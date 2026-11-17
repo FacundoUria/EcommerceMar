@@ -1,0 +1,24 @@
+# dependencias y builds
+node_modules/
+dist/
+build/
+.netlify/
+
+# variables de entorno
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+
+# sistema / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/*
+!.vscode/extensions.json
+
+# Claude Code: config personal (la compartida es .claude/settings.json)
+.claude/settings.local.json

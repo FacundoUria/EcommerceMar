@@ -1,0 +1,986 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="web_standard" name="shell-type">
+<title>Dream Hair — TikTok Reel-Style Visual Shop &amp; Studio Mendoza</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior-y: none; }
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .glass-pill {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .glass-dark {
+      background: rgba(11, 41, 27, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(254, 214, 91, 0.65); }
+      70% { transform: scale(1.06); box-shadow: 0 0 0 10px rgba(254, 214, 91, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(254, 214, 91, 0); }
+    }
+    .animate-glow-pulse {
+      animation: pulse-ring 2.2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+    }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-surface": "#1b1c19",
+            "on-error-container": "#93000a",
+            "on-secondary-fixed": "#241a00",
+            "on-primary": "#ffffff",
+            "tertiary-fixed-dim": "#bbcd9e",
+            "inverse-on-surface": "#f2f1ec",
+            "on-primary-container": "#73927f",
+            "on-secondary-fixed-variant": "#574500",
+            "on-tertiary": "#ffffff",
+            "tertiary": "#071100",
+            "error-container": "#ffdad6",
+            "inverse-primary": "#adceb9",
+            "outline": "#727973",
+            "surface": "#faf9f4",
+            "secondary-container": "#fed65b",
+            "on-secondary": "#ffffff",
+            "outline-variant": "#c2c8c2",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-fixed-variant": "#304d3d",
+            "surface-container-highest": "#e3e3de",
+            "on-tertiary-container": "#809166",
+            "primary-fixed-dim": "#adceb9",
+            "secondary-fixed-dim": "#e9c349",
+            "surface-bright": "#faf9f4",
+            "surface-container-high": "#e9e8e3",
+            "surface-container-low": "#f5f4ef",
+            "background": "#faf9f4",
+            "on-secondary-container": "#745c00",
+            "surface-tint": "#476554",
+            "primary-container": "#0b291b",
+            "surface-variant": "#e3e3de",
+            "tertiary-container": "#1a2807",
+            "on-primary-fixed": "#032113",
+            "on-tertiary-fixed": "#121f02",
+            "error": "#ba1a1a",
+            "on-error": "#ffffff",
+            "primary": "#001208",
+            "on-surface-variant": "#424843",
+            "inverse-surface": "#30312e",
+            "secondary": "#735c00",
+            "tertiary-fixed": "#d6e9b8",
+            "primary-fixed": "#c9ebd4",
+            "surface-container": "#efeee9",
+            "surface-dim": "#dbdad5",
+            "on-tertiary-fixed-variant": "#3c4c27",
+            "secondary-fixed": "#ffe088",
+            "on-background": "#1b1c19"
+          },
+          fontFamily: {
+            "headline-2xl": ["Playfair Display", "serif"],
+            "headline-xl": ["Playfair Display", "serif"],
+            "headline-md": ["Playfair Display", "serif"],
+            "headline-lg": ["Playfair Display", "serif"],
+            "body-lg": ["Manrope", "sans-serif"],
+            "body-md": ["Manrope", "sans-serif"],
+            "body-sm": ["Manrope", "sans-serif"],
+            "label-lg": ["Manrope", "sans-serif"],
+            "label-md": ["Manrope", "sans-serif"],
+            "label-sm": ["Manrope", "sans-serif"],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-body-md text-on-surface antialiased bg-gradient-to-b from-[#FAF9F4] via-[#F1F3EB] to-[#E7EBE0] min-h-screen pb-24 selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Toast Notification Stack -->
+<div class="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 pointer-events-none w-11/12 max-w-sm" id="toast-container"></div>
+<!-- ULTRA-MODERN MOBILE-FIRST APP BAR -->
+<header class="sticky top-0 z-40 bg-[#FAF9F4]/80 backdrop-blur-xl border-b border-[#0b291b]/8 transition-all">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 h-15 py-2.5 flex items-center justify-between gap-3">
+<!-- Live Indicator + Brand Title -->
+<div class="flex items-center gap-2.5">
+<div class="relative flex items-center justify-center">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping absolute"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-600 relative"></span>
+</div>
+<a class="flex items-center gap-2.5 group" href="#"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD76E_BfssynV1n06YLM5IGLdAjnsXwwFbmTLs7C7bN900fwpG2f44ScE2pqbJagPUWnqyQcvn72_DCHCPD4Gaa5EShsY-SFiPg74isFhVTqPYUqYk4wIvn41CKSPidwBGdoJkxqu8hVBlvVsaTNRv6Jj4YXb7DQz-Ik0XzWNf25ZyFatj1B705Vo5Xr_72efWdW4MFYax8gqUdroRqhM85JDM49v6iockk4oBgbSUwDIKIEn4Fb1ZkFw" alt="Dream Hair LOGO.webp" class="h-10 w-10 object-contain rounded-full bg-white shadow-xs p-0.5 border border-[#0b291b]/10 group-hover:scale-105 transition-transform"><div class="flex flex-col"><span class="font-headline-md text-lg sm:text-xl font-bold tracking-tight text-primary-container leading-none">DREAM HAIR</span><span class="text-[9px] font-bold uppercase tracking-[0.2em] text-[#735c00]">The Curly Studio</span></div><span class="hidden sm:inline text-[9px] font-bold uppercase tracking-wider text-[#735c00] bg-secondary-container/40 px-1.5 py-0.5 rounded-md ml-1">LIVE</span></a>
+</div>
+<!-- Quick Reel Filter Selector / Stories trigger & Bag Action -->
+<div class="flex items-center gap-2">
+<button class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full glass-pill border border-[#0b291b]/10 text-xs font-semibold text-primary-container hover:bg-white transition-all shadow-xs" onclick="toggleSalonDrawer()">
+<span class="material-symbols-outlined text-[16px] text-[#735c00]">chair</span>
+<span>Turnos Mendoza</span>
+</button>
+<button class="relative flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary-container text-on-primary hover:bg-[#143b27] shadow-sm hover:scale-[1.02] active:scale-95 transition-all" id="header-cart-btn" onclick="openCartDrawer()">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+<span class="text-xs font-bold tracking-wider hidden xs:inline">BOLSA</span>
+<span class="bg-secondary-container text-on-secondary-container text-[11px] font-extrabold px-1.5 py-0.5 rounded-full" id="header-cart-qty">3</span>
+</button>
+</div>
+</div>
+</header>
+<!-- SEAMLESS LIVE REELS HERO: "TIKTOK / REEL-STYLE VISUAL SWIPE & TAP COMMERCE" -->
+<main class="max-w-6xl mx-auto px-4 sm:px-6 pt-3 space-y-6">
+<!-- Micro Sticky Announcement Ticker -->
+
+<!-- REEL FEED CAROUSEL (Mobile Visual Lookbook Hero) -->
+<section class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-700 text-[20px]">play_circle</span>
+<h2 class="font-headline-md text-lg sm:text-xl font-bold text-primary-container tracking-tight">Shop the Look &amp; Rutinas en Video</h2>
+</div>
+<span class="text-[11px] font-bold uppercase tracking-wider text-outline">Tocá los pines ＋</span>
+</div>
+<!-- Main Visual Reel Card with Interactive Product Hotspots -->
+<div class="relative rounded-3xl overflow-hidden shadow-lg border border-[#0b291b]/10 bg-surface-dim aspect-[4/5] sm:aspect-[16/9] max-h-[520px] group select-none">
+<img alt="Dream Hair Curly Look" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-102" id="reel-main-media" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHfuA779RqmBxbP3-zHPYJvxbc3dWU2y5-5VEez-S3HhdQAybgrCLeZ0UNXQQw2BIcfoElkJhCn2z-IYSi8BhZL9WILVntArK_ky7HQ1vZcZvzcoYI9ITfvZ1-Y2Znu8Lhc6kbBRO-bPvxzErNWQctKO7uQpkz8-WiV2VuvspGVXghkd2-Xy9E_o_0RMBNIRSNb5ZhVTJG_7ra_6U5KpHHyTdLHfckLEagXGRMYbMC">
+<!-- Ambient Video Vignette Gradient -->
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/90 via-primary-container/25 to-transparent"></div>
+<!-- Top Reel Header Pills -->
+<div class="absolute top-4 left-4 right-4 flex items-center justify-between z-20 pointer-events-none">
+<div class="flex items-center gap-2 pointer-events-auto">
+<span class="glass-pill px-3 py-1 rounded-full text-xs font-bold text-primary-container flex items-center gap-1.5 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+              REEL #01 • Mendoza Studio
+            </span>
+<span class="hidden sm:inline-flex glass-pill px-2.5 py-1 rounded-full text-[11px] font-semibold text-on-surface-variant">
+              Porosidad Media • Patrón 2C/3A
+            </span>
+</div>
+<div class="flex items-center gap-1.5 pointer-events-auto">
+<button class="w-8 h-8 rounded-full glass-pill flex items-center justify-center text-primary-container hover:bg-white transition-transform active:scale-90 shadow-sm" onclick="toggleAudio(this)" title="Audio">
+<span class="material-symbols-outlined text-[18px]">volume_up</span>
+</button>
+<button class="w-8 h-8 rounded-full glass-pill flex items-center justify-center text-primary-container hover:bg-white transition-transform active:scale-90 shadow-sm" onclick="shareReel()" title="Compartir">
+<span class="material-symbols-outlined text-[18px]">ios_share</span>
+</button>
+</div>
+</div>
+<!-- INTERACTIVE HOTSPOT PIN 1: Shampoo Low Poo HAN -->
+<div class="absolute top-[38%] left-[28%] -translate-x-1/2 -translate-y-1/2 z-20 group/pin">
+<button class="w-10 h-10 rounded-full bg-white text-primary-container font-black shadow-xl flex items-center justify-center transition-all hover:scale-115 active:scale-95 border-2 border-emerald-400 animate-glow-pulse" onclick="openHotspotModal('han')">
+<span class="material-symbols-outlined text-[20px] font-bold">add</span>
+</button>
+<!-- Tooltip preview -->
+<div class="absolute left-12 top-1/2 -translate-y-1/2 hidden group-hover/pin:flex items-center gap-2.5 p-2 rounded-2xl glass-pill shadow-xl border border-white/40 whitespace-nowrap z-30 transition-all pointer-events-auto">
+<img alt="HAN" class="w-9 h-9 object-contain bg-white rounded-lg p-0.5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRTZPl7D6lOCs_FHrPRJmInsP59tZpsQ-WQg5qhI6_fQvBXd2QmhXgPUzYxR31EVu-cs4ozGTqBADu0Nh_rxp3Q2vwUFLfsC7vVxv7ufqXC-ANSX_GnGRAtneD8gE6glkM9n2af7kfFhWn2rYEgaF2lZnAzYtVsBK4BVoZr88PndGNyAbViL9KAac0LJO3ELRNJ4bmJ5QbBLlzsdIghZ7r2nspbq2YhZeqXg9Qband">
+<div>
+<p class="font-bold text-xs text-primary-container leading-none">HAN Low Poo</p>
+<p class="text-[11px] font-bold text-[#735c00] mt-0.5">$15.000,00</p>
+</div>
+<button class="px-2.5 py-1 rounded-xl bg-primary-container text-white text-[11px] font-bold hover:bg-[#153e2a]" onclick="quickAdd('HAN Low Poo', '$15.000,00')">
+              Comprar
+            </button>
+</div>
+</div>
+<!-- INTERACTIVE HOTSPOT PIN 2: Skala Potão 1000g -->
+<div class="absolute bottom-[36%] right-[24%] -translate-x-1/2 -translate-y-1/2 z-20 group/pin">
+<button class="w-10 h-10 rounded-full bg-white text-primary-container font-black shadow-xl flex items-center justify-center transition-all hover:scale-115 active:scale-95 border-2 border-amber-300 animate-glow-pulse" onclick="openHotspotModal('skala')">
+<span class="material-symbols-outlined text-[20px] font-bold">add</span>
+</button>
+<!-- Tooltip preview -->
+<div class="absolute right-12 top-1/2 -translate-y-1/2 hidden group-hover/pin:flex items-center gap-2.5 p-2 rounded-2xl glass-pill shadow-xl border border-white/40 whitespace-nowrap z-30 transition-all pointer-events-auto">
+<img alt="Skala" class="w-9 h-9 object-contain bg-white rounded-lg p-0.5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcOTdzupDdsgdoh3RB43CswLdU1aZtN4RXwZMqeyn74bGVmBBNXUSzN3SuIT9NP-qa-CtiTBkYR4PucsLxgvSd3v_HrrFauYU2g1Yot9AtwjrSgliTJeK88b6nJW2Xj66ZYV5UBGG2bTDGoqz2Yq_r_vgsGb8NCnA2OxlXL3LJ5LO1B-Bj_fxjLoN3I6_D_oHIG9HAdyDp0MtqKwSWjtvAvCushX9A40-iyFdLSSFs">
+<div>
+<p class="font-bold text-xs text-primary-container leading-none">Skala 2 en 1 Brasil</p>
+<p class="text-[11px] font-bold text-[#735c00] mt-0.5">$6.900,00</p>
+</div>
+<button class="px-2.5 py-1 rounded-xl bg-primary-container text-white text-[11px] font-bold hover:bg-[#153e2a]" onclick="quickAdd('Skala Brasil 1kg', '$6.900,00')">
+              Comprar
+            </button>
+</div>
+</div>
+<!-- Bottom Reel Control & Quick-Cart Banner -->
+<div class="absolute bottom-4 left-4 right-4 z-20 flex flex-col sm:flex-row sm:items-end justify-between gap-3 text-white">
+<div class="space-y-1 max-w-md">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full bg-white/20 backdrop-blur-md text-[10px] font-bold tracking-wider uppercase text-emerald-200">Rutina Completa en Estudio</span>
+<span class="text-xs text-white/80">★ 4.9 (142 reseñas)</span>
+</div>
+<h3 class="font-headline-lg text-xl sm:text-2xl font-bold leading-tight drop-shadow-sm">Definición &amp; Hidratación Botánica</h3>
+
+</div>
+<div class="flex items-center gap-2">
+<button class="w-full sm:w-auto px-5 py-2.5 rounded-full bg-secondary-container text-on-secondary-container hover:bg-amber-300 font-bold text-xs tracking-wider uppercase transition-all shadow-lg flex items-center justify-center gap-2 active:scale-95" onclick="addBundleToCart()">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+<span>Llevar Rutina ($21.900)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Quick Reel Selector Thumbnails (TikTok / Story style swiper) -->
+<div class="flex items-center gap-3 overflow-x-auto no-scrollbar py-1">
+<button class="reel-thumb ring-2 ring-primary-container shrink-0 flex items-center gap-2 p-1.5 pr-3 rounded-2xl glass-card border border-[#0b291b]/10 transition-all hover:bg-white" onclick="switchReel('curly01')">
+<div class="w-10 h-10 rounded-xl overflow-hidden bg-surface-container">
+<img alt="R1" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHfuA779RqmBxbP3-zHPYJvxbc3dWU2y5-5VEez-S3HhdQAybgrCLeZ0UNXQQw2BIcfoElkJhCn2z-IYSi8BhZL9WILVntArK_ky7HQ1vZcZvzcoYI9ITfvZ1-Y2Znu8Lhc6kbBRO-bPvxzErNWQctKO7uQpkz8-WiV2VuvspGVXghkd2-Xy9E_o_0RMBNIRSNb5ZhVTJG_7ra_6U5KpHHyTdLHfckLEagXGRMYbMC">
+</div>
+<div class="text-left">
+<p class="text-xs font-bold text-primary-container leading-none">Ondas 2A-2C</p>
+<span class="text-[10px] text-outline">Definición liviana</span>
+</div>
+</button>
+<button class="reel-thumb shrink-0 flex items-center gap-2 p-1.5 pr-3 rounded-2xl glass-card border border-[#0b291b]/10 transition-all hover:bg-white opacity-70" onclick="switchReel('curly02')">
+<div class="w-10 h-10 rounded-xl overflow-hidden bg-surface-container">
+<img alt="R2" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqG05MPdr9UR6DMKH_mLhGVYkOpiQS8UmGgUa9mkFk5NZK0EVtnMQJFqmcN5FNr_lxuBfYLvU2BAsVx1FEoyvhGjt4w-fvwg3YjS1JuN2JJiXxlmvwtCNbpaqS0Qzi4E5uFrufZltkL9dWp7yrJ2FYka5HV9BF1T1MW2nCtUDVwnLkwzomD_YWWBzteGFaNP29a-CKeaFqPtEFqYdaV39nF59NfOYO5vxMFeyCaR_O">
+</div>
+<div class="text-left">
+<p class="text-xs font-bold text-primary-container leading-none">Rizos 3A-3C</p>
+<span class="text-[10px] text-outline">Volumen &amp; Forma</span>
+</div>
+</button>
+<button class="reel-thumb shrink-0 flex items-center gap-2 p-1.5 pr-3 rounded-2xl glass-card border border-[#0b291b]/10 transition-all hover:bg-white opacity-70" onclick="switchReel('curly03')">
+<div class="w-10 h-10 rounded-xl overflow-hidden bg-surface-container">
+<img alt="R3" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmYLKLZKlQ8boDRLZjPTmNerDcxMT296Bpww3_-2H_Wy4IDSXlCRPMN49yA7HlUq6RPGQdOk2rMNIJocz_7LfHlo6WZ5issy0dZI8U5rn7Fzv88p2X30Br8zU0UcHlqDFZ6RX3eguStsq4kCwycVF60_-PtgqugbkMcK579LdMBJZcJVFTRTfunCaCfSnxVqFz0jXAlNIOBDokSlaW2lj9GPgx3uGtuZsS0LhQGHW2">
+</div>
+<div class="text-left">
+<p class="text-xs font-bold text-primary-container leading-none">Afro 4A-4C</p>
+<span class="text-[10px] text-outline">Nutrición óleos</span>
+</div>
+</button>
+<button class="reel-thumb shrink-0 flex items-center gap-2 p-1.5 pr-3 rounded-2xl glass-card border border-[#0b291b]/10 transition-all hover:bg-white opacity-70" onclick="switchReel('curly04')">
+<div class="w-10 h-10 rounded-xl overflow-hidden bg-surface-container">
+<img alt="R4" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsMm-f9cuDorusUbzLLnwnJg8D7uFDEyD0Ooq-XZbic4YIj_Yp0BFqdWqNnUbCukgubM4j_hJzzb0uTVe4gGhEYQzQu5JvMaWm_gqKwSAxNiqqpkQE90dIwgfDhcsIpoHgK2ptBJwESSGZhEFBh8AECgftjtdKz3_kMd3W1ROB_FCElsowoJ8EttX2PZv1pORJHfBkFQ9nNc7ZoKnHY30Wc0QC3suS6hTC4S8yK5KP">
+</div>
+<div class="text-left">
+<p class="text-xs font-bold text-primary-container leading-none">Satén &amp; Sueño</p>
+<span class="text-[10px] text-outline">Cero frizz noche</span>
+</div>
+</button>
+</div>
+</section><section class="space-y-3 pt-1"><div class="flex items-center justify-between px-1"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[#735c00] text-[20px]">auto_awesome</span><h3 class="font-headline-md text-base sm:text-lg font-bold text-primary-container">Asesoras de Rulos &amp; Rutinas Guiadas</h3></div><span class="text-xs text-outline font-medium">Elegí tu tipo de onda</span></div><div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3"><div class="rounded-3xl glass-card p-3 border border-[#0b291b]/8 shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center cursor-pointer group hover:bg-white" onclick="showToast('Asesora Camila: Rutina con Amor &amp; Protección de Rulos')"><div class="w-20 h-24 sm:w-24 sm:h-28 rounded-2xl overflow-hidden bg-[#FAF9F4] border border-[#0b291b]/8 mb-2 flex items-end justify-center relative"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDDAso9ElueQydhpwsIIzTCeDWkysvRtXkDLTj8ctHz6I6wFciGkRw55t0DVenQlHCmO7CqzgzA4c0wmibyyVTgnFBQbnMzBJsVfmh9tYkWvCIASPwYFbWHzhGYi1xZdFm9106gccpJNelr9Cv6I0XNPCQp2ziBcAeeUsbPFtFVRepESLeJidowFSHzOUPlSCWuBQxWGvpCeXX9Cuy3ud_JJshsvN6wOyLSRti0r_f6BYlkLEvE7osjg" alt="Asesora Camila - personita1.jpg" class="w-full h-full object-cover object-bottom group-hover:scale-105 transition-transform duration-300"><span class="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-white"></span></div><h4 class="font-bold text-xs text-primary-container leading-tight">Camila • Ondas 2A/2B</h4><p class="text-[10px] text-outline mt-0.5">Control de frizz &amp; ligereza</p><span class="mt-2 px-2 py-0.5 rounded-full bg-secondary-container/40 text-[9px] font-bold text-[#735c00]">Ver Tips ✨</span></div><div class="rounded-3xl glass-card p-3 border border-[#0b291b]/8 shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center cursor-pointer group hover:bg-white" onclick="showToast('Asesora Martina: Definición y Rebote 2C/3A')"><div class="w-20 h-24 sm:w-24 sm:h-28 rounded-2xl overflow-hidden bg-[#FAF9F4] border border-[#0b291b]/8 mb-2 flex items-end justify-center relative"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDW3-POOjgbKe5gboIAnaLHBB2FU0J-kEULAAD2_gZlR2ueuHluntBcowYGKInXsfzwSm-lMtyWZ5yTkw_dzAGyYUlwVbdEMz1epNeMZfoFX3ra6Qti7Y-C1Bg6N6JuzNUj8SbeHZ6NjWo0jGSb8qV7AQ3zx0wbdpb0UPGDptGnGm5wx8d6ec-wDj92BRivjEtd0zIG3r1lfggwkYcMZVPJG7_bSR9fntwCwPt5mEsRSlhNztYGDKQ6BQ" alt="Asesora Martina - personita2.jpg" class="w-full h-full object-cover object-bottom group-hover:scale-105 transition-transform duration-300"><span class="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-white"></span></div><h4 class="font-bold text-xs text-primary-container leading-tight">Martina • Rizos 2C/3A</h4><p class="text-[10px] text-outline mt-0.5">Definición cinta x cinta</p><span class="mt-2 px-2 py-0.5 rounded-full bg-secondary-container/40 text-[9px] font-bold text-[#735c00]">Ver Tips ✨</span></div><div class="rounded-3xl glass-card p-3 border border-[#0b291b]/8 shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center cursor-pointer group hover:bg-white" onclick="showToast('Asesora Lucía: Nutrición y Porosidad Alta 3B/3C')"><div class="w-20 h-24 sm:w-24 sm:h-28 rounded-2xl overflow-hidden bg-[#FAF9F4] border border-[#0b291b]/8 mb-2 flex items-end justify-center relative"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBIejTKXgYrHPhjyLAPavtVk3RIfWOOz70526JDFW0La4YEmI7TD-D3XIMchjK5WMizx2vtpHbZzrsJ-774zXQ5pi0woy5L1jRi_VBose1sYj0kumsWxA7cBxF-xfNur-4kNlnMPUODqVQKsX__2V7ZVREUJZyT3oxVF_mjg4cPQa3ugXveOO_g5P08pufHpQGKhDX_gxkiCo9rmUX8wsLewI1nHZ1vt4JvInyYXUbGj4i1B4KVuDnjQ" alt="Asesora Lucía - personita3.jpg" class="w-full h-full object-cover object-bottom group-hover:scale-105 transition-transform duration-300"><span class="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-white"></span></div><h4 class="font-bold text-xs text-primary-container leading-tight">Lucía • Rizos 3B/3C</h4><p class="text-[10px] text-outline mt-0.5">Nutrición &amp; Co-Wash puro</p><span class="mt-2 px-2 py-0.5 rounded-full bg-secondary-container/40 text-[9px] font-bold text-[#735c00]">Ver Tips ✨</span></div><div class="rounded-3xl glass-card p-3 border border-[#0b291b]/8 shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center cursor-pointer group hover:bg-white" onclick="showToast('Asesora Sofía: Volumen Afro &amp; Retención de Humedad 4A/4C')"><div class="w-20 h-24 sm:w-24 sm:h-28 rounded-2xl overflow-hidden bg-[#FAF9F4] border border-[#0b291b]/8 mb-2 flex items-end justify-center relative"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJcPCl3BFVCIt3Z6d_v-c-18toNEe13ICdaXI6XcYFcA2IoR7CZf57P2A-Fv34D_D0HBUk1QuI2QnJrF-KL4R9OTQsGaAOVkMJv3jwli_-JKbQLZIySWFE0cJMB0zxdLcIBan2rf_4-iYuuxpCSgo7TxU8IwEFmbeVkGrqTnyZ0SvEpit0ixOlq5tI3mezcQLcDSIkH1pimpEXA1cwgGGvsBKU1-3lipaZ3c3IU6EtQUwLFW3695-qkQ" alt="Asesora Sofía - personita4.jpg" class="w-full h-full object-cover object-bottom group-hover:scale-105 transition-transform duration-300"><span class="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-white"></span></div><h4 class="font-bold text-xs text-primary-container leading-tight">Sofía • Afro 4A/4C</h4><p class="text-[10px] text-outline mt-0.5">Óleos botánicos &amp; volumen</p><span class="mt-2 px-2 py-0.5 rounded-full bg-secondary-container/40 text-[9px] font-bold text-[#735c00]">Ver Tips ✨</span></div></div></section>
+<!-- LIVE FILTER TABS (Tactile Pills with Glassmorphism Badges) -->
+<section class="sticky top-15 z-30 pt-2 pb-1 bg-[#FAF9F4]/90 backdrop-blur-md -mx-4 px-4 sm:mx-0 sm:px-0">
+<div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1" id="filter-bar">
+<button class="filter-chip active px-4 py-2 rounded-full bg-primary-container text-white text-xs font-bold whitespace-nowrap shadow-sm transition-all" onclick="filterCatalog('all', this)">
+          Todos los Productos (8)
+        </button>
+<button class="filter-chip px-3.5 py-2 rounded-full glass-card hover:bg-white text-on-surface-variant text-xs font-semibold whitespace-nowrap border border-[#0b291b]/10 transition-all" onclick="filterCatalog('lowpoo', this)">
+          ✨ Apto Low Poo
+        </button>
+<button class="filter-chip px-3.5 py-2 rounded-full glass-card hover:bg-white text-on-surface-variant text-xs font-semibold whitespace-nowrap border border-[#0b291b]/10 transition-all" onclick="filterCatalog('cowash', this)">
+          🥑 Apto Co-Wash
+        </button>
+<button class="filter-chip px-3.5 py-2 rounded-full glass-card hover:bg-white text-on-surface-variant text-xs font-semibold whitespace-nowrap border border-[#0b291b]/10 transition-all" onclick="filterCatalog('skala', this)">
+          🇧🇷 Skala Brasil 1kg
+        </button>
+<button class="filter-chip px-3.5 py-2 rounded-full glass-card hover:bg-white text-on-surface-variant text-xs font-semibold whitespace-nowrap border border-[#0b291b]/10 transition-all" onclick="filterCatalog('geles', this)">
+          💧 Geles &amp; Gelatinas
+        </button>
+<button class="filter-chip px-3.5 py-2 rounded-full glass-card hover:bg-white text-on-surface-variant text-xs font-semibold whitespace-nowrap border border-[#0b291b]/10 transition-all" onclick="filterCatalog('accesorios', this)">
+          🌙 Satén &amp; Cepillos
+        </button>
+</div>
+</section>
+<!-- HIGH-DENSITY 2-COLUMN TIKTOK-STYLE PRODUCT FEED (Tap, Stepper & Quick Buy) -->
+<section class="space-y-4" id="tienda">
+<div class="flex items-center justify-between px-1">
+<h3 class="font-headline-md text-base sm:text-lg font-bold text-primary-container">Catálogo Rápido</h3>
+<span class="text-xs text-outline font-medium">Toque para seleccionar y sumar</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4" id="catalog-grid">
+<!-- PRODUCT 1: HAN LOW POO -->
+<div class="product-card group rounded-3xl glass-card p-3 border border-[#0b291b]/8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="lowpoo han">
+<div>
+<div class="relative w-full aspect-square rounded-2xl bg-white overflow-hidden flex items-center justify-center p-2 mb-2 border border-[#0b291b]/6">
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-primary-container text-white text-[9px] font-bold uppercase tracking-wider z-10">Low Poo</span>
+<button class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 shadow-xs flex items-center justify-center text-outline hover:text-red-500 z-10 transition-transform active:scale-75" onclick="toggleWishlist(this)">
+<span class="material-symbols-outlined text-[16px]">favorite</span>
+</button>
+<img alt="HAN Low Poo" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" id="han-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRTZPl7D6lOCs_FHrPRJmInsP59tZpsQ-WQg5qhI6_fQvBXd2QmhXgPUzYxR31EVu-cs4ozGTqBADu0Nh_rxp3Q2vwUFLfsC7vVxv7ufqXC-ANSX_GnGRAtneD8gE6glkM9n2af7kfFhWn2rYEgaF2lZnAzYtVsBK4BVoZr88PndGNyAbViL9KAac0LJO3ELRNJ4bmJ5QbBLlzsdIghZ7r2nspbq2YhZeqXg9Qband">
+</div>
+<div class="space-y-1">
+<span class="text-[10px] font-bold text-outline uppercase tracking-wider block">HAN 500ml</span>
+<h4 class="font-body-md text-xs sm:text-sm font-bold text-primary-container line-clamp-1">Shampoo Low Poo HAN</h4>
+<!-- Fast Variant Selector Pills -->
+<div class="flex items-center gap-1 overflow-x-auto no-scrollbar pt-1">
+<button class="han-pill active px-2 py-0.5 rounded-md bg-primary-container text-white text-[9px] font-bold" onclick="changeHanVariant(this, 'Hialurónico', 'https://lh3.googleusercontent.com/aida-public/AB6AXuCRTZPl7D6lOCs_FHrPRJmInsP59tZpsQ-WQg5qhI6_fQvBXd2QmhXgPUzYxR31EVu-cs4ozGTqBADu0Nh_rxp3Q2vwUFLfsC7vVxv7ufqXC-ANSX_GnGRAtneD8gE6glkM9n2af7kfFhWn2rYEgaF2lZnAzYtVsBK4BVoZr88PndGNyAbViL9KAac0LJO3ELRNJ4bmJ5QbBLlzsdIghZ7r2nspbq2YhZeqXg9Qband')">Hialurónico</button>
+<button class="han-pill px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant text-[9px] font-semibold" onclick="changeHanVariant(this, 'Avena', 'https://lh3.googleusercontent.com/aida-public/AB6AXuAqG05MPdr9UR6DMKH_mLhGVYkOpiQS8UmGgUa9mkFk5NZK0EVtnMQJFqmcN5FNr_lxuBfYLvU2BAsVx1FEoyvhGjt4w-fvwg3YjS1JuN2JJiXxlmvwtCNbpaqS0Qzi4E5uFrufZltkL9dWp7yrJ2FYka5HV9BF1T1MW2nCtUDVwnLkwzomD_YWWBzteGFaNP29a-CKeaFqPtEFqYdaV39nF59NfOYO5vxMFeyCaR_O')">Avena</button>
+<button class="han-pill px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant text-[9px] font-semibold" onclick="changeHanVariant(this, 'Biotina', 'https://lh3.googleusercontent.com/aida-public/AB6AXuBMmrjN8vje1SXS15NLdIQ8rxL-xsH_GUaJRbcJFzMuNijnfUqfaiXCCtsnnoAALkOkjry1CN6OrlXHqsaE9Oz0QcElnlKGirqbeQsfR5vUCHVNDj-t1SeJBYodjHGQA-acePdFY4_XTYRcB2ZBBHROxBZ74PsWNimRnTND74YEeZvkNV1oySx_ZbXhQE6OjOOki2e3YfXlFKoCve845c1PpB-jt3eDjW-lS-em2HF4')">Biotina</button>
+</div>
+</div>
+</div>
+<div class="mt-3 pt-2 border-t border-[#0b291b]/8 flex items-center justify-between gap-1">
+<div>
+<span class="font-extrabold text-xs sm:text-sm text-primary-container block leading-tight">$15.000</span>
+<span class="text-[9px] text-[#735c00] font-semibold">3x $5.000 s/int</span>
+</div>
+<!-- Micro-Stepper + Direct Tap Add -->
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center hover:scale-105 active:scale-95 transition-transform shadow-xs" onclick="quickAdd('Shampoo HAN Low Poo', '$15.000,00')" title="Agregar al carrito">
+<span class="material-symbols-outlined text-[17px]">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- PRODUCT 2: SKALA BRASIL 2 EN 1 -->
+<div class="product-card group rounded-3xl glass-card p-3 border border-[#0b291b]/8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="cowash skala">
+<div>
+<div class="relative w-full aspect-square rounded-2xl bg-white overflow-hidden flex items-center justify-center p-2 mb-2 border border-[#0b291b]/6">
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-[#735c00] text-white text-[9px] font-bold uppercase tracking-wider z-10">Co-Wash</span>
+<span class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded bg-black/60 text-white text-[8px] font-mono font-bold z-10">1000g</span>
+<button class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 shadow-xs flex items-center justify-center text-outline hover:text-red-500 z-10 transition-transform active:scale-75" onclick="toggleWishlist(this)">
+<span class="material-symbols-outlined text-[16px]">favorite</span>
+</button>
+<img alt="Skala" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcOTdzupDdsgdoh3RB43CswLdU1aZtN4RXwZMqeyn74bGVmBBNXUSzN3SuIT9NP-qa-CtiTBkYR4PucsLxgvSd3v_HrrFauYU2g1Yot9AtwjrSgliTJeK88b6nJW2Xj66ZYV5UBGG2bTDGoqz2Yq_r_vgsGb8NCnA2OxlXL3LJ5LO1B-Bj_fxjLoN3I6_D_oHIG9HAdyDp0MtqKwSWjtvAvCushX9A40-iyFdLSSFs">
+</div>
+<div class="space-y-1">
+<span class="text-[10px] font-bold text-outline uppercase tracking-wider block">Skala Brasil</span>
+<h4 class="font-body-md text-xs sm:text-sm font-bold text-primary-container line-clamp-1">Cremas Skala 2 en 1</h4>
+<p class="text-[10px] text-outline line-clamp-1">Máscara + crema de peinar</p>
+</div>
+</div>
+<div class="mt-3 pt-2 border-t border-[#0b291b]/8 flex items-center justify-between gap-1">
+<div>
+<span class="font-extrabold text-xs sm:text-sm text-primary-container block leading-tight">$6.900</span>
+<span class="text-[9px] text-[#735c00] font-semibold">Mega pote 1kg</span>
+</div>
+<button class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center hover:scale-105 active:scale-95 transition-transform shadow-xs" onclick="quickAdd('Skala Brasil 1kg', '$6.900,00')">
+<span class="material-symbols-outlined text-[17px]">add</span>
+</button>
+</div>
+</div>
+<!-- PRODUCT 3: GEL BEKIM 800GR -->
+<div class="product-card group rounded-3xl glass-card p-3 border border-[#0b291b]/8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="geles">
+<div>
+<div class="relative w-full aspect-square rounded-2xl bg-white overflow-hidden flex items-center justify-center p-2 mb-2 border border-[#0b291b]/6">
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-emerald-700 text-white text-[9px] font-bold uppercase tracking-wider z-10">Fijación 10</span>
+<button class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 shadow-xs flex items-center justify-center text-outline hover:text-red-500 z-10 transition-transform active:scale-75" onclick="toggleWishlist(this)">
+<span class="material-symbols-outlined text-[16px]">favorite</span>
+</button>
+<img alt="Gel Bekim" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB21_puKYP3dWI_-9fRR6kaCLcwTW1S3Xc4n-pdKJv86bo4Ed_seLDr7cuAQcvQNhKp1S641Ror-lqa5hDHsHkxHurMAs41ROhLFh21bQeHpiQhu6p3HmrWo7hgz8YTi4kwVjRrCkSTRKKBW0TG3A7Nki5dHNcwpJKZJ1-EjNUVVlVKhKbFlvSWckJclRZpbiv-TkBlf16a_Jk3wQShefK4gGfC_oof3V62nB_9vtmr">
+</div>
+<div class="space-y-1">
+<span class="text-[10px] font-bold text-outline uppercase tracking-wider block">Bekim 800g</span>
+<h4 class="font-body-md text-xs sm:text-sm font-bold text-primary-container line-clamp-1">Gel Bekim Fixer Pro</h4>
+<p class="text-[10px] text-outline line-clamp-1">Anti-humedad sin caspa</p>
+</div>
+</div>
+<div class="mt-3 pt-2 border-t border-[#0b291b]/8 flex items-center justify-between gap-1">
+<div>
+<span class="font-extrabold text-xs sm:text-sm text-primary-container block leading-tight">$19.000</span>
+<span class="text-[9px] text-[#735c00] font-semibold">3x $6.333 s/int</span>
+</div>
+<button class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center hover:scale-105 active:scale-95 transition-transform shadow-xs" onclick="quickAdd('Gel Bekim 800gr', '$19.000,00')">
+<span class="material-symbols-outlined text-[17px]">add</span>
+</button>
+</div>
+</div>
+<!-- PRODUCT 4: GELATINA SALON LINE TO DE CACHO -->
+<div class="product-card group rounded-3xl glass-card p-3 border border-[#0b291b]/8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="geles salonline">
+<div>
+<div class="relative w-full aspect-square rounded-2xl bg-white overflow-hidden flex items-center justify-center p-2 mb-2 border border-[#0b291b]/6">
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-[#fed65b] text-[#574500] text-[9px] font-bold uppercase tracking-wider z-10">72h Memory</span>
+<button class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 shadow-xs flex items-center justify-center text-outline hover:text-red-500 z-10 transition-transform active:scale-75" onclick="toggleWishlist(this)">
+<span class="material-symbols-outlined text-[16px]">favorite</span>
+</button>
+<img alt="Gelatina Salon line" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX8qK3h45Bg9jfW7IZfwnWp0hNQJjSrAak5yvNCCfZxNNvcAgrzVKr-KbfGryj0pk895jImmaCs40zTlihw0xf4skYM30S0Craw_yYu5AGqQ3u8U85RZt-xg_sMxTjazhnW47SWHhL5b7ngNMrqPG0ntCC-JNBcBV8HxfghOrcD3i24ewcYOjnoEoh7saw8kiKjA7cTgjjoaZLoIGu0KZSEqBjd8x7aMebcxS8oWoH">
+</div>
+<div class="space-y-1">
+<span class="text-[10px] font-bold text-outline uppercase tracking-wider block">Salon Line Brasil</span>
+<h4 class="font-body-md text-xs sm:text-sm font-bold text-primary-container line-clamp-1">Gelatina Líquida</h4>
+<p class="text-[10px] text-outline line-clamp-1">Textura ligera sin rigidez</p>
+</div>
+</div>
+<div class="mt-3 pt-2 border-t border-[#0b291b]/8 flex items-center justify-between gap-1">
+<div>
+<span class="font-extrabold text-xs sm:text-sm text-primary-container block leading-tight">$28.000</span>
+<span class="text-[9px] text-[#735c00] font-semibold">3 cuotas sin interés</span>
+</div>
+<button class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center hover:scale-105 active:scale-95 transition-transform shadow-xs" onclick="quickAdd('Gelatina Salon Line Líquida', '$28.000,00')">
+<span class="material-symbols-outlined text-[17px]">add</span>
+</button>
+</div>
+</div>
+<!-- PRODUCT 5: GELATINAS KIDS -->
+<div class="product-card group rounded-3xl glass-card p-3 border border-[#0b291b]/8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="geles kids">
+<div>
+<div class="relative w-full aspect-square rounded-2xl bg-white overflow-hidden flex items-center justify-center p-2 mb-2 border border-[#0b291b]/6">
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-pink-600 text-white text-[9px] font-bold uppercase tracking-wider z-10">Kids Suave</span>
+<button class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 shadow-xs flex items-center justify-center text-outline hover:text-red-500 z-10 transition-transform active:scale-75" onclick="toggleWishlist(this)">
+<span class="material-symbols-outlined text-[16px]">favorite</span>
+</button>
+<img alt="Salon Line kids" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh2EB_OpSXiCRksz84h2a0wh6h9IYSfLj09qoRyCPDmmz_mGhlGCFmWyIllvN-BPmwVP-PB78rzTOpECTvlCUebMEBm6Ti4_fI8mQOjSiHeOnVLUzYlcoT4t-8WEF-hSEwbjndBiLPSzCqKL04bp-7ts1RpUl2g6QUAnBCoPaqtE64tB6J5zRhdMHC6jZO7F8e9ELBfF5s6TmfbgvweTBwsSxYaVdrwU13rRhsqhmG">
+</div>
+<div class="space-y-1">
+<span class="text-[10px] font-bold text-outline uppercase tracking-wider block">550g Frutas</span>
+<h4 class="font-body-md text-xs sm:text-sm font-bold text-primary-container line-clamp-1">Gelatinas Salon Line Kids</h4>
+<p class="text-[10px] text-outline line-clamp-1">Melón, Uva, Sandía pura</p>
+</div>
+</div>
+<div class="mt-3 pt-2 border-t border-[#0b291b]/8 flex items-center justify-between gap-1">
+<div>
+<span class="font-extrabold text-xs sm:text-sm text-primary-container block leading-tight">$26.000</span>
+<span class="text-[9px] text-[#735c00] font-semibold">Hipoalergénico</span>
+</div>
+<button class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center hover:scale-105 active:scale-95 transition-transform shadow-xs" onclick="quickAdd('Gelatina Salon Line Kids', '$26.000,00')">
+<span class="material-symbols-outlined text-[17px]">add</span>
+</button>
+</div>
+</div>
+<!-- PRODUCT 6: GEL DE RICH BOUTIQUE -->
+<div class="product-card group rounded-3xl glass-card p-3 border border-[#0b291b]/8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="geles signature">
+<div>
+<div class="relative w-full aspect-square rounded-2xl bg-white overflow-hidden flex items-center justify-center p-2 mb-2 border border-[#0b291b]/6">
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-primary-container text-white text-[9px] font-bold uppercase tracking-wider z-10">Studio Pure</span>
+<button class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 shadow-xs flex items-center justify-center text-outline hover:text-red-500 z-10 transition-transform active:scale-75" onclick="toggleWishlist(this)">
+<span class="material-symbols-outlined text-[16px]">favorite</span>
+</button>
+<img alt="Gel de Rich" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmYLKLZKlQ8boDRLZjPTmNerDcxMT296Bpww3_-2H_Wy4IDSXlCRPMN49yA7HlUq6RPGQdOk2rMNIJocz_7LfHlo6WZ5issy0dZI8U5rn7Fzv88p2X30Br8zU0UcHlqDFZ6RX3eguStsq4kCwycVF60_-PtgqugbkMcK579LdMBJZcJVFTRTfunCaCfSnxVqFz0jXAlNIOBDokSlaW2lj9GPgx3uGtuZsS0LhQGHW2">
+</div>
+<div class="space-y-1">
+<span class="text-[10px] font-bold text-outline uppercase tracking-wider block">Dream Hair Signature</span>
+<h4 class="font-body-md text-xs sm:text-sm font-bold text-primary-container line-clamp-1">Gel de Rich Alta Gama</h4>
+<p class="text-[10px] text-outline line-clamp-1">Con aceites nobles de estudio</p>
+</div>
+</div>
+<div class="mt-3 pt-2 border-t border-[#0b291b]/8 flex items-center justify-between gap-1">
+<div>
+<span class="font-extrabold text-xs sm:text-sm text-primary-container block leading-tight">$35.000</span>
+<span class="text-[9px] text-[#735c00] font-semibold">Fórmula de Autor</span>
+</div>
+<button class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center hover:scale-105 active:scale-95 transition-transform shadow-xs" onclick="quickAdd('Gel de Rich Alta Gama', '$35.000,00')">
+<span class="material-symbols-outlined text-[17px]">add</span>
+</button>
+</div>
+</div>
+<!-- PRODUCT 7: CEPILLO DEFINIDOR -->
+<div class="product-card group rounded-3xl glass-card p-3 border border-[#0b291b]/8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="accesorios">
+<div>
+<div class="relative w-full aspect-square rounded-2xl bg-white overflow-hidden flex items-center justify-center p-2 mb-2 border border-[#0b291b]/6">
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-stone-700 text-white text-[9px] font-bold uppercase tracking-wider z-10">Herramienta Pro</span>
+<button class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 shadow-xs flex items-center justify-center text-outline hover:text-red-500 z-10 transition-transform active:scale-75" onclick="toggleWishlist(this)">
+<span class="material-symbols-outlined text-[16px]">favorite</span>
+</button>
+<img alt="Cepillo" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB07cWorvfplrwUiWSMIoRt5iyDHY_cxnJK-gHChViclWBcQVULowcTUYeF4jK1bP128frgWJucdoCOokYMt9JuRTlroR7NW6NaKaiHW2mm5l0vfyyhg8C6qOKxJJIjIhhy71T5D96ueps58mROzFz7nCzA6zua55wRsaFjtfvye2lrdbDuRMdCGVD04mnPacgrCMyjW3FmPLdpm_WQEqChyIp5TwVgV14u_DiQBudo">
+</div>
+<div class="space-y-1">
+<span class="text-[10px] font-bold text-outline uppercase tracking-wider block">9 Hileras</span>
+<h4 class="font-body-md text-xs sm:text-sm font-bold text-primary-container line-clamp-1">Cepillo Definidor 9 Hileras</h4>
+<p class="text-[10px] text-outline line-clamp-1">Cintas perfectas sin tirón</p>
+</div>
+</div>
+<div class="mt-3 pt-2 border-t border-[#0b291b]/8 flex items-center justify-between gap-1">
+<div>
+<span class="font-extrabold text-xs sm:text-sm text-primary-container block leading-tight">$12.500</span>
+<span class="text-[9px] text-[#735c00] font-semibold">Goma desmontable</span>
+</div>
+<button class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center hover:scale-105 active:scale-95 transition-transform shadow-xs" onclick="quickAdd('Cepillo Definidor 9 Hileras', '$12.500,00')">
+<span class="material-symbols-outlined text-[17px]">add</span>
+</button>
+</div>
+</div>
+<!-- PRODUCT 8: GORRA DE SATÉN -->
+<div class="product-card group rounded-3xl glass-card p-3 border border-[#0b291b]/8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="accesorios">
+<div>
+<div class="relative w-full aspect-square rounded-2xl bg-white overflow-hidden flex items-center justify-center p-2 mb-2 border border-[#0b291b]/6">
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-[#735c00] text-white text-[9px] font-bold uppercase tracking-wider z-10">Satén Doble</span>
+<button class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 shadow-xs flex items-center justify-center text-outline hover:text-red-500 z-10 transition-transform active:scale-75" onclick="toggleWishlist(this)">
+<span class="material-symbols-outlined text-[16px]">favorite</span>
+</button>
+<img alt="Gorra saten" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsMm-f9cuDorusUbzLLnwnJg8D7uFDEyD0Ooq-XZbic4YIj_Yp0BFqdWqNnUbCukgubM4j_hJzzb0uTVe4gGhEYQzQu5JvMaWm_gqKwSAxNiqqpkQE90dIwgfDhcsIpoHgK2ptBJwESSGZhEFBh8AECgftjtdKz3_kMd3W1ROB_FCElsowoJ8EttX2PZv1pORJHfBkFQ9nNc7ZoKnHY30Wc0QC3suS6hTC4S8yK5KP">
+</div>
+<div class="space-y-1">
+<span class="text-[10px] font-bold text-outline uppercase tracking-wider block">Anti-frizz</span>
+<h4 class="font-body-md text-xs sm:text-sm font-bold text-primary-container line-clamp-1">Gorra de Satén Doble Faz</h4>
+<p class="text-[10px] text-outline line-clamp-1">Retiene la humedad natural</p>
+</div>
+</div>
+<div class="mt-3 pt-2 border-t border-[#0b291b]/8 flex items-center justify-between gap-1">
+<div>
+<span class="font-extrabold text-xs sm:text-sm text-primary-container block leading-tight">$11.800</span>
+<span class="text-[9px] text-[#735c00] font-semibold">Elástico sin marca</span>
+</div>
+<button class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center hover:scale-105 active:scale-95 transition-transform shadow-xs" onclick="quickAdd('Gorra de Satén Doble Faz', '$11.800,00')">
+<span class="material-symbols-outlined text-[17px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- INTEGRATED STUDIO EXPERIENCE IN MENDOZA (COMPACT BOTANICAL CARD) -->
+<section class="rounded-3xl glass-dark text-white p-5 sm:p-7 shadow-lg border border-white/10 space-y-4"><div class="flex items-center justify-between bg-white/10 rounded-2xl p-2.5 px-3.5 border border-white/15"><div class="flex items-center gap-2"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9Z32KdWkJW-Jna5hIvQnVI7axuRae5f_gna4a-nMkG90KXtqdXJSqKzF7OnpWIxeB2tpd2sSUqryTMgAwAFYA80QDPMU5sFhcMqLBhZHgNsng66HAAj3wrbq1H65Nc0LCEUvvTWr-604UeFUaxTwoEe03JR15OVIr2KMGQ3xAN9-V6ha-RN_gAcc5ktAvcpGMAo7x6XCDAyTciqlBdpJ61nM713Ut0xtrH_ySp9xutQDBYTkZYcIu1Q" alt="Dream Hair The Curly Studio logocito.jpg" class="h-8 rounded bg-white p-0.5 object-contain shadow-xs"><span class="text-[11px] font-bold text-emerald-200 tracking-wide uppercase">Estudio Oficial Certificado en Método Curly</span></div><span class="text-[10px] text-white/80 hidden sm:inline font-semibold">Mendoza • Arístides 420</span></div>
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+<div>
+<span class="px-2.5 py-0.5 rounded-full bg-white/10 text-secondary-fixed text-[10px] font-bold uppercase tracking-wider">Showroom &amp; Salón Mendoza</span>
+<h3 class="font-headline-md text-xl sm:text-2xl font-bold text-white mt-1">Corte en Seco Curly &amp; Asesoría de Patrón</h3>
+<p class="text-xs text-white/80 mt-0.5">Av. Arístides Villanueva 420, Quinta Sección • Mar a Sáb 10-19:30hs</p>
+</div>
+<button class="px-4 py-2 rounded-full bg-secondary-container text-on-secondary-container hover:bg-amber-300 font-bold text-xs uppercase tracking-wider transition-all shadow-md shrink-0 flex items-center gap-1.5" onclick="toggleSalonDrawer()">
+<span class="material-symbols-outlined text-[17px]">calendar_month</span>
+<span>Ver Turnos Disponibles</span>
+</button>
+</div>
+<!-- Verified Clients Testimonial Pulse -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+<div class="p-3 rounded-2xl bg-white/5 border border-white/10 text-xs">
+<p class="italic text-white/90">"Carina Luna y el equipo te dejan sumamente conforme con el corte y la recomendación de productos exactos."</p>
+<span class="text-[10px] text-secondary-fixed font-bold block mt-1">★★★★★ Carina L. (Cliente Verificada en Salón)</span>
+</div>
+<div class="p-3 rounded-2xl bg-white/5 border border-white/10 text-xs">
+<p class="italic text-white/90">"La rapidez para retirar en el día y el asesoramiento por WhatsApp te salvan los rulos por completo."</p>
+<span class="text-[10px] text-secondary-fixed font-bold block mt-1">★★★★★ Sofía O. (Ondas 2C)</span>
+</div>
+</div>
+</section>
+<!-- ULTRA-CLEAN FOOTER -->
+<footer class="pt-4 pb-8 border-t border-[#0b291b]/10 text-center text-xs text-outline space-y-2">
+<div class="flex justify-center mb-3"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDej9Kr5XcWX5WfyFey1FoQSe3IeD9zqb7DmAHM0Qms59UvxIaeWmWjMyWg3v2Tcd00FUyt1v9a5Zr_MMDR3K_HUf94uq75pZ6hDonur5ORGweoAHXTRCsMYOjB8H89wil00d4t9_dNO4Uia4y9kdezpZa8PnjnXY67ENvQltdzFm1tiIs3zr17EMPcjAPlFistqd1zLm0w3MOTZBO5dIxifPIfuNF4YBL-ER2zrdBnfj2C-7Zah05RDA" alt="Dream Hair LOGO.webp" class="h-12 w-auto object-contain rounded-xl shadow-xs border border-[#0b291b]/10"></div><p class="font-bold text-primary-container tracking-wider uppercase">DREAM HAIR BOUTIQUE • MENDOZA ARGENTINA</p>
+<p class="text-[11px]">Envíos en el día en Gran Mendoza • Envíos a todo el país por Correo Argentino</p>
+<div class="flex justify-center gap-4 pt-1 font-semibold text-primary-container">
+<a class="hover:underline" href="#tienda">Catálogo</a>
+<a class="hover:underline" href="https://wa.me/542615557890" target="_blank">WhatsApp</a>
+<a class="hover:underline" href="javascript:void(0)" onclick="toggleSalonDrawer()">Studio Arístides</a>
+</div>
+</footer>
+</main>
+<!-- FLOATING INTERACTIVE ACTIONS (FAB CONCIERGE & STICKY CART) -->
+<aside class="fixed bottom-4 right-4 z-40 flex flex-col items-end gap-2.5">
+<!-- Floating Quick Diagnostic / WhatsApp Concierge Bubble -->
+<a class="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-[#25D366] text-white shadow-xl hover:scale-105 active:scale-95 transition-all text-xs font-extrabold group" href="https://wa.me/542615557890?text=Hola%20Dream%20Hair!%20Quiero%20asesoramiento%20para%20mi%20patr%C3%B3n%20curly" rel="noopener" target="_blank" title="Diagnóstico Curly por WhatsApp">
+<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 2.01.815 3.094.815 3.181 0 5.768-2.587 5.768-5.767 0-3.181-2.587-5.768-5.768-5.768zm7.842 5.767c0 4.328-3.52 7.847-7.842 7.847-1.341 0-2.613-.341-3.73-.938l-4.301 1.127 1.147-4.195c-.694-1.189-1.082-2.56-1.082-4.004.001-4.328 3.52-7.847 7.843-7.847 4.327 0 7.843 3.52 7.843 7.848z"></path></svg>
+<span class="hidden sm:inline font-bold">Diagnóstico Rápido</span>
+</a>
+<!-- Sticky Bottom Cart Pill (Always Visible on Mobile) -->
+<button class="flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-primary-container text-white shadow-2xl hover:scale-105 active:scale-95 transition-all text-xs font-bold border border-white/20" onclick="openCartDrawer()">
+<span class="material-symbols-outlined text-[19px]">shopping_bag</span>
+<span>Bolsa (<span id="fab-cart-count">3</span>)</span>
+<span class="bg-[#fed65b] text-[#574500] font-black px-1.5 py-0.5 rounded-md">$56.900</span>
+</button>
+</aside>
+<!-- MODAL: HOTSPOT QUICK-BUY DETAIL -->
+<div class="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 flex items-center justify-center p-4 transition-opacity duration-200 opacity-0 pointer-events-none" id="hotspot-modal">
+<div class="w-full max-w-sm rounded-3xl glass-card p-5 border border-white/40 shadow-2xl space-y-3 transform transition-transform duration-200 scale-95" id="hotspot-modal-card">
+<div class="flex items-center justify-between border-b border-[#0b291b]/10 pb-2">
+<span class="text-[11px] font-bold uppercase tracking-wider text-outline">Producto del Look</span>
+<button class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-outline hover:text-black" onclick="closeHotspotModal()">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<img alt="Producto" class="w-16 h-16 object-contain rounded-xl bg-white p-1 border border-[#0b291b]/10" id="hotspot-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcOTdzupDdsgdoh3RB43CswLdU1aZtN4RXwZMqeyn74bGVmBBNXUSzN3SuIT9NP-qa-CtiTBkYR4PucsLxgvSd3v_HrrFauYU2g1Yot9AtwjrSgliTJeK88b6nJW2Xj66ZYV5UBGG2bTDGoqz2Yq_r_vgsGb8NCnA2OxlXL3LJ5LO1B-Bj_fxjLoN3I6_D_oHIG9HAdyDp0MtqKwSWjtvAvCushX9A40-iyFdLSSFs">
+<div>
+<h4 class="font-bold text-sm text-primary-container" id="hotspot-title">Cremas Skala 2 en 1 Divino</h4>
+<p class="text-xs text-outline" id="hotspot-sub">Co-wash &amp; Peinar • 1000g Brasil</p>
+<span class="text-sm font-extrabold text-[#735c00] block mt-0.5" id="hotspot-price">$6.900,00</span>
+</div>
+</div>
+<button class="w-full py-2.5 rounded-full bg-primary-container text-white text-xs font-bold uppercase tracking-wider hover:bg-[#143b27] transition-all flex items-center justify-center gap-1.5 shadow-sm" id="hotspot-buy-btn">
+<span class="material-symbols-outlined text-[17px]">add_shopping_cart</span>
+<span>Sumar a la Bolsa</span>
+</button>
+</div>
+</div>
+<!-- SLIDE-OVER QUICK SHOPPING CART DRAWER -->
+<div class="fixed inset-0 bg-[#001208]/40 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300" id="cart-drawer-backdrop">
+<div class="absolute top-0 right-0 h-full w-full max-w-md bg-[#FAF9F4] shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-out" id="cart-drawer">
+<!-- Drawer Header -->
+<div class="p-4 bg-white border-b border-[#0b291b]/10 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[22px]">shopping_bag</span>
+<div>
+<h3 class="font-headline-md text-base font-bold text-primary-container leading-none">Bolsa Curly</h3>
+<span class="text-[11px] text-outline"><span id="drawer-qty-label">3</span> productos listos</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-outline hover:text-black transition-colors" onclick="closeCartDrawer()">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Drawer Items List -->
+<div class="flex-1 overflow-y-auto p-4 space-y-3" id="drawer-items">
+<!-- Cart Item 1 -->
+<div class="flex gap-3 p-3 rounded-2xl bg-white border border-[#0b291b]/8 shadow-xs" data-item-id="item-han">
+<img alt="HAN" class="w-14 h-14 object-contain rounded-xl bg-surface-container-low p-1 border border-[#0b291b]/6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRTZPl7D6lOCs_FHrPRJmInsP59tZpsQ-WQg5qhI6_fQvBXd2QmhXgPUzYxR31EVu-cs4ozGTqBADu0Nh_rxp3Q2vwUFLfsC7vVxv7ufqXC-ANSX_GnGRAtneD8gE6glkM9n2af7kfFhWn2rYEgaF2lZnAzYtVsBK4BVoZr88PndGNyAbViL9KAac0LJO3ELRNJ4bmJ5QbBLlzsdIghZ7r2nspbq2YhZeqXg9Qband">
+<div class="flex-1 min-w-0">
+<h4 class="text-xs font-bold text-primary-container truncate">Shampoo Low Poo HAN</h4>
+<span class="text-[10px] text-outline block">Var: Hialurónico</span>
+<div class="mt-2 flex items-center justify-between">
+<span class="text-xs font-extrabold text-primary-container">$15.000,00</span>
+<div class="flex items-center gap-1.5 bg-surface-container px-2 py-0.5 rounded-full text-xs font-bold">
+<button onclick="updateItemCount(this, -1)">-</button>
+<span class="px-1 text-[11px]">1</span>
+<button onclick="updateItemCount(this, 1)">+</button>
+</div>
+</div>
+</div>
+<button class="text-outline hover:text-red-500 self-start p-1" onclick="removeDrawerItem('item-han')">
+<span class="material-symbols-outlined text-[15px]">close</span>
+</button>
+</div>
+<!-- Cart Item 2 -->
+<div class="flex gap-3 p-3 rounded-2xl bg-white border border-[#0b291b]/8 shadow-xs" data-item-id="item-skala">
+<img alt="Skala" class="w-14 h-14 object-contain rounded-xl bg-surface-container-low p-1 border border-[#0b291b]/6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcOTdzupDdsgdoh3RB43CswLdU1aZtN4RXwZMqeyn74bGVmBBNXUSzN3SuIT9NP-qa-CtiTBkYR4PucsLxgvSd3v_HrrFauYU2g1Yot9AtwjrSgliTJeK88b6nJW2Xj66ZYV5UBGG2bTDGoqz2Yq_r_vgsGb8NCnA2OxlXL3LJ5LO1B-Bj_fxjLoN3I6_D_oHIG9HAdyDp0MtqKwSWjtvAvCushX9A40-iyFdLSSFs">
+<div class="flex-1 min-w-0">
+<h4 class="text-xs font-bold text-primary-container truncate">Cremas Skala 2 en 1</h4>
+<span class="text-[10px] text-outline block">Mega Potão 1000g Brasil</span>
+<div class="mt-2 flex items-center justify-between">
+<span class="text-xs font-extrabold text-primary-container">$6.900,00</span>
+<div class="flex items-center gap-1.5 bg-surface-container px-2 py-0.5 rounded-full text-xs font-bold">
+<button onclick="updateItemCount(this, -1)">-</button>
+<span class="px-1 text-[11px]">1</span>
+<button onclick="updateItemCount(this, 1)">+</button>
+</div>
+</div>
+</div>
+<button class="text-outline hover:text-red-500 self-start p-1" onclick="removeDrawerItem('item-skala')">
+<span class="material-symbols-outlined text-[15px]">close</span>
+</button>
+</div>
+<!-- Cart Item 3 -->
+<div class="flex gap-3 p-3 rounded-2xl bg-white border border-[#0b291b]/8 shadow-xs" data-item-id="item-rich">
+<img alt="Gel de Rich" class="w-14 h-14 object-contain rounded-xl bg-surface-container-low p-1 border border-[#0b291b]/6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmYLKLZKlQ8boDRLZjPTmNerDcxMT296Bpww3_-2H_Wy4IDSXlCRPMN49yA7HlUq6RPGQdOk2rMNIJocz_7LfHlo6WZ5issy0dZI8U5rn7Fzv88p2X30Br8zU0UcHlqDFZ6RX3eguStsq4kCwycVF60_-PtgqugbkMcK579LdMBJZcJVFTRTfunCaCfSnxVqFz0jXAlNIOBDokSlaW2lj9GPgx3uGtuZsS0LhQGHW2">
+<div class="flex-1 min-w-0">
+<h4 class="text-xs font-bold text-primary-container truncate">Gel de Rich Alta Gama</h4>
+<span class="text-[10px] text-outline block">Edición Boutique 250ml</span>
+<div class="mt-2 flex items-center justify-between">
+<span class="text-xs font-extrabold text-primary-container">$35.000,00</span>
+<div class="flex items-center gap-1.5 bg-surface-container px-2 py-0.5 rounded-full text-xs font-bold">
+<button onclick="updateItemCount(this, -1)">-</button>
+<span class="px-1 text-[11px]">1</span>
+<button onclick="updateItemCount(this, 1)">+</button>
+</div>
+</div>
+</div>
+<button class="text-outline hover:text-red-500 self-start p-1" onclick="removeDrawerItem('item-rich')">
+<span class="material-symbols-outlined text-[15px]">close</span>
+</button>
+</div>
+</div>
+<!-- Drawer Footer -->
+<div class="p-4 bg-white border-t border-[#0b291b]/10 space-y-2.5">
+<div class="flex justify-between text-xs text-outline">
+<span>Envío Mendoza</span>
+<span class="text-emerald-700 font-bold">Gratis por superar $45.000</span>
+</div>
+<div class="flex justify-between text-base font-extrabold text-primary-container pt-1 border-t border-[#0b291b]/6">
+<span>Total estimado</span>
+<span id="drawer-total-price">$56.900,00</span>
+</div>
+<p class="text-[11px] text-[#735c00] font-bold text-center">3 cuotas sin interés de $18.966</p>
+<button class="w-full py-3.5 rounded-full bg-primary-container text-white font-bold text-xs uppercase tracking-wider hover:bg-[#143b27] transition-all flex items-center justify-center gap-2 shadow-md" onclick="checkoutWhatsApp()">
+<span>Finalizar por WhatsApp / Web</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- MODAL DRAWER: STUDIO MENDOZA APPOINTMENT BOOKING -->
+<div class="fixed inset-0 bg-[#001208]/40 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300" id="salon-drawer-backdrop">
+<div class="absolute bottom-0 sm:bottom-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 w-full max-w-lg rounded-t-3xl sm:rounded-3xl bg-[#FAF9F4] p-5 shadow-2xl border border-[#0b291b]/10 transform translate-y-full sm:translate-y-0 transition-transform duration-300" id="salon-drawer">
+<div class="flex items-center justify-between border-b border-[#0b291b]/10 pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#735c00]">chair</span>
+<div>
+<h3 class="font-headline-md text-base font-bold text-primary-container">Turnos Studio Mendoza</h3>
+<p class="text-[11px] text-outline">Corte en seco, diagnóstico y nutrición profunda</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-outline hover:text-black" onclick="toggleSalonDrawer()">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="py-4 space-y-3">
+<div>
+<label class="text-[11px] font-bold uppercase text-outline block mb-1">Elegí tu Servicio:</label>
+<div class="grid grid-cols-2 gap-2 text-xs">
+<button class="service-pill active p-2.5 rounded-xl border border-primary-container bg-primary-container text-white font-bold text-left" onclick="selectService(this)">
+<span class="block">Corte en Seco Curly</span>
+<span class="text-[10px] text-white/80 font-normal">Incluye lavado y definición</span>
+</button>
+<button class="service-pill p-2.5 rounded-xl border border-[#0b291b]/10 glass-card text-primary-container font-bold text-left" onclick="selectService(this)">
+<span class="block">Nutrición &amp; Detox</span>
+<span class="text-[10px] text-outline font-normal">Recuperación post-química</span>
+</button>
+</div>
+</div>
+<div class="p-3 rounded-2xl bg-white border border-[#0b291b]/8 space-y-1 text-xs">
+<p class="font-bold text-primary-container">📍 Dirección del Showroom:</p>
+<p class="text-outline">Av. Arístides Villanueva 420, Mendoza Ciudad.</p>
+<p class="text-[11px] text-emerald-800 font-semibold pt-1">Atención personalizada con Carina Luna y equipo.</p>
+</div>
+<a class="w-full py-3 rounded-full bg-[#25D366] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md hover:bg-emerald-600 transition-all" href="https://wa.me/542615557890?text=Hola%20Dream%20Hair!%20Quiero%20reservar%20un%20turno%20para%20Corte%20en%20Seco%20en%20el%20Showroom%20Mendoza" target="_blank">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+<span>Coordinar Día y Hora por WhatsApp</span>
+</a>
+</div>
+</div>
+</div>
+<!-- LOGIC & INTERACTIONS SCRIPT -->
+<script>
+    let cartCount = 3;
+
+    function showToast(msg) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'pointer-events-auto flex items-center gap-2 px-4 py-2.5 rounded-2xl glass-dark text-white text-xs font-semibold shadow-xl border border-white/20 transform transition-all duration-300 translate-y-2 opacity-0';
+      toast.innerHTML = `<span class="material-symbols-outlined text-[#fed65b] text-[18px]">verified</span><span>${msg}</span>`;
+      container.appendChild(toast);
+      
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      });
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-2', 'opacity-0');
+        setTimeout(() => toast.remove(), 300);
+      }, 2300);
+    }
+
+    function updateCartBadges() {
+      document.getElementById('header-cart-qty').textContent = cartCount;
+      document.getElementById('fab-cart-count').textContent = cartCount;
+      document.getElementById('drawer-qty-label').textContent = cartCount;
+    }
+
+    function quickAdd(name, price) {
+      cartCount++;
+      updateCartBadges();
+      showToast(`+1 "${name}" sumado a tu bolsa`);
+    }
+
+    function addBundleToCart() {
+      cartCount += 3;
+      updateCartBadges();
+      showToast(`Rutina Completa #Curly01 añadida ($21.900)`);
+    }
+
+    // Cart Drawer Controls
+    const backdrop = document.getElementById('cart-drawer-backdrop');
+    const drawer = document.getElementById('cart-drawer');
+
+    function openCartDrawer() {
+      backdrop.classList.remove('opacity-0', 'pointer-events-none');
+      drawer.classList.remove('translate-x-full');
+    }
+
+    function closeCartDrawer() {
+      backdrop.classList.add('opacity-0', 'pointer-events-none');
+      drawer.classList.add('translate-x-full');
+    }
+
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) closeCartDrawer();
+    });
+
+    function removeDrawerItem(id) {
+      const el = document.querySelector(`[data-item-id="${id}"]`);
+      if (el) {
+        el.remove();
+        cartCount = Math.max(0, cartCount - 1);
+        updateCartBadges();
+        showToast('Producto eliminado');
+      }
+    }
+
+    function updateItemCount(btn, delta) {
+      const span = btn.parentElement.querySelector('span');
+      let val = parseInt(span.textContent) + delta;
+      if (val < 1) val = 1;
+      span.textContent = val;
+    }
+
+    // Salon Drawer Controls
+    const salonBackdrop = document.getElementById('salon-drawer-backdrop');
+    const salonDrawer = document.getElementById('salon-drawer');
+
+    function toggleSalonDrawer() {
+      const isOpen = !salonBackdrop.classList.contains('pointer-events-none');
+      if (isOpen) {
+        salonBackdrop.classList.add('opacity-0', 'pointer-events-none');
+        salonDrawer.classList.add('translate-y-full');
+      } else {
+        salonBackdrop.classList.remove('opacity-0', 'pointer-events-none');
+        salonDrawer.classList.remove('translate-y-full');
+      }
+    }
+
+    salonBackdrop.addEventListener('click', (e) => {
+      if (e.target === salonBackdrop) toggleSalonDrawer();
+    });
+
+    function selectService(btn) {
+      document.querySelectorAll('.service-pill').forEach(b => {
+        b.className = 'service-pill p-2.5 rounded-xl border border-[#0b291b]/10 glass-card text-primary-container font-bold text-left';
+      });
+      btn.className = 'service-pill active p-2.5 rounded-xl border border-primary-container bg-primary-container text-white font-bold text-left';
+    }
+
+    // Hotspot Modal Logic
+    const hotspotData = {
+      han: {
+        title: 'Shampoo Low Poo HAN Hialurónico',
+        sub: 'Apto método curly • 500ml',
+        price: '$15.000,00',
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCRTZPl7D6lOCs_FHrPRJmInsP59tZpsQ-WQg5qhI6_fQvBXd2QmhXgPUzYxR31EVu-cs4ozGTqBADu0Nh_rxp3Q2vwUFLfsC7vVxv7ufqXC-ANSX_GnGRAtneD8gE6glkM9n2af7kfFhWn2rYEgaF2lZnAzYtVsBK4BVoZr88PndGNyAbViL9KAac0LJO3ELRNJ4bmJ5QbBLlzsdIghZ7r2nspbq2YhZeqXg9Qband'
+      },
+      skala: {
+        title: 'Cremas Skala 2 en 1 Divino',
+        sub: 'Co-wash & Peinar • 1000g Brasil',
+        price: '$6.900,00',
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAcOTdzupDdsgdoh3RB43CswLdU1aZtN4RXwZMqeyn74bGVmBBNXUSzN3SuIT9NP-qa-CtiTBkYR4PucsLxgvSd3v_HrrFauYU2g1Yot9AtwjrSgliTJeK88b6nJW2Xj66ZYV5UBGG2bTDGoqz2Yq_r_vgsGb8NCnA2OxlXL3LJ5LO1B-Bj_fxjLoN3I6_D_oHIG9HAdyDp0MtqKwSWjtvAvCushX9A40-iyFdLSSFs'
+      }
+    };
+
+    function openHotspotModal(itemKey) {
+      const d = hotspotData[itemKey];
+      if (!d) return;
+      document.getElementById('hotspot-title').textContent = d.title;
+      document.getElementById('hotspot-sub').textContent = d.sub;
+      document.getElementById('hotspot-price').textContent = d.price;
+      document.getElementById('hotspot-img').src = d.img;
+      
+      const buyBtn = document.getElementById('hotspot-buy-btn');
+      buyBtn.onclick = () => {
+        quickAdd(d.title, d.price);
+        closeHotspotModal();
+      };
+
+      const m = document.getElementById('hotspot-modal');
+      m.classList.remove('opacity-0', 'pointer-events-none');
+      document.getElementById('hotspot-modal-card').classList.remove('scale-95');
+    }
+
+    function closeHotspotModal() {
+      const m = document.getElementById('hotspot-modal');
+      m.classList.add('opacity-0', 'pointer-events-none');
+      document.getElementById('hotspot-modal-card').classList.add('scale-95');
+    }
+
+    // HAN Variant Selector inside Card
+    function changeHanVariant(btn, name, src) {
+      document.querySelectorAll('.han-pill').forEach(p => {
+        p.className = 'han-pill px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant text-[9px] font-semibold';
+      });
+      btn.className = 'han-pill active px-2 py-0.5 rounded-md bg-primary-container text-white text-[9px] font-bold';
+      document.getElementById('han-img').src = src;
+      showToast(`Variante ${name} seleccionada`);
+    }
+
+    // Catalog Filter Chips
+    function filterCatalog(category, btn) {
+      document.querySelectorAll('.filter-chip').forEach(c => {
+        c.className = 'filter-chip px-3.5 py-2 rounded-full glass-card hover:bg-white text-on-surface-variant text-xs font-semibold whitespace-nowrap border border-[#0b291b]/10 transition-all';
+      });
+      btn.className = 'filter-chip active px-4 py-2 rounded-full bg-primary-container text-white text-xs font-bold whitespace-nowrap shadow-sm transition-all';
+
+      const items = document.querySelectorAll('#catalog-grid .product-card');
+      items.forEach(card => {
+        if (category === 'all') {
+          card.style.display = 'flex';
+        } else {
+          const cats = card.getAttribute('data-category') || '';
+          card.style.display = cats.includes(category) ? 'flex' : 'none';
+        }
+      });
+    }
+
+    // Reel Lookbook Switcher
+    const reels = {
+      curly01: {
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBHfuA779RqmBxbP3-zHPYJvxbc3dWU2y5-5VEez-S3HhdQAybgrCLeZ0UNXQQw2BIcfoElkJhCn2z-IYSi8BhZL9WILVntArK_ky7HQ1vZcZvzcoYI9ITfvZ1-Y2Znu8Lhc6kbBRO-bPvxzErNWQctKO7uQpkz8-WiV2VuvspGVXghkd2-Xy9E_o_0RMBNIRSNb5ZhVTJG_7ra_6U5KpHHyTdLHfckLEagXGRMYbMC',
+        title: 'Definición & Hidratación Botánica',
+        sub: 'Ondas 2A-2C • HAN Avena + Skala Potão'
+      },
+      curly02: {
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAqG05MPdr9UR6DMKH_mLhGVYkOpiQS8UmGgUa9mkFk5NZK0EVtnMQJFqmcN5FNr_lxuBfYLvU2BAsVx1FEoyvhGjt4w-fvwg3YjS1JuN2JJiXxlmvwtCNbpaqS0Qzi4E5uFrufZltkL9dWp7yrJ2FYka5HV9BF1T1MW2nCtUDVwnLkwzomD_YWWBzteGFaNP29a-CKeaFqPtEFqYdaV39nF59NfOYO5vxMFeyCaR_O',
+        title: 'Volumen & Definición 3A-3C',
+        sub: 'Gelatina #todecacho + HAN Hialurónico'
+      },
+      curly03: {
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCmYLKLZKlQ8boDRLZjPTmNerDcxMT296Bpww3_-2H_Wy4IDSXlCRPMN49yA7HlUq6RPGQdOk2rMNIJocz_7LfHlo6WZ5issy0dZI8U5rn7Fzv88p2X30Br8zU0UcHlqDFZ6RX3eguStsq4kCwycVF60_-PtgqugbkMcK579LdMBJZcJVFTRTfunCaCfSnxVqFz0jXAlNIOBDokSlaW2lj9GPgx3uGtuZsS0LhQGHW2',
+        title: 'Nutrición Óleos 4A-4C',
+        sub: 'Gel de Rich Alta Gama + Aceites nobles'
+      },
+      curly04: {
+        img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAsMm-f9cuDorusUbzLLnwnJg8D7uFDEyD0Ooq-XZbic4YIj_Yp0BFqdWqNnUbCukgubM4j_hJzzb0uTVe4gGhEYQzQu5JvMaWm_gqKwSAxNiqqpkQE90dIwgfDhcsIpoHgK2ptBJwESSGZhEFBh8AECgftjtdKz3_kMd3W1ROB_FCElsowoJ8EttX2PZv1pORJHfBkFQ9nNc7ZoKnHY30Wc0QC3suS6hTC4S8yK5KP',
+        title: 'Rutina Nocturna de Protección',
+        sub: 'Gorra de Satén Doble Faz + Cepillo 9 Hileras'
+      }
+    };
+
+    function switchReel(key) {
+      document.querySelectorAll('.reel-thumb').forEach(t => {
+        t.classList.remove('ring-2', 'ring-primary-container', 'opacity-100');
+        t.classList.add('opacity-70');
+      });
+      event.currentTarget.classList.add('ring-2', 'ring-primary-container');
+      event.currentTarget.classList.remove('opacity-70');
+
+      const data = reels[key];
+      const media = document.getElementById('reel-main-media');
+      media.style.opacity = '0.4';
+      setTimeout(() => {
+        media.src = data.img;
+        media.style.opacity = '1';
+        showToast(`Mostrando: ${data.title}`);
+      }, 150);
+    }
+
+    function copyCoupon(code) {
+      navigator.clipboard.writeText(code).then(() => {
+        showToast(`Cupón ${code} copiado al portapapeles`);
+      }).catch(() => {
+        showToast(`Cupón: ${code}`);
+      });
+    }
+
+    function toggleWishlist(btn) {
+      const icon = btn.querySelector('.material-symbols-outlined');
+      if (icon.classList.contains('text-red-500')) {
+        icon.classList.remove('text-red-500');
+        showToast('Quitado de favoritos');
+      } else {
+        icon.classList.add('text-red-500');
+        showToast('Guardado en favoritos');
+      }
+    }
+
+    function toggleAudio(btn) {
+      const icon = btn.querySelector('.material-symbols-outlined');
+      if (icon.textContent === 'volume_up') {
+        icon.textContent = 'volume_off';
+        showToast('Audio silenciado');
+      } else {
+        icon.textContent = 'volume_up';
+        showToast('Audio activado (Reel ambiental)');
+      }
+    }
+
+    function shareReel() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Dream Hair Mendoza - Look Curly',
+          url: window.location.href
+        }).catch(() => {});
+      } else {
+        showToast('Enlace del reel copiado');
+      }
+    }
+
+    function checkoutWhatsApp() {
+      window.open('https://wa.me/542615557890?text=Hola%20Dream%20Hair!%20Quiero%20finalizar%20mi%20pedido%20de%20la%20Bolsa%20Curly%20por%20$56.900', '_blank');
+    }
+  </script>
+
+
+</body></html>

@@ -10,6 +10,7 @@ import { useUI } from '../../context/UIContext.jsx';
 import { useCart } from '../../context/CartContext.jsx';
 import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 import { useFocusTrap } from '../../hooks/useFocusTrap.js';
+import { useOcultarBottomNav } from '../../hooks/useOcultarBottomNav.js';
 
 /** Vista rápida: bottom-sheet en mobile (arrastrable para cerrar), modal en desktop. */
 export default function QuickView() {
@@ -31,7 +32,8 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
   const [aviso, setAviso] = useState(false);
   const ref = useRef(null);
   const controles = useDragControls();
-  useFocusTrap(ref, onClose);
+  useFocusTrap(ref, onClose, true, { enfocarContenedor: true });
+  useOcultarBottomNav();
 
   useEffect(() => {
     const prev = document.body.style.overflow;
@@ -71,6 +73,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
       <m.div
         ref={ref}
         role="dialog"
+        tabIndex={-1}
         aria-modal="true"
         aria-labelledby="qv-titulo"
         {...animSheet}
@@ -83,7 +86,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
         onDragEnd={(_, info) => {
           if (info.offset.y > 120 || info.velocity.y > 600) onClose();
         }}
-        className="relative max-h-[92dvh] w-full overflow-y-auto rounded-t-5xl bg-crema-card shadow-flotante md:grid md:max-w-4xl md:grid-cols-2 md:rounded-5xl"
+        className="relative max-h-[92dvh] w-full overflow-y-auto rounded-t-5xl bg-crema-card shadow-flotante outline-none md:grid md:max-w-4xl md:grid-cols-2 md:rounded-5xl"
       >
         <div
           className="sticky top-0 z-10 flex touch-none justify-center pt-3 pb-3 md:hidden"

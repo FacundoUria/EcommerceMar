@@ -11,6 +11,7 @@ import { useBrands, useCategories, useProducts } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
 import { useMediaQuery } from '../hooks/useMediaQuery.js';
 import { useFocusTrap } from '../hooks/useFocusTrap.js';
+import { useOcultarBottomNav } from '../hooks/useOcultarBottomNav.js';
 import { coincide } from '../lib/texto.js';
 import { imgSm, plural } from '../lib/format.js';
 
@@ -280,6 +281,7 @@ function Popover({ onClose, ...props }) {
 function Hoja({ onClose, ...props }) {
   const ref = useRef(null);
   useFocusTrap(ref, onClose, true, { enfocarContenedor: true });
+  useOcultarBottomNav();
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
@@ -300,7 +302,7 @@ function Hoja({ onClose, ...props }) {
         animate={{ y: 0 }}
         exit={{ y: '100%' }}
         transition={{ type: 'spring', damping: 32, stiffness: 320 }}
-        className="relative max-h-[85dvh] w-full overflow-y-auto rounded-t-5xl bg-crema-card outline-none px-5 pt-3 pb-[max(1.25rem,env(safe-area-inset-bottom))] shadow-flotante"
+        className="relative max-h-[85dvh] w-full overflow-y-auto rounded-t-5xl bg-crema-card outline-none px-5 pt-3 pb-[calc(1.25rem+env(safe-area-inset-bottom))] shadow-flotante"
       >
         <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-tinta/15" aria-hidden="true" />
         <ContenidoFiltros onClose={onClose} {...props} />

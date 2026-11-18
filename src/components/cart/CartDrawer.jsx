@@ -6,6 +6,7 @@ import CartLine from './CartLine.jsx';
 import CartSummary from './CartSummary.jsx';
 import { useCart } from '../../context/CartContext.jsx';
 import { useFocusTrap } from '../../hooks/useFocusTrap.js';
+import { useOcultarBottomNav } from '../../hooks/useOcultarBottomNav.js';
 
 export default function CartDrawer() {
   const { abierto, cerrar } = useCart();
@@ -24,7 +25,8 @@ function Panel({ onClose }) {
   const { lineas } = useCart();
   const reducido = useReducedMotion();
   const ref = useRef(null);
-  useFocusTrap(ref, onClose);
+  useFocusTrap(ref, onClose, true, { enfocarContenedor: true });
+  useOcultarBottomNav();
 
   useEffect(() => {
     const prev = document.body.style.overflow;
@@ -46,13 +48,14 @@ function Panel({ onClose }) {
       <m.aside
         ref={ref}
         role="dialog"
+        tabIndex={-1}
         aria-modal="true"
         aria-labelledby="drawer-titulo"
         initial={reducido ? { opacity: 0 } : { x: '100%' }}
         animate={reducido ? { opacity: 1 } : { x: 0 }}
         exit={reducido ? { opacity: 0 } : { x: '100%' }}
         transition={{ type: 'spring', damping: 32, stiffness: 300 }}
-        className="absolute inset-y-0 right-0 flex w-full max-w-md flex-col bg-crema-card shadow-flotante sm:rounded-l-5xl"
+        className="absolute inset-y-0 right-0 flex w-full max-w-md flex-col bg-crema-card shadow-flotante outline-none sm:rounded-l-5xl"
       >
         <div className="flex items-center justify-between px-6 pt-6 pb-4">
           <h2 id="drawer-titulo" className="text-2xl">

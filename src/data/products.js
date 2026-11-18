@@ -75,13 +75,17 @@ export const products = [
   variantes: (p.variantes || []).map(([nombre, f]) => ({ nombre, imagen: img(f) })),
 }));
 
+// Fotos del estudio que mandó Mar (nov 2026). Asesoramiento básico, completo y Tratamiento y finalización
+// siguen con una foto anterior: las nuevas (assets/estudio/pendientes/) muestran la cara de una clienta y
+// esperan que Mar confirme el permiso. "Completo" usa salon-1 mientras tanto (asesoramiento-2 es la misma
+// toma que corte-en-seco y se repetía).
 export const services = [
-  { id: 'corte-rulos', nombre: 'Corte de rulos', imagen: '/img/estudio/servicio-corte-rulos.webp' },
+  { id: 'corte-rulos', nombre: 'Corte de rulos', imagen: '/img/estudio/corte-en-seco.webp' },
   { id: 'asesoramiento-basico', nombre: 'Asesoramiento básico', imagen: '/img/estudio/asesoramiento-1.webp' },
-  { id: 'asesoramiento-completo', nombre: 'Asesoramiento completo', imagen: '/img/estudio/asesoramiento-2.webp' },
-  { id: 'asesoramiento-deluxe', nombre: 'Asesoramiento De luxe', imagen: '/img/estudio/salon-1.webp' },
-  { id: 'asesoramiento-lo-hiciste-tu', nombre: 'Asesoramiento "Lo hiciste tú"', imagen: '/img/productos/asesoramiento-lo-hiciste-tu.webp', tn: 'asesoramiento-lo-hiciste-tu-dncg0' },
+  { id: 'asesoramiento-completo', nombre: 'Asesoramiento completo', imagen: '/img/estudio/salon-1.webp' },
+  { id: 'asesoramiento-deluxe', nombre: 'Asesoramiento De luxe', imagen: '/img/estudio/asesoramiento-deluxe.webp' },
+  { id: 'asesoramiento-lo-hiciste-tu', nombre: 'Asesoramiento "Lo hiciste tú"', imagen: '/img/estudio/lo-hiciste-tu.webp' },
   { id: 'tratamiento-finalizacion', nombre: 'Tratamiento y finalización', imagen: '/img/estudio/servicio-tratamiento-lavado-1.webp' },
-  { id: 'ozonoterapia', nombre: 'Ozonoterapia', imagen: '/img/estudio/servicio-ozonoterapia.webp' },
-  { id: 'celulas-madre-infrarrojo', nombre: 'Células madre + infrarrojo', imagen: '/img/estudio/servicio-celulas-madre-infrarrojo.webp' },
+  { id: 'ozonoterapia', nombre: 'Ozonoterapia', imagen: '/img/estudio/ozonoterapia.webp' },
+  { id: 'celulas-madre-infrarrojo', nombre: 'Células madre + infrarrojo', imagen: '/img/estudio/celulas-madre-infrarrojo.webp' },
 ];

@@ -28,3 +28,8 @@ desktop.ini
 
 # videos originales (se commitean solo las versiones optimizadas de public/video/)
 assets/videos/
+
+# fotos del estudio: originales en resolución completa (en assets/estudio/ van las optimizadas)
+assets/estudio/originales/
+# fotos con la cara de una clienta: no se publican hasta que Mar confirme el permiso
+assets/estudio/pendientes/

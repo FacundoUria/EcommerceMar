@@ -66,6 +66,11 @@ const BANNERS = [
 const TITULO_TEXTO = 'El cabello es el espejo de tu';
 const TITULO_EM = 'amor propio';
 const PARALLAX_PX = 60;
+// Foto del hero (también precargada en index.html con el mismo srcset/sizes: si cambia, cambiar los dos)
+const HERO_FOTO = '/img/mar/inicio.webp';
+const HERO_FOTO_SM = '/img/mar/inicio-sm.webp';
+const HERO_SIZES = '(min-width: 768px) min(30rem, 42vw), 84vw';
+const HERO_ENCUADRE = 'object-[50%_30%]';
 const BLOB = 'rounded-[46%_54%_40%_60%/56%_44%_56%_44%]';
 
 function Hero() {
@@ -77,7 +82,10 @@ function Hero() {
   const yCard1 = useTransform(scrollY, [0, 600], [0, -70], { clamp: true });
   const yCard2 = useTransform(scrollY, [0, 600], [0, -140], { clamp: true });
 
-  const flotantes = ['shampoo-low-poo-han', 'cremas-skala'].map((id) => productos?.find((p) => p.id === id)).filter(Boolean);
+  const shampoo = productos?.find((p) => p.id === 'shampoo-low-poo-han');
+  // El pote que sostiene Mar en la foto es la crema Skala Cachonados: la mini-card muestra esa variante
+  const skala = productos?.find((p) => p.id === 'cremas-skala');
+  const cachonados = skala?.variantes.find((v) => v.nombre === 'Cachonados');
 
   return (
     <section aria-labelledby="hero-titulo" className="grano -mt-px overflow-hidden">
@@ -114,22 +122,26 @@ function Hero() {
               de motion. Es la imagen del LCP: así no queda en opacity 0 mientras carga el JS. */}
           <div className={`hero-foto relative aspect-[4/5] overflow-hidden bg-salvia-media shadow-flotante ${BLOB}`}>
             <m.div className="absolute inset-x-0 bottom-0" style={{ top: -PARALLAX_PX, y: reducido ? 0 : yFoto }}>
+              {/* Foto elegida por Mar (793×1064). Mismo srcset/sizes que el preload de index.html */}
               <SmartImg
-                src="/img/mar/mar-con-productos-1.webp"
-                alt="Mar, de Dream Hair, con rulos definidos y productos para rulos"
-                width={387}
-                height={516}
+                src={HERO_FOTO}
+                srcSm={HERO_FOTO_SM}
+                sizes={HERO_SIZES}
+                alt="Mar, de Dream Hair, con rulos definidos y una crema Skala Cachonados"
+                width={793}
+                height={1064}
                 priority
-                className="size-full object-cover object-top"
+                className={`size-full object-cover ${HERO_ENCUADRE}`}
               />
             </m.div>
           </div>
 
-          {flotantes[0] && (
-            <MiniCard producto={flotantes[0]} y={reducido ? 0 : yCard1} delay={0.9} className="-left-[14%] bottom-[10%] md:-left-[18%]" />
+          {shampoo && (
+            <MiniCard producto={shampoo} y={reducido ? 0 : yCard1} delay={0.9} className="-left-[14%] -top-[3%] md:-left-[18%] md:top-[4%]" />
           )}
-          {flotantes[1] && (
-            <MiniCard producto={flotantes[1]} y={reducido ? 0 : yCard2} delay={1.05} className="-right-[10%] top-[8%] md:-right-[12%]" flotarDesfase />
+          {/* Junto al pote de Skala que sostiene Mar (abajo, a su derecha), sin taparlo */}
+          {skala && (
+            <MiniCard producto={skala} variante={cachonados} y={reducido ? 0 : yCard2} delay={1.05} className="-right-[10%] bottom-[9%] md:-right-[14%]" flotarDesfase />
           )}
         </div>
       </div>
@@ -145,8 +157,11 @@ function Hero() {
   );
 }
 
-function MiniCard({ producto, y, delay, className, flotarDesfase = false }) {
+/** `variante` (opcional): muestra esa variante (foto y nombre) y linkea directo a ella. */
+function MiniCard({ producto, variante, y, delay, className, flotarDesfase = false }) {
   const reducido = useReducedMotion();
+  const imagen = variante?.imagen ?? producto.imagen;
+  const nombre = variante ? `${producto.nombre} · ${variante.nombre}` : producto.nombre;
   return (
     <m.div style={{ y }} className={`absolute z-10 ${className}`}>
       <m.div
@@ -155,15 +170,15 @@ function MiniCard({ producto, y, delay, className, flotarDesfase = false }) {
         transition={{ duration: 0.7, delay, ease: EASE }}
       >
         <Link
-          to={`/producto/${producto.id}`}
+          to={`/producto/${producto.id}${variante ? `?v=${encodeURIComponent(variante.nombre)}` : ''}`}
           className="anim-flotar flex w-[10.5rem] items-center gap-2.5 rounded-2xl border border-linea bg-crema-card/90 p-2 pr-3 shadow-flotante backdrop-blur-md transition hover:bg-crema-card md:w-[13rem] md:p-2.5"
           style={{ animation: `flotar ${flotarDesfase ? 5 : 4.5}s ease-in-out ${flotarDesfase ? '-2.2s' : '0s'} infinite` }}
         >
           <span className="size-11 shrink-0 overflow-hidden rounded-xl md:size-14">
-            <FotoProducto src={imgSm(producto.imagen)} zoom={false} compacta />
+            <FotoProducto src={imgSm(imagen)} zoom={false} compacta />
           </span>
           <span className="min-w-0">
-            <span className="line-clamp-2 block text-xs leading-tight font-semibold text-tinta md:text-[13px]">{producto.nombre}</span>
+            <span className="line-clamp-2 block text-xs leading-tight font-semibold text-tinta md:text-[13px]">{nombre}</span>
             <Precio valor={producto.precio} className="mt-0.5 block text-xs text-verde md:text-sm" />
           </span>
         </Link>

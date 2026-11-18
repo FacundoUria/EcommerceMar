@@ -8,13 +8,15 @@
     <title>Dream Hair · The Curly Studio</title>
     <link rel="icon" href="/img/marca/logocito.webp" type="image/webp" />
     <!-- LCP del home: la foto del hero se pide desde el HTML (no espera al JS) y solo en "/"
-         (en las otras páginas no se usa). Si hay varias medidas, se agrega imagesrcset/imagesizes. -->
+         (en las otras páginas no se usa). srcset/sizes iguales a los del <img> del hero (Home.jsx). -->
     <script>
       if (location.pathname === '/') {
         var l = document.createElement('link');
         l.rel = 'preload';
         l.as = 'image';
-        l.href = '/img/mar/mar-con-productos-1.webp';
+        l.href = '/img/mar/inicio.webp';
+        l.setAttribute('imagesrcset', '/img/mar/inicio-sm.webp 400w, /img/mar/inicio.webp 793w');
+        l.setAttribute('imagesizes', '(min-width: 768px) min(30rem, 42vw), 84vw');
         l.setAttribute('fetchpriority', 'high');
         document.head.appendChild(l);
       }

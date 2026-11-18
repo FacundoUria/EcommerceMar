@@ -24,7 +24,8 @@ React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScri
 
 ## Assets
 - Originales en `assets/` (no se sirven). Versiones web generadas en `public/img/` (`<nombre>.webp` 900px + `<nombre>-sm.webp` 400px) y `public/video/` con los scripts de `scripts/`. Los archivos `VERIFICAR-*` y `personita*` se ignoran. Los videos originales (`assets/videos/`) no se commitean.
-- Hero del home: foto `mar-con-productos-1` (los cuadros del video no quedan nítidos recortados a 4:5).
+- Hero del home: foto `assets/mar/inicio.jpeg` (793×1064, la eligió Mar), webp 400/793 con srcset; preload en `index.html` con el mismo srcset/sizes (constantes `HERO_*` en Home.jsx). No agrandarla ni usar versiones de IA (Real-ESRGAN descartado: piel artificial). Mini-card de Skala junto al pote = variante Cachonados.
+- Fotos del estudio: `assets/estudio/` (jpg máx 1200px). Originales en `assets/estudio/originales/` y fotos con la cara de una clienta en `assets/estudio/pendientes/` (ambas ignoradas por git: no se publican hasta que Mar confirme el permiso).
 - Videos: el único es el del proceso en /servicios (con audio, sin autoplay: play al tocar, `preload="none"` + poster). El home ya no tiene sección Resultados ni video.
 - Banners de Mar (`assets/banners/`, traen su texto): carrusel `<Banners>` al final del home (después de "Hola, soy Mar"). Autoplay 6 s, pausa con hover/toque, puntos; sin autoplay con movimiento reducido. Tienen versión `-lg` (1504px).
 - Producto sin foto → placeholder elegante (crema + marca + nombre en Playfair), nunca imagen rota.

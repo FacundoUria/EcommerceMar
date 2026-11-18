@@ -82,7 +82,8 @@ export default function SmartImg({
       <img
         key={src}
         src={cerca ? src : undefined}
-        srcSet={cerca && srcSm ? `${srcSm} 400w, ${src} 900w` : undefined}
+        // `width` = ancho real de la versión grande (900 por defecto; la del hero mide 793)
+        srcSet={cerca && srcSm ? `${srcSm} 400w, ${src} ${width}w` : undefined}
         sizes={srcSm ? sizes : undefined}
         alt={alt}
         width={width}

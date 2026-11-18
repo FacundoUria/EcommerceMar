@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, m } from 'motion/react';
 import Icon from '../components/ui/Icon.jsx';
 import SmartImg from '../components/ui/SmartImg.jsx';
 import Swatches from '../components/product/Swatches.jsx';
@@ -83,7 +83,7 @@ export default function Rutina() {
                 className="group flex w-full flex-col items-start gap-2 text-left"
               >
                 <span className="relative h-1.5 w-full overflow-hidden rounded-full bg-verde/10">
-                  <motion.span
+                  <m.span
                     className="absolute inset-y-0 left-0 rounded-full bg-verde"
                     initial={false}
                     animate={{ width: hecho ? '100%' : activo ? '45%' : '0%' }}
@@ -110,7 +110,7 @@ export default function Rutina() {
         {/* Paso actual */}
         <div className="min-w-0">
           <AnimatePresence mode="wait" custom={direccion} initial={false}>
-            <motion.section
+            <m.section
               key={paso.paso}
               custom={direccion}
               initial={{ opacity: 0, x: direccion * 40 }}
@@ -178,7 +178,7 @@ export default function Rutina() {
                   </button>
                 )}
               </div>
-            </motion.section>
+            </m.section>
           </AnimatePresence>
         </div>
 
@@ -273,7 +273,7 @@ export default function Rutina() {
 function Total({ valor, className = '' }) {
   return (
     <AnimatePresence mode="popLayout" initial={false}>
-      <motion.span
+      <m.span
         key={valor}
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
@@ -283,7 +283,7 @@ function Total({ valor, className = '' }) {
         aria-live="polite"
       >
         {formatPrecio(valor)}
-      </motion.span>
+      </m.span>
     </AnimatePresence>
   );
 }
@@ -293,7 +293,7 @@ function OpcionProducto({ producto, seleccion, onElegir, onVariante }) {
   const imagen = seleccion?.variante?.imagen ?? producto.imagen;
   return (
     <li className={`${activo && producto.variantes.length ? 'col-span-2 sm:col-span-3' : ''}`}>
-      <motion.div
+      <m.div
         layout
         className={`overflow-hidden rounded-4xl border-2 bg-white transition-colors ${activo ? 'border-verde shadow-flotante' : 'border-transparent shadow-suave'}`}
       >
@@ -346,7 +346,7 @@ function OpcionProducto({ producto, seleccion, onElegir, onVariante }) {
             />
           </div>
         )}
-      </motion.div>
+      </m.div>
     </li>
   );
 }

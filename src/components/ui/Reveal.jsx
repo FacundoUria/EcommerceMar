@@ -1,8 +1,8 @@
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 
 /** Aparición suave al entrar en pantalla (MotionConfig reducedMotion="user" la apaga si corresponde). */
 export default function Reveal({ children, delay = 0, y = 24, className = '', as = 'div', ...rest }) {
-  const Comp = motion[as];
+  const Comp = m[as];
   return (
     <Comp
       initial={{ opacity: 0, y }}

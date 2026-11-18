@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router';
-import { AnimatePresence, MotionConfig, motion } from 'motion/react';
+import { AnimatePresence, LazyMotion, MotionConfig, m } from 'motion/react';
 import { CartProvider } from './context/CartContext.jsx';
 import { UIProvider } from './context/UIContext.jsx';
 import Header from './components/layout/Header.jsx';
@@ -10,9 +10,12 @@ import Toaster from './components/layout/Toaster.jsx';
 import CartDrawer from './components/cart/CartDrawer.jsx';
 import QuickView from './components/product/QuickView.jsx';
 import { PageSkeleton } from './components/ui/Skeleton.jsx';
+import Home from './pages/Home.jsx'; // página de entrada: sin lazy para no sumar una cascada al LCP
+
+// Features de animación en un chunk aparte (no bloquean la primera pintura)
+const cargarFeatures = () => import('./lib/motionFeatures.js').then((r) => r.default);
 
 // Code-splitting por ruta
-const Home = lazy(() => import('./pages/Home.jsx'));
 const Tienda = lazy(() => import('./pages/Tienda.jsx'));
 const Producto = lazy(() => import('./pages/Producto.jsx'));
 const Rutina = lazy(() => import('./pages/Rutina.jsx'));
@@ -24,7 +27,7 @@ function Paginas() {
   const location = useLocation();
   return (
     <AnimatePresence mode="wait" initial={false} onExitComplete={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
-      <motion.main
+      <m.main
         id="contenido"
         key={location.pathname}
         initial={{ opacity: 0, y: 14 }}
@@ -44,7 +47,7 @@ function Paginas() {
             <Route path="*" element={<NoEncontrado />} />
           </Routes>
         </Suspense>
-      </motion.main>
+      </m.main>
     </AnimatePresence>
   );
 }
@@ -52,19 +55,21 @@ function Paginas() {
 export default function App() {
   return (
     <BrowserRouter>
-      <MotionConfig reducedMotion="user">
-        <CartProvider>
-          <UIProvider>
-            <Header />
-            <Paginas />
-            <Footer />
-            <BottomNav />
-            <CartDrawer />
-            <QuickView />
-            <Toaster />
-          </UIProvider>
-        </CartProvider>
-      </MotionConfig>
+      <LazyMotion features={cargarFeatures} strict>
+        <MotionConfig reducedMotion="user">
+          <CartProvider>
+            <UIProvider>
+              <Header />
+              <Paginas />
+              <Footer />
+              <BottomNav />
+              <CartDrawer />
+              <QuickView />
+              <Toaster />
+            </UIProvider>
+          </CartProvider>
+        </MotionConfig>
+      </LazyMotion>
     </BrowserRouter>
   );
 }

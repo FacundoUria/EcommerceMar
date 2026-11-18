@@ -48,10 +48,11 @@ export default function SmartImg({
       height={height}
       loading={priority ? 'eager' : 'lazy'}
       fetchPriority={priority ? 'high' : undefined}
-      decoding="async"
+      decoding={priority ? 'sync' : 'async'}
       onError={() => setError(true)}
       onLoad={() => setCargada(true)}
-      className={`${className} transition-opacity duration-500 ${cargada ? 'opacity-100' : 'opacity-0'}`}
+      // Las prioritarias (arriba de todo / LCP) se pintan apenas llegan; el resto aparece con fade.
+      className={priority ? className : `${className} transition-opacity duration-500 ${cargada ? 'opacity-100' : 'opacity-0'}`}
       {...rest}
     />
   );

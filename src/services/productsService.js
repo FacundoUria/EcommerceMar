@@ -1,16 +1,16 @@
 // Única puerta de entrada a los datos del catálogo.
-// Hoy lee src/data/products.js (cargado bajo demanda, en un chunk aparte).
+// Hoy lee src/data/products.js (estático: son ~2 KB y así no alarga la carga de la página).
 // Mañana: reemplazar `cargar()` por un fetch a la base de datos donde Mar carga productos,
-// manteniendo la misma forma de los objetos. La UI no se toca.
+// manteniendo la misma forma de los objetos y la API async. La UI no se toca.
+import * as catalogo from '../data/products.js';
 
 let cache = null;
 
 function cargar() {
   if (!cache) {
-    cache = import('../data/products.js').catch((e) => {
-      cache = null; // si falla la red, permitir reintentar
-      throw e;
-    });
+    cache = Promise.resolve(catalogo);
+    // Con base de datos, algo así:
+    // cache = fetch('/api/catalogo').then((r) => r.json()).catch((e) => { cache = null; throw e; });
   }
   return cache;
 }

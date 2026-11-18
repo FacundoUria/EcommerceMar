@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, m } from 'motion/react';
 import Icon from '../ui/Icon.jsx';
 import { useUI } from '../../context/UIContext.jsx';
 import { useCart } from '../../context/CartContext.jsx';
@@ -15,7 +15,7 @@ export default function Toaster() {
     >
       <AnimatePresence>
         {toast && (
-          <motion.div
+          <m.div
             key={toast.id}
             initial={{ opacity: 0, y: 24, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -48,7 +48,7 @@ export default function Toaster() {
                 Ver carrito
               </button>
             )}
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

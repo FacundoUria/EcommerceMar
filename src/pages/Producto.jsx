@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, m } from 'motion/react';
 import Icon from '../components/ui/Icon.jsx';
 import SmartImg from '../components/ui/SmartImg.jsx';
 import QuantityStepper from '../components/ui/QuantityStepper.jsx';
@@ -92,7 +92,7 @@ function Detalle({ producto }) {
         <div className="min-w-0 md:sticky md:top-24 md:self-start">
           <div ref={imgRef} className="relative aspect-square overflow-hidden rounded-5xl bg-white shadow-suave">
             <AnimatePresence mode="popLayout" initial={false}>
-              <motion.div
+              <m.div
                 key={imagen}
                 initial={{ opacity: 0, scale: 1.05 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -108,7 +108,7 @@ function Detalle({ producto }) {
                   priority
                   className="size-full object-cover"
                 />
-              </motion.div>
+              </m.div>
             </AnimatePresence>
             {producto.destacado && (
               <span className="absolute top-4 left-4 rounded-full bg-amarillo px-3 py-1 text-xs font-extrabold tracking-wider text-verde uppercase">

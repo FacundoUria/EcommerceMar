@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { AnimatePresence, m, useReducedMotion } from 'motion/react';
 import { Link, useLocation } from 'react-router';
 import Icon from '../ui/Icon.jsx';
 import CartLine from './CartLine.jsx';
@@ -36,14 +36,14 @@ function Panel({ onClose }) {
 
   return (
     <div className="fixed inset-0 z-[70]">
-      <motion.div
+      <m.div
         className="absolute inset-0 bg-verde/50 backdrop-blur-sm"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
       />
-      <motion.aside
+      <m.aside
         ref={ref}
         role="dialog"
         aria-modal="true"
@@ -101,7 +101,7 @@ function Panel({ onClose }) {
             </div>
           </>
         )}
-      </motion.aside>
+      </m.aside>
     </div>
   );
 }

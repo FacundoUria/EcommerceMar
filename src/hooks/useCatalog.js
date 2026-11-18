@@ -31,6 +31,22 @@ function useServicio(clave, fn) {
   return estado;
 }
 
+/**
+ * Pide el catálogo al arrancar la app (sin bloquear el render). Si llega antes de que
+ * se monte una página, esa página arranca con los datos y no muestra skeleton.
+ */
+export function precargarCatalogo() {
+  return Promise.all([service.getProducts(), service.getCategories(), service.getServices(), service.getBrands()])
+    .then(([products, categories, services, brands]) => {
+      resueltos.set('products', products);
+      resueltos.set('categories', categories);
+      resueltos.set('services', services);
+      resueltos.set('brands', brands);
+      for (const p of products) resueltos.set(`product:${p.id}`, p);
+    })
+    .catch(() => {}); // si falla, cada hook lo reintenta y muestra su error/skeleton
+}
+
 export const useProducts = () => useServicio('products', service.getProducts);
 export const useCategories = () => useServicio('categories', service.getCategories);
 export const useServices = () => useServicio('services', service.getServices);

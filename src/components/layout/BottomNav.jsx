@@ -1,5 +1,5 @@
 import { NavLink, useLocation } from 'react-router';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import Icon from '../ui/Icon.jsx';
 import CartBadge from './CartBadge.jsx';
 import { useCart } from '../../context/CartContext.jsx';
@@ -35,7 +35,7 @@ export default function BottomNav() {
               {({ isActive }) => (
                 <>
                   {isActive && (
-                    <motion.span
+                    <m.span
                       layoutId="bottomnav-activo"
                       className="absolute inset-0 rounded-full bg-amarillo"
                       transition={{ type: 'spring', stiffness: 420, damping: 34 }}

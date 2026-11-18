@@ -10,7 +10,8 @@ import { useUI } from '../../context/UIContext.jsx';
 
 const SIZES = '(min-width: 1024px) 280px, (min-width: 768px) 33vw, 50vw';
 
-function ProductCard({ producto, etiqueta, priority = false, className = '' }) {
+function ProductCard({ producto, etiqueta, priority = false, className = '', nivelTitulo = 'h3' }) {
+  const Titulo = nivelTitulo;
   const { agregar } = useCart();
   const { abrirQuickView, mostrarToast } = useUI();
   const [elegida, setElegida] = useState(null); // variante elegida (tap/click)
@@ -82,11 +83,11 @@ function ProductCard({ producto, etiqueta, priority = false, className = '' }) {
 
       <div className="mt-3 px-1">
         <p className="text-[11px] font-bold tracking-[0.14em] text-dorado uppercase">{producto.marca ?? etiqueta}</p>
-        <h3 className="mt-0.5 line-clamp-2 font-sans text-[15px] leading-snug font-semibold text-tinta">
+        <Titulo className="mt-0.5 line-clamp-2 font-sans text-[15px] leading-snug font-semibold text-tinta">
           <Link to={url} className="hover:text-verde-700" tabIndex={-1}>
             {producto.nombre}
           </Link>
-        </h3>
+        </Titulo>
         <p className="mt-0.5 h-4 truncate text-xs text-gris">{varianteVisible?.nombre ?? ''}</p>
         <p className="mt-0.5 font-serif text-lg font-semibold text-verde">{precio}</p>
         {tieneVariantes && (

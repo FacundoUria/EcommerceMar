@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, m } from 'motion/react';
 import Icon from '../components/ui/Icon.jsx';
 import ProductCard from '../components/product/ProductCard.jsx';
 import { GridSkeleton, Skeleton } from '../components/ui/Skeleton.jsx';
@@ -174,10 +174,10 @@ export default function Tienda() {
             </button>
           </div>
         ) : (
-          <motion.ul layout className="grid grid-cols-2 gap-x-3 gap-y-7 sm:gap-x-5 md:grid-cols-3 lg:grid-cols-4">
+          <m.ul layout className="grid grid-cols-2 gap-x-3 gap-y-7 sm:gap-x-5 md:grid-cols-3 lg:grid-cols-4">
             <AnimatePresence mode="popLayout" initial={false}>
               {resultados.map((p, i) => (
-                <motion.li
+                <m.li
                   key={p.id}
                   layout
                   initial={{ opacity: 0, scale: 0.94 }}
@@ -185,11 +185,11 @@ export default function Tienda() {
                   exit={{ opacity: 0, scale: 0.94 }}
                   transition={{ duration: 0.25 }}
                 >
-                  <ProductCard producto={p} etiqueta={nombreCat[p.categoria]} priority={i < 4} />
-                </motion.li>
+                  <ProductCard producto={p} etiqueta={nombreCat[p.categoria]} priority={i < 4} nivelTitulo="h2" />
+                </m.li>
               ))}
             </AnimatePresence>
-          </motion.ul>
+          </m.ul>
         )}
       </div>
     </div>

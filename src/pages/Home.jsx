@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import Icon from '../components/ui/Icon.jsx';
 import Reveal from '../components/ui/Reveal.jsx';
 import Carousel from '../components/ui/Carousel.jsx';
@@ -49,15 +49,15 @@ function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-verde from-35% via-verde/85 via-60% to-verde/0 md:hidden" />
 
         <div className="relative flex min-h-[78svh] flex-col justify-end gap-6 p-6 pt-32 pb-8 md:min-h-0 md:p-14">
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             className="glass-oscuro inline-flex w-fit items-center gap-2 rounded-full px-3.5 py-1.5 text-[11px] font-bold tracking-[0.2em] text-amarillo uppercase ring-1 ring-amarillo/30"
           >
             <span className="pulso size-1.5 rounded-full bg-amarillo" /> Método curly · {NEGOCIO.ciudad}
-          </motion.p>
-          <motion.h1
+          </m.p>
+          <m.h1
             id="hero-titulo"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -65,16 +65,16 @@ function Hero() {
             className="text-[2.6rem] leading-[1.05] text-crema md:text-6xl"
           >
             El cabello es el espejo de tu <em className="text-amarillo">amor propio</em>
-          </motion.h1>
-          <motion.p
+          </m.h1>
+          <m.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.35 }}
             className="max-w-md text-crema/80"
           >
             Productos para cuidar, hidratar y definir tus rulos, con envíos a todo Mendoza.
-          </motion.p>
-          <motion.div
+          </m.p>
+          <m.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.45 }}
@@ -86,7 +86,7 @@ function Hero() {
             <Link to="/rutina" className="btn border border-crema/30 bg-crema/10 text-crema backdrop-blur hover:bg-crema/20">
               Armá tu rutina
             </Link>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

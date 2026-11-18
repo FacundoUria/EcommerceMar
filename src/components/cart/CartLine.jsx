@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { Link } from 'react-router';
 import Icon from '../ui/Icon.jsx';
 import SmartImg from '../ui/SmartImg.jsx';
@@ -12,7 +12,7 @@ export default function CartLine({ linea, compacta = false, onNavigate }) {
   const url = `/producto/${linea.id}${linea.variante ? `?v=${encodeURIComponent(linea.variante)}` : ''}`;
 
   return (
-    <motion.li
+    <m.li
       layout
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
@@ -50,6 +50,6 @@ export default function CartLine({ linea, compacta = false, onNavigate }) {
           <p className="font-serif text-lg font-semibold text-verde tabular-nums">{formatPrecio(linea.precio * linea.cantidad)}</p>
         </div>
       </div>
-    </motion.li>
+    </m.li>
   );
 }

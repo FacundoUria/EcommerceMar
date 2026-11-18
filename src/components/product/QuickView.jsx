@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion, useDragControls, useReducedMotion } from 'motion/react';
+import { AnimatePresence, m, useDragControls, useReducedMotion } from 'motion/react';
 import { Link } from 'react-router';
 import Icon from '../ui/Icon.jsx';
 import SmartImg from '../ui/SmartImg.jsx';
@@ -61,14 +61,14 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
 
   return (
     <div className="fixed inset-0 z-[60] flex items-end justify-center md:items-center md:p-6">
-      <motion.div
+      <m.div
         className="absolute inset-0 bg-verde/50 backdrop-blur-sm"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
       />
-      <motion.div
+      <m.div
         ref={ref}
         role="dialog"
         aria-modal="true"
@@ -103,7 +103,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
 
         <div className="mx-4 aspect-square overflow-hidden rounded-4xl bg-white md:m-0 md:aspect-auto md:h-full md:rounded-none">
           <AnimatePresence mode="popLayout" initial={false}>
-            <motion.div
+            <m.div
               key={imagen}
               initial={{ opacity: 0, scale: 1.04 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -116,9 +116,9 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
                 alt={producto.nombre}
                 placeholderTitulo={producto.nombre}
                 priority
-                className="size-full object-contain p-6"
+                className="size-full object-cover"
               />
-            </motion.div>
+            </m.div>
           </AnimatePresence>
         </div>
 
@@ -156,7 +156,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
 
           <div className="flex items-center gap-3">
             <QuantityStepper value={cantidad} onChange={setCantidad} />
-            <button type="button" onClick={confirmar} className="btn btn-primario flex-1">
+            <button type="button" onClick={confirmar} className="btn btn-primario flex-1 px-4 whitespace-nowrap">
               <Icon name="carrito" size={18} />
               Agregar · {formatPrecio(producto.precio * cantidad)}
             </button>
@@ -171,7 +171,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
           </Link>
           <div className="h-[env(safe-area-inset-bottom)] md:hidden" />
         </div>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

@@ -5,8 +5,8 @@ export function Skeleton({ className = '' }) {
 export function ProductCardSkeleton() {
   return (
     <div aria-hidden="true">
-      <Skeleton className="aspect-square w-full rounded-4xl" />
-      <Skeleton className="mt-3 h-3 w-1/3" />
+      <Skeleton className="aspect-[4/5] w-full rounded-4xl" />
+      <Skeleton className="mt-2.5 h-3 w-1/3" />
       <Skeleton className="mt-2 h-4 w-4/5" />
       <Skeleton className="mt-2 h-4 w-1/3" />
     </div>

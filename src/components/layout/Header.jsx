@@ -8,7 +8,7 @@ import { NEGOCIO } from '../../config/negocio.js';
 const LINKS = [
   { to: '/', label: 'Inicio', end: true },
   { to: '/tienda', label: 'Tienda' },
-  { to: '/rutina', label: 'Armá tu rutina' },
+  { to: '/rutina', label: 'Rutina' },
   { to: '/servicios', label: 'Servicios' },
 ];
 
@@ -72,18 +72,11 @@ export default function Header() {
           >
             <Icon name="buscar" />
           </Link>
-          <Link
-            to="/servicios"
-            aria-label="Servicios"
-            className="flex size-11 items-center justify-center rounded-full text-verde transition hover:bg-verde/5 active:scale-90 md:hidden"
-          >
-            <Icon name="tijera" />
-          </Link>
           <button
             type="button"
             onClick={abrir}
             aria-label={`Abrir carrito (${cantidadTotal} productos)`}
-            className="relative hidden size-11 items-center justify-center rounded-full text-verde transition hover:bg-verde/5 active:scale-90 md:flex"
+            className="relative flex size-11 items-center justify-center rounded-full text-verde transition hover:bg-verde/5 active:scale-90"
           >
             <span data-cart-target className="relative">
               <Icon name="carrito" />

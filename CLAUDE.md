@@ -44,7 +44,16 @@ React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScri
 
 ## Diseño
 - Referencia visual: `docs/referencia-stitch/modelo-stitch.html` (generado con Stitch). Es una **noción** del estilo, NO una especificación: no copiarlo literal ni sus funciones.
-- Estilo a tomar: mobile-first, verde muy oscuro `#0b291b` + crema `#FAF9F4` + amarillo `#fed65b`, tipografías Playfair Display (títulos) + Manrope (texto), tarjetas redondeadas con efecto vidrio.
+- Tipografías Playfair Display (títulos) + Manrope (texto). Mobile-first. Fotos de producto protagonistas.
+- **Dirección CLARA y CÁLIDA** (feedback de la demo, nov 2026):
+  - Verde `#0b291b` NUNCA como fondo de secciones, cards o bloques grandes. Solo títulos, texto, botón primario, íconos y bordes finos.
+  - Fondos: crema `#FAF9F4`; para separar, crema cálido `#F3EFE6` (`bg-crema-200`) o blanco. Las secciones se separan con espacio, no con cajas.
+  - Cards: utilidad `card` (blanca, borde 1px `rgba(11,41,27,0.08)`, sombra muy suave, redondeada).
+  - Cursivas destacadas en dorado `#735c00` (el amarillo no se lee sobre claro).
+  - Amarillo `#fed65b` solo en detalles chicos (badge del carrito, puntos de acento).
+  - Bottom nav / toast / header: blanco o crema translúcido con blur (`glass-claro`). Modales: `velo` claro.
+- **Poco texto**: sin eyebrows, sin subtítulos ni párrafos bajo títulos de sección, títulos de 1–3 palabras, botones de 1–2 palabras. Cards de producto: marca, nombre y precio, nada más. Excepción: "Hola, soy Mar" y "Rulos que se ven y se sienten" del home quedan como están.
+- El campo `paso` de las categorías se usa SOLO dentro de /rutina.
 - Imágenes de la marca en `assets/marca/` (logo y fotos).
 
 ## Datos: nada inventado

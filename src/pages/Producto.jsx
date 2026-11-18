@@ -38,7 +38,6 @@ function Detalle({ producto }) {
   const variante = producto.variantes.find((v) => v.nombre === params.get('v')) ?? null;
   const tieneVariantes = producto.variantes.length > 0;
   const categoria = categorias?.find((c) => c.id === producto.categoria);
-  const paso = PASOS_RUTINA.find((p) => p.categorias.includes(producto.categoria));
 
   // Galería: foto principal + una por variante
   const galeria = useMemo(
@@ -90,7 +89,7 @@ function Detalle({ producto }) {
       <div className="grid gap-8 md:grid-cols-2 md:gap-12">
         {/* Galería */}
         <div className="min-w-0 md:sticky md:top-24 md:self-start">
-          <div ref={imgRef} className="relative aspect-square overflow-hidden rounded-5xl bg-white shadow-suave">
+          <div ref={imgRef} className="card relative aspect-[4/5] overflow-hidden rounded-5xl md:aspect-square">
             <AnimatePresence mode="popLayout" initial={false}>
               <m.div
                 key={imagen}
@@ -110,11 +109,6 @@ function Detalle({ producto }) {
                 />
               </m.div>
             </AnimatePresence>
-            {producto.destacado && (
-              <span className="absolute top-4 left-4 rounded-full bg-amarillo px-3 py-1 text-xs font-extrabold tracking-wider text-verde uppercase">
-                Destacado
-              </span>
-            )}
           </div>
           {galeria.length > 1 && (
             <div className="no-scrollbar -mx-4 mt-3 flex gap-2 overflow-x-auto px-4 pb-1" aria-label="Fotos del producto">
@@ -142,25 +136,13 @@ function Detalle({ producto }) {
         {/* Info */}
         <div className="flex min-w-0 flex-col gap-6">
           <div>
-            <p className="text-xs font-bold tracking-[0.2em] text-dorado uppercase">{producto.marca ?? categoria?.nombre ?? 'Dream Hair'}</p>
+            {producto.marca && <p className="text-xs font-bold tracking-[0.2em] text-dorado uppercase">{producto.marca}</p>}
             <h1 className="mt-1 text-4xl leading-tight md:text-5xl">{producto.nombre}</h1>
             <p className="mt-3 font-serif text-3xl font-semibold text-verde">{formatPrecio(producto.precio)}</p>
-            {paso && (
-              <Link
-                to="/rutina"
-                className="mt-4 inline-flex items-center gap-2 rounded-full bg-amarillo/40 px-3.5 py-1.5 text-sm font-semibold text-verde transition hover:bg-amarillo/70"
-              >
-                <span className="flex size-6 items-center justify-center rounded-full bg-verde text-xs font-bold text-amarillo">{paso.paso}</span>
-                Paso {paso.paso} de tu rutina: {paso.titulo}
-              </Link>
-            )}
           </div>
 
           {tieneVariantes && (
             <div id="variantes">
-              <p className="mb-3 text-sm font-semibold">
-                Variante: <span className="text-gris">{(preview ?? variante)?.nombre ?? 'elegí una'}</span>
-              </p>
               <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={`Variantes de ${producto.nombre}`} onMouseLeave={() => setPreview(null)}>
                 {producto.variantes.map((v) => {
                   const activa = variante?.nombre === v.nombre;
@@ -186,7 +168,7 @@ function Detalle({ producto }) {
               </div>
               {aviso && (
                 <p className="mt-3 text-sm font-semibold text-dorado" role="alert">
-                  Elegí una variante para agregarla al carrito.
+                  Elegí una variante
                 </p>
               )}
             </div>
@@ -196,25 +178,14 @@ function Detalle({ producto }) {
           <div className="hidden items-center gap-3 md:flex">
             <QuantityStepper value={cantidad} onChange={setCantidad} />
             <button type="button" onClick={agregarAlCarrito} className="btn btn-primario flex-1 py-4 text-base">
-              <Icon name="carrito" size={20} /> Agregar al carrito · {formatPrecio(producto.precio * cantidad)}
+              <Icon name="carrito" size={20} /> Agregar
             </button>
           </div>
-          <div className="flex items-center justify-between rounded-4xl bg-white p-4 shadow-suave md:hidden">
-            <span className="text-sm font-semibold">Cantidad</span>
+          <div className="flex justify-center md:hidden">
+            <span className="sr-only">Cantidad</span>
             <QuantityStepper value={cantidad} onChange={setCantidad} />
           </div>
 
-          <ul className="grid gap-2 rounded-4xl border border-verde/10 p-5 text-sm text-gris">
-            <li className="flex items-center gap-2">
-              <Icon name="camion" size={18} className="text-dorado" /> Envíos a todo Mendoza
-            </li>
-            <li className="flex items-center gap-2">
-              <Icon name="tarjeta" size={18} className="text-dorado" /> Recibimos todos los medios de pago
-            </li>
-            <li className="flex items-center gap-2">
-              <Icon name="regalo" size={18} className="text-dorado" /> Promociones todos los meses
-            </li>
-          </ul>
         </div>
       </div>
 
@@ -235,7 +206,7 @@ function Detalle({ producto }) {
             </span>
           </button>
           <button type="button" onClick={agregarAlCarrito} className="btn btn-primario h-12 flex-1 py-0">
-            Agregar · {formatPrecio(producto.precio * cantidad)}
+            Agregar
           </button>
         </div>
       </div>
@@ -243,39 +214,34 @@ function Detalle({ producto }) {
   );
 }
 
-/** Productos de los otros pasos de la rutina (destacados primero). */
+/** Productos de los otros grupos de categorías de la rutina (destacados primero). */
 function CompletaTuRutina({ producto }) {
   const { data: productos } = useProducts();
-  const { data: categorias } = useCategories();
   const sugeridos = useMemo(() => {
     if (!productos) return [];
-    const pasoActual = PASOS_RUTINA.find((p) => p.categorias.includes(producto.categoria))?.paso;
-    return PASOS_RUTINA.filter((p) => p.paso !== pasoActual).flatMap((p) =>
+    const otrosGrupos = PASOS_RUTINA.map((p) => p.categorias).filter((cats) => !cats.includes(producto.categoria));
+    return otrosGrupos.flatMap((cats) =>
       productos
-        .filter((x) => p.categorias.includes(x.categoria) && x.id !== producto.id)
+        .filter((x) => cats.includes(x.categoria) && x.id !== producto.id)
         .sort((a, b) => Number(!!b.destacado) - Number(!!a.destacado))
         .slice(0, 2),
     );
   }, [productos, producto]);
-  const nombreCat = Object.fromEntries((categorias ?? []).map((c) => [c.id, c.nombre]));
 
   if (!sugeridos.length) return null;
   return (
     <section aria-labelledby="completa-titulo" className="-mx-4 mt-16">
       <Reveal className="mb-5 flex items-end justify-between gap-4 px-4">
-        <div>
-          <p className="text-xs font-bold tracking-[0.22em] text-dorado uppercase">Rutina curly</p>
-          <h2 id="completa-titulo" className="mt-1 text-3xl">
-            Completá tu rutina
-          </h2>
-        </div>
+        <h2 id="completa-titulo" className="text-3xl">
+          Completá tu rutina
+        </h2>
         <Link to="/rutina" className="text-sm font-bold text-verde">
-          Armarla paso a paso →
+          Ver rutina →
         </Link>
       </Reveal>
       <Carousel label="Completá tu rutina">
         {sugeridos.map((p) => (
-          <ProductCard key={p.id} producto={p} etiqueta={nombreCat[p.categoria]} className="w-[46%] shrink-0 snap-start sm:w-56" />
+          <ProductCard key={p.id} producto={p} className="w-[46%] shrink-0 snap-start sm:w-56" />
         ))}
       </Carousel>
     </section>

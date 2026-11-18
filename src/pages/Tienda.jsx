@@ -69,8 +69,7 @@ export default function Tienda() {
   return (
     <div className="mx-auto max-w-6xl pt-4 pb-10">
       <header className="px-4">
-        <p className="text-xs font-bold tracking-[0.22em] text-dorado uppercase">Tienda Dream Hair</p>
-        <h1 className="mt-1 text-4xl md:text-5xl">{catActual?.nombre ?? (marca || 'Todos los productos')}</h1>
+        <h1 className="text-4xl md:text-5xl">{catActual?.nombre ?? (marca || 'Tienda')}</h1>
       </header>
 
       {/* Barra de búsqueda + orden, pegajosa debajo del header */}
@@ -150,27 +149,26 @@ export default function Tienda() {
         ))}
       </div>
 
-      <div className="mt-4 flex items-center justify-between px-4 text-sm text-gris">
-        <p aria-live="polite">{loading ? 'Cargando productos…' : plural(resultados.length, 'producto', 'productos')}</p>
-        {hayFiltros && (
-          <button type="button" onClick={() => setParams({}, { preventScrollReset: true })} className="font-bold text-verde underline-offset-4 hover:underline">
-            Limpiar filtros
+      <p className="sr-only" aria-live="polite">{loading ? 'Cargando productos' : plural(resultados.length, 'producto', 'productos')}</p>
+      {hayFiltros && (
+        <div className="mt-2 flex justify-end px-4">
+          <button type="button" onClick={() => setParams({}, { preventScrollReset: true })} className="text-sm font-bold text-verde underline-offset-4 hover:underline">
+            Limpiar
           </button>
-        )}
-      </div>
+        </div>
+      )}
 
       <div className="mt-4 px-4">
         {loading ? (
           <GridSkeleton n={8} />
         ) : resultados.length === 0 ? (
-          <div className="flex flex-col items-center rounded-5xl bg-white px-6 py-16 text-center shadow-suave">
-            <div className="flex size-16 items-center justify-center rounded-full bg-amarillo/40 text-verde">
+          <div className="card flex flex-col items-center rounded-5xl px-6 py-16 text-center">
+            <div className="flex size-16 items-center justify-center rounded-full bg-crema-200 text-verde">
               <Icon name="buscar" size={28} />
             </div>
-            <p className="mt-4 font-serif text-2xl text-verde">No encontramos productos</p>
-            <p className="mt-1 text-gris">Probá con otra palabra o quitá algún filtro.</p>
+            <p className="mt-4 font-serif text-2xl text-verde">Sin resultados</p>
             <button type="button" onClick={() => setParams({})} className="btn btn-primario mt-6">
-              Ver todos los productos
+              Ver todo
             </button>
           </div>
         ) : (
@@ -185,7 +183,7 @@ export default function Tienda() {
                   exit={{ opacity: 0, scale: 0.94 }}
                   transition={{ duration: 0.25 }}
                 >
-                  <ProductCard producto={p} etiqueta={nombreCat[p.categoria]} priority={i < 4} nivelTitulo="h2" />
+                  <ProductCard producto={p} priority={i < 4} nivelTitulo="h2" />
                 </m.li>
               ))}
             </AnimatePresence>
@@ -203,7 +201,7 @@ function Chip({ activo, onClick, children, variante }) {
       onClick={onClick}
       aria-pressed={activo}
       className={`chip ${variante === 'marca' ? 'font-serif' : ''} ${
-        activo ? 'border-verde bg-verde text-amarillo shadow-suave' : 'border-verde/15 bg-white text-verde hover:border-verde/40'
+        activo ? 'border-verde bg-verde/8 text-verde' : 'border-linea bg-white text-verde hover:border-verde/30'
       }`}
     >
       {activo && <Icon name="check" size={14} strokeWidth={2.6} />}

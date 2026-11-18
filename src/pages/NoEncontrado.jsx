@@ -5,11 +5,9 @@ export default function NoEncontrado() {
   usePageTitle('Página no encontrada');
   return (
     <section className="mx-auto flex max-w-md flex-col items-center px-6 py-24 text-center">
-      <p className="text-xs font-bold tracking-[0.25em] text-dorado uppercase">Error 404</p>
-      <h1 className="mt-3 text-4xl">Esta página se nos enruló</h1>
-      <p className="mt-3 text-gris">No encontramos lo que buscabas. Probá desde la tienda.</p>
+      <h1 className="text-4xl">Página no encontrada</h1>
       <Link to="/tienda" className="btn btn-primario mt-8">
-        Ir a la tienda
+        Ver tienda
       </Link>
     </section>
   );

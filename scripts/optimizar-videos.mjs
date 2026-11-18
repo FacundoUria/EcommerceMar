@@ -7,7 +7,10 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 
 const VIDEOS = [
-  { origen: 'resultado-rulos-amor-propio-8s.mp4', salida: 'hero', maxMB: 1.5, audio: false },
+  // Hero en 4:5: recorta la mitad de arriba (384x480) para dejar afuera el texto quemado del
+  // original ("El cabello es el espejo…", fijo a ~50% de la altura). Si Mar pasa el video sin
+  // texto, sacar `filtro` y usar el cuadro completo.
+  { origen: 'resultado-rulos-amor-propio-8s.mp4', salida: 'hero', maxMB: 0.9, audio: false, filtro: 'crop=384:480:96:0' },
   { origen: 'resultado-rulos-buena-vista-13s.mp4', salida: 'resultado', maxMB: 2, audio: false, poster: 7 },
   // 720p como máximo: el original es 576x1024, así que no se agranda.
   { origen: 'proceso-asesoramiento-72s.mp4', salida: 'proceso', maxMB: 6, audio: true, alto: 1280 },
@@ -36,7 +39,8 @@ for (const v of VIDEOS) {
   const seg = duracion(entrada);
   const totalKbps = (v.maxMB * 8 * 1024 * MARGEN) / seg;
   const videoKbps = Math.floor(totalKbps - (v.audio ? AUDIO_KBPS : 0));
-  const escala = v.alto ? ['-vf', `scale=-2:'min(${v.alto},ih)'`] : [];
+  const filtros = [v.filtro, v.alto && `scale=-2:'min(${v.alto},ih)'`].filter(Boolean);
+  const escala = filtros.length ? ['-vf', filtros.join(',')] : [];
   const comun = ['-i', entrada, ...escala, '-c:v', 'libx264', '-preset', 'slow', '-b:v', `${videoKbps}k`,
     '-maxrate', `${Math.floor(videoKbps * 1.5)}k`, '-bufsize', `${videoKbps * 2}k`, '-pix_fmt', 'yuv420p',
     '-profile:v', 'high', '-passlogfile', passlog];

@@ -14,18 +14,14 @@ export default function Servicios() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 pt-4 pb-10">
-      <header className="max-w-2xl">
-        <p className="text-xs font-bold tracking-[0.22em] text-dorado uppercase">Estudio en {NEGOCIO.ciudad}</p>
-        <h1 className="mt-1 text-4xl leading-tight md:text-5xl">
-          Servicios para <em className="text-dorado">tus rulos</em>
-        </h1>
-        <p className="mt-3 text-gris">Cortes, asesoramientos y tratamientos en Dream Hair. Los turnos se reservan por WhatsApp.</p>
-        <a href={NEGOCIO.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-primario mt-6">
-          <Icon name="whatsapp" size={18} /> Reservar por WhatsApp
+      <header className="flex items-end justify-between gap-4">
+        <h1 className="text-4xl leading-tight md:text-5xl">Servicios</h1>
+        <a href={NEGOCIO.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-primario">
+          <Icon name="whatsapp" size={18} /> Reservar
         </a>
       </header>
 
-      <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {loading
           ? Array.from({ length: 6 }, (_, i) => (
               <li key={i}>
@@ -34,7 +30,8 @@ export default function Servicios() {
             ))
           : (servicios ?? []).map((s, i) => (
               <Reveal as="li" key={s.id} delay={(i % 3) * 0.07}>
-                <article className="group relative aspect-[4/5] overflow-hidden rounded-5xl bg-verde shadow-suave">
+                <article className="card group overflow-hidden rounded-5xl">
+                  <div className="aspect-[4/5] overflow-hidden bg-crema-200">
                   <SmartImg
                     src={s.imagen}
                     srcSm={imgSm(s.imagen)}
@@ -45,20 +42,17 @@ export default function Servicios() {
                     placeholderTitulo={s.nombre}
                     className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-verde via-verde/30 to-transparent" />
-                  <div className="glass-oscuro absolute inset-x-3 bottom-3 rounded-4xl p-5 text-crema">
-                    <h2 className="text-2xl leading-tight text-crema">{s.nombre}</h2>
+                  </div>
+                  <div className="p-5">
+                    <h2 className="text-2xl leading-tight">{s.nombre}</h2>
                     <div className="mt-3 flex items-center justify-between gap-3">
-                      <p className="text-sm">
-                        <span className="text-crema/60">Precio: </span>
-                        <span className="font-bold text-amarillo">Consultar</span>
-                      </p>
+                      <p className="text-sm font-bold text-dorado">Consultar</p>
                       <a
                         href={NEGOCIO.whatsapp}
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`Reservar ${s.nombre} por WhatsApp`}
-                        className="inline-flex items-center gap-1.5 rounded-full bg-amarillo px-4 py-2.5 text-xs font-extrabold text-verde transition hover:bg-amarillo-300 active:scale-95"
+                        className="inline-flex items-center gap-1.5 rounded-full bg-verde px-4 py-2.5 text-xs font-extrabold text-crema transition hover:bg-verde-700 active:scale-95"
                       >
                         <Icon name="whatsapp" size={16} /> Reservar
                       </a>
@@ -80,17 +74,15 @@ function ProcesoVideo() {
   return (
     <section aria-labelledby="proceso-titulo" className="mt-16 grid items-center gap-8 md:grid-cols-2 md:gap-14">
       <Reveal>
-        <p className="text-xs font-bold tracking-[0.22em] text-dorado uppercase">Así trabajamos</p>
-        <h2 id="proceso-titulo" className="mt-2 text-4xl leading-tight md:text-5xl">
-          El proceso de un <em className="text-dorado">asesoramiento</em>
+        <h2 id="proceso-titulo" className="text-4xl leading-tight md:text-5xl">
+          El <em className="text-dorado">proceso</em>
         </h2>
-        <p className="mt-3 max-w-md text-gris">Mirá cómo es un asesoramiento en el estudio, de principio a fin.</p>
-        <a href={NEGOCIO.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-amarillo mt-6">
-          <Icon name="whatsapp" size={18} /> Reservar mi turno
+        <a href={NEGOCIO.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-primario mt-6">
+          <Icon name="whatsapp" size={18} /> Reservar
         </a>
       </Reveal>
       <Reveal delay={0.1} className="mx-auto w-full max-w-xs">
-        <div className="relative aspect-[9/16] overflow-hidden rounded-5xl bg-verde shadow-flotante ring-8 ring-white">
+        <div className="relative aspect-[9/16] overflow-hidden rounded-5xl border border-linea bg-crema-200 shadow-suave">
           {activo ? (
             <video
               src="/video/proceso.mp4"
@@ -105,13 +97,10 @@ function ProcesoVideo() {
           ) : (
             <button type="button" onClick={() => setActivo(true)} className="group absolute inset-0" aria-label="Reproducir video del proceso de asesoramiento (con sonido)">
               <img src="/video/proceso.webp" alt="" width="576" height="1024" loading="lazy" className="size-full object-cover" />
-              <span className="absolute inset-0 bg-verde/25 transition group-hover:bg-verde/10" />
+              <span className="absolute inset-0 bg-black/5 transition group-hover:bg-transparent" />
               <span className="absolute top-1/2 left-1/2 flex size-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-amarillo text-verde shadow-flotante transition group-hover:scale-110 group-active:scale-95">
                 <span className="pulso absolute inset-0 rounded-full" />
                 <Icon name="play" size={30} className="ml-1" />
-              </span>
-              <span className="glass-oscuro absolute inset-x-4 bottom-4 rounded-full px-4 py-2 text-center text-xs font-semibold text-crema">
-                1:12 · con sonido
               </span>
             </button>
           )}

@@ -62,7 +62,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
   return (
     <div className="fixed inset-0 z-[60] flex items-end justify-center md:items-center md:p-6">
       <m.div
-        className="absolute inset-0 bg-verde/50 backdrop-blur-sm"
+        className="velo absolute inset-0"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -124,7 +124,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
 
         <div className="flex flex-col gap-5 p-6 md:p-8">
           <div>
-            <p className="text-xs font-bold tracking-[0.18em] text-dorado uppercase">{producto.marca ?? 'Dream Hair'}</p>
+            {producto.marca && <p className="text-xs font-bold tracking-[0.18em] text-dorado uppercase">{producto.marca}</p>}
             <h2 id="qv-titulo" className="mt-1 text-3xl leading-tight">
               {producto.nombre}
             </h2>
@@ -134,7 +134,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
           {tieneVariantes && (
             <div>
               <p className="mb-2 text-sm font-semibold">
-                Variante: <span className="text-gris">{(preview ?? variante)?.nombre ?? 'elegí una'}</span>
+                {(preview ?? variante)?.nombre ?? 'Variante'}
               </p>
               <Swatches
                 variantes={producto.variantes}
@@ -148,7 +148,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
               />
               {aviso && (
                 <p className="mt-2 text-sm font-semibold text-dorado" role="alert">
-                  Elegí una variante para agregarla.
+                  Elegí una variante
                 </p>
               )}
             </div>
@@ -158,7 +158,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
             <QuantityStepper value={cantidad} onChange={setCantidad} />
             <button type="button" onClick={confirmar} className="btn btn-primario flex-1 px-4 whitespace-nowrap">
               <Icon name="carrito" size={18} />
-              Agregar · {formatPrecio(producto.precio * cantidad)}
+              Agregar
             </button>
           </div>
 
@@ -167,7 +167,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
             onClick={onClose}
             className="inline-flex items-center gap-1 self-start text-sm font-bold text-verde underline-offset-4 hover:underline"
           >
-            Ver detalle completo <Icon name="flecha" size={16} />
+            Ver detalle <Icon name="flecha" size={16} />
           </Link>
           <div className="h-[env(safe-area-inset-bottom)] md:hidden" />
         </div>

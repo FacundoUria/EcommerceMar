@@ -37,7 +37,7 @@ function Panel({ onClose }) {
   return (
     <div className="fixed inset-0 z-[70]">
       <m.div
-        className="absolute inset-0 bg-verde/50 backdrop-blur-sm"
+        className="velo absolute inset-0"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -70,11 +70,10 @@ function Panel({ onClose }) {
 
         {lineas.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-4 px-8 text-center">
-            <div className="flex size-20 items-center justify-center rounded-full bg-amarillo/40 text-verde">
+            <div className="flex size-20 items-center justify-center rounded-full bg-crema-200 text-verde">
               <Icon name="carrito" size={34} />
             </div>
-            <p className="font-serif text-xl text-verde">Tu carrito está vacío</p>
-            <p className="text-sm text-gris">Descubrí productos para cuidar, hidratar y definir tus rulos.</p>
+            <p className="font-serif text-xl text-verde">Carrito vacío</p>
             <Link to="/tienda" className="btn btn-primario">
               Ver productos
             </Link>
@@ -88,13 +87,13 @@ function Panel({ onClose }) {
                 ))}
               </AnimatePresence>
             </ul>
-            <div className="border-t border-verde/10 bg-white/60 px-6 pt-4 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
+            <div className="border-t border-linea bg-white px-6 pt-4 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
               <CartSummary />
               <div className="mt-3 grid grid-cols-2 gap-2">
                 <button type="button" onClick={onClose} className="btn btn-borde px-3">
-                  Seguir comprando
+                  Seguir
                 </button>
-                <Link to="/carrito" className="btn btn-amarillo px-3">
+                <Link to="/carrito" className="btn btn-primario px-3">
                   Ver carrito
                 </Link>
               </div>

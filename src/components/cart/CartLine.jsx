@@ -17,7 +17,7 @@ export default function CartLine({ linea, compacta = false, onNavigate }) {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, x: -40, transition: { duration: 0.2 } }}
-      className="flex gap-4 rounded-4xl bg-white p-3 shadow-suave"
+      className="card flex gap-4 rounded-4xl p-3"
     >
       <Link to={url} onClick={onNavigate} className={`shrink-0 overflow-hidden rounded-3xl bg-white ${compacta ? 'size-20' : 'size-24 md:size-28'}`}>
         <SmartImg src={imgSm(linea.imagen)} alt={linea.nombre} width={400} height={400} placeholderTitulo={linea.nombre} className="size-full object-contain p-1" />

@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import { Link } from 'react-router';
 import { AnimatePresence, m } from 'motion/react';
 import Icon from '../components/ui/Icon.jsx';
 import SmartImg from '../components/ui/SmartImg.jsx';
@@ -8,7 +7,7 @@ import { GridSkeleton } from '../components/ui/Skeleton.jsx';
 import { useCategories, useProducts } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
 import { useCart } from '../context/CartContext.jsx';
-import { formatPrecio, imgSm, plural } from '../lib/format.js';
+import { formatPrecio, imgSm } from '../lib/format.js';
 import { PASOS_RUTINA } from '../config/negocio.js';
 
 export default function Rutina() {
@@ -52,7 +51,7 @@ export default function Rutina() {
 
   const agregarRutina = () => {
     if (faltaVariante) {
-      setAviso(`Elegí la variante de ${eleccion[faltaVariante.paso].producto.nombre} (paso ${faltaVariante.paso}).`);
+      setAviso(`Elegí una variante de ${eleccion[faltaVariante.paso].producto.nombre}`);
       irA(PASOS_RUTINA.indexOf(faltaVariante));
       return;
     }
@@ -61,16 +60,12 @@ export default function Rutina() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 pt-4 pb-48 md:pb-16">
-      <header>
-        <p className="text-xs font-bold tracking-[0.22em] text-dorado uppercase">En 4 pasos</p>
-        <h1 className="mt-1 text-4xl leading-tight md:text-5xl">
-          Armá tu rutina <em className="text-dorado">curly</em>
-        </h1>
-        <p className="mt-2 max-w-xl text-gris">Elegí un producto por paso (podés saltear los que no necesites) y sumá toda la rutina al carrito.</p>
-      </header>
+      <h1 className="text-4xl leading-tight md:text-5xl">
+        Armá tu <em className="text-dorado">rutina</em>
+      </h1>
 
       {/* Stepper */}
-      <ol className="mt-7 grid grid-cols-4 gap-1.5" aria-label="Pasos de la rutina">
+      <ol className="mt-6 grid grid-cols-4 gap-1.5" aria-label="Pasos de la rutina">
         {PASOS_RUTINA.map((p, i) => {
           const hecho = !!eleccion[p.paso];
           const activo = i === actual;
@@ -119,12 +114,9 @@ export default function Rutina() {
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               aria-labelledby="paso-titulo"
             >
-              <div className="flex items-baseline justify-between gap-4">
-                <h2 id="paso-titulo" className="text-3xl">
-                  <span className="text-dorado">{paso.paso}.</span> {paso.titulo}
-                </h2>
-                <span className="text-sm text-gris">{paso.bajada}</span>
-              </div>
+              <h2 id="paso-titulo" className="text-3xl">
+                <span className="text-dorado">{paso.paso}.</span> {paso.titulo}
+              </h2>
 
               {aviso && (
                 <p className="mt-4 rounded-3xl bg-amarillo/40 px-4 py-3 text-sm font-semibold text-verde" role="alert">
@@ -170,11 +162,11 @@ export default function Rutina() {
                 </button>
                 {actual < PASOS_RUTINA.length - 1 ? (
                   <button type="button" onClick={() => irA(actual + 1)} className="btn btn-primario">
-                    {eleccion[paso.paso] ? 'Siguiente paso' : 'Saltear paso'} <Icon name="flecha" size={18} />
+                    {eleccion[paso.paso] ? 'Siguiente' : 'Saltear'} <Icon name="flecha" size={18} />
                   </button>
                 ) : (
-                  <button type="button" onClick={agregarRutina} disabled={!elegidos.length} className="btn btn-amarillo hidden md:inline-flex">
-                    Agregar rutina al carrito
+                  <button type="button" onClick={agregarRutina} disabled={!elegidos.length} className="btn btn-primario hidden md:inline-flex">
+                    Agregar rutina
                   </button>
                 )}
               </div>
@@ -184,7 +176,7 @@ export default function Rutina() {
 
         {/* Resumen (desktop) */}
         <aside className="hidden md:block" aria-label="Resumen de tu rutina">
-          <div className="sticky top-24 rounded-5xl bg-white p-6 shadow-suave">
+          <div className="card sticky top-24 rounded-5xl p-6">
             <h2 className="text-2xl">Tu rutina</h2>
             <ol className="mt-4 space-y-3">
               {PASOS_RUTINA.map((p, i) => {
@@ -211,7 +203,7 @@ export default function Rutina() {
                       )}
                       <span className="min-w-0 flex-1">
                         <span className="block text-xs font-bold tracking-wider text-dorado uppercase">{p.titulo}</span>
-                        <span className="block truncate text-sm font-semibold">{e ? e.producto.nombre : 'Sin elegir'}</span>
+                        <span className="block truncate text-sm font-semibold">{e ? e.producto.nombre : '—'}</span>
                         {e?.variante && <span className="block truncate text-xs text-gris">{e.variante.nombre}</span>}
                       </span>
                       {e && <span className="text-sm font-bold text-verde tabular-nums">{formatPrecio(e.producto.precio)}</span>}
@@ -225,7 +217,7 @@ export default function Rutina() {
               <Total valor={total} className="text-3xl" />
             </div>
             <button type="button" onClick={agregarRutina} disabled={!elegidos.length} className="btn btn-primario mt-4 w-full">
-              <Icon name="carrito" size={18} /> Agregar rutina al carrito
+              <Icon name="carrito" size={18} /> Agregar rutina
             </button>
           </div>
         </aside>
@@ -254,7 +246,6 @@ export default function Rutina() {
             })}
           </div>
           <div className="min-w-0 flex-1 leading-tight">
-            <p className="text-[11px] text-gris">{plural(elegidos.length, 'producto', 'productos')}</p>
             <Total valor={total} className="text-lg" />
           </div>
           <button type="button" onClick={agregarRutina} disabled={!elegidos.length} className="btn btn-primario px-4 py-3 text-xs">
@@ -263,9 +254,6 @@ export default function Rutina() {
         </div>
       </div>
 
-      <p className="mt-10 text-center text-sm text-gris">
-        ¿Querés que Mar te asesore? <Link to="/servicios" className="font-bold text-verde underline-offset-4 hover:underline">Mirá los asesoramientos</Link>
-      </p>
     </div>
   );
 }
@@ -295,7 +283,7 @@ function OpcionProducto({ producto, seleccion, onElegir, onVariante }) {
     <li className={`${activo && producto.variantes.length ? 'col-span-2 sm:col-span-3' : ''}`}>
       <m.div
         layout
-        className={`overflow-hidden rounded-4xl border-2 bg-white transition-colors ${activo ? 'border-verde shadow-flotante' : 'border-transparent shadow-suave'}`}
+        className={`overflow-hidden rounded-4xl border-2 bg-white transition-colors ${activo ? 'border-verde shadow-flotante' : 'border-linea shadow-suave'}`}
       >
         <button
           type="button"
@@ -319,7 +307,7 @@ function OpcionProducto({ producto, seleccion, onElegir, onVariante }) {
             />
           </span>
           <span className={`block ${activo && producto.variantes.length ? '' : 'p-3'}`}>
-            <span className="block text-[11px] font-bold tracking-[0.12em] text-dorado uppercase">{producto.marca ?? 'Dream Hair'}</span>
+            {producto.marca && <span className="block text-[11px] font-bold tracking-[0.12em] text-dorado uppercase">{producto.marca}</span>}
             <span className="line-clamp-2 block text-sm leading-snug font-semibold">{producto.nombre}</span>
             <span className="mt-1 block font-serif font-semibold text-verde">{formatPrecio(producto.precio)}</span>
           </span>
@@ -335,7 +323,7 @@ function OpcionProducto({ producto, seleccion, onElegir, onVariante }) {
         {activo && producto.variantes.length > 0 && (
           <div className="border-t border-verde/10 px-4 pt-3 pb-4">
             <p className="mb-2 text-sm font-semibold">
-              Variante: <span className="text-gris">{seleccion.variante?.nombre ?? 'elegí una'}</span>
+              {seleccion.variante?.nombre ?? 'Variante'}
             </p>
             <Swatches
               variantes={producto.variantes}

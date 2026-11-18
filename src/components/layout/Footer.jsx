@@ -1,6 +1,4 @@
-import { useRef } from 'react';
 import { Link } from 'react-router';
-import { m, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import Icon from '../ui/Icon.jsx';
 import { NEGOCIO } from '../../config/negocio.js';
 
@@ -12,17 +10,12 @@ const LINKS = [
 ];
 
 /**
- * Footer de borde a borde: degradé arena → salvia con grano. Abajo, "Dream Hair" en Playfair
- * gigante (18vw) en salvia-media, a todo el ancho y cortado abajo, que sube con parallax al llegar al final.
+ * Footer de borde a borde: degradé arena → salvia con grano. Termina en la línea del copyright
+ * (en mobile, con espacio abajo para que el bottom nav no la tape).
  */
 export default function Footer() {
-  const ref = useRef(null);
-  const reducido = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end end'] });
-  const yMarca = useTransform(scrollYProgress, [0, 1], ['45%', '0%']);
-
   return (
-    <footer ref={ref} className="fondo-salvia-abajo grano overflow-hidden pt-16 md:pt-24">
+    <footer className="fondo-salvia-abajo grano pt-16 pb-28 md:pt-24 md:pb-10">
       <div className="contenedor text-tinta">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div>
@@ -57,18 +50,6 @@ export default function Footer() {
           © {new Date().getFullYear()} {NEGOCIO.nombre} · {NEGOCIO.ciudad}
         </p>
       </div>
-
-      {/* Marca gigante, decorativa: cortada abajo (el contenedor muestra ~72% de la altura de la letra) */}
-      <div aria-hidden="true" className="mt-8 h-[13vw] overflow-hidden md:mt-12">
-        <m.p
-          style={{ y: reducido ? 0 : yMarca }}
-          className="text-center font-serif text-[18vw] leading-[0.95] tracking-[-0.03em] whitespace-nowrap text-salvia-media select-none"
-        >
-          {NEGOCIO.nombre}
-        </m.p>
-      </div>
-      {/* espacio para el bottom nav en mobile */}
-      <div className="h-24 md:hidden" aria-hidden="true" />
     </footer>
   );
 }

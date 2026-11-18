@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, m, useScroll } from 'motion/react';
-import Reveal from '../components/ui/Reveal.jsx';
+import Reveal, { cascada } from '../components/ui/Reveal.jsx';
 import RevealText from '../components/ui/RevealText.jsx';
 import LineaProgreso from '../components/ui/LineaProgreso.jsx';
 import Icon from '../components/ui/Icon.jsx';
@@ -15,7 +15,7 @@ import { PASOS_RUTINA } from '../config/negocio.js';
 import Precio from '../components/ui/Precio.jsx';
 import { scrollA } from '../lib/smooth.js';
 import Roll from '../components/ui/Roll.jsx';
-import { Estrella } from '../components/marca/Destellos.jsx';
+import { ConDestellos, Estrella } from '../components/marca/Destellos.jsx';
 import { explotarDestellos, lluviaDestellos } from '../lib/destellos.js';
 
 export default function Rutina() {
@@ -81,9 +81,11 @@ export default function Rutina() {
   return (
     <div ref={pagina} className="contenedor pt-4 pb-48 md:pb-16">
       <Reveal>
-        <RevealText as="h1" className="text-4xl leading-tight md:text-5xl">
-          Armá tu <em className="texto-dorado">rutina</em>
-        </RevealText>
+        <ConDestellos>
+          <RevealText as="h1" className="text-4xl leading-tight md:text-5xl">
+            Armá tu <em className="texto-dorado">rutina</em>
+          </RevealText>
+        </ConDestellos>
       </Reveal>
 
       {/* Stepper: los 4 pasos aparecen de a uno; la línea se dibuja con el scroll de la página */}
@@ -153,9 +155,10 @@ export default function Rutina() {
                         <h3 className="mb-3 font-sans text-sm font-bold tracking-[0.15em] text-dorado uppercase">{nombreCat[catId]}</h3>
                       )}
                       <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                        {lista.map((p) => (
+                        {lista.map((p, i) => (
                           <OpcionProducto
                             key={p.id}
+                            indice={i}
                             producto={p}
                             seleccion={eleccion[paso.paso]?.producto.id === p.id ? eleccion[paso.paso] : null}
                             onElegir={() => elegir(p)}
@@ -329,11 +332,12 @@ function Total({ valor, className = '' }) {
   );
 }
 
-function OpcionProducto({ producto, seleccion, onElegir, onVariante }) {
+function OpcionProducto({ producto, seleccion, onElegir, onVariante, indice = 0 }) {
   const activo = !!seleccion;
   const imagen = seleccion?.variante?.imagen ?? producto.imagen;
   return (
-    <li className={`${activo && producto.variantes.length ? 'col-span-2 sm:col-span-3' : ''}`}>
+    // Cascada al entrar (cada paso vuelve a montar la lista)
+    <Reveal as="li" delay={cascada(indice, 6)} className={`${activo && producto.variantes.length ? 'col-span-2 sm:col-span-3' : ''}`}>
       <m.div
         layout
         className={`overflow-hidden rounded-4xl border-2 bg-crema-card transition-colors ${activo ? 'border-verde shadow-flotante' : 'border-linea shadow-suave'}`}
@@ -388,6 +392,6 @@ function OpcionProducto({ producto, seleccion, onElegir, onVariante }) {
           </div>
         )}
       </m.div>
-    </li>
+    </Reveal>
   );
 }

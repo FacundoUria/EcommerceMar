@@ -7,7 +7,7 @@ import { formatPrecio, imgSm } from '../../lib/format.js';
 import { useCart } from '../../context/CartContext.jsx';
 
 /** Una línea del carrito (producto + variante). Se usa en el drawer y en /carrito. */
-export default function CartLine({ linea, compacta = false, onNavigate }) {
+export default function CartLine({ linea, compacta = false, onNavigate, delay = 0 }) {
   const { setCantidad, quitar } = useCart();
   const url = `/producto/${linea.id}${linea.variante ? `?v=${encodeURIComponent(linea.variante)}` : ''}`;
 
@@ -15,7 +15,7 @@ export default function CartLine({ linea, compacta = false, onNavigate }) {
     <m.li
       layout
       initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
+      animate={{ opacity: 1, y: 0, transition: { duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] } }}
       exit={{ opacity: 0, x: -40, transition: { duration: 0.2 } }}
       className="card flex gap-4 rounded-4xl p-3"
     >

@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { AnimatePresence } from 'motion/react';
 import Icon from '../components/ui/Icon.jsx';
-import Reveal from '../components/ui/Reveal.jsx';
+import Reveal, { cascada } from '../components/ui/Reveal.jsx';
 import RevealText from '../components/ui/RevealText.jsx';
+import { ConDestellos } from '../components/marca/Destellos.jsx';
 import CartLine from '../components/cart/CartLine.jsx';
 import CartSummary from '../components/cart/CartSummary.jsx';
 import { useCart } from '../context/CartContext.jsx';
@@ -21,7 +22,9 @@ export default function Carrito() {
         <div className="flex size-24 items-center justify-center rounded-full bg-salvia text-verde">
           <Icon name="carrito" size={40} />
         </div>
-        <RevealText as="h1" className="mt-6 text-4xl">Carrito vacío</RevealText>
+        <ConDestellos className="mt-6">
+          <RevealText as="h1" className="text-4xl">Carrito vacío</RevealText>
+        </ConDestellos>
         <Link to="/tienda" className="btn btn-primario mt-8">
           <Roll>
             Ver productos
@@ -34,7 +37,9 @@ export default function Carrito() {
   return (
     <div className="contenedor pt-4 pb-32 md:pb-12">
       <header className="flex flex-wrap items-end justify-between gap-3">
-        <RevealText as="h1" className="text-4xl md:text-5xl">Tu carrito</RevealText>
+        <ConDestellos>
+          <RevealText as="h1" className="text-4xl md:text-5xl">Tu carrito</RevealText>
+        </ConDestellos>
         <div className="flex items-center gap-2">
           {confirmar ? (
             <>
@@ -70,8 +75,8 @@ export default function Carrito() {
       <div className="mt-8 grid gap-8 md:grid-cols-[1fr_360px]">
         <ul className="space-y-3">
           <AnimatePresence initial={false}>
-            {lineas.map((l) => (
-              <CartLine key={l.clave} linea={l} />
+            {lineas.map((l, i) => (
+              <CartLine key={l.clave} linea={l} delay={cascada(i, 8)} />
             ))}
           </AnimatePresence>
         </ul>

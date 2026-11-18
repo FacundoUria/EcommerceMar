@@ -14,6 +14,7 @@ import { useBotonesMagneticos } from './hooks/useBotonesMagneticos.js';
 import Cursor from './components/ui/Cursor.jsx';
 import IntroMarca from './components/marca/IntroMarca.jsx';
 import ProgresoScroll from './components/marca/ProgresoScroll.jsx';
+import Rulos from './components/marca/Rulos.jsx';
 import { scrollA } from './lib/smooth.js';
 import Home from './pages/Home.jsx'; // página de entrada: sin lazy para no sumar una cascada al LCP
 
@@ -50,6 +51,16 @@ function Cortina() {
   );
 }
 
+// Variante de rulos por ruta (posiciones distintas en cada página)
+const RULOS_POR_RUTA = [
+  ['/tienda', 'tienda'],
+  ['/producto/', 'producto'],
+  ['/rutina', 'rutinaPagina'],
+  ['/servicios', 'servicios'],
+  ['/carrito', 'carrito'],
+];
+const rulosDe = (path) => RULOS_POR_RUTA.find(([r]) => path.startsWith(r))?.[1];
+
 function Paginas() {
   const location = useLocation();
   const reducido = useReducedMotion();
@@ -58,7 +69,7 @@ function Paginas() {
       <m.main
         id="contenido"
         key={location.pathname}
-        className="min-h-[70vh]"
+        className="relative min-h-[70vh]"
         {...(reducido && {
           initial: { opacity: 0 },
           animate: { opacity: 1, transition: { duration: 0.2 } },
@@ -66,6 +77,8 @@ function Paginas() {
         })}
       >
         {!reducido && <Cortina />}
+        {/* Rulos de cada página (el home tiene los suyos en el hero y en la rutina) */}
+        {rulosDe(location.pathname) && <Rulos key={location.pathname} variante={rulosDe(location.pathname)} />}
         <Suspense fallback={<PageSkeleton />}>
           <Routes location={location}>
             <Route path="/" element={<Home />} />

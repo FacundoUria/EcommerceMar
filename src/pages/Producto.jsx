@@ -5,8 +5,9 @@ import Icon from '../components/ui/Icon.jsx';
 import FotoProducto from '../components/product/FotoProducto.jsx';
 import QuantityStepper from '../components/ui/QuantityStepper.jsx';
 import Carousel from '../components/ui/Carousel.jsx';
-import Reveal from '../components/ui/Reveal.jsx';
+import Reveal, { cascada } from '../components/ui/Reveal.jsx';
 import RevealText from '../components/ui/RevealText.jsx';
+import { ConDestellos } from '../components/marca/Destellos.jsx';
 import ProductCard from '../components/product/ProductCard.jsx';
 import CartBadge from '../components/layout/CartBadge.jsx';
 import { Skeleton } from '../components/ui/Skeleton.jsx';
@@ -142,7 +143,9 @@ function Detalle({ producto }) {
         <Reveal delay={0.1} className="flex min-w-0 flex-col gap-6">
           <div>
             {producto.marca && <p className="text-xs font-bold tracking-[0.2em] text-dorado uppercase">{producto.marca}</p>}
-            <RevealText as="h1" className="mt-1 text-4xl leading-tight md:text-5xl">{producto.nombre}</RevealText>
+            <ConDestellos className="mt-1">
+              <RevealText as="h1" className="text-4xl leading-tight md:text-5xl">{producto.nombre}</RevealText>
+            </ConDestellos>
             <Precio as="p" valor={producto.precio} className="mt-3 text-3xl text-tinta" />
           </div>
 
@@ -248,8 +251,10 @@ function CompletaTuRutina({ producto }) {
         </Link>
       </Reveal>
       <Carousel label="Completá tu rutina">
-        {sugeridos.map((p) => (
-          <ProductCard key={p.id} producto={p} className="w-[46%] shrink-0 snap-start sm:w-56" />
+        {sugeridos.map((p, i) => (
+          <Reveal key={p.id} delay={cascada(i)} className="w-[46%] shrink-0 snap-start sm:w-56">
+            <ProductCard producto={p} className="h-full" />
+          </Reveal>
         ))}
       </Carousel>
     </section>

@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import { AnimatePresence, m, useReducedMotion } from 'motion/react';
 import Reveal, { cascada } from '../components/ui/Reveal.jsx';
 import RevealText from '../components/ui/RevealText.jsx';
+import { ConDestellos } from '../components/marca/Destellos.jsx';
 import Icon from '../components/ui/Icon.jsx';
 import ProductCard from '../components/product/ProductCard.jsx';
 import FotoProducto from '../components/product/FotoProducto.jsx';
@@ -89,7 +90,9 @@ export default function Tienda() {
   return (
     <div className="mx-auto w-full max-w-[84rem] pt-4 pb-10 md:px-4">
       <Reveal as="header" className="px-4">
-        <RevealText as="h1" className="text-4xl md:text-5xl">{titulo}</RevealText>
+        <ConDestellos>
+          <RevealText as="h1" className="text-4xl md:text-5xl">{titulo}</RevealText>
+        </ConDestellos>
       </Reveal>
 
       {/* Barra pegajosa: buscador + Filtros, y una fila de categorías */}

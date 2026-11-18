@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Icon from '../components/ui/Icon.jsx';
 import Reveal from '../components/ui/Reveal.jsx';
 import RevealText from '../components/ui/RevealText.jsx';
+import { ConDestellos } from '../components/marca/Destellos.jsx';
 import SmartImg from '../components/ui/SmartImg.jsx';
 import { Skeleton } from '../components/ui/Skeleton.jsx';
 import { useServices } from '../hooks/useCatalog.js';
@@ -17,7 +18,9 @@ export default function Servicios() {
   return (
     <div className="contenedor pt-4 pb-10">
       <Reveal as="header" className="flex items-end justify-between gap-4">
-        <RevealText as="h1" className="text-4xl leading-tight md:text-5xl">Servicios</RevealText>
+        <ConDestellos>
+          <RevealText as="h1" className="text-4xl leading-tight md:text-5xl">Servicios</RevealText>
+        </ConDestellos>
         <a href={NEGOCIO.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-primario">
           <Roll>
             <Icon name="whatsapp" size={18} /> Reservar
@@ -58,7 +61,9 @@ export default function Servicios() {
                         aria-label={`Reservar ${s.nombre} por WhatsApp`}
                         className="inline-flex items-center gap-1.5 rounded-full bg-verde px-4 py-2.5 text-xs font-extrabold text-arena transition hover:bg-verde-700 active:scale-95"
                       >
-                        <Icon name="whatsapp" size={16} /> Reservar
+                        <Roll>
+                          <Icon name="whatsapp" size={16} /> Reservar
+                        </Roll>
                       </a>
                     </div>
                   </div>

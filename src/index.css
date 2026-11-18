@@ -129,6 +129,12 @@
 @utility btn-borde {
   @apply border border-verde bg-transparent text-verde hover:bg-salvia;
 }
+/* Precios: Manrope 600 con números tabulares (nunca Playfair). Formato "$ 15.000" en lib/format.js */
+@utility precio {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
 @utility chip {
   @apply inline-flex shrink-0 items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-semibold whitespace-nowrap transition duration-200 active:scale-95;
 }

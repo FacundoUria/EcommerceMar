@@ -138,7 +138,7 @@ function Detalle({ producto }) {
           <div>
             {producto.marca && <p className="text-xs font-bold tracking-[0.2em] text-dorado uppercase">{producto.marca}</p>}
             <h1 className="mt-1 text-4xl leading-tight md:text-5xl">{producto.nombre}</h1>
-            <p className="mt-3 font-serif text-3xl font-semibold text-tinta">{formatPrecio(producto.precio)}</p>
+            <p className="precio mt-3 text-3xl text-tinta">{formatPrecio(producto.precio)}</p>
           </div>
 
           {tieneVariantes && (

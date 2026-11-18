@@ -74,7 +74,7 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
             {producto.nombre}
           </Link>
         </Titulo>
-        <p className="mt-0.5 font-serif text-lg font-semibold text-tinta">{precio}</p>
+        <p className="precio mt-1 text-base text-tinta">{precio}</p>
       </div>
     </article>
   );

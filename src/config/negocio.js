@@ -1,12 +1,14 @@
-// Datos reales del negocio (de su Tiendanube / banners). Lo que falta: [A CONFIRMAR CON MAR].
+// Datos reales del negocio (de su Tiendanube / banners / Instagram).
+// Dato que falta = string vacío o null: la UI no lo muestra (nada de "[A CONFIRMAR CON MAR]" visible).
+// Pendientes de Mar: dirección y horarios.
 export const NEGOCIO = {
   nombre: 'Dream Hair',
   bajada: 'The Curly Studio',
   ciudad: 'Mendoza',
   frase: 'El cabello es el espejo de tu amor propio',
   whatsapp: 'https://wa.me/message/G7IS2KBVGNF4E1',
-  direccion: '[A CONFIRMAR CON MAR]',
-  horarios: '[A CONFIRMAR CON MAR]',
+  direccion: '',
+  horarios: '',
   instagram: 'https://www.instagram.com/dreamhair_mza',
 };
 

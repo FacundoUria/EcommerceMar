@@ -31,9 +31,9 @@ export default function Footer() {
             </ul>
           </nav>
           <div className="text-sm text-texto-suave">
-            <p>{NEGOCIO.direccion}</p>
-            <p>{NEGOCIO.horarios}</p>
-            <div className="mt-4 flex flex-wrap gap-2">
+            {NEGOCIO.direccion && <p>{NEGOCIO.direccion}</p>}
+            {NEGOCIO.horarios && <p>{NEGOCIO.horarios}</p>}
+            <div className={`flex flex-wrap gap-2 ${NEGOCIO.direccion || NEGOCIO.horarios ? 'mt-4' : ''}`}>
               <a href={NEGOCIO.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-primario">
                 <Icon name="whatsapp" size={18} /> WhatsApp
               </a>

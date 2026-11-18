@@ -8,11 +8,11 @@ export default function CartSummary({ className = '' }) {
     <div className={className}>
       <div className="flex items-center justify-between text-sm text-texto-suave">
         <span>{plural(cantidadTotal, 'producto', 'productos')}</span>
-        <span className="tabular-nums">{formatPrecio(total)}</span>
+        <span className="precio">{formatPrecio(total)}</span>
       </div>
       <div className="mt-2 flex items-baseline justify-between">
         <span className="text-sm font-extrabold tracking-[0.18em] text-tinta uppercase">Total</span>
-        <span className="font-serif text-3xl font-semibold text-tinta tabular-nums">{formatPrecio(total)}</span>
+        <span className="precio text-3xl text-tinta">{formatPrecio(total)}</span>
       </div>
       <button type="button" disabled className="btn btn-primario mt-4 w-full">
         Finalizar pedido

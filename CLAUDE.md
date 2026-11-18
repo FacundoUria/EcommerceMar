@@ -24,8 +24,9 @@ React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScri
 
 ## Assets
 - Originales en `assets/` (no se sirven). Versiones web generadas en `public/img/` (`<nombre>.webp` 900px + `<nombre>-sm.webp` 400px) y `public/video/` con los scripts de `scripts/`. Los archivos `VERIFICAR-*` y `personita*` se ignoran. Los videos originales (`assets/videos/`) no se commitean.
+- Hero del home: foto `mar-con-productos-1` (los cuadros del video no quedan nítidos recortados a 4:5). El video "amor propio" va en Resultados, rotado para arrancar en su cuadro más nítido (opción `inicio` en `scripts/optimizar-videos.mjs`).
 - Producto sin foto → placeholder elegante (crema + marca + nombre en Playfair), nunca imagen rota.
-- Datos reales del negocio y textos de la franja: `src/config/negocio.js` (lo que falta dice `[A CONFIRMAR CON MAR]`).
+- Datos reales del negocio: `src/config/negocio.js`. Dato que falta = string vacío y la UI NO lo muestra (pendientes: dirección y horarios).
 
 ## Comandos
 - `npm run dev` (localhost:5173) · `npm run dev -- --host` (ver desde el celu en la misma red) · `npm run build` · `npm run preview`
@@ -53,12 +54,13 @@ React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScri
   - Secciones alternan arena / salvia; los bloques dentro del contenedor usan `bloque-salvia` (rounded-3xl). Cards: utilidad `card`.
   - Header, bottom nav y barras fijas: `glass-arena` (arena translúcido con blur), íconos tinta, activo con píldora salvia y texto verde. Modales: `velo`.
   - Botón secundario `btn-borde`: borde verde 1px, texto verde, fondo transparente.
+  - Precios: utilidad `precio` (Manrope 600, tabular-nums), nunca Playfair. Formato "$ 15.000" vía `formatPrecio`.
 - **Poco texto**: sin eyebrows, sin subtítulos ni párrafos bajo títulos de sección, títulos de 1–3 palabras, botones de 1–2 palabras. Cards de producto: marca, nombre y precio, nada más. Excepción: "Hola, soy Mar" y "Rulos que se ven y se sienten" del home quedan como están.
 - El campo `paso` de las categorías se usa SOLO dentro de /rutina.
 - Imágenes de la marca en `assets/marca/` (logo y fotos).
 
 ## Datos: nada inventado
-El modelo de Stitch tiene datos de relleno. **No usar como reales**: reseñas ("4.9, 142 reseñas"), testimonios, nombres de asesoras, dirección, horarios, número de WhatsApp, "estudio certificado", precios, cuotas, envíos gratis. Todo dato real lo da Mar; si falta, dejar un placeholder visible tipo `[A CONFIRMAR CON MAR]`.
+El modelo de Stitch tiene datos de relleno. **No usar como reales**: reseñas ("4.9, 142 reseñas"), testimonios, nombres de asesoras, dirección, horarios, número de WhatsApp, "estudio certificado", precios, cuotas, envíos gratis. Todo dato real lo da Mar; si falta, no se muestra (nada de placeholders visibles en el sitio).
 Las fotos de personas (`personita*.jpg`) solo se publican si Mar confirma que tiene permiso de esas personas.
 
 ## Forma de trabajo

@@ -128,7 +128,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
             <h2 id="qv-titulo" className="mt-1 text-3xl leading-tight">
               {producto.nombre}
             </h2>
-            <p className="mt-2 font-serif text-2xl font-semibold text-tinta">{formatPrecio(producto.precio)}</p>
+            <p className="precio mt-2 text-2xl text-tinta">{formatPrecio(producto.precio)}</p>
           </div>
 
           {tieneVariantes && (

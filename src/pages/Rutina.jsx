@@ -206,7 +206,7 @@ export default function Rutina() {
                         <span className="block truncate text-sm font-semibold">{e ? e.producto.nombre : '—'}</span>
                         {e?.variante && <span className="block truncate text-xs text-texto-suave">{e.variante.nombre}</span>}
                       </span>
-                      {e && <span className="text-sm font-bold text-tinta tabular-nums">{formatPrecio(e.producto.precio)}</span>}
+                      {e && <span className="precio text-sm text-tinta">{formatPrecio(e.producto.precio)}</span>}
                     </button>
                   </li>
                 );
@@ -267,7 +267,7 @@ function Total({ valor, className = '' }) {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -8 }}
         transition={{ duration: 0.2 }}
-        className={`inline-block font-serif font-semibold text-tinta tabular-nums ${className}`}
+        className={`precio inline-block text-tinta ${className}`}
         aria-live="polite"
       >
         {formatPrecio(valor)}
@@ -309,7 +309,7 @@ function OpcionProducto({ producto, seleccion, onElegir, onVariante }) {
           <span className={`block ${activo && producto.variantes.length ? '' : 'p-3'}`}>
             {producto.marca && <span className="block text-[11px] font-bold tracking-[0.12em] text-dorado uppercase">{producto.marca}</span>}
             <span className="line-clamp-2 block text-sm leading-snug font-semibold">{producto.nombre}</span>
-            <span className="mt-1 block font-serif font-semibold text-tinta">{formatPrecio(producto.precio)}</span>
+            <span className="precio mt-1 block text-tinta">{formatPrecio(producto.precio)}</span>
           </span>
           <span
             className={`absolute top-2.5 right-2.5 flex size-7 items-center justify-center rounded-full transition ${

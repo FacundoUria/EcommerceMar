@@ -39,13 +39,17 @@ function Hero() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="md:order-2"
         >
-          <AutoVideo
-            src="/video/hero.mp4"
-            poster="/video/hero.webp"
-            alt="Pelo con rulos definidos de una clienta de Dream Hair"
-            priority
-            className="aspect-[4/5] w-full rounded-3xl bg-salvia-media md:mx-auto md:max-w-md"
-          />
+          {/* Foto fija: los cuadros del video no quedan nítidos a este tamaño (el video va en Resultados) */}
+          <div className="aspect-[4/5] w-full overflow-hidden rounded-3xl bg-salvia-media md:mx-auto md:max-w-md">
+            <SmartImg
+              src="/img/mar/mar-con-productos-1.webp"
+              alt="Mar, de Dream Hair, con rulos definidos y productos para rulos"
+              width={387}
+              height={516}
+              priority
+              className="size-full object-cover object-top"
+            />
+          </div>
         </m.div>
         <div className="flex flex-col items-start gap-6 px-3 md:order-1 md:px-0">
           <m.h1
@@ -212,8 +216,8 @@ function Resultados() {
         </Reveal>
         <Reveal delay={0.1} className="mx-auto w-full max-w-xs md:order-1">
           <AutoVideo
-            src="/video/resultado.mp4"
-            poster="/video/resultado.webp"
+            src="/video/amor-propio.mp4"
+            poster="/video/amor-propio.webp"
             alt="Video: resultado de rulos definidos en Dream Hair"
             className="aspect-[9/16] rounded-5xl shadow-flotante ring-8 ring-crema-card"
           />

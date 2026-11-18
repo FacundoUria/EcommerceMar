@@ -29,7 +29,7 @@ export default function CartLine({ linea, compacta = false, onNavigate }) {
               {linea.nombre}
             </Link>
             {linea.variante && <p className="truncate text-xs text-texto-suave">{linea.variante}</p>}
-            <p className="mt-0.5 text-xs text-texto-suave">{formatPrecio(linea.precio)} c/u</p>
+            <p className="mt-0.5 text-xs text-texto-suave"><span className="precio">{formatPrecio(linea.precio)}</span> c/u</p>
           </div>
           <button
             type="button"
@@ -47,7 +47,7 @@ export default function CartLine({ linea, compacta = false, onNavigate }) {
             onChange={(n) => (n < 1 ? quitar(linea.clave) : setCantidad(linea.clave, n))}
             label={`Cantidad de ${linea.nombre}`}
           />
-          <p className="font-serif text-lg font-semibold text-tinta tabular-nums">{formatPrecio(linea.precio * linea.cantidad)}</p>
+          <p className="precio text-lg text-tinta">{formatPrecio(linea.precio * linea.cantidad)}</p>
         </div>
       </div>
     </m.li>

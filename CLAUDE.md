@@ -18,11 +18,24 @@ React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScri
 ## Datos: preparado para un panel futuro
 - Catálogo en `src/data/products.js` (precios de su Tiendanube, nov 2026).
 - **Los componentes NUNCA importan `products.js` directo.** Todo pasa por `src/services/productsService.js` (`getProducts`, `getProductById`, `getCategories`, `getServices`, todas async).
-- Más adelante el service va a leer de una base de datos donde Mar carga productos y precios (panel admin), sin tocar la UI. Mantener esa frontera.
+- Más adelante el service va a leer de una base de datos donde Mar carga productos y precios (panel admin), sin tocar la UI. Mantener esa frontera. Hoy importa `products.js` estático (2 KB, mejor LCP); el lugar del futuro `fetch` está comentado en `cargar()`.
+- Los hooks de `src/hooks/useCatalog.js` cachean lo resuelto: el skeleton se ve solo mientras algo realmente carga. `precargarCatalogo()` arranca en `main.jsx`.
+- El carrito re-sincroniza precio/nombre contra el catálogo al abrir la app (los precios cambian seguido).
 
 ## Assets
-- Originales en `assets/` (no se sirven). Versiones web generadas en `public/img/` y `public/video/` con los scripts de `scripts/` (sharp / ffmpeg). Los archivos `VERIFICAR-*` se ignoran hasta confirmarlos.
+- Originales en `assets/` (no se sirven). Versiones web generadas en `public/img/` (`<nombre>.webp` 900px + `<nombre>-sm.webp` 400px) y `public/video/` con los scripts de `scripts/`. Los archivos `VERIFICAR-*` y `personita*` se ignoran. Los videos originales (`assets/videos/`) no se commitean.
 - Producto sin foto → placeholder elegante (crema + marca + nombre en Playfair), nunca imagen rota.
+- Datos reales del negocio y textos de la franja: `src/config/negocio.js` (lo que falta dice `[A CONFIRMAR CON MAR]`).
+
+## Comandos
+- `npm run dev` (localhost:5173) · `npm run dev -- --host` (ver desde el celu en la misma red) · `npm run build` · `npm run preview`
+- `npm run fotos:importar` (baja de Tiendanube las fotos de productos con `tn`) · `npm run assets:optimizar` (sharp) · `npm run videos:optimizar` (ffmpeg)
+
+## Performance (Lighthouse mobile ≥ 85 / a11y ≥ 90)
+- motion vía `LazyMotion` + componente `m` (nunca `motion.div`: `strict` tira error). Features async en `src/lib/motionFeatures.js`.
+- Fuentes self-hosted en `src/assets/fonts` (un solo archivo de Playfair 500 para todos los pesos).
+- Home sin lazy; el resto de las páginas con `lazy()`. `vite.config.js` precarga el chunk de la ruta de entrada.
+- Imágenes arriba de todo: `priority` en `SmartImg` (eager, sin fade).
 
 ## Decisiones pendientes (preguntar antes de asumir)
 1. **Cierre del carrito:** ¿mensaje de WhatsApp a Mar con el pedido y el total, u otra cosa? (en Fase 1 queda "Próximamente").

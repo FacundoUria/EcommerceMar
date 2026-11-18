@@ -40,7 +40,7 @@ export default function Home() {
 
 /* ═════════ BANNERS de Mar (al final del home, después de "Hola, soy Mar") ═════════ */
 const BANNERS = [
-  ['hola-soy-mar', 'Hola, soy Mar'],
+  // hola-soy-mar no va: repite la sección "Hola, soy Mar" que está justo arriba
   ['asesoramiento-corte-en-seco', 'Asesoramiento y corte en seco'],
   ['envios-mendoza', 'Envíos a todo Mendoza'],
   ['medios-de-pago', 'Medios de pago'],

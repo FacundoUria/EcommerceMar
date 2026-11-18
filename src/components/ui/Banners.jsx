@@ -7,7 +7,7 @@ import Icon from './Icon.jsx';
  * - Scroll-snap nativo: se desliza con el dedo; en desktop flechas + arrastre con mouse.
  * - Autoplay lento (6 s) solo en pantalla y con la pestaña visible. Se pausa con hover, foco
  *   o al tocar (vuelve a andar 10 s después del último toque). Sin autoplay con movimiento reducido.
- * - Mobile: 1 banner por vista. Desktop: 2 (a todo el ancho un banner de 2:1 queda gigante).
+ * - Mobile: 1 banner por vista y asoma ~12% del siguiente (se nota que se desliza). Desktop: 2 (a todo el ancho un banner de 2:1 queda gigante).
  *   Los puntos representan posiciones de scroll, así que se ajustan solos a cuántos entran.
  */
 const INTERVALO = 6000;
@@ -113,7 +113,7 @@ export default function Banners({ items, label = 'Novedades' }) {
     <section
       aria-label={label}
       aria-roledescription="carrusel"
-      className="contenedor relative pb-20 md:pb-28"
+      className="contenedor relative"
       onPointerEnter={(e) => e.pointerType === 'mouse' && (pausa.current.hover = true)}
       onPointerLeave={(e) => e.pointerType === 'mouse' && (pausa.current.hover = false)}
       onFocus={() => (pausa.current.foco = true)}
@@ -138,12 +138,12 @@ export default function Banners({ items, label = 'Novedades' }) {
               role="group"
               aria-roledescription="banner"
               aria-label={`${n + 1} de ${items.length}`}
-              className="aspect-[1504/704] w-full shrink-0 snap-start overflow-hidden rounded-3xl bg-salvia-media shadow-suave md:w-[calc(50%-0.625rem)]"
+              className="aspect-[1504/704] w-[calc((100%-0.75rem)/1.12)] shrink-0 snap-start overflow-hidden rounded-3xl bg-salvia-media shadow-suave md:w-[calc(50%-0.625rem)]"
             >
               <img
                 src={b.src}
                 srcSet={`${b.src.replace(/\.webp$/, '-sm.webp')} 400w, ${b.src} 900w, ${b.src.replace(/\.webp$/, '-lg.webp')} 1504w`}
-                sizes="(min-width: 768px) 50vw, 100vw"
+                sizes="(min-width: 768px) 50vw, 90vw"
                 alt={b.alt}
                 width="1504"
                 height="704"

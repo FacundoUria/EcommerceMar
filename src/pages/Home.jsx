@@ -552,7 +552,7 @@ function HolaSoyMar() {
 
 /* ═════════ RESULTADOS (textos intactos): stories con fotos del estudio + video ═════════ */
 const STORIES = [
-  { tipo: 'video', src: '/video/amor-propio.mp4', poster: '/video/amor-propio.webp', alt: 'Video: rulos definidos en Dream Hair', duracion: 7.7 },
+  { tipo: 'video', src: '/video/buena-vista.mp4', poster: '/video/buena-vista.webp', alt: 'Video: rulos definidos en Dream Hair', duracion: 12.8 },
   { tipo: 'foto', src: '/img/estudio/servicio-corte-rulos.webp', alt: 'Corte de rulos en el estudio', duracion: 5 },
   { tipo: 'foto', src: '/img/estudio/asesoramiento-1.webp', alt: 'Asesoramiento en el estudio', duracion: 5 },
   { tipo: 'foto', src: '/img/estudio/asesoramiento-2.webp', alt: 'Asesoramiento en el estudio', duracion: 5 },

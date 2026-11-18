@@ -8,10 +8,10 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 
 const VIDEOS = [
-  // Sección "Resultados" (9:16 completo). `inicio`: el video arranca en el cuadro más nítido
-  // (5,25 s, medido con blurdetect) y sigue el loop desde ahí; el poster es ese mismo cuadro.
-  // (Se probó como hero recortado a 4:5, pero a ese tamaño ningún cuadro queda nítido.)
-  { origen: 'resultado-rulos-amor-propio-8s.mp4', salida: 'amor-propio', maxMB: 1.5, audio: false, inicio: 5.25 },
+  // Sección "Resultados" (stories, 9:16). Sin audio. Poster: cuadro nítido de los rulos (8 s, medido
+  // con blurdetect). No se rota (`inicio`): el texto del video se lee en orden desde el principio.
+  { origen: 'resultado-rulos-buena-vista-13s.mp4', salida: 'buena-vista', maxMB: 2, audio: false, poster: 8 },
+  // Opción disponible: `inicio: <seg>` rota el video para que arranque (y haga loop) desde ese cuadro.
   // 720p como máximo: el original es 576x1024, así que no se agranda.
   { origen: 'proceso-asesoramiento-72s.mp4', salida: 'proceso', maxMB: 6, audio: true, alto: 1280 },
 ];

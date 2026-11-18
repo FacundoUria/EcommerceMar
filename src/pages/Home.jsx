@@ -109,12 +109,9 @@ function Hero() {
 
         {/* Foto con forma orgánica + mini-cards flotando */}
         <div className="relative mx-auto w-[84%] max-w-[30rem] md:w-full">
-          <m.div
-            initial={{ opacity: 0, scale: reducido ? 1 : 1.08 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: EASE }}
-            className={`relative aspect-[4/5] overflow-hidden bg-salvia-media shadow-flotante ${BLOB}`}
-          >
+          {/* Entrada con CSS (no con motion): arranca con el primer pintado, sin esperar al chunk async
+              de motion. Es la imagen del LCP: así no queda en opacity 0 mientras carga el JS. */}
+          <div className={`hero-foto relative aspect-[4/5] overflow-hidden bg-salvia-media shadow-flotante ${BLOB}`}>
             <m.div className="absolute inset-x-0 bottom-0" style={{ top: -PARALLAX_PX, y: reducido ? 0 : yFoto }}>
               <SmartImg
                 src="/img/mar/mar-con-productos-1.webp"
@@ -125,7 +122,7 @@ function Hero() {
                 className="size-full object-cover object-top"
               />
             </m.div>
-          </m.div>
+          </div>
 
           {flotantes[0] && (
             <MiniCard producto={flotantes[0]} y={reducido ? 0 : yCard1} delay={0.9} className="-left-[14%] bottom-[10%] md:-left-[18%]" />

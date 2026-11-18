@@ -40,6 +40,8 @@ export default function IntroMarca() {
   return (
     <div
       aria-hidden="true"
+      // `.intro` lleva opacity 0.97 (ver index.css): con la capa 100% opaca Chrome no da por pintada
+      // la foto del hero que queda debajo y el LCP esperaba a que se abriera la intro (792 → ~200 ms).
       className={`intro fixed inset-0 z-[100] flex flex-col items-center justify-center bg-arena ${saltar ? 'intro-ya' : ''}`}
       onClick={() => setSaltar(true)}
       onAnimationEnd={(e) => e.target === e.currentTarget && setVisible(false)}

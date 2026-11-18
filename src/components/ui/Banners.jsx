@@ -20,6 +20,8 @@ export default function Banners({ items, label = 'Novedades' }) {
   const drag = useRef({ activo: false, x: 0, scroll: 0, movio: false });
   const reducido = useReducedMotion();
   const enPantalla = useInView(ref, { amount: 0.5 });
+  // Las fotos se piden recién cerca de la pantalla (no compiten con el LCP del hero; ver SmartImg)
+  const cerca = useInView(ref, { once: true, margin: '400px 0px' });
   const [activo, setActivo] = useState(0);
   const [posiciones, setPosiciones] = useState(items.length);
 
@@ -142,13 +144,13 @@ export default function Banners({ items, label = 'Novedades' }) {
               className="aspect-[1504/704] w-[calc((100%-0.75rem)/1.12)] shrink-0 snap-start overflow-hidden rounded-3xl bg-salvia-media shadow-suave md:w-[calc(50%-0.625rem)]"
             >
               <img
-                src={b.src}
-                srcSet={`${b.src.replace(/\.webp$/, '-sm.webp')} 400w, ${b.src} 900w, ${b.src.replace(/\.webp$/, '-lg.webp')} 1504w`}
+                src={cerca ? b.src : undefined}
+                srcSet={cerca ? `${b.src.replace(/\.webp$/, '-sm.webp')} 400w, ${b.src} 900w, ${b.src.replace(/\.webp$/, '-lg.webp')} 1504w` : undefined}
                 sizes="(min-width: 768px) 50vw, 90vw"
                 alt={b.alt}
                 width="1504"
                 height="704"
-                loading={n === 0 ? 'eager' : 'lazy'}
+                loading="lazy" // el carrusel está al final del home: no compite con la foto del hero
                 decoding="async"
                 draggable="false"
                 className={`size-full object-cover ${b.encuadre ?? ''}`}

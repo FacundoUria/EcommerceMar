@@ -7,6 +7,18 @@
     <meta name="description" content="Dream Hair — The Curly Studio. Productos para rulos y método curly en Mendoza." />
     <title>Dream Hair · The Curly Studio</title>
     <link rel="icon" href="/img/marca/logocito.webp" type="image/webp" />
+    <!-- LCP del home: la foto del hero se pide desde el HTML (no espera al JS) y solo en "/"
+         (en las otras páginas no se usa). Si hay varias medidas, se agrega imagesrcset/imagesizes. -->
+    <script>
+      if (location.pathname === '/') {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.as = 'image';
+        l.href = '/img/mar/mar-con-productos-1.webp';
+        l.setAttribute('fetchpriority', 'high');
+        document.head.appendChild(l);
+      }
+    </script>
   </head>
   <body style="margin: 0; background: #f4efe6">
     <!-- Shell estático: pinta la marca antes de que cargue el JS (React lo reemplaza) -->

@@ -35,7 +35,9 @@ React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScri
 - `npm run dev` (localhost:5173) · `npm run dev -- --host` (ver desde el celu en la misma red) · `npm run build` · `npm run preview`
 - `npm run fotos:importar` (baja de Tiendanube las fotos de productos con `tn`) · `npm run assets:optimizar` (sharp) · `npm run videos:optimizar` (ffmpeg)
 
-## Performance (Lighthouse mobile ≥ 85 / a11y ≥ 90)
+## Performance (Lighthouse mobile Performance ≥ 80 / a11y ≥ 90)
+- LCP del home = foto del hero. Preload desde `index.html` (solo en "/", con fetchpriority high), Playfair normal + cursiva con preload (lo agrega `vite.config.js` con el nombre hasheado), entrada de la foto con CSS (`.hero-foto`, no motion: no espera al chunk async).
+- Fotos no prioritarias: `SmartImg` pone el `src` recién a 300px de la pantalla (IntersectionObserver); banners igual. Con conexión lenta/desconocida Chrome agranda el margen de `loading="lazy"` y bajaba casi todo el home antes del LCP (946 KB → 439 KB, LCP simulado 4.7 → 3.6 s).
 - motion vía `LazyMotion` + componente `m` (nunca `motion.div`: `strict` tira error). Features async en `src/lib/motionFeatures.js`.
 - Fuentes self-hosted en `src/assets/fonts` (un solo archivo de Playfair 500 para todos los pesos).
 - Home sin lazy; el resto de las páginas con `lazy()`. `vite.config.js` precarga el chunk de la ruta de entrada.
@@ -58,7 +60,7 @@ React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScri
   - `<Rulos variante>` (hero, rutina del home, footer): espirales SVG al 25% que se dibujan con el scroll de su sección (stroke-dashoffset escrito directo en el DOM; NO `useScroll`/`pathLength` de motion: no pinta el valor inicial hasta el primer scroll). Miden su propia capa, no la ref del padre (todavía no está conectada al montar el hijo).
   - `<AdornoTitulo>`: subrayado en rulo bajo "amor propio" (CSS, 0.9 s) + destellos alrededor. `<Destellos>`: estrellitas que titilan (también junto al logo del header).
   - `explotarDestellos(boton)` al agregar al carrito (card, quick view, producto, rutina); `lluviaDestellos()` al elegir el 4.º paso de /rutina + "¡Tu rutina está lista!" con el total junto al botón de agregar. En WAAPI el easing va por keyframe (en la animación entera aplasta la fase visible).
-  - `<IntroMarca>`: primera visita de la sesión (sessionStorage `dh-intro`, con try/catch), ≈ 1.2 s, tap para saltar, CSS puro. El hero atrasa su título con `DEMORA_INTRO`. El LCP (foto del hero) no cambia; el Speed Index sí sube.
+  - `<IntroMarca>`: primera visita de la sesión (sessionStorage `dh-intro`, con try/catch), ≈ 1.2 s, tap para saltar, CSS puro. El hero atrasa su título con `DEMORA_INTRO`. La capa va con `opacity: 0.97`: con una capa 100% opaca Chrome no cuenta la foto del hero como pintada y el LCP esperaba a que se abriera la intro (0.99 no alcanza).
   - `<ProgresoScroll>`: línea ondulada verde arriba de todo (sigue funcionando con movimiento reducido: es información).
   - Movimiento reducido: rulos ya dibujados, sin destellos/explosión/lluvia, intro con fade.
 ## Decisiones pendientes (preguntar antes de asumir)

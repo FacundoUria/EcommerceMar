@@ -30,7 +30,12 @@ function precargarRutaInicial() {
           if (m) mapa[m[1]] = [c.fileName, ...c.imports].map((f) => `/${f}`);
         }
         const script = `(function(){var p=location.pathname,r=${JSON.stringify(RUTAS)},m=${JSON.stringify(mapa)};for(var k in r){if(p.indexOf(k)===0&&m[r[k]]){m[r[k]].forEach(function(f){var l=document.createElement('link');l.rel='modulepreload';l.href=f;document.head.appendChild(l)});break}}})();`;
-        return html.replace('</head>', `  <script>${script}</script>\n  </head>`);
+        // Playfair (normal + cursiva) de los títulos: se pide con el HTML en vez de esperar al CSS
+        const fuentes = Object.values(ctx.bundle)
+          .filter((a) => a.type === 'asset' && /playfair-display-latin-500-(normal|italic)/.test(a.fileName))
+          .map((a) => `  <link rel="preload" as="font" type="font/woff2" href="/${a.fileName}" crossorigin />`)
+          .join('\n');
+        return html.replace('</head>', `${fuentes}\n  <script>${script}</script>\n  </head>`);
       },
     },
   };

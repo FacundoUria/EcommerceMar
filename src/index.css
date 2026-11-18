@@ -326,6 +326,19 @@
   }
 }
 
+/* Entrada de la foto del hero (LCP): CSS para que arranque con el primer pintado */
+.hero-foto {
+  animation: hero-foto 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes hero-foto {
+  from { opacity: 0; transform: scale(1.08); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-foto {
+    animation-name: fundido;
+  }
+}
+
 /* ═════ "Rulos y brillo" ═════ */
 /* Trazo que se dibuja a mano (subrayado de "amor propio", aro de la intro). El path usa pathLength="1":
    dasharray 1 2 y offset 1.1 lo dejan oculto sin que el remate redondo asome en el inicio. */
@@ -355,8 +368,12 @@
   82% { opacity: 0.55; transform: scale(0.45) rotate(70deg); }
 }
 
-/* Intro de marca: logo, aro que se dibuja y la pantalla se abre hacia arriba (≈ 1.2 s) */
+/* Intro de marca: logo, aro que se dibuja y la pantalla se abre hacia arriba (≈ 1.2 s).
+   opacity 0.97 y no 1: con una capa 100% opaca encima, Chrome no cuenta como pintada la foto del hero
+   y el LCP se iba a cuando se abre la intro. Con 0.97 (medido: 0.99 no alcanza) la foto se pinta
+   detrás desde el primer momento; a la vista es igual. */
 .intro {
+  opacity: 0.97;
   animation: intro-salir 0.42s cubic-bezier(0.76, 0, 0.24, 1) 0.78s forwards;
 }
 .intro.intro-ya {

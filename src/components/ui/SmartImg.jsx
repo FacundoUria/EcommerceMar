@@ -1,5 +1,34 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLqip } from '../../lib/lqip.js';
+
+/**
+ * true cuando el elemento está a menos de 300px de la pantalla (una vez).
+ * Las fotos no prioritarias recién ponen su src ahí: con conexiones lentas o desconocidas Chrome
+ * agranda mucho el margen del loading="lazy" y pedía casi todas las fotos del home al cargar,
+ * compitiendo con la foto del hero (LCP). Mientras tanto se ve el blur-up.
+ */
+function useCerca(ref, activo) {
+  const [cerca, setCerca] = useState(!activo);
+  useEffect(() => {
+    if (cerca) return;
+    const el = ref.current;
+    if (!el || !('IntersectionObserver' in window)) {
+      setCerca(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        setCerca(true);
+        io.disconnect();
+      },
+      { rootMargin: '300px' },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [cerca, ref]);
+  return cerca;
+}
 
 /** Placeholder elegante para productos sin foto: nunca una imagen rota. */
 export function ImgPlaceholder({ titulo, subtitulo = 'Dream Hair', className = '' }) {
@@ -37,6 +66,8 @@ export default function SmartImg({
   const [error, setError] = useState(false);
   const [cargada, setCargada] = useState(false);
   const lqip = useLqip(src);
+  const caja = useRef(null);
+  const cerca = useCerca(caja, !priority);
 
   if (!src || error) return <ImgPlaceholder titulo={placeholderTitulo ?? alt} subtitulo={placeholderSubtitulo} />;
 
@@ -44,13 +75,14 @@ export default function SmartImg({
   // real carga y aparece con fade de opacidad. Sin miniatura, el fondo es salvia-media.
   return (
     <span
+      ref={caja}
       className={`block size-full overflow-hidden ${sinFondo ? '' : 'bg-salvia-media bg-cover bg-center'}`}
       style={!sinFondo && lqip && !cargada ? { backgroundImage: `url("${lqip}")` } : undefined}
     >
       <img
         key={src}
-        src={src}
-        srcSet={srcSm ? `${srcSm} 400w, ${src} 900w` : undefined}
+        src={cerca ? src : undefined}
+        srcSet={cerca && srcSm ? `${srcSm} 400w, ${src} 900w` : undefined}
         sizes={srcSm ? sizes : undefined}
         alt={alt}
         width={width}

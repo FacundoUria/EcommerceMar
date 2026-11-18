@@ -1,32 +1,46 @@
-import { m, useReducedMotion } from 'motion/react';
+import { useRef } from 'react';
+import { m, useInView, useReducedMotion } from 'motion/react';
 
 const EASE = [0.76, 0, 0.24, 1];
+const OCULTO = 'inset(100% 0% 0% 0%)';
 
 /**
  * Revela una imagen "con cortina": clip-path inset de 100% a 0 de abajo hacia arriba (0.9s)
  * + escala del contenido de 1.15 a 1, al entrar en pantalla (una vez). Estático con movimiento reducido.
- * El padre define tamaño y bordes; este componente ocupa todo (size-full).
+ *
+ * `listo`: la cortina no se abre hasta que el contenido está cargado (ej. el poster de un video),
+ * así nunca se revela una caja vacía. La animación se monta recién cuando está listo y en pantalla
+ * (animación de montaje: funciona aunque las features de motion carguen después).
  */
-export default function RevealImagen({ children, className = '', delay = 0 }) {
+export default function RevealImagen({ children, className = '', delay = 0, listo = true }) {
   const reducido = useReducedMotion();
+  const ref = useRef(null);
+  const enPantalla = useInView(ref, { once: true, margin: '0px 0px 10% 0px' });
+
   if (reducido) return <div className={`size-full ${className}`}>{children}</div>;
+
+  const abrir = enPantalla && listo;
   return (
-    <m.div
-      className={`size-full overflow-hidden ${className}`}
-      initial={{ clipPath: 'inset(100% 0% 0% 0%)' }}
-      whileInView={{ clipPath: 'inset(0% 0% 0% 0%)' }}
-      viewport={{ once: true, margin: '0px 0px 10% 0px' }}
-      transition={{ duration: 0.9, delay, ease: EASE }}
-    >
-      <m.div
-        className="size-full"
-        initial={{ scale: 1.15 }}
-        whileInView={{ scale: 1 }}
-        viewport={{ once: true, margin: '0px 0px 10% 0px' }}
-        transition={{ duration: 1.1, delay, ease: [0.22, 1, 0.36, 1] }}
-      >
-        {children}
-      </m.div>
-    </m.div>
+    <div ref={ref} className={`size-full ${className}`}>
+      {abrir ? (
+        <m.div
+          className="size-full overflow-hidden"
+          initial={{ clipPath: OCULTO }}
+          animate={{ clipPath: 'inset(0% 0% 0% 0%)' }}
+          transition={{ duration: 0.9, delay, ease: EASE }}
+        >
+          <m.div className="size-full" initial={{ scale: 1.15 }} animate={{ scale: 1 }} transition={{ duration: 1.1, delay, ease: [0.22, 1, 0.36, 1] }}>
+            {children}
+          </m.div>
+        </m.div>
+      ) : (
+        // Cerrada: el contenido ya está montado (y cargando) pero oculto por la cortina
+        <div className="size-full overflow-hidden" style={{ clipPath: OCULTO }}>
+          <div className="size-full" style={{ transform: 'scale(1.15)' }}>
+            {children}
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

@@ -47,17 +47,23 @@ export default function Stories({ items, className = '', label = 'Resultados' })
       {/* Contenido */}
       <div className="absolute inset-0" aria-live="polite">
         {actual.tipo === 'video' ? (
-          <video
-            key={actual.src}
-            ref={videoRef}
-            src={enPantalla ? actual.src : undefined}
-            poster={actual.poster}
-            muted
-            playsInline
-            preload="none"
-            aria-label={actual.alt}
-            className="size-full object-cover"
-          />
+          <>
+            {/* Poster como imagen debajo del video: nunca queda una caja vacía mientras el video carga */}
+            {actual.poster && (
+              <img src={actual.poster} alt="" aria-hidden="true" width="576" height="1024" decoding="async" className="absolute inset-0 size-full object-cover" />
+            )}
+            <video
+              key={actual.src}
+              ref={videoRef}
+              src={enPantalla ? actual.src : undefined}
+              poster={actual.poster}
+              muted
+              playsInline
+              preload="none"
+              aria-label={actual.alt}
+              className="relative size-full object-cover"
+            />
+          </>
         ) : (
           <SmartImg key={actual.src} src={actual.src} srcSm={imgSm(actual.src)} sizes="320px" alt={actual.alt} className="size-full object-cover" />
         )}

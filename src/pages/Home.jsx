@@ -15,6 +15,7 @@ import ProductCard from '../components/product/ProductCard.jsx';
 import FotoProducto from '../components/product/FotoProducto.jsx';
 import CarruselCentrado from '../components/ui/CarruselCentrado.jsx';
 import { useMediaQuery } from '../hooks/useMediaQuery.js';
+import { useImagenLista } from '../hooks/useImagenLista.js';
 import { ProductCardSkeleton, Skeleton } from '../components/ui/Skeleton.jsx';
 import { useBrands, useCategories, useProducts } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
@@ -563,6 +564,8 @@ const STORIES = [
 ];
 
 function Resultados() {
+  // La cortina del video se abre recién con el poster ya cargado y decodificado
+  const posterListo = useImagenLista(STORIES[0].poster);
   return (
     <section aria-labelledby="res-titulo" className="fondo-salvia grano py-20 md:py-28">
       <div className="contenedor grid items-center gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-20">
@@ -577,8 +580,8 @@ function Resultados() {
           </Link>
         </Reveal>
         <Reveal delay={0.1} className="mx-auto w-full max-w-[20rem] md:order-1 md:max-w-[22rem]">
-          <div className="aspect-[9/16] overflow-hidden rounded-5xl shadow-flotante ring-8 ring-crema-card">
-            <RevealImagen>
+          <div className={`aspect-[9/16] overflow-hidden rounded-5xl shadow-flotante ring-8 ring-crema-card transition-opacity duration-500 ${posterListo ? "opacity-100" : "opacity-0"}`}>
+            <RevealImagen listo={posterListo}>
               <Stories items={STORIES} className="size-full" />
             </RevealImagen>
           </div>

@@ -2,6 +2,7 @@
 // Uso: npm run assets:optimizar   (agregar -- --forzar para regenerar todo)
 //  - <nombre>.webp     → máx 900px de ancho (fotos grandes, galería)
 //  - <nombre>-sm.webp  → máx 400px de ancho (cards, swatches, miniaturas)
+//  - <nombre>-lg.webp  → máx 1600px, solo banners (carrusel a todo el ancho en desktop)
 //  - src/data/lqip.json → miniatura de 20px en base64 por foto (blur-up mientras carga la real)
 // Ignora archivos VERIFICAR-* (fotos a confirmar) y personita* (falta permiso).
 // Saltea las versiones que ya existen y son más nuevas que el original.
@@ -17,6 +18,7 @@ const TAMANIOS = [
   { sufijo: '', ancho: 900 },
   { sufijo: '-sm', ancho: 400 },
 ];
+const EXTRA = { banners: [{ sufijo: '-lg', ancho: 1600 }] };
 const forzar = process.argv.includes('--forzar');
 
 const mtime = (f) => stat(f).then((s) => s.mtimeMs, () => 0);
@@ -59,7 +61,7 @@ for (const carpeta of CARPETAS) {
     const entrada = path.join(origen, archivo);
     const tOrigen = await mtime(entrada);
 
-    for (const { sufijo, ancho } of TAMANIOS) {
+    for (const { sufijo, ancho } of [...TAMANIOS, ...(EXTRA[carpeta] ?? [])]) {
       const salida = path.join(destino, `${nombre}${sufijo}.webp`);
       if (!forzar && (await mtime(salida)) > tOrigen) continue;
       await sharp(entrada)

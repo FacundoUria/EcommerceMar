@@ -34,6 +34,7 @@
   body {
     @apply bg-crema font-sans text-tinta antialiased;
     overscroll-behavior-y: none;
+    overflow-x: clip; /* red de seguridad contra scroll horizontal en mobile (no rompe sticky) */
   }
   h1,
   h2,

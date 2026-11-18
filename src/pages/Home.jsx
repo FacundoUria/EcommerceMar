@@ -284,7 +284,7 @@ function HolaSoyMar() {
   return (
     <section aria-labelledby="mar-titulo" className="mx-auto mt-16 max-w-6xl px-4">
       <div className="grid items-center gap-8 md:grid-cols-2 md:gap-14">
-        <Reveal className="relative mx-auto w-full max-w-sm">
+        <Reveal className="relative mx-auto w-[86%] max-w-sm">
           <div className="absolute -inset-3 rotate-[-4deg] rounded-5xl bg-amarillo" />
           <div className="relative aspect-[4/5] overflow-hidden rounded-5xl shadow-flotante">
             <SmartImg

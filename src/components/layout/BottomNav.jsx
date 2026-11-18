@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router';
+import { NavLink, useLocation } from 'react-router';
 import { motion } from 'motion/react';
 import Icon from '../ui/Icon.jsx';
 import CartBadge from './CartBadge.jsx';
@@ -14,6 +14,9 @@ const ITEMS = [
 /** Navegación inferior tipo app (solo mobile). */
 export default function BottomNav() {
   const { cantidadTotal } = useCart();
+  const { pathname } = useLocation();
+  // En el detalle de producto la barra "Agregar al carrito" ocupa su lugar
+  if (pathname.startsWith('/producto/')) return null;
   return (
     <nav aria-label="Navegación inferior" className="fixed inset-x-0 bottom-0 z-40 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:hidden">
       <ul className="glass-oscuro mx-auto flex max-w-md items-center justify-around rounded-full px-2 py-1.5 shadow-flotante">

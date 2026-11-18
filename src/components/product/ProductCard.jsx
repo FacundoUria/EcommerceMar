@@ -52,7 +52,7 @@ function ProductCard({ producto, etiqueta, priority = false, className = '' }) {
               placeholderTitulo={producto.nombre}
               placeholderSubtitulo={producto.marca ?? 'Dream Hair'}
               priority={priority}
-              className="size-full object-contain p-3 transition-transform duration-700 ease-out group-hover:scale-[1.07]"
+              className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.07]"
             />
             {producto.destacado && (
               <span className="absolute top-3 left-3 rounded-full bg-amarillo px-2.5 py-1 text-[10px] font-extrabold tracking-wider text-verde uppercase">

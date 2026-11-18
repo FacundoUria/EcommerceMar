@@ -74,7 +74,7 @@ function Panel({ onClose }) {
               <Icon name="carrito" size={34} />
             </div>
             <p className="font-serif text-xl text-verde">Tu carrito está vacío</p>
-            <p className="text-sm text-gris">Descubrí los productos que usa Mar para cuidar tus rulos.</p>
+            <p className="text-sm text-gris">Descubrí productos para cuidar, hidratar y definir tus rulos.</p>
             <Link to="/tienda" className="btn btn-primario">
               Ver productos
             </Link>

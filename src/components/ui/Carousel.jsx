@@ -73,7 +73,7 @@ export default function Carousel({ children, label, className = '', itemsClassNa
         onPointerLeave={terminar}
         onClickCapture={onClickCapture}
         onDragStart={(e) => e.preventDefault()}
-        className={`no-scrollbar flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-px-4 px-4 pb-2 md:cursor-grab md:active:cursor-grabbing ${itemsClassName}`}
+        className={`no-scrollbar flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-px-[var(--gutter)] px-[var(--gutter)] pb-2 [--gutter:max(1rem,calc((100vw-72rem)/2+1rem))] md:cursor-grab md:active:cursor-grabbing ${itemsClassName}`}
       >
         {children}
       </div>

@@ -13,6 +13,7 @@ import Precio from '../ui/Precio.jsx';
 import { useOcultarBottomNav } from '../../hooks/useOcultarBottomNav.js';
 import Roll from '../ui/Roll.jsx';
 import { explotarDestellos } from '../../lib/destellos.js';
+import { colorDe } from '../../lib/colores.js';
 
 /** Vista rápida: bottom-sheet en mobile (arrastrable para cerrar), modal en desktop. */
 export default function QuickView() {
@@ -53,7 +54,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
       setAviso(true);
       return;
     }
-    explotarDestellos(e?.currentTarget); // van en <body>: se ven aunque la quick view se cierre
+    explotarDestellos(e?.currentTarget, colorDe(imagen)); // van en <body>: se ven aunque la quick view se cierre
     agregar(producto, variante, cantidad);
     onClose();
   };

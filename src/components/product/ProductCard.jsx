@@ -6,6 +6,7 @@ import FotoProducto from './FotoProducto.jsx';
 import { formatPrecio, imgSm } from '../../lib/format.js';
 import { flyToCart } from '../../lib/flyToCart.js';
 import { explotarDestellos } from '../../lib/destellos.js';
+import { colorDe } from '../../lib/colores.js';
 import { useCart } from '../../context/CartContext.jsx';
 import { useUI } from '../../context/UIContext.jsx';
 import Precio from '../ui/Precio.jsx';
@@ -30,6 +31,7 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
   const fotoVariante = conHover && tieneVariantes ? producto.variantes[0].imagen : null;
   const url = `/producto/${producto.id}`;
   const precio = formatPrecio(producto.precio);
+  const color = colorDe(producto.imagen);
 
   const agregarRapido = async (e) => {
     // Con variantes: la quick view deja elegir cuál.
@@ -37,7 +39,7 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
       abrirQuickView(producto);
       return;
     }
-    explotarDestellos(e?.currentTarget);
+    explotarDestellos(e?.currentTarget, color);
     await flyToCart(imgRef.current?.querySelector('img'));
     agregar(producto, null, 1, { abrir: false });
     mostrarToast({ tipo: 'carrito', titulo: 'Agregado', texto: producto.nombre, imagen: imgSm(producto.imagen) });
@@ -76,7 +78,9 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
       data-cursor="ver"
       onPointerMove={inclinar}
       onPointerLeave={soltar}
-      className={`card group relative overflow-hidden rounded-3xl transition duration-500 ease-out md:hover:-translate-y-1.5 md:hover:shadow-flotante ${className}`}
+      // borde-producto: en hover el borde toma el color del producto (y el halo de la foto se expande)
+      style={{ '--color-producto': color }}
+      className={`card borde-producto group relative overflow-hidden rounded-3xl transition duration-500 ease-out md:hover:-translate-y-1.5 md:hover:shadow-flotante ${className}`}
     >
       {conHover && !reducido && (
         <span aria-hidden="true" className="pointer-events-none absolute -inset-1/2 z-20 overflow-hidden">

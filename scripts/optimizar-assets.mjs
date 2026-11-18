@@ -4,6 +4,8 @@
 //  - <nombre>-sm.webp  → máx 400px de ancho (cards, swatches, miniaturas)
 //  - <nombre>-lg.webp  → máx 1600px, solo banners (carrusel a todo el ancho en desktop)
 //  - src/data/lqip.json → miniatura de 20px en base64 por foto (blur-up mientras carga la real)
+//  - src/data/colores.json → color dominante de cada foto de producto (halo de las cards, fondo de la
+//    foto en /producto, destellos al agregar). Las categorías usan la foto de un producto: van incluidas.
 // Ignora archivos VERIFICAR-* (fotos a confirmar) y personita* (falta permiso).
 // Saltea las versiones que ya existen y son más nuevas que el original.
 import { readdir, mkdir, stat, writeFile } from 'node:fs/promises';
@@ -45,10 +47,42 @@ async function tipoDeFondo(archivo) {
   return claros / total > 0.8 ? 'blanco' : 'escena';
 }
 
+/**
+ * Color dominante "con color" de la foto, ignorando blancos, grises y casi negros (fondos de estudio,
+ * tapas negras, sombras). Agrupa los píxeles en cubos RGB de 16 niveles pesados por saturación y
+ * devuelve el promedio del cubo ganador en hex. null si la foto es toda neutra.
+ */
+async function colorDominante(archivo) {
+  const { data } = await sharp(archivo).rotate().resize(64, 64, { fit: 'inside' }).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+  const cubos = new Map();
+  for (let i = 0; i < data.length; i += 3) {
+    const [r, g, b] = [data[i], data[i + 1], data[i + 2]];
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    const l = (max + min) / 510;
+    const s = max === min ? 0 : (max - min) / (255 - Math.abs(max + min - 255));
+    if (s < 0.22 || l < 0.12 || l > 0.9) continue; // blanco, gris o casi negro
+    const clave = (r >> 4) * 256 + (g >> 4) * 16 + (b >> 4);
+    const c = cubos.get(clave) ?? { peso: 0, r: 0, g: 0, b: 0, n: 0 };
+    c.peso += s;
+    c.r += r;
+    c.g += g;
+    c.b += b;
+    c.n++;
+    cubos.set(clave, c);
+  }
+  let mejor = null;
+  for (const c of cubos.values()) if (!mejor || c.peso > mejor.peso) mejor = c;
+  if (!mejor || mejor.n < 6) return null;
+  const hex = (v) => Math.round(v / mejor.n).toString(16).padStart(2, '0');
+  return `#${hex(mejor.r)}${hex(mejor.g)}${hex(mejor.b)}`;
+}
+
 let total = 0;
 let generadas = 0;
 const lqip = {};
 const fondos = {};
+const colores = {};
 
 for (const carpeta of CARPETAS) {
   const origen = path.resolve('assets', carpeta);
@@ -76,13 +110,19 @@ for (const carpeta of CARPETAS) {
       const buf = await sharp(entrada).rotate().resize({ width: 20 }).webp({ quality: 40 }).toBuffer();
       lqip[`/img/${carpeta}/${nombre}.webp`] = `data:image/webp;base64,${buf.toString('base64')}`;
     }
-    if (carpeta === 'productos') fondos[`/img/productos/${nombre}.webp`] = await tipoDeFondo(entrada);
+    if (carpeta === 'productos') {
+      fondos[`/img/productos/${nombre}.webp`] = await tipoDeFondo(entrada);
+      const color = await colorDominante(entrada);
+      if (color) colores[`/img/productos/${nombre}.webp`] = color;
+    }
     total++;
   }
 }
 
 await writeFile(path.resolve('src/data/lqip.json'), JSON.stringify(lqip) + '\n');
 await writeFile(path.resolve('src/data/fondos.json'), JSON.stringify(fondos, null, 1) + '\n');
+await writeFile(path.resolve('src/data/colores.json'), JSON.stringify(colores, null, 1) + '\n');
+console.log(`colores.json: ${Object.keys(colores).length} fotos con color (${Object.keys(fondos).length - Object.keys(colores).length} neutras → dorado)`);
 const blancos = Object.values(fondos).filter((v) => v === 'blanco').length;
 console.log(`fondos.json: ${blancos} con fondo blanco, ${Object.keys(fondos).length - blancos} de escena`);
 const kb = (JSON.stringify(lqip).length / 1024).toFixed(1);

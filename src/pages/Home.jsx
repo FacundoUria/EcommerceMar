@@ -21,6 +21,7 @@ import { usePageTitle } from '../hooks/usePageTitle.js';
 import { NEGOCIO, PASOS_RUTINA } from '../config/negocio.js';
 import Precio from '../components/ui/Precio.jsx';
 import { imgSm } from '../lib/format.js';
+import { colorDe } from '../lib/colores.js';
 import Roll from '../components/ui/Roll.jsx';
 import Rulos from '../components/marca/Rulos.jsx';
 import AdornoTitulo from '../components/marca/AdornoTitulo.jsx';
@@ -191,7 +192,13 @@ function Categorias() {
       ) : (
         <CarruselCentrado label="Categorías" anchoItem="w-[68vw] max-w-[19rem]">
           {categorias.map((c) => (
-            <Link key={c.id} to={`/tienda?cat=${c.id}`} data-cursor="ver" className="relative block aspect-[3/4] overflow-hidden rounded-3xl shadow-suave">
+            <Link
+              key={c.id}
+              to={`/tienda?cat=${c.id}`}
+              data-cursor="ver"
+              style={{ '--color-producto': colorDe(c.imagen) }}
+              className="borde-producto group relative block aspect-[3/4] overflow-hidden rounded-3xl border-2 border-transparent shadow-suave"
+            >
               <FotoProducto src={c.imagen} srcSm={imgSm(c.imagen)} sizes="68vw" placeholderTitulo={c.nombre} cover zoom={false} />
               <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#16241C]/80 via-[#16241C]/10 to-transparent" />
               <span className="absolute inset-x-5 bottom-5 font-serif text-2xl leading-tight text-crema-card">{c.nombre}</span>
@@ -224,7 +231,8 @@ function PanelesCategorias({ categorias }) {
                 onFocus={() => setActivo(i)}
                 aria-label={todas ? 'Ver todas las categorías' : `${p.nombre}: ver productos`}
                 data-cursor="ver"
-                className={`group relative block size-full overflow-hidden rounded-3xl shadow-suave ${todas ? 'bg-salvia' : ''}`}
+                style={todas ? undefined : { '--color-producto': colorDe(p.imagen) }}
+                className={`borde-producto group relative block size-full overflow-hidden rounded-3xl border-2 border-transparent shadow-suave ${todas ? 'bg-salvia' : ''}`}
               >
                 {!todas && (
                   <>

@@ -18,6 +18,7 @@ import { useCart } from '../context/CartContext.jsx';
 import { imgSm } from '../lib/format.js';
 import Precio from '../components/ui/Precio.jsx';
 import { explotarDestellos } from '../lib/destellos.js';
+import { colorDe } from '../lib/colores.js';
 import { PASOS_RUTINA } from '../config/negocio.js';
 import Roll from '../components/ui/Roll.jsx';
 
@@ -65,7 +66,7 @@ function Detalle({ producto }) {
       document.getElementById('variantes')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
-    explotarDestellos(e?.currentTarget);
+    explotarDestellos(e?.currentTarget, colorDe(imagen));
     agregar(producto, variante, cantidad);
   };
 
@@ -112,6 +113,7 @@ function Detalle({ producto }) {
                   placeholderSubtitulo={producto.marca ?? 'Dream Hair'}
                   priority
                   zoom={false}
+                  className="fondo-color-producto" // degradé suave del color del producto hacia arena
                 />
               </m.div>
             </AnimatePresence>

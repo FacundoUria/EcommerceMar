@@ -9,6 +9,9 @@ const MANCHAS = [
   { color: 'var(--color-salvia-media)', pos: '-right-[25%] top-[10%]', tam: 'size-[70vmax] md:size-[50vmax]', anim: 'deriva-b 30s', opacidad: 0.75 },
   { color: 'var(--color-arena)', pos: 'left-[20%] -bottom-[30%]', tam: 'size-[75vmax] md:size-[55vmax]', anim: 'deriva-c 22s' },
   { color: 'rgb(126 96 43 / 0.15)', pos: 'right-[15%] -bottom-[10%]', tam: 'size-[45vmax] md:size-[32vmax]', anim: 'deriva-a 28s reverse' },
+  // Toques de color de los productos (rosa y turquesa al 20%), sin cambiar la paleta base
+  { color: 'rgb(244 182 194 / 0.2)', pos: '-left-[10%] top-[35%]', tam: 'size-[50vmax] md:size-[34vmax]', anim: 'deriva-b 27s reverse' },
+  { color: 'rgb(158 216 210 / 0.2)', pos: 'right-[5%] -top-[15%]', tam: 'size-[48vmax] md:size-[32vmax]', anim: 'deriva-c 24s' },
 ];
 
 export default function MeshFondo({ fundidoAbajo = true }) {

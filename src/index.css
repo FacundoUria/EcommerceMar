@@ -326,6 +326,45 @@
   }
 }
 
+/* Color desde los productos (src/lib/colores.js). `--color-producto` lo pone FotoProducto / la card.
+   Halo: luz difusa al 35% detrás del producto; con el hover del `.group` se intensifica y se expande
+   (solo opacity + transform). */
+.halo-producto {
+  position: absolute;
+  inset: -12%;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 55%, color-mix(in srgb, var(--color-producto) 35%, transparent) 0%, transparent 62%);
+  opacity: 0.8;
+  transform: scale(0.92);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .halo-producto,
+.group:focus-visible .halo-producto {
+  opacity: 1;
+  transform: scale(1.18);
+}
+/* /producto: el fondo del bloque de la foto toma un degradé suave del color del producto hacia arena */
+.fondo-color-producto {
+  background-image: linear-gradient(165deg, color-mix(in srgb, var(--color-producto) 22%, var(--color-arena)) 0%, var(--color-arena) 100%);
+}
+/* Fotos de fondo blanco (multiply): los bordes se esfuman. Si el "blanco" de la foto no es puro, sobre
+   un fondo con color se marcaba el recuadro de la foto. */
+.foto-bordes-suaves {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent), linear-gradient(transparent, #000 7%, #000 93%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent), linear-gradient(transparent, #000 7%, #000 93%, transparent);
+  mask-composite: intersect;
+}
+/* Borde de la card en hover con el color del producto */
+.borde-producto {
+  transition: border-color 0.5s ease;
+}
+.borde-producto:hover {
+  border-color: color-mix(in srgb, var(--color-producto) 70%, var(--color-linea, transparent));
+}
+
 /* Entrada de la foto del hero (LCP): CSS para que arranque con el primer pintado */
 .hero-foto {
   animation: hero-foto 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;

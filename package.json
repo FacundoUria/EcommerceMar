@@ -1,0 +1,27 @@
+{
+  "name": "dream-hair-tienda",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "fotos:importar": "node scripts/importar-fotos-faltantes.mjs",
+    "assets:optimizar": "node scripts/optimizar-assets.mjs",
+    "videos:optimizar": "node scripts/optimizar-videos.mjs"
+  },
+  "dependencies": {
+    "motion": "^14.14.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router": "^8.5.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.5",
+    "@vitejs/plugin-react": "^6.3.0",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4.3.5",
+    "vite": "^8.3.8"
+  }
+}

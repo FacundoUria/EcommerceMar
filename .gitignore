@@ -22,3 +22,9 @@ desktop.ini
 
 # Claude Code: config personal (la compartida es .claude/settings.json)
 .claude/settings.local.json
+
+# zips originales de fotos (ya extraídas en assets/)
+*.zip
+
+# videos originales (se commitean solo las versiones optimizadas de public/video/)
+assets/videos/

@@ -4,18 +4,30 @@ Tienda online de productos para pelo con rulos (método curly) de **Mar**, dueñ
 Desarrollador: Facu (FacundoUria). Repo: https://github.com/FacundoUria/EcommerceMar (público).
 
 ## Estado actual
-**Fase 0 — Definición.** Todavía NO se programa. No crear código de la app, no instalar dependencias ni hacer scaffolding hasta que Facu lo pida explícitamente.
+**Fase 1 — MVP de diseño.** Demo para mostrarle a Mar cómo se vería su tienda (reemplaza a su Tiendanube: https://dreamhairarg.mitiendanube.com). NO es la versión final: prioridad = diseño moderno, muy interactivo, centrado en los productos, mobile-first (la mayoría de sus clientas entra desde el celular).
 
 ## Qué es (y qué NO es)
 - La gente navega el catálogo, ve productos y precios, y arma un carrito.
-- **No hay pago online.** El carrito es solo visual. El cobro lo maneja Mar por fuera de la web.
+- **No hay pago online.** El carrito es solo visual. El cobro lo maneja Mar por fuera de la web. "Finalizar pedido" queda deshabilitado ("Próximamente").
 - No hay pasarela de pago (ni Mercado Pago, ni tarjetas), ni cuentas de usuario, ni stock en tiempo real, salvo que Facu lo pida.
+- Servicios de peluquería: solo se muestran, precio "Consultar", botón "Reservar por WhatsApp" (https://wa.me/message/G7IS2KBVGNF4E1, link real de su Tiendanube). No van al carrito.
+
+## Stack (confirmado)
+React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScript, sin backend. Deploy en Netlify desde `main` (`netlify.toml`: build `npm run build`, publish `dist`, redirect SPA).
+
+## Datos: preparado para un panel futuro
+- Catálogo en `src/data/products.js` (precios de su Tiendanube, nov 2026).
+- **Los componentes NUNCA importan `products.js` directo.** Todo pasa por `src/services/productsService.js` (`getProducts`, `getProductById`, `getCategories`, `getServices`, todas async).
+- Más adelante el service va a leer de una base de datos donde Mar carga productos y precios (panel admin), sin tocar la UI. Mantener esa frontera.
+
+## Assets
+- Originales en `assets/` (no se sirven). Versiones web generadas en `public/img/` y `public/video/` con los scripts de `scripts/` (sharp / ffmpeg). Los archivos `VERIFICAR-*` se ignoran hasta confirmarlos.
+- Producto sin foto → placeholder elegante (crema + marca + nombre en Playfair), nunca imagen rota.
 
 ## Decisiones pendientes (preguntar antes de asumir)
-1. **Cierre del carrito:** ¿qué pasa cuando el cliente termina? (ej. botón que arma un mensaje de WhatsApp a Mar con el pedido y el total, o solo mostrar el resumen).
-2. **Carga de productos y precios:** ¿quién los actualiza y cómo? (JSON en el repo que edita Facu / Google Sheet que edita Mar / panel admin). Los precios cambian seguido: es la decisión más importante.
-3. **Turnos de peluquería:** ¿entra en esta web o solo un link a WhatsApp?
-4. **Stack y hosting:** propuesta por defecto = React + Vite + Tailwind, deploy en Netlify desde `main` (mismo flujo que otros proyectos de Facu). Confirmar antes de usar.
+1. **Cierre del carrito:** ¿mensaje de WhatsApp a Mar con el pedido y el total, u otra cosa? (en Fase 1 queda "Próximamente").
+2. **Carga de productos y precios:** cómo carga Mar (panel admin / Google Sheet / otra). Los precios cambian seguido.
+3. **Turnos:** por ahora solo link a WhatsApp.
 
 ## Diseño
 - Referencia visual: `docs/referencia-stitch/modelo-stitch.html` (generado con Stitch). Es una **noción** del estilo, NO una especificación: no copiarlo literal ni sus funciones.

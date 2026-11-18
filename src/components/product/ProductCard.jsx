@@ -5,6 +5,7 @@ import Icon from '../ui/Icon.jsx';
 import FotoProducto from './FotoProducto.jsx';
 import { formatPrecio, imgSm } from '../../lib/format.js';
 import { flyToCart } from '../../lib/flyToCart.js';
+import { explotarDestellos } from '../../lib/destellos.js';
 import { useCart } from '../../context/CartContext.jsx';
 import { useUI } from '../../context/UIContext.jsx';
 import Precio from '../ui/Precio.jsx';
@@ -30,12 +31,13 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
   const url = `/producto/${producto.id}`;
   const precio = formatPrecio(producto.precio);
 
-  const agregarRapido = async () => {
+  const agregarRapido = async (e) => {
     // Con variantes: la quick view deja elegir cuál.
     if (tieneVariantes) {
       abrirQuickView(producto);
       return;
     }
+    explotarDestellos(e?.currentTarget);
     await flyToCart(imgRef.current?.querySelector('img'));
     agregar(producto, null, 1, { abrir: false });
     mostrarToast({ tipo: 'carrito', titulo: 'Agregado', texto: producto.nombre, imagen: imgSm(producto.imagen) });

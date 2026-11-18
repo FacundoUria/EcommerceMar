@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, m, useScroll } from 'motion/react';
 import Reveal from '../components/ui/Reveal.jsx';
 import RevealText from '../components/ui/RevealText.jsx';
@@ -15,6 +15,8 @@ import { PASOS_RUTINA } from '../config/negocio.js';
 import Precio from '../components/ui/Precio.jsx';
 import { scrollA } from '../lib/smooth.js';
 import Roll from '../components/ui/Roll.jsx';
+import { Estrella } from '../components/marca/Destellos.jsx';
+import { explotarDestellos, lluviaDestellos } from '../lib/destellos.js';
 
 export default function Rutina() {
   usePageTitle('Armá tu rutina curly');
@@ -57,12 +59,22 @@ export default function Rutina() {
     });
   };
 
-  const agregarRutina = () => {
+  // Rutina completa: al elegir el 4.º paso (y solo en ese momento), lluvia suave de destellos
+  const ultimoPaso = PASOS_RUTINA[PASOS_RUTINA.length - 1].paso;
+  const rutinaLista = !!eleccion[ultimoPaso];
+  const listaAntes = useRef(rutinaLista);
+  useEffect(() => {
+    if (rutinaLista && !listaAntes.current) lluviaDestellos();
+    listaAntes.current = rutinaLista;
+  }, [rutinaLista]);
+
+  const agregarRutina = (e) => {
     if (faltaVariante) {
       setAviso(`Elegí una variante de ${eleccion[faltaVariante.paso].producto.nombre}`);
       irA(PASOS_RUTINA.indexOf(faltaVariante));
       return;
     }
+    explotarDestellos(e?.currentTarget);
     agregarVarios(elegidos.map((e) => ({ producto: e.producto, variante: e.variante, cantidad: 1 })));
   };
 
@@ -221,6 +233,7 @@ export default function Rutina() {
                 );
               })}
             </ol>
+            <MensajeLista visible={rutinaLista} total={total} className="mt-5" />
             <div className="mt-5 flex items-baseline justify-between border-t border-verde/10 pt-4">
               <span className="text-sm font-extrabold tracking-[0.18em] text-tinta uppercase">Total</span>
               <Total valor={total} className="text-3xl" />
@@ -236,6 +249,7 @@ export default function Rutina() {
 
       {/* Resumen (mobile): barra arriba del bottom nav */}
       <div className="fixed inset-x-0 bottom-[calc(4.6rem+max(0.75rem,env(safe-area-inset-bottom)))] z-30 px-3 md:hidden">
+        <MensajeLista visible={rutinaLista} total={total} className="mb-2" />
         <div className="glass-arena flex items-center gap-3 rounded-4xl p-2 pl-4 shadow-flotante ring-1 ring-verde/10">
           <div className="flex gap-1">
             {PASOS_RUTINA.map((p) => {
@@ -267,6 +281,32 @@ export default function Rutina() {
         </div>
       </div>
 
+    </div>
+  );
+}
+
+/** "¡Tu rutina está lista!" con el total, justo antes del botón de agregar (aparece con el 4.º paso). */
+function MensajeLista({ visible, total, className = '' }) {
+  return (
+    <div aria-live="polite" className={visible ? className : undefined}>
+      <AnimatePresence initial={false}>
+        {visible && (
+          <m.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, transition: { duration: 0.2 } }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="flex items-center gap-3 rounded-4xl bg-crema-card px-4 py-3 shadow-flotante ring-1 ring-dorado/20"
+          >
+            <Estrella className="size-7 shrink-0 text-dorado" />
+            <p className="min-w-0 flex-1 font-serif text-lg leading-tight text-tinta">¡Tu rutina está lista!</p>
+            <p className="text-right text-xs leading-tight text-texto-suave">
+              Total
+              <span className="precio block text-base text-tinta">{formatPrecio(total)}</span>
+            </p>
+          </m.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

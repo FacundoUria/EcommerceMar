@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 import Icon from '../ui/Icon.jsx';
+import Rulos from '../marca/Rulos.jsx';
 import { NEGOCIO } from '../../config/negocio.js';
 import Roll from '../ui/Roll.jsx';
 
@@ -17,6 +18,8 @@ const LINKS = [
 export default function Footer() {
   return (
     <footer className="fondo-salvia-abajo grano pt-16 pb-28 md:pt-24 md:pb-10">
+      {/* Rulos que terminan de dibujarse justo al llegar al final de la página */}
+      <Rulos variante="footer" hastaElFinal />
       <div className="contenedor text-tinta">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div>

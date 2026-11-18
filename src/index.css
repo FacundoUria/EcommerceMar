@@ -326,6 +326,82 @@
   }
 }
 
+/* ═════ "Rulos y brillo" ═════ */
+/* Trazo que se dibuja a mano (subrayado de "amor propio", aro de la intro). El path usa pathLength="1":
+   dasharray 1 2 y offset 1.1 lo dejan oculto sin que el remate redondo asome en el inicio. */
+.trazo-a-mano,
+.intro-aro {
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: 1.1;
+}
+.trazo-a-mano {
+  animation: dibujar 0.9s cubic-bezier(0.65, 0, 0.35, 1) var(--delay, 0s) forwards;
+}
+@keyframes dibujar {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Destellos que titilan: escala + opacidad (duración y desfase al azar en línea, ver Destellos.jsx) */
+.destello {
+  opacity: 0;
+  transform: scale(0);
+  animation: titilar 3s ease-in-out infinite both;
+}
+@keyframes titilar {
+  0%, 52%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+  68% { opacity: 1; transform: scale(1) rotate(45deg); }
+  82% { opacity: 0.55; transform: scale(0.45) rotate(70deg); }
+}
+
+/* Intro de marca: logo, aro que se dibuja y la pantalla se abre hacia arriba (≈ 1.2 s) */
+.intro {
+  animation: intro-salir 0.42s cubic-bezier(0.76, 0, 0.24, 1) 0.78s forwards;
+}
+.intro.intro-ya {
+  animation: intro-salir 0.32s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+.intro-logo {
+  animation: intro-logo 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.intro-aro {
+  animation: dibujar 0.6s cubic-bezier(0.65, 0, 0.35, 1) 0.12s forwards;
+}
+@keyframes intro-salir {
+  to { transform: translateY(-100%); }
+}
+@keyframes intro-logo {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+}
+
+/* Movimiento reducido: rulos ya dibujados y quietos, sin destellos; solo fades */
+@media (prefers-reduced-motion: reduce) {
+  .destello {
+    display: none;
+  }
+  .trazo-a-mano,
+  .intro-aro {
+    stroke-dashoffset: 0;
+    animation: fundido 0.6s ease-out var(--delay, 0s) both;
+  }
+  .intro-logo {
+    animation: none;
+  }
+  .intro {
+    animation: fundido-salir 0.3s ease-out 0.6s forwards;
+  }
+  .intro.intro-ya {
+    animation: fundido-salir 0.2s ease-out forwards;
+  }
+}
+@keyframes fundido {
+  from { opacity: 0; }
+}
+@keyframes fundido-salir {
+  to { opacity: 0; }
+}
+
 /* Roll de texto en hover (links del nav y botones): el texto sube y entra una copia desde abajo.
    <Roll> duplica el contenido (la copia es aria-hidden). Solo con mouse; botones deshabilitados no. */
 .roll {

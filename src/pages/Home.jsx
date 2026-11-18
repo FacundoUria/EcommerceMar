@@ -22,6 +22,9 @@ import { NEGOCIO, PASOS_RUTINA } from '../config/negocio.js';
 import Precio from '../components/ui/Precio.jsx';
 import { imgSm } from '../lib/format.js';
 import Roll from '../components/ui/Roll.jsx';
+import Rulos from '../components/marca/Rulos.jsx';
+import AdornoTitulo from '../components/marca/AdornoTitulo.jsx';
+import { DEMORA_INTRO } from '../components/marca/IntroMarca.jsx';
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -78,17 +81,23 @@ function Hero() {
   return (
     <section aria-labelledby="hero-titulo" className="grano -mt-px overflow-hidden">
       <MeshFondo />
+      <Rulos variante="hero" />
       {/* El hero termina donde termina su contenido (+ indicador de scroll), sin aire vacío abajo */}
       <div className="contenedor grid items-center gap-8 pt-6 pb-10 md:grid-cols-[1.08fr_0.92fr] md:gap-10 md:pt-10 md:pb-6">
-        {/* Título (arriba en mobile, izquierda en desktop): revelado por línea al cargar */}
+        {/* Título (arriba en mobile, izquierda en desktop): revelado por línea al cargar.
+            Con intro de marca, entra cuando la intro se abre. */}
         <div className="flex flex-col items-start gap-8">
-          <RevealText as="h1" id="hero-titulo" alCargar delay={0.15} className="text-[clamp(3rem,7.4vw,6.5rem)] leading-[0.98] tracking-[-0.02em]">
-            {TITULO_TEXTO} <em className="texto-dorado brillo-dorado">{TITULO_EM}</em>
-          </RevealText>
+          <div className="relative">
+            <RevealText as="h1" id="hero-titulo" alCargar delay={0.15 + DEMORA_INTRO} className="text-[clamp(3rem,7.4vw,6.5rem)] leading-[0.98] tracking-[-0.02em]">
+              {TITULO_TEXTO} <em className="texto-dorado brillo-dorado">{TITULO_EM}</em>
+            </RevealText>
+            {/* Subrayado en rulo (después de que entra el título) + destellos alrededor de "amor propio" */}
+            <AdornoTitulo delay={1.25 + DEMORA_INTRO} />
+          </div>
           <m.div
             initial={{ opacity: 0, y: reducido ? 0 : 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.55, ease: EASE }}
+            transition={{ duration: 0.6, delay: 0.55 + DEMORA_INTRO, ease: EASE }}
           >
             <Link to="/tienda" className="btn btn-primario px-8 py-4 text-base">
               <Roll>
@@ -404,6 +413,8 @@ function RutinaHistoria() {
   return (
     <section aria-labelledby="rutina-titulo" className="grano">
       <MeshFondo />
+      {/* `fijo`: en desktop la sección mide 320vh con un panel sticky; los rulos acompañan la pantalla */}
+      <Rulos variante="rutina" fijo />
       <RutinaDesktop />
       <RutinaMobile />
     </section>

@@ -3,6 +3,9 @@ import { Link, NavLink } from 'react-router';
 import { m, useMotionValueEvent, useReducedMotion, useScroll } from 'motion/react';
 import Icon from '../ui/Icon.jsx';
 import Roll from '../ui/Roll.jsx';
+import Destellos from '../marca/Destellos.jsx';
+
+const DESTELLO_LOGO = [{ x: '78%', y: '-14%', tam: 12 }];
 import CartBadge from './CartBadge.jsx';
 import { useCart } from '../../context/CartContext.jsx';
 import { NEGOCIO } from '../../config/negocio.js';
@@ -68,7 +71,10 @@ export default function Header() {
             transition={{ duration: 0.5, ease: EASE }}
             className="flex origin-left items-center gap-2.5"
           >
-          <img src="/img/marca/LOGO-sm.webp" alt="" width="44" height="44" className="size-10 rounded-full mix-blend-multiply md:size-11" />
+          <span className="relative shrink-0">
+            <img src="/img/marca/LOGO-sm.webp" alt="" width="44" height="44" className="size-10 rounded-full mix-blend-multiply md:size-11" />
+            <Destellos puntos={DESTELLO_LOGO} />
+          </span>
           <span className="leading-none">
             <span className="block font-serif text-xl font-semibold tracking-tight text-tinta md:text-2xl">{NEGOCIO.nombre}</span>
             <span className="block text-[10px] font-bold tracking-[0.28em] text-dorado uppercase">{NEGOCIO.bajada}</span>

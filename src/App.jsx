@@ -12,6 +12,8 @@ import QuickView from './components/product/QuickView.jsx';
 import { PageSkeleton } from './components/ui/Skeleton.jsx';
 import { useBotonesMagneticos } from './hooks/useBotonesMagneticos.js';
 import Cursor from './components/ui/Cursor.jsx';
+import IntroMarca from './components/marca/IntroMarca.jsx';
+import ProgresoScroll from './components/marca/ProgresoScroll.jsx';
 import { scrollA } from './lib/smooth.js';
 import Home from './pages/Home.jsx'; // página de entrada: sin lazy para no sumar una cascada al LCP
 
@@ -96,6 +98,8 @@ export default function App() {
               <QuickView />
               <Toaster />
               <Cursor />
+              <ProgresoScroll />
+              <IntroMarca />
             </UIProvider>
           </CartProvider>
         </MotionConfig>

@@ -54,6 +54,13 @@ React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScri
 - Desktop con mouse: cursor propio (`Cursor.jsx`, `data-cursor="ver"` en cards), cards de producto 3D (hasta 6°), botones magnéticos.
 - Transición entre rutas: cortina salvia con el logo (≈0.68s, no en la primera carga). Grano: utilidad `grano`. Reveal se dispara 10% antes de entrar.
 - Excepciones pedidas a "solo transform/opacity": clip-path de la cortina de fotos y flex-grow de los paneles de categorías.
+- **"Rulos y brillo"** (identidad de marca, todo SVG + CSS/WAAPI, sin librerías; `src/components/marca/`, `src/lib/rulos.js`, `src/lib/destellos.js`):
+  - `<Rulos variante>` (hero, rutina del home, footer): espirales SVG al 25% que se dibujan con el scroll de su sección (stroke-dashoffset escrito directo en el DOM; NO `useScroll`/`pathLength` de motion: no pinta el valor inicial hasta el primer scroll). Miden su propia capa, no la ref del padre (todavía no está conectada al montar el hijo).
+  - `<AdornoTitulo>`: subrayado en rulo bajo "amor propio" (CSS, 0.9 s) + destellos alrededor. `<Destellos>`: estrellitas que titilan (también junto al logo del header).
+  - `explotarDestellos(boton)` al agregar al carrito (card, quick view, producto, rutina); `lluviaDestellos()` al elegir el 4.º paso de /rutina + "¡Tu rutina está lista!" con el total junto al botón de agregar. En WAAPI el easing va por keyframe (en la animación entera aplasta la fase visible).
+  - `<IntroMarca>`: primera visita de la sesión (sessionStorage `dh-intro`, con try/catch), ≈ 1.2 s, tap para saltar, CSS puro. El hero atrasa su título con `DEMORA_INTRO`. El LCP (foto del hero) no cambia; el Speed Index sí sube.
+  - `<ProgresoScroll>`: línea ondulada verde arriba de todo (sigue funcionando con movimiento reducido: es información).
+  - Movimiento reducido: rulos ya dibujados, sin destellos/explosión/lluvia, intro con fade.
 ## Decisiones pendientes (preguntar antes de asumir)
 1. **Cierre del carrito:** ¿mensaje de WhatsApp a Mar con el pedido y el total, u otra cosa? (en Fase 1 queda "Próximamente").
 2. **Carga de productos y precios:** cómo carga Mar (panel admin / Google Sheet / otra). Los precios cambian seguido.

@@ -12,6 +12,7 @@ import { useFocusTrap } from '../../hooks/useFocusTrap.js';
 import Precio from '../ui/Precio.jsx';
 import { useOcultarBottomNav } from '../../hooks/useOcultarBottomNav.js';
 import Roll from '../ui/Roll.jsx';
+import { explotarDestellos } from '../../lib/destellos.js';
 
 /** Vista rápida: bottom-sheet en mobile (arrastrable para cerrar), modal en desktop. */
 export default function QuickView() {
@@ -47,11 +48,12 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
   const tieneVariantes = producto.variantes.length > 0;
   const imagen = (preview ?? variante)?.imagen ?? producto.imagen;
 
-  const confirmar = () => {
+  const confirmar = (e) => {
     if (tieneVariantes && !variante) {
       setAviso(true);
       return;
     }
+    explotarDestellos(e?.currentTarget); // van en <body>: se ven aunque la quick view se cierre
     agregar(producto, variante, cantidad);
     onClose();
   };

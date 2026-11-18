@@ -16,6 +16,7 @@ import { usePageTitle } from '../hooks/usePageTitle.js';
 import { useCart } from '../context/CartContext.jsx';
 import { imgSm } from '../lib/format.js';
 import Precio from '../components/ui/Precio.jsx';
+import { explotarDestellos } from '../lib/destellos.js';
 import { PASOS_RUTINA } from '../config/negocio.js';
 import Roll from '../components/ui/Roll.jsx';
 
@@ -57,12 +58,13 @@ function Detalle({ producto }) {
     setAviso(false);
   };
 
-  const agregarAlCarrito = () => {
+  const agregarAlCarrito = (e) => {
     if (tieneVariantes && !variante) {
       setAviso(true);
       document.getElementById('variantes')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
+    explotarDestellos(e?.currentTarget);
     agregar(producto, variante, cantidad);
   };
 

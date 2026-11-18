@@ -88,7 +88,7 @@ function Detalle({ producto }) {
 
       <div className="grid gap-8 md:grid-cols-2 md:gap-12">
         {/* Galería */}
-        <div className="min-w-0 md:sticky md:top-24 md:self-start">
+        <Reveal className="min-w-0 md:sticky md:top-24 md:self-start">
           <div ref={imgRef} className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-salvia-media md:aspect-square">
             <AnimatePresence mode="popLayout" initial={false}>
               <m.div
@@ -131,10 +131,10 @@ function Detalle({ producto }) {
               })}
             </div>
           )}
-        </div>
+        </Reveal>
 
         {/* Info */}
-        <div className="flex min-w-0 flex-col gap-6">
+        <Reveal delay={0.1} className="flex min-w-0 flex-col gap-6">
           <div>
             {producto.marca && <p className="text-xs font-bold tracking-[0.2em] text-dorado uppercase">{producto.marca}</p>}
             <h1 className="mt-1 text-4xl leading-tight md:text-5xl">{producto.nombre}</h1>
@@ -185,8 +185,7 @@ function Detalle({ producto }) {
             <span className="sr-only">Cantidad</span>
             <QuantityStepper value={cantidad} onChange={setCantidad} />
           </div>
-
-        </div>
+        </Reveal>
       </div>
 
       <CompletaTuRutina producto={producto} />

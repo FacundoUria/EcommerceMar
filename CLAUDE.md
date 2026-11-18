@@ -37,6 +37,13 @@ React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScri
 - Fuentes self-hosted en `src/assets/fonts` (un solo archivo de Playfair 500 para todos los pesos).
 - Home sin lazy; el resto de las páginas con `lazy()`. `vite.config.js` precarga el chunk de la ruta de entrada.
 - Imágenes arriba de todo: `priority` en `SmartImg` (eager, sin fade).
+- Blur-up: `scripts/optimizar-assets.mjs` genera `src/data/lqip.json` (miniaturas de 20px); se carga en un chunk aparte después del `load` (`src/lib/lqip.js`). `SmartImg` las usa de fondo y hace fade a la foto.
+
+## Animaciones (motion)
+- Solo `transform` y `opacity` (nada de width/height/top). Duraciones 0.5–0.8s, ease-out suave `[0.22, 1, 0.36, 1]`.
+- Entradas UNA vez: `<Reveal>` (`src/components/ui/Reveal.jsx`, fade + translateY 24px→0) y `cascada(i)` para stagger de 0.06s.
+- Con `prefers-reduced-motion` todo queda estático: `Reveal` renderiza sin animar, el header no se oculta, sin parallax ni cinta.
+- Scroll: hero (parallax de la foto al 70%), header (compacto > 40px, se oculta al bajar; estado en `<html data-header>`), parallax de capas en "Hola, soy Mar", línea de pasos con `LineaProgreso` (scaleX ligado a scrollYProgress). Carrusel con `hint` (WAAPI, una vez).
 
 ## Decisiones pendientes (preguntar antes de asumir)
 1. **Cierre del carrito:** ¿mensaje de WhatsApp a Mar con el pedido y el total, u otra cosa? (en Fase 1 queda "Próximamente").

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { AnimatePresence } from 'motion/react';
 import Icon from '../components/ui/Icon.jsx';
+import Reveal from '../components/ui/Reveal.jsx';
 import CartLine from '../components/cart/CartLine.jsx';
 import CartSummary from '../components/cart/CartSummary.jsx';
 import { useCart } from '../context/CartContext.jsx';
@@ -18,7 +19,7 @@ export default function Carrito() {
         <div className="flex size-24 items-center justify-center rounded-full bg-salvia text-verde">
           <Icon name="carrito" size={40} />
         </div>
-        <h1 className="mt-6 text-4xl">Carrito vacío</h1>
+        <Reveal as="h1" className="mt-6 text-4xl">Carrito vacío</Reveal>
         <Link to="/tienda" className="btn btn-primario mt-8">
           Ver productos
         </Link>
@@ -29,7 +30,7 @@ export default function Carrito() {
   return (
     <div className="mx-auto max-w-6xl px-4 pt-4 pb-32 md:pb-12">
       <header className="flex flex-wrap items-end justify-between gap-3">
-        <h1 className="text-4xl md:text-5xl">Tu carrito</h1>
+        <Reveal as="h1" className="text-4xl md:text-5xl">Tu carrito</Reveal>
         <div className="flex items-center gap-2">
           {confirmar ? (
             <>

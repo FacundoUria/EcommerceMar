@@ -14,12 +14,12 @@ export default function Servicios() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 pt-4 pb-10">
-      <header className="flex items-end justify-between gap-4">
+      <Reveal as="header" className="flex items-end justify-between gap-4">
         <h1 className="text-4xl leading-tight md:text-5xl">Servicios</h1>
         <a href={NEGOCIO.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-primario">
           <Icon name="whatsapp" size={18} /> Reservar
         </a>
-      </header>
+      </Reveal>
 
       <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {loading

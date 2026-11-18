@@ -1,5 +1,7 @@
-import { useMemo, useState } from 'react';
-import { AnimatePresence, m } from 'motion/react';
+import { useMemo, useRef, useState } from 'react';
+import { AnimatePresence, m, useScroll } from 'motion/react';
+import Reveal from '../components/ui/Reveal.jsx';
+import LineaProgreso from '../components/ui/LineaProgreso.jsx';
 import Icon from '../components/ui/Icon.jsx';
 import SmartImg from '../components/ui/SmartImg.jsx';
 import Swatches from '../components/product/Swatches.jsx';
@@ -15,6 +17,8 @@ export default function Rutina() {
   const { data: productos, loading } = useProducts();
   const { data: categorias } = useCategories();
   const { agregarVarios } = useCart();
+  const pagina = useRef(null);
+  const { scrollYProgress } = useScroll({ target: pagina, offset: ['start start', 'end end'] });
 
   const [actual, setActual] = useState(0); // índice del paso
   const [direccion, setDireccion] = useState(1);
@@ -59,47 +63,42 @@ export default function Rutina() {
   };
 
   return (
-    <div className="mx-auto max-w-6xl px-4 pt-4 pb-48 md:pb-16">
-      <h1 className="text-4xl leading-tight md:text-5xl">
-        Armá tu <em className="text-dorado">rutina</em>
-      </h1>
+    <div ref={pagina} className="mx-auto max-w-6xl px-4 pt-4 pb-48 md:pb-16">
+      <Reveal>
+        <h1 className="text-4xl leading-tight md:text-5xl">
+          Armá tu <em className="text-dorado">rutina</em>
+        </h1>
+      </Reveal>
 
-      {/* Stepper */}
-      <ol className="mt-6 grid grid-cols-4 gap-1.5" aria-label="Pasos de la rutina">
-        {PASOS_RUTINA.map((p, i) => {
-          const hecho = !!eleccion[p.paso];
-          const activo = i === actual;
-          return (
-            <li key={p.paso}>
-              <button
-                type="button"
-                onClick={() => irA(i)}
-                aria-current={activo ? 'step' : undefined}
-                className="group flex w-full flex-col items-start gap-2 text-left"
-              >
-                <span className="relative h-1.5 w-full overflow-hidden rounded-full bg-salvia">
-                  <m.span
-                    className="absolute inset-y-0 left-0 rounded-full bg-verde"
-                    initial={false}
-                    animate={{ width: hecho ? '100%' : activo ? '45%' : '0%' }}
-                    transition={{ duration: 0.4 }}
-                  />
-                </span>
-                <span className="flex items-center gap-1.5">
+      {/* Stepper: los 4 pasos aparecen de a uno; la línea se dibuja con el scroll de la página */}
+      <div className="relative mt-6">
+        <LineaProgreso progreso={scrollYProgress} className="absolute top-[18px] right-[12.5%] left-[12.5%]" />
+        <ol className="relative grid grid-cols-4" aria-label="Pasos de la rutina">
+          {PASOS_RUTINA.map((p, i) => {
+            const hecho = !!eleccion[p.paso];
+            const activo = i === actual;
+            return (
+              <Reveal as="li" key={p.paso} delay={0.1 + i * 0.12}>
+                <button
+                  type="button"
+                  onClick={() => irA(i)}
+                  aria-current={activo ? 'step' : undefined}
+                  className="group flex w-full flex-col items-center gap-2 text-center"
+                >
                   <span
-                    className={`flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-bold transition ${
-                      hecho ? 'bg-verde text-arena' : activo ? 'bg-crema-card text-verde ring-1 ring-verde' : 'bg-salvia text-tinta'
+                    className={`flex size-9 items-center justify-center rounded-full text-sm font-bold shadow-suave transition-colors duration-500 ${
+                      hecho ? 'bg-verde text-arena' : activo ? 'bg-crema-card text-verde ring-2 ring-verde' : 'border border-linea bg-crema-card text-tinta'
                     }`}
                   >
-                    {hecho ? <Icon name="check" size={13} strokeWidth={3} /> : p.paso}
+                    {hecho ? <Icon name="check" size={15} strokeWidth={3} /> : p.paso}
                   </span>
                   <span className={`text-xs leading-tight font-semibold md:text-sm ${activo ? 'text-tinta' : 'text-texto-suave'}`}>{p.titulo}</span>
-                </span>
-              </button>
-            </li>
-          );
-        })}
-      </ol>
+                </button>
+              </Reveal>
+            );
+          })}
+        </ol>
+      </div>
 
       <div className="mt-8 grid gap-8 md:grid-cols-[1fr_320px]">
         {/* Paso actual */}
@@ -111,7 +110,7 @@ export default function Rutina() {
               initial={{ opacity: 0, x: direccion * 40 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: direccion * -40 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               aria-labelledby="paso-titulo"
             >
               <h2 id="paso-titulo" className="text-3xl">

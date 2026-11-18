@@ -1,15 +1,31 @@
 import { useEffect, useRef, useState } from 'react';
+import { useInView, useReducedMotion } from 'motion/react';
 import Icon from './Icon.jsx';
 
 /**
  * Carrusel horizontal con scroll-snap nativo (touch) + arrastre con mouse + flechas en desktop.
  * Los hijos deberían tener ancho fijo (ej. w-[70%] sm:w-64) y `snap-start`.
  */
-/** `gutter`: margen lateral (CSS). Por defecto alinea con el contenedor de 72rem; dentro de un bloque, pasar un valor fijo. */
-export default function Carousel({ children, label, className = '', itemsClassName = 'gap-4', gutter }) {
+/**
+ * `gutter`: margen lateral (CSS). Por defecto alinea con el contenedor de 72rem; dentro de un bloque, pasar un valor fijo.
+ * `hint`: al entrar en pantalla, el carrusel se desliza 40px a la izquierda y vuelve (una sola vez) para mostrar que se arrastra.
+ */
+export default function Carousel({ children, label, className = '', itemsClassName = 'gap-4', gutter, hint = false }) {
   const ref = useRef(null);
   const drag = useRef({ activo: false, x: 0, scroll: 0, movio: false });
   const [bordes, setBordes] = useState({ inicio: true, fin: false });
+  const reducido = useReducedMotion();
+  const visible = useInView(ref, { once: true, amount: 0.6 });
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!hint || !visible || reducido || !el?.animate) return;
+    // Solo transform; Web Animations API (sin sumar peso al bundle)
+    el.animate(
+      [{ transform: 'translateX(0)' }, { transform: 'translateX(-40px)', offset: 0.45 }, { transform: 'translateX(0)' }],
+      { duration: 800, delay: 350, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' },
+    );
+  }, [hint, visible, reducido]);
 
   const actualizarBordes = () => {
     const el = ref.current;

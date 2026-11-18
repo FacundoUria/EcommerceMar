@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router';
-import { AnimatePresence, m } from 'motion/react';
+import { AnimatePresence, m, useReducedMotion } from 'motion/react';
+import Reveal, { cascada } from '../components/ui/Reveal.jsx';
 import Icon from '../components/ui/Icon.jsx';
 import ProductCard from '../components/product/ProductCard.jsx';
 import { GridSkeleton, Skeleton } from '../components/ui/Skeleton.jsx';
@@ -22,6 +23,7 @@ export default function Tienda() {
   const orden = ORDENES.some((o) => o.id === params.get('orden')) ? params.get('orden') : 'destacados';
   const qUrl = params.get('q') ?? '';
 
+  const reducido = useReducedMotion();
   const { data: productos, loading } = useProducts();
   const { data: categorias } = useCategories();
   const { data: marcas } = useBrands();
@@ -68,12 +70,12 @@ export default function Tienda() {
 
   return (
     <div className="mx-auto max-w-6xl pt-4 pb-10">
-      <header className="px-4">
+      <Reveal as="header" className="px-4">
         <h1 className="text-4xl md:text-5xl">{catActual?.nombre ?? (marca || 'Tienda')}</h1>
-      </header>
+      </Reveal>
 
       {/* Barra de búsqueda + orden, pegajosa debajo del header */}
-      <div className="sticky top-16 z-30 mt-5 md:top-20">
+      <div className="sticky top-16 z-30 mt-5 transition-transform duration-500 ease-out in-data-[header=compacto]:-translate-y-2 in-data-[header=oculto]:-translate-y-16 md:top-20 md:in-data-[header=oculto]:-translate-y-20">
         <div className="glass-arena px-4 py-3">
           <div className="flex gap-2">
             <label className="relative flex-1">
@@ -173,15 +175,17 @@ export default function Tienda() {
           </div>
         ) : (
           <m.ul layout className="grid grid-cols-2 gap-x-3 gap-y-7 sm:gap-x-5 md:grid-cols-3 lg:grid-cols-4">
-            <AnimatePresence mode="popLayout" initial={false}>
+            <AnimatePresence mode="popLayout">
               {resultados.map((p, i) => (
+                // Cascada (0.06s) solo para las cards que entran en pantalla, una vez cada una.
                 <m.li
                   key={p.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.94 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.94 }}
-                  transition={{ duration: 0.25 }}
+                  layout={!reducido}
+                  initial={reducido ? false : { opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '0px 0px -40px 0px' }}
+                  exit={reducido ? undefined : { opacity: 0, transition: { duration: 0.2 } }}
+                  transition={{ duration: 0.6, delay: cascada(i), ease: [0.22, 1, 0.36, 1] }}
                 >
                   <ProductCard producto={p} priority={i < 4} nivelTitulo="h2" className="h-full" />
                 </m.li>

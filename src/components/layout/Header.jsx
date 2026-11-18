@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router';
+import { m, useMotionValueEvent, useReducedMotion, useScroll } from 'motion/react';
 import Icon from '../ui/Icon.jsx';
 import CartBadge from './CartBadge.jsx';
 import { useCart } from '../../context/CartContext.jsx';
@@ -12,33 +13,66 @@ const LINKS = [
   { to: '/servicios', label: 'Servicios' },
 ];
 
+const EASE = [0.22, 1, 0.36, 1];
+const COMPACTO_DESDE = 40; // px de scroll para achicar el header
+const OCULTAR_DESDE = 120; // no se oculta en el primer tramo de la página
+
 export default function Header() {
   const { abrir, cantidadTotal } = useCart();
-  const [scrolled, setScrolled] = useState(false);
+  const reducido = useReducedMotion();
+  const { scrollY } = useScroll();
+  const [compacto, setCompacto] = useState(false);
+  const [oculto, setOculto] = useState(false);
+  const ultimo = useRef(0);
 
+  // Se achica después de 40px; se oculta al bajar y reaparece al subir.
+  useMotionValueEvent(scrollY, 'change', (y) => {
+    const delta = y - ultimo.current;
+    ultimo.current = y;
+    setCompacto(y > COMPACTO_DESDE);
+    if (reducido) return; // con movimiento reducido el header queda fijo, sin ocultarse
+    if (Math.abs(delta) < 4) return; // evita temblores
+    setOculto(delta > 0 && y > OCULTAR_DESDE);
+  });
+
+  // Otros elementos sticky (barra de filtros de /tienda) acompañan al header.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    document.documentElement.dataset.header = oculto ? 'oculto' : compacto && !reducido ? 'compacto' : '';
+  }, [oculto, compacto, reducido]);
+
+  const desplazamiento = oculto ? '-100%' : compacto && !reducido ? -8 : 0;
 
   return (
-    <header
-      className={`sticky top-0 z-40 transition-all duration-300 ${
-        scrolled ? 'glass-arena border-b border-linea shadow-[0_4px_24px_-12px_rgb(34_56_43/0.18)]' : 'glass-arena border-b border-transparent'
+    <m.header
+      initial={false}
+      animate={{ y: desplazamiento }}
+      transition={{ duration: 0.5, ease: EASE }}
+      className={`glass-arena sticky top-0 z-40 border-b transition-[border-color,box-shadow] duration-500 ${
+        compacto ? 'border-linea shadow-[0_4px_24px_-12px_rgb(34_56_43/0.18)]' : 'border-transparent'
       }`}
     >
       <a href="#contenido" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:rounded-full focus:bg-verde focus:px-4 focus:py-2 focus:text-arena">
         Saltar al contenido
       </a>
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 md:h-20">
-        <Link to="/" className="flex items-center gap-2.5 rounded-full" aria-label={`${NEGOCIO.nombre} — inicio`}>
+      <m.div
+        initial={false}
+        animate={{ y: compacto && !reducido ? 4 : 0 }}
+        transition={{ duration: 0.5, ease: EASE }}
+        className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 md:h-20"
+      >
+        <Link to="/" className="rounded-full" aria-label={`${NEGOCIO.nombre} — inicio`}>
+          <m.span
+            initial={false}
+            animate={{ scale: compacto && !reducido ? 0.86 : 1 }}
+            transition={{ duration: 0.5, ease: EASE }}
+            className="flex origin-left items-center gap-2.5"
+          >
           <img src="/img/marca/LOGO-sm.webp" alt="" width="44" height="44" className="size-10 rounded-full mix-blend-multiply md:size-11" />
           <span className="leading-none">
             <span className="block font-serif text-xl font-semibold tracking-tight text-tinta md:text-2xl">{NEGOCIO.nombre}</span>
             <span className="block text-[10px] font-bold tracking-[0.28em] text-dorado uppercase">{NEGOCIO.bajada}</span>
           </span>
+          </m.span>
         </Link>
 
         <nav aria-label="Principal" className="hidden md:block">
@@ -84,7 +118,7 @@ export default function Header() {
             </span>
           </button>
         </div>
-      </div>
-    </header>
+      </m.div>
+    </m.header>
   );
 }

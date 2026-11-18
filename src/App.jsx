@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router';
-import { AnimatePresence, LazyMotion, MotionConfig, m } from 'motion/react';
+import { AnimatePresence, LazyMotion, MotionConfig, m, useReducedMotion } from 'motion/react';
 import { CartProvider } from './context/CartContext.jsx';
 import { UIProvider } from './context/UIContext.jsx';
 import Header from './components/layout/Header.jsx';
@@ -25,14 +25,15 @@ const NoEncontrado = lazy(() => import('./pages/NoEncontrado.jsx'));
 
 function Paginas() {
   const location = useLocation();
+  const reducido = useReducedMotion();
   return (
     <AnimatePresence mode="wait" initial={false} onExitComplete={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
       <m.main
         id="contenido"
         key={location.pathname}
-        initial={{ opacity: 0, y: 14 }}
+        initial={reducido ? false : { opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -8 }}
+        exit={reducido ? undefined : { opacity: 0, y: -8 }}
         transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
         className="min-h-[70vh]"
       >

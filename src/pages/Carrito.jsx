@@ -8,6 +8,7 @@ import CartLine from '../components/cart/CartLine.jsx';
 import CartSummary from '../components/cart/CartSummary.jsx';
 import { useCart } from '../context/CartContext.jsx';
 import { usePageTitle } from '../hooks/usePageTitle.js';
+import Roll from '../components/ui/Roll.jsx';
 
 export default function Carrito() {
   usePageTitle('Carrito');
@@ -22,7 +23,9 @@ export default function Carrito() {
         </div>
         <RevealText as="h1" className="mt-6 text-4xl">Carrito vacío</RevealText>
         <Link to="/tienda" className="btn btn-primario mt-8">
-          Ver productos
+          <Roll>
+            Ver productos
+          </Roll>
         </Link>
       </section>
     );
@@ -44,15 +47,21 @@ export default function Carrito() {
                 }}
                 className="btn bg-red-700 px-4 py-2.5 text-arena hover:bg-red-800"
               >
-                Sí
+                <Roll>
+                  Sí
+                </Roll>
               </button>
               <button type="button" onClick={() => setConfirmar(false)} className="btn btn-borde px-4 py-2.5">
-                No
+                <Roll>
+                  No
+                </Roll>
               </button>
             </>
           ) : (
             <button type="button" onClick={() => setConfirmar(true)} className="btn btn-borde px-4 py-2.5">
-              <Icon name="basura" size={16} /> Vaciar
+              <Roll>
+                <Icon name="basura" size={16} /> Vaciar
+              </Roll>
             </button>
           )}
         </div>
@@ -72,7 +81,9 @@ export default function Carrito() {
             <RevealText className="mb-4 text-2xl">Resumen</RevealText>
             <CartSummary />
             <Link to="/tienda" className="btn btn-borde mt-3 w-full">
-              <Icon name="flechaIzq" size={18} /> Seguir comprando
+              <Roll>
+                <Icon name="flechaIzq" size={18} /> Seguir comprando
+              </Roll>
             </Link>
           </div>
         </aside>

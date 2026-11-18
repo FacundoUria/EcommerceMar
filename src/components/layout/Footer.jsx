@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import Icon from '../ui/Icon.jsx';
 import { NEGOCIO } from '../../config/negocio.js';
+import Roll from '../ui/Roll.jsx';
 
 const LINKS = [
   { to: '/tienda', label: 'Tienda' },
@@ -38,10 +39,14 @@ export default function Footer() {
             {NEGOCIO.horarios && <p>{NEGOCIO.horarios}</p>}
             <div className={`flex flex-wrap gap-2 ${NEGOCIO.direccion || NEGOCIO.horarios ? 'mt-4' : ''}`}>
               <a href={NEGOCIO.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-primario">
-                <Icon name="whatsapp" size={18} /> WhatsApp
+                <Roll>
+                  <Icon name="whatsapp" size={18} /> WhatsApp
+                </Roll>
               </a>
               <a href={NEGOCIO.instagram} target="_blank" rel="noopener noreferrer" className="btn btn-borde">
-                <Icon name="instagram" size={18} /> Instagram
+                <Roll>
+                  <Icon name="instagram" size={18} /> Instagram
+                </Roll>
               </a>
             </div>
           </div>

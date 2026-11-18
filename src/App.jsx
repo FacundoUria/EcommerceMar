@@ -32,6 +32,7 @@ const EASE_CORTINA = [0.76, 0, 0.24, 1];
  * Transición entre rutas: cortina salvia que sube cubriendo la pantalla (0.32s) con el logo,
  * se cambia la página (y el scroll vuelve arriba mientras está tapado) y la cortina se retira (0.36s).
  * Total ≈ 0.68s. No aparece en la primera carga (AnimatePresence initial={false}).
+ * Con movimiento reducido no hay cortina: la página cambia con un fade rápido (0.15s + 0.2s).
  */
 function Cortina() {
   return (
@@ -52,7 +53,16 @@ function Paginas() {
   const reducido = useReducedMotion();
   return (
     <AnimatePresence mode="wait" initial={false} onExitComplete={() => scrollA(0, { inmediato: true })}>
-      <m.main id="contenido" key={location.pathname} className="min-h-[70vh]">
+      <m.main
+        id="contenido"
+        key={location.pathname}
+        className="min-h-[70vh]"
+        {...(reducido && {
+          initial: { opacity: 0 },
+          animate: { opacity: 1, transition: { duration: 0.2 } },
+          exit: { opacity: 0, transition: { duration: 0.15 } },
+        })}
+      >
         {!reducido && <Cortina />}
         <Suspense fallback={<PageSkeleton />}>
           <Routes location={location}>

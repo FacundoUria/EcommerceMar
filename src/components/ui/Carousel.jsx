@@ -8,7 +8,7 @@ import Icon from './Icon.jsx';
  *
  * - `gutter`: margen lateral (CSS). Por defecto alinea con `.contenedor`.
  * - `hint`: al entrar en pantalla se desliza 40px y vuelve (una vez) para mostrar que se arrastra.
- * - `autoplay`: ms entre avances. Se pausa con hover / touch / foco y fuera de pantalla. Sin movimiento reducido.
+ * - `autoplay`: ms entre avances. Se pausa con hover / touch / foco y fuera de pantalla. Con movimiento reducido, cada 8 s como mínimo.
  * - `puntos`: puntos de progreso (solo mobile).
  */
 /**
@@ -65,14 +65,14 @@ export default function Carousel({ children, label, className = '', itemsClassNa
 
   // Autoplay lento
   useEffect(() => {
-    if (!autoplay || reducido || !enPantalla) return;
+    if (!autoplay || !enPantalla) return;
     const id = setInterval(() => {
       const el = ref.current;
       const ps = pausa.current;
       if (!el || ps.hover || ps.foco || Date.now() < ps.touchHasta || drag.current.activo) return;
       const alFinal = el.scrollLeft + el.clientWidth >= el.scrollWidth - 8;
       el.scrollTo({ left: alFinal ? 0 : el.scrollLeft + paso(), behavior: 'smooth' });
-    }, autoplay);
+    }, reducido ? Math.max(autoplay, 8000) : autoplay);
     return () => clearInterval(id);
   }, [autoplay, reducido, enPantalla, paso]);
 

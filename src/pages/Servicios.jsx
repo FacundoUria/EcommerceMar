@@ -8,6 +8,7 @@ import { useServices } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
 import { NEGOCIO } from '../config/negocio.js';
 import { imgSm } from '../lib/format.js';
+import Roll from '../components/ui/Roll.jsx';
 
 export default function Servicios() {
   usePageTitle('Servicios');
@@ -18,7 +19,9 @@ export default function Servicios() {
       <Reveal as="header" className="flex items-end justify-between gap-4">
         <RevealText as="h1" className="text-4xl leading-tight md:text-5xl">Servicios</RevealText>
         <a href={NEGOCIO.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-primario">
-          <Icon name="whatsapp" size={18} /> Reservar
+          <Roll>
+            <Icon name="whatsapp" size={18} /> Reservar
+          </Roll>
         </a>
       </Reveal>
 
@@ -79,7 +82,9 @@ function ProcesoVideo() {
           El <em className="texto-dorado">proceso</em>
         </RevealText>
         <a href={NEGOCIO.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-primario mt-6">
-          <Icon name="whatsapp" size={18} /> Reservar
+          <Roll>
+            <Icon name="whatsapp" size={18} /> Reservar
+          </Roll>
         </a>
       </Reveal>
       <Reveal delay={0.1} className="mx-auto w-full max-w-xs">

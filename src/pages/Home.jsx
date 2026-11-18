@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { AnimatePresence, m, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import Icon from '../components/ui/Icon.jsx';
@@ -19,7 +19,9 @@ import { ProductCardSkeleton, Skeleton } from '../components/ui/Skeleton.jsx';
 import { useBrands, useCategories, useProducts } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
 import { NEGOCIO, PASOS_RUTINA } from '../config/negocio.js';
-import { formatPrecio, imgSm } from '../lib/format.js';
+import Precio from '../components/ui/Precio.jsx';
+import { imgSm } from '../lib/format.js';
+import Roll from '../components/ui/Roll.jsx';
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -81,15 +83,17 @@ function Hero() {
         {/* Título (arriba en mobile, izquierda en desktop): revelado por línea al cargar */}
         <div className="flex flex-col items-start gap-8">
           <RevealText as="h1" id="hero-titulo" alCargar delay={0.15} className="text-[clamp(3rem,7.4vw,6.5rem)] leading-[0.98] tracking-[-0.02em]">
-            {TITULO_TEXTO} <em className="texto-dorado">{TITULO_EM}</em>
+            {TITULO_TEXTO} <em className="texto-dorado brillo-dorado">{TITULO_EM}</em>
           </RevealText>
           <m.div
-            initial={reducido ? false : { opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: reducido ? 0 : 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.55, ease: EASE }}
           >
             <Link to="/tienda" className="btn btn-primario px-8 py-4 text-base">
-              Ver productos <Icon name="flecha" size={18} />
+              <Roll>
+                Ver productos <Icon name="flecha" size={18} />
+              </Roll>
             </Link>
           </m.div>
         </div>
@@ -97,7 +101,7 @@ function Hero() {
         {/* Foto con forma orgánica + mini-cards flotando */}
         <div className="relative mx-auto w-[84%] max-w-[30rem] md:w-full">
           <m.div
-            initial={reducido ? false : { opacity: 0, scale: 1.08 }}
+            initial={{ opacity: 0, scale: reducido ? 1 : 1.08 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: EASE }}
             className={`relative aspect-[4/5] overflow-hidden bg-salvia-media shadow-flotante ${BLOB}`}
@@ -139,7 +143,7 @@ function MiniCard({ producto, y, delay, className, flotarDesfase = false }) {
   return (
     <m.div style={{ y }} className={`absolute z-10 ${className}`}>
       <m.div
-        initial={reducido ? false : { opacity: 0, y: 16 }}
+        initial={{ opacity: 0, y: reducido ? 0 : 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay, ease: EASE }}
       >
@@ -153,7 +157,7 @@ function MiniCard({ producto, y, delay, className, flotarDesfase = false }) {
           </span>
           <span className="min-w-0">
             <span className="line-clamp-2 block text-xs leading-tight font-semibold text-tinta md:text-[13px]">{producto.nombre}</span>
-            <span className="precio mt-0.5 block text-xs text-verde md:text-sm">{formatPrecio(producto.precio)}</span>
+            <Precio valor={producto.precio} className="mt-0.5 block text-xs text-verde md:text-sm" />
           </span>
         </Link>
       </m.div>
@@ -304,8 +308,52 @@ function MasVendidos() {
 }
 
 /* ═════════ Cinta infinita de marcas (sin título) ═════════ */
+/**
+ * Cinta infinita de marcas (CSS, solo transform). Reacciona al scroll: la velocidad del scroll sube el
+ * playbackRate de la animación (hasta 4x) y vuelve suave a 1x. Con movimiento reducido: quieta y centrada
+ * (una sola fila; justify-center reparte lo que sobra a los dos lados).
+ */
 function CintaMarcas() {
   const { data: marcas } = useBrands();
+  const reducido = useReducedMotion();
+  const pista = useRef(null);
+
+  useEffect(() => {
+    const el = pista.current;
+    if (reducido || !el?.getAnimations) return;
+    let raf = 0;
+    let rate = 1;
+    let objetivo = 1;
+    let yPrev = window.scrollY;
+    let tPrev = performance.now();
+    const onScroll = () => {
+      const t = performance.now();
+      const v = Math.abs(window.scrollY - yPrev) / Math.max(1, t - tPrev); // px/ms
+      yPrev = window.scrollY;
+      tPrev = t;
+      objetivo = Math.max(objetivo, Math.min(4, 1 + v * 2.5));
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+    const tick = () => {
+      const anim = el.getAnimations()[0];
+      objetivo += (1 - objetivo) * 0.06; // el empujón se va apagando
+      rate += (objetivo - rate) * 0.15;
+      if (anim) anim.playbackRate = rate;
+      if (Math.abs(rate - 1) < 0.01 && Math.abs(objetivo - 1) < 0.01) {
+        if (anim) anim.playbackRate = 1;
+        rate = objetivo = 1;
+        raf = 0;
+        return;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, [reducido, marcas?.length]);
+
   if (!marcas?.length) return <div className="h-20" aria-hidden="true" />;
   const fila = (copia) => (
     <ul className="flex shrink-0 items-center" aria-hidden={copia || undefined}>
@@ -325,10 +373,14 @@ function CintaMarcas() {
   );
   return (
     <nav aria-label="Marcas" className="group/cinta overflow-hidden py-8 [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)] md:py-12">
-      <div className="flex w-max animate-[cinta_45s_linear_infinite] group-hover/cinta:[animation-play-state:paused] motion-reduce:animate-none">
-        {fila(false)}
-        {fila(true)}
-      </div>
+      {reducido ? (
+        <div className="flex justify-center">{fila(false)}</div>
+      ) : (
+        <div ref={pista} className="flex w-max animate-[cinta_45s_linear_infinite] group-hover/cinta:[animation-play-state:paused]">
+          {fila(false)}
+          {fila(true)}
+        </div>
+      )}
     </nav>
   );
 }
@@ -396,7 +448,9 @@ function RutinaDesktop() {
           })}
         </ol>
         <Link to="/rutina" className="btn btn-primario mt-10 px-8 py-4 text-base">
-          Empezar<span className="sr-only"> la rutina</span> <Icon name="flecha" size={18} />
+          <Roll>
+            Empezar<span className="sr-only"> la rutina</span> <Icon name="flecha" size={18} />
+          </Roll>
         </Link>
       </div>
     );
@@ -437,7 +491,9 @@ function RutinaDesktop() {
               </ol>
             </div>
             <Link to="/rutina" className="btn btn-primario mt-10 px-8 py-4 text-base">
-              Empezar<span className="sr-only"> la rutina</span> <Icon name="flecha" size={18} />
+              <Roll>
+                Empezar<span className="sr-only"> la rutina</span> <Icon name="flecha" size={18} />
+              </Roll>
             </Link>
           </div>
 
@@ -458,7 +514,7 @@ function RutinaDesktop() {
                     </span>
                     <span className="absolute -bottom-5 left-6 rounded-2xl border border-linea bg-crema-card/95 px-4 py-3 shadow-flotante backdrop-blur">
                       <span className="block text-sm font-semibold text-tinta">{producto.nombre}</span>
-                      <span className="precio block text-sm text-verde">{formatPrecio(producto.precio)}</span>
+                      <Precio valor={producto.precio} className="block text-sm text-verde" />
                     </span>
                   </Link>
                 </m.div>
@@ -510,7 +566,9 @@ function RutinaMobile() {
       </div>
       <Reveal delay={0.2}>
         <Link to="/rutina" className="btn btn-primario mt-8">
-          Empezar<span className="sr-only"> la rutina</span> <Icon name="flecha" size={18} />
+          <Roll>
+            Empezar<span className="sr-only"> la rutina</span> <Icon name="flecha" size={18} />
+          </Roll>
         </Link>
       </Reveal>
     </div>
@@ -554,10 +612,14 @@ function HolaSoyMar() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/servicios" className="btn btn-primario">
-              Conocé los servicios
+              <Roll>
+                Conocé los servicios
+              </Roll>
             </Link>
             <a href={NEGOCIO.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-borde">
-              <Icon name="whatsapp" size={18} /> Escribime
+              <Roll>
+                <Icon name="whatsapp" size={18} /> Escribime
+              </Roll>
             </a>
           </div>
         </Reveal>

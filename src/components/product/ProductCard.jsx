@@ -7,7 +7,9 @@ import { formatPrecio, imgSm } from '../../lib/format.js';
 import { flyToCart } from '../../lib/flyToCart.js';
 import { useCart } from '../../context/CartContext.jsx';
 import { useUI } from '../../context/UIContext.jsx';
+import Precio from '../ui/Precio.jsx';
 import { useMediaQuery } from '../../hooks/useMediaQuery.js';
+import Roll from '../ui/Roll.jsx';
 
 const SIZES = '(min-width: 1280px) 300px, (min-width: 768px) 25vw, 50vw';
 
@@ -130,7 +132,9 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
             aria-label={etiquetaAgregar}
             className="btn btn-primario pointer-events-auto w-full translate-y-[120%] py-3 opacity-0 transition duration-500 ease-out group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:translate-y-0 group-hover:opacity-100"
           >
-            <Icon name="carrito" size={17} /> Agregar
+            <Roll>
+              <Icon name="carrito" size={17} /> Agregar
+            </Roll>
           </button>
         </div>
       </div>
@@ -142,7 +146,7 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
             {producto.nombre}
           </Link>
         </Titulo>
-        <p className="precio mt-1 text-base text-tinta">{precio}</p>
+        <Precio as="p" valor={producto.precio} className="mt-1 text-base text-tinta" />
       </div>
     </article>
   );

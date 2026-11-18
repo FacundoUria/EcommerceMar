@@ -167,6 +167,18 @@
 
 /* Cursivas destacadas: degradé dorado sutil en el texto.
    Tono más claro #9A7535: 3.69:1 sobre arena / 3.38:1 sobre salvia (AA texto grande; se usa solo en títulos). */
+/* Brillo que recorre "amor propio" del hero (5 s en loop, solo background-position). El tono más claro
+   (#a8823f) da 3.09:1 sobre arena: sigue en AA para texto grande. Quieto con movimiento reducido. */
+.brillo-dorado {
+  background-image: linear-gradient(100deg, #7e602b 0%, #9a7535 38%, #a8823f 50%, #9a7535 62%, #7e602b 100%);
+  background-size: 300% 100%;
+  background-position: 100% 0;
+  animation: brillo-texto 5s ease-in-out calc(1.6s + var(--orden, 0) * 0.25s) infinite;
+}
+@keyframes brillo-texto {
+  0% { background-position: 100% 0; }
+  70%, 100% { background-position: 0% 0; }
+}
 @utility texto-dorado {
   background-image: linear-gradient(100deg, #7e602b 0%, #9a7535 45%, #7e602b 100%);
   -webkit-background-clip: text;
@@ -297,21 +309,49 @@
   animation: pulso-aro 2.4s ease-out infinite;
 }
 
+/* Movimiento reducido = "menos movimiento", no cero: se mantienen fades, hovers y transiciones cortas.
+   Se apagan los loops que se desplazan solos (manchas del mesh, flotado de las mini-cards, indicador
+   de scroll, aro que late, brillo del título) y el scroll suave por código. La cinta de marcas queda
+   quieta y centrada (ver CintaMarcas). Parallax, cursor, 3D, Lenis y cortina se apagan en JS. */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  html {
     scroll-behavior: auto !important;
   }
-  /* Todo lo que se mueve queda quieto: degradés, flotados, indicador, aros */
   .mancha,
   .pulso,
   .anim-flotar,
-  .anim-rebote {
+  .anim-rebote,
+  .brillo-dorado {
     animation: none !important;
+  }
+}
+
+/* Roll de texto en hover (links del nav y botones): el texto sube y entra una copia desde abajo.
+   <Roll> duplica el contenido (la copia es aria-hidden). Solo con mouse; botones deshabilitados no. */
+.roll {
+  display: inline-grid;
+  gap: inherit;
+  overflow: hidden;
+  padding-block: 0.15em;
+  margin-block: -0.15em;
+}
+.roll > span {
+  grid-area: 1 / 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: inherit;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.roll > span + span {
+  transform: translateY(130%);
+}
+@media (hover: hover) {
+  :is(a, button:not(:disabled)):hover > .roll > span:first-child {
+    transform: translateY(-130%);
+  }
+  :is(a, button:not(:disabled)):hover > .roll > span + span {
+    transform: translateY(0);
   }
 }
 

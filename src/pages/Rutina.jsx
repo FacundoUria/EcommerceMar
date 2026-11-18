@@ -12,7 +12,9 @@ import { usePageTitle } from '../hooks/usePageTitle.js';
 import { useCart } from '../context/CartContext.jsx';
 import { formatPrecio, imgSm } from '../lib/format.js';
 import { PASOS_RUTINA } from '../config/negocio.js';
+import Precio from '../components/ui/Precio.jsx';
 import { scrollA } from '../lib/smooth.js';
+import Roll from '../components/ui/Roll.jsx';
 
 export default function Rutina() {
   usePageTitle('Armá tu rutina curly');
@@ -159,15 +161,21 @@ export default function Rutina() {
 
               <div className="mt-8 flex items-center justify-between gap-3">
                 <button type="button" onClick={() => irA(actual - 1)} disabled={actual === 0} className="btn btn-borde">
-                  <Icon name="flechaIzq" size={18} /> Anterior
+                  <Roll>
+                    <Icon name="flechaIzq" size={18} /> Anterior
+                  </Roll>
                 </button>
                 {actual < PASOS_RUTINA.length - 1 ? (
                   <button type="button" onClick={() => irA(actual + 1)} className="btn btn-primario">
-                    {eleccion[paso.paso] ? 'Siguiente' : 'Saltear'} <Icon name="flecha" size={18} />
+                    <Roll>
+                      {eleccion[paso.paso] ? 'Siguiente' : 'Saltear'} <Icon name="flecha" size={18} />
+                    </Roll>
                   </button>
                 ) : (
                   <button type="button" onClick={agregarRutina} disabled={!elegidos.length} className="btn btn-primario hidden md:inline-flex">
-                    Agregar rutina
+                    <Roll>
+                      Agregar rutina
+                    </Roll>
                   </button>
                 )}
               </div>
@@ -207,7 +215,7 @@ export default function Rutina() {
                         <span className="block truncate text-sm font-semibold">{e ? e.producto.nombre : '—'}</span>
                         {e?.variante && <span className="block truncate text-xs text-texto-suave">{e.variante.nombre}</span>}
                       </span>
-                      {e && <span className="precio text-sm text-tinta">{formatPrecio(e.producto.precio)}</span>}
+                      {e && <Precio valor={e.producto.precio} className="text-sm text-tinta" />}
                     </button>
                   </li>
                 );
@@ -218,7 +226,9 @@ export default function Rutina() {
               <Total valor={total} className="text-3xl" />
             </div>
             <button type="button" onClick={agregarRutina} disabled={!elegidos.length} className="btn btn-primario mt-4 w-full">
-              <Icon name="carrito" size={18} /> Agregar rutina
+              <Roll>
+                <Icon name="carrito" size={18} /> Agregar rutina
+              </Roll>
             </button>
           </div>
         </aside>
@@ -250,7 +260,9 @@ export default function Rutina() {
             <Total valor={total} className="text-lg" />
           </div>
           <button type="button" onClick={agregarRutina} disabled={!elegidos.length} className="btn btn-primario px-4 py-3 text-xs">
-            Agregar rutina
+            <Roll>
+              Agregar rutina
+            </Roll>
           </button>
         </div>
       </div>
@@ -310,7 +322,7 @@ function OpcionProducto({ producto, seleccion, onElegir, onVariante }) {
           <span className={`block ${activo && producto.variantes.length ? '' : 'p-3'}`}>
             {producto.marca && <span className="block text-[11px] font-bold tracking-[0.12em] text-dorado uppercase">{producto.marca}</span>}
             <span className="line-clamp-2 block text-sm leading-snug font-semibold">{producto.nombre}</span>
-            <span className="precio mt-1 block text-tinta">{formatPrecio(producto.precio)}</span>
+            <Precio valor={producto.precio} className="mt-1 block text-tinta" />
           </span>
           <span
             className={`absolute top-2.5 right-2.5 flex size-7 items-center justify-center rounded-full transition ${

@@ -14,8 +14,10 @@ import NoEncontrado from './NoEncontrado.jsx';
 import { useCategories, useProduct, useProducts } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
 import { useCart } from '../context/CartContext.jsx';
-import { formatPrecio, imgSm } from '../lib/format.js';
+import { imgSm } from '../lib/format.js';
+import Precio from '../components/ui/Precio.jsx';
 import { PASOS_RUTINA } from '../config/negocio.js';
+import Roll from '../components/ui/Roll.jsx';
 
 export default function Producto() {
   const { id } = useParams();
@@ -139,7 +141,7 @@ function Detalle({ producto }) {
           <div>
             {producto.marca && <p className="text-xs font-bold tracking-[0.2em] text-dorado uppercase">{producto.marca}</p>}
             <RevealText as="h1" className="mt-1 text-4xl leading-tight md:text-5xl">{producto.nombre}</RevealText>
-            <p className="precio mt-3 text-3xl text-tinta">{formatPrecio(producto.precio)}</p>
+            <Precio as="p" valor={producto.precio} className="mt-3 text-3xl text-tinta" />
           </div>
 
           {tieneVariantes && (
@@ -179,7 +181,9 @@ function Detalle({ producto }) {
           <div className="hidden items-center gap-3 md:flex">
             <QuantityStepper value={cantidad} onChange={setCantidad} />
             <button type="button" onClick={agregarAlCarrito} className="btn btn-primario flex-1 py-4 text-base">
-              <Icon name="carrito" size={20} /> Agregar
+              <Roll>
+                <Icon name="carrito" size={20} /> Agregar
+              </Roll>
             </button>
           </div>
           <div className="flex justify-center md:hidden">
@@ -206,7 +210,9 @@ function Detalle({ producto }) {
             </span>
           </button>
           <button type="button" onClick={agregarAlCarrito} className="btn btn-primario h-12 flex-1 py-0">
-            Agregar
+            <Roll>
+              Agregar
+            </Roll>
           </button>
         </div>
       </div>

@@ -7,6 +7,7 @@ import CartSummary from './CartSummary.jsx';
 import { useCart } from '../../context/CartContext.jsx';
 import { useFocusTrap } from '../../hooks/useFocusTrap.js';
 import { useOcultarBottomNav } from '../../hooks/useOcultarBottomNav.js';
+import Roll from '../ui/Roll.jsx';
 
 export default function CartDrawer() {
   const { abierto, cerrar } = useCart();
@@ -78,7 +79,9 @@ function Panel({ onClose }) {
             </div>
             <p className="font-serif text-xl text-tinta">Carrito vacío</p>
             <Link to="/tienda" className="btn btn-primario">
-              Ver productos
+              <Roll>
+                Ver productos
+              </Roll>
             </Link>
           </div>
         ) : (
@@ -94,10 +97,14 @@ function Panel({ onClose }) {
               <CartSummary />
               <div className="mt-3 grid grid-cols-2 gap-2">
                 <button type="button" onClick={onClose} className="btn btn-borde px-3">
-                  Seguir
+                  <Roll>
+                    Seguir
+                  </Roll>
                 </button>
                 <Link to="/carrito" className="btn btn-primario px-3">
-                  Ver carrito
+                  <Roll>
+                    Ver carrito
+                  </Roll>
                 </Link>
               </div>
             </div>

@@ -5,12 +5,13 @@ import Icon from '../ui/Icon.jsx';
 import FotoProducto from './FotoProducto.jsx';
 import QuantityStepper from '../ui/QuantityStepper.jsx';
 import Swatches from './Swatches.jsx';
-import { formatPrecio } from '../../lib/format.js';
 import { useUI } from '../../context/UIContext.jsx';
 import { useCart } from '../../context/CartContext.jsx';
 import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 import { useFocusTrap } from '../../hooks/useFocusTrap.js';
+import Precio from '../ui/Precio.jsx';
 import { useOcultarBottomNav } from '../../hooks/useOcultarBottomNav.js';
+import Roll from '../ui/Roll.jsx';
 
 /** Vista rápida: bottom-sheet en mobile (arrastrable para cerrar), modal en desktop. */
 export default function QuickView() {
@@ -125,7 +126,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
             <h2 id="qv-titulo" className="mt-1 text-3xl leading-tight">
               {producto.nombre}
             </h2>
-            <p className="precio mt-2 text-2xl text-tinta">{formatPrecio(producto.precio)}</p>
+            <Precio as="p" valor={producto.precio} className="mt-2 text-2xl text-tinta" />
           </div>
 
           {tieneVariantes && (
@@ -154,8 +155,10 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
           <div className="flex items-center gap-3">
             <QuantityStepper value={cantidad} onChange={setCantidad} />
             <button type="button" onClick={confirmar} className="btn btn-primario flex-1 px-4 whitespace-nowrap">
-              <Icon name="carrito" size={18} />
-              Agregar
+              <Roll>
+                <Icon name="carrito" size={18} />
+                Agregar
+              </Roll>
             </button>
           </div>
 

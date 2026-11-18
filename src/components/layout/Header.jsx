@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import { m, useMotionValueEvent, useReducedMotion, useScroll } from 'motion/react';
 import Icon from '../ui/Icon.jsx';
+import Roll from '../ui/Roll.jsx';
 import CartBadge from './CartBadge.jsx';
 import { useCart } from '../../context/CartContext.jsx';
 import { NEGOCIO } from '../../config/negocio.js';
@@ -86,7 +87,7 @@ export default function Header() {
                     `subrayado px-3 py-2 text-[15px] font-semibold transition-colors duration-300 ${isActive ? 'text-verde' : 'text-texto-suave hover:text-tinta'}`
                   }
                 >
-                  {l.label}
+                  <Roll>{l.label}</Roll>
                 </NavLink>
               </li>
             ))}

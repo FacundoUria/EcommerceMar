@@ -6,11 +6,12 @@ import Icon from './Icon.jsx';
  * Carrusel de banners de Mar (los banners ya traen su texto: no se superpone nada).
  * - Scroll-snap nativo: se desliza con el dedo; en desktop flechas + arrastre con mouse.
  * - Autoplay lento (6 s) solo en pantalla y con la pestaña visible. Se pausa con hover, foco
- *   o al tocar (vuelve a andar 10 s después del último toque). Sin autoplay con movimiento reducido.
+ *   o al tocar (vuelve a andar 10 s después del último toque). Con movimiento reducido, más lento (8 s).
  * - Mobile: 1 banner por vista y asoma ~12% del siguiente (se nota que se desliza). Desktop: 2 (a todo el ancho un banner de 2:1 queda gigante).
  *   Los puntos representan posiciones de scroll, así que se ajustan solos a cuántos entran.
  */
 const INTERVALO = 6000;
+const INTERVALO_REDUCIDO = 8000;
 const PAUSA_TOQUE = 10000;
 
 export default function Banners({ items, label = 'Novedades' }) {
@@ -49,19 +50,19 @@ export default function Banners({ items, label = 'Novedades' }) {
     (i) => {
       const el = ref.current;
       if (!el) return;
-      el.scrollTo({ left: i * paso(), behavior: reducido ? 'instant' : 'smooth' });
+      el.scrollTo({ left: i * paso(), behavior: 'smooth' });
     },
-    [paso, reducido],
+    [paso],
   );
 
   // Autoplay
   useEffect(() => {
-    if (reducido || !enPantalla) return;
+    if (!enPantalla) return;
     const id = setInterval(() => {
       const ps = pausa.current;
       if (ps.hover || ps.foco || Date.now() < ps.toqueHasta || drag.current.activo || document.hidden) return;
       irA(activo + 1 >= posiciones ? 0 : activo + 1);
-    }, INTERVALO);
+    }, reducido ? INTERVALO_REDUCIDO : INTERVALO);
     return () => clearInterval(id);
   }, [reducido, enPantalla, activo, posiciones, irA]);
 

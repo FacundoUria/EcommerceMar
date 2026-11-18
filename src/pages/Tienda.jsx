@@ -15,6 +15,7 @@ import { useFocusTrap } from '../hooks/useFocusTrap.js';
 import { useOcultarBottomNav } from '../hooks/useOcultarBottomNav.js';
 import { coincide } from '../lib/texto.js';
 import { imgSm, plural } from '../lib/format.js';
+import Roll from '../components/ui/Roll.jsx';
 
 const ORDENES = [
   { id: 'destacados', label: 'Destacados' },
@@ -203,7 +204,9 @@ export default function Tienda() {
             </div>
             <p className="mt-4 font-serif text-2xl text-tinta">Sin resultados</p>
             <button type="button" onClick={() => setParams({})} className="btn btn-primario mt-6">
-              Ver todo
+              <Roll>
+                Ver todo
+              </Roll>
             </button>
           </div>
         ) : (
@@ -214,7 +217,7 @@ export default function Tienda() {
                 <m.li
                   key={p.id}
                   layout={!reducido}
-                  initial={reducido ? false : { opacity: 0, y: 24 }}
+                  initial={{ opacity: 0, y: reducido ? 0 : 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '0px 0px 10% 0px' }}
                   exit={reducido ? undefined : { opacity: 0, transition: { duration: 0.2 } }}
@@ -350,7 +353,9 @@ function ContenidoFiltros({ onClose, marcas, marcasSel, onMarca, orden, onOrden,
           Limpiar
         </button>
         <button type="button" onClick={onClose} className="btn btn-primario px-6 py-3">
-          Listo<span className="sr-only"> ({plural(resultados, 'producto', 'productos')})</span>
+          <Roll>
+            Listo<span className="sr-only"> ({plural(resultados, 'producto', 'productos')})</span>
+          </Roll>
         </button>
       </div>
     </div>

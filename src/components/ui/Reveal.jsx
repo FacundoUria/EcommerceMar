@@ -4,23 +4,15 @@ const EASE = [0.22, 1, 0.36, 1]; // ease-out suave
 
 /**
  * Aparición al entrar en pantalla: fade + translateY (24px → 0), UNA sola vez.
- * Con prefers-reduced-motion se renderiza estático (sin animar ni opacidad).
+ * Con movimiento reducido queda solo el fade (sin desplazamiento).
  * `delay` sirve para cascadas: pasar índice * 0.06.
  */
 export default function Reveal({ children, delay = 0, y = 24, duration = 0.6, className = '', as = 'div', ...rest }) {
   const reducido = useReducedMotion();
-  if (reducido) {
-    const Tag = as;
-    return (
-      <Tag className={className} {...rest}>
-        {children}
-      </Tag>
-    );
-  }
   const Comp = m[as];
   return (
     <Comp
-      initial={{ opacity: 0, y }}
+      initial={{ opacity: 0, y: reducido ? 0 : y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '0px 0px 10% 0px' }} // se dispara un 10% antes de entrar: nunca se ve el hueco
       transition={{ duration, delay, ease: EASE }}

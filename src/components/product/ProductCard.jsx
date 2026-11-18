@@ -1,7 +1,7 @@
 import { memo, useRef } from 'react';
 import { Link } from 'react-router';
 import Icon from '../ui/Icon.jsx';
-import SmartImg from '../ui/SmartImg.jsx';
+import FotoProducto from './FotoProducto.jsx';
 import { formatPrecio, imgSm } from '../../lib/format.js';
 import { flyToCart } from '../../lib/flyToCart.js';
 import { useCart } from '../../context/CartContext.jsx';
@@ -45,8 +45,8 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
     >
       <div className="relative">
         <Link to={url} className="block" aria-label={`${producto.nombre}, ${precio}`}>
-          <div ref={imgRef} className="relative aspect-[4/5] overflow-hidden bg-salvia-media">
-            <SmartImg
+          <div ref={imgRef} className="relative aspect-[4/5] overflow-hidden">
+            <FotoProducto
               src={producto.imagen}
               srcSm={imgSm(producto.imagen)}
               sizes={SIZES}
@@ -54,19 +54,11 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
               placeholderTitulo={producto.nombre}
               placeholderSubtitulo={producto.marca ?? 'Dream Hair'}
               priority={priority}
-              className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.07]"
             />
             {fotoVariante && (
-              <img
-                src={imgSm(fotoVariante)}
-                alt=""
-                aria-hidden="true"
-                width="400"
-                height="400"
-                loading="lazy"
-                decoding="async"
-                className="absolute inset-0 size-full scale-[1.07] object-cover opacity-0 transition duration-700 ease-out group-hover:opacity-100"
-              />
+              <span className="absolute inset-0 opacity-0 transition-opacity duration-700 ease-out group-hover:opacity-100" aria-hidden="true">
+                <FotoProducto src={fotoVariante} srcSm={imgSm(fotoVariante)} sizes={SIZES} />
+              </span>
             )}
           </div>
         </Link>

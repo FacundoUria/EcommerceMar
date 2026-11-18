@@ -31,6 +31,7 @@ export default function SmartImg({
   placeholderTitulo,
   placeholderSubtitulo,
   priority = false,
+  sinFondo = false, // true: sin fondo ni blur-up (fotos con mix-blend multiply sobre un fondo propio)
   ...rest
 }) {
   const [error, setError] = useState(false);
@@ -43,8 +44,8 @@ export default function SmartImg({
   // real carga y aparece con fade de opacidad. Sin miniatura, el fondo es salvia-media.
   return (
     <span
-      className="block size-full overflow-hidden bg-salvia-media bg-cover bg-center"
-      style={lqip && !cargada ? { backgroundImage: `url("${lqip}")` } : undefined}
+      className={`block size-full overflow-hidden ${sinFondo ? '' : 'bg-salvia-media bg-cover bg-center'}`}
+      style={!sinFondo && lqip && !cargada ? { backgroundImage: `url("${lqip}")` } : undefined}
     >
       <img
         key={src}

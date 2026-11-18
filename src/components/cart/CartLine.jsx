@@ -1,7 +1,7 @@
 import { m } from 'motion/react';
 import { Link } from 'react-router';
 import Icon from '../ui/Icon.jsx';
-import SmartImg from '../ui/SmartImg.jsx';
+import FotoProducto from '../product/FotoProducto.jsx';
 import QuantityStepper from '../ui/QuantityStepper.jsx';
 import { formatPrecio, imgSm } from '../../lib/format.js';
 import { useCart } from '../../context/CartContext.jsx';
@@ -19,8 +19,8 @@ export default function CartLine({ linea, compacta = false, onNavigate }) {
       exit={{ opacity: 0, x: -40, transition: { duration: 0.2 } }}
       className="card flex gap-4 rounded-4xl p-3"
     >
-      <Link to={url} onClick={onNavigate} className={`shrink-0 overflow-hidden rounded-3xl bg-salvia-media ${compacta ? 'size-20' : 'size-24 md:size-28'}`}>
-        <SmartImg src={imgSm(linea.imagen)} alt={linea.nombre} width={400} height={400} placeholderTitulo={linea.nombre} className="size-full object-contain p-1" />
+      <Link to={url} onClick={onNavigate} className={`shrink-0 overflow-hidden rounded-3xl ${compacta ? 'size-20' : 'size-24 md:size-28'}`}>
+        <FotoProducto src={imgSm(linea.imagen)} alt={linea.nombre} placeholderTitulo={linea.nombre} zoom={false} compacta />
       </Link>
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="flex items-start justify-between gap-2">

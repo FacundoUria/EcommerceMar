@@ -11,7 +11,11 @@ import Icon from './Icon.jsx';
  * - `autoplay`: ms entre avances. Se pausa con hover / touch / foco y fuera de pantalla. Sin movimiento reducido.
  * - `puntos`: puntos de progreso (solo mobile).
  */
-export default function Carousel({ children, label, className = '', itemsClassName = 'gap-4', gutter, hint = false, autoplay = 0, puntos = false }) {
+/**
+ * `cabecera`: título de la sección. Si se pasa, se muestra arriba con el contador "01 / 08" (Playfair)
+ * y las flechas prev/next juntas a la derecha (en lugar de flechas sobre las cards).
+ */
+export default function Carousel({ children, label, className = '', itemsClassName = 'gap-4', gutter, hint = false, autoplay = 0, puntos = false, cabecera = null }) {
   const ref = useRef(null);
   const drag = useRef({ activo: false, x: 0, scroll: 0, movio: false });
   const pausa = useRef({ hover: false, touchHasta: 0, foco: false });
@@ -126,6 +130,20 @@ export default function Carousel({ children, label, className = '', itemsClassNa
     );
   };
 
+  const dos = (n) => String(n).padStart(2, '0');
+  const posicion = bordes.fin ? total : Math.min(total, activo + 1);
+  const flechaArriba = (dir) => (
+    <button
+      type="button"
+      onClick={() => mover(dir)}
+      aria-label={dir < 0 ? 'Anterior' : 'Siguiente'}
+      disabled={dir < 0 ? bordes.inicio : bordes.fin}
+      className="flex size-12 items-center justify-center rounded-full border border-verde/40 text-verde transition duration-300 hover:border-verde hover:bg-verde hover:text-arena active:scale-95 disabled:pointer-events-none disabled:opacity-35"
+    >
+      <Icon name={dir < 0 ? 'flechaIzq' : 'flecha'} size={20} />
+    </button>
+  );
+
   return (
     <div
       className={`relative ${className}`}
@@ -137,6 +155,20 @@ export default function Carousel({ children, label, className = '', itemsClassNa
       onFocus={() => (pausa.current.foco = true)}
       onBlur={() => (pausa.current.foco = false)}
     >
+      {cabecera && (
+        <div className="contenedor mb-6 flex items-end justify-between gap-6">
+          {cabecera}
+          <div className="flex items-center gap-5">
+            <p className="font-serif text-xl text-texto-suave tabular-nums" aria-live="polite">
+              <span className="text-tinta">{dos(posicion)}</span> / {dos(total)}
+            </p>
+            <div className="flex gap-2">
+              {flechaArriba(-1)}
+              {flechaArriba(1)}
+            </div>
+          </div>
+        </div>
+      )}
       <div
         ref={ref}
         onScroll={actualizar}
@@ -152,8 +184,8 @@ export default function Carousel({ children, label, className = '', itemsClassNa
       >
         {children}
       </div>
-      {flecha(-1)}
-      {flecha(1)}
+      {!cabecera && flecha(-1)}
+      {!cabecera && flecha(1)}
       {puntos && total > 1 && (
         <div className="mt-3 flex justify-center gap-3 md:hidden" aria-hidden="true">
           {Array.from({ length: total }, (_, i) => (

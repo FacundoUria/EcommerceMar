@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, m, useDragControls, useReducedMotion } from 'motion/react';
 import { Link } from 'react-router';
 import Icon from '../ui/Icon.jsx';
-import SmartImg from '../ui/SmartImg.jsx';
+import FotoProducto from './FotoProducto.jsx';
 import QuantityStepper from '../ui/QuantityStepper.jsx';
 import Swatches from './Swatches.jsx';
 import { formatPrecio } from '../../lib/format.js';
@@ -101,7 +101,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
           <Icon name="cerrar" size={20} />
         </button>
 
-        <div className="mx-4 aspect-square overflow-hidden rounded-4xl bg-salvia-media md:m-0 md:aspect-auto md:h-full md:rounded-none">
+        <div className="mx-4 aspect-square overflow-hidden rounded-4xl md:m-0 md:aspect-auto md:h-full md:rounded-none">
           <AnimatePresence mode="popLayout" initial={false}>
             <m.div
               key={imagen}
@@ -111,13 +111,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
               transition={{ duration: 0.3 }}
               className="size-full"
             >
-              <SmartImg
-                src={imagen}
-                alt={producto.nombre}
-                placeholderTitulo={producto.nombre}
-                priority
-                className="size-full object-cover"
-              />
+              <FotoProducto src={imagen} alt={producto.nombre} placeholderTitulo={producto.nombre} priority zoom={false} />
             </m.div>
           </AnimatePresence>
         </div>

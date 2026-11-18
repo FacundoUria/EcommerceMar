@@ -77,6 +77,17 @@
     outline-offset: 3px;
     border-radius: 0.75rem;
   }
+  /* El recuadro de foco solo con teclado (:focus-visible), nunca al hacer clic */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+  /* En campos de texto el navegador marca :focus-visible también con el mouse:
+     ahí el foco se indica con el borde verde del campo, sin recuadro */
+  input[type='search']:focus-visible,
+  input[type='text']:focus-visible,
+  textarea:focus-visible {
+    outline: none;
+  }
   ::selection {
     background: var(--color-salvia-media);
     color: var(--color-tinta);
@@ -170,6 +181,11 @@
 }
 @utility fondo-salvia-abajo {
   background-image: linear-gradient(180deg, var(--color-arena) 0%, var(--color-salvia) 40%);
+}
+
+/* Fondo único de las fotos de producto: degradé muy suave salvia-media → arena */
+@utility fondo-foto {
+  background-image: linear-gradient(165deg, color-mix(in srgb, var(--color-salvia-media) 62%, var(--color-arena)) 0%, var(--color-arena) 100%);
 }
 
 /* Contenedor ancho del sitio (desktop 1440px aprovechado) */

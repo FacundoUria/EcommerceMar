@@ -3,7 +3,7 @@ import { AnimatePresence, m, useScroll } from 'motion/react';
 import Reveal from '../components/ui/Reveal.jsx';
 import LineaProgreso from '../components/ui/LineaProgreso.jsx';
 import Icon from '../components/ui/Icon.jsx';
-import SmartImg from '../components/ui/SmartImg.jsx';
+import FotoProducto from '../components/product/FotoProducto.jsx';
 import Swatches from '../components/product/Swatches.jsx';
 import { GridSkeleton } from '../components/ui/Skeleton.jsx';
 import { useCategories, useProducts } from '../hooks/useCatalog.js';
@@ -292,17 +292,17 @@ function OpcionProducto({ producto, seleccion, onElegir, onVariante }) {
           className={`relative flex w-full text-left transition active:scale-[0.98] ${activo && producto.variantes.length ? 'items-center gap-4 p-3' : 'flex-col'}`}
         >
           <span
-            className={`relative block shrink-0 overflow-hidden bg-salvia-media ${
+            className={`relative block shrink-0 overflow-hidden ${
               activo && producto.variantes.length ? 'size-24 rounded-3xl' : 'aspect-square w-full'
             }`}
           >
-            <SmartImg
+            <FotoProducto
               src={imagen}
               srcSm={imgSm(imagen)}
               sizes="(min-width: 640px) 220px, 45vw"
-              alt=""
               placeholderTitulo={producto.nombre}
-              className="size-full object-cover"
+              zoom={false}
+              compacta={!!(activo && producto.variantes.length)}
             />
           </span>
           <span className={`block ${activo && producto.variantes.length ? '' : 'p-3'}`}>

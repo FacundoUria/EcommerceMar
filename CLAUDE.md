@@ -26,6 +26,7 @@ React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScri
 - Originales en `assets/` (no se sirven). Versiones web generadas en `public/img/` (`<nombre>.webp` 900px + `<nombre>-sm.webp` 400px) y `public/video/` con los scripts de `scripts/`. Los archivos `VERIFICAR-*` y `personita*` se ignoran. Los videos originales (`assets/videos/`) no se commitean.
 - Hero del home: foto `mar-con-productos-1` (los cuadros del video no quedan nítidos recortados a 4:5). El video "amor propio" va en Resultados, rotado para arrancar en su cuadro más nítido (opción `inicio` en `scripts/optimizar-videos.mjs`).
 - Producto sin foto → placeholder elegante (crema + marca + nombre en Playfair), nunca imagen rota.
+- **Fotos de producto siempre con `<FotoProducto>`** (cards, carruseles, quick view, producto, rutina, carrito): mismo fondo `fondo-foto` (salvia-media → arena). Fotos de fondo blanco → `mix-blend-mode: multiply` + padding; de escena → cover en marco con overlay salvia 10%. La clasificación la genera `scripts/optimizar-assets.mjs` en `src/data/fondos.json`.
 - Datos reales del negocio: `src/config/negocio.js`. Dato que falta = string vacío y la UI NO lo muestra (pendientes: dirección y horarios).
 
 ## Comandos
@@ -40,7 +41,7 @@ React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScri
 - Blur-up: `scripts/optimizar-assets.mjs` genera `src/data/lqip.json` (miniaturas de 20px); se carga en un chunk aparte después del `load` (`src/lib/lqip.js`). `SmartImg` las usa de fondo y hace fade a la foto.
 
 ## Animaciones (motion)
-- Solo `transform` y `opacity` (nada de width/height/top). Duraciones 0.5–0.8s, ease-out suave `[0.22, 1, 0.36, 1]`.
+- Solo `transform` y `opacity` (nada de width/height/top). Excepción pedida: los paneles de categorías en desktop animan `flex-grow` (0.6s). Duraciones 0.5–0.8s, ease-out suave `[0.22, 1, 0.36, 1]`.
 - Entradas UNA vez: `<Reveal>` (`src/components/ui/Reveal.jsx`, fade + translateY 24px→0) y `cascada(i)` para stagger de 0.06s.
 - Con `prefers-reduced-motion` todo queda estático: `Reveal` renderiza sin animar, el header no se oculta, sin parallax ni cinta.
 - Scroll: hero (parallax de la foto al 70%), header (compacto > 40px, se oculta al bajar; estado en `<html data-header>`), parallax de capas en "Hola, soy Mar", línea de pasos con `LineaProgreso` (scaleX ligado a scrollYProgress). Carrusel con `hint` (WAAPI, una vez).

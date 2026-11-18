@@ -2,8 +2,12 @@ import { useEffect, useRef } from 'react';
 
 const FOCUSABLES = 'a[href], button:not([disabled]), input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])';
 
-/** Mantiene el foco dentro del diálogo, cierra con Escape y devuelve el foco al cerrar. */
-export function useFocusTrap(ref, onClose, activo = true) {
+/**
+ * Mantiene el foco dentro del diálogo, cierra con Escape y devuelve el foco al cerrar.
+ * `enfocarContenedor`: el foco inicial va al contenedor (tabIndex=-1) en vez del primer control,
+ * así no aparece un recuadro de foco sobre una opción al abrir con el mouse.
+ */
+export function useFocusTrap(ref, onClose, activo = true, { enfocarContenedor = false } = {}) {
   const onCloseRef = useRef(onClose);
   onCloseRef.current = onClose;
 
@@ -11,7 +15,7 @@ export function useFocusTrap(ref, onClose, activo = true) {
     if (!activo) return;
     const previo = document.activeElement;
     const el = ref.current;
-    const primero = el?.querySelector(FOCUSABLES);
+    const primero = enfocarContenedor ? null : el?.querySelector(FOCUSABLES);
     (primero ?? el)?.focus({ preventScroll: true });
 
     const onKey = (e) => {

@@ -2,7 +2,7 @@ import { useMemo, useRef, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router';
 import { AnimatePresence, m } from 'motion/react';
 import Icon from '../components/ui/Icon.jsx';
-import SmartImg from '../components/ui/SmartImg.jsx';
+import FotoProducto from '../components/product/FotoProducto.jsx';
 import QuantityStepper from '../components/ui/QuantityStepper.jsx';
 import Carousel from '../components/ui/Carousel.jsx';
 import Reveal from '../components/ui/Reveal.jsx';
@@ -89,7 +89,7 @@ function Detalle({ producto }) {
       <div className="grid gap-8 md:grid-cols-2 md:gap-12">
         {/* Galería */}
         <Reveal className="min-w-0 md:sticky md:top-24 md:self-start">
-          <div ref={imgRef} className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-salvia-media md:aspect-square">
+          <div ref={imgRef} className="relative aspect-[4/5] overflow-hidden rounded-3xl md:aspect-square">
             <AnimatePresence mode="popLayout" initial={false}>
               <m.div
                 key={imagen}
@@ -99,13 +99,13 @@ function Detalle({ producto }) {
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 className="size-full"
               >
-                <SmartImg
+                <FotoProducto
                   src={imagen}
                   alt={variante ? `${producto.nombre} — ${variante.nombre}` : producto.nombre}
                   placeholderTitulo={producto.nombre}
                   placeholderSubtitulo={producto.marca ?? 'Dream Hair'}
                   priority
-                  className="size-full object-cover"
+                  zoom={false}
                 />
               </m.div>
             </AnimatePresence>
@@ -125,7 +125,7 @@ function Detalle({ producto }) {
                       activa ? 'border-verde' : 'border-transparent opacity-70 hover:opacity-100'
                     }`}
                   >
-                    <img src={imgSm(g.imagen)} alt="" width="80" height="80" loading="lazy" className="size-full object-cover" />
+                    <FotoProducto src={imgSm(g.imagen)} zoom={false} compacta />
                   </button>
                 );
               })}

@@ -10,6 +10,9 @@ import MeshFondo from '../components/ui/MeshFondo.jsx';
 import SectionHeader from '../components/ui/SectionHeader.jsx';
 import LineaProgreso from '../components/ui/LineaProgreso.jsx';
 import ProductCard from '../components/product/ProductCard.jsx';
+import FotoProducto from '../components/product/FotoProducto.jsx';
+import CarruselCentrado from '../components/ui/CarruselCentrado.jsx';
+import { useMediaQuery } from '../hooks/useMediaQuery.js';
 import { ProductCardSkeleton, Skeleton } from '../components/ui/Skeleton.jsx';
 import { useBrands, useCategories, useProducts } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
@@ -62,7 +65,8 @@ function Hero() {
   return (
     <section aria-labelledby="hero-titulo" className="relative isolate -mt-px overflow-hidden">
       <MeshFondo />
-      <div className="contenedor grid min-h-[calc(85svh-4rem)] items-center gap-8 pt-6 pb-20 md:min-h-[calc(90vh-5rem)] md:grid-cols-[1.08fr_0.92fr] md:gap-10 md:pt-4 md:pb-24">
+      {/* El hero termina donde termina su contenido (+ indicador de scroll), sin aire vacío abajo */}
+      <div className="contenedor grid items-center gap-8 pt-6 pb-10 md:grid-cols-[1.08fr_0.92fr] md:gap-10 md:pt-10 md:pb-6">
         {/* Título (arriba en mobile, izquierda en desktop) */}
         <div className="flex flex-col items-start gap-8">
           <h1 id="hero-titulo" className="text-[clamp(3rem,7.4vw,6.5rem)] leading-[0.98] tracking-[-0.02em]">
@@ -125,8 +129,8 @@ function Hero() {
         </div>
       </div>
 
-      {/* Indicador de scroll */}
-      <div aria-hidden="true" className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1.5 text-texto-suave md:flex">
+      {/* Indicador de scroll: dentro del hero, abajo */}
+      <div aria-hidden="true" className="hidden flex-col items-center gap-1.5 pb-8 text-texto-suave md:flex">
         <span className="flex h-10 w-6 justify-center rounded-full border border-tinta/25 pt-2">
           <span className="anim-rebote h-2 w-1 rounded-full bg-verde" style={{ animation: 'rebote 2s ease-in-out infinite' }} />
         </span>
@@ -150,13 +154,9 @@ function MiniCard({ producto, y, delay, className, flotarDesfase = false }) {
           className="anim-flotar flex w-[10.5rem] items-center gap-2.5 rounded-2xl border border-linea bg-crema-card/90 p-2 pr-3 shadow-flotante backdrop-blur-md transition hover:bg-crema-card md:w-[13rem] md:p-2.5"
           style={{ animation: `flotar ${flotarDesfase ? 7 : 6}s ease-in-out ${flotarDesfase ? '-2s' : '0s'} infinite` }}
         >
-          <img
-            src={imgSm(producto.imagen)}
-            alt=""
-            width="56"
-            height="56"
-            className="size-11 shrink-0 rounded-xl bg-salvia-media object-cover md:size-14"
-          />
+          <span className="size-11 shrink-0 overflow-hidden rounded-xl md:size-14">
+            <FotoProducto src={imgSm(producto.imagen)} zoom={false} compacta />
+          </span>
           <span className="min-w-0">
             <span className="line-clamp-2 block text-xs leading-tight font-semibold text-tinta md:text-[13px]">{producto.nombre}</span>
             <span className="precio mt-0.5 block text-xs text-verde md:text-sm">{formatPrecio(producto.precio)}</span>
@@ -167,68 +167,141 @@ function MiniCard({ producto, y, delay, className, flotarDesfase = false }) {
   );
 }
 
-/* ═════════ CATEGORÍAS: cards altas 3:4, foto a sangre, degradé y nombre en blanco ═════════ */
+/* ═════════ CATEGORÍAS: paneles expandibles (desktop) / carrusel centrado (mobile) ═════════ */
+const MAX_PANELES = 5; // + 1 panel "Ver todas"
+
 function Categorias() {
   const { data: categorias, loading } = useCategories();
+  const desktop = useMediaQuery('(min-width: 1024px)');
   return (
-    <section aria-labelledby="cat-titulo" className="pt-10 pb-16 md:pt-16 md:pb-24">
-      <SectionHeader id="cat-titulo" titulo="Categorías" link="/tienda" />
-      <Carousel label="Categorías" itemsClassName="gap-3 md:gap-5" hint>
-        {loading || !categorias
-          ? Array.from({ length: 4 }, (_, i) => <Skeleton key={i} className="aspect-[3/4] w-[64%] shrink-0 rounded-3xl md:w-[18.5rem]" />)
-          : categorias.map((c, i) => (
-              <Reveal key={c.id} delay={cascada(i)} className="w-[64%] shrink-0 snap-start md:w-[18.5rem]">
-                <Link
-                  to={`/tienda?cat=${c.id}`}
-                  className="group relative block aspect-[3/4] overflow-hidden rounded-3xl bg-salvia-media shadow-suave transition duration-500 hover:shadow-flotante"
-                >
-                  <SmartImg
-                    src={c.imagen}
-                    srcSm={imgSm(c.imagen)}
-                    sizes="(min-width: 768px) 296px, 64vw"
-                    alt=""
-                    placeholderTitulo={c.nombre}
-                    className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                  />
-                  <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#16241C]/80 via-[#16241C]/15 to-transparent" />
-                  <span className="absolute inset-x-5 bottom-5 flex items-center gap-2 text-crema-card">
-                    <span className="font-serif text-2xl leading-tight transition-transform duration-500 ease-out group-hover:translate-x-1 md:text-[1.65rem]">
-                      {c.nombre}
-                    </span>
-                    <Icon
-                      name="flecha"
-                      size={20}
-                      className="shrink-0 -translate-x-2 opacity-0 transition duration-500 ease-out group-hover:translate-x-1 group-hover:opacity-100"
-                    />
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
-      </Carousel>
+    <section aria-labelledby="cat-titulo" className="pt-4 pb-10 md:pt-8 md:pb-12">
+      <SectionHeader id="cat-titulo" titulo="Categorías" />
+      {loading || !categorias ? (
+        <div className="contenedor flex gap-3">
+          {Array.from({ length: desktop ? 6 : 2 }, (_, i) => (
+            <Skeleton key={i} className="h-[420px] flex-1 rounded-3xl lg:h-[480px]" />
+          ))}
+        </div>
+      ) : desktop ? (
+        <PanelesCategorias categorias={categorias} />
+      ) : (
+        <CarruselCentrado label="Categorías" anchoItem="w-[68vw] max-w-[19rem]">
+          {categorias.map((c) => (
+            <Link key={c.id} to={`/tienda?cat=${c.id}`} className="relative block aspect-[3/4] overflow-hidden rounded-3xl shadow-suave">
+              <FotoProducto src={c.imagen} srcSm={imgSm(c.imagen)} sizes="68vw" placeholderTitulo={c.nombre} cover zoom={false} />
+              <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#16241C]/80 via-[#16241C]/10 to-transparent" />
+              <span className="absolute inset-x-5 bottom-5 font-serif text-2xl leading-tight text-crema-card">{c.nombre}</span>
+            </Link>
+          ))}
+        </CarruselCentrado>
+      )}
     </section>
   );
 }
 
-/* ═════════ MÁS VENDIDOS: full-bleed (degradé arena → salvia → arena), autoplay lento ═════════ */
+function PanelesCategorias({ categorias }) {
+  const [activo, setActivo] = useState(0);
+  const paneles = [...categorias.slice(0, MAX_PANELES).map((c) => ({ ...c, to: `/tienda?cat=${c.id}` })), { id: 'todas', nombre: 'Ver todas', to: '/tienda' }];
+  return (
+    <div className="contenedor">
+      <ul className="flex h-[480px] gap-3">
+        {paneles.map((p, i) => {
+          const on = i === activo;
+          const todas = p.id === 'todas';
+          return (
+            <li
+              key={p.id}
+              className="min-w-0 basis-0 transition-[flex-grow] duration-[600ms] ease-[ease]"
+              style={{ flexGrow: on ? 4 : 1 }}
+              onMouseEnter={() => setActivo(i)}
+            >
+              <Link
+                to={p.to}
+                onFocus={() => setActivo(i)}
+                aria-label={todas ? 'Ver todas las categorías' : `${p.nombre}: ver productos`}
+                className={`group relative block size-full overflow-hidden rounded-3xl shadow-suave ${todas ? 'bg-salvia' : ''}`}
+              >
+                {!todas && (
+                  <>
+                    <FotoProducto src={p.imagen} srcSm={imgSm(p.imagen)} sizes="(min-width: 1024px) 640px" placeholderTitulo={p.nombre} cover zoom={false} />
+                    <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#16241C]/80 via-[#16241C]/15 to-transparent" />
+                  </>
+                )}
+                {/* Angosto: nombre en vertical */}
+                <span
+                  aria-hidden="true"
+                  className={`absolute bottom-7 left-1/2 -translate-x-1/2 rotate-180 font-serif text-2xl whitespace-nowrap [writing-mode:vertical-rl] transition-opacity duration-500 ${
+                    todas ? 'text-tinta' : 'text-crema-card'
+                  } ${on ? 'opacity-0' : 'opacity-100'}`}
+                >
+                  {todas ? 'Ver todas →' : p.nombre}
+                </span>
+                {/* Expandido: nombre grande + "Ver productos →" que entra desde abajo */}
+                <span className={`absolute inset-x-8 bottom-8 transition-opacity duration-500 ${on ? 'opacity-100 delay-150' : 'opacity-0'}`}>
+                  <span className={`block font-serif text-5xl leading-none whitespace-nowrap ${todas ? 'text-tinta' : 'text-crema-card'}`}>
+                    {todas ? 'Ver todas' : p.nombre}
+                  </span>
+                  <span
+                    className={`mt-3 inline-flex items-center gap-2 text-sm font-bold transition duration-500 ease-out ${todas ? 'text-verde' : 'text-crema-card'} ${
+                      on ? 'translate-y-0 opacity-100 delay-200' : 'translate-y-4 opacity-0'
+                    }`}
+                  >
+                    {todas ? 'Todas las categorías' : 'Ver productos'} <Icon name="flecha" size={16} />
+                  </span>
+                </span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
+/* ═════════ MÁS VENDIDOS: full-bleed; desktop con controles arriba, mobile con card central ═════════ */
 function MasVendidos() {
   const { data: productos, loading } = useProducts();
+  const desktop = useMediaQuery('(min-width: 768px)');
   const destacados = useMemo(() => (productos ?? []).filter((p) => p.destacado), [productos]);
+  const titulo = (
+    <h2 id="dest-titulo" className="text-3xl leading-tight md:text-4xl">
+      Más vendidos
+    </h2>
+  );
   return (
     <section aria-labelledby="dest-titulo" className="fondo-salvia py-16 md:py-24">
-      <SectionHeader id="dest-titulo" titulo="Más vendidos" link="/tienda" />
-      <Carousel label="Más vendidos" itemsClassName="gap-3 md:gap-5" hint={!loading} autoplay={4500} puntos>
-        {loading
-          ? Array.from({ length: 4 }, (_, i) => (
-              <div key={i} className="w-[64%] shrink-0 sm:w-[17.5rem] lg:w-[19rem]">
-                <ProductCardSkeleton />
-              </div>
-            ))
-          : destacados.map((p, i) => (
-              <Reveal key={p.id} delay={cascada(i)} className="w-[64%] shrink-0 snap-start sm:w-[17.5rem] lg:w-[19rem]">
-                <ProductCard producto={p} className="h-full" />
-              </Reveal>
+      {loading ? (
+        <div className="contenedor">
+          {titulo}
+          <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
+            {Array.from({ length: 4 }, (_, i) => (
+              <ProductCardSkeleton key={i} />
             ))}
-      </Carousel>
+          </div>
+        </div>
+      ) : desktop ? (
+        <Carousel label="Más vendidos" itemsClassName="gap-5" autoplay={4500} hint cabecera={<Reveal>{titulo}</Reveal>}>
+          {destacados.map((p, i) => (
+            <Reveal key={p.id} delay={cascada(i)} className="w-[17.5rem] shrink-0 snap-start lg:w-[19rem]">
+              <ProductCard producto={p} className="h-full" />
+            </Reveal>
+          ))}
+        </Carousel>
+      ) : (
+        <>
+          <div className="contenedor mb-2 flex items-end justify-between">
+            {titulo}
+            <Link to="/tienda" className="py-2 text-sm font-bold text-verde">
+              Ver todo
+            </Link>
+          </div>
+          <CarruselCentrado label="Más vendidos">
+            {destacados.map((p) => (
+              <ProductCard key={p.id} producto={p} className="h-full" />
+            ))}
+          </CarruselCentrado>
+        </>
+      )}
     </section>
   );
 }
@@ -310,8 +383,8 @@ function RutinaDesktop() {
             return (
               <li key={p}>
                 <Link to={prod ? `/producto/${prod.id}` : '/rutina'} className="card group block overflow-hidden rounded-3xl">
-                  <span className="block aspect-[4/5] overflow-hidden bg-salvia-media">
-                    {prod && <SmartImg src={prod.imagen} srcSm={imgSm(prod.imagen)} sizes="300px" alt="" className="size-full object-cover" />}
+                  <span className="block aspect-[4/5] overflow-hidden">
+                    {prod && <FotoProducto src={prod.imagen} srcSm={imgSm(prod.imagen)} sizes="300px" />}
                   </span>
                   <span className="flex items-center gap-3 p-4">
                     <span className="flex size-9 shrink-0 items-center justify-center rounded-full border border-verde text-sm font-bold text-verde">{i + 1}</span>
@@ -383,14 +456,8 @@ function RutinaDesktop() {
                   className="absolute inset-0"
                 >
                   <Link to={`/producto/${producto.id}`} className="group block size-full">
-                    <span className="block size-full overflow-hidden rounded-[2.5rem] bg-salvia-media shadow-flotante">
-                      <SmartImg
-                        src={producto.imagen}
-                        srcSm={imgSm(producto.imagen)}
-                        sizes="448px"
-                        alt={producto.nombre}
-                        className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
+                    <span className="block size-full overflow-hidden rounded-[2.5rem] shadow-flotante">
+                      <FotoProducto src={producto.imagen} srcSm={imgSm(producto.imagen)} sizes="448px" alt={producto.nombre} />
                     </span>
                     <span className="absolute -bottom-5 left-6 rounded-2xl border border-linea bg-crema-card/95 px-4 py-3 shadow-flotante backdrop-blur">
                       <span className="block text-sm font-semibold text-tinta">{producto.nombre}</span>
@@ -430,7 +497,9 @@ function RutinaMobile() {
                 </span>
                 <span className="card flex flex-1 items-center gap-3 rounded-2xl p-2 pr-3">
                   {prod && (
-                    <img src={imgSm(prod.imagen)} alt="" width="64" height="64" loading="lazy" className="size-16 shrink-0 rounded-xl bg-salvia-media object-cover" />
+                    <span className="size-16 shrink-0 overflow-hidden rounded-xl">
+                      <FotoProducto src={imgSm(prod.imagen)} zoom={false} compacta />
+                    </span>
                   )}
                   <span className="min-w-0">
                     <span className="block font-serif text-xl text-tinta">{p}</span>

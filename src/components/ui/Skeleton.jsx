@@ -27,7 +27,7 @@ export function GridSkeleton({ n = 8 }) {
 
 export function PageSkeleton() {
   return (
-    <div className="mx-auto max-w-6xl px-4 pt-6 pb-24" role="status" aria-label="Cargando">
+    <div className="contenedor pt-6 pb-24" role="status" aria-label="Cargando">
       <Skeleton className="h-8 w-1/2" />
       <Skeleton className="mt-3 h-4 w-2/3" />
       <div className="mt-8">

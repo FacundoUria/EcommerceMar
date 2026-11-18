@@ -28,7 +28,7 @@ export default function Carrito() {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 pt-4 pb-32 md:pb-12">
+    <div className="contenedor pt-4 pb-32 md:pb-12">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <Reveal as="h1" className="text-4xl md:text-5xl">Tu carrito</Reveal>
         <div className="flex items-center gap-2">

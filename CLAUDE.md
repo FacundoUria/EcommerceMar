@@ -58,7 +58,11 @@ React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScri
   - `verde` #3E6450 (hover `verde-700` #345543): botón primario, íconos activos, links. `tinta` #22382B títulos y texto. `texto-suave` #5B6B60 secundario.
   - `dorado` #7E602B cursivas destacadas (oscurecido desde #8A6A2F para llegar a AA sobre salvia). `crema-card` #FFFDF8 cards, drawer, quick view.
   - `amarillo` #fed65b SOLO en el badge del carrito. El verde casi negro #0b291b ya no existe en el sitio.
-  - Secciones alternan arena / salvia; los bloques dentro del contenedor usan `bloque-salvia` (rounded-3xl). Cards: utilidad `card`.
+  - **Sin cajas**: las secciones van de borde a borde; los cambios de fondo son degradés (`fondo-salvia`: arena → salvia → arena; `fondo-salvia-abajo` para el footer). Nada de bloques redondeados con margen. Las cards siguen siendo cards (`card`).
+  - Ancho: `contenedor` (máx 84rem, px-4 / md:px-8). En desktop 1440 nada debe verse como "celu estirado" (tienda en 4 columnas, hero en 2).
+  - Hero y rutina del home: `<MeshFondo>` (manchas radial-gradient que derivan 20–30 s con transform; quietas con movimiento reducido).
+  - Botón primario: degradé verde #3E6450 → #2F5240 con brillo en hover. Botones con efecto magnético (máx 6px, `useBotonesMagneticos`, solo mouse).
+  - Cursivas destacadas: `texto-dorado` (degradé con background-clip; solo en títulos grandes, el tono claro da 3.38:1).
   - Header, bottom nav y barras fijas: `glass-arena` (arena translúcido con blur), íconos tinta, activo con píldora salvia y texto verde. Modales: `velo`.
   - Botón secundario `btn-borde`: borde verde 1px, texto verde, fondo transparente.
   - Precios: utilidad `precio` (Manrope 600, tabular-nums), nunca Playfair. Formato "$ 15.000" vía `formatPrecio`.

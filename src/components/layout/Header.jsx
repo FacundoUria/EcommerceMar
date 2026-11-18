@@ -58,7 +58,7 @@ export default function Header() {
         initial={false}
         animate={{ y: compacto && !reducido ? 4 : 0 }}
         transition={{ duration: 0.5, ease: EASE }}
-        className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 md:h-20"
+        className="contenedor flex h-16 items-center justify-between gap-4 md:h-20"
       >
         <Link to="/" className="rounded-full" aria-label={`${NEGOCIO.nombre} — inicio`}>
           <m.span
@@ -76,22 +76,17 @@ export default function Header() {
         </Link>
 
         <nav aria-label="Principal" className="hidden md:block">
-          <ul className="flex items-center gap-1">
+          <ul className="flex items-center gap-2 lg:gap-4">
             {LINKS.map((l) => (
               <li key={l.to}>
                 <NavLink
                   to={l.to}
                   end={l.end}
                   className={({ isActive }) =>
-                    `relative rounded-full px-4 py-2 text-sm font-semibold transition hover:bg-salvia ${isActive ? 'bg-salvia text-verde' : 'text-texto-suave hover:text-tinta'}`
+                    `subrayado px-3 py-2 text-[15px] font-semibold transition-colors duration-300 ${isActive ? 'text-verde' : 'text-texto-suave hover:text-tinta'}`
                   }
                 >
-                  {({ isActive }) => (
-                    <>
-                      {l.label}
-                      {isActive && <span className="absolute inset-x-4 -bottom-0.5 h-0.5 rounded-full bg-verde" />}
-                    </>
-                  )}
+                  {l.label}
                 </NavLink>
               </li>
             ))}

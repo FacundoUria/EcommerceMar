@@ -69,7 +69,7 @@ export default function Tienda() {
   const hayFiltros = cat || marca || q;
 
   return (
-    <div className="mx-auto max-w-6xl pt-4 pb-10">
+    <div className="mx-auto w-full max-w-[84rem] pt-4 pb-10 md:px-4">
       <Reveal as="header" className="px-4">
         <h1 className="text-4xl md:text-5xl">{catActual?.nombre ?? (marca || 'Tienda')}</h1>
       </Reveal>
@@ -174,7 +174,7 @@ export default function Tienda() {
             </button>
           </div>
         ) : (
-          <m.ul layout className="grid grid-cols-2 gap-x-3 gap-y-7 sm:gap-x-5 md:grid-cols-3 lg:grid-cols-4">
+          <m.ul layout className="grid grid-cols-2 gap-x-3 gap-y-7 sm:gap-x-5 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-6 lg:gap-y-10">
             <AnimatePresence mode="popLayout">
               {resultados.map((p, i) => (
                 // Cascada (0.06s) solo para las cards que entran en pantalla, una vez cada una.

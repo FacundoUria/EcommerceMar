@@ -122,8 +122,23 @@
 @utility btn {
   @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-bold tracking-wide transition duration-200 select-none active:scale-[0.96] disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100;
 }
+/* Primario: degradé verde (#3E6450 → #2F5240) con un brillo que lo recorre en hover.
+   Texto arena: 5.83:1 en el tono claro, 7.63:1 en el oscuro. */
 @utility btn-primario {
-  @apply bg-verde text-arena shadow-suave hover:bg-verde-700 hover:shadow-flotante;
+  @apply relative isolate overflow-hidden text-arena shadow-suave hover:shadow-flotante;
+  background-image: linear-gradient(135deg, #3e6450 0%, #2f5240 100%);
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(100deg, transparent 30%, rgb(255 253 248 / 0.28) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  &:hover::after {
+    transform: translateX(120%);
+  }
 }
 /* Secundario: borde verde 1px, texto verde, fondo transparente */
 @utility btn-borde {
@@ -137,6 +152,87 @@
 }
 @utility chip {
   @apply inline-flex shrink-0 items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-semibold whitespace-nowrap transition duration-200 active:scale-95;
+}
+
+/* Cursivas destacadas: degradé dorado sutil en el texto.
+   Tono más claro #9A7535: 3.69:1 sobre arena / 3.38:1 sobre salvia (AA texto grande; se usa solo en títulos). */
+@utility texto-dorado {
+  background-image: linear-gradient(100deg, #7e602b 0%, #9a7535 45%, #7e602b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-right: 0.08em; /* que la cursiva no se corte al recortar el fondo */
+}
+
+/* Fondos de sección de borde a borde: transiciones suaves arena → salvia → arena (sin cajas) */
+@utility fondo-salvia {
+  background-image: linear-gradient(180deg, var(--color-arena) 0%, var(--color-salvia) 22%, var(--color-salvia) 78%, var(--color-arena) 100%);
+}
+@utility fondo-salvia-abajo {
+  background-image: linear-gradient(180deg, var(--color-arena) 0%, var(--color-salvia) 40%);
+}
+
+/* Contenedor ancho del sitio (desktop 1440px aprovechado) */
+@utility contenedor {
+  @apply mx-auto w-full max-w-[84rem] px-4 md:px-8;
+}
+
+/* Subrayado que se dibuja de izquierda a derecha (links del nav) */
+@utility subrayado {
+  @apply relative;
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: 0.2rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--color-verde);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  &:hover::after,
+  &[aria-current='page']::after {
+    transform: scaleX(1);
+  }
+}
+
+/* Mesh gradient animado: manchas difuminadas (radial-gradient) que se mueven lento con transform */
+@keyframes deriva-a {
+  0% { transform: translate3d(-8%, -6%, 0) scale(1); }
+  100% { transform: translate3d(10%, 8%, 0) scale(1.18); }
+}
+@keyframes deriva-b {
+  0% { transform: translate3d(6%, 4%, 0) scale(1.1); }
+  100% { transform: translate3d(-12%, -8%, 0) scale(0.95); }
+}
+@keyframes deriva-c {
+  0% { transform: translate3d(0, 8%, 0) scale(0.9); }
+  100% { transform: translate3d(8%, -10%, 0) scale(1.12); }
+}
+.mancha {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Indicador de scroll y flotado suave de las mini-cards del hero */
+@keyframes rebote {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(8px); opacity: 0.55; }
+}
+@keyframes flotar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Barras de progreso de las stories */
+@keyframes llenar {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
 
 /* Cinta infinita de marcas: dos copias de la fila, se desplaza una fila entera (solo transform) */
@@ -166,19 +262,14 @@
   animation: brillo 1.4s infinite;
 }
 
-@keyframes pulso-verde {
-  0% {
-    box-shadow: 0 0 0 0 rgb(62 100 80 / 0.45);
-  }
-  70% {
-    box-shadow: 0 0 0 12px rgb(62 100 80 / 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgb(62 100 80 / 0);
-  }
+/* Aro que se expande (solo transform + opacity) */
+@keyframes pulso-aro {
+  0% { transform: scale(1); opacity: 0.7; }
+  80%, 100% { transform: scale(1.45); opacity: 0; }
 }
 .pulso {
-  animation: pulso-verde 2.4s infinite;
+  border: 2px solid rgb(62 100 80 / 0.5);
+  animation: pulso-aro 2.4s ease-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -189,5 +280,12 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  /* Todo lo que se mueve queda quieto: degradés, flotados, indicador, aros */
+  .mancha,
+  .pulso,
+  .anim-flotar,
+  .anim-rebote {
+    animation: none !important;
   }
 }

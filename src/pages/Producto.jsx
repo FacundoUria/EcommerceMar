@@ -64,7 +64,7 @@ function Detalle({ producto }) {
   };
 
   return (
-    <div className="mx-auto max-w-6xl px-4 pt-2 pb-36 md:pt-6 md:pb-10">
+    <div className="contenedor pt-2 pb-36 md:pt-6 md:pb-10">
       {/* Migas */}
       <nav aria-label="Migas de pan" className="mb-4 text-sm text-texto-suave">
         <ol className="flex flex-wrap items-center gap-1.5">
@@ -249,7 +249,7 @@ function CompletaTuRutina({ producto }) {
 
 function ProductoSkeleton() {
   return (
-    <div className="mx-auto grid max-w-6xl gap-8 px-4 pt-6 md:grid-cols-2" role="status" aria-label="Cargando producto">
+    <div className="contenedor grid gap-8 pt-6 md:grid-cols-2" role="status" aria-label="Cargando producto">
       <Skeleton className="aspect-square rounded-5xl" />
       <div>
         <Skeleton className="h-3 w-24" />

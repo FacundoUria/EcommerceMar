@@ -1,19 +1,20 @@
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router';
-import { m, useReducedMotion, useScroll, useTransform } from 'motion/react';
+import { AnimatePresence, m, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import Icon from '../components/ui/Icon.jsx';
 import Reveal, { cascada } from '../components/ui/Reveal.jsx';
 import Carousel from '../components/ui/Carousel.jsx';
 import SmartImg from '../components/ui/SmartImg.jsx';
-import AutoVideo from '../components/ui/AutoVideo.jsx';
+import Stories from '../components/ui/Stories.jsx';
+import MeshFondo from '../components/ui/MeshFondo.jsx';
 import SectionHeader from '../components/ui/SectionHeader.jsx';
 import LineaProgreso from '../components/ui/LineaProgreso.jsx';
 import ProductCard from '../components/product/ProductCard.jsx';
 import { ProductCardSkeleton, Skeleton } from '../components/ui/Skeleton.jsx';
 import { useBrands, useCategories, useProducts } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
-import { NEGOCIO } from '../config/negocio.js';
-import { imgSm } from '../lib/format.js';
+import { NEGOCIO, PASOS_RUTINA } from '../config/negocio.js';
+import { formatPrecio, imgSm } from '../lib/format.js';
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -25,14 +26,14 @@ export default function Home() {
       <Categorias />
       <MasVendidos />
       <CintaMarcas />
-      <RutinaCard />
+      <RutinaHistoria />
       <HolaSoyMar />
       <Resultados />
     </>
   );
 }
 
-/* ───────── Hero: bloque salvia, foto con zoom-out + parallax, título palabra por palabra ───────── */
+/* ═════════ HERO full-screen: mesh animado, título gigante, foto blob + mini-cards flotantes ═════════ */
 const TITULO = [
   { t: 'El' },
   { t: 'cabello' },
@@ -44,53 +45,41 @@ const TITULO = [
   { t: 'amor', em: true },
   { t: 'propio', em: true },
 ];
-const PARALLAX_PX = 60; // recorrido máximo de la foto dentro del marco
+const PARALLAX_PX = 60;
+const BLOB = 'rounded-[46%_54%_40%_60%/56%_44%_56%_44%]';
 
 function Hero() {
   const reducido = useReducedMotion();
   const { scrollY } = useScroll();
-  // La foto sube al 70% de la velocidad del scroll: se desplaza +30% del scroll (hasta 60px).
+  const { data: productos } = useProducts();
+  // Foto al 70% de la velocidad del scroll; mini-cards a distintas velocidades.
   const yFoto = useTransform(scrollY, [0, PARALLAX_PX / 0.3], [0, PARALLAX_PX], { clamp: true });
+  const yCard1 = useTransform(scrollY, [0, 600], [0, -70], { clamp: true });
+  const yCard2 = useTransform(scrollY, [0, 600], [0, -140], { clamp: true });
+
+  const flotantes = ['shampoo-low-poo-han', 'cremas-skala'].map((id) => productos?.find((p) => p.id === id)).filter(Boolean);
 
   return (
-    <section aria-labelledby="hero-titulo" className="mx-auto max-w-6xl px-3 pt-2 md:px-4 md:pt-6">
-      <div className="bloque-salvia grid items-center gap-6 p-3 pb-7 md:grid-cols-2 md:gap-12 md:p-10">
-        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl bg-salvia-media md:order-2 md:mx-auto md:max-w-md">
-          {/* Capa extendida hacia arriba para que el parallax nunca deje un hueco */}
-          <m.div className="absolute inset-x-0 bottom-0" style={{ top: -PARALLAX_PX, y: reducido ? 0 : yFoto }}>
-            <m.div
-              initial={reducido ? false : { scale: 1.08 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.8, ease: EASE }}
-              className="size-full"
-            >
-              <SmartImg
-                src="/img/mar/mar-con-productos-1.webp"
-                alt="Mar, de Dream Hair, con rulos definidos y productos para rulos"
-                width={387}
-                height={516}
-                priority
-                className="size-full object-cover object-top"
-              />
-            </m.div>
-          </m.div>
-        </div>
-        <div className="flex flex-col items-start gap-6 px-3 md:order-1 md:px-0">
-          <h1 id="hero-titulo" className="text-[2.5rem] leading-[1.05] md:text-6xl">
+    <section aria-labelledby="hero-titulo" className="relative isolate -mt-px overflow-hidden">
+      <MeshFondo />
+      <div className="contenedor grid min-h-[calc(85svh-4rem)] items-center gap-8 pt-6 pb-20 md:min-h-[calc(90vh-5rem)] md:grid-cols-[1.08fr_0.92fr] md:gap-10 md:pt-4 md:pb-24">
+        {/* Título (arriba en mobile, izquierda en desktop) */}
+        <div className="flex flex-col items-start gap-8">
+          <h1 id="hero-titulo" className="text-[clamp(3rem,7.4vw,6.5rem)] leading-[0.98] tracking-[-0.02em]">
             {TITULO.map(({ t, em }, i) => {
               const palabra = (
                 <m.span
                   className="inline-block"
                   initial={reducido ? false : { opacity: 0, y: '0.35em' }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.15 + i * 0.08, ease: EASE }}
+                  transition={{ duration: 0.7, delay: 0.15 + i * 0.08, ease: EASE }}
                 >
                   {t}
                 </m.span>
               );
               return (
                 <span key={t + i}>
-                  {em ? <em className="text-dorado">{palabra}</em> : palabra}
+                  {em ? <em className="texto-dorado">{palabra}</em> : palabra}
                   {i < TITULO.length - 1 && ' '}
                 </span>
               );
@@ -101,39 +90,117 @@ function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 + TITULO.length * 0.08, ease: EASE }}
           >
-            <Link to="/tienda" className="btn btn-primario">
+            <Link to="/tienda" className="btn btn-primario px-8 py-4 text-base">
               Ver productos <Icon name="flecha" size={18} />
             </Link>
           </m.div>
         </div>
+
+        {/* Foto con forma orgánica + mini-cards flotando */}
+        <div className="relative mx-auto w-[84%] max-w-[30rem] md:w-full">
+          <m.div
+            initial={reducido ? false : { opacity: 0, scale: 1.08 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: EASE }}
+            className={`relative aspect-[4/5] overflow-hidden bg-salvia-media shadow-flotante ${BLOB}`}
+          >
+            <m.div className="absolute inset-x-0 bottom-0" style={{ top: -PARALLAX_PX, y: reducido ? 0 : yFoto }}>
+              <SmartImg
+                src="/img/mar/mar-con-productos-1.webp"
+                alt="Mar, de Dream Hair, con rulos definidos y productos para rulos"
+                width={387}
+                height={516}
+                priority
+                className="size-full object-cover object-top"
+              />
+            </m.div>
+          </m.div>
+
+          {flotantes[0] && (
+            <MiniCard producto={flotantes[0]} y={reducido ? 0 : yCard1} delay={0.9} className="-left-[14%] bottom-[10%] md:-left-[18%]" />
+          )}
+          {flotantes[1] && (
+            <MiniCard producto={flotantes[1]} y={reducido ? 0 : yCard2} delay={1.05} className="-right-[10%] top-[8%] md:-right-[12%]" flotarDesfase />
+          )}
+        </div>
+      </div>
+
+      {/* Indicador de scroll */}
+      <div aria-hidden="true" className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1.5 text-texto-suave md:flex">
+        <span className="flex h-10 w-6 justify-center rounded-full border border-tinta/25 pt-2">
+          <span className="anim-rebote h-2 w-1 rounded-full bg-verde" style={{ animation: 'rebote 2s ease-in-out infinite' }} />
+        </span>
+        <span className="text-[11px] font-semibold tracking-[0.2em] uppercase">Scroll</span>
       </div>
     </section>
   );
 }
 
-/* ───────── Categorías (fondo arena): cascada al entrar ───────── */
+function MiniCard({ producto, y, delay, className, flotarDesfase = false }) {
+  const reducido = useReducedMotion();
+  return (
+    <m.div style={{ y }} className={`absolute z-10 ${className}`}>
+      <m.div
+        initial={reducido ? false : { opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay, ease: EASE }}
+      >
+        <Link
+          to={`/producto/${producto.id}`}
+          className="anim-flotar flex w-[10.5rem] items-center gap-2.5 rounded-2xl border border-linea bg-crema-card/90 p-2 pr-3 shadow-flotante backdrop-blur-md transition hover:bg-crema-card md:w-[13rem] md:p-2.5"
+          style={{ animation: `flotar ${flotarDesfase ? 7 : 6}s ease-in-out ${flotarDesfase ? '-2s' : '0s'} infinite` }}
+        >
+          <img
+            src={imgSm(producto.imagen)}
+            alt=""
+            width="56"
+            height="56"
+            className="size-11 shrink-0 rounded-xl bg-salvia-media object-cover md:size-14"
+          />
+          <span className="min-w-0">
+            <span className="line-clamp-2 block text-xs leading-tight font-semibold text-tinta md:text-[13px]">{producto.nombre}</span>
+            <span className="precio mt-0.5 block text-xs text-verde md:text-sm">{formatPrecio(producto.precio)}</span>
+          </span>
+        </Link>
+      </m.div>
+    </m.div>
+  );
+}
+
+/* ═════════ CATEGORÍAS: cards altas 3:4, foto a sangre, degradé y nombre en blanco ═════════ */
 function Categorias() {
   const { data: categorias, loading } = useCategories();
   return (
-    <section aria-labelledby="cat-titulo" className="mt-14">
+    <section aria-labelledby="cat-titulo" className="pt-10 pb-16 md:pt-16 md:pb-24">
       <SectionHeader id="cat-titulo" titulo="Categorías" link="/tienda" />
-      <Carousel label="Categorías" itemsClassName="gap-3 md:gap-4">
+      <Carousel label="Categorías" itemsClassName="gap-3 md:gap-5" hint>
         {loading || !categorias
-          ? Array.from({ length: 3 }, (_, i) => <Skeleton key={i} className="aspect-[4/5] w-[58%] shrink-0 rounded-3xl md:w-64" />)
+          ? Array.from({ length: 4 }, (_, i) => <Skeleton key={i} className="aspect-[3/4] w-[64%] shrink-0 rounded-3xl md:w-[18.5rem]" />)
           : categorias.map((c, i) => (
-              <Reveal key={c.id} delay={cascada(i)} className="w-[58%] shrink-0 snap-start md:w-64">
-                <Link to={`/tienda?cat=${c.id}`} className="group block rounded-3xl">
-                  <span className="block aspect-[4/5] overflow-hidden rounded-3xl bg-salvia-media transition duration-300 group-hover:-translate-y-1 group-hover:shadow-flotante group-active:scale-[0.98]">
-                    <SmartImg
-                      src={c.imagen}
-                      srcSm={imgSm(c.imagen)}
-                      sizes="(min-width: 768px) 256px, 58vw"
-                      alt=""
-                      placeholderTitulo={c.nombre}
-                      className="size-full object-cover transition-transform duration-700 group-hover:scale-110"
+              <Reveal key={c.id} delay={cascada(i)} className="w-[64%] shrink-0 snap-start md:w-[18.5rem]">
+                <Link
+                  to={`/tienda?cat=${c.id}`}
+                  className="group relative block aspect-[3/4] overflow-hidden rounded-3xl bg-salvia-media shadow-suave transition duration-500 hover:shadow-flotante"
+                >
+                  <SmartImg
+                    src={c.imagen}
+                    srcSm={imgSm(c.imagen)}
+                    sizes="(min-width: 768px) 296px, 64vw"
+                    alt=""
+                    placeholderTitulo={c.nombre}
+                    className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                  />
+                  <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#16241C]/80 via-[#16241C]/15 to-transparent" />
+                  <span className="absolute inset-x-5 bottom-5 flex items-center gap-2 text-crema-card">
+                    <span className="font-serif text-2xl leading-tight transition-transform duration-500 ease-out group-hover:translate-x-1 md:text-[1.65rem]">
+                      {c.nombre}
+                    </span>
+                    <Icon
+                      name="flecha"
+                      size={20}
+                      className="shrink-0 -translate-x-2 opacity-0 transition duration-500 ease-out group-hover:translate-x-1 group-hover:opacity-100"
                     />
                   </span>
-                  <span className="mt-2.5 block px-1 font-serif text-lg leading-tight text-tinta">{c.nombre}</span>
                 </Link>
               </Reveal>
             ))}
@@ -142,43 +209,34 @@ function Categorias() {
   );
 }
 
-/* ───────── Más vendidos (bloque salvia): cascada + "hint" del carrusel ───────── */
+/* ═════════ MÁS VENDIDOS: full-bleed (degradé arena → salvia → arena), autoplay lento ═════════ */
 function MasVendidos() {
   const { data: productos, loading } = useProducts();
   const destacados = useMemo(() => (productos ?? []).filter((p) => p.destacado), [productos]);
   return (
-    <section aria-labelledby="dest-titulo" className="mx-auto mt-14 max-w-6xl px-3 md:px-4">
-      <div className="bloque-salvia overflow-hidden py-7 md:py-10">
-        <Reveal className="mb-5 flex items-end justify-between gap-4 px-5 md:px-8">
-          <h2 id="dest-titulo" className="text-3xl leading-tight md:text-4xl">
-            Más vendidos
-          </h2>
-          <Link to="/tienda" className="group/l inline-flex shrink-0 items-center gap-1 py-2 text-sm font-bold text-verde">
-            Ver todo <Icon name="flecha" size={16} className="transition-transform group-hover/l:translate-x-1" />
-          </Link>
-        </Reveal>
-        <Carousel label="Más vendidos" itemsClassName="gap-3 md:gap-4" gutter="1.25rem" hint={!loading}>
-          {loading
-            ? Array.from({ length: 3 }, (_, i) => (
-                <div key={i} className="w-[62%] shrink-0 sm:w-64">
-                  <ProductCardSkeleton />
-                </div>
-              ))
-            : destacados.map((p, i) => (
-                <Reveal key={p.id} delay={cascada(i)} className="w-[62%] shrink-0 snap-start sm:w-64">
-                  <ProductCard producto={p} className="h-full" />
-                </Reveal>
-              ))}
-        </Carousel>
-      </div>
+    <section aria-labelledby="dest-titulo" className="fondo-salvia py-16 md:py-24">
+      <SectionHeader id="dest-titulo" titulo="Más vendidos" link="/tienda" />
+      <Carousel label="Más vendidos" itemsClassName="gap-3 md:gap-5" hint={!loading} autoplay={4500} puntos>
+        {loading
+          ? Array.from({ length: 4 }, (_, i) => (
+              <div key={i} className="w-[64%] shrink-0 sm:w-[17.5rem] lg:w-[19rem]">
+                <ProductCardSkeleton />
+              </div>
+            ))
+          : destacados.map((p, i) => (
+              <Reveal key={p.id} delay={cascada(i)} className="w-[64%] shrink-0 snap-start sm:w-[17.5rem] lg:w-[19rem]">
+                <ProductCard producto={p} className="h-full" />
+              </Reveal>
+            ))}
+      </Carousel>
     </section>
   );
 }
 
-/* ───────── Cinta infinita de marcas (sin título) ───────── */
+/* ═════════ Cinta infinita de marcas (sin título) ═════════ */
 function CintaMarcas() {
   const { data: marcas } = useBrands();
-  if (!marcas?.length) return <div className="mt-6 h-14" aria-hidden="true" />;
+  if (!marcas?.length) return <div className="h-20" aria-hidden="true" />;
   const fila = (copia) => (
     <ul className="flex shrink-0 items-center" aria-hidden={copia || undefined}>
       {marcas.map((mk) => (
@@ -186,18 +244,18 @@ function CintaMarcas() {
           <Link
             to={`/tienda?marca=${encodeURIComponent(mk)}`}
             tabIndex={copia ? -1 : undefined}
-            className="px-5 font-serif text-2xl whitespace-nowrap text-tinta transition-colors hover:text-verde md:text-3xl"
+            className="px-6 font-serif text-3xl whitespace-nowrap text-tinta transition-colors hover:text-verde md:px-9 md:text-5xl"
           >
             {mk}
           </Link>
-          <span className="size-1.5 rounded-full bg-dorado" aria-hidden="true" />
+          <span className="size-2 rounded-full bg-dorado" aria-hidden="true" />
         </li>
       ))}
     </ul>
   );
   return (
-    <nav aria-label="Marcas" className="group/cinta mt-6 overflow-hidden py-4 [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
-      <div className="flex w-max animate-[cinta_40s_linear_infinite] group-hover/cinta:[animation-play-state:paused] motion-reduce:animate-none">
+    <nav aria-label="Marcas" className="group/cinta overflow-hidden py-8 [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)] md:py-12">
+      <div className="flex w-max animate-[cinta_45s_linear_infinite] group-hover/cinta:[animation-play-state:paused] motion-reduce:animate-none">
         {fila(false)}
         {fila(true)}
       </div>
@@ -205,47 +263,195 @@ function CintaMarcas() {
   );
 }
 
-/* ───────── Rutina (bloque salvia): pasos de a uno + línea que se dibuja con el scroll ───────── */
+/* ═════════ ARMÁ TU RUTINA: scroll storytelling (sticky en desktop, apilado en mobile) ═════════ */
 const PASOS_CHIPS = ['Lavar', 'Hidratar', 'Definir', 'Proteger'];
 
-function RutinaCard() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 90%', 'center 45%'] });
+function useProductosPorPaso() {
+  const { data: productos } = useProducts();
+  return useMemo(
+    () =>
+      PASOS_RUTINA.map((p) => {
+        const lista = (productos ?? []).filter((x) => p.categorias.includes(x.categoria));
+        return lista.find((x) => x.destacado) ?? lista[0] ?? null;
+      }),
+    [productos],
+  );
+}
+
+function RutinaHistoria() {
   return (
-    <section ref={ref} aria-labelledby="rutina-titulo" className="mx-auto mt-6 max-w-6xl px-3 md:px-4">
-      <div className="bloque-salvia flex flex-col gap-6 p-6 md:flex-row md:items-center md:justify-between md:gap-12 md:p-10">
-        <div className="flex-1">
-          <Reveal>
-            <h2 id="rutina-titulo" className="text-3xl md:text-4xl">
-              Armá tu rutina
-            </h2>
-          </Reveal>
-          <div className="relative mt-5 max-w-xl">
-            {/* línea que conecta los centros de los 4 círculos */}
-            <LineaProgreso progreso={scrollYProgress} className="absolute top-[17px] right-[12.5%] left-[12.5%]" />
-            <ol className="relative grid grid-cols-4">
-              {PASOS_CHIPS.map((p, i) => (
-                <Reveal as="li" key={p} delay={0.1 + i * 0.12} className="flex flex-col items-center gap-2 text-center">
-                  <span className="flex size-9 items-center justify-center rounded-full border border-linea bg-crema-card text-sm font-bold text-verde shadow-suave">
-                    {i + 1}
-                  </span>
-                  <span className="text-sm font-semibold text-tinta">{p}</span>
-                </Reveal>
-              ))}
-            </ol>
-          </div>
-        </div>
-        <Reveal delay={0.2} className="self-start md:self-auto">
-          <Link to="/rutina" className="btn btn-primario">
-            Empezar<span className="sr-only"> la rutina</span> <Icon name="flecha" size={18} />
-          </Link>
-        </Reveal>
-      </div>
+    <section aria-labelledby="rutina-titulo" className="relative isolate">
+      <MeshFondo />
+      <RutinaDesktop />
+      <RutinaMobile />
     </section>
   );
 }
 
-/* ───────── Hola, soy Mar (parallax de capas: foto y marco a distinta velocidad) ───────── */
+function RutinaDesktop() {
+  const ref = useRef(null);
+  const reducido = useReducedMotion();
+  const porPaso = useProductosPorPaso();
+  const [activo, setActivo] = useState(0);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
+  useMotionValueEvent(scrollYProgress, 'change', (v) => setActivo(Math.min(3, Math.max(0, Math.floor(v * 4)))));
+  const producto = porPaso[activo];
+
+  // Movimiento reducido: sin sticky ni escenas; los 4 pasos a la vista en una grilla.
+  if (reducido) {
+    return (
+      <div className="contenedor hidden py-24 md:block">
+        <h2 id="rutina-titulo" className="text-[clamp(2.75rem,5vw,4.5rem)] leading-none">
+          Armá tu <em className="texto-dorado">rutina</em>
+        </h2>
+        <ol className="mt-10 grid grid-cols-4 gap-6">
+          {PASOS_CHIPS.map((p, i) => {
+            const prod = porPaso[i];
+            return (
+              <li key={p}>
+                <Link to={prod ? `/producto/${prod.id}` : '/rutina'} className="card group block overflow-hidden rounded-3xl">
+                  <span className="block aspect-[4/5] overflow-hidden bg-salvia-media">
+                    {prod && <SmartImg src={prod.imagen} srcSm={imgSm(prod.imagen)} sizes="300px" alt="" className="size-full object-cover" />}
+                  </span>
+                  <span className="flex items-center gap-3 p-4">
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full border border-verde text-sm font-bold text-verde">{i + 1}</span>
+                    <span className="min-w-0">
+                      <span className="block font-serif text-2xl text-tinta">{p}</span>
+                      {prod && <span className="block truncate text-xs text-texto-suave">{prod.nombre}</span>}
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
+        </ol>
+        <Link to="/rutina" className="btn btn-primario mt-10 px-8 py-4 text-base">
+          Empezar<span className="sr-only"> la rutina</span> <Icon name="flecha" size={18} />
+        </Link>
+      </div>
+    );
+  }
+
+  return (
+    <div ref={ref} className="hidden h-[320vh] md:block">
+      <div className="sticky top-0 flex h-screen items-center">
+        <div className="contenedor grid grid-cols-[0.95fr_1.05fr] items-center gap-16">
+          <div>
+            <h2 id="rutina-titulo" className="text-[clamp(2.75rem,5vw,4.5rem)] leading-none">
+              Armá tu <em className="texto-dorado">rutina</em>
+            </h2>
+            <div className="relative mt-10">
+              <LineaProgreso progreso={scrollYProgress} vertical className="absolute top-5 bottom-5 left-[19px]" />
+              <ol className="relative space-y-5">
+                {PASOS_CHIPS.map((p, i) => {
+                  const on = i === activo;
+                  const hecho = i < activo;
+                  return (
+                    <li key={p} className="flex items-center gap-5">
+                      <span
+                        className={`flex size-10 items-center justify-center rounded-full border text-sm font-bold transition duration-500 ${
+                          on ? 'scale-110 border-verde bg-verde text-arena shadow-flotante' : hecho ? 'border-verde bg-crema-card text-verde' : 'border-linea bg-crema-card text-texto-suave'
+                        }`}
+                      >
+                        {i + 1}
+                      </span>
+                      <span
+                        className={`font-serif text-3xl transition duration-500 ${on ? 'translate-x-1 text-tinta' : 'text-texto-suave'}`}
+                        aria-current={on ? 'step' : undefined}
+                      >
+                        {p}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
+            <Link to="/rutina" className="btn btn-primario mt-10 px-8 py-4 text-base">
+              Empezar<span className="sr-only"> la rutina</span> <Icon name="flecha" size={18} />
+            </Link>
+          </div>
+
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-[28rem]">
+            <AnimatePresence mode="popLayout" initial={false}>
+              {producto && (
+                <m.div
+                  key={producto.id}
+                  initial={reducido ? false : { opacity: 0, scale: 0.94, y: 24 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={reducido ? undefined : { opacity: 0, scale: 1.03 }}
+                  transition={{ duration: 0.6, ease: EASE }}
+                  className="absolute inset-0"
+                >
+                  <Link to={`/producto/${producto.id}`} className="group block size-full">
+                    <span className="block size-full overflow-hidden rounded-[2.5rem] bg-salvia-media shadow-flotante">
+                      <SmartImg
+                        src={producto.imagen}
+                        srcSm={imgSm(producto.imagen)}
+                        sizes="448px"
+                        alt={producto.nombre}
+                        className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    </span>
+                    <span className="absolute -bottom-5 left-6 rounded-2xl border border-linea bg-crema-card/95 px-4 py-3 shadow-flotante backdrop-blur">
+                      <span className="block text-sm font-semibold text-tinta">{producto.nombre}</span>
+                      <span className="precio block text-sm text-verde">{formatPrecio(producto.precio)}</span>
+                    </span>
+                  </Link>
+                </m.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function RutinaMobile() {
+  const ref = useRef(null);
+  const porPaso = useProductosPorPaso();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 80%', 'end 60%'] });
+  return (
+    <div className="contenedor py-16 md:hidden">
+      <Reveal>
+        <h2 className="text-4xl leading-none">
+          Armá tu <em className="texto-dorado">rutina</em>
+        </h2>
+      </Reveal>
+      <div ref={ref} className="relative mt-8">
+        <LineaProgreso progreso={scrollYProgress} vertical className="absolute top-8 bottom-8 left-[19px]" />
+        <ol className="relative space-y-4">
+          {PASOS_CHIPS.map((p, i) => {
+            const prod = porPaso[i];
+            return (
+              <Reveal as="li" key={p} delay={i * 0.1} className="flex items-center gap-4">
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-full border border-verde bg-crema-card text-sm font-bold text-verde">
+                  {i + 1}
+                </span>
+                <span className="card flex flex-1 items-center gap-3 rounded-2xl p-2 pr-3">
+                  {prod && (
+                    <img src={imgSm(prod.imagen)} alt="" width="64" height="64" loading="lazy" className="size-16 shrink-0 rounded-xl bg-salvia-media object-cover" />
+                  )}
+                  <span className="min-w-0">
+                    <span className="block font-serif text-xl text-tinta">{p}</span>
+                    {prod && <span className="block truncate text-xs text-texto-suave">{prod.nombre}</span>}
+                  </span>
+                </span>
+              </Reveal>
+            );
+          })}
+        </ol>
+      </div>
+      <Reveal delay={0.2}>
+        <Link to="/rutina" className="btn btn-primario mt-8">
+          Empezar<span className="sr-only"> la rutina</span> <Icon name="flecha" size={18} />
+        </Link>
+      </Reveal>
+    </div>
+  );
+}
+
+/* ═════════ HOLA, SOY MAR (textos intactos; parallax de capas) ═════════ */
 function HolaSoyMar() {
   const ref = useRef(null);
   const reducido = useReducedMotion();
@@ -254,15 +460,15 @@ function HolaSoyMar() {
   const yMarco = useTransform(scrollYProgress, [0, 1], [15, -15]);
   const yFoto = useTransform(scrollYProgress, [0, 1], [-15, 15]);
   return (
-    <section ref={ref} aria-labelledby="mar-titulo" className="mx-auto mt-16 max-w-6xl px-4">
-      <div className="grid items-center gap-8 md:grid-cols-2 md:gap-14">
-        <Reveal className="relative mx-auto w-[86%] max-w-sm">
+    <section ref={ref} aria-labelledby="mar-titulo" className="contenedor py-20 md:py-28">
+      <div className="grid items-center gap-10 md:grid-cols-2 md:gap-20">
+        <Reveal className="relative mx-auto w-[86%] max-w-md">
           <m.div style={reducido ? undefined : { y: yMarco }} className="absolute -inset-3 rotate-[-4deg] rounded-5xl bg-salvia-media" />
           <m.div style={reducido ? undefined : { y: yFoto }} className="relative aspect-[4/5] overflow-hidden rounded-5xl shadow-flotante">
             <SmartImg
               src="/img/mar/mar-con-producto.webp"
               srcSm="/img/mar/mar-con-producto-sm.webp"
-              sizes="(min-width: 768px) 384px, 90vw"
+              sizes="(min-width: 768px) 448px, 90vw"
               alt="Mar, especialista en rizos de Dream Hair"
               width={900}
               height={1575}
@@ -272,13 +478,13 @@ function HolaSoyMar() {
         </Reveal>
         <Reveal delay={0.1}>
           <p className="text-xs font-bold tracking-[0.22em] text-dorado uppercase">Detrás de Dream Hair</p>
-          <h2 id="mar-titulo" className="mt-2 text-5xl leading-none md:text-6xl">
-            Hola, soy <em className="text-dorado">Mar</em>
+          <h2 id="mar-titulo" className="mt-2 text-5xl leading-none md:text-7xl">
+            Hola, soy <em className="texto-dorado">Mar</em>
           </h2>
-          <p className="mt-5 font-serif text-2xl leading-snug text-tinta">
+          <p className="mt-5 max-w-lg font-serif text-2xl leading-snug text-tinta md:text-3xl">
             Especialista en rizos y apasionada por realzar la identidad de cada cabello.
           </p>
-          <div className="mt-7 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/servicios" className="btn btn-primario">
               Conocé los servicios
             </Link>
@@ -292,28 +498,35 @@ function HolaSoyMar() {
   );
 }
 
-/* ───────── Resultados ───────── */
+/* ═════════ RESULTADOS (textos intactos): stories con fotos del estudio + video ═════════ */
+const STORIES = [
+  { tipo: 'video', src: '/video/amor-propio.mp4', poster: '/video/amor-propio.webp', alt: 'Video: rulos definidos en Dream Hair', duracion: 7.7 },
+  { tipo: 'foto', src: '/img/estudio/servicio-corte-rulos.webp', alt: 'Corte de rulos en el estudio', duracion: 5 },
+  { tipo: 'foto', src: '/img/estudio/asesoramiento-1.webp', alt: 'Asesoramiento en el estudio', duracion: 5 },
+  { tipo: 'foto', src: '/img/estudio/asesoramiento-2.webp', alt: 'Asesoramiento en el estudio', duracion: 5 },
+  { tipo: 'foto', src: '/img/estudio/servicio-tratamiento-lavado-1.webp', alt: 'Tratamiento y lavado', duracion: 5 },
+  { tipo: 'foto', src: '/img/estudio/servicio-tratamiento-lavado-2.webp', alt: 'Tratamiento y lavado', duracion: 5 },
+  { tipo: 'foto', src: '/img/estudio/servicio-ozonoterapia.webp', alt: 'Ozonoterapia', duracion: 5 },
+  { tipo: 'foto', src: '/img/estudio/servicio-celulas-madre-infrarrojo.webp', alt: 'Células madre + infrarrojo', duracion: 5 },
+  { tipo: 'foto', src: '/img/estudio/salon-1.webp', alt: 'El estudio Dream Hair', duracion: 5 },
+];
+
 function Resultados() {
   return (
-    <section aria-labelledby="res-titulo" className="mx-auto mt-16 max-w-6xl px-4">
-      <div className="grid items-center gap-8 md:grid-cols-[0.8fr_1.2fr] md:gap-14">
+    <section aria-labelledby="res-titulo" className="fondo-salvia py-20 md:py-28">
+      <div className="contenedor grid items-center gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-20">
         <Reveal className="md:order-2">
           <p className="text-xs font-bold tracking-[0.22em] text-dorado uppercase">Resultados reales</p>
-          <h2 id="res-titulo" className="mt-2 text-4xl leading-tight md:text-5xl">
-            Rulos que se <em className="text-dorado">ven</em> y se <em className="text-dorado">sienten</em>
+          <h2 id="res-titulo" className="mt-2 text-4xl leading-tight md:text-6xl">
+            Rulos que se <em className="texto-dorado">ven</em> y se <em className="texto-dorado">sienten</em>
           </h2>
           <p className="mt-3 max-w-md text-texto-suave">Así quedan los rulos después de pasar por el estudio.</p>
           <Link to="/servicios" className="btn btn-primario mt-6">
             Reservá tu turno <Icon name="flecha" size={18} />
           </Link>
         </Reveal>
-        <Reveal delay={0.1} className="mx-auto w-full max-w-xs md:order-1">
-          <AutoVideo
-            src="/video/amor-propio.mp4"
-            poster="/video/amor-propio.webp"
-            alt="Video: resultado de rulos definidos en Dream Hair"
-            className="aspect-[9/16] rounded-5xl shadow-flotante ring-8 ring-crema-card"
-          />
+        <Reveal delay={0.1} className="mx-auto w-full max-w-[20rem] md:order-1 md:max-w-[22rem]">
+          <Stories items={STORIES} className="aspect-[9/16] rounded-5xl shadow-flotante ring-8 ring-crema-card" />
         </Reveal>
       </div>
     </section>

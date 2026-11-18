@@ -1,54 +1,86 @@
-import { useEffect, useRef, useState } from 'react';
+import { Children, useCallback, useEffect, useRef, useState } from 'react';
 import { useInView, useReducedMotion } from 'motion/react';
 import Icon from './Icon.jsx';
 
 /**
- * Carrusel horizontal con scroll-snap nativo (touch) + arrastre con mouse + flechas en desktop.
- * Los hijos deberían tener ancho fijo (ej. w-[70%] sm:w-64) y `snap-start`.
+ * Carrusel horizontal: scroll-snap nativo (touch) + arrastre con mouse + flechas en desktop.
+ * Los hijos deberían tener ancho fijo (ej. w-[70%] md:w-72) y `snap-start`.
+ *
+ * - `gutter`: margen lateral (CSS). Por defecto alinea con `.contenedor`.
+ * - `hint`: al entrar en pantalla se desliza 40px y vuelve (una vez) para mostrar que se arrastra.
+ * - `autoplay`: ms entre avances. Se pausa con hover / touch / foco y fuera de pantalla. Sin movimiento reducido.
+ * - `puntos`: puntos de progreso (solo mobile).
  */
-/**
- * `gutter`: margen lateral (CSS). Por defecto alinea con el contenedor de 72rem; dentro de un bloque, pasar un valor fijo.
- * `hint`: al entrar en pantalla, el carrusel se desliza 40px a la izquierda y vuelve (una sola vez) para mostrar que se arrastra.
- */
-export default function Carousel({ children, label, className = '', itemsClassName = 'gap-4', gutter, hint = false }) {
+export default function Carousel({ children, label, className = '', itemsClassName = 'gap-4', gutter, hint = false, autoplay = 0, puntos = false }) {
   const ref = useRef(null);
   const drag = useRef({ activo: false, x: 0, scroll: 0, movio: false });
+  const pausa = useRef({ hover: false, touchHasta: 0, foco: false });
   const [bordes, setBordes] = useState({ inicio: true, fin: false });
+  const [activo, setActivo] = useState(0);
   const reducido = useReducedMotion();
-  const visible = useInView(ref, { once: true, amount: 0.6 });
+  const visibleUnaVez = useInView(ref, { once: true, amount: 0.6 });
+  const enPantalla = useInView(ref, { amount: 0.3 });
+  const total = Children.count(children);
 
+  // Paso = ancho de un ítem + gap
+  const paso = useCallback(() => {
+    const el = ref.current;
+    const a = el?.children[0];
+    const b = el?.children[1];
+    if (!a) return el?.clientWidth ?? 0;
+    return b ? b.offsetLeft - a.offsetLeft : a.offsetWidth;
+  }, []);
+
+  // Hint: una sola vez, solo transform (Web Animations API)
   useEffect(() => {
     const el = ref.current;
-    if (!hint || !visible || reducido || !el?.animate) return;
-    // Solo transform; Web Animations API (sin sumar peso al bundle)
+    if (!hint || !visibleUnaVez || reducido || !el?.animate) return;
     el.animate(
       [{ transform: 'translateX(0)' }, { transform: 'translateX(-40px)', offset: 0.45 }, { transform: 'translateX(0)' }],
       { duration: 800, delay: 350, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' },
     );
-  }, [hint, visible, reducido]);
+  }, [hint, visibleUnaVez, reducido]);
 
-  const actualizarBordes = () => {
+  const actualizar = () => {
     const el = ref.current;
     if (!el) return;
     setBordes({ inicio: el.scrollLeft < 8, fin: el.scrollLeft + el.clientWidth >= el.scrollWidth - 8 });
+    const p = paso();
+    if (p) setActivo(Math.min(total - 1, Math.round(el.scrollLeft / p)));
   };
 
   useEffect(() => {
-    actualizarBordes();
+    actualizar();
     const el = ref.current;
     if (!el) return;
-    const ro = new ResizeObserver(actualizarBordes);
+    const ro = new ResizeObserver(actualizar);
     ro.observe(el);
     return () => ro.disconnect();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [total]);
+
+  // Autoplay lento
+  useEffect(() => {
+    if (!autoplay || reducido || !enPantalla) return;
+    const id = setInterval(() => {
+      const el = ref.current;
+      const ps = pausa.current;
+      if (!el || ps.hover || ps.foco || Date.now() < ps.touchHasta || drag.current.activo) return;
+      const alFinal = el.scrollLeft + el.clientWidth >= el.scrollWidth - 8;
+      el.scrollTo({ left: alFinal ? 0 : el.scrollLeft + paso(), behavior: 'smooth' });
+    }, autoplay);
+    return () => clearInterval(id);
+  }, [autoplay, reducido, enPantalla, paso]);
 
   const mover = (dir) => {
     const el = ref.current;
-    el?.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: 'smooth' });
+    el?.scrollBy({ left: dir * Math.max(paso(), el.clientWidth * 0.8), behavior: 'smooth' });
   };
+  const irA = (i) => ref.current?.scrollTo({ left: i * paso(), behavior: 'smooth' });
 
   // Arrastre con mouse (en touch ya funciona el scroll nativo)
   const onPointerDown = (e) => {
+    if (e.pointerType !== 'mouse') pausa.current.touchHasta = Date.now() + 8000;
     if (e.pointerType !== 'mouse' || e.button !== 0) return;
     drag.current = { activo: true, x: e.clientX, scroll: ref.current.scrollLeft, movio: false };
   };
@@ -69,7 +101,6 @@ export default function Carousel({ children, label, className = '', itemsClassNa
     d.activo = false;
     if (ref.current) ref.current.style.scrollSnapType = '';
   };
-  // Si hubo arrastre, que el soltar no dispare el click del link
   const onClickCapture = (e) => {
     if (drag.current.movio) {
       e.preventDefault();
@@ -78,11 +109,37 @@ export default function Carousel({ children, label, className = '', itemsClassNa
     }
   };
 
+  const flecha = (dir) => {
+    const deshabilitada = dir < 0 ? bordes.inicio : bordes.fin;
+    return (
+      <button
+        type="button"
+        onClick={() => mover(dir)}
+        aria-label={dir < 0 ? 'Anterior' : 'Siguiente'}
+        disabled={deshabilitada}
+        className={`absolute top-[40%] z-10 hidden size-12 -translate-y-1/2 items-center justify-center rounded-full border border-linea bg-crema-card text-tinta shadow-flotante transition duration-300 hover:scale-105 hover:text-verde active:scale-95 disabled:pointer-events-none disabled:opacity-0 md:flex ${
+          dir < 0 ? 'left-3 lg:left-6' : 'right-3 lg:right-6'
+        }`}
+      >
+        <Icon name={dir < 0 ? 'flechaIzq' : 'flecha'} size={20} />
+      </button>
+    );
+  };
+
   return (
-    <div className={`group/car relative ${className}`} role="region" aria-roledescription="carrusel" aria-label={label}>
+    <div
+      className={`relative ${className}`}
+      role="region"
+      aria-roledescription="carrusel"
+      aria-label={label}
+      onPointerEnter={(e) => e.pointerType === 'mouse' && (pausa.current.hover = true)}
+      onPointerLeave={(e) => e.pointerType === 'mouse' && (pausa.current.hover = false)}
+      onFocus={() => (pausa.current.foco = true)}
+      onBlur={() => (pausa.current.foco = false)}
+    >
       <div
         ref={ref}
-        onScroll={actualizarBordes}
+        onScroll={actualizar}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={terminar}
@@ -91,26 +148,25 @@ export default function Carousel({ children, label, className = '', itemsClassNa
         onClickCapture={onClickCapture}
         onDragStart={(e) => e.preventDefault()}
         style={gutter ? { '--gutter': gutter } : undefined}
-        className={`no-scrollbar flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-px-[var(--gutter)] px-[var(--gutter)] pb-2 [--gutter:max(1rem,calc((100vw-72rem)/2+1rem))] md:cursor-grab md:active:cursor-grabbing ${itemsClassName}`}
+        className={`no-scrollbar flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-px-[var(--gutter)] px-[var(--gutter)] py-3 [--gutter:1rem] md:cursor-grab md:[--gutter:max(2rem,calc((100vw-84rem)/2+2rem))] md:active:cursor-grabbing ${itemsClassName}`}
       >
         {children}
       </div>
-      <button
-        type="button"
-        onClick={() => mover(-1)}
-        aria-label="Anterior"
-        className={`glass absolute top-1/3 left-2 hidden size-11 items-center justify-center rounded-full text-tinta shadow-suave transition hover:scale-105 active:scale-95 md:flex ${bordes.inicio ? 'pointer-events-none opacity-0' : 'opacity-0 group-hover/car:opacity-100'}`}
-      >
-        <Icon name="flechaIzq" size={20} />
-      </button>
-      <button
-        type="button"
-        onClick={() => mover(1)}
-        aria-label="Siguiente"
-        className={`glass absolute top-1/3 right-2 hidden size-11 items-center justify-center rounded-full text-tinta shadow-suave transition hover:scale-105 active:scale-95 md:flex ${bordes.fin ? 'pointer-events-none opacity-0' : 'opacity-0 group-hover/car:opacity-100'}`}
-      >
-        <Icon name="flecha" size={20} />
-      </button>
+      {flecha(-1)}
+      {flecha(1)}
+      {puntos && total > 1 && (
+        <div className="mt-3 flex justify-center gap-3 md:hidden" aria-hidden="true">
+          {Array.from({ length: total }, (_, i) => (
+            <button
+              key={i}
+              type="button"
+              tabIndex={-1}
+              onClick={() => irA(i)}
+              className={`h-1.5 w-1.5 rounded-full transition duration-500 ${i === activo ? 'scale-x-[2.6] bg-verde' : 'bg-verde/25'}`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

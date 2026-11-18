@@ -10,6 +10,7 @@ import Toaster from './components/layout/Toaster.jsx';
 import CartDrawer from './components/cart/CartDrawer.jsx';
 import QuickView from './components/product/QuickView.jsx';
 import { PageSkeleton } from './components/ui/Skeleton.jsx';
+import { useBotonesMagneticos } from './hooks/useBotonesMagneticos.js';
 import Home from './pages/Home.jsx'; // página de entrada: sin lazy para no sumar una cascada al LCP
 
 // Features de animación en un chunk aparte (no bloquean la primera pintura)
@@ -54,6 +55,7 @@ function Paginas() {
 }
 
 export default function App() {
+  useBotonesMagneticos();
   return (
     <BrowserRouter>
       <LazyMotion features={cargarFeatures} strict>

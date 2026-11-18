@@ -5,7 +5,7 @@ import Reveal from './Reveal.jsx';
 /** Título de sección (1 a 3 palabras) + link opcional. Sin eyebrow ni bajada. */
 export default function SectionHeader({ titulo, link, linkTexto = 'Ver todo', id }) {
   return (
-    <Reveal className="mx-auto mb-5 flex max-w-6xl items-end justify-between gap-4 px-4">
+    <Reveal className="contenedor mb-5 flex items-end justify-between gap-4">
       <h2 id={id} className="text-3xl leading-tight md:text-4xl">
         {titulo}
       </h2>

@@ -63,10 +63,10 @@ export default function Rutina() {
   };
 
   return (
-    <div ref={pagina} className="mx-auto max-w-6xl px-4 pt-4 pb-48 md:pb-16">
+    <div ref={pagina} className="contenedor pt-4 pb-48 md:pb-16">
       <Reveal>
         <h1 className="text-4xl leading-tight md:text-5xl">
-          Armá tu <em className="text-dorado">rutina</em>
+          Armá tu <em className="texto-dorado">rutina</em>
         </h1>
       </Reveal>
 

@@ -9,14 +9,14 @@ const LINKS = [
   { to: '/carrito', label: 'Carrito' },
 ];
 
-/** Footer: bloque salvia dentro del contenedor. */
+/** Footer de borde a borde: degradé arena → salvia (sin caja). */
 export default function Footer() {
   return (
-    <footer className="mx-auto mt-16 max-w-6xl px-3 pb-28 md:px-4 md:pb-6">
-      <div className="bloque-salvia px-6 pt-10 pb-6 text-tinta md:px-10">
+    <footer className="fondo-salvia-abajo pt-16 pb-28 md:pt-24 md:pb-10">
+      <div className="contenedor text-tinta">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div>
-            <p className="font-serif text-3xl">{NEGOCIO.nombre}</p>
+            <p className="font-serif text-4xl md:text-5xl">{NEGOCIO.nombre}</p>
             <p className="text-xs font-bold tracking-[0.28em] text-dorado uppercase">{NEGOCIO.bajada}</p>
           </div>
           <nav aria-label="Pie de página">

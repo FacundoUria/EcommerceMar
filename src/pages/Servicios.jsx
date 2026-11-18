@@ -13,7 +13,7 @@ export default function Servicios() {
   const { data: servicios, loading } = useServices();
 
   return (
-    <div className="mx-auto max-w-6xl px-4 pt-4 pb-10">
+    <div className="contenedor pt-4 pb-10">
       <Reveal as="header" className="flex items-end justify-between gap-4">
         <h1 className="text-4xl leading-tight md:text-5xl">Servicios</h1>
         <a href={NEGOCIO.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-primario">
@@ -72,10 +72,10 @@ export default function Servicios() {
 function ProcesoVideo() {
   const [activo, setActivo] = useState(false);
   return (
-    <section aria-labelledby="proceso-titulo" className="bloque-salvia mt-14 grid items-center gap-8 p-6 md:grid-cols-2 md:gap-14 md:p-10">
+    <section aria-labelledby="proceso-titulo" className="fondo-salvia mt-14 mx-[calc(50%-50vw)] grid items-center gap-8 px-[calc(50vw-50%)] py-16 md:grid-cols-2 md:gap-20 md:py-24">
       <Reveal>
         <h2 id="proceso-titulo" className="text-4xl leading-tight md:text-5xl">
-          El <em className="text-dorado">proceso</em>
+          El <em className="texto-dorado">proceso</em>
         </h2>
         <a href={NEGOCIO.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-primario mt-6">
           <Icon name="whatsapp" size={18} /> Reservar

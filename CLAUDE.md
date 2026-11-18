@@ -24,7 +24,9 @@ React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScri
 
 ## Assets
 - Originales en `assets/` (no se sirven). Versiones web generadas en `public/img/` (`<nombre>.webp` 900px + `<nombre>-sm.webp` 400px) y `public/video/` con los scripts de `scripts/`. Los archivos `VERIFICAR-*` y `personita*` se ignoran. Los videos originales (`assets/videos/`) no se commitean.
-- Hero del home: foto `mar-con-productos-1` (los cuadros del video no quedan nítidos recortados a 4:5). El video "amor propio" va en Resultados, rotado para arrancar en su cuadro más nítido (opción `inicio` en `scripts/optimizar-videos.mjs`).
+- Hero del home: foto `mar-con-productos-1` (los cuadros del video no quedan nítidos recortados a 4:5).
+- Videos: el único es el del proceso en /servicios (con audio, sin autoplay: play al tocar, `preload="none"` + poster). El home ya no tiene sección Resultados ni video.
+- Banners de Mar (`assets/banners/`, traen su texto): carrusel `<Banners>` al final del home (después de "Hola, soy Mar"). Autoplay 6 s, pausa con hover/toque, puntos; sin autoplay con movimiento reducido. Tienen versión `-lg` (1504px).
 - Producto sin foto → placeholder elegante (crema + marca + nombre en Playfair), nunca imagen rota.
 - **Fotos de producto siempre con `<FotoProducto>`** (cards, carruseles, quick view, producto, rutina, carrito): mismo fondo `fondo-foto` (salvia-media → arena). Fotos de fondo blanco → `mix-blend-mode: multiply` + padding; de escena → cover en marco con overlay salvia 10%. La clasificación la genera `scripts/optimizar-assets.mjs` en `src/data/fondos.json`.
 - Datos reales del negocio: `src/config/negocio.js`. Dato que falta = string vacío y la UI NO lo muestra (pendientes: dirección y horarios).
@@ -72,7 +74,7 @@ React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScri
   - Header, bottom nav y barras fijas: `glass-arena` (arena translúcido con blur), íconos tinta, activo con píldora salvia y texto verde. Modales: `velo`.
   - Botón secundario `btn-borde`: borde verde 1px, texto verde, fondo transparente.
   - Precios: utilidad `precio` (Manrope 600, tabular-nums), nunca Playfair. Formato "$ 15.000" vía `formatPrecio`.
-- **Poco texto**: sin eyebrows, sin subtítulos ni párrafos bajo títulos de sección, títulos de 1–3 palabras, botones de 1–2 palabras. Cards de producto: marca, nombre y precio, nada más. Excepción: "Hola, soy Mar" y "Rulos que se ven y se sienten" del home quedan como están.
+- **Poco texto**: sin eyebrows, sin subtítulos ni párrafos bajo títulos de sección, títulos de 1–3 palabras, botones de 1–2 palabras. Cards de producto: marca, nombre y precio, nada más. Excepción: "Hola, soy Mar" del home queda como está.
 - El campo `paso` de las categorías se usa SOLO dentro de /rutina.
 - Imágenes de la marca en `assets/marca/` (logo y fotos).
 

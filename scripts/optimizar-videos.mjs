@@ -8,10 +8,8 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 
 const VIDEOS = [
-  // Sección "Resultados" (stories, 9:16). Sin audio. Poster: cuadro nítido de los rulos (8 s, medido
-  // con blurdetect). No se rota (`inicio`): el texto del video se lee en orden desde el principio.
-  { origen: 'resultado-rulos-buena-vista-13s.mp4', salida: 'buena-vista', maxMB: 2, audio: false, poster: 8 },
-  // Opción disponible: `inicio: <seg>` rota el video para que arranque (y haga loop) desde ese cuadro.
+  // Opciones: `copiar: true` copia el stream H.264 sin recomprimir (si el original ya entra en maxMB);
+  // `poster: <seg>` elige el cuadro del poster; `inicio: <seg>` rota el video para que arranque (y haga loop) desde ese cuadro.
   // 720p como máximo: el original es 576x1024, así que no se agranda.
   { origen: 'proceso-asesoramiento-72s.mp4', salida: 'proceso', maxMB: 6, audio: true, alto: 1280 },
 ];
@@ -53,15 +51,19 @@ for (const v of VIDEOS.filter((x) => !elegidos.length || elegidos.includes(x.sal
     '-maxrate', `${Math.floor(videoKbps * 1.5)}k`, '-bufsize', `${videoKbps * 2}k`, '-pix_fmt', 'yuv420p',
     '-profile:v', 'high', '-passlogfile', passlog];
 
+  if (v.copiar) {
+    ff(['-i', entrada, '-map', '0:v:0', '-c:v', 'copy', '-an', '-movflags', '+faststart', salida]);
+  } else {
   ff([...comun, '-pass', '1', '-an', '-f', 'mp4', process.platform === 'win32' ? 'NUL' : '/dev/null']);
   ff([...comun, '-pass', '2', ...(v.audio ? ['-c:a', 'aac', '-b:a', `${AUDIO_KBPS}k`] : ['-an']),
     '-movflags', '+faststart', salida]);
+  }
 
   // poster en webp (por defecto 0,3 s; se puede elegir otro segundo con `poster`)
   ff(['-ss', String(v.poster ?? (v.inicio ? 0 : 0.3)), '-i', salida, '-frames:v', '1', '-c:v', 'libwebp', '-quality', '72', path.join(OUT, `${v.salida}.webp`)]);
 
   const mb = (await stat(salida)).size / 1024 / 1024;
-  console.log(`${mb <= v.maxMB ? '✓' : '✗'} ${v.salida}.mp4  ${mb.toFixed(2)} MB (máx ${v.maxMB}) · ${videoKbps} kbps · ${seg.toFixed(1)} s`);
+  console.log(`${mb <= v.maxMB ? '✓' : '✗'} ${v.salida}.mp4  ${mb.toFixed(2)} MB (máx ${v.maxMB}) · ${v.copiar ? "copia sin recomprimir" : `${videoKbps} kbps`} · ${seg.toFixed(1)} s`);
 }
 
 for (const ext of ['-0.log', '-0.log.mbtree']) await rm(passlog + ext, { force: true });

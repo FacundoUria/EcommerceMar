@@ -90,6 +90,7 @@ function ProcesoVideo() {
               poster="/video/proceso.webp"
               controls
               autoPlay
+              preload="none"
               playsInline
               className="size-full object-cover"
             >

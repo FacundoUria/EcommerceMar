@@ -7,7 +7,7 @@ import RevealText from '../components/ui/RevealText.jsx';
 import RevealImagen from '../components/ui/RevealImagen.jsx';
 import Carousel from '../components/ui/Carousel.jsx';
 import SmartImg from '../components/ui/SmartImg.jsx';
-import Stories from '../components/ui/Stories.jsx';
+import Banners from '../components/ui/Banners.jsx';
 import MeshFondo from '../components/ui/MeshFondo.jsx';
 import SectionHeader from '../components/ui/SectionHeader.jsx';
 import LineaProgreso from '../components/ui/LineaProgreso.jsx';
@@ -15,7 +15,6 @@ import ProductCard from '../components/product/ProductCard.jsx';
 import FotoProducto from '../components/product/FotoProducto.jsx';
 import CarruselCentrado from '../components/ui/CarruselCentrado.jsx';
 import { useMediaQuery } from '../hooks/useMediaQuery.js';
-import { useImagenLista } from '../hooks/useImagenLista.js';
 import { ProductCardSkeleton, Skeleton } from '../components/ui/Skeleton.jsx';
 import { useBrands, useCategories, useProducts } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
@@ -34,10 +33,27 @@ export default function Home() {
       <CintaMarcas />
       <RutinaHistoria />
       <HolaSoyMar />
-      <Resultados />
+      <Banners items={BANNERS} />
     </>
   );
 }
+
+/* ═════════ BANNERS de Mar (al final del home, después de "Hola, soy Mar") ═════════ */
+const BANNERS = [
+  ['hola-soy-mar', 'Hola, soy Mar'],
+  ['asesoramiento-corte-en-seco', 'Asesoramiento y corte en seco'],
+  ['envios-mendoza', 'Envíos a todo Mendoza'],
+  ['medios-de-pago', 'Medios de pago'],
+  ['promociones-mensuales', 'Promociones mensuales'],
+  ['promos-rulos', 'Promos para rulos'],
+  ['marcas-lideres', 'Marcas líderes'],
+  ['dream-hair-studio', 'Dream Hair Studio'],
+].map(([nombre, alt]) => ({
+  src: `/img/banners/${nombre}.webp`,
+  alt,
+  // marcas-lideres es más alto (1376x768): se recorta abajo (solo la URL), no el logo de arriba
+  encuadre: nombre === 'marcas-lideres' ? 'object-top' : '',
+}));
 
 /* ═════════ HERO full-screen: mesh animado, título gigante, foto blob + mini-cards flotantes ═════════ */
 // La frase de Mar: "El cabello es el espejo de tu amor propio"
@@ -543,47 +559,6 @@ function HolaSoyMar() {
             <a href={NEGOCIO.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-borde">
               <Icon name="whatsapp" size={18} /> Escribime
             </a>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-/* ═════════ RESULTADOS (textos intactos): stories con fotos del estudio + video ═════════ */
-const STORIES = [
-  { tipo: 'video', src: '/video/buena-vista.mp4', poster: '/video/buena-vista.webp', alt: 'Video: rulos definidos en Dream Hair', duracion: 12.8 },
-  { tipo: 'foto', src: '/img/estudio/servicio-corte-rulos.webp', alt: 'Corte de rulos en el estudio', duracion: 5 },
-  { tipo: 'foto', src: '/img/estudio/asesoramiento-1.webp', alt: 'Asesoramiento en el estudio', duracion: 5 },
-  { tipo: 'foto', src: '/img/estudio/asesoramiento-2.webp', alt: 'Asesoramiento en el estudio', duracion: 5 },
-  { tipo: 'foto', src: '/img/estudio/servicio-tratamiento-lavado-1.webp', alt: 'Tratamiento y lavado', duracion: 5 },
-  { tipo: 'foto', src: '/img/estudio/servicio-tratamiento-lavado-2.webp', alt: 'Tratamiento y lavado', duracion: 5 },
-  { tipo: 'foto', src: '/img/estudio/servicio-ozonoterapia.webp', alt: 'Ozonoterapia', duracion: 5 },
-  { tipo: 'foto', src: '/img/estudio/servicio-celulas-madre-infrarrojo.webp', alt: 'Células madre + infrarrojo', duracion: 5 },
-  { tipo: 'foto', src: '/img/estudio/salon-1.webp', alt: 'El estudio Dream Hair', duracion: 5 },
-];
-
-function Resultados() {
-  // La cortina del video se abre recién con el poster ya cargado y decodificado
-  const posterListo = useImagenLista(STORIES[0].poster);
-  return (
-    <section aria-labelledby="res-titulo" className="fondo-salvia grano py-20 md:py-28">
-      <div className="contenedor grid items-center gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-20">
-        <Reveal className="md:order-2">
-          <p className="text-xs font-bold tracking-[0.22em] text-dorado uppercase">Resultados reales</p>
-          <RevealText id="res-titulo" className="mt-2 text-4xl leading-tight md:text-6xl">
-            Rulos que se <em className="texto-dorado">ven</em> y se <em className="texto-dorado">sienten</em>
-          </RevealText>
-          <p className="mt-3 max-w-md text-texto-suave">Así quedan los rulos después de pasar por el estudio.</p>
-          <Link to="/servicios" className="btn btn-primario mt-6">
-            Reservá tu turno <Icon name="flecha" size={18} />
-          </Link>
-        </Reveal>
-        <Reveal delay={0.1} className="mx-auto w-full max-w-[20rem] md:order-1 md:max-w-[22rem]">
-          <div className={`aspect-[9/16] overflow-hidden rounded-5xl shadow-flotante ring-8 ring-crema-card transition-opacity duration-500 ${posterListo ? "opacity-100" : "opacity-0"}`}>
-            <RevealImagen listo={posterListo}>
-              <Stories items={STORIES} className="size-full" />
-            </RevealImagen>
           </div>
         </Reveal>
       </div>

@@ -260,12 +260,6 @@
   50% { transform: translateY(-8px); }
 }
 
-/* Barras de progreso de las stories */
-@keyframes llenar {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-}
-
 /* Cinta infinita de marcas: dos copias de la fila, se desplaza una fila entera (solo transform) */
 @keyframes cinta {
   to {

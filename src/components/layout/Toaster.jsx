@@ -21,12 +21,12 @@ export default function Toaster() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.97 }}
             transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-            className="glass-claro pointer-events-auto flex w-full max-w-sm items-center gap-3 rounded-3xl p-2.5 pr-3 text-tinta shadow-flotante"
+            className="pointer-events-auto flex border border-linea bg-crema-card w-full max-w-sm items-center gap-3 rounded-3xl p-2.5 pr-3 text-tinta shadow-flotante"
           >
             {toast.imagen ? (
-              <img src={toast.imagen} alt="" width="48" height="48" className="size-12 shrink-0 rounded-2xl border border-linea bg-white object-cover" />
+              <img src={toast.imagen} alt="" width="48" height="48" className="size-12 shrink-0 rounded-2xl border border-linea bg-crema-card object-cover" />
             ) : (
-              <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-crema text-verde">
+              <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-arena text-tinta">
                 <Icon name="check" />
               </span>
             )}
@@ -34,7 +34,7 @@ export default function Toaster() {
               <p className="flex items-center gap-1 text-sm font-bold text-verde">
                 <Icon name="check" size={15} strokeWidth={2.6} /> {toast.titulo}
               </p>
-              {toast.texto && <p className="truncate text-xs text-gris">{toast.texto}</p>}
+              {toast.texto && <p className="truncate text-xs text-texto-suave">{toast.texto}</p>}
             </div>
             {toast.tipo === 'carrito' && (
               <button
@@ -43,7 +43,7 @@ export default function Toaster() {
                   cerrarToast();
                   abrir();
                 }}
-                className="shrink-0 rounded-full bg-verde px-3.5 py-2 text-xs font-extrabold text-crema transition active:scale-95"
+                className="shrink-0 rounded-full bg-verde px-3.5 py-2 text-xs font-extrabold text-arena transition active:scale-95"
               >
                 Ver
               </button>

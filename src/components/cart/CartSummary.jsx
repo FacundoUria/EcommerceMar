@@ -6,17 +6,17 @@ export default function CartSummary({ className = '' }) {
   const { cantidadTotal, total } = useCart();
   return (
     <div className={className}>
-      <div className="flex items-center justify-between text-sm text-gris">
+      <div className="flex items-center justify-between text-sm text-texto-suave">
         <span>{plural(cantidadTotal, 'producto', 'productos')}</span>
         <span className="tabular-nums">{formatPrecio(total)}</span>
       </div>
       <div className="mt-2 flex items-baseline justify-between">
-        <span className="text-sm font-extrabold tracking-[0.18em] text-verde uppercase">Total</span>
-        <span className="font-serif text-3xl font-semibold text-verde tabular-nums">{formatPrecio(total)}</span>
+        <span className="text-sm font-extrabold tracking-[0.18em] text-tinta uppercase">Total</span>
+        <span className="font-serif text-3xl font-semibold text-tinta tabular-nums">{formatPrecio(total)}</span>
       </div>
       <button type="button" disabled className="btn btn-primario mt-4 w-full">
         Finalizar pedido
-        <span className="rounded-full bg-amarillo px-2 py-0.5 text-[10px] font-extrabold text-verde uppercase">Próximamente</span>
+        <span className="rounded-full bg-salvia px-2 py-0.5 text-[10px] font-extrabold text-verde uppercase">Próximamente</span>
       </button>
     </div>
   );

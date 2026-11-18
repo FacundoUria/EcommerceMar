@@ -25,7 +25,7 @@ export function flyToCart(imgEl) {
     borderRadius: '24px',
     zIndex: 9999,
     pointerEvents: 'none',
-    boxShadow: '0 18px 48px -12px rgb(11 41 27 / 0.35)',
+    boxShadow: '0 18px 48px -12px rgb(34 56 43 / 0.3)',
     background: '#fff',
   });
   document.body.appendChild(clon);

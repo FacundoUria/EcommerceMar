@@ -66,10 +66,10 @@ function Detalle({ producto }) {
   return (
     <div className="mx-auto max-w-6xl px-4 pt-2 pb-36 md:pt-6 md:pb-10">
       {/* Migas */}
-      <nav aria-label="Migas de pan" className="mb-4 text-sm text-gris">
+      <nav aria-label="Migas de pan" className="mb-4 text-sm text-texto-suave">
         <ol className="flex flex-wrap items-center gap-1.5">
           <li>
-            <Link to="/tienda" className="hover:text-verde">
+            <Link to="/tienda" className="hover:text-tinta">
               Tienda
             </Link>
           </li>
@@ -77,7 +77,7 @@ function Detalle({ producto }) {
             <>
               <li aria-hidden="true">/</li>
               <li>
-                <Link to={`/tienda?cat=${categoria.id}`} className="hover:text-verde">
+                <Link to={`/tienda?cat=${categoria.id}`} className="hover:text-tinta">
                   {categoria.nombre}
                 </Link>
               </li>
@@ -89,7 +89,7 @@ function Detalle({ producto }) {
       <div className="grid gap-8 md:grid-cols-2 md:gap-12">
         {/* Galería */}
         <div className="min-w-0 md:sticky md:top-24 md:self-start">
-          <div ref={imgRef} className="card relative aspect-[4/5] overflow-hidden rounded-5xl md:aspect-square">
+          <div ref={imgRef} className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-salvia-media md:aspect-square">
             <AnimatePresence mode="popLayout" initial={false}>
               <m.div
                 key={imagen}
@@ -121,7 +121,7 @@ function Detalle({ producto }) {
                     onClick={() => elegir(g.nombre ? g : null)}
                     aria-label={g.nombre ? `Ver variante ${g.nombre}` : 'Ver foto principal'}
                     aria-pressed={activa}
-                    className={`size-16 shrink-0 overflow-hidden rounded-2xl border-2 bg-white transition active:scale-95 md:size-20 ${
+                    className={`size-16 shrink-0 overflow-hidden rounded-2xl border-2 bg-crema-card transition active:scale-95 md:size-20 ${
                       activa ? 'border-verde' : 'border-transparent opacity-70 hover:opacity-100'
                     }`}
                   >
@@ -138,7 +138,7 @@ function Detalle({ producto }) {
           <div>
             {producto.marca && <p className="text-xs font-bold tracking-[0.2em] text-dorado uppercase">{producto.marca}</p>}
             <h1 className="mt-1 text-4xl leading-tight md:text-5xl">{producto.nombre}</h1>
-            <p className="mt-3 font-serif text-3xl font-semibold text-verde">{formatPrecio(producto.precio)}</p>
+            <p className="mt-3 font-serif text-3xl font-semibold text-tinta">{formatPrecio(producto.precio)}</p>
           </div>
 
           {tieneVariantes && (
@@ -156,8 +156,8 @@ function Detalle({ producto }) {
                       onMouseEnter={() => setPreview(v)}
                       onFocus={() => setPreview(v)}
                       onBlur={() => setPreview(null)}
-                      className={`flex items-center gap-2 rounded-full border-2 bg-white py-1 pr-4 pl-1 text-sm font-semibold transition active:scale-95 ${
-                        activa ? 'border-verde text-verde shadow-suave' : 'border-verde/10 text-tinta hover:border-verde/40'
+                      className={`flex items-center gap-2 rounded-full border-2 bg-crema-card py-1 pr-4 pl-1 text-sm font-semibold transition active:scale-95 ${
+                        activa ? 'border-verde text-tinta shadow-suave' : 'border-verde/10 text-tinta hover:border-verde/40'
                       }`}
                     >
                       <img src={imgSm(v.imagen)} alt="" width="36" height="36" loading="lazy" className="size-9 rounded-full object-cover" />
@@ -193,12 +193,12 @@ function Detalle({ producto }) {
 
       {/* Barra fija mobile */}
       <div className="fixed inset-x-0 bottom-0 z-40 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:hidden">
-        <div className="glass-crema flex items-center gap-2 rounded-full p-2 shadow-flotante ring-1 ring-verde/10">
+        <div className="glass-arena flex items-center gap-2 rounded-full p-2 shadow-flotante ring-1 ring-verde/10">
           <button
             type="button"
             onClick={abrir}
             aria-label="Abrir carrito"
-            className="relative flex size-12 shrink-0 items-center justify-center rounded-full bg-white text-verde active:scale-90"
+            className="relative flex size-12 shrink-0 items-center justify-center rounded-full bg-crema-card text-tinta active:scale-90"
           >
             <span data-cart-target className="relative">
               <Icon name="carrito" />

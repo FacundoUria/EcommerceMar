@@ -52,7 +52,7 @@ function Panel({ onClose }) {
         animate={reducido ? { opacity: 1 } : { x: 0 }}
         exit={reducido ? { opacity: 0 } : { x: '100%' }}
         transition={{ type: 'spring', damping: 32, stiffness: 300 }}
-        className="absolute inset-y-0 right-0 flex w-full max-w-md flex-col bg-crema shadow-flotante sm:rounded-l-5xl"
+        className="absolute inset-y-0 right-0 flex w-full max-w-md flex-col bg-crema-card shadow-flotante sm:rounded-l-5xl"
       >
         <div className="flex items-center justify-between px-6 pt-6 pb-4">
           <h2 id="drawer-titulo" className="text-2xl">
@@ -62,7 +62,7 @@ function Panel({ onClose }) {
             type="button"
             onClick={onClose}
             aria-label="Cerrar carrito"
-            className="flex size-10 items-center justify-center rounded-full text-verde transition hover:rotate-90 hover:bg-verde/5 active:scale-90"
+            className="flex size-10 items-center justify-center rounded-full text-tinta transition hover:rotate-90 hover:bg-salvia active:scale-90"
           >
             <Icon name="cerrar" />
           </button>
@@ -70,10 +70,10 @@ function Panel({ onClose }) {
 
         {lineas.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-4 px-8 text-center">
-            <div className="flex size-20 items-center justify-center rounded-full bg-crema-200 text-verde">
+            <div className="flex size-20 items-center justify-center rounded-full bg-salvia text-verde">
               <Icon name="carrito" size={34} />
             </div>
-            <p className="font-serif text-xl text-verde">Carrito vacío</p>
+            <p className="font-serif text-xl text-tinta">Carrito vacío</p>
             <Link to="/tienda" className="btn btn-primario">
               Ver productos
             </Link>
@@ -87,7 +87,7 @@ function Panel({ onClose }) {
                 ))}
               </AnimatePresence>
             </ul>
-            <div className="border-t border-linea bg-white px-6 pt-4 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
+            <div className="border-t border-linea bg-arena px-6 pt-4 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
               <CartSummary />
               <div className="mt-3 grid grid-cols-2 gap-2">
                 <button type="button" onClick={onClose} className="btn btn-borde px-3">

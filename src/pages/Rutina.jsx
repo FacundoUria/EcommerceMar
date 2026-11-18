@@ -77,7 +77,7 @@ export default function Rutina() {
                 aria-current={activo ? 'step' : undefined}
                 className="group flex w-full flex-col items-start gap-2 text-left"
               >
-                <span className="relative h-1.5 w-full overflow-hidden rounded-full bg-verde/10">
+                <span className="relative h-1.5 w-full overflow-hidden rounded-full bg-salvia">
                   <m.span
                     className="absolute inset-y-0 left-0 rounded-full bg-verde"
                     initial={false}
@@ -88,12 +88,12 @@ export default function Rutina() {
                 <span className="flex items-center gap-1.5">
                   <span
                     className={`flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-bold transition ${
-                      hecho ? 'bg-verde text-amarillo' : activo ? 'bg-amarillo text-verde' : 'bg-verde/10 text-verde'
+                      hecho ? 'bg-verde text-arena' : activo ? 'bg-crema-card text-verde ring-1 ring-verde' : 'bg-salvia text-tinta'
                     }`}
                   >
                     {hecho ? <Icon name="check" size={13} strokeWidth={3} /> : p.paso}
                   </span>
-                  <span className={`text-xs leading-tight font-semibold md:text-sm ${activo ? 'text-verde' : 'text-gris'}`}>{p.titulo}</span>
+                  <span className={`text-xs leading-tight font-semibold md:text-sm ${activo ? 'text-tinta' : 'text-texto-suave'}`}>{p.titulo}</span>
                 </span>
               </button>
             </li>
@@ -119,7 +119,7 @@ export default function Rutina() {
               </h2>
 
               {aviso && (
-                <p className="mt-4 rounded-3xl bg-amarillo/40 px-4 py-3 text-sm font-semibold text-verde" role="alert">
+                <p className="mt-4 rounded-3xl bg-salvia px-4 py-3 text-sm font-semibold text-tinta" role="alert">
                   {aviso}
                 </p>
               )}
@@ -186,7 +186,7 @@ export default function Rutina() {
                     <button
                       type="button"
                       onClick={() => irA(i)}
-                      className="flex w-full items-center gap-3 rounded-3xl p-2 text-left transition hover:bg-crema"
+                      className="flex w-full items-center gap-3 rounded-3xl p-2 text-left transition hover:bg-arena"
                     >
                       {e ? (
                         <img
@@ -194,26 +194,26 @@ export default function Rutina() {
                           alt=""
                           width="48"
                           height="48"
-                          className="size-12 shrink-0 rounded-2xl bg-crema object-cover"
+                          className="size-12 shrink-0 rounded-2xl bg-arena object-cover"
                         />
                       ) : (
-                        <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl border-2 border-dashed border-verde/15 font-serif text-lg text-verde/40">
+                        <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl border-2 border-dashed border-verde/15 font-serif text-lg text-tinta/40">
                           {p.paso}
                         </span>
                       )}
                       <span className="min-w-0 flex-1">
                         <span className="block text-xs font-bold tracking-wider text-dorado uppercase">{p.titulo}</span>
                         <span className="block truncate text-sm font-semibold">{e ? e.producto.nombre : '—'}</span>
-                        {e?.variante && <span className="block truncate text-xs text-gris">{e.variante.nombre}</span>}
+                        {e?.variante && <span className="block truncate text-xs text-texto-suave">{e.variante.nombre}</span>}
                       </span>
-                      {e && <span className="text-sm font-bold text-verde tabular-nums">{formatPrecio(e.producto.precio)}</span>}
+                      {e && <span className="text-sm font-bold text-tinta tabular-nums">{formatPrecio(e.producto.precio)}</span>}
                     </button>
                   </li>
                 );
               })}
             </ol>
             <div className="mt-5 flex items-baseline justify-between border-t border-verde/10 pt-4">
-              <span className="text-sm font-extrabold tracking-[0.18em] text-verde uppercase">Total</span>
+              <span className="text-sm font-extrabold tracking-[0.18em] text-tinta uppercase">Total</span>
               <Total valor={total} className="text-3xl" />
             </div>
             <button type="button" onClick={agregarRutina} disabled={!elegidos.length} className="btn btn-primario mt-4 w-full">
@@ -225,7 +225,7 @@ export default function Rutina() {
 
       {/* Resumen (mobile): barra arriba del bottom nav */}
       <div className="fixed inset-x-0 bottom-[calc(4.6rem+max(0.75rem,env(safe-area-inset-bottom)))] z-30 px-3 md:hidden">
-        <div className="glass-crema flex items-center gap-3 rounded-4xl p-2 pl-4 shadow-flotante ring-1 ring-verde/10">
+        <div className="glass-arena flex items-center gap-3 rounded-4xl p-2 pl-4 shadow-flotante ring-1 ring-verde/10">
           <div className="flex gap-1">
             {PASOS_RUTINA.map((p) => {
               const e = eleccion[p.paso];
@@ -236,10 +236,10 @@ export default function Rutina() {
                   alt=""
                   width="32"
                   height="32"
-                  className="size-7 rounded-full bg-white object-cover ring-2 ring-verde"
+                  className="size-7 rounded-full bg-crema-card object-cover ring-2 ring-verde"
                 />
               ) : (
-                <span key={p.paso} className="flex size-7 items-center justify-center rounded-full border border-dashed border-verde/25 text-[11px] font-bold text-verde/50">
+                <span key={p.paso} className="flex size-7 items-center justify-center rounded-full border border-dashed border-verde/40 text-[11px] font-bold text-texto-suave">
                   {p.paso}
                 </span>
               );
@@ -267,7 +267,7 @@ function Total({ valor, className = '' }) {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -8 }}
         transition={{ duration: 0.2 }}
-        className={`inline-block font-serif font-semibold text-verde tabular-nums ${className}`}
+        className={`inline-block font-serif font-semibold text-tinta tabular-nums ${className}`}
         aria-live="polite"
       >
         {formatPrecio(valor)}
@@ -283,7 +283,7 @@ function OpcionProducto({ producto, seleccion, onElegir, onVariante }) {
     <li className={`${activo && producto.variantes.length ? 'col-span-2 sm:col-span-3' : ''}`}>
       <m.div
         layout
-        className={`overflow-hidden rounded-4xl border-2 bg-white transition-colors ${activo ? 'border-verde shadow-flotante' : 'border-linea shadow-suave'}`}
+        className={`overflow-hidden rounded-4xl border-2 bg-crema-card transition-colors ${activo ? 'border-verde shadow-flotante' : 'border-linea shadow-suave'}`}
       >
         <button
           type="button"
@@ -293,7 +293,7 @@ function OpcionProducto({ producto, seleccion, onElegir, onVariante }) {
           className={`relative flex w-full text-left transition active:scale-[0.98] ${activo && producto.variantes.length ? 'items-center gap-4 p-3' : 'flex-col'}`}
         >
           <span
-            className={`relative block shrink-0 overflow-hidden bg-white ${
+            className={`relative block shrink-0 overflow-hidden bg-salvia-media ${
               activo && producto.variantes.length ? 'size-24 rounded-3xl' : 'aspect-square w-full'
             }`}
           >
@@ -309,11 +309,11 @@ function OpcionProducto({ producto, seleccion, onElegir, onVariante }) {
           <span className={`block ${activo && producto.variantes.length ? '' : 'p-3'}`}>
             {producto.marca && <span className="block text-[11px] font-bold tracking-[0.12em] text-dorado uppercase">{producto.marca}</span>}
             <span className="line-clamp-2 block text-sm leading-snug font-semibold">{producto.nombre}</span>
-            <span className="mt-1 block font-serif font-semibold text-verde">{formatPrecio(producto.precio)}</span>
+            <span className="mt-1 block font-serif font-semibold text-tinta">{formatPrecio(producto.precio)}</span>
           </span>
           <span
             className={`absolute top-2.5 right-2.5 flex size-7 items-center justify-center rounded-full transition ${
-              activo ? 'scale-100 bg-verde text-amarillo' : 'scale-90 border-2 border-verde/20 bg-white/80'
+              activo ? 'scale-100 bg-verde text-arena' : 'scale-90 border-2 border-verde/20 bg-crema-card/80'
             }`}
             aria-hidden="true"
           >

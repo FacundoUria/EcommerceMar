@@ -81,7 +81,7 @@ export default function AutoVideo({ src, poster, alt, className = '', priority =
           type="button"
           onClick={() => setManual(true)}
           aria-label="Reproducir video"
-          className="glass absolute right-4 bottom-4 z-10 flex size-12 items-center justify-center rounded-full text-verde shadow-suave"
+          className="glass absolute right-4 bottom-4 z-10 flex size-12 items-center justify-center rounded-full text-tinta shadow-suave"
         >
           <Icon name="play" size={20} />
         </button>

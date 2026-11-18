@@ -27,19 +27,22 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+/* Paleta "Salvia y arena". Contraste AA verificado (texto normal ≥ 4.5:1):
+   tinta/arena 10.99 · tinta/salvia 10.08 · texto-suave/arena 4.93 · texto-suave/salvia 4.53
+   arena sobre verde 5.83 · verde/arena 5.83 · verde/salvia 5.35 · dorado/arena 5.10 · dorado/salvia 4.68
+   (dorado oscurecido de #8A6A2F a #7E602B para llegar a AA sobre salvia y arena). */
 @theme {
-  --color-verde: #0b291b;
-  --color-verde-700: #173d2b;
-  --color-verde-500: #476554;
-  --color-verde-200: #adceb9;
-  --color-crema: #faf9f4;
-  --color-crema-200: #f3efe6; /* crema cálido para separar secciones */
-  --color-crema-300: #e8e5d8;
-  --color-amarillo: #fed65b;
-  --color-amarillo-300: #ffe69a;
-  --color-dorado: #735c00;
-  --color-tinta: #1b1c19;
-  --color-gris: #5d635e;
+  --color-arena: #f4efe6; /* fondo base */
+  --color-salvia: #e3e8da; /* secciones destacadas */
+  --color-salvia-media: #b9c6ae; /* placeholders, fondo de fotos, hovers */
+  --color-verde: #3e6450; /* botón primario, íconos activos, links */
+  --color-verde-700: #345543; /* hover del verde */
+  --color-tinta: #22382b; /* títulos y texto principal */
+  --color-texto-suave: #5b6b60; /* texto secundario */
+  --color-dorado: #7e602b; /* cursivas destacadas, detalles */
+  --color-crema-card: #fffdf8; /* cards, drawer, quick view */
+  --color-amarillo: #fed65b; /* SOLO el badge del carrito */
+  --color-linea: rgb(34 56 43 / 0.1); /* bordes finos */
 
   --font-serif: 'Playfair Display', 'Georgia', serif;
   --font-sans: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -47,10 +50,8 @@
   --radius-4xl: 2rem;
   --radius-5xl: 2.5rem;
 
-  --color-linea: rgb(11 41 27 / 0.08); /* bordes finos */
-
-  --shadow-suave: 0 1px 2px rgb(11 41 27 / 0.03), 0 6px 18px -10px rgb(11 41 27 / 0.1);
-  --shadow-flotante: 0 14px 36px -14px rgb(11 41 27 / 0.2);
+  --shadow-suave: 0 1px 2px rgb(34 56 43 / 0.04), 0 6px 18px -10px rgb(34 56 43 / 0.14);
+  --shadow-flotante: 0 14px 36px -14px rgb(34 56 43 / 0.24);
 
   --ease-salto: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -61,51 +62,49 @@
     scroll-padding-top: 5rem;
   }
   body {
-    @apply bg-crema font-sans text-tinta antialiased;
+    @apply bg-arena font-sans text-tinta antialiased;
     overscroll-behavior-y: none;
     overflow-x: clip; /* red de seguridad contra scroll horizontal en mobile (no rompe sticky) */
   }
   h1,
   h2,
   h3 {
-    @apply font-serif text-verde;
+    @apply font-serif text-tinta;
     text-wrap: balance;
   }
   :focus-visible {
-    outline: 2px solid var(--color-dorado);
+    outline: 2px solid var(--color-verde);
     outline-offset: 3px;
     border-radius: 0.75rem;
   }
   ::selection {
-    background: var(--color-amarillo);
-    color: var(--color-verde);
+    background: var(--color-salvia-media);
+    color: var(--color-tinta);
   }
 }
 
+/* El verde nunca es fondo de secciones: solo botones, íconos activos y links. */
 @utility glass {
-  background: rgb(255 255 255 / 0.72);
-  backdrop-filter: blur(16px) saturate(1.4);
-  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  background: rgb(255 253 248 / 0.8);
+  backdrop-filter: blur(16px) saturate(1.3);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
 }
-@utility glass-crema {
-  background: rgb(250 249 244 / 0.78);
-  backdrop-filter: blur(16px) saturate(1.4);
-  -webkit-backdrop-filter: blur(16px) saturate(1.4);
-}
-/* Dirección visual clara: el verde oscuro NUNCA es fondo de bloques grandes
-   (solo títulos, texto, botón primario, íconos y bordes finos). */
-@utility glass-claro {
-  background: rgb(255 255 255 / 0.82);
-  backdrop-filter: blur(18px) saturate(1.5);
-  -webkit-backdrop-filter: blur(18px) saturate(1.5);
-  border: 1px solid var(--color-linea);
+/* Header, bottom nav y barras fijas: arena translúcido con blur */
+@utility glass-arena {
+  background: rgb(244 239 230 / 0.82);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
 }
 @utility card {
-  @apply border border-linea bg-white shadow-suave;
+  @apply border border-linea bg-crema-card shadow-suave;
 }
-/* Fondo de modales/drawer: velo claro, no verde */
+/* Bloque de sección con color (dentro del contenedor) */
+@utility bloque-salvia {
+  @apply rounded-3xl bg-salvia;
+}
+/* Fondo de modales/drawer: velo suave */
 @utility velo {
-  background: rgb(27 28 25 / 0.28);
+  background: rgb(34 56 43 / 0.3);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
@@ -124,13 +123,11 @@
   @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-bold tracking-wide transition duration-200 select-none active:scale-[0.96] disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100;
 }
 @utility btn-primario {
-  @apply bg-verde text-crema shadow-suave hover:bg-verde-700 hover:shadow-flotante;
+  @apply bg-verde text-arena shadow-suave hover:bg-verde-700 hover:shadow-flotante;
 }
-@utility btn-amarillo {
-  @apply bg-amarillo text-verde shadow-suave hover:bg-amarillo-300 hover:shadow-flotante;
-}
+/* Secundario: borde verde 1px, texto verde, fondo transparente */
 @utility btn-borde {
-  @apply border border-verde/20 bg-white/60 text-verde hover:border-verde/50 hover:bg-white;
+  @apply border border-verde bg-transparent text-verde hover:bg-salvia;
 }
 @utility chip {
   @apply inline-flex shrink-0 items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-semibold whitespace-nowrap transition duration-200 active:scale-95;
@@ -145,30 +142,30 @@
 .skeleton {
   position: relative;
   overflow: hidden;
-  background: var(--color-crema-300);
+  background: color-mix(in srgb, var(--color-salvia-media) 55%, var(--color-arena));
 }
 .skeleton::after {
   content: '';
   position: absolute;
   inset: 0;
   transform: translateX(-100%);
-  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.55), transparent);
+  background: linear-gradient(90deg, transparent, rgb(255 253 248 / 0.5), transparent);
   animation: brillo 1.4s infinite;
 }
 
-@keyframes pulso-amarillo {
+@keyframes pulso-verde {
   0% {
-    box-shadow: 0 0 0 0 rgb(254 214 91 / 0.7);
+    box-shadow: 0 0 0 0 rgb(62 100 80 / 0.45);
   }
   70% {
-    box-shadow: 0 0 0 12px rgb(254 214 91 / 0);
+    box-shadow: 0 0 0 12px rgb(62 100 80 / 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgb(254 214 91 / 0);
+    box-shadow: 0 0 0 0 rgb(62 100 80 / 0);
   }
 }
 .pulso {
-  animation: pulso-amarillo 2.4s infinite;
+  animation: pulso-verde 2.4s infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

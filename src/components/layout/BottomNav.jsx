@@ -19,7 +19,7 @@ export default function BottomNav() {
   if (pathname.startsWith('/producto/')) return null;
   return (
     <nav aria-label="Navegación inferior" className="fixed inset-x-0 bottom-0 z-40 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:hidden">
-      <ul className="glass-claro mx-auto flex max-w-md items-center justify-around rounded-full px-2 py-1.5 shadow-flotante">
+      <ul className="glass-arena mx-auto flex max-w-md items-center justify-around rounded-full px-2 py-1.5 shadow-flotante">
         {ITEMS.map((it) => (
           <li key={it.to} className="flex-1">
             <NavLink
@@ -28,7 +28,7 @@ export default function BottomNav() {
               aria-label={it.carrito ? `Carrito (${cantidadTotal} productos)` : undefined}
               className={({ isActive }) =>
                 `relative flex flex-col items-center gap-0.5 rounded-full py-1.5 text-[11px] font-semibold transition active:scale-90 ${
-                  isActive ? 'text-verde' : 'text-verde/75'
+                  isActive ? 'text-verde' : 'text-tinta'
                 }`
               }
             >
@@ -37,7 +37,7 @@ export default function BottomNav() {
                   {isActive && (
                     <m.span
                       layoutId="bottomnav-activo"
-                      className="absolute inset-0 rounded-full bg-verde/8"
+                      className="absolute inset-0 rounded-full bg-salvia"
                       transition={{ type: 'spring', stiffness: 420, damping: 34 }}
                     />
                   )}

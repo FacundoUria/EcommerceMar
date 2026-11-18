@@ -4,13 +4,13 @@ import { useState } from 'react';
 export function ImgPlaceholder({ titulo, subtitulo = 'Dream Hair', className = '' }) {
   return (
     <div
-      className={`flex h-full w-full flex-col items-center justify-center gap-2 bg-crema-200 p-4 text-center ${className}`}
+      className={`flex h-full w-full flex-col items-center justify-center gap-2 bg-salvia-media p-4 text-center ${className}`}
       role="img"
       aria-label={titulo ? `${titulo} (sin foto)` : 'Sin foto'}
     >
-      <span className="text-[10px] font-bold tracking-[0.25em] text-dorado uppercase">{subtitulo}</span>
-      <span className="h-px w-8 bg-dorado/40" />
-      {titulo && <span className="font-serif text-lg leading-tight text-verde">{titulo}</span>}
+      <span className="text-[10px] font-bold tracking-[0.25em] text-tinta uppercase">{subtitulo}</span>
+      <span className="h-px w-8 bg-tinta/30" />
+      {titulo && <span className="font-serif text-lg leading-tight text-tinta">{titulo}</span>}
     </div>
   );
 }

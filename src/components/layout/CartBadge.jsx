@@ -13,7 +13,7 @@ export default function CartBadge({ className = '' }) {
           animate={{ scale: [1.6, 0.9, 1], opacity: 1 }}
           exit={{ scale: 0, opacity: 0 }}
           transition={{ duration: 0.45, ease: 'easeOut' }}
-          className={`absolute -top-1.5 -right-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-amarillo px-1 text-[11px] font-extrabold text-verde ring-2 ring-crema tabular-nums ${className}`}
+          className={`absolute -top-1.5 -right-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-amarillo px-1 text-[11px] font-extrabold text-tinta ring-2 ring-arena tabular-nums ${className}`}
         >
           {cantidadTotal > 99 ? '99+' : cantidadTotal}
         </m.span>

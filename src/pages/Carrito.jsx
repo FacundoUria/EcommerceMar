@@ -15,7 +15,7 @@ export default function Carrito() {
   if (!lineas.length) {
     return (
       <section className="mx-auto flex max-w-md flex-col items-center px-6 py-20 text-center">
-        <div className="flex size-24 items-center justify-center rounded-full bg-crema-200 text-verde">
+        <div className="flex size-24 items-center justify-center rounded-full bg-salvia text-verde">
           <Icon name="carrito" size={40} />
         </div>
         <h1 className="mt-6 text-4xl">Carrito vacío</h1>
@@ -40,7 +40,7 @@ export default function Carrito() {
                   vaciar();
                   setConfirmar(false);
                 }}
-                className="btn bg-red-700 px-4 py-2.5 text-crema hover:bg-red-800"
+                className="btn bg-red-700 px-4 py-2.5 text-arena hover:bg-red-800"
               >
                 Sí
               </button>

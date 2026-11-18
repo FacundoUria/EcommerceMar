@@ -7,7 +7,7 @@ export const NEGOCIO = {
   whatsapp: 'https://wa.me/message/G7IS2KBVGNF4E1',
   direccion: '[A CONFIRMAR CON MAR]',
   horarios: '[A CONFIRMAR CON MAR]',
-  instagram: null, // [A CONFIRMAR CON MAR]
+  instagram: 'https://www.instagram.com/dreamhair_mza',
 };
 
 // Franja de beneficios (textos de sus banners)

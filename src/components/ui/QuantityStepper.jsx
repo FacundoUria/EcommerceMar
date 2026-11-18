@@ -2,10 +2,10 @@ import Icon from './Icon.jsx';
 
 export default function QuantityStepper({ value, onChange, min = 1, max = 99, size = 'md', label = 'Cantidad' }) {
   const chico = size === 'sm';
-  const btn = `flex items-center justify-center rounded-full text-verde transition active:scale-90 hover:bg-verde/5 disabled:opacity-30 ${chico ? 'size-8' : 'size-11'}`;
+  const btn = `flex items-center justify-center rounded-full text-tinta transition active:scale-90 hover:bg-salvia disabled:opacity-30 ${chico ? 'size-8' : 'size-11'}`;
   return (
     <div
-      className={`inline-flex items-center rounded-full border border-verde/15 bg-white ${chico ? 'p-0.5' : 'p-1'}`}
+      className={`inline-flex items-center rounded-full border border-verde/15 bg-crema-card ${chico ? 'p-0.5' : 'p-1'}`}
       role="group"
       aria-label={label}
     >

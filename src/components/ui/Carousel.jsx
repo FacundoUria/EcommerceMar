@@ -5,7 +5,8 @@ import Icon from './Icon.jsx';
  * Carrusel horizontal con scroll-snap nativo (touch) + arrastre con mouse + flechas en desktop.
  * Los hijos deberían tener ancho fijo (ej. w-[70%] sm:w-64) y `snap-start`.
  */
-export default function Carousel({ children, label, className = '', itemsClassName = 'gap-4' }) {
+/** `gutter`: margen lateral (CSS). Por defecto alinea con el contenedor de 72rem; dentro de un bloque, pasar un valor fijo. */
+export default function Carousel({ children, label, className = '', itemsClassName = 'gap-4', gutter }) {
   const ref = useRef(null);
   const drag = useRef({ activo: false, x: 0, scroll: 0, movio: false });
   const [bordes, setBordes] = useState({ inicio: true, fin: false });
@@ -73,6 +74,7 @@ export default function Carousel({ children, label, className = '', itemsClassNa
         onPointerLeave={terminar}
         onClickCapture={onClickCapture}
         onDragStart={(e) => e.preventDefault()}
+        style={gutter ? { '--gutter': gutter } : undefined}
         className={`no-scrollbar flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-px-[var(--gutter)] px-[var(--gutter)] pb-2 [--gutter:max(1rem,calc((100vw-72rem)/2+1rem))] md:cursor-grab md:active:cursor-grabbing ${itemsClassName}`}
       >
         {children}
@@ -81,7 +83,7 @@ export default function Carousel({ children, label, className = '', itemsClassNa
         type="button"
         onClick={() => mover(-1)}
         aria-label="Anterior"
-        className={`glass absolute top-1/3 left-2 hidden size-11 items-center justify-center rounded-full text-verde shadow-suave transition hover:scale-105 active:scale-95 md:flex ${bordes.inicio ? 'pointer-events-none opacity-0' : 'opacity-0 group-hover/car:opacity-100'}`}
+        className={`glass absolute top-1/3 left-2 hidden size-11 items-center justify-center rounded-full text-tinta shadow-suave transition hover:scale-105 active:scale-95 md:flex ${bordes.inicio ? 'pointer-events-none opacity-0' : 'opacity-0 group-hover/car:opacity-100'}`}
       >
         <Icon name="flechaIzq" size={20} />
       </button>
@@ -89,7 +91,7 @@ export default function Carousel({ children, label, className = '', itemsClassNa
         type="button"
         onClick={() => mover(1)}
         aria-label="Siguiente"
-        className={`glass absolute top-1/3 right-2 hidden size-11 items-center justify-center rounded-full text-verde shadow-suave transition hover:scale-105 active:scale-95 md:flex ${bordes.fin ? 'pointer-events-none opacity-0' : 'opacity-0 group-hover/car:opacity-100'}`}
+        className={`glass absolute top-1/3 right-2 hidden size-11 items-center justify-center rounded-full text-tinta shadow-suave transition hover:scale-105 active:scale-95 md:flex ${bordes.fin ? 'pointer-events-none opacity-0' : 'opacity-0 group-hover/car:opacity-100'}`}
       >
         <Icon name="flecha" size={20} />
       </button>

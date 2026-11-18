@@ -36,15 +36,15 @@ export default function Swatches({ variantes, seleccionada, onSelect, onPreview,
             onMouseEnter={() => onPreview?.(v)}
             onFocus={() => onPreview?.(v)}
             onBlur={() => onPreview?.(null)}
-            className={`${dim} shrink-0 overflow-hidden rounded-full border-2 bg-white transition duration-200 hover:scale-110 active:scale-95 ${
-              activa ? 'border-verde ring-2 ring-amarillo ring-offset-1' : 'border-white shadow-suave'
+            className={`${dim} shrink-0 overflow-hidden rounded-full border-2 bg-crema-card transition duration-200 hover:scale-110 active:scale-95 ${
+              activa ? 'border-verde ring-2 ring-salvia-media ring-offset-1' : 'border-crema-card shadow-suave'
             }`}
           >
             <img src={imgSm(v.imagen)} alt="" width="56" height="56" loading="lazy" decoding="async" className="size-full object-cover" />
           </button>
         );
       })}
-      {resto > 0 && <span className="text-xs font-bold text-gris">+{resto}</span>}
+      {resto > 0 && <span className="text-xs font-bold text-texto-suave">+{resto}</span>}
     </div>
   );
 }

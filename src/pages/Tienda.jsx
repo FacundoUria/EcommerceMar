@@ -74,11 +74,11 @@ export default function Tienda() {
 
       {/* Barra de búsqueda + orden, pegajosa debajo del header */}
       <div className="sticky top-16 z-30 mt-5 md:top-20">
-        <div className="glass-crema px-4 py-3">
+        <div className="glass-arena px-4 py-3">
           <div className="flex gap-2">
             <label className="relative flex-1">
               <span className="sr-only">Buscar productos</span>
-              <Icon name="buscar" size={19} className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-gris" />
+              <Icon name="buscar" size={19} className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-texto-suave" />
               <input
                 ref={inputRef}
                 type="search"
@@ -90,7 +90,7 @@ export default function Tienda() {
                   actualizar({ q: e.target.value }, { replace: true });
                 }}
                 placeholder="Buscar…"
-                className="h-12 w-full rounded-full border border-verde/15 bg-white pr-10 pl-11 text-[16px] shadow-suave transition outline-none placeholder:text-gris/70 focus:border-verde focus:ring-4 focus:ring-amarillo/40"
+                className="h-12 w-full rounded-full border border-verde/15 bg-crema-card pr-10 pl-11 text-[16px] shadow-suave transition outline-none placeholder:text-texto-suave/70 focus:border-verde focus:ring-4 focus:ring-salvia-media"
               />
               {q && (
                 <button
@@ -101,7 +101,7 @@ export default function Tienda() {
                     inputRef.current?.focus();
                   }}
                   aria-label="Borrar búsqueda"
-                  className="absolute top-1/2 right-2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full text-gris hover:bg-verde/5"
+                  className="absolute top-1/2 right-2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full text-texto-suave hover:bg-salvia"
                 >
                   <Icon name="cerrar" size={16} />
                 </button>
@@ -112,7 +112,7 @@ export default function Tienda() {
               <select
                 value={orden}
                 onChange={(e) => actualizar({ orden: e.target.value === 'destacados' ? '' : e.target.value }, { replace: true })}
-                className="h-12 appearance-none rounded-full border border-verde/15 bg-white pr-9 pl-4 text-sm font-semibold text-verde shadow-suave outline-none focus:border-verde focus:ring-4 focus:ring-amarillo/40"
+                className="h-12 appearance-none rounded-full border border-verde/15 bg-crema-card pr-9 pl-4 text-sm font-semibold text-tinta shadow-suave outline-none focus:border-verde focus:ring-4 focus:ring-salvia-media"
               >
                 {ORDENES.map((o) => (
                   <option key={o.id} value={o.id}>
@@ -120,7 +120,7 @@ export default function Tienda() {
                   </option>
                 ))}
               </select>
-              <Icon name="sliders" size={16} className="pointer-events-none absolute top-1/2 right-3.5 -translate-y-1/2 text-verde" />
+              <Icon name="sliders" size={16} className="pointer-events-none absolute top-1/2 right-3.5 -translate-y-1/2 text-tinta" />
             </label>
           </div>
 
@@ -163,10 +163,10 @@ export default function Tienda() {
           <GridSkeleton n={8} />
         ) : resultados.length === 0 ? (
           <div className="card flex flex-col items-center rounded-5xl px-6 py-16 text-center">
-            <div className="flex size-16 items-center justify-center rounded-full bg-crema-200 text-verde">
+            <div className="flex size-16 items-center justify-center rounded-full bg-salvia text-verde">
               <Icon name="buscar" size={28} />
             </div>
-            <p className="mt-4 font-serif text-2xl text-verde">Sin resultados</p>
+            <p className="mt-4 font-serif text-2xl text-tinta">Sin resultados</p>
             <button type="button" onClick={() => setParams({})} className="btn btn-primario mt-6">
               Ver todo
             </button>
@@ -183,7 +183,7 @@ export default function Tienda() {
                   exit={{ opacity: 0, scale: 0.94 }}
                   transition={{ duration: 0.25 }}
                 >
-                  <ProductCard producto={p} priority={i < 4} nivelTitulo="h2" />
+                  <ProductCard producto={p} priority={i < 4} nivelTitulo="h2" className="h-full" />
                 </m.li>
               ))}
             </AnimatePresence>
@@ -201,7 +201,7 @@ function Chip({ activo, onClick, children, variante }) {
       onClick={onClick}
       aria-pressed={activo}
       className={`chip ${variante === 'marca' ? 'font-serif' : ''} ${
-        activo ? 'border-verde bg-verde/8 text-verde' : 'border-linea bg-white text-verde hover:border-verde/30'
+        activo ? 'border-verde bg-salvia text-verde' : 'border-linea bg-crema-card text-tinta hover:border-verde/40'
       }`}
     >
       {activo && <Icon name="check" size={14} strokeWidth={2.6} />}

@@ -31,7 +31,7 @@ export default function Servicios() {
           : (servicios ?? []).map((s, i) => (
               <Reveal as="li" key={s.id} delay={(i % 3) * 0.07}>
                 <article className="card group overflow-hidden rounded-5xl">
-                  <div className="aspect-[4/5] overflow-hidden bg-crema-200">
+                  <div className="aspect-[4/5] overflow-hidden bg-salvia-media">
                   <SmartImg
                     src={s.imagen}
                     srcSm={imgSm(s.imagen)}
@@ -52,7 +52,7 @@ export default function Servicios() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`Reservar ${s.nombre} por WhatsApp`}
-                        className="inline-flex items-center gap-1.5 rounded-full bg-verde px-4 py-2.5 text-xs font-extrabold text-crema transition hover:bg-verde-700 active:scale-95"
+                        className="inline-flex items-center gap-1.5 rounded-full bg-verde px-4 py-2.5 text-xs font-extrabold text-arena transition hover:bg-verde-700 active:scale-95"
                       >
                         <Icon name="whatsapp" size={16} /> Reservar
                       </a>
@@ -72,7 +72,7 @@ export default function Servicios() {
 function ProcesoVideo() {
   const [activo, setActivo] = useState(false);
   return (
-    <section aria-labelledby="proceso-titulo" className="mt-16 grid items-center gap-8 md:grid-cols-2 md:gap-14">
+    <section aria-labelledby="proceso-titulo" className="bloque-salvia mt-14 grid items-center gap-8 p-6 md:grid-cols-2 md:gap-14 md:p-10">
       <Reveal>
         <h2 id="proceso-titulo" className="text-4xl leading-tight md:text-5xl">
           El <em className="text-dorado">proceso</em>
@@ -82,7 +82,7 @@ function ProcesoVideo() {
         </a>
       </Reveal>
       <Reveal delay={0.1} className="mx-auto w-full max-w-xs">
-        <div className="relative aspect-[9/16] overflow-hidden rounded-5xl border border-linea bg-crema-200 shadow-suave">
+        <div className="relative aspect-[9/16] overflow-hidden rounded-5xl border border-linea bg-salvia-media shadow-suave">
           {activo ? (
             <video
               src="/video/proceso.mp4"
@@ -98,7 +98,7 @@ function ProcesoVideo() {
             <button type="button" onClick={() => setActivo(true)} className="group absolute inset-0" aria-label="Reproducir video del proceso de asesoramiento (con sonido)">
               <img src="/video/proceso.webp" alt="" width="576" height="1024" loading="lazy" className="size-full object-cover" />
               <span className="absolute inset-0 bg-black/5 transition group-hover:bg-transparent" />
-              <span className="absolute top-1/2 left-1/2 flex size-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-amarillo text-verde shadow-flotante transition group-hover:scale-110 group-active:scale-95">
+              <span className="absolute top-1/2 left-1/2 flex size-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-crema-card text-verde shadow-flotante transition group-hover:scale-110 group-active:scale-95">
                 <span className="pulso absolute inset-0 rounded-full" />
                 <Icon name="play" size={30} className="ml-1" />
               </span>

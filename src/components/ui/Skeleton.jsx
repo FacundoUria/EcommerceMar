@@ -4,11 +4,13 @@ export function Skeleton({ className = '' }) {
 
 export function ProductCardSkeleton() {
   return (
-    <div aria-hidden="true">
-      <Skeleton className="aspect-[4/5] w-full rounded-4xl" />
-      <Skeleton className="mt-2.5 h-3 w-1/3" />
-      <Skeleton className="mt-2 h-4 w-4/5" />
-      <Skeleton className="mt-2 h-4 w-1/3" />
+    <div aria-hidden="true" className="card overflow-hidden rounded-3xl">
+      <Skeleton className="aspect-[4/5] w-full rounded-none" />
+      <div className="px-3.5 pt-3 pb-3.5">
+        <Skeleton className="h-3 w-1/3" />
+        <Skeleton className="mt-2 h-4 w-4/5" />
+        <Skeleton className="mt-2 h-4 w-1/3" />
+      </div>
     </div>
   );
 }

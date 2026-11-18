@@ -83,7 +83,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
         onDragEnd={(_, info) => {
           if (info.offset.y > 120 || info.velocity.y > 600) onClose();
         }}
-        className="relative max-h-[92dvh] w-full overflow-y-auto rounded-t-5xl bg-crema shadow-flotante md:grid md:max-w-4xl md:grid-cols-2 md:rounded-5xl"
+        className="relative max-h-[92dvh] w-full overflow-y-auto rounded-t-5xl bg-crema-card shadow-flotante md:grid md:max-w-4xl md:grid-cols-2 md:rounded-5xl"
       >
         <div
           className="sticky top-0 z-10 flex touch-none justify-center pt-3 pb-3 md:hidden"
@@ -96,12 +96,12 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
           type="button"
           onClick={onClose}
           aria-label="Cerrar vista rápida"
-          className="glass absolute top-4 right-4 z-20 flex size-10 items-center justify-center rounded-full text-verde shadow-suave transition hover:rotate-90 active:scale-90"
+          className="glass absolute top-4 right-4 z-20 flex size-10 items-center justify-center rounded-full text-tinta shadow-suave transition hover:rotate-90 active:scale-90"
         >
           <Icon name="cerrar" size={20} />
         </button>
 
-        <div className="mx-4 aspect-square overflow-hidden rounded-4xl bg-white md:m-0 md:aspect-auto md:h-full md:rounded-none">
+        <div className="mx-4 aspect-square overflow-hidden rounded-4xl bg-salvia-media md:m-0 md:aspect-auto md:h-full md:rounded-none">
           <AnimatePresence mode="popLayout" initial={false}>
             <m.div
               key={imagen}
@@ -128,7 +128,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
             <h2 id="qv-titulo" className="mt-1 text-3xl leading-tight">
               {producto.nombre}
             </h2>
-            <p className="mt-2 font-serif text-2xl font-semibold text-verde">{formatPrecio(producto.precio)}</p>
+            <p className="mt-2 font-serif text-2xl font-semibold text-tinta">{formatPrecio(producto.precio)}</p>
           </div>
 
           {tieneVariantes && (

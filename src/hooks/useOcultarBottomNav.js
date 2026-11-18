@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { pausarSmooth } from '../lib/smooth.js';
 
 // Contador global: si hay overlays apilados, el nav vuelve recién cuando se cierra el último.
 let abiertos = 0;
@@ -12,9 +13,13 @@ export function useOcultarBottomNav(activo = true) {
     if (!activo) return;
     abiertos += 1;
     document.documentElement.dataset.overlay = 'abierto';
+    pausarSmooth(true); // el scroll suave se pausa con un overlay abierto
     return () => {
       abiertos = Math.max(0, abiertos - 1);
-      if (!abiertos) delete document.documentElement.dataset.overlay;
+      if (!abiertos) {
+        delete document.documentElement.dataset.overlay;
+        pausarSmooth(false);
+      }
     };
   }, [activo]);
 }

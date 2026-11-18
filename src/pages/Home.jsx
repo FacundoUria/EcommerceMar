@@ -3,6 +3,8 @@ import { Link } from 'react-router';
 import { AnimatePresence, m, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import Icon from '../components/ui/Icon.jsx';
 import Reveal, { cascada } from '../components/ui/Reveal.jsx';
+import RevealText from '../components/ui/RevealText.jsx';
+import RevealImagen from '../components/ui/RevealImagen.jsx';
 import Carousel from '../components/ui/Carousel.jsx';
 import SmartImg from '../components/ui/SmartImg.jsx';
 import Stories from '../components/ui/Stories.jsx';
@@ -37,17 +39,9 @@ export default function Home() {
 }
 
 /* ═════════ HERO full-screen: mesh animado, título gigante, foto blob + mini-cards flotantes ═════════ */
-const TITULO = [
-  { t: 'El' },
-  { t: 'cabello' },
-  { t: 'es' },
-  { t: 'el' },
-  { t: 'espejo' },
-  { t: 'de' },
-  { t: 'tu' },
-  { t: 'amor', em: true },
-  { t: 'propio', em: true },
-];
+// La frase de Mar: "El cabello es el espejo de tu amor propio"
+const TITULO_TEXTO = 'El cabello es el espejo de tu';
+const TITULO_EM = 'amor propio';
 const PARALLAX_PX = 60;
 const BLOB = 'rounded-[46%_54%_40%_60%/56%_44%_56%_44%]';
 
@@ -63,36 +57,19 @@ function Hero() {
   const flotantes = ['shampoo-low-poo-han', 'cremas-skala'].map((id) => productos?.find((p) => p.id === id)).filter(Boolean);
 
   return (
-    <section aria-labelledby="hero-titulo" className="relative isolate -mt-px overflow-hidden">
+    <section aria-labelledby="hero-titulo" className="grano -mt-px overflow-hidden">
       <MeshFondo />
       {/* El hero termina donde termina su contenido (+ indicador de scroll), sin aire vacío abajo */}
       <div className="contenedor grid items-center gap-8 pt-6 pb-10 md:grid-cols-[1.08fr_0.92fr] md:gap-10 md:pt-10 md:pb-6">
-        {/* Título (arriba en mobile, izquierda en desktop) */}
+        {/* Título (arriba en mobile, izquierda en desktop): revelado por línea al cargar */}
         <div className="flex flex-col items-start gap-8">
-          <h1 id="hero-titulo" className="text-[clamp(3rem,7.4vw,6.5rem)] leading-[0.98] tracking-[-0.02em]">
-            {TITULO.map(({ t, em }, i) => {
-              const palabra = (
-                <m.span
-                  className="inline-block"
-                  initial={reducido ? false : { opacity: 0, y: '0.35em' }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.15 + i * 0.08, ease: EASE }}
-                >
-                  {t}
-                </m.span>
-              );
-              return (
-                <span key={t + i}>
-                  {em ? <em className="texto-dorado">{palabra}</em> : palabra}
-                  {i < TITULO.length - 1 && ' '}
-                </span>
-              );
-            })}
-          </h1>
+          <RevealText as="h1" id="hero-titulo" alCargar delay={0.15} className="text-[clamp(3rem,7.4vw,6.5rem)] leading-[0.98] tracking-[-0.02em]">
+            {TITULO_TEXTO} <em className="texto-dorado">{TITULO_EM}</em>
+          </RevealText>
           <m.div
             initial={reducido ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15 + TITULO.length * 0.08, ease: EASE }}
+            transition={{ duration: 0.6, delay: 0.55, ease: EASE }}
           >
             <Link to="/tienda" className="btn btn-primario px-8 py-4 text-base">
               Ver productos <Icon name="flecha" size={18} />
@@ -152,7 +129,7 @@ function MiniCard({ producto, y, delay, className, flotarDesfase = false }) {
         <Link
           to={`/producto/${producto.id}`}
           className="anim-flotar flex w-[10.5rem] items-center gap-2.5 rounded-2xl border border-linea bg-crema-card/90 p-2 pr-3 shadow-flotante backdrop-blur-md transition hover:bg-crema-card md:w-[13rem] md:p-2.5"
-          style={{ animation: `flotar ${flotarDesfase ? 7 : 6}s ease-in-out ${flotarDesfase ? '-2s' : '0s'} infinite` }}
+          style={{ animation: `flotar ${flotarDesfase ? 5 : 4.5}s ease-in-out ${flotarDesfase ? '-2.2s' : '0s'} infinite` }}
         >
           <span className="size-11 shrink-0 overflow-hidden rounded-xl md:size-14">
             <FotoProducto src={imgSm(producto.imagen)} zoom={false} compacta />
@@ -187,7 +164,7 @@ function Categorias() {
       ) : (
         <CarruselCentrado label="Categorías" anchoItem="w-[68vw] max-w-[19rem]">
           {categorias.map((c) => (
-            <Link key={c.id} to={`/tienda?cat=${c.id}`} className="relative block aspect-[3/4] overflow-hidden rounded-3xl shadow-suave">
+            <Link key={c.id} to={`/tienda?cat=${c.id}`} data-cursor="ver" className="relative block aspect-[3/4] overflow-hidden rounded-3xl shadow-suave">
               <FotoProducto src={c.imagen} srcSm={imgSm(c.imagen)} sizes="68vw" placeholderTitulo={c.nombre} cover zoom={false} />
               <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#16241C]/80 via-[#16241C]/10 to-transparent" />
               <span className="absolute inset-x-5 bottom-5 font-serif text-2xl leading-tight text-crema-card">{c.nombre}</span>
@@ -219,11 +196,14 @@ function PanelesCategorias({ categorias }) {
                 to={p.to}
                 onFocus={() => setActivo(i)}
                 aria-label={todas ? 'Ver todas las categorías' : `${p.nombre}: ver productos`}
+                data-cursor="ver"
                 className={`group relative block size-full overflow-hidden rounded-3xl shadow-suave ${todas ? 'bg-salvia' : ''}`}
               >
                 {!todas && (
                   <>
-                    <FotoProducto src={p.imagen} srcSm={imgSm(p.imagen)} sizes="(min-width: 1024px) 640px" placeholderTitulo={p.nombre} cover zoom={false} />
+                    <RevealImagen delay={i * 0.08}>
+                      <FotoProducto src={p.imagen} srcSm={imgSm(p.imagen)} sizes="(min-width: 1024px) 640px" placeholderTitulo={p.nombre} cover zoom={false} />
+                    </RevealImagen>
                     <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#16241C]/80 via-[#16241C]/15 to-transparent" />
                   </>
                 )}
@@ -264,12 +244,12 @@ function MasVendidos() {
   const desktop = useMediaQuery('(min-width: 768px)');
   const destacados = useMemo(() => (productos ?? []).filter((p) => p.destacado), [productos]);
   const titulo = (
-    <h2 id="dest-titulo" className="text-3xl leading-tight md:text-4xl">
+    <RevealText id="dest-titulo" className="text-3xl leading-tight md:text-4xl">
       Más vendidos
-    </h2>
+    </RevealText>
   );
   return (
-    <section aria-labelledby="dest-titulo" className="fondo-salvia py-16 md:py-24">
+    <section aria-labelledby="dest-titulo" className="fondo-salvia grano py-14 md:py-20">
       {loading ? (
         <div className="contenedor">
           {titulo}
@@ -353,7 +333,7 @@ function useProductosPorPaso() {
 
 function RutinaHistoria() {
   return (
-    <section aria-labelledby="rutina-titulo" className="relative isolate">
+    <section aria-labelledby="rutina-titulo" className="grano">
       <MeshFondo />
       <RutinaDesktop />
       <RutinaMobile />
@@ -374,9 +354,9 @@ function RutinaDesktop() {
   if (reducido) {
     return (
       <div className="contenedor hidden py-24 md:block">
-        <h2 id="rutina-titulo" className="text-[clamp(2.75rem,5vw,4.5rem)] leading-none">
+        <RevealText id="rutina-titulo" className="text-[clamp(2.75rem,5vw,4.5rem)] leading-none">
           Armá tu <em className="texto-dorado">rutina</em>
-        </h2>
+        </RevealText>
         <ol className="mt-10 grid grid-cols-4 gap-6">
           {PASOS_CHIPS.map((p, i) => {
             const prod = porPaso[i];
@@ -410,9 +390,9 @@ function RutinaDesktop() {
       <div className="sticky top-0 flex h-screen items-center">
         <div className="contenedor grid grid-cols-[0.95fr_1.05fr] items-center gap-16">
           <div>
-            <h2 id="rutina-titulo" className="text-[clamp(2.75rem,5vw,4.5rem)] leading-none">
+            <RevealText id="rutina-titulo" className="text-[clamp(2.75rem,5vw,4.5rem)] leading-none">
               Armá tu <em className="texto-dorado">rutina</em>
-            </h2>
+            </RevealText>
             <div className="relative mt-10">
               <LineaProgreso progreso={scrollYProgress} vertical className="absolute top-5 bottom-5 left-[19px]" />
               <ol className="relative space-y-5">
@@ -481,9 +461,9 @@ function RutinaMobile() {
   return (
     <div className="contenedor py-16 md:hidden">
       <Reveal>
-        <h2 className="text-4xl leading-none">
+        <RevealText className="text-4xl leading-none">
           Armá tu <em className="texto-dorado">rutina</em>
-        </h2>
+        </RevealText>
       </Reveal>
       <div ref={ref} className="relative mt-8">
         <LineaProgreso progreso={scrollYProgress} vertical className="absolute top-8 bottom-8 left-[19px]" />
@@ -534,6 +514,7 @@ function HolaSoyMar() {
         <Reveal className="relative mx-auto w-[86%] max-w-md">
           <m.div style={reducido ? undefined : { y: yMarco }} className="absolute -inset-3 rotate-[-4deg] rounded-5xl bg-salvia-media" />
           <m.div style={reducido ? undefined : { y: yFoto }} className="relative aspect-[4/5] overflow-hidden rounded-5xl shadow-flotante">
+            <RevealImagen>
             <SmartImg
               src="/img/mar/mar-con-producto.webp"
               srcSm="/img/mar/mar-con-producto-sm.webp"
@@ -543,13 +524,14 @@ function HolaSoyMar() {
               height={1575}
               className="size-full object-cover object-top"
             />
+            </RevealImagen>
           </m.div>
         </Reveal>
         <Reveal delay={0.1}>
           <p className="text-xs font-bold tracking-[0.22em] text-dorado uppercase">Detrás de Dream Hair</p>
-          <h2 id="mar-titulo" className="mt-2 text-5xl leading-none md:text-7xl">
+          <RevealText id="mar-titulo" className="mt-2 text-5xl leading-none md:text-7xl">
             Hola, soy <em className="texto-dorado">Mar</em>
-          </h2>
+          </RevealText>
           <p className="mt-5 max-w-lg font-serif text-2xl leading-snug text-tinta md:text-3xl">
             Especialista en rizos y apasionada por realzar la identidad de cada cabello.
           </p>
@@ -582,20 +564,24 @@ const STORIES = [
 
 function Resultados() {
   return (
-    <section aria-labelledby="res-titulo" className="fondo-salvia py-20 md:py-28">
+    <section aria-labelledby="res-titulo" className="fondo-salvia grano py-20 md:py-28">
       <div className="contenedor grid items-center gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-20">
         <Reveal className="md:order-2">
           <p className="text-xs font-bold tracking-[0.22em] text-dorado uppercase">Resultados reales</p>
-          <h2 id="res-titulo" className="mt-2 text-4xl leading-tight md:text-6xl">
+          <RevealText id="res-titulo" className="mt-2 text-4xl leading-tight md:text-6xl">
             Rulos que se <em className="texto-dorado">ven</em> y se <em className="texto-dorado">sienten</em>
-          </h2>
+          </RevealText>
           <p className="mt-3 max-w-md text-texto-suave">Así quedan los rulos después de pasar por el estudio.</p>
           <Link to="/servicios" className="btn btn-primario mt-6">
             Reservá tu turno <Icon name="flecha" size={18} />
           </Link>
         </Reveal>
         <Reveal delay={0.1} className="mx-auto w-full max-w-[20rem] md:order-1 md:max-w-[22rem]">
-          <Stories items={STORIES} className="aspect-[9/16] rounded-5xl shadow-flotante ring-8 ring-crema-card" />
+          <div className="aspect-[9/16] overflow-hidden rounded-5xl shadow-flotante ring-8 ring-crema-card">
+            <RevealImagen>
+              <Stories items={STORIES} className="size-full" />
+            </RevealImagen>
+          </div>
         </Reveal>
       </div>
     </section>

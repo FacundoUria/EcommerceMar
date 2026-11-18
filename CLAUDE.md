@@ -46,6 +46,11 @@ React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScri
 - Con `prefers-reduced-motion` todo queda estático: `Reveal` renderiza sin animar, el header no se oculta, sin parallax ni cinta.
 - Scroll: hero (parallax de la foto al 70%), header (compacto > 40px, se oculta al bajar; estado en `<html data-header>`), parallax de capas en "Hola, soy Mar", línea de pasos con `LineaProgreso` (scaleX ligado a scrollYProgress). Carrusel con `hint` (WAAPI, una vez).
 
+- Títulos h1/h2: `<RevealText>` (por línea con máscara, stagger 0.08s). Fotos destacadas: `<RevealImagen>` (cortina clip-path + escala 1.15→1).
+- Smooth scroll: Lenis (`src/lib/smooth.js`), solo desktop con mouse y sin movimiento reducido; se pausa con overlays. Para scrollear por código usar `scrollA()`.
+- Desktop con mouse: cursor propio (`Cursor.jsx`, `data-cursor="ver"` en cards), cards de producto 3D (hasta 6°), botones magnéticos.
+- Transición entre rutas: cortina salvia con el logo (≈0.68s, no en la primera carga). Grano: utilidad `grano`. Reveal se dispara 10% antes de entrar.
+- Excepciones pedidas a "solo transform/opacity": clip-path de la cortina de fotos y flex-grow de los paneles de categorías.
 ## Decisiones pendientes (preguntar antes de asumir)
 1. **Cierre del carrito:** ¿mensaje de WhatsApp a Mar con el pedido y el total, u otra cosa? (en Fase 1 queda "Próximamente").
 2. **Carga de productos y precios:** cómo carga Mar (panel admin / Google Sheet / otra). Los precios cambian seguido.

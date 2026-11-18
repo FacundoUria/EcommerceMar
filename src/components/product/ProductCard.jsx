@@ -1,4 +1,5 @@
 import { memo, useRef } from 'react';
+import { useReducedMotion } from 'motion/react';
 import { Link } from 'react-router';
 import Icon from '../ui/Icon.jsx';
 import FotoProducto from './FotoProducto.jsx';
@@ -39,10 +40,49 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
   };
   const etiquetaAgregar = tieneVariantes ? `Elegir variante de ${producto.nombre}` : `Agregar ${producto.nombre} al carrito`;
 
+  // Card 3D (desktop con mouse, sin movimiento reducido): se inclina hasta 6° siguiendo el mouse
+  // (perspective 800px) y un brillo diagonal se mueve con la inclinación. Sin re-renders.
+  const cardRef = useRef(null);
+  const brilloRef = useRef(null);
+  const reducido = useReducedMotion();
+  const inclinar = (e) => {
+    if (!conHover || reducido || e.pointerType !== 'mouse') return;
+    const el = cardRef.current;
+    const r = el.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width - 0.5; // -0.5 … 0.5
+    const py = (e.clientY - r.top) / r.height - 0.5;
+    el.style.transition = 'transform 120ms ease-out, box-shadow 500ms';
+    el.style.transform = `perspective(800px) rotateX(${(-py * 12).toFixed(2)}deg) rotateY(${(px * 12).toFixed(2)}deg)`;
+    if (brilloRef.current) {
+      brilloRef.current.style.opacity = '1';
+      brilloRef.current.style.transform = `translate(${(px * 40).toFixed(1)}%, ${(py * 40).toFixed(1)}%)`;
+    }
+  };
+  const soltar = () => {
+    const el = cardRef.current;
+    if (!el) return;
+    el.style.transition = 'transform 600ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 500ms';
+    el.style.transform = '';
+    if (brilloRef.current) brilloRef.current.style.opacity = '0';
+  };
+
   return (
     <article
-      className={`card group overflow-hidden rounded-3xl transition duration-500 ease-out md:hover:-translate-y-1.5 md:hover:shadow-flotante ${className}`}
+      ref={cardRef}
+      data-cursor="ver"
+      onPointerMove={inclinar}
+      onPointerLeave={soltar}
+      className={`card group relative overflow-hidden rounded-3xl transition duration-500 ease-out md:hover:-translate-y-1.5 md:hover:shadow-flotante ${className}`}
     >
+      {conHover && !reducido && (
+        <span aria-hidden="true" className="pointer-events-none absolute -inset-1/2 z-20 overflow-hidden">
+          <span
+            ref={brilloRef}
+            className="absolute inset-0 opacity-0 transition-opacity duration-500"
+            style={{ background: 'linear-gradient(115deg, transparent 38%, rgb(255 253 248 / 0.38) 50%, transparent 62%)' }}
+          />
+        </span>
+      )}
       <div className="relative">
         <Link to={url} className="block" aria-label={`${producto.nombre}, ${precio}`}>
           <div ref={imgRef} className="relative aspect-[4/5] overflow-hidden">

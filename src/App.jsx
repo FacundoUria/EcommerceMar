@@ -11,6 +11,8 @@ import CartDrawer from './components/cart/CartDrawer.jsx';
 import QuickView from './components/product/QuickView.jsx';
 import { PageSkeleton } from './components/ui/Skeleton.jsx';
 import { useBotonesMagneticos } from './hooks/useBotonesMagneticos.js';
+import Cursor from './components/ui/Cursor.jsx';
+import { scrollA } from './lib/smooth.js';
 import Home from './pages/Home.jsx'; // página de entrada: sin lazy para no sumar una cascada al LCP
 
 // Features de animación en un chunk aparte (no bloquean la primera pintura)
@@ -24,20 +26,34 @@ const Servicios = lazy(() => import('./pages/Servicios.jsx'));
 const Carrito = lazy(() => import('./pages/Carrito.jsx'));
 const NoEncontrado = lazy(() => import('./pages/NoEncontrado.jsx'));
 
+const EASE_CORTINA = [0.76, 0, 0.24, 1];
+
+/**
+ * Transición entre rutas: cortina salvia que sube cubriendo la pantalla (0.32s) con el logo,
+ * se cambia la página (y el scroll vuelve arriba mientras está tapado) y la cortina se retira (0.36s).
+ * Total ≈ 0.68s. No aparece en la primera carga (AnimatePresence initial={false}).
+ */
+function Cortina() {
+  return (
+    <m.div
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 z-[90] flex items-center justify-center bg-salvia"
+      initial={{ y: '0%' }}
+      animate={{ y: '-100%', transition: { duration: 0.36, ease: EASE_CORTINA } }}
+      exit={{ y: ['100%', '0%'], transition: { duration: 0.32, ease: EASE_CORTINA } }}
+    >
+      <img src="/img/marca/LOGO-sm.webp" alt="" width="96" height="96" className="size-24 rounded-full mix-blend-multiply" />
+    </m.div>
+  );
+}
+
 function Paginas() {
   const location = useLocation();
   const reducido = useReducedMotion();
   return (
-    <AnimatePresence mode="wait" initial={false} onExitComplete={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
-      <m.main
-        id="contenido"
-        key={location.pathname}
-        initial={reducido ? false : { opacity: 0, y: 14 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={reducido ? undefined : { opacity: 0, y: -8 }}
-        transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-        className="min-h-[70vh]"
-      >
+    <AnimatePresence mode="wait" initial={false} onExitComplete={() => scrollA(0, { inmediato: true })}>
+      <m.main id="contenido" key={location.pathname} className="min-h-[70vh]">
+        {!reducido && <Cortina />}
         <Suspense fallback={<PageSkeleton />}>
           <Routes location={location}>
             <Route path="/" element={<Home />} />
@@ -69,6 +85,7 @@ export default function App() {
               <CartDrawer />
               <QuickView />
               <Toaster />
+              <Cursor />
             </UIProvider>
           </CartProvider>
         </MotionConfig>

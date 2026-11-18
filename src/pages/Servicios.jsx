@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Icon from '../components/ui/Icon.jsx';
 import Reveal from '../components/ui/Reveal.jsx';
+import RevealText from '../components/ui/RevealText.jsx';
 import SmartImg from '../components/ui/SmartImg.jsx';
 import { Skeleton } from '../components/ui/Skeleton.jsx';
 import { useServices } from '../hooks/useCatalog.js';
@@ -15,7 +16,7 @@ export default function Servicios() {
   return (
     <div className="contenedor pt-4 pb-10">
       <Reveal as="header" className="flex items-end justify-between gap-4">
-        <h1 className="text-4xl leading-tight md:text-5xl">Servicios</h1>
+        <RevealText as="h1" className="text-4xl leading-tight md:text-5xl">Servicios</RevealText>
         <a href={NEGOCIO.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-primario">
           <Icon name="whatsapp" size={18} /> Reservar
         </a>
@@ -44,7 +45,7 @@ export default function Servicios() {
                   />
                   </div>
                   <div className="p-5">
-                    <h2 className="text-2xl leading-tight">{s.nombre}</h2>
+                    <RevealText className="text-2xl leading-tight">{s.nombre}</RevealText>
                     <div className="mt-3 flex items-center justify-between gap-3">
                       <p className="text-sm font-bold text-dorado">Consultar</p>
                       <a
@@ -72,11 +73,11 @@ export default function Servicios() {
 function ProcesoVideo() {
   const [activo, setActivo] = useState(false);
   return (
-    <section aria-labelledby="proceso-titulo" className="fondo-salvia mt-14 mx-[calc(50%-50vw)] grid items-center gap-8 px-[calc(50vw-50%)] py-16 md:grid-cols-2 md:gap-20 md:py-24">
+    <section aria-labelledby="proceso-titulo" className="fondo-salvia grano mt-14 mx-[calc(50%-50vw)] grid items-center gap-8 px-[calc(50vw-50%)] py-16 md:grid-cols-2 md:gap-20 md:py-24">
       <Reveal>
-        <h2 id="proceso-titulo" className="text-4xl leading-tight md:text-5xl">
+        <RevealText id="proceso-titulo" className="text-4xl leading-tight md:text-5xl">
           El <em className="texto-dorado">proceso</em>
-        </h2>
+        </RevealText>
         <a href={NEGOCIO.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-primario mt-6">
           <Icon name="whatsapp" size={18} /> Reservar
         </a>

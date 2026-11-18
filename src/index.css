@@ -177,7 +177,7 @@
 
 /* Fondos de sección de borde a borde: transiciones suaves arena → salvia → arena (sin cajas) */
 @utility fondo-salvia {
-  background-image: linear-gradient(180deg, var(--color-arena) 0%, var(--color-salvia) 22%, var(--color-salvia) 78%, var(--color-arena) 100%);
+  background-image: linear-gradient(180deg, var(--color-arena) 0%, var(--color-salvia) 12%, var(--color-salvia) 88%, var(--color-arena) 100%);
 }
 @utility fondo-salvia-abajo {
   background-image: linear-gradient(180deg, var(--color-arena) 0%, var(--color-salvia) 40%);
@@ -186,6 +186,21 @@
 /* Fondo único de las fotos de producto: degradé muy suave salvia-media → arena */
 @utility fondo-foto {
   background-image: linear-gradient(165deg, color-mix(in srgb, var(--color-salvia-media) 62%, var(--color-arena)) 0%, var(--color-arena) 100%);
+}
+
+/* Grano: ruido sutil (SVG feTurbulence, estático) sobre el hero y los bloques con degradé */
+@utility grano {
+  position: relative;
+  isolation: isolate;
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
 }
 
 /* Contenedor ancho del sitio (desktop 1440px aprovechado) */
@@ -304,4 +319,28 @@
   .anim-rebote {
     animation: none !important;
   }
+}
+
+/* Lenis (smooth scroll, solo desktop) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+/* Cursor propio (desktop): se oculta el nativo salvo en campos de texto */
+html.cursor-propio,
+html.cursor-propio * {
+  cursor: none !important;
+}
+html.cursor-propio :is(input, textarea, select, [contenteditable='true']) {
+  cursor: auto !important;
 }

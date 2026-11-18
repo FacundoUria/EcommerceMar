@@ -22,7 +22,7 @@ export default function Reveal({ children, delay = 0, y = 24, duration = 0.6, cl
     <Comp
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '0px 0px -40px 0px' }}
+      viewport={{ once: true, margin: '0px 0px 10% 0px' }} // se dispara un 10% antes de entrar: nunca se ve el hueco
       transition={{ duration, delay, ease: EASE }}
       className={className}
       {...rest}

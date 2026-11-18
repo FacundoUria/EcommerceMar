@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { AnimatePresence } from 'motion/react';
 import Icon from '../components/ui/Icon.jsx';
 import Reveal from '../components/ui/Reveal.jsx';
+import RevealText from '../components/ui/RevealText.jsx';
 import CartLine from '../components/cart/CartLine.jsx';
 import CartSummary from '../components/cart/CartSummary.jsx';
 import { useCart } from '../context/CartContext.jsx';
@@ -19,7 +20,7 @@ export default function Carrito() {
         <div className="flex size-24 items-center justify-center rounded-full bg-salvia text-verde">
           <Icon name="carrito" size={40} />
         </div>
-        <Reveal as="h1" className="mt-6 text-4xl">Carrito vacío</Reveal>
+        <RevealText as="h1" className="mt-6 text-4xl">Carrito vacío</RevealText>
         <Link to="/tienda" className="btn btn-primario mt-8">
           Ver productos
         </Link>
@@ -30,7 +31,7 @@ export default function Carrito() {
   return (
     <div className="contenedor pt-4 pb-32 md:pb-12">
       <header className="flex flex-wrap items-end justify-between gap-3">
-        <Reveal as="h1" className="text-4xl md:text-5xl">Tu carrito</Reveal>
+        <RevealText as="h1" className="text-4xl md:text-5xl">Tu carrito</RevealText>
         <div className="flex items-center gap-2">
           {confirmar ? (
             <>
@@ -68,7 +69,7 @@ export default function Carrito() {
 
         <aside aria-label="Resumen del pedido">
           <div className="card sticky top-24 rounded-5xl p-6">
-            <h2 className="mb-4 text-2xl">Resumen</h2>
+            <RevealText className="mb-4 text-2xl">Resumen</RevealText>
             <CartSummary />
             <Link to="/tienda" className="btn btn-borde mt-3 w-full">
               <Icon name="flechaIzq" size={18} /> Seguir comprando

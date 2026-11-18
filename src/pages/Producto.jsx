@@ -6,6 +6,7 @@ import FotoProducto from '../components/product/FotoProducto.jsx';
 import QuantityStepper from '../components/ui/QuantityStepper.jsx';
 import Carousel from '../components/ui/Carousel.jsx';
 import Reveal from '../components/ui/Reveal.jsx';
+import RevealText from '../components/ui/RevealText.jsx';
 import ProductCard from '../components/product/ProductCard.jsx';
 import CartBadge from '../components/layout/CartBadge.jsx';
 import { Skeleton } from '../components/ui/Skeleton.jsx';
@@ -137,7 +138,7 @@ function Detalle({ producto }) {
         <Reveal delay={0.1} className="flex min-w-0 flex-col gap-6">
           <div>
             {producto.marca && <p className="text-xs font-bold tracking-[0.2em] text-dorado uppercase">{producto.marca}</p>}
-            <h1 className="mt-1 text-4xl leading-tight md:text-5xl">{producto.nombre}</h1>
+            <RevealText as="h1" className="mt-1 text-4xl leading-tight md:text-5xl">{producto.nombre}</RevealText>
             <p className="precio mt-3 text-3xl text-tinta">{formatPrecio(producto.precio)}</p>
           </div>
 
@@ -231,9 +232,9 @@ function CompletaTuRutina({ producto }) {
   return (
     <section aria-labelledby="completa-titulo" className="-mx-4 mt-16">
       <Reveal className="mb-5 flex items-end justify-between gap-4 px-4">
-        <h2 id="completa-titulo" className="text-3xl">
+        <RevealText id="completa-titulo" className="text-3xl">
           Completá tu rutina
-        </h2>
+        </RevealText>
         <Link to="/rutina" className="text-sm font-bold text-verde">
           Ver rutina →
         </Link>

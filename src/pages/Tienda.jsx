@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, m, useReducedMotion } from 'motion/react';
 import Reveal, { cascada } from '../components/ui/Reveal.jsx';
+import RevealText from '../components/ui/RevealText.jsx';
 import Icon from '../components/ui/Icon.jsx';
 import ProductCard from '../components/product/ProductCard.jsx';
 import FotoProducto from '../components/product/FotoProducto.jsx';
@@ -87,7 +88,7 @@ export default function Tienda() {
   return (
     <div className="mx-auto w-full max-w-[84rem] pt-4 pb-10 md:px-4">
       <Reveal as="header" className="px-4">
-        <h1 className="text-4xl md:text-5xl">{titulo}</h1>
+        <RevealText as="h1" className="text-4xl md:text-5xl">{titulo}</RevealText>
       </Reveal>
 
       {/* Barra pegajosa: buscador + Filtros, y una fila de categorías */}
@@ -215,7 +216,7 @@ export default function Tienda() {
                   layout={!reducido}
                   initial={reducido ? false : { opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '0px 0px -40px 0px' }}
+                  viewport={{ once: true, margin: '0px 0px 10% 0px' }}
                   exit={reducido ? undefined : { opacity: 0, transition: { duration: 0.2 } }}
                   transition={{ duration: 0.6, delay: cascada(i), ease: EASE }}
                 >

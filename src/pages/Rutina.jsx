@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from 'react';
 import { AnimatePresence, m, useScroll } from 'motion/react';
 import Reveal from '../components/ui/Reveal.jsx';
+import RevealText from '../components/ui/RevealText.jsx';
 import LineaProgreso from '../components/ui/LineaProgreso.jsx';
 import Icon from '../components/ui/Icon.jsx';
 import FotoProducto from '../components/product/FotoProducto.jsx';
@@ -11,6 +12,7 @@ import { usePageTitle } from '../hooks/usePageTitle.js';
 import { useCart } from '../context/CartContext.jsx';
 import { formatPrecio, imgSm } from '../lib/format.js';
 import { PASOS_RUTINA } from '../config/negocio.js';
+import { scrollA } from '../lib/smooth.js';
 
 export default function Rutina() {
   usePageTitle('Armá tu rutina curly');
@@ -39,7 +41,7 @@ export default function Rutina() {
     setDireccion(i > actual ? 1 : -1);
     setActual(i);
     setAviso(null);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollA(0);
   };
 
   const elegir = (producto) => {
@@ -65,9 +67,9 @@ export default function Rutina() {
   return (
     <div ref={pagina} className="contenedor pt-4 pb-48 md:pb-16">
       <Reveal>
-        <h1 className="text-4xl leading-tight md:text-5xl">
+        <RevealText as="h1" className="text-4xl leading-tight md:text-5xl">
           Armá tu <em className="texto-dorado">rutina</em>
-        </h1>
+        </RevealText>
       </Reveal>
 
       {/* Stepper: los 4 pasos aparecen de a uno; la línea se dibuja con el scroll de la página */}
@@ -113,9 +115,9 @@ export default function Rutina() {
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               aria-labelledby="paso-titulo"
             >
-              <h2 id="paso-titulo" className="text-3xl">
+              <RevealText id="paso-titulo" className="text-3xl">
                 <span className="text-dorado">{paso.paso}.</span> {paso.titulo}
-              </h2>
+              </RevealText>
 
               {aviso && (
                 <p className="mt-4 rounded-3xl bg-salvia px-4 py-3 text-sm font-semibold text-tinta" role="alert">
@@ -176,7 +178,7 @@ export default function Rutina() {
         {/* Resumen (desktop) */}
         <aside className="hidden md:block" aria-label="Resumen de tu rutina">
           <div className="card sticky top-24 rounded-5xl p-6">
-            <h2 className="text-2xl">Tu rutina</h2>
+            <RevealText className="text-2xl">Tu rutina</RevealText>
             <ol className="mt-4 space-y-3">
               {PASOS_RUTINA.map((p, i) => {
                 const e = eleccion[p.paso];

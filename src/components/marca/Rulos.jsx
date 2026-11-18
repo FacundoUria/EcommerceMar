@@ -6,6 +6,8 @@ const DORADO = 'rgb(126 96 43 / 0.25)';
 const VERDE = 'rgb(62 100 80 / 0.25)';
 
 // Composiciones por sección (viewBox 400x400). `rango`: tramo del scroll de la sección en que se dibuja cada trazo.
+// Posición vertical con top/bottom-0 o en rem, nunca en %: si el alto del contenedor cambia (Suspense,
+// imágenes), un top en % mueve el SVG y cuenta como layout shift (CLS 0.14 en /carrito).
 const VARIANTES = {
   hero: {
     caja: 'top-0 right-0 w-[78vw] max-w-[34rem] translate-x-[18%] -translate-y-[8%] md:w-[44vw]',
@@ -33,7 +35,7 @@ const VARIANTES = {
     ],
   },
   producto: {
-    caja: 'top-[38%] left-0 w-[70vw] max-w-[28rem] -translate-x-[38%] md:w-[30vw]',
+    caja: 'top-[26rem] left-0 w-[70vw] max-w-[28rem] -translate-x-[38%] md:top-[20rem] md:w-[30vw]',
     trazos: [
       { d: rulo({ x: 40, y: 40, largo: 340, vueltas: 4, radio: 32, angulo: 62 }), color: DORADO, rango: [0.2, 0.55] },
       { d: rulo({ x: 130, y: 10, largo: 300, vueltas: 4, radio: 22, angulo: 78, ovalo: 0.9 }), color: VERDE, rango: [0.26, 0.65] },
@@ -55,7 +57,7 @@ const VARIANTES = {
     ],
   },
   carrito: {
-    caja: 'top-[12%] right-0 w-[70vw] max-w-[28rem] translate-x-[36%] md:w-[30vw]',
+    caja: 'top-28 right-0 w-[70vw] max-w-[28rem] translate-x-[36%] md:w-[30vw]',
     trazos: [
       { d: rulo({ x: 60, y: 20, largo: 340, vueltas: 4, radio: 30, angulo: 100 }), color: VERDE, rango: [0.3, 0.7] },
       { d: rulo({ x: 160, y: 40, largo: 260, vueltas: 3, radio: 22, angulo: 115, afinar: 0.5 }), color: DORADO, rango: [0.35, 0.8] },

@@ -37,18 +37,18 @@ export default function Carrusel({ children, label, anchoMobile = '72%', autopla
       const vp = api.rootNode().getBoundingClientRect();
       const centro = vp.left + vp.width / 2;
       const mueve = api.canScrollNext() || api.canScrollPrev();
-      for (const slide of api.slideNodes()) {
+      // Primero se leen todas las posiciones y después se escriben las escalas: leer una caja después de
+      // escribir el transform de otra forzaba un recálculo de estilos por slide en cada frame del scroll.
+      const escalas = api.slideNodes().map((slide) => {
         const interno = slide.firstElementChild;
-        if (!interno) continue;
-        if (reducido || !mueve) {
-          interno.style.transform = '';
-          continue;
-        }
+        if (!interno) return null;
+        if (reducido || !mueve) return [interno, ''];
         // Centro de la card (no del slide, que suma el espaciado); la escala no mueve su centro
         const r = interno.getBoundingClientRect();
         const d = Math.min(1, Math.abs(r.left + r.width / 2 - centro) / slide.offsetWidth);
-        interno.style.transform = `scale(${(1 - (1 - ESCALA_LATERAL) * d).toFixed(4)})`;
-      }
+        return [interno, `scale(${(1 - (1 - ESCALA_LATERAL) * d).toFixed(4)})`];
+      });
+      for (const e of escalas) if (e && e[0].style.transform !== e[1]) e[0].style.transform = e[1];
       if (barra.current) {
         const w = Math.max(0.14, 1 / api.scrollSnapList().length);
         const p = Math.min(1, Math.max(0, api.scrollProgress()));

@@ -1,120 +1,84 @@
-// Chat guiado de mini Mar (src/components/marca/ChatMar.jsx). Único lugar a editar: guion, opciones y
-// respuestas. Los textos de Mar van tal cual.
+// Chat de mini Mar (src/components/marca/ChatMar.jsx). Único lugar a editar: saludo, opciones y respuestas.
+// Pensado para que lo use cualquiera (también personas mayores): un paso a la vez, botones grandes.
 //
-// Cada respuesta puede sumar, debajo del texto:
-// - servicios: ids de src/data/products.js → mini-card con foto, duración y "¡Reservar!" (WhatsApp)
-// - whatsapp: { label, mensaje } → botón verde que abre WhatsApp con ese mensaje
-// - boton: { label, to } → botón a una página del sitio
-// - link: { label, to } → link de texto a una página del sitio
+// Cada opción es un botón grande de la pantalla de inicio. Al tocarla se muestra SOLO su respuesta:
+// - texto: párrafos del mensaje de Mar
+// - servicio: id de un servicio (src/data/products.js) → mini-card con foto y duración
+// - accion: el botón principal (uno solo):
+//     { tipo: 'whatsapp', label, mensaje }   abre WhatsApp con ese mensaje
+//     { tipo: 'reservar' }                   "¡Reservar!" del servicio (WhatsApp "Quiero reservar: …")
+//     { tipo: 'pagina', label, to }          va a una página del sitio
+// - link: { label, to } → link chico opcional debajo del botón principal
+// Una opción con `whatsapp` (sin respuesta) abre WhatsApp directo: es el botón verde.
 
 export const CHAT = {
   nombre: 'Mar · Coach de rulos',
   estado: 'en línea',
-  placeholder: 'Elegí una opción 👇',
-  pie: { texto: '¿Otra duda? Escribile a Mar por WhatsApp', mensaje: '¡Hola Mar! Tengo una consulta.' },
-  // Mensaje del ícono de WhatsApp del header
-  whatsappHeader: '¡Hola Mar! Tengo una consulta.',
+  saludo: '¡Hola! Soy Mar, tu coach de rulos 💚 ¿En qué te ayudo?',
+  volver: '← Volver a las opciones',
 
-  // Al abrir por primera vez en la sesión, con "escribiendo…" entre mensajes.
-  // de: 'mar' | 'ejemplo' (burbuja de ejemplo de una clienta: derecha, más tenue)
-  guion: [
-    { de: 'mar', texto: '¡Hola! Soy Mar, tu coach de rulos' },
+  opciones: [
     {
-      de: 'ejemplo',
-      texto: 'Hola Mar 🥺 Estoy desesperada, ¡no sé qué hacer con mis rulos! 😩 Tengo frizz y están súper secos. ¿Me ayudas?',
-    },
-    { de: 'mar', texto: '¡Hola! Estoy acá para ayudarte a recuperar tus rulos. ¿Qué necesitás hoy? 👇' },
-  ],
-
-  grupos: [
-    {
-      titulo: '',
-      opciones: [
-        {
-          id: 'productos',
-          texto: '🧴 Necesito productos para mi tipo de cabello ✨',
-          respuesta: {
-            texto: '¡Cada rulo es único! Contame un poco de tu pelo y te recomiendo lo ideal ✨',
-            whatsapp: { label: 'Seguir por WhatsApp', mensaje: '¡Hola Mar! Necesito productos para mi tipo de cabello' },
-            link: { label: 'Mientras tanto, armá tu rutina →', to: '/rutina' },
-          },
-        },
-        {
-          id: 'frizz',
-          texto: '🦁 Ya no sé qué hacer con el FRIZZ',
-          respuesta: {
-            texto: '¡Tranqui, el frizz tiene solución! 🦁 Contame cómo es tu rutina y te ayudo.',
-            whatsapp: { label: 'Seguir por WhatsApp', mensaje: '¡Hola Mar! Ya no sé qué hacer con el frizz' },
-            link: { label: 'Ver productos anti-frizz →', to: '/tienda?q=frizz' },
-          },
-        },
-        {
-          id: 'corte',
-          texto: '✂️ Necesito corte y forma ✂️',
-          respuesta: {
-            texto: '¡Te entiendo! El corte en seco respeta la forma natural de tus rulos ✂️',
-            servicios: ['corte-rulos'],
-          },
-        },
-        {
-          id: 'asesoramiento',
-          texto: '💎 Necesito un ASESORAMIENTO COMPLETO 💖',
-          respuesta: {
-            texto: '¡Es la mejor forma de empezar! 💖',
-            servicios: ['asesoramiento-completo', 'asesoramiento-deluxe'],
-          },
-        },
-      ],
+      id: 'productos',
+      icono: '🧴',
+      texto: 'Productos para mi pelo',
+      respuesta: {
+        texto: ['¡Cada rulo es único! Contame cómo es tu pelo y te recomiendo lo ideal ✨'],
+        accion: { tipo: 'whatsapp', label: 'Seguir por WhatsApp', mensaje: '¡Hola Mar! Necesito productos para mi tipo de cabello' },
+        link: { label: 'o armá tu rutina', to: '/rutina' },
+      },
     },
     {
-      titulo: 'Preguntas frecuentes',
-      opciones: [
-        {
-          id: 'envios',
-          texto: '¿Hacen envíos?',
-          respuesta: {
-            texto:
-              '¡Sí! Enviamos a toda la provincia de Mendoza 📦🛵 El costo del envío lo coordinás conmigo por WhatsApp cuando hacés el pedido. También podés retirar en el estudio.',
-          },
-        },
-        {
-          id: 'pago',
-          texto: '¿Cómo pago?',
-          respuesta: {
-            texto:
-              'Aceptamos todos los medios de pago 💰 Cuando terminás tu pedido me llega por WhatsApp y ahí coordinamos cómo te queda más cómodo.',
-          },
-        },
-        {
-          id: 'compra',
-          texto: '¿Cómo compro?',
-          respuesta: {
-            texto:
-              "Súper fácil: agregá productos al carrito, tocá 'Finalizar pedido', completá tu nombre y si querés envío o retiro, y me llega todo por WhatsApp 💚",
-            boton: { label: 'Ir a la tienda', to: '/tienda' },
-          },
-        },
-        {
-          id: 'turno',
-          texto: '¿Cómo saco turno?',
-          respuesta: {
-            texto:
-              "Elegí el servicio que necesitás y tocá '¡Reservar!': me escribís directo por WhatsApp y coordinamos día y horario ✂️",
-            boton: { label: 'Ver servicios', to: '/servicios' },
-          },
-        },
-        {
-          id: 'donde',
-          texto: '¿Dónde están?',
-          respuesta: {
-            texto: 'Estamos en Mendoza 📍 Escribime y te paso la dirección y los horarios del estudio.',
-            whatsapp: { label: 'Escribile a Mar', mensaje: '¡Hola Mar! ¿Me pasás la dirección y los horarios del estudio?' },
-          },
-        },
-      ],
+      id: 'frizz',
+      icono: '🦁',
+      texto: 'Tengo frizz',
+      respuesta: {
+        texto: ['¡Tranqui, el frizz tiene solución! 🦁 Contame cómo es tu rutina y te ayudo.'],
+        accion: { tipo: 'whatsapp', label: 'Seguir por WhatsApp', mensaje: '¡Hola Mar! Ya no sé qué hacer con el frizz' },
+      },
+    },
+    {
+      id: 'corte',
+      icono: '✂️',
+      texto: 'Quiero un corte',
+      respuesta: {
+        texto: ['El corte en seco respeta la forma natural de tus rulos ✂️'],
+        servicio: 'corte-rulos',
+        accion: { tipo: 'reservar' },
+      },
+    },
+    {
+      id: 'asesoramiento',
+      icono: '💎',
+      texto: 'Asesoramiento completo',
+      respuesta: {
+        texto: ['¡Es la mejor forma de empezar! 💖'],
+        servicio: 'asesoramiento-completo',
+        accion: { tipo: 'reservar' },
+        link: { label: 'Ver todos los asesoramientos', to: '/servicios' },
+      },
+    },
+    {
+      id: 'envios',
+      icono: '📦',
+      texto: 'Envíos y pagos',
+      respuesta: {
+        texto: [
+          '📦 Enviamos a toda la provincia de Mendoza (el costo lo coordinás conmigo) o podés retirar en el estudio.',
+          '💳 Aceptamos todos los medios de pago.',
+          "Para comprar: agregá productos al carrito y tocá 'Finalizar pedido', me llega todo por WhatsApp 💚",
+        ],
+        accion: { tipo: 'pagina', label: 'Ir a la tienda', to: '/tienda' },
+      },
+    },
+    {
+      id: 'whatsapp',
+      icono: '💬',
+      texto: 'Hablar con Mar',
+      whatsapp: '¡Hola Mar! Tengo una consulta.',
     },
   ],
 };
 
-/** Opción por id (para reconstruir la conversación guardada en la sesión). */
-export const opcionChat = (id) => CHAT.grupos.flatMap((g) => g.opciones).find((o) => o.id === id) ?? null;
+/** Opción por id (para volver a la pantalla guardada en la sesión). */
+export const opcionChat = (id) => CHAT.opciones.find((o) => o.id === id && o.respuesta) ?? null;

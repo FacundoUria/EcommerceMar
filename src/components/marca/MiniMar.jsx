@@ -63,8 +63,8 @@ function FiguraCanvas({ ancho, alto }) {
 /**
  * Mini Mar señalando el botón del chat (abajo a la derecha, en todas las páginas) — SOLO DESKTOP.
  * En mobile no hay widget flotante: el chat se abre desde el botón central del bottom nav (MiniMarMobile.jsx).
- * Tocar la figura, el botón o la carita abre el chat guiado (ChatMar.jsx) en una ventana de ~380×540 a
- * la izquierda de mini Mar, donde apunta su dedo; mientras está abierto, ella queda entera al costado.
+ * Tocar la figura, el botón o la carita abre el chat (ChatMar.jsx) en una ventana de 400×600 en la
+ * esquina; mientras está abierto, la mini Mar flotante se oculta (la de adentro del chat la reemplaza).
  * - NO entra al cargar: en el home, cuando el hero salió de pantalla (scroll > 70% de su alto); en páginas
  *   sin hero, a los 300px de scroll o a los 8 s. Entra desde abajo con un rebote; a su izquierda, donde
  *   apunta el dedo, el botón de WhatsApp y el globito "¿Te ayudo a elegir?".
@@ -91,10 +91,6 @@ function MiniMarDesktop() {
   const [abierta, setAbierta] = useState(true);
   const [tapando, setTapando] = useState(false); // compacta encima de algo que no debe tapar
   const [chat, setChat] = useState(false); // ventana de chat abierta
-  const chatRef = useRef(false);
-  useEffect(() => {
-    chatRef.current = chat;
-  }, [chat]);
   const timer = useRef(null);
   const imagen = useRef(null);
 
@@ -139,18 +135,15 @@ function MiniMarDesktop() {
 
   const cerrarEn = useCallback((ms) => {
     clearTimeout(timer.current);
-    timer.current = setTimeout(() => !chatRef.current && setAbierta(false), ms);
+    timer.current = setTimeout(() => setAbierta(false), ms);
   }, []);
-  // Chat abierto: mini Mar queda entera al costado de la ventana. Al cerrarlo, se achica a los 1.5 s.
+  // Chat abierto: la mini Mar flotante se oculta; al cerrarlo vuelve compacta (botón con su carita)
   const abrirChat = () => {
     clearTimeout(timer.current);
-    setAbierta(true);
+    setAbierta(false);
     setChat(true);
   };
-  const cerrarChat = useCallback(() => {
-    setChat(false);
-    cerrarEn(1500);
-  }, [cerrarEn]);
+  const cerrarChat = useCallback(() => setChat(false), []);
   // Cambio de página (links del chat) → se cierra
   useEffect(() => {
     setChat(false);
@@ -176,7 +169,7 @@ function MiniMarDesktop() {
     return () => io.disconnect();
   }, []);
   useEffect(() => {
-    if (!conFooter || chatRef.current) return;
+    if (!conFooter) return;
     clearTimeout(timer.current);
     setAbierta(false);
   }, [conFooter, montada]);
@@ -228,7 +221,7 @@ function MiniMarDesktop() {
   const dy = abiertoPos.abajo - compactoPos.abajo; // y hacia abajo
 
   const hover = {
-    onPointerEnter: (e) => e.pointerType === 'mouse' && abrir(0),
+    onPointerEnter: (e) => e.pointerType === 'mouse' && !chat && abrir(0),
     onPointerLeave: (e) => e.pointerType === 'mouse' && cerrarEn(1200),
   };
 
@@ -242,7 +235,7 @@ function MiniMarDesktop() {
         aria-hidden="true"
         onClick={abrirChat}
         {...hover}
-        className={`absolute right-0 block ${chat ? '' : 'cursor-pointer'} ${abierta ? 'pointer-events-auto' : 'pointer-events-none'}`}
+        className={`absolute right-0 block cursor-pointer ${abierta ? 'pointer-events-auto' : 'pointer-events-none'}`}
         style={{ bottom: pie, width: ancho, height: alto }}
         initial={{ y: '105%', opacity: 0 }}
         animate={abierta ? { y: '0%', opacity: 1 } : { y: '105%', opacity: 0 }}
@@ -300,7 +293,7 @@ function MiniMarDesktop() {
           tabIndex={-1}
           aria-hidden="true"
           onClick={abrirChat}
-          className={`absolute -top-3 -left-3 size-8 overflow-hidden rounded-full bg-arena shadow-suave ring-2 ring-crema-card ${abierta || tapando ? 'pointer-events-none' : 'pointer-events-auto'}`}
+          className={`absolute -top-3 -left-3 size-8 overflow-hidden rounded-full bg-arena shadow-suave ring-2 ring-crema-card ${abierta || tapando || chat ? 'pointer-events-none' : 'pointer-events-auto'}`}
           initial={{ opacity: 0, scale: 0.5 }}
           animate={abierta ? { opacity: 0, scale: 0.5 } : { opacity: 1, scale: 1 }}
           transition={{ duration: 0.35, ease: EASE, delay: abierta ? 0 : 0.35 }}
@@ -309,12 +302,12 @@ function MiniMarDesktop() {
         </m.button>
       </m.div>
 
-      {/* Ventana de chat a la izquierda de mini Mar, donde apunta su dedo (portal: por encima del header) */}
+      {/* Ventana de chat en la esquina (portal: por encima del header) */}
       {createPortal(
         <AnimatePresence>
           {chat && (
             <Suspense key="chat" fallback={null}>
-              <Chat modo="ventana" derecha={Math.round(dedo.der + 10)} onClose={cerrarChat} />
+              <Chat modo="ventana" onClose={cerrarChat} />
             </Suspense>
           )}
         </AnimatePresence>,

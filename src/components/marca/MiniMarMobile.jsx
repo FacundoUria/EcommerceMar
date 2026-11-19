@@ -36,9 +36,8 @@ function primeraVez() {
 
 /**
  * Mini Mar en mobile (en desktop está el widget flotante de MiniMar.jsx). Es el botón central del
- * bottom nav: tocarlo abre el chat guiado de mini Mar (ChatMar.jsx: bottom sheet de ~75% del alto, con
- * mini Mar asomando por encima del borde; detrás, overlay arena al 40% con blur).
- * - Se cierra con la X, tocando afuera, deslizando hacia abajo, con el botón central (que muestra una X) o Esc.
+ * bottom nav: tocarlo abre el chat de mini Mar (ChatMar.jsx: bottom sheet al 85% del alto; el bottom nav
+ * se esconde mientras está abierto). Se cierra con la X del chat, tocando afuera o con Esc.
  * - La primera vez de la sesión, cuando ya bajó del hero (o a los 8 s en páginas sin hero), asoma sola
  *   ~3 s hasta la cintura, sin overlay, y vuelve a esconderse en el botón.
  * - Movimiento reducido: aparece y desaparece con fade (MotionConfig anula los desplazamientos).
@@ -150,9 +149,9 @@ export default function BotonMarMobile() {
               <Panel geo={geo} onAbrir={() => mostrar('abierta')} />
             </Suspense>
           )}
-          {abierta && geo && (
+          {abierta && (
             <Suspense key="chat" fallback={null}>
-              <Chat modo="sheet" base={geo.base} onClose={cerrar} />
+              <Chat modo="sheet" onClose={cerrar} />
             </Suspense>
           )}
         </AnimatePresence>,

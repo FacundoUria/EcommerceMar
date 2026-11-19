@@ -17,10 +17,9 @@ const EASE = [0.22, 1, 0.36, 1];
 // Punta del dedo (señala arriba a la izquierda), en fracción del ancho / alto de la imagen.
 const ASPECTO = 451 / 661;
 const DEDO = { x: 0.062, y: 0.342 };
-const MEDIDAS = {
-  mobile: { alto: 180, boton: 48, margen: 16, solape: 22 }, // solape: se mete detrás de la barra inferior
-  desktop: { alto: 300, boton: 56, margen: 24, solape: 0 },
-};
+const ALTO = 300;
+const BOTON = 56;
+const MARGEN = 24;
 
 /**
  * La ilustración dibujada en un <canvas> y no en un <img>: aparece después de la carga y en páginas con
@@ -60,45 +59,8 @@ function FiguraCanvas({ ancho, alto }) {
 }
 
 /**
- * Alto (px) de lo que hay fijo abajo en mobile: bottom nav, barra de /producto o la de /rutina
- * (marcadas con data-barra-inferior). Mini Mar va encima: no tapa "Agregar" ni el carrito.
- */
-function useBaseInferior(activo) {
-  const [base, setBase] = useState(0);
-  const { pathname } = useLocation();
-  useEffect(() => {
-    if (!activo) {
-      setBase(0);
-      return;
-    }
-    const medir = () => {
-      let top = window.innerHeight;
-      document.querySelectorAll('[data-barra-inferior]').forEach((el) => {
-        const r = el.getBoundingClientRect();
-        if (r.height) top = Math.min(top, r.top);
-      });
-      setBase(Math.max(0, Math.round(window.innerHeight - top)));
-    };
-    const ro = new ResizeObserver(medir);
-    // las barras de cada página aparecen cuando llega su chunk: medir otra vez un rato después
-    const ids = [0, 400, 1200].map((t) =>
-      setTimeout(() => {
-        document.querySelectorAll('[data-barra-inferior]').forEach((el) => ro.observe(el));
-        medir();
-      }, t),
-    );
-    window.addEventListener('resize', medir);
-    return () => {
-      ids.forEach(clearTimeout);
-      ro.disconnect();
-      window.removeEventListener('resize', medir);
-    };
-  }, [activo, pathname]);
-  return base;
-}
-
-/**
- * Mini Mar señalando el botón de WhatsApp (abajo a la derecha, en todas las páginas).
+ * Mini Mar señalando el botón de WhatsApp (abajo a la derecha, en todas las páginas) — SOLO DESKTOP.
+ * En mobile no hay widget flotante: el WhatsApp es el botón central del bottom nav (BottomNav.jsx).
  * - NO entra al cargar: en el home, cuando el hero salió de pantalla (scroll > 70% de su alto); en páginas
  *   sin hero, a los 300px de scroll o a los 8 s. Entra desde abajo con un rebote; a su izquierda, donde
  *   apunta el dedo, el botón de WhatsApp y el globito "¿Te ayudo a elegir?".
@@ -112,8 +74,13 @@ function useBaseInferior(activo) {
  */
 export default function MiniMar() {
   const desktop = useMediaQuery('(min-width: 768px)');
-  const { alto, boton, margen, solape } = MEDIDAS[desktop ? 'desktop' : 'mobile'];
-  const base = useBaseInferior(!desktop);
+  return desktop ? <MiniMarDesktop /> : null;
+}
+
+function MiniMarDesktop() {
+  const alto = ALTO;
+  const boton = BOTON;
+  const margen = MARGEN;
   const { pathname } = useLocation();
   const [montada, setMontada] = useState(false);
   const [abierta, setAbierta] = useState(true);
@@ -125,9 +92,8 @@ export default function MiniMar() {
   useEffect(() => {
     const precargar = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 3);
-      const grande = window.matchMedia('(min-width: 768px)').matches ? MEDIDAS.desktop : MEDIDAS.mobile;
       const img = new Image();
-      img.src = urlImagen('/img/marca/mini-mar.webp', Math.round(grande.alto * ASPECTO * dpr));
+      img.src = urlImagen('/img/marca/mini-mar.webp', Math.round(ALTO * ASPECTO * dpr));
       imagen.current = img.decode().catch(() => {});
     };
     if (document.readyState === 'complete') precargar();
@@ -182,7 +148,7 @@ export default function MiniMar() {
       setTapando(false);
       return;
     }
-    const abajo = (desktop ? 0 : base) + margen;
+    const abajo = margen;
     let raf = 0;
     const chequear = () => {
       raf = 0;
@@ -207,17 +173,17 @@ export default function MiniMar() {
       window.removeEventListener('scroll', programar);
       window.removeEventListener('resize', programar);
     };
-  }, [montada, abierta, desktop, base, margen, boton, pathname]);
+  }, [montada, abierta, margen, boton, pathname]);
 
   if (!montada) return null;
 
   // Geometría (px desde la esquina inferior derecha de la pantalla)
   const ancho = Math.round(alto * ASPECTO);
-  const pie = desktop ? 0 : Math.max(0, base - solape); // base de la figura (se mete detrás de la barra)
+  const pie = 0; // pegada al borde de abajo
   const dedo = { der: ancho * (1 - DEDO.x), abajo: pie + alto * (1 - DEDO.y) };
   // Botón abierto: a la izquierda y un poco arriba de la punta del dedo. Compacto: en la esquina.
   const abiertoPos = { der: dedo.der + 6, abajo: dedo.abajo - 4 };
-  const compactoPos = { der: margen, abajo: (desktop ? 0 : base) + margen };
+  const compactoPos = { der: margen, abajo: margen };
   const dx = abiertoPos.der - compactoPos.der; // cuánto se corre a la derecha al achicarse
   const dy = abiertoPos.abajo - compactoPos.abajo; // y hacia abajo
 
@@ -275,7 +241,7 @@ export default function MiniMar() {
           style={{ backgroundImage: 'linear-gradient(135deg, #3e6450 0%, #2f5240 100%)' }}
         >
           <span className="pulso absolute inset-0 rounded-full" aria-hidden="true" />
-          <Icon name="whatsapp" size={desktop ? 28 : 24} />
+          <Icon name="whatsapp" size={28} />
         </a>
 
         {/* Globito, a la izquierda del botón */}

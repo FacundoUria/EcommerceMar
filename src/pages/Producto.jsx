@@ -204,7 +204,7 @@ function Detalle({ producto }) {
       <CompletaTuRutina producto={producto} />
 
       {/* Barra fija mobile */}
-      <div data-barra-inferior className="fixed inset-x-0 bottom-0 z-40 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-40 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:hidden">
         <div className="glass-arena flex items-center gap-2 rounded-full p-2 shadow-flotante ring-1 ring-verde/10">
           <button
             type="button"

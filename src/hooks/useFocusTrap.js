@@ -39,7 +39,11 @@ export function useFocusTrap(ref, onClose, activo = true, { enfocarContenedor = 
     document.addEventListener('keydown', onKey);
     return () => {
       document.removeEventListener('keydown', onKey);
-      if (previo instanceof HTMLElement) previo.focus({ preventScroll: true });
+      // Devuelve el foco solo si quedó perdido (en body o dentro del diálogo que se cierra): con overlays
+      // encadenados (drawer → checkout) el que termina de salir tarde no le saca el foco al nuevo.
+      const actual = document.activeElement;
+      const perdido = !actual || actual === document.body || el?.contains(actual);
+      if (perdido && previo instanceof HTMLElement && previo.isConnected) previo.focus({ preventScroll: true });
     };
   }, [ref, activo]);
 }

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { AnimatePresence, m, useDragControls, useReducedMotion } from 'motion/react';
 import { Link } from 'react-router';
 import Icon from '../ui/Icon.jsx';
@@ -14,6 +14,7 @@ import { useOcultarBottomNav } from '../../hooks/useOcultarBottomNav.js';
 import Roll from '../ui/Roll.jsx';
 import { explotarDestellos } from '../../lib/destellos.js';
 import { colorDe } from '../../lib/colores.js';
+import { useBloquearScroll } from '../../hooks/useBloquearScroll.js';
 
 /** Vista rápida: bottom-sheet en mobile (arrastrable para cerrar), modal en desktop. */
 export default function QuickView() {
@@ -38,13 +39,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
   useFocusTrap(ref, onClose, true, { enfocarContenedor: true });
   useOcultarBottomNav();
 
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, []);
+  useBloquearScroll();
 
   const tieneVariantes = producto.variantes.length > 0;
   const imagen = (preview ?? variante)?.imagen ?? producto.imagen;

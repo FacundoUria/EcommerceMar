@@ -3,6 +3,7 @@ import { AnimatePresence, m } from 'motion/react';
 import Icon from './Icon.jsx';
 import { useFocusTrap } from '../../hooks/useFocusTrap.js';
 import { useOcultarBottomNav } from '../../hooks/useOcultarBottomNav.js';
+import { useBloquearScroll } from '../../hooks/useBloquearScroll.js';
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -19,13 +20,7 @@ export default function Modal({ src, poster, etiqueta, onClose }) {
   useFocusTrap(ref, onClose, true, { enfocarContenedor: true });
   useOcultarBottomNav(); // oculta bottom nav y mini Mar
 
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, []);
+  useBloquearScroll();
 
   // Progreso (escrito directo en el DOM, sin re-renders)
   useEffect(() => {

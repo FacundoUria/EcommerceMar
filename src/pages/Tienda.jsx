@@ -17,6 +17,7 @@ import { useOcultarBottomNav } from '../hooks/useOcultarBottomNav.js';
 import { coincide } from '../lib/texto.js';
 import { imgSm, plural } from '../lib/format.js';
 import Roll from '../components/ui/Roll.jsx';
+import { useBloquearScroll } from '../hooks/useBloquearScroll.js';
 
 const ORDENES = [
   { id: 'destacados', label: 'Destacados' },
@@ -289,13 +290,7 @@ function Hoja({ onClose, ...props }) {
   const ref = useRef(null);
   useFocusTrap(ref, onClose, true, { enfocarContenedor: true });
   useOcultarBottomNav();
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, []);
+  useBloquearScroll();
   return createPortal(
     <div className="fixed inset-0 z-[60] flex items-end">
       <m.div className="velo absolute inset-0" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} />

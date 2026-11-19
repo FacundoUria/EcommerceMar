@@ -5,6 +5,7 @@ import { AnimatePresence, m } from 'motion/react';
 import Icon from '../ui/Icon.jsx';
 import { fuenteImagen, imgFija } from '../../lib/imagenes.js';
 import { ASPECTO, FIGURA, medir } from './miniMarGeo.js';
+import { useBloquearScroll } from '../../hooks/useBloquearScroll.js';
 
 // El panel (overlay, figura grande, animaciones) va en un chunk aparte: se pide al tocar el botón o al
 // asomar, y se precarga cuando el navegador está ocioso después del load (junto con la figura).
@@ -69,16 +70,12 @@ export default function BotonMarMobile() {
   useEffect(() => cerrar(), [pathname, cerrar]);
 
   // Abierta: Esc cierra y la página de atrás no scrollea
+  useBloquearScroll(abierta);
   useEffect(() => {
     if (!abierta) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
     const onKey = (e) => e.key === 'Escape' && cerrar();
     document.addEventListener('keydown', onKey);
-    return () => {
-      document.body.style.overflow = prev;
-      document.removeEventListener('keydown', onKey);
-    };
+    return () => document.removeEventListener('keydown', onKey);
   }, [abierta, cerrar]);
 
   // Asomo de la primera vez: al bajar del hero (home) o a los 8 s / 300px en páginas sin hero

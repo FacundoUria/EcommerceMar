@@ -8,6 +8,7 @@ import { useCart } from '../../context/CartContext.jsx';
 import { useFocusTrap } from '../../hooks/useFocusTrap.js';
 import { useOcultarBottomNav } from '../../hooks/useOcultarBottomNav.js';
 import Roll from '../ui/Roll.jsx';
+import { useBloquearScroll } from '../../hooks/useBloquearScroll.js';
 
 export default function CartDrawer() {
   const { abierto, cerrar } = useCart();
@@ -29,13 +30,7 @@ function Panel({ onClose }) {
   useFocusTrap(ref, onClose, true, { enfocarContenedor: true });
   useOcultarBottomNav();
 
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, []);
+  useBloquearScroll();
 
   return (
     <div className="fixed inset-0 z-[70]">

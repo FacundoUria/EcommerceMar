@@ -4,7 +4,6 @@ import { m } from 'motion/react';
 import Icon from '../ui/Icon.jsx';
 import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 import { whatsappCon } from '../../config/negocio.js';
-import { HAY_INTRO } from './IntroMarca.jsx';
 
 const LINK = whatsappCon('¡Hola Mar! Tengo una consulta.');
 const TEXTO = '¿Te ayudo a elegir?';
@@ -97,10 +96,12 @@ function useBaseInferior(activo) {
 
 /**
  * Mini Mar señalando el botón de WhatsApp (abajo a la derecha, en todas las páginas).
- * - Aparece después de la carga (y de la intro): entra desde abajo con un rebote; a su izquierda, donde
+ * - NO entra al cargar: en el home, cuando el hero salió de pantalla (scroll > 70% de su alto); en páginas
+ *   sin hero, a los 300px de scroll o a los 8 s. Entra desde abajo con un rebote; a su izquierda, donde
  *   apunta el dedo, el botón de WhatsApp y el globito "¿Te ayudo a elegir?".
  * - A los 6 s se achica: queda el botón en la esquina con su carita. Hover (mouse) o tocar la carita la
- *   vuelve a mostrar.
+ *   vuelve a mostrar. Compacta, se esconde mientras se superpone con [data-evitar-mini-mar] (mini-card de
+ *   Skala del hero).
  * - Oculta con el carrito, el quick view o los filtros abiertos (<html data-overlay="abierto">).
  * - Movimiento reducido: sin desplazamientos (MotionConfig reducedMotion="user"), solo fades.
  * Solo transform + opacity. La imagen se pide recién después del `load` (no compite con el LCP) y va en
@@ -110,32 +111,51 @@ export default function MiniMar() {
   const desktop = useMediaQuery('(min-width: 768px)');
   const { alto, boton, margen, solape } = MEDIDAS[desktop ? 'desktop' : 'mobile'];
   const base = useBaseInferior(!desktop);
+  const { pathname } = useLocation();
   const [montada, setMontada] = useState(false);
   const [abierta, setAbierta] = useState(true);
+  const [tapando, setTapando] = useState(false); // compacta encima de algo que no debe tapar
   const timer = useRef(null);
+  const imagen = useRef(null);
 
-  // Montar después del load (+ lo que dura la intro de marca)
+  // La imagen se baja después del load y antes de mostrarla (el canvas no tiene "cargando": entraría vacío)
   useEffect(() => {
-    let id;
-    // la imagen se baja antes de mostrarla (el canvas no tiene "cargando": entraría vacío)
     const precargar = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 3);
       const grande = window.matchMedia('(min-width: 768px)').matches ? MEDIDAS.desktop : MEDIDAS.mobile;
       const img = new Image();
       img.src = grande.alto * ASPECTO * dpr <= 400 ? '/img/marca/mini-mar-sm.webp' : '/img/marca/mini-mar.webp';
-      return img.decode().catch(() => {});
+      imagen.current = img.decode().catch(() => {});
     };
-    const arrancar = () => {
-      const listo = precargar();
-      id = setTimeout(() => listo.then(() => setMontada(true)), HAY_INTRO ? 1500 : 700);
-    };
-    if (document.readyState === 'complete') arrancar();
-    else window.addEventListener('load', arrancar, { once: true });
-    return () => {
-      clearTimeout(id);
-      window.removeEventListener('load', arrancar);
-    };
+    if (document.readyState === 'complete') precargar();
+    else window.addEventListener('load', precargar, { once: true });
+    return () => window.removeEventListener('load', precargar);
   }, []);
+
+  // Cuándo entra: NO al cargar. Con hero ([data-hero], el home): cuando se scrolleó más del 70% de su
+  // alto. Sin hero: a los 300px de scroll o a los 8 s en la página, lo que pase primero.
+  useEffect(() => {
+    if (montada) return;
+    let hecho = false;
+    const mostrar = () => {
+      if (hecho) return;
+      hecho = true;
+      const listo = () => (imagen.current ?? Promise.resolve()).then(() => setMontada(true));
+      if (document.readyState === 'complete') listo();
+      else window.addEventListener('load', () => setTimeout(listo, 50), { once: true });
+    };
+    const chequear = () => {
+      const hero = document.querySelector('[data-hero]');
+      if (hero ? window.scrollY > hero.offsetHeight * 0.7 : window.scrollY > 300) mostrar();
+    };
+    const t = setTimeout(() => !document.querySelector('[data-hero]') && mostrar(), 8000);
+    window.addEventListener('scroll', chequear, { passive: true });
+    chequear();
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener('scroll', chequear);
+    };
+  }, [montada, pathname]);
 
   const cerrarEn = useCallback((ms) => {
     clearTimeout(timer.current);
@@ -151,6 +171,40 @@ export default function MiniMar() {
     if (montada) cerrarEn(ABIERTA_MS);
     return () => clearTimeout(timer.current);
   }, [montada, cerrarEn]);
+
+  // Compacta: si el botón (con su carita) queda encima de algo marcado con data-evitar-mini-mar (la
+  // mini-card de Skala del hero, si la clienta vuelve arriba), se esconde mientras dure la superposición.
+  useEffect(() => {
+    if (!montada || abierta) {
+      setTapando(false);
+      return;
+    }
+    const abajo = (desktop ? 0 : base) + margen;
+    let raf = 0;
+    const chequear = () => {
+      raf = 0;
+      const W = window.innerWidth;
+      const H = window.innerHeight;
+      const AIRE = 12; // la carita asoma 12px arriba a la izquierda
+      const caja = { l: W - margen - boton - AIRE, r: W - margen, t: H - abajo - boton - AIRE, b: H - abajo };
+      const choca = [...document.querySelectorAll('[data-evitar-mini-mar]')].some((el) => {
+        const e = el.getBoundingClientRect();
+        return e.width && e.left < caja.r && e.right > caja.l && e.top < caja.b && e.bottom > caja.t;
+      });
+      setTapando(choca);
+    };
+    const programar = () => !raf && (raf = requestAnimationFrame(chequear));
+    chequear();
+    window.addEventListener('scroll', programar, { passive: true });
+    window.addEventListener('resize', programar);
+    const id = setInterval(programar, 1000); // la card también se mueve sola (flota, parallax)
+    return () => {
+      cancelAnimationFrame(raf);
+      clearInterval(id);
+      window.removeEventListener('scroll', programar);
+      window.removeEventListener('resize', programar);
+    };
+  }, [montada, abierta, desktop, base, margen, boton, pathname]);
 
   if (!montada) return null;
 
@@ -200,11 +254,11 @@ export default function MiniMar() {
         className="absolute"
         style={{ right: abiertoPos.der, bottom: abiertoPos.abajo, width: boton, height: boton }}
         initial={{ x: 0, y: 0, opacity: 0, scale: 0.6 }}
-        animate={{ x: abierta ? 0 : dx, y: abierta ? 0 : dy, opacity: 1, scale: 1 }}
+        animate={{ x: abierta ? 0 : dx, y: abierta ? 0 : dy, opacity: tapando ? 0 : 1, scale: 1 }}
         transition={{
           x: { duration: 0.6, ease: EASE },
           y: { duration: 0.6, ease: EASE },
-          opacity: { duration: 0.3, delay: 0.25 },
+          opacity: { duration: 0.3, delay: tapando ? 0 : 0.25 },
           scale: { type: 'spring', bounce: 0.45, duration: 0.6, delay: 0.25 },
         }}
         {...hover}
@@ -214,7 +268,7 @@ export default function MiniMar() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${TEXTO} Escribile a Mar por WhatsApp`}
-          className="pointer-events-auto relative flex size-full items-center justify-center rounded-full text-arena shadow-flotante transition hover:scale-105 active:scale-95"
+          className={`${tapando ? 'pointer-events-none' : 'pointer-events-auto'} relative flex size-full items-center justify-center rounded-full text-arena shadow-flotante transition hover:scale-105 active:scale-95`}
           style={{ backgroundImage: 'linear-gradient(135deg, #3e6450 0%, #2f5240 100%)' }}
         >
           <span className="pulso absolute inset-0 rounded-full" aria-hidden="true" />
@@ -238,7 +292,7 @@ export default function MiniMar() {
           tabIndex={-1}
           aria-hidden="true"
           onClick={() => abrir(4000)}
-          className={`absolute -top-3 -left-3 size-8 overflow-hidden rounded-full bg-salvia shadow-suave ring-2 ring-crema-card ${abierta ? 'pointer-events-none' : 'pointer-events-auto'}`}
+          className={`absolute -top-3 -left-3 size-8 overflow-hidden rounded-full bg-salvia shadow-suave ring-2 ring-crema-card ${abierta || tapando ? 'pointer-events-none' : 'pointer-events-auto'}`}
           initial={{ opacity: 0, scale: 0.5 }}
           animate={abierta ? { opacity: 0, scale: 0.5 } : { opacity: 1, scale: 1 }}
           transition={{ duration: 0.35, ease: EASE, delay: abierta ? 0 : 0.35 }}

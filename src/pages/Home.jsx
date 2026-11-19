@@ -85,8 +85,9 @@ function Hero() {
   const skala = productos?.find((p) => p.id === 'cremas-skala');
   const cachonados = skala?.variantes.find((v) => v.nombre === 'Cachonados');
 
+  // data-hero: mini Mar entra recién cuando el hero salió de pantalla
   return (
-    <section aria-labelledby="hero-titulo" className="grano -mt-px overflow-hidden">
+    <section aria-labelledby="hero-titulo" data-hero className="grano -mt-px overflow-hidden">
       <MeshFondo />
       <Rulos variante="hero" />
       {/* El hero termina donde termina su contenido (+ indicador de scroll), sin aire vacío abajo */}
@@ -139,7 +140,7 @@ function Hero() {
           )}
           {/* Junto al pote de Skala que sostiene Mar (abajo, a su derecha), sin taparlo */}
           {skala && (
-            <MiniCard producto={skala} variante={cachonados} y={reducido ? 0 : yCard2} delay={1.05} className="-right-[10%] bottom-[9%] md:-right-[14%]" flotarDesfase />
+            <MiniCard producto={skala} variante={cachonados} y={reducido ? 0 : yCard2} delay={1.05} className="-right-[10%] bottom-[9%] md:-right-[14%]" flotarDesfase evitarMiniMar />
           )}
         </div>
       </div>
@@ -156,12 +157,13 @@ function Hero() {
 }
 
 /** `variante` (opcional): muestra esa variante (foto y nombre) y linkea directo a ella. */
-function MiniCard({ producto, variante, y, delay, className, flotarDesfase = false }) {
+// evitarMiniMar: el botón compacto de mini Mar se esconde mientras se superpone con esta card
+function MiniCard({ producto, variante, y, delay, className, flotarDesfase = false, evitarMiniMar = false }) {
   const reducido = useReducedMotion();
   const imagen = variante?.imagen ?? producto.imagen;
   const nombre = variante ? `${producto.nombre} · ${variante.nombre}` : producto.nombre;
   return (
-    <m.div style={{ y }} className={`absolute z-10 ${className}`}>
+    <m.div style={{ y }} className={`absolute z-10 ${className}`} data-evitar-mini-mar={evitarMiniMar || undefined}>
       <m.div
         initial={{ opacity: 0, y: reducido ? 0 : 16 }}
         animate={{ opacity: 1, y: 0 }}

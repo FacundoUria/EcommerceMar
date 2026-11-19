@@ -1,4 +1,6 @@
-// Animación del producto "volando" al ícono del carrito visible (header en desktop, bottom nav en mobile).
+// Animación del producto "volando" al ícono del carrito visible (el del header; en /producto mobile puede
+// ser el de la barra de "Agregar"). Si el header está oculto por el scroll, lo muestra un momento
+// (evento dh:mostrar-header) y apunta a donde va a quedar el carrito cuando termine de entrar.
 // Devuelve una promesa que resuelve al llegar (o al instante si no hay animación).
 export function flyToCart(imgEl) {
   const reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -6,10 +8,16 @@ export function flyToCart(imgEl) {
     const r = el.getBoundingClientRect();
     return r.width > 0 && r.height > 0;
   });
+  const header = destino?.closest('header');
+  const headerOculto = !!header && document.documentElement.dataset.header === 'oculto';
+  // Aunque no haya vuelo (sin imagen), el header aparece para que se vea el badge
+  if (headerOculto) window.dispatchEvent(new CustomEvent('dh:mostrar-header'));
   if (reducido || !imgEl || !destino || !imgEl.animate) return Promise.resolve();
 
   const o = imgEl.getBoundingClientRect();
   const d = destino.getBoundingClientRect();
+  // El header oculto está corrido -100%; al volver queda en su posición compacta (-8px)
+  const ajusteY = headerOculto ? -new DOMMatrixReadOnly(getComputedStyle(header).transform).m42 - 8 : 0;
   const lado = Math.min(o.width, o.height, 220);
 
   const clon = document.createElement('img');
@@ -31,7 +39,7 @@ export function flyToCart(imgEl) {
   document.body.appendChild(clon);
 
   const dx = d.left + d.width / 2 - (o.left + o.width / 2);
-  const dy = d.top + d.height / 2 - (o.top + o.height / 2);
+  const dy = d.top + ajusteY + d.height / 2 - (o.top + o.height / 2);
   const anim = clon.animate(
     [
       { transform: 'translate(0,0) scale(1)', opacity: 1, borderRadius: '24px' },

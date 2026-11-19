@@ -1,21 +1,19 @@
 import { NavLink, useLocation } from 'react-router';
 import { m } from 'motion/react';
 import Icon from '../ui/Icon.jsx';
-import CartBadge from './CartBadge.jsx';
-import { useCart } from '../../context/CartContext.jsx';
 import BotonMarMobile from '../marca/MiniMarMobile.jsx';
 
+// El carrito en mobile está en el header (arriba a la derecha, con su badge)
 const ITEMS = [
   { to: '/', label: 'Inicio', icon: 'home', end: true },
-  { to: '/tienda', label: 'Tienda', icon: 'tienda' },
-  null, // botón central: mini Mar (abre la figura con el botón de WhatsApp)
+  { to: '/tienda', label: 'Productos', icon: 'tienda' },
+  null, // botón central: mini Mar (abre su chat)
+  { to: '/servicios', label: 'Servicios', icon: 'tijera' },
   { to: '/rutina', label: 'Rutina', icon: 'rutina' },
-  { to: '/carrito', label: 'Carrito', icon: 'carrito', carrito: true },
 ];
 
-/** Navegación inferior tipo app (solo mobile): Inicio, Tienda, [mini Mar → WhatsApp], Rutina, Carrito. */
+/** Navegación inferior tipo app (solo mobile): Inicio, Productos, [mini Mar → chat], Servicios, Rutina. */
 export default function BottomNav() {
-  const { cantidadTotal } = useCart();
   const { pathname } = useLocation();
   // En el detalle de producto la barra "Agregar al carrito" ocupa su lugar
   if (pathname.startsWith('/producto/')) return null;
@@ -30,7 +28,6 @@ export default function BottomNav() {
               <NavLink
                 to={it.to}
                 end={it.end}
-                aria-label={it.carrito ? `Carrito (${cantidadTotal} productos)` : undefined}
                 className={({ isActive }) =>
                   `relative flex flex-col items-center gap-0.5 rounded-full py-1.5 text-[11px] font-semibold transition active:scale-90 ${
                     isActive ? 'text-verde' : 'text-tinta'
@@ -46,9 +43,8 @@ export default function BottomNav() {
                         transition={{ type: 'spring', stiffness: 420, damping: 34 }}
                       />
                     )}
-                    <span className="relative" {...(it.carrito ? { 'data-cart-target': '' } : {})}>
+                    <span className="relative">
                       <Icon name={it.icon} size={22} strokeWidth={isActive ? 2.2 : 1.8} />
-                      {it.carrito && <CartBadge />}
                     </span>
                     <span className="relative">{it.label}</span>
                   </>

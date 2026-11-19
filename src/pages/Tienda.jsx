@@ -73,7 +73,7 @@ export default function Tienda() {
   }, [params]);
 
   const catActual = categorias?.find((c) => c.id === cat);
-  const titulo = catActual?.nombre ?? (marcasSel.length === 1 ? marcasSel[0] : 'Tienda');
+  const titulo = catActual?.nombre ?? (marcasSel.length === 1 ? marcasSel[0] : 'Productos');
   usePageTitle(titulo);
 
   const nombreCat = useMemo(() => Object.fromEntries((categorias ?? []).map((c) => [c.id, c.nombre])), [categorias]);

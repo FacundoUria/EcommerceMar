@@ -84,7 +84,7 @@ function Detalle({ producto }) {
         <ol className="flex flex-wrap items-center gap-1.5">
           <li>
             <Link to="/tienda" className="hover:text-tinta">
-              Tienda
+              Productos
             </Link>
           </li>
           {categoria && (

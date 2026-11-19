@@ -13,7 +13,7 @@ import { imgFija } from '../../lib/imagenes.js';
 
 const LINKS = [
   { to: '/', label: 'Inicio', end: true },
-  { to: '/tienda', label: 'Tienda' },
+  { to: '/tienda', label: 'Productos' },
   { to: '/rutina', label: 'Rutina' },
   { to: '/servicios', label: 'Servicios' },
 ];
@@ -21,6 +21,7 @@ const LINKS = [
 const EASE = [0.22, 1, 0.36, 1];
 const COMPACTO_DESDE = 40; // px de scroll para achicar el header
 const OCULTAR_DESDE = 120; // no se oculta en el primer tramo de la página
+const MOSTRAR_AL_AGREGAR_MS = 1800; // al agregar al carrito con el header oculto, se muestra este tiempo
 
 export default function Header() {
   const { abrir, cantidadTotal } = useCart();
@@ -29,6 +30,18 @@ export default function Header() {
   const [compacto, setCompacto] = useState(false);
   const [oculto, setOculto] = useState(false);
   const ultimo = useRef(0);
+  const mantenerHasta = useRef(0);
+
+  // Al agregar al carrito (flyToCart): si estaba oculto, aparece un momento para ver el producto volar
+  // al carrito y el badge, aunque se siga scrolleando hacia abajo
+  useEffect(() => {
+    const mostrar = (e) => {
+      mantenerHasta.current = performance.now() + (e.detail?.ms ?? MOSTRAR_AL_AGREGAR_MS);
+      setOculto(false);
+    };
+    window.addEventListener('dh:mostrar-header', mostrar);
+    return () => window.removeEventListener('dh:mostrar-header', mostrar);
+  }, []);
 
   // Se achica después de 40px; se oculta al bajar y reaparece al subir.
   useMotionValueEvent(scrollY, 'change', (y) => {
@@ -37,7 +50,7 @@ export default function Header() {
     setCompacto(y > COMPACTO_DESDE);
     if (reducido) return; // con movimiento reducido el header queda fijo, sin ocultarse
     if (Math.abs(delta) < 4) return; // evita temblores
-    setOculto(delta > 0 && y > OCULTAR_DESDE);
+    setOculto(delta > 0 && y > OCULTAR_DESDE && performance.now() >= mantenerHasta.current);
   });
 
   // Otros elementos sticky (barra de filtros de /tienda) acompañan al header.
@@ -109,12 +122,12 @@ export default function Header() {
           >
             <Icon name="buscar" />
           </Link>
-          {/* Carrito: solo desktop. En mobile está en el bottom nav (y en /producto, en la barra de "Agregar") */}
+          {/* Carrito (mobile y desktop), con el badge de cantidad. En /producto mobile también está en la barra de "Agregar" */}
           <button
             type="button"
             onClick={abrir}
             aria-label={`Abrir carrito (${cantidadTotal} productos)`}
-            className="relative hidden size-11 items-center justify-center rounded-full text-tinta transition hover:bg-salvia active:scale-90 md:flex"
+            className="relative flex size-11 items-center justify-center rounded-full text-tinta transition hover:bg-salvia active:scale-90"
           >
             <span data-cart-target className="relative">
               <Icon name="carrito" />

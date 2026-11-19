@@ -13,7 +13,7 @@ export default function NoEncontrado() {
       </ConDestellos>
       <Link to="/tienda" className="btn btn-primario mt-8">
         <Roll>
-          Ver tienda
+          Ver productos
         </Roll>
       </Link>
     </section>

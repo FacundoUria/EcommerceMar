@@ -68,7 +68,7 @@ export const CHAT = {
           '💳 Aceptamos todos los medios de pago.',
           "Para comprar: agregá productos al carrito y tocá 'Finalizar pedido', me llega todo por WhatsApp 💚",
         ],
-        accion: { tipo: 'pagina', label: 'Ir a la tienda', to: '/tienda' },
+        accion: { tipo: 'pagina', label: 'Ver productos', to: '/tienda' },
       },
     },
     {

@@ -4,7 +4,7 @@ import Rulos from '../marca/Rulos.jsx';
 import { NEGOCIO, whatsappCon } from '../../config/negocio.js';
 
 const LINKS = [
-  { to: '/tienda', label: 'Tienda' },
+  { to: '/tienda', label: 'Productos' },
   { to: '/rutina', label: 'Rutina' },
   { to: '/servicios', label: 'Servicios' },
   { to: '/carrito', label: 'Carrito' },

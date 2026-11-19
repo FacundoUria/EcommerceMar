@@ -35,18 +35,23 @@ export default function Rutina() {
     return n >= 1 && n <= PASOS_RUTINA.length ? n - 1 : 0;
   }); // índice del paso
   const [direccion, setDireccion] = useState(1);
-  const [eleccion, setEleccion] = useState({}); // { [paso]: { producto, variante } }
+  const [eleccion, setEleccion] = useState({}); // { [paso]: [{ producto, variante }, …] } (varios por paso)
   const [aviso, setAviso] = useState(null);
 
   const paso = PASOS_RUTINA[actual];
   const nombreCat = useMemo(() => Object.fromEntries((categorias ?? []).map((c) => [c.id, c.nombre])), [categorias]);
 
-  const elegidos = PASOS_RUTINA.map((p) => eleccion[p.paso]).filter(Boolean);
+  const delPaso = (p) => eleccion[p.paso] ?? [];
+  const elegidos = PASOS_RUTINA.flatMap(delPaso);
   const total = elegidos.reduce((s, e) => s + e.producto.precio, 0);
-  const faltaVariante = PASOS_RUTINA.find((p) => {
-    const e = eleccion[p.paso];
-    return e && e.producto.variantes.length > 0 && !e.variante;
-  });
+  // Primer producto marcado que tiene variantes y todavía no eligió cuál (y en qué paso está)
+  const faltaVariante = (() => {
+    for (const p of PASOS_RUTINA) {
+      const e = delPaso(p).find((x) => x.producto.variantes.length > 0 && !x.variante);
+      if (e) return { paso: p, e };
+    }
+    return null;
+  })();
 
   const irA = (i) => {
     setDireccion(i > actual ? 1 : -1);
@@ -56,20 +61,27 @@ export default function Rutina() {
     scrollA(0);
   };
 
+  // Marcar / desmarcar (varios por paso). Con variantes, al marcarlo aparecen para elegir cuál.
   const elegir = (producto) => {
     setAviso(null);
     setEleccion((prev) => {
-      const ya = prev[paso.paso]?.producto.id === producto.id;
-      const next = { ...prev };
-      if (ya) delete next[paso.paso];
-      else next[paso.paso] = { producto, variante: null };
-      return next;
+      const lista = prev[paso.paso] ?? [];
+      const ya = lista.some((e) => e.producto.id === producto.id);
+      return { ...prev, [paso.paso]: ya ? lista.filter((e) => e.producto.id !== producto.id) : [...lista, { producto, variante: null }] };
     });
   };
+  const elegirVariante = (producto, variante) => {
+    setAviso(null);
+    setEleccion((prev) => ({
+      ...prev,
+      [paso.paso]: (prev[paso.paso] ?? []).map((e) => (e.producto.id === producto.id ? { ...e, variante } : e)),
+    }));
+  };
 
-  // Rutina completa: al elegir el 4.º paso (y solo en ese momento), lluvia suave de destellos
-  const ultimoPaso = PASOS_RUTINA[PASOS_RUTINA.length - 1].paso;
-  const rutinaLista = !!eleccion[ultimoPaso];
+  // "¡Tu rutina está lista!": con al menos un producto en el paso 4, o al llegar al último paso con algo
+  // elegido. La lluvia de destellos sale una vez, cuando se cumple.
+  const ultimo = PASOS_RUTINA[PASOS_RUTINA.length - 1];
+  const rutinaLista = elegidos.length > 0 && (delPaso(ultimo).length > 0 || actual === PASOS_RUTINA.length - 1);
   const listaAntes = useRef(rutinaLista);
   useEffect(() => {
     if (rutinaLista && !listaAntes.current) lluviaDestellos();
@@ -78,8 +90,8 @@ export default function Rutina() {
 
   const agregarRutina = (e) => {
     if (faltaVariante) {
-      setAviso(`Elegí una variante de ${eleccion[faltaVariante.paso].producto.nombre}`);
-      irA(PASOS_RUTINA.indexOf(faltaVariante));
+      irA(PASOS_RUTINA.indexOf(faltaVariante.paso)); // (irA limpia el aviso: va primero)
+      setAviso(`Elegí una variante de ${faltaVariante.e.producto.nombre}`);
       return;
     }
     explotarDestellos(e?.currentTarget);
@@ -101,7 +113,7 @@ export default function Rutina() {
         <LineaProgreso progreso={scrollYProgress} className="absolute top-[18px] right-[12.5%] left-[12.5%]" />
         <ol className="relative grid grid-cols-4" aria-label="Pasos de la rutina">
           {PASOS_RUTINA.map((p, i) => {
-            const hecho = !!eleccion[p.paso];
+            const hecho = delPaso(p).length > 0;
             const activo = i === actual;
             return (
               <Reveal as="li" key={p.paso} delay={0.1 + i * 0.12}>
@@ -139,9 +151,12 @@ export default function Rutina() {
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               aria-labelledby="paso-titulo"
             >
-              <RevealText id="paso-titulo" className="text-3xl">
-                <span className="text-dorado">{paso.paso}.</span> {paso.titulo}
-              </RevealText>
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <RevealText id="paso-titulo" className="text-3xl">
+                  <span className="text-dorado">{paso.paso}.</span> {paso.titulo}
+                </RevealText>
+                <p className="text-sm font-semibold text-texto-suave">Elegí uno o más</p>
+              </div>
 
               {aviso && (
                 <p className="mt-4 rounded-3xl bg-salvia px-4 py-3 text-sm font-semibold text-tinta" role="alert">
@@ -168,12 +183,9 @@ export default function Rutina() {
                             key={p.id}
                             indice={i}
                             producto={p}
-                            seleccion={eleccion[paso.paso]?.producto.id === p.id ? eleccion[paso.paso] : null}
+                            seleccion={delPaso(paso).find((e) => e.producto.id === p.id) ?? null}
                             onElegir={() => elegir(p)}
-                            onVariante={(v) => {
-                              setAviso(null);
-                              setEleccion((prev) => ({ ...prev, [paso.paso]: { producto: p, variante: v } }));
-                            }}
+                            onVariante={(v) => elegirVariante(p, v)}
                           />
                         ))}
                       </ul>
@@ -191,7 +203,7 @@ export default function Rutina() {
                 {actual < PASOS_RUTINA.length - 1 ? (
                   <button type="button" onClick={() => irA(actual + 1)} className="btn btn-primario">
                     <Roll>
-                      {eleccion[paso.paso] ? 'Siguiente' : 'Saltear'} <Icon name="flecha" size={18} />
+                      {delPaso(paso).length ? 'Siguiente' : 'Saltear'} <Icon name="flecha" size={18} />
                     </Roll>
                   </button>
                 ) : (
@@ -212,34 +224,41 @@ export default function Rutina() {
             <RevealText className="text-2xl">Tu rutina</RevealText>
             <ol className="mt-4 space-y-3">
               {PASOS_RUTINA.map((p, i) => {
-                const e = eleccion[p.paso];
+                const lista = delPaso(p);
                 return (
                   <li key={p.paso}>
                     <button
                       type="button"
                       onClick={() => irA(i)}
-                      className="flex w-full items-center gap-3 rounded-3xl p-2 text-left transition hover:bg-arena"
+                      className="flex w-full items-center gap-2 rounded-2xl px-2 py-1.5 text-left transition hover:bg-arena"
                     >
-                      {e ? (
-                        <img
-                          {...imgFija(e.variante?.imagen ?? e.producto.imagen, 48)}
-                          alt=""
-                          width="48"
-                          height="48"
-                          className="size-12 shrink-0 rounded-2xl bg-arena object-cover"
-                        />
-                      ) : (
-                        <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl border-2 border-dashed border-verde/15 font-serif text-lg text-tinta/40">
-                          {p.paso}
-                        </span>
-                      )}
-                      <span className="min-w-0 flex-1">
-                        <span className="block text-xs font-bold tracking-wider text-dorado uppercase">{p.titulo}</span>
-                        <span className="block truncate text-sm font-semibold">{e ? e.producto.nombre : '—'}</span>
-                        {e?.variante && <span className="block truncate text-xs text-texto-suave">{e.variante.nombre}</span>}
+                      <span className="text-xs font-bold tracking-wider text-dorado uppercase">
+                        {p.paso}. {p.titulo}
                       </span>
-                      {e && <Precio valor={e.producto.precio} className="text-sm text-tinta" />}
+                      {!lista.length && <span className="ml-auto text-sm text-texto-suave">—</span>}
                     </button>
+                    <ul className="space-y-1">
+                      <AnimatePresence initial={false}>
+                        {lista.map((e) => (
+                          <m.li
+                            key={e.producto.id}
+                            layout
+                            initial={{ opacity: 0, y: 6 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, transition: { duration: 0.15 } }}
+                            transition={{ duration: 0.3 }}
+                            className="flex items-center gap-3 px-2 py-1"
+                          >
+                            <img {...imgFija(e.variante?.imagen ?? e.producto.imagen, 40)} alt="" width="40" height="40" className="size-10 shrink-0 rounded-xl bg-arena object-cover" />
+                            <span className="min-w-0 flex-1">
+                              <span className="block truncate text-sm font-semibold">{e.producto.nombre}</span>
+                              {e.variante && <span className="block truncate text-xs text-texto-suave">{e.variante.nombre}</span>}
+                            </span>
+                            <Precio valor={e.producto.precio} className="text-sm text-tinta" />
+                          </m.li>
+                        ))}
+                      </AnimatePresence>
+                    </ul>
                   </li>
                 );
               })}
@@ -262,21 +281,30 @@ export default function Rutina() {
       <div className="fixed inset-x-0 bottom-[calc(4.6rem+max(0.75rem,env(safe-area-inset-bottom)))] z-30 px-3 md:hidden">
         <MensajeLista visible={rutinaLista} total={total} className="mb-2" />
         <div className="glass-arena flex items-center gap-3 rounded-4xl p-2 pl-4 shadow-flotante ring-1 ring-verde/10">
-          <div className="flex gap-1">
+          <div className="flex gap-1.5">
             {PASOS_RUTINA.map((p) => {
-              const e = eleccion[p.paso];
-              return e ? (
-                <img
-                  key={p.paso}
-                  {...imgFija(e.variante?.imagen ?? e.producto.imagen, 28)}
-                  alt=""
-                  width="32"
-                  height="32"
-                  className="size-7 rounded-full bg-crema-card object-cover ring-2 ring-verde"
-                />
-              ) : (
-                <span key={p.paso} className="flex size-7 items-center justify-center rounded-full border border-dashed border-verde/40 text-[11px] font-bold text-texto-suave">
-                  {p.paso}
+              const lista = delPaso(p);
+              if (!lista.length)
+                return (
+                  <span key={p.paso} className="flex size-7 items-center justify-center rounded-full border border-dashed border-verde/40 text-[11px] font-bold text-texto-suave">
+                    {p.paso}
+                  </span>
+                );
+              return (
+                // Una foto por paso (siempre 28px: el total entra) + cuántos hay si son más de uno
+                <span key={p.paso} className="relative">
+                  <img
+                    {...imgFija(lista[0].variante?.imagen ?? lista[0].producto.imagen, 28)}
+                    alt=""
+                    width="32"
+                    height="32"
+                    className="size-7 rounded-full bg-crema-card object-cover ring-2 ring-verde"
+                  />
+                  {lista.length > 1 && (
+                    <span className="absolute -top-1.5 -right-1.5 flex size-4 items-center justify-center rounded-full bg-dorado text-[9px] font-bold text-crema-card ring-2 ring-crema-card">
+                      {lista.length}
+                    </span>
+                  )}
                 </span>
               );
             })}
@@ -340,6 +368,32 @@ function Total({ valor, className = '' }) {
   );
 }
 
+/** Check de selección múltiple: el círculo hace un "pop" y el tilde se dibuja (stroke-dashoffset). */
+function CheckAnimado({ activo }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`absolute top-2.5 right-2.5 flex size-7 items-center justify-center rounded-full transition duration-300 ${
+        activo ? 'scale-100 bg-verde shadow-suave' : 'scale-90 border-2 border-verde/25 bg-crema-card/85'
+      }`}
+      style={{ transitionTimingFunction: activo ? 'var(--ease-salto)' : undefined }}
+    >
+      <svg viewBox="0 0 24 24" className="size-4 text-arena">
+        <path
+          d="m5 12.5 4.5 4.5L19 7"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          pathLength="1"
+          style={{ strokeDasharray: 1, strokeDashoffset: activo ? 0 : 1, transition: `stroke-dashoffset 0.35s ease-out ${activo ? '0.12s' : '0s'}` }}
+        />
+      </svg>
+    </span>
+  );
+}
+
 function OpcionProducto({ producto, seleccion, onElegir, onVariante, indice = 0 }) {
   const activo = !!seleccion;
   const imagen = seleccion?.variante?.imagen ?? producto.imagen;
@@ -376,14 +430,7 @@ function OpcionProducto({ producto, seleccion, onElegir, onVariante, indice = 0 
             <span className="line-clamp-2 block text-sm leading-snug font-semibold">{producto.nombre}</span>
             <Precio valor={producto.precio} className="mt-1 block text-tinta" />
           </span>
-          <span
-            className={`absolute top-2.5 right-2.5 flex size-7 items-center justify-center rounded-full transition ${
-              activo ? 'scale-100 bg-verde text-arena' : 'scale-90 border-2 border-verde/20 bg-crema-card/80'
-            }`}
-            aria-hidden="true"
-          >
-            {activo && <Icon name="check" size={15} strokeWidth={3} />}
-          </span>
+          <CheckAnimado activo={activo} />
         </button>
         {activo && producto.variantes.length > 0 && (
           <div className="border-t border-verde/10 px-4 pt-3 pb-4">

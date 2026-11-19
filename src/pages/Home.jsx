@@ -415,17 +415,18 @@ function CintaMarcas() {
 /* ═════════ ARMÁ TU RUTINA: scroll storytelling (sticky en desktop, apilado en mobile) ═════════ */
 const PASOS_CHIPS = ['Lavar', 'Hidratar', 'Definir', 'Proteger'];
 
-function useProductosPorPaso() {
+/** Opciones de cada paso (destacados primero). En /rutina se puede elegir más de una por paso. */
+function useOpcionesPorPaso() {
   const { data: productos } = useProducts();
   return useMemo(
     () =>
-      PASOS_RUTINA.map((p) => {
-        const lista = (productos ?? []).filter((x) => p.categorias.includes(x.categoria));
-        return lista.find((x) => x.destacado) ?? lista[0] ?? null;
-      }),
+      PASOS_RUTINA.map((p) =>
+        (productos ?? []).filter((x) => p.categorias.includes(x.categoria)).sort((a, b) => Number(!!b.destacado) - Number(!!a.destacado)),
+      ),
     [productos],
   );
 }
+const useProductosPorPaso = () => useOpcionesPorPaso().map((l) => l[0] ?? null);
 
 function RutinaHistoria() {
   return (
@@ -560,7 +561,7 @@ function RutinaDesktop() {
 
 function RutinaMobile() {
   const ref = useRef(null);
-  const porPaso = useProductosPorPaso();
+  const opciones = useOpcionesPorPaso();
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 80%', 'end 60%'] });
   // pb-8: con el pt-20 de "Hola, soy Mar" el hueco queda como entre las otras secciones (≈ 96px)
   return (
@@ -574,7 +575,7 @@ function RutinaMobile() {
         <LineaProgreso progreso={scrollYProgress} vertical className="absolute top-8 bottom-8 left-[19px]" />
         <ol className="relative space-y-4">
           {PASOS_CHIPS.map((p, i) => {
-            const prod = porPaso[i];
+            const lista = opciones[i];
             return (
               <Reveal as="li" key={p} delay={i * 0.1}>
                 <Link to={`/rutina?paso=${i + 1}`} className="group flex items-center gap-4 rounded-2xl transition active:scale-[0.98]">
@@ -582,14 +583,19 @@ function RutinaMobile() {
                   {i + 1}
                 </span>
                 <span className="card flex flex-1 items-center gap-3 rounded-2xl p-2 pr-3">
-                  {prod && (
-                    <span className="size-16 shrink-0 overflow-hidden rounded-xl">
-                      <FotoProducto src={imgSm(prod.imagen)} zoom={false} compacta />
+                  {/* Varias opciones por paso: hasta 3 fotos apiladas */}
+                  {lista.length > 0 && (
+                    <span className="flex shrink-0 -space-x-6">
+                      {lista.slice(0, 3).map((prod, k) => (
+                        <span key={prod.id} className="size-14 overflow-hidden rounded-xl shadow-suave ring-2 ring-crema-card" style={{ zIndex: 3 - k }}>
+                          <FotoProducto src={imgSm(prod.imagen)} zoom={false} compacta halo={false} />
+                        </span>
+                      ))}
                     </span>
                   )}
                   <span className="min-w-0 flex-1">
                     <span className="block font-serif text-xl text-tinta">{p}</span>
-                    {prod && <span className="block truncate text-xs text-texto-suave">{prod.nombre}</span>}
+                    {lista.length > 0 && <span className="block truncate text-xs text-texto-suave">{lista.length === 1 ? lista[0].nombre : `${lista.length} opciones`}</span>}
                   </span>
                   <Icon name="flecha" size={18} className="shrink-0 text-verde" />
                 </span>

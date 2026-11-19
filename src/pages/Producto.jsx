@@ -4,7 +4,7 @@ import { AnimatePresence, m } from 'motion/react';
 import Icon from '../components/ui/Icon.jsx';
 import FotoProducto from '../components/product/FotoProducto.jsx';
 import QuantityStepper from '../components/ui/QuantityStepper.jsx';
-import Carousel from '../components/ui/Carousel.jsx';
+import Carrusel from '../components/ui/Carrusel.jsx';
 import Reveal, { cascada } from '../components/ui/Reveal.jsx';
 import RevealText from '../components/ui/RevealText.jsx';
 import { ConDestellos } from '../components/marca/Destellos.jsx';
@@ -253,13 +253,13 @@ function CompletaTuRutina({ producto }) {
           Ver rutina →
         </Link>
       </Reveal>
-      <Carousel label="Completá tu rutina">
+      <Carrusel label="Completá tu rutina" anchoMobile="62%">
         {sugeridos.map((p, i) => (
-          <Reveal key={p.id} delay={cascada(i)} className="w-[46%] shrink-0 snap-start sm:w-56">
+          <Reveal key={p.id} delay={cascada(i)} className="h-full">
             <ProductCard producto={p} className="h-full" />
           </Reveal>
         ))}
-      </Carousel>
+      </Carrusel>
     </section>
   );
 }

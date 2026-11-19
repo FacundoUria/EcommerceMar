@@ -5,7 +5,7 @@ import Icon from '../components/ui/Icon.jsx';
 import Reveal, { cascada } from '../components/ui/Reveal.jsx';
 import RevealText from '../components/ui/RevealText.jsx';
 import RevealImagen from '../components/ui/RevealImagen.jsx';
-import Carousel from '../components/ui/Carousel.jsx';
+import Carrusel from '../components/ui/Carrusel.jsx';
 import SmartImg from '../components/ui/SmartImg.jsx';
 import Banners from '../components/ui/Banners.jsx';
 import Resenas from '../components/ui/Resenas.jsx';
@@ -15,7 +15,6 @@ import SectionHeader from '../components/ui/SectionHeader.jsx';
 import LineaProgreso from '../components/ui/LineaProgreso.jsx';
 import ProductCard from '../components/product/ProductCard.jsx';
 import FotoProducto from '../components/product/FotoProducto.jsx';
-import CarruselCentrado from '../components/ui/CarruselCentrado.jsx';
 import { useMediaQuery } from '../hooks/useMediaQuery.js';
 import { ProductCardSkeleton, Skeleton } from '../components/ui/Skeleton.jsx';
 import { useBrands, useCategories, useProducts } from '../hooks/useCatalog.js';
@@ -217,7 +216,7 @@ function Categorias() {
       ) : desktop ? (
         <PanelesCategorias categorias={categorias} />
       ) : (
-        <CarruselCentrado label="Categorías" anchoItem="w-[68vw] max-w-[19rem]">
+        <Carrusel label="Categorías" anchoMobile="68%">
           {categorias.map((c) => (
             <Link
               key={c.id}
@@ -231,7 +230,7 @@ function Categorias() {
               <span className="absolute inset-x-5 bottom-5 font-serif text-2xl leading-tight text-crema-card">{c.nombre}</span>
             </Link>
           ))}
-        </CarruselCentrado>
+        </Carrusel>
       )}
     </section>
   );
@@ -305,46 +304,31 @@ function PanelesCategorias({ categorias }) {
    mostrarlas (y vuelve a llamarse "Más vendidos"). */
 function FavoritosDeMar() {
   const { data: productos, loading } = useProducts();
-  const desktop = useMediaQuery('(min-width: 768px)');
   const destacados = useMemo(() => (productos ?? []).filter((p) => p.destacado), [productos]);
-  const titulo = (
-    <RevealText id="dest-titulo" className="text-3xl leading-tight md:text-4xl">
-      Favoritos de <em className="texto-dorado">Mar</em>
-    </RevealText>
-  );
   return (
     <section aria-labelledby="dest-titulo" className="fondo-salvia grano py-14 md:py-20">
+      <Reveal className="contenedor mb-1 flex items-end justify-between gap-4">
+        <RevealText id="dest-titulo" className="text-3xl leading-tight md:text-4xl">
+          Favoritos de <em className="texto-dorado">Mar</em>
+        </RevealText>
+        <Link to="/tienda" className="group/l inline-flex shrink-0 items-center gap-1 py-2 text-sm font-bold text-verde">
+          Ver todo <Icon name="flecha" size={16} className="transition-transform group-hover/l:translate-x-1" />
+        </Link>
+      </Reveal>
       {loading ? (
-        <div className="contenedor">
-          {titulo}
-          <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
-            {Array.from({ length: 4 }, (_, i) => (
-              <ProductCardSkeleton key={i} />
-            ))}
-          </div>
+        <div className="contenedor mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">
+          {Array.from({ length: 4 }, (_, i) => (
+            <ProductCardSkeleton key={i} />
+          ))}
         </div>
-      ) : desktop ? (
-        <Carousel label="Favoritos de Mar" itemsClassName="gap-5" autoplay={4500} hint cabecera={<Reveal>{titulo}</Reveal>}>
+      ) : (
+        <Carrusel label="Favoritos de Mar" autoplay={4500} fondo="var(--color-salvia)">
           {destacados.map((p, i) => (
-            <Reveal key={p.id} delay={cascada(i)} className="w-[17.5rem] shrink-0 snap-start lg:w-[19rem]">
+            <Reveal key={p.id} delay={cascada(i)} className="h-full">
               <ProductCard producto={p} className="h-full" />
             </Reveal>
           ))}
-        </Carousel>
-      ) : (
-        <>
-          <div className="contenedor mb-2 flex items-end justify-between">
-            {titulo}
-            <Link to="/tienda" className="py-2 text-sm font-bold text-verde">
-              Ver todo
-            </Link>
-          </div>
-          <CarruselCentrado label="Favoritos de Mar">
-            {destacados.map((p) => (
-              <ProductCard key={p.id} producto={p} className="h-full" />
-            ))}
-          </CarruselCentrado>
-        </>
+        </Carrusel>
       )}
     </section>
   );

@@ -13,6 +13,7 @@
     "imagenes:auditar": "node scripts/auditar-imagenes.mjs"
   },
   "dependencies": {
+    "embla-carousel-react": "^8.6.0",
     "lenis": "^1.3.27",
     "motion": "^14.14.0",
     "react": "^19.3.1",

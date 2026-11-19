@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { usePausaFueraDePantalla } from '../../hooks/usePausaFueraDePantalla.js';
 import { AnimatePresence, m, useReducedMotion } from 'motion/react';
 import Icon from '../ui/Icon.jsx';
 import { ANUNCIO } from '../../config/negocio.js';
@@ -18,12 +19,15 @@ export default function BarraAnuncio() {
   const reducido = useReducedMotion();
   const [i, setI] = useState(0);
   const [pausa, setPausa] = useState(false);
+  // Fuera de pantalla: brillo en pausa y sin cambiar de mensaje
+  const barra = useRef(null);
+  const visible = usePausaFueraDePantalla(barra, { margen: '0px' });
 
   useEffect(() => {
-    if (pausa) return;
+    if (pausa || !visible) return;
     const id = setInterval(() => !document.hidden && setI((n) => (n + 1) % ANUNCIO.length), CADA_MS);
     return () => clearInterval(id);
-  }, [pausa]);
+  }, [pausa, visible]);
 
   const msj = ANUNCIO[i];
   const anim = reducido
@@ -36,6 +40,7 @@ export default function BarraAnuncio() {
 
   return (
     <div
+      ref={barra}
       role="region"
       aria-label="Novedades de la tienda"
       tabIndex={0}

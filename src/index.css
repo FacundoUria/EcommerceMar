@@ -341,6 +341,17 @@
   animation: pulso-aro 2.4s ease-out infinite;
 }
 
+/* Sección fuera de pantalla (usePausaFueraDePantalla): sus loops quedan en pausa (no repintan ni
+   recalculan estilos en cada frame mientras nadie los ve) */
+[data-pausa],
+[data-pausa] *,
+[data-pausa]::before,
+[data-pausa]::after,
+[data-pausa] *::before,
+[data-pausa] *::after {
+  animation-play-state: paused !important;
+}
+
 /* Movimiento reducido = "menos movimiento", no cero: se mantienen fades, hovers y transiciones cortas.
    Se apagan los loops que se desplazan solos (manchas del mesh, flotado de las mini-cards, indicador
    de scroll, aro que late, brillo del título) y el scroll suave por código. La cinta de marcas queda

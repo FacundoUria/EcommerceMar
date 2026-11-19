@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { AnimatePresence, m, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import Icon from '../components/ui/Icon.jsx';
+import { usePausaFueraDePantalla } from '../hooks/usePausaFueraDePantalla.js';
 import Reveal, { cascada } from '../components/ui/Reveal.jsx';
 import RevealText from '../components/ui/RevealText.jsx';
 import RevealImagen from '../components/ui/RevealImagen.jsx';
@@ -72,6 +73,9 @@ const BLOB = 'rounded-[46%_54%_40%_60%/56%_44%_56%_44%]';
 
 function Hero() {
   const reducido = useReducedMotion();
+  // Fuera de pantalla, sus loops (brillo dorado, manchas, mini-cards, destellos) quedan en pausa
+  const seccion = useRef(null);
+  usePausaFueraDePantalla(seccion);
   const { scrollY } = useScroll();
   const { data: productos } = useProducts();
   // Foto al 70% de la velocidad del scroll; mini-cards a distintas velocidades.
@@ -93,7 +97,7 @@ function Hero() {
 
   // data-hero: mini Mar entra recién cuando el hero salió de pantalla
   return (
-    <section aria-labelledby="hero-titulo" data-hero className="grano -mt-px overflow-hidden">
+    <section ref={seccion} aria-labelledby="hero-titulo" data-hero className="grano -mt-px overflow-hidden">
       <MeshFondo />
       <Rulos variante="hero" />
       {/* El hero termina donde termina su contenido (+ indicador de scroll), sin aire vacío abajo */}
@@ -342,6 +346,9 @@ function CintaMarcas() {
   const { data: marcas } = useBrands();
   const reducido = useReducedMotion();
   const pista = useRef(null);
+  // Fuera de pantalla, la cinta queda quieta
+  const cinta = useRef(null);
+  usePausaFueraDePantalla(cinta, { listo: !!marcas?.length });
 
   useEffect(() => {
     const el = pista.current;
@@ -397,7 +404,7 @@ function CintaMarcas() {
     </ul>
   );
   return (
-    <nav aria-label="Marcas" className="group/cinta overflow-hidden py-8 [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)] md:py-12">
+    <nav ref={cinta} aria-label="Marcas" className="group/cinta overflow-hidden py-8 [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)] md:py-12">
       {reducido ? (
         <div className="flex justify-center">{fila(false)}</div>
       ) : (

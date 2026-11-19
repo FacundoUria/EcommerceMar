@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+import { usePausaFueraDePantalla } from '../../hooks/usePausaFueraDePantalla.js';
 /**
  * Fondo "mesh gradient" animado, solo CSS: 4 manchas difuminadas (radial-gradient)
  * que se desplazan muy lento (20–30 s, ida y vuelta) con transform.
@@ -15,8 +17,11 @@ const MANCHAS = [
 ];
 
 export default function MeshFondo({ fundidoAbajo = true }) {
+  // Las manchas son capas enormes: fuera de pantalla quedan quietas
+  const ref = useRef(null);
+  usePausaFueraDePantalla(ref);
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-arena">
+    <div ref={ref} aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-arena">
       {MANCHAS.map((mn, i) => (
         <span
           key={i}

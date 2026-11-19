@@ -18,7 +18,7 @@ export const whatsappCon = (texto = '¡Hola Mar!') => `${NEGOCIO.whatsapp}?text=
 
 // Barra de anuncio (arriba de todo): un mensaje a la vez, cada uno con su ícono (src/components/ui/Icon.jsx)
 export const ANUNCIO = [
-  { icono: 'corazon', texto: 'La comunidad de rulos más grande de Mendoza' },
+  { icono: 'corazon', texto: 'La comunidad de rulos más grande en Mendoza' },
   { icono: 'camionFino', texto: 'Envíos a toda la provincia' },
   { icono: 'tarjetaFina', texto: 'Aceptamos todos los medios de pago' },
 ];

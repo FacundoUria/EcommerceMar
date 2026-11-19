@@ -21,7 +21,8 @@ export function useTarjeta3D() {
     const r = el.getBoundingClientRect();
     const px = (e.clientX - r.left) / r.width - 0.5; // -0.5 … 0.5
     const py = (e.clientY - r.top) / r.height - 0.5;
-    el.style.transition = 'transform 120ms ease-out, box-shadow 500ms, border-color 500ms';
+    // Sin transición de transform mientras sigue al mouse: responde en el mismo frame (antes 120 ms)
+    el.style.transition = 'box-shadow 500ms, border-color 500ms';
     el.style.transform = `perspective(800px) rotateX(${(-py * 12).toFixed(2)}deg) rotateY(${(px * 12).toFixed(2)}deg)`;
     if (brilloRef.current) {
       brilloRef.current.style.opacity = '1';
@@ -31,7 +32,7 @@ export function useTarjeta3D() {
   const onPointerLeave = () => {
     const el = ref.current;
     if (!el) return;
-    el.style.transition = 'transform 600ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 500ms, border-color 500ms';
+    el.style.transition = 'transform 300ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 500ms, border-color 500ms';
     el.style.transform = '';
     if (brilloRef.current) brilloRef.current.style.opacity = '0';
   };

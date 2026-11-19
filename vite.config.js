@@ -75,10 +75,10 @@ export default defineConfig({
       output: {
         // Lo que comparten 2+ chunks (React, motion, componentes y helpers comunes) va en UN chunk común.
         // Sin esto, Rolldown saca un chunk chico por cada combinación de módulos compartidos y el home
-        // pedía 14 archivos de JS en vez de 8 (peor LCP con red lenta). Lenis y las miniaturas (lqip)
-        // quedan aparte: se cargan después y solo cuando hacen falta.
+        // pedía 14 archivos de JS en vez de 8 (peor LCP con red lenta). Las miniaturas (lqip) quedan aparte:
+        // se cargan después del load.
         codeSplitting: {
-          groups: [{ name: 'comun', minShareCount: 2, test: (id) => !/[\/](lenis|lqip)/.test(id) }],
+          groups: [{ name: 'comun', minShareCount: 2, test: (id) => !/[\/]lqip/.test(id) }],
         },
       },
     },

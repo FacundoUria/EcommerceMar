@@ -52,7 +52,6 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
   return (
     <article
       ref={tarjeta.ref}
-      data-cursor="ver"
       {...tarjeta.eventos}
       // borde-producto: en hover el borde toma el color del producto (y el halo de la foto se expande)
       style={{ '--color-producto': color }}

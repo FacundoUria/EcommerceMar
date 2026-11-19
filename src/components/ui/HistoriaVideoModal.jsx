@@ -17,7 +17,7 @@ export default function Modal({ src, poster, etiqueta, onClose }) {
   const [pausado, setPausado] = useState(false);
   const [mudo, setMudo] = useState(false);
   useFocusTrap(ref, onClose, true, { enfocarContenedor: true });
-  useOcultarBottomNav(); // oculta bottom nav y mini Mar, pausa Lenis
+  useOcultarBottomNav(); // oculta bottom nav y mini Mar
 
   useEffect(() => {
     const prev = document.body.style.overflow;

@@ -60,6 +60,9 @@
   html {
     -webkit-tap-highlight-color: transparent;
     scroll-padding-top: 5rem;
+    /* Scroll nativo (sin Lenis: con touchpad se sentía pegajoso). Suave solo para anclas y scroll por
+       código; la rueda y el touchpad van 1:1. Con movimiento reducido: auto (ver más abajo). */
+    scroll-behavior: smooth;
   }
   body {
     @apply bg-arena font-sans text-tinta antialiased;
@@ -150,6 +153,10 @@
   &:hover::after {
     transform: translateX(120%);
   }
+}
+/* Botón magnético siguiendo al mouse: sin transición de `translate` (responde en el mismo frame) */
+.btn[data-magnetico] {
+  transition-property: color, background-color, border-color, box-shadow, opacity, transform, scale;
 }
 /* Secundario: borde verde 1px, texto verde, fondo transparente */
 @utility btn-borde {
@@ -337,7 +344,7 @@
 /* Movimiento reducido = "menos movimiento", no cero: se mantienen fades, hovers y transiciones cortas.
    Se apagan los loops que se desplazan solos (manchas del mesh, flotado de las mini-cards, indicador
    de scroll, aro que late, brillo del título) y el scroll suave por código. La cinta de marcas queda
-   quieta y centrada (ver CintaMarcas). Parallax, cursor, 3D, Lenis y cortina se apagan en JS. */
+   quieta y centrada (ver CintaMarcas). Parallax, 3D y cortina se apagan en JS. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto !important;
@@ -512,29 +519,7 @@
   }
 }
 
-/* Lenis (smooth scroll, solo desktop) */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-.lenis.lenis-stopped {
-  overflow: clip;
-}
 
-/* Cursor propio (desktop): se oculta el nativo salvo en campos de texto */
-html.cursor-propio,
-html.cursor-propio * {
-  cursor: none !important;
-}
-html.cursor-propio :is(input, textarea, select, [contenteditable='true']) {
-  cursor: auto !important;
-}
 
 /* ═════ Secciones nuevas con el mismo vocabulario (servicios, reseñas) ═════ */
 /* Halo de color sobre una foto a sangre (cards de servicio): el mismo .halo-producto, fundido con soft-light */

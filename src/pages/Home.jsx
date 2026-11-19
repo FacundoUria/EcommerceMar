@@ -221,7 +221,6 @@ function Categorias() {
             <Link
               key={c.id}
               to={`/tienda?cat=${c.id}`}
-              data-cursor="ver"
               style={{ '--color-producto': colorDe(c.imagen) }}
               className="borde-producto group relative block aspect-[3/4] overflow-hidden rounded-3xl border-2 border-transparent shadow-suave"
             >
@@ -256,8 +255,7 @@ function PanelesCategorias({ categorias }) {
                 to={p.to}
                 onFocus={() => setActivo(i)}
                 aria-label={todas ? 'Ver todas las categorías' : `${p.nombre}: ver productos`}
-                data-cursor="ver"
-                style={todas ? undefined : { '--color-producto': colorDe(p.imagen) }}
+                  style={todas ? undefined : { '--color-producto': colorDe(p.imagen) }}
                 className={`borde-producto group relative block size-full overflow-hidden rounded-3xl border-2 border-transparent shadow-suave ${todas ? 'bg-salvia' : ''}`}
               >
                 {!todas && (

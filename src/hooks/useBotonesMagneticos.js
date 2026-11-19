@@ -14,8 +14,13 @@ export function useBotonesMagneticos() {
     if (!puede || reducido) return;
 
     let actual = null;
+    // Mientras sigue al mouse, `data-magnetico` saca `translate` de la transición del .btn (200 ms):
+    // responde en el mismo frame. Al soltar vuelve a su lugar con la transición corta.
     const soltar = () => {
-      if (actual) actual.style.translate = '';
+      if (actual) {
+        delete actual.dataset.magnetico;
+        actual.style.translate = '';
+      }
       actual = null;
     };
     const mover = (e) => {
@@ -23,6 +28,7 @@ export function useBotonesMagneticos() {
       if (btn !== actual) soltar();
       if (!btn) return;
       actual = btn;
+      btn.dataset.magnetico = '';
       const r = btn.getBoundingClientRect();
       const dx = ((e.clientX - (r.left + r.width / 2)) / (r.width / 2)) * MAX;
       const dy = ((e.clientY - (r.top + r.height / 2)) / (r.height / 2)) * MAX;

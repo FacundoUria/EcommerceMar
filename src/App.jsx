@@ -12,7 +12,6 @@ import CartDrawer from './components/cart/CartDrawer.jsx';
 import QuickView from './components/product/QuickView.jsx';
 import { PageSkeleton } from './components/ui/Skeleton.jsx';
 import { useBotonesMagneticos } from './hooks/useBotonesMagneticos.js';
-import Cursor from './components/ui/Cursor.jsx';
 import IntroMarca from './components/marca/IntroMarca.jsx';
 import MiniMar from './components/marca/MiniMar.jsx';
 import ProgresoScroll from './components/marca/ProgresoScroll.jsx';
@@ -116,7 +115,6 @@ export default function App() {
               <CartDrawer />
               <QuickView />
               <Toaster />
-              <Cursor />
               <ProgresoScroll />
               <MiniMar />
               <IntroMarca />

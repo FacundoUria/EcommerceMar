@@ -2,6 +2,8 @@
 
 Tienda online de productos para pelo con rulos (método curly) de **Mar**, dueña de la peluquería Dream Hair (Mendoza, Argentina).
 Desarrollador: Facu (FacundoUria). Repo: https://github.com/FacundoUria/EcommerceMar (público).
+Dominio final de Mar: **dreamhair.ar** (en `NEGOCIO.dominio`; "dreamhair.com" que aparece en un banner viejo es incorrecto).
+WhatsApp del estudio: +54 9 2616 95-1803 → `https://wa.me/5492616951803` (`NEGOCIO.whatsapp`). Links siempre con `whatsappCon(texto)` (`src/config/negocio.js`, por defecto "¡Hola Mar!").
 
 ## Estado actual
 **Fase 1 — MVP de diseño.** Demo para mostrarle a Mar cómo se vería su tienda (reemplaza a su Tiendanube: https://dreamhairarg.mitiendanube.com). NO es la versión final: prioridad = diseño moderno, muy interactivo, centrado en los productos, mobile-first (la mayoría de sus clientas entra desde el celular).
@@ -10,14 +12,15 @@ Desarrollador: Facu (FacundoUria). Repo: https://github.com/FacundoUria/Ecommerc
 - La gente navega el catálogo, ve productos y precios, y arma un carrito.
 - **No hay pago online.** El carrito es solo visual. El cobro lo maneja Mar por fuera de la web. "Finalizar pedido" queda deshabilitado ("Próximamente").
 - No hay pasarela de pago (ni Mercado Pago, ni tarjetas), ni cuentas de usuario, ni stock en tiempo real, salvo que Facu lo pida.
-- Servicios de peluquería: solo se muestran, precio "Consultar", botón "Reservar por WhatsApp" (https://wa.me/message/G7IS2KBVGNF4E1, link real de su Tiendanube). No van al carrito.
+- Servicios de peluquería: solo se muestran, **sin precio** (ni "Consultar"). Card: foto, nombre, chip de duración con reloj, descripción de Mar (mobile 3 líneas + "Ver más"; desktop completa) y "¡Reservar!" → WhatsApp con "¡Hola Mar! Quiero reservar: <servicio>". Agrupados en Asesoramientos / Cortes y clases / Tratamientos (`serviceGroups` en products.js, `getServiceGroups()`). No van al carrito.
 
 ## Stack (confirmado)
 React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScript, sin backend. Deploy en Netlify desde `main` (`netlify.toml`: build `npm run build`, publish `dist`, redirect SPA).
 
 ## Datos: preparado para un panel futuro
 - Catálogo en `src/data/products.js` (precios de su Tiendanube, nov 2026).
-- **Los componentes NUNCA importan `products.js` directo.** Todo pasa por `src/services/productsService.js` (`getProducts`, `getProductById`, `getCategories`, `getServices`, todas async).
+- **Los componentes NUNCA importan `products.js` ni `resenas.js` directo.** Todo pasa por `src/services/productsService.js` (`getProducts`, `getProductById`, `getCategories`, `getServices`, `getServiceGroups`, `getReviews`, todas async).
+- Textos de Mar (servicios, reseñas, "Hola, soy Mar", barra de anuncio): **tal cual**, sin corregir ni reescribir.
 - Más adelante el service va a leer de una base de datos donde Mar carga productos y precios (panel admin), sin tocar la UI. Mantener esa frontera. Hoy importa `products.js` estático (2 KB, mejor LCP); el lugar del futuro `fetch` está comentado en `cargar()`.
 - Los hooks de `src/hooks/useCatalog.js` cachean lo resuelto: el skeleton se ve solo mientras algo realmente carga. `precargarCatalogo()` arranca en `main.jsx`.
 - El carrito re-sincroniza precio/nombre contra el catálogo al abrir la app (los precios cambian seguido).
@@ -25,9 +28,10 @@ React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScri
 ## Assets
 - Originales en `assets/` (no se sirven). Versiones web generadas en `public/img/` (`<nombre>.webp` 900px + `<nombre>-sm.webp` 400px) y `public/video/` con los scripts de `scripts/`. Los archivos `VERIFICAR-*` y `personita*` se ignoran. Los videos originales (`assets/videos/`) no se commitean.
 - Hero del home: foto `assets/mar/inicio.jpeg` (793×1064, la eligió Mar), webp 400/793 con srcset; preload en `index.html` con el mismo srcset/sizes (constantes `HERO_*` en Home.jsx). No agrandarla ni usar versiones de IA (Real-ESRGAN descartado: piel artificial). Mini-card de Skala junto al pote = variante Cachonados.
-- Fotos del estudio: `assets/estudio/` (jpg máx 1200px). Originales en `assets/estudio/originales/` y fotos con la cara de una clienta en `assets/estudio/pendientes/` (ambas ignoradas por git: no se publican hasta que Mar confirme el permiso).
+- Fotos del estudio: `assets/estudio/` (jpg máx 1200px, las eligió Mar; también las que muestran clientas). Originales en `assets/estudio/originales/` (ignorada).
+- Reseñas: `src/data/resenas.js` (vía el service). Fotos de las clientas: recorte cuadrado centrado en la cara en `assets/resenas/` → webp de 192px (originales en `assets/resenas/originales/`, ignorada).
 - Videos: el único es el del proceso en /servicios (con audio, sin autoplay: play al tocar, `preload="none"` + poster). El home ya no tiene sección Resultados ni video.
-- Banners de Mar (`assets/banners/`, traen su texto): carrusel `<Banners>` al final del home (después de "Hola, soy Mar"). Autoplay 6 s, pausa con hover/toque, puntos; sin autoplay con movimiento reducido. Tienen versión `-lg` (1504px).
+- Banners de Mar (`assets/banners/`, traen su texto; originales tal como los mandó en `assets/banners/originales/`, ignorada): carrusel `<Banners>` al final del home (después de las reseñas). Autoplay 6 s, pausa con hover/toque, puntos. Tienen versión `-lg`. `marcas-lideres` va recortado abajo (sin "www.dreamhair.com"). `hola-soy-mar` NO va en el carrusel (tiene un typo).
 - Producto sin foto → placeholder elegante (crema + marca + nombre en Playfair), nunca imagen rota.
 - **Fotos de producto siempre con `<FotoProducto>`** (cards, carruseles, quick view, producto, rutina, carrito): mismo fondo `fondo-foto` (salvia-media → arena). Fotos de fondo blanco → `mix-blend-mode: multiply` + padding; de escena → cover en marco con overlay salvia 10%. La clasificación la genera `scripts/optimizar-assets.mjs` en `src/data/fondos.json`.
 - Datos reales del negocio: `src/config/negocio.js`. Dato que falta = string vacío y la UI NO lo muestra (pendientes: dirección y horarios).
@@ -66,6 +70,12 @@ React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScri
   - Movimiento reducido: rulos ya dibujados, sin destellos/explosión/lluvia, intro con fade.
 - **Color desde los productos** (sin tocar la paleta base): `scripts/optimizar-assets.mjs` guarda el color dominante de cada foto de producto en `src/data/colores.json` (ignora blancos, grises y casi negros; las categorías usan la foto de un producto). `colorDe(src)` (`src/lib/colores.js`) → `--color-producto`: halo `.halo-producto` (radial al 35%, en hover se intensifica y se expande) dentro de `FotoProducto`, borde en hover `.borde-producto` (cards de producto y categoría), fondo de la foto en /producto `.fondo-color-producto`, destellos de la explosión (color del producto + dorado). Fotos blancas con bordes esfumados (`.foto-bordes-suaves`). `MeshFondo` suma rosa #F4B6C2 y turquesa #9ED8D2 al 20%.
 - Rulos en todas las páginas: el home tiene los suyos (hero, rutina); el resto los monta `App` dentro de `<main>` según la ruta. Títulos principales con `<ConDestellos>`.
+
+## Secciones (Fase 2, feedback de Mar)
+- **Barra de anuncio** (`BarraAnuncio.jsx`, texto en `ANUNCIO` de negocio.js): franja verde de 34px arriba del header en todas las páginas, marquee lento (CSS, solo transform), pausa con hover/toque; con movimiento reducido quieta y centrada (las frases que no entran se ocultan). Está en el flujo: el header sticky queda debajo sin CLS. También está en el shell de `index.html`.
+- **Home**: Hero → Categorías → Más vendidos → Cinta de marcas → Rutina → "Hola, soy Mar" (texto de Mar + "Leer más" que despliega el resto) → **Reseñas** (`Resenas.jsx`: carrusel 1/2/3 por vista, autoplay 7 s, mobile 5 líneas + "Leer más") → Banners.
+- `<Expandible>` (`src/components/ui/Expandible.jsx`): texto recortado a N líneas con despliegue animado del alto (excepción pedida a "solo transform/opacity"); `soloMobile` lo deja completo desde md; `lineas={0}` arranca oculto.
+- `main` tiene `min-h-svh`: mientras carga el chunk de una página el footer queda abajo del pliegue (si no, saltaba: CLS).
 ## Decisiones pendientes (preguntar antes de asumir)
 1. **Cierre del carrito:** ¿mensaje de WhatsApp a Mar con el pedido y el total, u otra cosa? (en Fase 1 queda "Próximamente").
 2. **Carga de productos y precios:** cómo carga Mar (panel admin / Google Sheet / otra). Los precios cambian seguido.
@@ -92,7 +102,7 @@ React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScri
 - Imágenes de la marca en `assets/marca/` (logo y fotos).
 
 ## Datos: nada inventado
-El modelo de Stitch tiene datos de relleno. **No usar como reales**: reseñas ("4.9, 142 reseñas"), testimonios, nombres de asesoras, dirección, horarios, número de WhatsApp, "estudio certificado", precios, cuotas, envíos gratis. Todo dato real lo da Mar; si falta, no se muestra (nada de placeholders visibles en el sitio).
+El modelo de Stitch tiene datos de relleno. **No usar como reales**: reseñas ("4.9, 142 reseñas"), testimonios, nombres de asesoras, dirección, horarios, número de WhatsApp, "estudio certificado", precios, cuotas, envíos gratis. Todo dato real lo da Mar; si falta, no se muestra (nada de placeholders visibles en el sitio). Las reseñas reales están en `src/data/resenas.js` (las mandó Mar).
 Las fotos de personas (`personita*.jpg`) solo se publican si Mar confirma que tiene permiso de esas personas.
 
 ## Forma de trabajo

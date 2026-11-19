@@ -1,14 +1,16 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useLocation } from 'react-router';
-import { m } from 'motion/react';
+import { AnimatePresence, m } from 'motion/react';
 import Icon from '../ui/Icon.jsx';
 import Destellos from './Destellos.jsx';
 import { useMediaQuery } from '../../hooks/useMediaQuery.js';
-import { whatsappCon } from '../../config/negocio.js';
 import { imgFija, urlImagen } from '../../lib/imagenes.js';
 
 const DESTELLO_GLOBO = [{ x: '-6%', y: '-45%', tam: 11 }];
-const LINK = whatsappCon('¡Hola Mar! Tengo una consulta.');
+// El chat guiado va en un chunk aparte (ChatMar.jsx): se pide al tocar a mini Mar y se precarga después del load
+const cargarChat = () => import('./ChatMar.jsx');
+const Chat = lazy(cargarChat);
 const TEXTO = '¿Te ayudo a elegir?';
 const ABIERTA_MS = 6000; // a los 6 s se achica
 const EASE = [0.22, 1, 0.36, 1];
@@ -59,13 +61,15 @@ function FiguraCanvas({ ancho, alto }) {
 }
 
 /**
- * Mini Mar señalando el botón de WhatsApp (abajo a la derecha, en todas las páginas) — SOLO DESKTOP.
- * En mobile no hay widget flotante: el WhatsApp es el botón central del bottom nav (BottomNav.jsx).
+ * Mini Mar señalando el botón del chat (abajo a la derecha, en todas las páginas) — SOLO DESKTOP.
+ * En mobile no hay widget flotante: el chat se abre desde el botón central del bottom nav (MiniMarMobile.jsx).
+ * Tocar la figura, el botón o la carita abre el chat guiado (ChatMar.jsx) en una ventana de ~380×540 a
+ * la izquierda de mini Mar, donde apunta su dedo; mientras está abierto, ella queda entera al costado.
  * - NO entra al cargar: en el home, cuando el hero salió de pantalla (scroll > 70% de su alto); en páginas
  *   sin hero, a los 300px de scroll o a los 8 s. Entra desde abajo con un rebote; a su izquierda, donde
  *   apunta el dedo, el botón de WhatsApp y el globito "¿Te ayudo a elegir?".
- * - A los 6 s se achica: queda el botón en la esquina con su carita. Hover (mouse) o tocar la carita la
- *   vuelve a mostrar. Compacta, se esconde mientras se superpone con [data-evitar-mini-mar] (mini-card de
+ * - A los 6 s se achica: queda el botón en la esquina con su carita. Hover (mouse) la vuelve a mostrar;
+ *   tocar la carita abre el chat. Compacta, se esconde mientras se superpone con [data-evitar-mini-mar] (mini-card de
  *   Skala del hero).
  * - Con el footer en pantalla se achica sola (no tapa los links del footer).
  * - Oculta con el carrito, el quick view o los filtros abiertos (<html data-overlay="abierto">).
@@ -86,6 +90,11 @@ function MiniMarDesktop() {
   const [montada, setMontada] = useState(false);
   const [abierta, setAbierta] = useState(true);
   const [tapando, setTapando] = useState(false); // compacta encima de algo que no debe tapar
+  const [chat, setChat] = useState(false); // ventana de chat abierta
+  const chatRef = useRef(false);
+  useEffect(() => {
+    chatRef.current = chat;
+  }, [chat]);
   const timer = useRef(null);
   const imagen = useRef(null);
 
@@ -96,6 +105,7 @@ function MiniMarDesktop() {
       const img = new Image();
       img.src = urlImagen('/img/marca/mini-mar.webp', Math.round(ALTO * ASPECTO * dpr));
       imagen.current = img.decode().catch(() => {});
+      cargarChat();
     };
     if (document.readyState === 'complete') precargar();
     else window.addEventListener('load', precargar, { once: true });
@@ -129,8 +139,22 @@ function MiniMarDesktop() {
 
   const cerrarEn = useCallback((ms) => {
     clearTimeout(timer.current);
-    timer.current = setTimeout(() => setAbierta(false), ms);
+    timer.current = setTimeout(() => !chatRef.current && setAbierta(false), ms);
   }, []);
+  // Chat abierto: mini Mar queda entera al costado de la ventana. Al cerrarlo, se achica a los 1.5 s.
+  const abrirChat = () => {
+    clearTimeout(timer.current);
+    setAbierta(true);
+    setChat(true);
+  };
+  const cerrarChat = useCallback(() => {
+    setChat(false);
+    cerrarEn(1500);
+  }, [cerrarEn]);
+  // Cambio de página (links del chat) → se cierra
+  useEffect(() => {
+    setChat(false);
+  }, [pathname]);
   const abrir = (ms) => {
     setAbierta(true);
     if (ms) cerrarEn(ms);
@@ -152,7 +176,7 @@ function MiniMarDesktop() {
     return () => io.disconnect();
   }, []);
   useEffect(() => {
-    if (!conFooter) return;
+    if (!conFooter || chatRef.current) return;
     clearTimeout(timer.current);
     setAbierta(false);
   }, [conFooter, montada]);
@@ -213,15 +237,12 @@ function MiniMarDesktop() {
       className="pointer-events-none fixed right-0 bottom-0 z-[29] transition-[opacity,visibility] duration-300 in-data-[overlay=abierto]:invisible in-data-[overlay=abierto]:opacity-0"
       data-mini-mar
     >
-      {/* La figura */}
-      <m.a
-        href={LINK}
-        target="_blank"
-        rel="noopener noreferrer"
-        tabIndex={-1}
+      {/* La figura: tocarla abre el chat */}
+      <m.div
         aria-hidden="true"
+        onClick={abrirChat}
         {...hover}
-        className={`absolute right-0 block ${abierta ? 'pointer-events-auto' : 'pointer-events-none'}`}
+        className={`absolute right-0 block ${chat ? '' : 'cursor-pointer'} ${abierta ? 'pointer-events-auto' : 'pointer-events-none'}`}
         style={{ bottom: pie, width: ancho, height: alto }}
         initial={{ y: '105%', opacity: 0 }}
         animate={abierta ? { y: '0%', opacity: 1 } : { y: '105%', opacity: 0 }}
@@ -232,33 +253,34 @@ function MiniMarDesktop() {
         }
       >
         <FiguraCanvas ancho={ancho} alto={alto} />
-      </m.a>
+      </m.div>
 
       {/* Botón + globito + carita: se mueven juntos entre la posición "abierta" y la esquina */}
       <m.div
         className="absolute"
         style={{ right: abiertoPos.der, bottom: abiertoPos.abajo, width: boton, height: boton }}
         initial={{ x: 0, y: 0, opacity: 0, scale: 0.6 }}
-        animate={{ x: abierta ? 0 : dx, y: abierta ? 0 : dy, opacity: tapando ? 0 : 1, scale: 1 }}
+        animate={{ x: abierta ? 0 : dx, y: abierta ? 0 : dy, opacity: tapando || chat ? 0 : 1, scale: 1 }}
         transition={{
           x: { duration: 0.6, ease: EASE },
           y: { duration: 0.6, ease: EASE },
-          opacity: { duration: 0.3, delay: tapando ? 0 : 0.25 },
+          opacity: { duration: 0.3, delay: tapando || chat ? 0 : 0.25 },
           scale: { type: 'spring', bounce: 0.45, duration: 0.6, delay: 0.25 },
         }}
         {...hover}
       >
-        <a
-          href={LINK}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`${TEXTO} Escribile a Mar por WhatsApp`}
-          className={`${tapando ? 'pointer-events-none' : 'pointer-events-auto'} relative flex size-full items-center justify-center rounded-full text-arena shadow-flotante transition hover:scale-105 active:scale-95`}
+        <button
+          type="button"
+          onClick={abrirChat}
+          aria-expanded={chat}
+          aria-haspopup="dialog"
+          aria-label={`${TEXTO} Abrir el chat con Mar`}
+          className={`${tapando || chat ? 'pointer-events-none' : 'pointer-events-auto'} relative flex size-full items-center justify-center rounded-full text-arena shadow-flotante transition hover:scale-105 active:scale-95`}
           style={{ backgroundImage: 'linear-gradient(135deg, #3e6450 0%, #2f5240 100%)' }}
         >
           <span className="pulso absolute inset-0 rounded-full" aria-hidden="true" />
-          <Icon name="whatsapp" size={28} />
-        </a>
+          <Icon name="chat" size={27} strokeWidth={2} />
+        </button>
 
         {/* Globito, a la izquierda del botón */}
         <m.span
@@ -272,12 +294,12 @@ function MiniMarDesktop() {
           <Destellos puntos={DESTELLO_GLOBO} />
         </m.span>
 
-        {/* Carita (modo compacto): tocarla vuelve a mostrar a mini Mar */}
+        {/* Carita (modo compacto): tocarla abre el chat */}
         <m.button
           type="button"
           tabIndex={-1}
           aria-hidden="true"
-          onClick={() => abrir(4000)}
+          onClick={abrirChat}
           className={`absolute -top-3 -left-3 size-8 overflow-hidden rounded-full bg-arena shadow-suave ring-2 ring-crema-card ${abierta || tapando ? 'pointer-events-none' : 'pointer-events-auto'}`}
           initial={{ opacity: 0, scale: 0.5 }}
           animate={abierta ? { opacity: 0, scale: 0.5 } : { opacity: 1, scale: 1 }}
@@ -286,6 +308,18 @@ function MiniMarDesktop() {
           <img {...imgFija('/img/marca/mini-mar-cara.webp', 32)} alt="" width="192" height="192" className="size-full object-cover" />
         </m.button>
       </m.div>
+
+      {/* Ventana de chat a la izquierda de mini Mar, donde apunta su dedo (portal: por encima del header) */}
+      {createPortal(
+        <AnimatePresence>
+          {chat && (
+            <Suspense key="chat" fallback={null}>
+              <Chat modo="ventana" derecha={Math.round(dedo.der + 10)} onClose={cerrarChat} />
+            </Suspense>
+          )}
+        </AnimatePresence>,
+        document.body,
+      )}
     </div>
   );
 }

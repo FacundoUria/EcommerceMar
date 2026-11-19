@@ -341,6 +341,16 @@
   animation: pulso-aro 2.4s ease-out infinite;
 }
 
+/* "escribiendo…" del chat de mini Mar: tres puntos que saltan escalonados (delay en línea).
+   Con movimiento reducido el chat no muestra el indicador. */
+.escribiendo-punto {
+  animation: escribiendo 1.2s ease-in-out infinite;
+}
+@keyframes escribiendo {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.45; }
+  30% { transform: translateY(-3px); opacity: 1; }
+}
+
 /* Movimiento reducido = "menos movimiento", no cero: se mantienen fades, hovers y transiciones cortas.
    Se apagan los loops que se desplazan solos (manchas del mesh, flotado de las mini-cards, indicador
    de scroll, aro que late, brillo del título) y el scroll suave por código. La cinta de marcas queda

@@ -5,12 +5,13 @@ import { AnimatePresence, m } from 'motion/react';
 import Icon from '../ui/Icon.jsx';
 import { fuenteImagen, imgFija } from '../../lib/imagenes.js';
 import { ASPECTO, FIGURA, medir } from './miniMarGeo.js';
-import { useBloquearScroll } from '../../hooks/useBloquearScroll.js';
 
-// El panel (overlay, figura grande, animaciones) va en un chunk aparte: se pide al tocar el botón o al
-// asomar, y se precarga cuando el navegador está ocioso después del load (junto con la figura).
+// El asomo (figura grande, globito) y el chat van en chunks aparte: se piden al asomar / al tocar el
+// botón, y se precargan cuando el navegador está ocioso después del load (junto con la figura).
 const cargarPanel = () => import('./MiniMarPanel.jsx');
+const cargarChat = () => import('./ChatMar.jsx');
 const Panel = lazy(cargarPanel);
+const Chat = lazy(cargarChat);
 const ASOMA_MS = 3000;
 const CLAVE_ASOMO = 'dh-asomo';
 
@@ -35,11 +36,9 @@ function primeraVez() {
 
 /**
  * Mini Mar en mobile (en desktop está el widget flotante de MiniMar.jsx). Es el botón central del
- * bottom nav: tocarlo NO abre WhatsApp directo, abre a mini Mar:
- * - La figura sube desde el botón con un rebote suave y queda parada sobre la barra, a la derecha,
- *   señalando el botón grande "Escribile a Mar" (WhatsApp) con el globito "¿Te ayudo a elegir?".
- *   Detrás, overlay arena al 40% con blur.
- * - Se cierra tocando afuera, deslizando hacia abajo, con el botón central (que muestra una X) o Esc.
+ * bottom nav: tocarlo abre el chat guiado de mini Mar (ChatMar.jsx: bottom sheet de ~75% del alto, con
+ * mini Mar asomando por encima del borde; detrás, overlay arena al 40% con blur).
+ * - Se cierra con la X, tocando afuera, deslizando hacia abajo, con el botón central (que muestra una X) o Esc.
  * - La primera vez de la sesión, cuando ya bajó del hero (o a los 8 s en páginas sin hero), asoma sola
  *   ~3 s hasta la cintura, sin overlay, y vuelve a esconderse en el botón.
  * - Movimiento reducido: aparece y desaparece con fade (MotionConfig anula los desplazamientos).
@@ -50,6 +49,10 @@ export default function BotonMarMobile() {
   const boton = useRef(null);
   const { pathname } = useLocation();
   const abierta = estado === 'abierta';
+  const estadoRef = useRef(estado);
+  useEffect(() => {
+    estadoRef.current = estado;
+  }, [estado]);
 
   const mostrar = useCallback((nuevo) => {
     setGeo(medir(boton.current?.closest('ul')));
@@ -61,6 +64,7 @@ export default function BotonMarMobile() {
   useEffect(() => {
     enIdle(() => {
       cargarPanel();
+      cargarChat();
       const img = new Image();
       img.src = fuenteImagen(FIGURA, Math.round(280 * ASPECTO * Math.min(window.devicePixelRatio || 1, 3))).src;
     });
@@ -69,14 +73,7 @@ export default function BotonMarMobile() {
   // Cambio de página → se cierra
   useEffect(() => cerrar(), [pathname, cerrar]);
 
-  // Abierta: Esc cierra y la página de atrás no scrollea
-  useBloquearScroll(abierta);
-  useEffect(() => {
-    if (!abierta) return;
-    const onKey = (e) => e.key === 'Escape' && cerrar();
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [abierta, cerrar]);
+  // Abierta: Esc, bloqueo de scroll y foco los maneja el chat (ChatMar.jsx)
 
   // Asomo de la primera vez: al bajar del hero (home) o a los 8 s / 300px en páginas sin hero
   const asomoHecho = useRef(false);
@@ -87,7 +84,8 @@ export default function BotonMarMobile() {
     const asomar = () => {
       if (asomoHecho.current) return;
       asomoHecho.current = true;
-      if (!primeraVez() || document.documentElement.dataset.overlay) return;
+      // Si ya abrió el chat, no hace falta asomar (y no se lo cierra)
+      if (estadoRef.current !== 'cerrada' || !primeraVez() || document.documentElement.dataset.overlay) return;
       mostrar('asomando');
       timerAsomo.current = setTimeout(() => setEstado((e) => (e === 'asomando' ? 'cerrada' : e)), ASOMA_MS);
     };
@@ -111,7 +109,7 @@ export default function BotonMarMobile() {
           type="button"
           onClick={() => (abierta ? cerrar() : mostrar('abierta'))}
           aria-expanded={abierta}
-          aria-label={abierta ? 'Cerrar a mini Mar' : '¿Te ayudo a elegir? Abrir a mini Mar'}
+          aria-label={abierta ? 'Cerrar el chat con Mar' : '¿Te ayudo a elegir? Abrir el chat con Mar'}
           // Fondo arena (por la transparencia del avatar); verde solo cuando muestra la X
           className="relative flex size-[3.6rem] items-center justify-center overflow-hidden rounded-full border-4 border-arena bg-arena shadow-flotante transition active:scale-90"
           style={abierta ? { backgroundImage: 'linear-gradient(135deg, #3e6450 0%, #2f5240 100%)' } : undefined}
@@ -137,19 +135,24 @@ export default function BotonMarMobile() {
             )}
           </AnimatePresence>
         </button>
-        {/* Marca de WhatsApp en la esquina del círculo */}
+        {/* Globito de chat en la esquina del círculo */}
         {!abierta && (
           // Badge chico (18px) sobre el borde del círculo, abajo a la derecha: fuera de la cara
           <span aria-hidden="true" className="pointer-events-none absolute right-0 bottom-0 flex size-[18px] items-center justify-center rounded-full bg-verde text-arena ring-2 ring-arena">
-            <Icon name="whatsapp" size={11} />
+            <Icon name="chat" size={11} strokeWidth={2.4} />
           </span>
         )}
       </span>
       {createPortal(
         <AnimatePresence>
-          {estado !== 'cerrada' && geo && (
-            <Suspense key="panel" fallback={null}>
-              <Panel geo={geo} estado={estado} onClose={cerrar} onAbrir={() => mostrar('abierta')} />
+          {estado === 'asomando' && geo && (
+            <Suspense key="asomo" fallback={null}>
+              <Panel geo={geo} onAbrir={() => mostrar('abierta')} />
+            </Suspense>
+          )}
+          {abierta && geo && (
+            <Suspense key="chat" fallback={null}>
+              <Chat modo="sheet" base={geo.base} onClose={cerrar} />
             </Suspense>
           )}
         </AnimatePresence>,

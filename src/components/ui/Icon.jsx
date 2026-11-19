@@ -32,6 +32,8 @@ const PATHS = {
   abajo: 'm6 9 6 6 6-6',
   copiar: 'M9 9h10a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1zM5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1',
   local: 'M3.5 9 5 4h14l1.5 5M4.5 9v11h15V9M3 9h18M10 20v-5h4v5',
+  // Globito de chat (Lucide message-circle-more): botón de mini Mar
+  chat: 'M7.9 20A9 9 0 1 0 4 16.1L2 22zM8 12h.01M12 12h.01M16 12h.01',
   instagram: 'M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm5 13a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5.5-9.5h.01',
 };
 

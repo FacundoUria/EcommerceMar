@@ -54,12 +54,7 @@ const BANNERS = [
   ['promos-rulos', 'Promos para rulos'],
   ['marcas-lideres', 'Marcas líderes'],
   ['dream-hair-studio', 'Dream Hair Studio'],
-].map(([nombre, alt]) => ({
-  src: `/img/banners/${nombre}.webp`,
-  alt,
-  // marcas-lideres es más alto (1376x768): se recorta abajo (solo la URL), no el logo de arriba
-  encuadre: nombre === 'marcas-lideres' ? 'object-top' : '',
-}));
+].map(([nombre, alt]) => ({ src: `/img/banners/${nombre}.webp`, alt }));
 
 /* ═════════ HERO full-screen: mesh animado, título gigante, foto blob + mini-cards flotantes ═════════ */
 // La frase de Mar: "El cabello es el espejo de tu amor propio"

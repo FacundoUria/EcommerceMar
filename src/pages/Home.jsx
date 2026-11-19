@@ -18,7 +18,7 @@ import { useMediaQuery } from '../hooks/useMediaQuery.js';
 import { ProductCardSkeleton, Skeleton } from '../components/ui/Skeleton.jsx';
 import { useBrands, useCategories, useProducts } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
-import { NEGOCIO, PASOS_RUTINA } from '../config/negocio.js';
+import { PASOS_RUTINA, whatsappCon } from '../config/negocio.js';
 import Precio from '../components/ui/Precio.jsx';
 import { imgSm } from '../lib/format.js';
 import { colorDe } from '../lib/colores.js';
@@ -642,7 +642,7 @@ function HolaSoyMar() {
                 Conocé los servicios
               </Roll>
             </Link>
-            <a href={NEGOCIO.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-borde">
+            <a href={whatsappCon()} target="_blank" rel="noopener noreferrer" className="btn btn-borde">
               <Roll>
                 <Icon name="whatsapp" size={18} /> Escribime
               </Roll>

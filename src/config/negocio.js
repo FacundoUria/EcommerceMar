@@ -6,11 +6,15 @@ export const NEGOCIO = {
   bajada: 'The Curly Studio',
   ciudad: 'Mendoza',
   frase: 'El cabello es el espejo de tu amor propio',
-  whatsapp: 'https://wa.me/message/G7IS2KBVGNF4E1',
+  whatsapp: 'https://wa.me/5492616951803', // +54 9 2616 95-1803 (estudio)
+  dominio: 'dreamhair.ar',
   direccion: '',
   horarios: '',
   instagram: 'https://www.instagram.com/dreamhair_mza',
 };
+
+/** Link de WhatsApp al estudio con un mensaje ya escrito (por defecto "¡Hola Mar!"). */
+export const whatsappCon = (texto = '¡Hola Mar!') => `${NEGOCIO.whatsapp}?text=${encodeURIComponent(texto)}`;
 
 // Barra de anuncio (arriba de todo). Texto de Mar, tal cual; cada frase es un tramo que puede
 // quedar oculto si no entra (versión quieta con movimiento reducido).

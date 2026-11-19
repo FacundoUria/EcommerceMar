@@ -75,17 +75,81 @@ export const products = [
   variantes: (p.variantes || []).map(([nombre, f]) => ({ nombre, imagen: img(f) })),
 }));
 
-// Fotos del estudio que mandó Mar (nov 2026). Asesoramiento básico, completo y Tratamiento y finalización
-// siguen con una foto anterior: las nuevas (assets/estudio/pendientes/) muestran la cara de una clienta y
-// esperan que Mar confirme el permiso. "Completo" usa salon-1 mientras tanto (asesoramiento-2 es la misma
-// toma que corte-en-seco y se repetía).
+// Servicios del estudio (textos, duraciones y fotos de Mar, nov 2026). Sin precio: se reservan por WhatsApp.
+// `grupo` arma las secciones de /servicios (en este orden).
+export const serviceGroups = ['Asesoramientos', 'Cortes y clases', 'Tratamientos'];
+
 export const services = [
-  { id: 'corte-rulos', nombre: 'Corte de rulos', imagen: '/img/estudio/corte-en-seco.webp' },
-  { id: 'asesoramiento-basico', nombre: 'Asesoramiento básico', imagen: '/img/estudio/asesoramiento-1.webp' },
-  { id: 'asesoramiento-completo', nombre: 'Asesoramiento completo', imagen: '/img/estudio/salon-1.webp' },
-  { id: 'asesoramiento-deluxe', nombre: 'Asesoramiento De luxe', imagen: '/img/estudio/asesoramiento-deluxe.webp' },
-  { id: 'asesoramiento-lo-hiciste-tu', nombre: 'Asesoramiento "Lo hiciste tú"', imagen: '/img/estudio/lo-hiciste-tu.webp' },
-  { id: 'tratamiento-finalizacion', nombre: 'Tratamiento y finalización', imagen: '/img/estudio/servicio-tratamiento-lavado-1.webp' },
-  { id: 'ozonoterapia', nombre: 'Ozonoterapia', imagen: '/img/estudio/ozonoterapia.webp' },
-  { id: 'celulas-madre-infrarrojo', nombre: 'Células madre + infrarrojo', imagen: '/img/estudio/celulas-madre-infrarrojo.webp' },
-];
+  {
+    id: 'asesoramiento-basico',
+    nombre: 'Asesoramiento básico',
+    grupo: 'Asesoramientos',
+    duracion: '1 h',
+    foto: 'asesoramiento-basico',
+    descripcion:
+      'Diagnóstico personalizado y rutina a medida para tus rulos. Evaluamos tu patrón y las necesidades reales de tu hebra para diseñar el cuidado ideal. Incluye lavado, tratamiento nutritivo, clase práctica de finalización para que aprendas a definirte en casa y secado.',
+  },
+  {
+    id: 'asesoramiento-completo',
+    nombre: 'Asesoramiento completo',
+    grupo: 'Asesoramientos',
+    duracion: '1 h 40 min',
+    foto: 'asesoramiento-completo',
+    descripcion:
+      'Diagnóstico capilar, corte en seco, tratamiento y clase de finalización. Todo el asesoramiento personalizado para conocer las necesidades de tu cabello, sumado al corte a medida, lavado, tratamiento específico, clase de definición para tu casa y secado.',
+  },
+  {
+    id: 'asesoramiento-deluxe',
+    nombre: 'Asesoramiento De luxe',
+    grupo: 'Asesoramientos',
+    duracion: '2 h',
+    foto: 'asesoramiento-deluxe',
+    descripcion:
+      'La experiencia capilar más completa y avanzada. Incluye diagnóstico completo, corte en seco, lavado, tratamiento, análisis con cámara y un tratamiento con tecnología avanzada (ozonoterapia, infrarrojo o ambos según lo que tu fibra necesite).',
+  },
+  {
+    id: 'corte-rulos',
+    nombre: 'Corte de rulos',
+    grupo: 'Cortes y clases',
+    duracion: '1 h',
+    foto: 'corte-en-seco',
+    descripcion:
+      'Corte especializado, ritual de lavado, tratamiento e hidratación profunda. Diseñado específicamente para respetar la forma natural de tus rulos y ondas en seco, finalizando con secado profesional.',
+  },
+  {
+    id: 'lo-hiciste-tu',
+    nombre: 'Lo hiciste tú',
+    grupo: 'Cortes y clases',
+    duracion: '1 h 20 min',
+    foto: 'lo-hiciste-tu',
+    descripcion:
+      'Clase teórico-práctica de finalización. Incluye productos y materiales para usar durante la clase. Vas a aprender a finalizar tu cabello según tus gustos, tiempos y tipo de cabello. Incluye tratamiento y lavado.',
+  },
+  {
+    id: 'tratamiento-finalizacion',
+    nombre: 'Tratamiento y finalización',
+    grupo: 'Cortes y clases',
+    duracion: '50 min',
+    foto: 'lavado',
+    descripcion:
+      'Tratamiento específico según tu tipo de cabello (se evalúa en el momento). Finalización (peinado) de rulos, ondas o afro y secado.',
+  },
+  {
+    id: 'ozonoterapia',
+    nombre: 'Ozonoterapia',
+    grupo: 'Tratamientos',
+    duracion: '1 h',
+    foto: 'ozonoterapia',
+    descripcion:
+      'Oxigenación y detox profundo para el cuero cabelludo. Purifica el folículo, estimula el crecimiento y devuelve la vitalidad a los rizos fatigados, potenciando la absorción de cada nutriente.',
+  },
+  {
+    id: 'celulas-madre-infrarrojo',
+    nombre: 'Células madre + infrarrojo',
+    grupo: 'Tratamientos',
+    duracion: '1 h',
+    foto: 'celulas-madre-infrarrojo',
+    descripcion:
+      'Reconstrucción extrema, suavidad y control total del frizz. Combina activos regeneradores con fototerapia infrarroja para reparar la fibra desde adentro y sellar la cutícula, logrando rulos elásticos y con brillo espejo.',
+  },
+].map(({ foto, ...s }) => ({ ...s, imagen: `/img/estudio/${foto}.webp` }));

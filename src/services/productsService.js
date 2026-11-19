@@ -33,10 +33,16 @@ export async function getCategories() {
   return categories.map((c) => ({ ...c, imagen: `/img/productos/${c.portada}.webp` }));
 }
 
-/** Servicios de peluquería (no van al carrito). */
+/** Servicios de peluquería (no van al carrito), en el orden de Mar. Cada uno trae su `grupo`. */
 export async function getServices() {
   const { services } = await cargar();
   return services;
+}
+
+/** Grupos de servicios con sus servicios: [{ titulo, servicios }] (en el orden de /servicios). */
+export async function getServiceGroups() {
+  const { services, serviceGroups } = await cargar();
+  return serviceGroups.map((titulo) => ({ titulo, servicios: services.filter((s) => s.grupo === titulo) }));
 }
 
 /** Marcas presentes en el catálogo, ordenadas por cantidad de productos. */

@@ -1,19 +1,20 @@
 import { useState } from 'react';
 import Icon from '../components/ui/Icon.jsx';
-import Reveal from '../components/ui/Reveal.jsx';
+import Reveal, { cascada } from '../components/ui/Reveal.jsx';
 import RevealText from '../components/ui/RevealText.jsx';
+import Expandible from '../components/ui/Expandible.jsx';
 import { ConDestellos } from '../components/marca/Destellos.jsx';
 import SmartImg from '../components/ui/SmartImg.jsx';
 import { Skeleton } from '../components/ui/Skeleton.jsx';
-import { useServices } from '../hooks/useCatalog.js';
+import { useServiceGroups } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
-import { NEGOCIO } from '../config/negocio.js';
+import { whatsappCon } from '../config/negocio.js';
 import { imgSm } from '../lib/format.js';
 import Roll from '../components/ui/Roll.jsx';
 
 export default function Servicios() {
   usePageTitle('Servicios');
-  const { data: servicios, loading } = useServices();
+  const { data: grupos, loading } = useServiceGroups();
 
   return (
     <div className="contenedor pt-4 pb-10">
@@ -21,59 +22,83 @@ export default function Servicios() {
         <ConDestellos>
           <RevealText as="h1" className="text-4xl leading-tight md:text-5xl">Servicios</RevealText>
         </ConDestellos>
-        <a href={NEGOCIO.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-primario">
+        <a href={whatsappCon()} target="_blank" rel="noopener noreferrer" className="btn btn-primario">
           <Roll>
             <Icon name="whatsapp" size={18} /> Reservar
           </Roll>
         </a>
       </Reveal>
 
-      <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {loading
-          ? Array.from({ length: 6 }, (_, i) => (
-              <li key={i}>
-                <Skeleton className="aspect-[4/5] rounded-5xl" />
-              </li>
-            ))
-          : (servicios ?? []).map((s, i) => (
-              <Reveal as="li" key={s.id} delay={(i % 3) * 0.07}>
-                <article className="card group overflow-hidden rounded-5xl">
-                  <div className="aspect-[4/5] overflow-hidden bg-salvia-media">
-                  <SmartImg
-                    src={s.imagen}
-                    srcSm={imgSm(s.imagen)}
-                    sizes="(min-width: 1024px) 370px, (min-width: 640px) 50vw, 100vw"
-                    alt=""
-                    width={900}
-                    height={1125}
-                    placeholderTitulo={s.nombre}
-                    className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  </div>
-                  <div className="p-5">
-                    <RevealText className="text-2xl leading-tight">{s.nombre}</RevealText>
-                    <div className="mt-3 flex items-center justify-between gap-3">
-                      <p className="text-sm font-bold text-dorado">Consultar</p>
-                      <a
-                        href={NEGOCIO.whatsapp}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`Reservar ${s.nombre} por WhatsApp`}
-                        className="inline-flex items-center gap-1.5 rounded-full bg-verde px-4 py-2.5 text-xs font-extrabold text-arena transition hover:bg-verde-700 active:scale-95"
-                      >
-                        <Roll>
-                          <Icon name="whatsapp" size={16} /> Reservar
-                        </Roll>
-                      </a>
-                    </div>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-      </ul>
+      {loading ? (
+        <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 3 }, (_, i) => (
+            <li key={i}>
+              <Skeleton className="aspect-[4/5] rounded-5xl" />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        (grupos ?? []).map((g) => (
+          <section key={g.titulo} aria-labelledby={`grupo-${g.titulo}`} className="mt-10 md:mt-14">
+            <RevealText id={`grupo-${g.titulo}`} className="text-3xl leading-tight md:text-4xl">
+              {g.titulo}
+            </RevealText>
+            <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 md:gap-6">
+              {g.servicios.map((s, i) => (
+                <Reveal as="li" key={s.id} delay={cascada(i, 3)} className="h-full">
+                  <CardServicio servicio={s} />
+                </Reveal>
+              ))}
+            </ul>
+          </section>
+        ))
+      )}
 
       <ProcesoVideo />
     </div>
+  );
+}
+
+/** Card de servicio: foto, nombre, duración, descripción (3 líneas + "Ver más" en mobile) y reserva. */
+function CardServicio({ servicio: s }) {
+  return (
+    <article className="card group flex h-full flex-col overflow-hidden rounded-5xl">
+      <div className="aspect-[4/5] overflow-hidden bg-salvia-media">
+        <SmartImg
+          src={s.imagen}
+          srcSm={imgSm(s.imagen)}
+          sizes="(min-width: 1024px) 370px, (min-width: 640px) 50vw, 100vw"
+          alt=""
+          width={900}
+          height={1125}
+          placeholderTitulo={s.nombre}
+          className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+      </div>
+      <div className="flex flex-1 flex-col p-5">
+        <h3 className="text-2xl leading-tight">{s.nombre}</h3>
+        <p className="mt-2.5 inline-flex w-fit items-center gap-1.5 rounded-full bg-salvia px-3 py-1 text-xs font-bold text-verde">
+          <Icon name="reloj" size={14} strokeWidth={2} />
+          <span className="sr-only">Duración:</span> {s.duracion}
+        </p>
+        <Expandible lineas={3} soloMobile className="mt-3 text-[15px] leading-relaxed text-texto-suave">
+          <p>{s.descripcion}</p>
+        </Expandible>
+        <div className="mt-auto pt-5">
+          <a
+            href={whatsappCon(`¡Hola Mar! Quiero reservar: ${s.nombre}`)}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`¡Reservar! ${s.nombre} por WhatsApp`}
+            className="btn btn-primario w-full"
+          >
+            <Roll>
+              <Icon name="whatsapp" size={18} /> ¡Reservar!
+            </Roll>
+          </a>
+        </div>
+      </div>
+    </article>
   );
 }
 
@@ -86,7 +111,7 @@ function ProcesoVideo() {
         <RevealText id="proceso-titulo" className="text-4xl leading-tight md:text-5xl">
           El <em className="texto-dorado">proceso</em>
         </RevealText>
-        <a href={NEGOCIO.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-primario mt-6">
+        <a href={whatsappCon()} target="_blank" rel="noopener noreferrer" className="btn btn-primario mt-6">
           <Roll>
             <Icon name="whatsapp" size={18} /> Reservar
           </Roll>

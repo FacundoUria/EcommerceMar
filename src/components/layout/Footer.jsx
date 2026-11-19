@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 import Icon from '../ui/Icon.jsx';
 import Rulos from '../marca/Rulos.jsx';
-import { NEGOCIO } from '../../config/negocio.js';
+import { NEGOCIO, whatsappCon } from '../../config/negocio.js';
 import Roll from '../ui/Roll.jsx';
 
 const LINKS = [
@@ -41,7 +41,7 @@ export default function Footer() {
             {NEGOCIO.direccion && <p>{NEGOCIO.direccion}</p>}
             {NEGOCIO.horarios && <p>{NEGOCIO.horarios}</p>}
             <div className={`flex flex-wrap gap-2 ${NEGOCIO.direccion || NEGOCIO.horarios ? 'mt-4' : ''}`}>
-              <a href={NEGOCIO.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-primario">
+              <a href={whatsappCon()} target="_blank" rel="noopener noreferrer" className="btn btn-primario">
                 <Roll>
                   <Icon name="whatsapp" size={18} /> WhatsApp
                 </Roll>

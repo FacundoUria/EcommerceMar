@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, m, useScroll } from 'motion/react';
+import { useSearchParams } from 'react-router';
 import Reveal, { cascada } from '../components/ui/Reveal.jsx';
 import RevealText from '../components/ui/RevealText.jsx';
 import LineaProgreso from '../components/ui/LineaProgreso.jsx';
@@ -27,7 +28,12 @@ export default function Rutina() {
   const pagina = useRef(null);
   const { scrollYProgress } = useScroll({ target: pagina, offset: ['start start', 'end end'] });
 
-  const [actual, setActual] = useState(0); // índice del paso
+  // Paso inicial desde ?paso=N (1-4: links del home); la URL acompaña al paso actual
+  const [params, setParams] = useSearchParams();
+  const [actual, setActual] = useState(() => {
+    const n = Number(params.get('paso'));
+    return n >= 1 && n <= PASOS_RUTINA.length ? n - 1 : 0;
+  }); // índice del paso
   const [direccion, setDireccion] = useState(1);
   const [eleccion, setEleccion] = useState({}); // { [paso]: { producto, variante } }
   const [aviso, setAviso] = useState(null);
@@ -46,6 +52,7 @@ export default function Rutina() {
     setDireccion(i > actual ? 1 : -1);
     setActual(i);
     setAviso(null);
+    setParams({ paso: String(i + 1) }, { replace: true, preventScrollReset: true });
     scrollA(0);
   };
 

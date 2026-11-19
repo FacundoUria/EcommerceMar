@@ -476,7 +476,7 @@ function RutinaDesktop() {
             const prod = porPaso[i];
             return (
               <li key={p}>
-                <Link to={prod ? `/producto/${prod.id}` : '/rutina'} className="card group block overflow-hidden rounded-3xl">
+                <Link to={`/rutina?paso=${i + 1}`} className="card group block overflow-hidden rounded-3xl">
                   <span className="block aspect-[4/5] overflow-hidden">
                     {prod && <FotoProducto src={prod.imagen} srcSm={imgSm(prod.imagen)} sizes="300px" />}
                   </span>
@@ -516,20 +516,22 @@ function RutinaDesktop() {
                   const on = i === activo;
                   const hecho = i < activo;
                   return (
-                    <li key={p} className="flex items-center gap-5">
+                    <li key={p}>
+                      <Link to={`/rutina?paso=${i + 1}`} className="group flex w-fit items-center gap-5 rounded-full pr-3">
                       <span
-                        className={`flex size-10 items-center justify-center rounded-full border text-sm font-bold transition duration-500 ${
+                        className={`flex size-10 items-center justify-center rounded-full border text-sm font-bold transition duration-500 group-hover:border-verde ${
                           on ? 'scale-110 border-verde bg-verde text-arena shadow-flotante' : hecho ? 'border-verde bg-crema-card text-verde' : 'border-linea bg-crema-card text-texto-suave'
                         }`}
                       >
                         {i + 1}
                       </span>
                       <span
-                        className={`font-serif text-3xl transition duration-500 ${on ? 'translate-x-1 text-tinta' : 'text-texto-suave'}`}
+                        className={`font-serif text-3xl transition duration-500 group-hover:text-verde ${on ? 'translate-x-1 text-tinta' : 'text-texto-suave'}`}
                         aria-current={on ? 'step' : undefined}
                       >
                         {p}
                       </span>
+                      </Link>
                     </li>
                   );
                 })}
@@ -590,8 +592,9 @@ function RutinaMobile() {
           {PASOS_CHIPS.map((p, i) => {
             const prod = porPaso[i];
             return (
-              <Reveal as="li" key={p} delay={i * 0.1} className="flex items-center gap-4">
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-full border border-verde bg-crema-card text-sm font-bold text-verde">
+              <Reveal as="li" key={p} delay={i * 0.1}>
+                <Link to={`/rutina?paso=${i + 1}`} className="group flex items-center gap-4 rounded-2xl transition active:scale-[0.98]">
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-full border border-verde bg-crema-card text-sm font-bold text-verde transition-colors group-active:bg-verde group-active:text-arena">
                   {i + 1}
                 </span>
                 <span className="card flex flex-1 items-center gap-3 rounded-2xl p-2 pr-3">
@@ -600,11 +603,13 @@ function RutinaMobile() {
                       <FotoProducto src={imgSm(prod.imagen)} zoom={false} compacta />
                     </span>
                   )}
-                  <span className="min-w-0">
+                  <span className="min-w-0 flex-1">
                     <span className="block font-serif text-xl text-tinta">{p}</span>
                     {prod && <span className="block truncate text-xs text-texto-suave">{prod.nombre}</span>}
                   </span>
+                  <Icon name="flecha" size={18} className="shrink-0 text-verde" />
                 </span>
+                </Link>
               </Reveal>
             );
           })}

@@ -25,6 +25,7 @@ export default function CartLine({ linea, compacta = false, onNavigate, delay = 
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0">
+            {linea.marca && <p className="text-[11px] font-bold tracking-[0.14em] text-dorado uppercase">{linea.marca}</p>}
             <Link to={url} onClick={onNavigate} className="line-clamp-2 text-sm leading-snug font-bold text-tinta hover:text-verde">
               {linea.nombre}
             </Link>

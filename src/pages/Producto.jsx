@@ -22,6 +22,7 @@ import { colorDe } from '../lib/colores.js';
 import { PASOS_RUTINA, whatsappCon } from '../config/negocio.js';
 import { imgFija } from '../lib/imagenes.js';
 import Roll from '../components/ui/Roll.jsx';
+import Expandible from '../components/ui/Expandible.jsx';
 
 export default function Producto() {
   const { id } = useParams();
@@ -44,7 +45,8 @@ function Detalle({ producto }) {
 
   const variante = producto.variantes.find((v) => v.nombre === params.get('v')) ?? null;
   // Consulta por WhatsApp con el producto (y la variante elegida) ya escritos
-  const consulta = whatsappCon(`¡Hola Mar! Tengo una consulta sobre: ${producto.nombre}${variante ? ` (${variante.nombre})` : ''}`);
+  const nombreMensaje = `${producto.marca && producto.marca !== 'Dream Hair' ? `${producto.marca} ` : ''}${producto.nombreCorto}`;
+  const consulta = whatsappCon(`¡Hola Mar! Tengo una consulta sobre: ${nombreMensaje}${variante ? ` (${variante.nombre})` : ''}`);
   const tieneVariantes = producto.variantes.length > 0;
   const categoria = categorias?.find((c) => c.id === producto.categoria);
 
@@ -149,8 +151,19 @@ function Detalle({ producto }) {
           <div>
             {producto.marca && <p className="text-xs font-bold tracking-[0.2em] text-dorado uppercase">{producto.marca}</p>}
             <ConDestellos className="mt-1">
-              <RevealText as="h1" className="text-4xl leading-tight md:text-5xl">{producto.nombre}</RevealText>
+              <RevealText as="h1" className="text-3xl leading-tight md:text-4xl">{producto.nombre}</RevealText>
             </ConDestellos>
+            {producto.tamano && (
+              <p className="mt-3 inline-flex rounded-full bg-salvia px-3 py-1 text-xs font-bold text-verde">
+                <span className="sr-only">Tamaño:</span> {producto.tamano}
+              </p>
+            )}
+            {/* Descripción de Mar (tal cual): mobile 4 líneas + "Ver más"; desktop completa */}
+            {producto.descripcion && (
+              <Expandible lineas={4} soloMobile className="mt-3 text-[15px] leading-relaxed text-texto-suave">
+                <p>{producto.descripcion}</p>
+              </Expandible>
+            )}
             <Precio as="p" valor={producto.precio} className="mt-3 text-3xl text-tinta" />
           </div>
 

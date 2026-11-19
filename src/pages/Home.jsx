@@ -167,7 +167,7 @@ function Hero() {
 function MiniCard({ producto, variante, etiqueta, y, delay, className, flotarDesfase = false, evitarMiniMar = false }) {
   const reducido = useReducedMotion();
   const imagen = variante?.imagen ?? producto.imagen;
-  const nombre = variante ? `${producto.nombre} · ${variante.nombre}` : producto.nombre;
+  const nombre = variante ? `${producto.nombreCorto} · ${variante.nombre}` : producto.nombreCorto;
   return (
     <m.div style={{ y }} className={`absolute z-10 ${className}`} data-evitar-mini-mar={evitarMiniMar || undefined}>
       <m.div
@@ -467,7 +467,7 @@ function RutinaDesktop() {
                     <span className="flex size-9 shrink-0 items-center justify-center rounded-full border border-verde text-sm font-bold text-verde">{i + 1}</span>
                     <span className="min-w-0">
                       <span className="block font-serif text-2xl text-tinta">{p}</span>
-                      {prod && <span className="block truncate text-xs text-texto-suave">{prod.nombre}</span>}
+                      {prod && <span className="block truncate text-xs text-texto-suave">{prod.nombreCorto}</span>}
                     </span>
                   </span>
                 </Link>
@@ -540,10 +540,10 @@ function RutinaDesktop() {
                 >
                   <Link to={`/producto/${producto.id}`} className="group block size-full">
                     <span className="block size-full overflow-hidden rounded-[2.5rem] shadow-flotante">
-                      <FotoProducto src={producto.imagen} srcSm={imgSm(producto.imagen)} sizes="448px" alt={producto.nombre} />
+                      <FotoProducto src={producto.imagen} srcSm={imgSm(producto.imagen)} sizes="448px" alt={producto.nombreCorto} />
                     </span>
                     <span className="absolute -bottom-5 left-6 rounded-2xl border border-linea bg-crema-card/95 px-4 py-3 shadow-flotante backdrop-blur">
-                      <span className="block text-sm font-semibold text-tinta">{producto.nombre}</span>
+                      <span className="block text-sm font-semibold text-tinta">{producto.nombreCorto}</span>
                       <Precio valor={producto.precio} className="block text-sm text-verde" />
                     </span>
                   </Link>

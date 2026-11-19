@@ -113,7 +113,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
               transition={{ duration: 0.3 }}
               className="size-full"
             >
-              <FotoProducto src={imagen} alt={producto.nombre} placeholderTitulo={producto.nombre} priority zoom={false} />
+              <FotoProducto src={imagen} alt={producto.nombreCorto} placeholderTitulo={producto.nombreCorto} priority zoom={false} />
             </m.div>
           </AnimatePresence>
         </div>
@@ -122,7 +122,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
           <div>
             {producto.marca && <p className="text-xs font-bold tracking-[0.18em] text-dorado uppercase">{producto.marca}</p>}
             <h2 id="qv-titulo" className="mt-1 text-3xl leading-tight">
-              {producto.nombre}
+              {producto.nombreCorto}
             </h2>
             <Precio as="p" valor={producto.precio} className="mt-2 text-2xl text-tinta" />
           </div>
@@ -140,7 +140,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
                   setAviso(false);
                 }}
                 onPreview={setPreview}
-                nombreProducto={producto.nombre}
+                nombreProducto={producto.nombreCorto}
               />
               {aviso && (
                 <p className="mt-2 text-sm font-semibold text-dorado" role="alert">

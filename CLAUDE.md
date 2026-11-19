@@ -18,10 +18,12 @@ WhatsApp del estudio: +54 9 2616 95-1803 → `https://wa.me/5492616951803` (`NEG
 React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScript, sin backend. Deploy en Netlify desde `main` (`netlify.toml`: build `npm run build`, publish `dist`, redirect SPA).
 
 ## Datos: preparado para un panel futuro
-- Catálogo en `src/data/products.js` (precios de su Tiendanube, nov 2026).
+- Catálogo en `src/data/products.js` (precios de su Tiendanube, nov 2026). Campos: `nombre` (nombre comercial completo de Mar, solo en /producto), `nombreCorto` (≤ ~32 caracteres: cards, carruseles, quick view, rutina, carrito y mensajes de WhatsApp, que le anteponen la marca), `marca` (nombres cortos y consistentes: Cantu, Rich, Lola Cosmetics, Alfa…), `tamano` (chip en /producto) y `descripcion` (texto de Mar tal cual; en /producto bajo el nombre, mobile 4 líneas + "Ver más"; la búsqueda la incluye). Variantes sin foto propia usan la del producto.
+- Productos nuevos sin precio ni foto: `activo: false` + `precio: null`. El service los filtra (tienda, rutina, carruseles, búsqueda, chat, marcas, carrito; su página da "No encontrado"). Lo pendiente con Mar está en `docs/confirmar-con-mar.md`.
+- Carrito guardado: si una variante ya no existe (renombrada o sacada), la línea queda como el producto sin variante (y se suma si ya había una igual).
 - **Los componentes NUNCA importan `products.js` ni `resenas.js` directo.** Todo pasa por `src/services/productsService.js` (`getProducts`, `getProductById`, `getCategories`, `getServices`, `getServiceGroups`, `getReviews`, todas async).
 - Textos de Mar (servicios, reseñas, "Hola, soy Mar"): **tal cual**, sin corregir ni reescribir.
-- Más adelante el service va a leer de una base de datos donde Mar carga productos y precios (panel admin), sin tocar la UI. Mantener esa frontera. Hoy importa `products.js` estático (2 KB, mejor LCP); el lugar del futuro `fetch` está comentado en `cargar()`.
+- Más adelante el service va a leer de una base de datos donde Mar carga productos y precios (panel admin), sin tocar la UI. Mantener esa frontera. Hoy importa `products.js` estático (~30 KB sin comprimir con las descripciones; mejor LCP que un fetch); el lugar del futuro `fetch` está comentado en `cargar()`.
 - Los hooks de `src/hooks/useCatalog.js` cachean lo resuelto: el skeleton se ve solo mientras algo realmente carga. `precargarCatalogo()` arranca en `main.jsx`.
 - El carrito re-sincroniza precio/nombre contra el catálogo al abrir la app (los precios cambian seguido).
 

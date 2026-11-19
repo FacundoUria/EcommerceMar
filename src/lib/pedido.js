@@ -15,7 +15,9 @@ export const numeroPedido = () => `DH-${Math.floor(1000 + Math.random() * 9000)}
  */
 export function armarMensaje({ lineas, datos, numero }) {
   const items = lineas.map((l) => {
-    const nombre = l.variante ? `${l.nombre} (${l.variante})` : l.nombre;
+    // Con la marca adelante: los nombres cortos no la llevan ("Cantu Comeback Curl Revitalizer")
+    const conMarca = l.marca && l.marca !== 'Dream Hair' ? `${l.marca} ${l.nombre}` : l.nombre;
+    const nombre = l.variante ? `${conMarca} (${l.variante})` : conMarca;
     return l.cantidad > 1
       ? `• ${l.cantidad} × ${nombre} — ${formatPrecio(l.precio)} c/u = ${formatPrecio(l.precio * l.cantidad)}`
       : `• 1 × ${nombre} — ${formatPrecio(l.precio)}`;

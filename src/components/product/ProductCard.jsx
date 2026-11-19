@@ -42,9 +42,9 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
     explotarDestellos(e?.currentTarget, color);
     await flyToCart(imgRef.current?.querySelector('img'));
     agregar(producto, null, 1, { abrir: false });
-    mostrarToast({ tipo: 'carrito', titulo: 'Agregado', texto: producto.nombre, imagen: imgSm(producto.imagen) });
+    mostrarToast({ tipo: 'carrito', titulo: 'Agregado', texto: producto.nombreCorto, imagen: imgSm(producto.imagen) });
   };
-  const etiquetaAgregar = tieneVariantes ? `Elegir variante de ${producto.nombre}` : `Agregar ${producto.nombre} al carrito`;
+  const etiquetaAgregar = tieneVariantes ? `Elegir variante de ${producto.nombreCorto}` : `Agregar ${producto.nombreCorto} al carrito`;
 
   // Card 3D en desktop (ver useTarjeta3D)
   const tarjeta = useTarjeta3D();
@@ -59,14 +59,14 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
     >
       {tarjeta.brillo}
       <div className="relative">
-        <Link to={url} className="block" aria-label={`${producto.nombre}, ${precio}`}>
+        <Link to={url} className="block" aria-label={`${producto.nombreCorto}, ${precio}`}>
           <div ref={imgRef} className="relative aspect-[4/5] overflow-hidden">
             <FotoProducto
               src={producto.imagen}
               srcSm={imgSm(producto.imagen)}
               sizes={SIZES}
-              alt={producto.nombre}
-              placeholderTitulo={producto.nombre}
+              alt={producto.nombreCorto}
+              placeholderTitulo={producto.nombreCorto}
               placeholderSubtitulo={producto.marca ?? 'Dream Hair'}
               priority={priority}
             />
@@ -81,7 +81,7 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
         <button
           type="button"
           onClick={() => abrirQuickView(producto)}
-          aria-label={`Vista rápida de ${producto.nombre}`}
+          aria-label={`Vista rápida de ${producto.nombreCorto}`}
           className="glass absolute top-3 right-3 flex size-10 items-center justify-center rounded-full text-tinta shadow-suave transition duration-500 hover:scale-110 active:scale-90 md:translate-y-1 md:opacity-0 md:group-focus-within:translate-y-0 md:group-focus-within:opacity-100 md:group-hover:translate-y-0 md:group-hover:opacity-100"
         >
           <Icon name="ojo" size={18} />
@@ -116,7 +116,7 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
         {producto.marca && <p className="text-[11px] font-bold tracking-[0.14em] text-dorado uppercase">{producto.marca}</p>}
         <Titulo className="line-clamp-2 font-sans text-[15px] leading-snug font-semibold text-tinta">
           <Link to={url} className="hover:text-verde" tabIndex={-1}>
-            {producto.nombre}
+            {producto.nombreCorto}
           </Link>
         </Titulo>
         <Precio as="p" valor={producto.precio} className="mt-1 text-base text-tinta" />

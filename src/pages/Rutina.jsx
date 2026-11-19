@@ -91,7 +91,7 @@ export default function Rutina() {
   const agregarRutina = (e) => {
     if (faltaVariante) {
       irA(PASOS_RUTINA.indexOf(faltaVariante.paso)); // (irA limpia el aviso: va primero)
-      setAviso(`Elegí una variante de ${faltaVariante.e.producto.nombre}`);
+      setAviso(`Elegí una variante de ${faltaVariante.e.producto.nombreCorto}`);
       return;
     }
     explotarDestellos(e?.currentTarget);
@@ -251,7 +251,7 @@ export default function Rutina() {
                           >
                             <img {...imgFija(e.variante?.imagen ?? e.producto.imagen, 40)} alt="" width="40" height="40" className="size-10 shrink-0 rounded-xl bg-arena object-cover" />
                             <span className="min-w-0 flex-1">
-                              <span className="block truncate text-sm font-semibold">{e.producto.nombre}</span>
+                              <span className="block truncate text-sm font-semibold">{e.producto.nombreCorto}</span>
                               {e.variante && <span className="block truncate text-xs text-texto-suave">{e.variante.nombre}</span>}
                             </span>
                             <Precio valor={e.producto.precio} className="text-sm text-tinta" />
@@ -420,14 +420,14 @@ function OpcionProducto({ producto, seleccion, onElegir, onVariante, indice = 0 
               src={imagen}
               srcSm={imgSm(imagen)}
               sizes="(min-width: 640px) 220px, 45vw"
-              placeholderTitulo={producto.nombre}
+              placeholderTitulo={producto.nombreCorto}
               zoom={false}
               compacta={!!(activo && producto.variantes.length)}
             />
           </span>
           <span className={`block ${activo && producto.variantes.length ? '' : 'p-3'}`}>
             {producto.marca && <span className="block text-[11px] font-bold tracking-[0.12em] text-dorado uppercase">{producto.marca}</span>}
-            <span className="line-clamp-2 block text-sm leading-snug font-semibold">{producto.nombre}</span>
+            <span className="line-clamp-2 block text-sm leading-snug font-semibold">{producto.nombreCorto}</span>
             <Precio valor={producto.precio} className="mt-1 block text-tinta" />
           </span>
           <CheckAnimado activo={activo} />
@@ -442,7 +442,7 @@ function OpcionProducto({ producto, seleccion, onElegir, onVariante, indice = 0 
               seleccionada={seleccion.variante?.nombre}
               onSelect={onVariante}
               size="md"
-              nombreProducto={producto.nombre}
+              nombreProducto={producto.nombreCorto}
             />
           </div>
         )}

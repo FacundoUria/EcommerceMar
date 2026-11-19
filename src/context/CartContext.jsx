@@ -35,7 +35,7 @@ function reducer(lineas, accion) {
         {
           clave,
           id: producto.id,
-          nombre: producto.nombre,
+          nombre: producto.nombreCorto ?? producto.nombre,
           marca: producto.marca ?? null,
           variante: variante?.nombre ?? null,
           imagen: variante?.imagen ?? producto.imagen,
@@ -51,15 +51,27 @@ function reducer(lineas, accion) {
     case 'vaciar':
       return [];
     case 'sincronizar': {
-      // Los precios cambian seguido: al cargar el catálogo, actualizamos precio/nombre
-      // de lo guardado y sacamos productos que ya no existen.
+      // Los precios cambian seguido: al cargar el catálogo, actualizamos precio/nombre de lo guardado y
+      // sacamos productos que ya no existen (o están ocultos). Si la variante guardada ya no existe (se
+      // renombró o se sacó), la línea queda como el producto sin variante; si ya había una así, se suman.
       const porId = new Map(accion.productos.map((p) => [p.id, p]));
-      return lineas
-        .filter((l) => porId.has(l.id))
-        .map((l) => {
-          const p = porId.get(l.id);
-          return { ...l, nombre: p.nombre, marca: p.marca ?? null, precio: p.precio };
-        });
+      const resultado = [];
+      for (const l of lineas) {
+        const p = porId.get(l.id);
+        if (!p) continue;
+        const existe = !l.variante || p.variantes?.some((v) => v.nombre === l.variante);
+        const linea = {
+          ...l,
+          nombre: p.nombreCorto ?? p.nombre,
+          marca: p.marca ?? null,
+          precio: p.precio,
+          ...(existe ? {} : { variante: null, imagen: p.imagen, clave: claveLinea(p.id, null) }),
+        };
+        const igual = resultado.find((r) => r.clave === linea.clave);
+        if (igual) igual.cantidad = limitar(igual.cantidad + linea.cantidad);
+        else resultado.push(linea);
+      }
+      return resultado;
     }
     default:
       return lineas;

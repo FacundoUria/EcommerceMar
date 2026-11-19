@@ -12,7 +12,7 @@ export function coincide(producto, consulta, nombreCategoria = '') {
   const palabras = normalizar(consulta).split(/\s+/).filter(Boolean);
   if (!palabras.length) return true;
   const texto = normalizar(
-    [producto.nombre, producto.marca, nombreCategoria, producto.descripcion ?? '', ...producto.variantes.map((v) => v.nombre)].join(' '),
+    [producto.nombre, producto.nombreCorto ?? '', producto.marca, nombreCategoria, producto.descripcion ?? '', ...producto.variantes.map((v) => v.nombre)].join(' '),
   );
   return palabras.every((p) => texto.includes(p));
 }

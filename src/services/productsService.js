@@ -8,6 +8,10 @@ import { reviews } from '../data/resenas.js';
 const catalogo = { ...productos, reviews };
 let cache = null;
 
+// Productos nuevos de Mar sin precio ni foto: `activo: false` → ocultos en tienda, rutina, carruseles,
+// búsqueda, chat y carrito (y su página da "No encontrado").
+const visibles = (products) => products.filter((p) => p.activo !== false);
+
 function cargar() {
   if (!cache) {
     cache = Promise.resolve(catalogo);
@@ -17,16 +21,16 @@ function cargar() {
   return cache;
 }
 
-/** Productos del catálogo. */
+/** Productos del catálogo (solo los activos). */
 export async function getProducts() {
   const { products } = await cargar();
-  return products;
+  return visibles(products);
 }
 
-/** Un producto por id, o null si no existe. */
+/** Un producto activo por id, o null si no existe (o está oculto). */
 export async function getProductById(id) {
   const { products } = await cargar();
-  return products.find((p) => p.id === id) ?? null;
+  return visibles(products).find((p) => p.id === id) ?? null;
 }
 
 /** Categorías con su paso de la rutina (1-4 o null) y la foto de portada. */
@@ -57,6 +61,6 @@ export async function getReviews() {
 export async function getBrands() {
   const { products } = await cargar();
   const cuenta = new Map();
-  for (const p of products) if (p.marca) cuenta.set(p.marca, (cuenta.get(p.marca) || 0) + 1);
+  for (const p of visibles(products)) if (p.marca) cuenta.set(p.marca, (cuenta.get(p.marca) || 0) + 1);
   return [...cuenta.entries()].sort((a, b) => b[1] - a[1]).map(([nombre]) => nombre);
 }

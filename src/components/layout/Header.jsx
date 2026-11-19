@@ -109,11 +109,12 @@ export default function Header() {
           >
             <Icon name="buscar" />
           </Link>
+          {/* Carrito: solo desktop. En mobile está en el bottom nav (y en /producto, en la barra de "Agregar") */}
           <button
             type="button"
             onClick={abrir}
             aria-label={`Abrir carrito (${cantidadTotal} productos)`}
-            className="relative flex size-11 items-center justify-center rounded-full text-tinta transition hover:bg-salvia active:scale-90"
+            className="relative hidden size-11 items-center justify-center rounded-full text-tinta transition hover:bg-salvia active:scale-90 md:flex"
           >
             <span data-cart-target className="relative">
               <Icon name="carrito" />

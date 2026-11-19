@@ -8,6 +8,7 @@ import RevealImagen from '../components/ui/RevealImagen.jsx';
 import Carousel from '../components/ui/Carousel.jsx';
 import SmartImg from '../components/ui/SmartImg.jsx';
 import Banners from '../components/ui/Banners.jsx';
+import Resenas from '../components/ui/Resenas.jsx';
 import MeshFondo from '../components/ui/MeshFondo.jsx';
 import SectionHeader from '../components/ui/SectionHeader.jsx';
 import LineaProgreso from '../components/ui/LineaProgreso.jsx';
@@ -39,6 +40,7 @@ export default function Home() {
       <CintaMarcas />
       <RutinaHistoria />
       <HolaSoyMar />
+      <Resenas />
       <Banners items={BANNERS} />
     </>
   );

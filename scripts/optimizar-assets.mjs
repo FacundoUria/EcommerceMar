@@ -3,6 +3,7 @@
 //  - <nombre>.webp     → máx 900px de ancho (fotos grandes, galería)
 //  - <nombre>-sm.webp  → máx 400px de ancho (cards, swatches, miniaturas)
 //  - <nombre>-lg.webp  → máx 1600px, solo banners (carrusel a todo el ancho en desktop)
+//  - resenas/: una sola versión de 192px (foto circular de la clienta)
 //  - src/data/lqip.json → miniatura de 20px en base64 por foto (blur-up mientras carga la real)
 //  - src/data/colores.json → color dominante de cada foto de producto (halo de las cards, fondo de la
 //    foto en /producto, destellos al agregar). Las categorías usan la foto de un producto: van incluidas.
@@ -12,7 +13,7 @@ import { readdir, mkdir, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
 
-const CARPETAS = ['productos', 'banners', 'estudio', 'mar', 'marca'];
+const CARPETAS = ['productos', 'banners', 'estudio', 'mar', 'marca', 'resenas'];
 const CON_LQIP = new Set(['productos', 'estudio', 'mar']); // las que se ven en la web
 const EXT = /\.(jpe?g|png|webp)$/i;
 const IGNORAR = /^(VERIFICAR-|personita)/i;
@@ -21,6 +22,8 @@ const TAMANIOS = [
   { sufijo: '-sm', ancho: 400 },
 ];
 const EXTRA = { banners: [{ sufijo: '-lg', ancho: 1600 }] };
+// Carpetas con sus propios tamaños (en vez de 900/400): reseñas = foto circular chica (64px a 3x)
+const SOLO = { resenas: [{ sufijo: '', ancho: 192 }] };
 const forzar = process.argv.includes('--forzar');
 
 const mtime = (f) => stat(f).then((s) => s.mtimeMs, () => 0);
@@ -95,7 +98,7 @@ for (const carpeta of CARPETAS) {
     const entrada = path.join(origen, archivo);
     const tOrigen = await mtime(entrada);
 
-    for (const { sufijo, ancho } of [...TAMANIOS, ...(EXTRA[carpeta] ?? [])]) {
+    for (const { sufijo, ancho } of SOLO[carpeta] ?? [...TAMANIOS, ...(EXTRA[carpeta] ?? [])]) {
       const salida = path.join(destino, `${nombre}${sufijo}.webp`);
       if (!forzar && (await mtime(salida)) > tOrigen) continue;
       await sharp(entrada)

@@ -32,6 +32,9 @@ assets/videos/
 # banners: originales tal como los mandó Mar (en assets/banners/ van los renombrados/recortados)
 assets/banners/originales/
 
+# reseñas: fotos originales de las clientas (en assets/resenas/ van los recortes cuadrados)
+assets/resenas/originales/
+
 # fotos del estudio: originales en resolución completa (en assets/estudio/ van las optimizadas)
 assets/estudio/originales/
 # fotos con la cara de una clienta: no se publican hasta que Mar confirme el permiso

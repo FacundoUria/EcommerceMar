@@ -36,8 +36,9 @@ function useServicio(clave, fn) {
  * se monte una página, esa página arranca con los datos y no muestra skeleton.
  */
 export function precargarCatalogo() {
-  return Promise.all([service.getProducts(), service.getCategories(), service.getServiceGroups(), service.getBrands()])
-    .then(([products, categories, serviceGroups, brands]) => {
+  return Promise.all([service.getProducts(), service.getCategories(), service.getServiceGroups(), service.getBrands(), service.getReviews()])
+    .then(([products, categories, serviceGroups, brands, reviews]) => {
+      resueltos.set('reviews', reviews);
       resueltos.set('products', products);
       resueltos.set('categories', categories);
       resueltos.set('serviceGroups', serviceGroups);
@@ -50,5 +51,6 @@ export function precargarCatalogo() {
 export const useProducts = () => useServicio('products', service.getProducts);
 export const useCategories = () => useServicio('categories', service.getCategories);
 export const useServiceGroups = () => useServicio('serviceGroups', service.getServiceGroups);
-export const useBrands = () => useServicio('brands', service.getBrands);
+export const useReviews = () => useServicio('reviews', service.getReviews);
+export const useBrands =() => useServicio('brands', service.getBrands);
 export const useProduct = (id) => useServicio(`product:${id}`, () => service.getProductById(id));

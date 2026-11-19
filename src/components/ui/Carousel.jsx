@@ -158,7 +158,8 @@ export default function Carousel({ children, label, className = '', itemsClassNa
       {cabecera && (
         <div className="contenedor mb-6 flex items-end justify-between gap-6">
           {cabecera}
-          <div className="flex items-center gap-5">
+          {/* En mobile no: se desliza con el dedo (y están los puntos) */}
+          <div className="hidden items-center gap-5 md:flex">
             <p className="font-serif text-xl text-texto-suave tabular-nums" aria-live="polite">
               <span className="text-tinta">{dos(posicion)}</span> / {dos(total)}
             </p>

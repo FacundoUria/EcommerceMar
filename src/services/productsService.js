@@ -2,8 +2,10 @@
 // Hoy lee src/data/products.js (estático: son ~2 KB y así no alarga la carga de la página).
 // Mañana: reemplazar `cargar()` por un fetch a la base de datos donde Mar carga productos,
 // manteniendo la misma forma de los objetos y la API async. La UI no se toca.
-import * as catalogo from '../data/products.js';
+import * as productos from '../data/products.js';
+import { reviews } from '../data/resenas.js';
 
+const catalogo = { ...productos, reviews };
 let cache = null;
 
 function cargar() {
@@ -43,6 +45,12 @@ export async function getServices() {
 export async function getServiceGroups() {
   const { services, serviceGroups } = await cargar();
   return serviceGroups.map((titulo) => ({ titulo, servicios: services.filter((s) => s.grupo === titulo) }));
+}
+
+/** Reseñas de clientas (home). */
+export async function getReviews() {
+  const { reviews } = await cargar();
+  return reviews;
 }
 
 /** Marcas presentes en el catálogo, ordenadas por cantidad de productos. */

@@ -19,7 +19,7 @@ import { imgSm } from '../lib/format.js';
 import Precio from '../components/ui/Precio.jsx';
 import { explotarDestellos } from '../lib/destellos.js';
 import { colorDe } from '../lib/colores.js';
-import { PASOS_RUTINA } from '../config/negocio.js';
+import { PASOS_RUTINA, whatsappCon } from '../config/negocio.js';
 import { imgFija } from '../lib/imagenes.js';
 import Roll from '../components/ui/Roll.jsx';
 
@@ -43,6 +43,8 @@ function Detalle({ producto }) {
   const imgRef = useRef(null);
 
   const variante = producto.variantes.find((v) => v.nombre === params.get('v')) ?? null;
+  // Consulta por WhatsApp con el producto (y la variante elegida) ya escritos
+  const consulta = whatsappCon(`¡Hola Mar! Tengo una consulta sobre: ${producto.nombre}${variante ? ` (${variante.nombre})` : ''}`);
   const tieneVariantes = producto.variantes.length > 0;
   const categoria = categorias?.find((c) => c.id === producto.categoria);
 
@@ -194,6 +196,14 @@ function Detalle({ producto }) {
               </Roll>
             </button>
           </div>
+          <a
+            href={consulta}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 hidden w-fit items-center gap-1.5 text-sm font-semibold text-verde underline-offset-4 hover:underline md:inline-flex"
+          >
+            <Icon name="whatsapp" size={16} /> ¿Dudas? Consultale a Mar
+          </a>
           <div className="flex justify-center md:hidden">
             <span className="sr-only">Cantidad</span>
             <QuantityStepper value={cantidad} onChange={setCantidad} />
@@ -206,6 +216,16 @@ function Detalle({ producto }) {
       {/* Barra fija mobile */}
       <div className="fixed inset-x-0 bottom-0 z-40 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:hidden">
         <div className="glass-arena flex items-center gap-2 rounded-full p-2 shadow-flotante ring-1 ring-verde/10">
+          <a
+            href={consulta}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Consultale a Mar por WhatsApp sobre ${producto.nombre}`}
+            className="flex size-12 shrink-0 items-center justify-center rounded-full text-arena shadow-suave active:scale-90"
+            style={{ backgroundImage: 'linear-gradient(135deg, #3e6450 0%, #2f5240 100%)' }}
+          >
+            <Icon name="whatsapp" size={22} />
+          </a>
           <button
             type="button"
             onClick={abrir}

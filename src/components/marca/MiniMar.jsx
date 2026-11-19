@@ -1,0 +1,251 @@
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router';
+import { m } from 'motion/react';
+import Icon from '../ui/Icon.jsx';
+import { useMediaQuery } from '../../hooks/useMediaQuery.js';
+import { whatsappCon } from '../../config/negocio.js';
+import { HAY_INTRO } from './IntroMarca.jsx';
+
+const LINK = whatsappCon('¡Hola Mar! Tengo una consulta.');
+const TEXTO = '¿Te ayudo a elegir?';
+const ABIERTA_MS = 6000; // a los 6 s se achica
+const EASE = [0.22, 1, 0.36, 1];
+
+// Ilustración (assets/marca/mini-mar.png, 451×661): cortada a la derecha y abajo → va pegada a esos bordes.
+// Punta del dedo (señala arriba a la izquierda), en fracción del ancho / alto de la imagen.
+const ASPECTO = 451 / 661;
+const DEDO = { x: 0.062, y: 0.342 };
+const MEDIDAS = {
+  mobile: { alto: 180, boton: 48, margen: 16, solape: 22 }, // solape: se mete detrás de la barra inferior
+  desktop: { alto: 300, boton: 56, margen: 24, solape: 0 },
+};
+
+/**
+ * La ilustración dibujada en un <canvas> y no en un <img>: aparece después de la carga y en páginas con
+ * poco contenido (/carrito) pasaba a ser el elemento LCP (2.86 → 3.21 s). Un canvas no cuenta para el LCP.
+ */
+function FiguraCanvas({ ancho, alto }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const canvas = ref.current;
+    if (!canvas) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 3);
+    canvas.width = Math.round(ancho * dpr);
+    canvas.height = Math.round(alto * dpr);
+    const img = new Image();
+    img.decoding = 'async';
+    img.src = canvas.width <= 400 ? '/img/marca/mini-mar-sm.webp' : '/img/marca/mini-mar.webp';
+    let vivo = true;
+    img.onload = () => {
+      if (!vivo) return;
+      const ctx = canvas.getContext('2d');
+      ctx.imageSmoothingQuality = 'high';
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    };
+    return () => {
+      vivo = false;
+    };
+  }, [ancho, alto]);
+  return (
+    <canvas
+      ref={ref}
+      aria-hidden="true"
+      style={{ width: ancho, height: alto }}
+      className="block drop-shadow-[0_10px_18px_rgb(34_56_43/0.18)]"
+    />
+  );
+}
+
+/**
+ * Alto (px) de lo que hay fijo abajo en mobile: bottom nav, barra de /producto o la de /rutina
+ * (marcadas con data-barra-inferior). Mini Mar va encima: no tapa "Agregar" ni el carrito.
+ */
+function useBaseInferior(activo) {
+  const [base, setBase] = useState(0);
+  const { pathname } = useLocation();
+  useEffect(() => {
+    if (!activo) {
+      setBase(0);
+      return;
+    }
+    const medir = () => {
+      let top = window.innerHeight;
+      document.querySelectorAll('[data-barra-inferior]').forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.height) top = Math.min(top, r.top);
+      });
+      setBase(Math.max(0, Math.round(window.innerHeight - top)));
+    };
+    const ro = new ResizeObserver(medir);
+    // las barras de cada página aparecen cuando llega su chunk: medir otra vez un rato después
+    const ids = [0, 400, 1200].map((t) =>
+      setTimeout(() => {
+        document.querySelectorAll('[data-barra-inferior]').forEach((el) => ro.observe(el));
+        medir();
+      }, t),
+    );
+    window.addEventListener('resize', medir);
+    return () => {
+      ids.forEach(clearTimeout);
+      ro.disconnect();
+      window.removeEventListener('resize', medir);
+    };
+  }, [activo, pathname]);
+  return base;
+}
+
+/**
+ * Mini Mar señalando el botón de WhatsApp (abajo a la derecha, en todas las páginas).
+ * - Aparece después de la carga (y de la intro): entra desde abajo con un rebote; a su izquierda, donde
+ *   apunta el dedo, el botón de WhatsApp y el globito "¿Te ayudo a elegir?".
+ * - A los 6 s se achica: queda el botón en la esquina con su carita. Hover (mouse) o tocar la carita la
+ *   vuelve a mostrar.
+ * - Oculta con el carrito, el quick view o los filtros abiertos (<html data-overlay="abierto">).
+ * - Movimiento reducido: sin desplazamientos (MotionConfig reducedMotion="user"), solo fades.
+ * Solo transform + opacity. La imagen se pide recién después del `load` (no compite con el LCP) y va en
+ * un canvas (no se vuelve el elemento LCP).
+ */
+export default function MiniMar() {
+  const desktop = useMediaQuery('(min-width: 768px)');
+  const { alto, boton, margen, solape } = MEDIDAS[desktop ? 'desktop' : 'mobile'];
+  const base = useBaseInferior(!desktop);
+  const [montada, setMontada] = useState(false);
+  const [abierta, setAbierta] = useState(true);
+  const timer = useRef(null);
+
+  // Montar después del load (+ lo que dura la intro de marca)
+  useEffect(() => {
+    let id;
+    // la imagen se baja antes de mostrarla (el canvas no tiene "cargando": entraría vacío)
+    const precargar = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 3);
+      const grande = window.matchMedia('(min-width: 768px)').matches ? MEDIDAS.desktop : MEDIDAS.mobile;
+      const img = new Image();
+      img.src = grande.alto * ASPECTO * dpr <= 400 ? '/img/marca/mini-mar-sm.webp' : '/img/marca/mini-mar.webp';
+      return img.decode().catch(() => {});
+    };
+    const arrancar = () => {
+      const listo = precargar();
+      id = setTimeout(() => listo.then(() => setMontada(true)), HAY_INTRO ? 1500 : 700);
+    };
+    if (document.readyState === 'complete') arrancar();
+    else window.addEventListener('load', arrancar, { once: true });
+    return () => {
+      clearTimeout(id);
+      window.removeEventListener('load', arrancar);
+    };
+  }, []);
+
+  const cerrarEn = useCallback((ms) => {
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => setAbierta(false), ms);
+  }, []);
+  const abrir = (ms) => {
+    setAbierta(true);
+    if (ms) cerrarEn(ms);
+    else clearTimeout(timer.current);
+  };
+
+  useEffect(() => {
+    if (montada) cerrarEn(ABIERTA_MS);
+    return () => clearTimeout(timer.current);
+  }, [montada, cerrarEn]);
+
+  if (!montada) return null;
+
+  // Geometría (px desde la esquina inferior derecha de la pantalla)
+  const ancho = Math.round(alto * ASPECTO);
+  const pie = desktop ? 0 : Math.max(0, base - solape); // base de la figura (se mete detrás de la barra)
+  const dedo = { der: ancho * (1 - DEDO.x), abajo: pie + alto * (1 - DEDO.y) };
+  // Botón abierto: a la izquierda y un poco arriba de la punta del dedo. Compacto: en la esquina.
+  const abiertoPos = { der: dedo.der + 6, abajo: dedo.abajo - 4 };
+  const compactoPos = { der: margen, abajo: (desktop ? 0 : base) + margen };
+  const dx = abiertoPos.der - compactoPos.der; // cuánto se corre a la derecha al achicarse
+  const dy = abiertoPos.abajo - compactoPos.abajo; // y hacia abajo
+
+  const hover = {
+    onPointerEnter: (e) => e.pointerType === 'mouse' && abrir(0),
+    onPointerLeave: (e) => e.pointerType === 'mouse' && cerrarEn(1200),
+  };
+
+  return (
+    <div
+      className="pointer-events-none fixed right-0 bottom-0 z-[29] transition-[opacity,visibility] duration-300 in-data-[overlay=abierto]:invisible in-data-[overlay=abierto]:opacity-0"
+      data-mini-mar
+    >
+      {/* La figura */}
+      <m.a
+        href={LINK}
+        target="_blank"
+        rel="noopener noreferrer"
+        tabIndex={-1}
+        aria-hidden="true"
+        {...hover}
+        className={`absolute right-0 block ${abierta ? 'pointer-events-auto' : 'pointer-events-none'}`}
+        style={{ bottom: pie, width: ancho, height: alto }}
+        initial={{ y: '105%', opacity: 0 }}
+        animate={abierta ? { y: '0%', opacity: 1 } : { y: '105%', opacity: 0 }}
+        transition={
+          abierta
+            ? { y: { type: 'spring', bounce: 0.38, duration: 0.85 }, opacity: { duration: 0.35 } }
+            : { y: { duration: 0.5, ease: EASE }, opacity: { duration: 0.35, delay: 0.15 } }
+        }
+      >
+        <FiguraCanvas ancho={ancho} alto={alto} />
+      </m.a>
+
+      {/* Botón + globito + carita: se mueven juntos entre la posición "abierta" y la esquina */}
+      <m.div
+        className="absolute"
+        style={{ right: abiertoPos.der, bottom: abiertoPos.abajo, width: boton, height: boton }}
+        initial={{ x: 0, y: 0, opacity: 0, scale: 0.6 }}
+        animate={{ x: abierta ? 0 : dx, y: abierta ? 0 : dy, opacity: 1, scale: 1 }}
+        transition={{
+          x: { duration: 0.6, ease: EASE },
+          y: { duration: 0.6, ease: EASE },
+          opacity: { duration: 0.3, delay: 0.25 },
+          scale: { type: 'spring', bounce: 0.45, duration: 0.6, delay: 0.25 },
+        }}
+        {...hover}
+      >
+        <a
+          href={LINK}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${TEXTO} Escribile a Mar por WhatsApp`}
+          className="pointer-events-auto relative flex size-full items-center justify-center rounded-full text-arena shadow-flotante transition hover:scale-105 active:scale-95"
+          style={{ backgroundImage: 'linear-gradient(135deg, #3e6450 0%, #2f5240 100%)' }}
+        >
+          <span className="pulso absolute inset-0 rounded-full" aria-hidden="true" />
+          <Icon name="whatsapp" size={desktop ? 28 : 24} />
+        </a>
+
+        {/* Globito, a la izquierda del botón */}
+        <m.span
+          aria-hidden="true"
+          className="absolute top-1/2 right-[calc(100%+0.6rem)] -translate-y-1/2 rounded-2xl rounded-br-md bg-crema-card px-3.5 py-2 text-[13px] font-bold whitespace-nowrap text-tinta shadow-flotante ring-1 ring-linea"
+          initial={{ opacity: 0, x: 8 }}
+          animate={abierta ? { opacity: 1, x: 0 } : { opacity: 0, x: 8 }}
+          transition={{ duration: 0.35, ease: EASE, delay: abierta ? 0.55 : 0 }}
+        >
+          {TEXTO}
+        </m.span>
+
+        {/* Carita (modo compacto): tocarla vuelve a mostrar a mini Mar */}
+        <m.button
+          type="button"
+          tabIndex={-1}
+          aria-hidden="true"
+          onClick={() => abrir(4000)}
+          className={`absolute -top-3 -left-3 size-8 overflow-hidden rounded-full bg-salvia shadow-suave ring-2 ring-crema-card ${abierta ? 'pointer-events-none' : 'pointer-events-auto'}`}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={abierta ? { opacity: 0, scale: 0.5 } : { opacity: 1, scale: 1 }}
+          transition={{ duration: 0.35, ease: EASE, delay: abierta ? 0 : 0.35 }}
+        >
+          <img src="/img/marca/mini-mar-cara.webp" alt="" width="160" height="160" className="size-full object-cover" />
+        </m.button>
+      </m.div>
+    </div>
+  );
+}

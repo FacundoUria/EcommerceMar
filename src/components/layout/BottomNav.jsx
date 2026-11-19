@@ -18,7 +18,7 @@ export default function BottomNav() {
   // En el detalle de producto la barra "Agregar al carrito" ocupa su lugar
   if (pathname.startsWith('/producto/')) return null;
   return (
-    <nav aria-label="Navegación inferior" className="fixed inset-x-0 bottom-0 z-40 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] transition-transform duration-500 ease-out in-data-[overlay=abierto]:pointer-events-none in-data-[overlay=abierto]:translate-y-[calc(100%+1.5rem)] md:hidden">
+    <nav aria-label="Navegación inferior" data-barra-inferior className="fixed inset-x-0 bottom-0 z-40 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] transition-transform duration-500 ease-out in-data-[overlay=abierto]:pointer-events-none in-data-[overlay=abierto]:translate-y-[calc(100%+1.5rem)] md:hidden">
       <ul className="glass-arena mx-auto flex max-w-md items-center justify-around rounded-full px-2 py-1.5 shadow-flotante">
         {ITEMS.map((it) => (
           <li key={it.to} className="flex-1">

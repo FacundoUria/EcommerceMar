@@ -14,6 +14,7 @@ import { PageSkeleton } from './components/ui/Skeleton.jsx';
 import { useBotonesMagneticos } from './hooks/useBotonesMagneticos.js';
 import Cursor from './components/ui/Cursor.jsx';
 import IntroMarca from './components/marca/IntroMarca.jsx';
+import MiniMar from './components/marca/MiniMar.jsx';
 import ProgresoScroll from './components/marca/ProgresoScroll.jsx';
 import Rulos from './components/marca/Rulos.jsx';
 import { scrollA } from './lib/smooth.js';
@@ -116,6 +117,7 @@ export default function App() {
               <Toaster />
               <Cursor />
               <ProgresoScroll />
+              <MiniMar />
               <IntroMarca />
             </UIProvider>
           </CartProvider>

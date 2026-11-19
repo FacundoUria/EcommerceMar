@@ -32,6 +32,9 @@ assets/videos/
 # banners: originales tal como los mandó Mar (en assets/banners/ van los renombrados/recortados)
 assets/banners/originales/
 
+# marca: originales (ilustración de mini Mar con fondo, antes del recorte)
+assets/marca/originales/
+
 # reseñas: fotos originales de las clientas (en assets/resenas/ van los recortes cuadrados)
 assets/resenas/originales/
 

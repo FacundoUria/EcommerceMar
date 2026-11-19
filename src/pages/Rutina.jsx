@@ -251,7 +251,7 @@ export default function Rutina() {
       </div>
 
       {/* Resumen (mobile): barra arriba del bottom nav */}
-      <div className="fixed inset-x-0 bottom-[calc(4.6rem+max(0.75rem,env(safe-area-inset-bottom)))] z-30 px-3 md:hidden">
+      <div data-barra-inferior className="fixed inset-x-0 bottom-[calc(4.6rem+max(0.75rem,env(safe-area-inset-bottom)))] z-30 px-3 md:hidden">
         <MensajeLista visible={rutinaLista} total={total} className="mb-2" />
         <div className="glass-arena flex items-center gap-3 rounded-4xl p-2 pl-4 shadow-flotante ring-1 ring-verde/10">
           <div className="flex gap-1">

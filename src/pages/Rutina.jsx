@@ -10,7 +10,7 @@ import Swatches from '../components/product/Swatches.jsx';
 import { GridSkeleton } from '../components/ui/Skeleton.jsx';
 import { useCategories, useProducts } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
-import { useCart } from '../context/CartContext.jsx';
+import { useCartAcciones } from '../context/CartContext.jsx';
 import { formatPrecio, imgSm } from '../lib/format.js';
 import { PASOS_RUTINA } from '../config/negocio.js';
 import { imgFija } from '../lib/imagenes.js';
@@ -24,7 +24,7 @@ export default function Rutina() {
   usePageTitle('Armá tu rutina curly');
   const { data: productos, loading } = useProducts();
   const { data: categorias } = useCategories();
-  const { agregarVarios } = useCart();
+  const { agregarVarios } = useCartAcciones();
   const pagina = useRef(null);
   const { scrollYProgress } = useScroll({ target: pagina, offset: ['start start', 'end end'] });
 

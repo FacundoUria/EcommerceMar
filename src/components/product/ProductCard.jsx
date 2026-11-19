@@ -6,8 +6,8 @@ import { formatPrecio, imgSm } from '../../lib/format.js';
 import { flyToCart } from '../../lib/flyToCart.js';
 import { explotarDestellos } from '../../lib/destellos.js';
 import { colorDe } from '../../lib/colores.js';
-import { useCart } from '../../context/CartContext.jsx';
-import { useUI } from '../../context/UIContext.jsx';
+import { useCartAcciones } from '../../context/CartContext.jsx';
+import { useUIAcciones } from '../../context/UIContext.jsx';
 import Precio from '../ui/Precio.jsx';
 import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 import Roll from '../ui/Roll.jsx';
@@ -22,8 +22,9 @@ const SIZES = '(min-width: 1280px) 300px, (min-width: 768px) 25vw, 50vw';
  */
 function ProductCard({ producto, priority = false, className = '', nivelTitulo = 'h3' }) {
   const Titulo = nivelTitulo;
-  const { agregar } = useCart();
-  const { abrirQuickView, mostrarToast } = useUI();
+  // Solo acciones: la card no se vuelve a renderizar cuando cambia el carrito o aparece un toast
+  const { agregar } = useCartAcciones();
+  const { abrirQuickView, mostrarToast } = useUIAcciones();
   const imgRef = useRef(null);
   const conHover = useMediaQuery('(hover: hover) and (pointer: fine)');
 

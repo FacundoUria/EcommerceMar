@@ -14,7 +14,7 @@ import { Skeleton } from '../components/ui/Skeleton.jsx';
 import NoEncontrado from './NoEncontrado.jsx';
 import { useCategories, useDescripciones, useProduct, useProducts } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
-import { useCart } from '../context/CartContext.jsx';
+import { useCartAcciones } from '../context/CartContext.jsx';
 import { imgSm } from '../lib/format.js';
 import Precio from '../components/ui/Precio.jsx';
 import { explotarDestellos } from '../lib/destellos.js';
@@ -36,7 +36,7 @@ export default function Producto() {
 
 function Detalle({ producto }) {
   const [params, setParams] = useSearchParams();
-  const { agregar, abrir } = useCart();
+  const { agregar, abrir } = useCartAcciones();
   const { data: categorias } = useCategories();
   const [cantidad, setCantidad] = useState(1);
   const [preview, setPreview] = useState(null);

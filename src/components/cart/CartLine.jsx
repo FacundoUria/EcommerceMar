@@ -4,11 +4,11 @@ import Icon from '../ui/Icon.jsx';
 import FotoProducto from '../product/FotoProducto.jsx';
 import QuantityStepper from '../ui/QuantityStepper.jsx';
 import { formatPrecio, imgSm } from '../../lib/format.js';
-import { useCart } from '../../context/CartContext.jsx';
+import { useCartAcciones } from '../../context/CartContext.jsx';
 
 /** Una línea del carrito (producto + variante). Se usa en el drawer y en /carrito. */
 export default function CartLine({ linea, compacta = false, onNavigate, delay = 0 }) {
-  const { setCantidad, quitar } = useCart();
+  const { setCantidad, quitar } = useCartAcciones();
   const url = `/producto/${linea.id}${linea.variante ? `?v=${encodeURIComponent(linea.variante)}` : ''}`;
 
   return (

@@ -2,11 +2,11 @@ import { AnimatePresence, m } from 'motion/react';
 import Icon from '../ui/Icon.jsx';
 import { imgFija } from '../../lib/imagenes.js';
 import { useUI } from '../../context/UIContext.jsx';
-import { useCart } from '../../context/CartContext.jsx';
+import { useCartAcciones } from '../../context/CartContext.jsx';
 
 export default function Toaster() {
   const { toast, cerrarToast } = useUI();
-  const { abrir } = useCart();
+  const { abrir } = useCartAcciones();
 
   return (
     <div

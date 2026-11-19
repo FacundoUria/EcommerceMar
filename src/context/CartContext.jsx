@@ -5,6 +5,9 @@ const STORAGE_KEY = 'dreamhair:carrito:v1';
 const MAX_CANTIDAD = 99;
 
 const CartContext = createContext(null);
+// Solo las acciones (funciones estables): quien no muestra el carrito (cards, páginas) no se vuelve a
+// renderizar cada vez que cambia el carrito.
+const CartAccionesContext = createContext(null);
 
 // Cada línea = producto + variante. La clave las distingue.
 export const claveLinea = (id, variante) => `${id}::${variante ?? ''}`;
@@ -116,18 +119,10 @@ export function CartProvider({ children }) {
     setAbierto(true);
   }, []);
 
-  const value = useMemo(() => {
-    const cantidadTotal = lineas.reduce((s, l) => s + l.cantidad, 0);
-    const total = lineas.reduce((s, l) => s + l.cantidad * l.precio, 0);
-    return {
-      lineas,
-      cantidadTotal,
-      total,
-      abierto,
-      ultimoAgregado,
+  const acciones = useMemo(
+    () => ({
       abrir: () => setAbierto(true),
       cerrar: () => setAbierto(false),
-      checkoutAbierto,
       // Desde el drawer: se cierra el drawer y entra el checkout
       abrirCheckout: () => {
         setAbierto(false);
@@ -139,10 +134,28 @@ export function CartProvider({ children }) {
       setCantidad: (clave, cantidad) => dispatch({ type: 'cantidad', clave, cantidad }),
       quitar: (clave) => dispatch({ type: 'quitar', clave }),
       vaciar: () => dispatch({ type: 'vaciar' }),
-    };
-  }, [lineas, abierto, checkoutAbierto, ultimoAgregado, agregar, agregarVarios]);
+    }),
+    [agregar, agregarVarios],
+  );
 
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+  const value = useMemo(() => {
+    const cantidadTotal = lineas.reduce((s, l) => s + l.cantidad, 0);
+    const total = lineas.reduce((s, l) => s + l.cantidad * l.precio, 0);
+    return { lineas, cantidadTotal, total, abierto, ultimoAgregado, checkoutAbierto, ...acciones };
+  }, [lineas, abierto, checkoutAbierto, ultimoAgregado, acciones]);
+
+  return (
+    <CartAccionesContext.Provider value={acciones}>
+      <CartContext.Provider value={value}>{children}</CartContext.Provider>
+    </CartAccionesContext.Provider>
+  );
+}
+
+/** Solo las acciones del carrito (estables): no re-renderiza cuando cambian las líneas. */
+export function useCartAcciones() {
+  const ctx = useContext(CartAccionesContext);
+  if (!ctx) throw new Error('useCartAcciones tiene que usarse dentro de <CartProvider>');
+  return ctx;
 }
 
 export function useCart() {

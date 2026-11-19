@@ -67,6 +67,7 @@ function FiguraCanvas({ ancho, alto }) {
  * - A los 6 s se achica: queda el botón en la esquina con su carita. Hover (mouse) o tocar la carita la
  *   vuelve a mostrar. Compacta, se esconde mientras se superpone con [data-evitar-mini-mar] (mini-card de
  *   Skala del hero).
+ * - Con el footer en pantalla se achica sola (no tapa los links del footer).
  * - Oculta con el carrito, el quick view o los filtros abiertos (<html data-overlay="abierto">).
  * - Movimiento reducido: sin desplazamientos (MotionConfig reducedMotion="user"), solo fades.
  * Solo transform + opacity. La imagen se pide recién después del `load` (no compite con el LCP) y va en
@@ -140,6 +141,21 @@ function MiniMarDesktop() {
     if (montada) cerrarEn(ABIERTA_MS);
     return () => clearTimeout(timer.current);
   }, [montada, cerrarEn]);
+
+  // Con el footer en pantalla se achica sola (no tapa sus links). Con hover se puede volver a abrir.
+  const [conFooter, setConFooter] = useState(false);
+  useEffect(() => {
+    const footer = document.querySelector('footer');
+    if (!footer || !('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver(([e]) => setConFooter(e.isIntersecting), { rootMargin: '0px 0px -40px 0px' });
+    io.observe(footer);
+    return () => io.disconnect();
+  }, []);
+  useEffect(() => {
+    if (!conFooter) return;
+    clearTimeout(timer.current);
+    setAbierta(false);
+  }, [conFooter, montada]);
 
   // Compacta: si el botón (con su carita) queda encima de algo marcado con data-evitar-mini-mar (la
   // mini-card de Skala del hero, si la clienta vuelve arriba), se esconde mientras dure la superposición.

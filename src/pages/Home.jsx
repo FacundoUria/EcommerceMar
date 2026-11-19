@@ -562,8 +562,9 @@ function RutinaMobile() {
   const ref = useRef(null);
   const porPaso = useProductosPorPaso();
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 80%', 'end 60%'] });
+  // pb-8: con el pt-20 de "Hola, soy Mar" el hueco queda como entre las otras secciones (≈ 96px)
   return (
-    <div className="contenedor py-16 md:hidden">
+    <div className="contenedor pt-16 pb-8 md:hidden">
       <Reveal>
         <RevealText className="text-4xl leading-none">
           Armá tu <em className="texto-dorado">rutina</em>
@@ -615,7 +616,7 @@ function HolaSoyMar() {
   const yMarco = useTransform(scrollYProgress, [0, 1], [15, -15]);
   const yFoto = useTransform(scrollYProgress, [0, 1], [-15, 15]);
   return (
-    <section ref={ref} aria-labelledby="mar-titulo" className="contenedor py-20 md:py-28">
+    <section ref={ref} aria-labelledby="mar-titulo" className="contenedor pt-20 pb-8 md:py-28">
       <div className="grid items-center gap-10 md:grid-cols-2 md:gap-20">
         <Reveal className="relative mx-auto w-[86%] max-w-md">
           <m.div style={reducido ? undefined : { y: yMarco }} className="absolute -inset-3 rotate-[-4deg] rounded-5xl bg-salvia-media" />

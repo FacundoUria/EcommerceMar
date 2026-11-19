@@ -279,6 +279,15 @@
   }
 }
 
+/* Barra de anuncio: la cinta se corre media vuelta (3 de sus 6 tramos) a ≈ 40px/s */
+.cinta-anuncio {
+  animation: cinta 60s linear infinite;
+}
+.cinta-anuncio:hover,
+.cinta-anuncio[data-pausa] {
+  animation-play-state: paused;
+}
+
 /* Skeleton shimmer */
 @keyframes brillo {
   100% {

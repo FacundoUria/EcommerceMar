@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router';
 import { AnimatePresence, LazyMotion, MotionConfig, m, useReducedMotion } from 'motion/react';
 import { CartProvider } from './context/CartContext.jsx';
 import { UIProvider } from './context/UIContext.jsx';
+import BarraAnuncio from './components/layout/BarraAnuncio.jsx';
 import Header from './components/layout/Header.jsx';
 import BottomNav from './components/layout/BottomNav.jsx';
 import Footer from './components/layout/Footer.jsx';
@@ -69,7 +70,9 @@ function Paginas() {
       <m.main
         id="contenido"
         key={location.pathname}
-        className="relative min-h-[70vh]"
+        // Alto mínimo = pantalla: mientras carga el chunk de la página, el footer queda abajo del pliegue
+        // (con 70vh se veía en desktop y saltaba al llegar la página: CLS 0.12–0.16)
+        className="relative min-h-svh"
         {...(reducido && {
           initial: { opacity: 0 },
           animate: { opacity: 1, transition: { duration: 0.2 } },
@@ -103,6 +106,7 @@ export default function App() {
         <MotionConfig reducedMotion="user">
           <CartProvider>
             <UIProvider>
+              <BarraAnuncio />
               <Header />
               <Paginas />
               <Footer />

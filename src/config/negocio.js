@@ -12,6 +12,14 @@ export const NEGOCIO = {
   instagram: 'https://www.instagram.com/dreamhair_mza',
 };
 
+// Barra de anuncio (arriba de todo). Texto de Mar, tal cual; cada frase es un tramo que puede
+// quedar oculto si no entra (versión quieta con movimiento reducido).
+export const ANUNCIO = [
+  '🫶🫶 La comunidad más grande de rulos de Mendoza 🫶🫶',
+  'Envíos a toda la provincia 📦🛵',
+  'Aceptamos todos los medios de pago 💰💵',
+];
+
 // Franja de beneficios (textos de sus banners)
 export const BENEFICIOS = [
   { icono: 'camion', texto: 'Envíos a todo Mendoza' },

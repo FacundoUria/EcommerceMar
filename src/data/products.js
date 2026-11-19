@@ -17,6 +17,7 @@ export const categories = [
 ];
 
 // foto: nombre del archivo en assets/productos (sin extensión). tn: slug de Tiendanube para bajar la foto que falta.
+// `destacado`: los "Favoritos de Mar" del home (elegidos a mano, no son datos de ventas).
 export const products = [
   { id: 'shampoo-low-poo-han', nombre: 'Shampoo low poo HAN', marca: 'HAN', categoria: 'low-poo', precio: 15000, foto: 'shampoo-low-poo-han', destacado: true,
     variantes: [['Ácido hialurónico','shampoo-han-acido-hialuronico'],['Avena y miel','shampoo-han-avena-miel'],['Biotina','shampoo-han-biotina'],['Control caída','shampoo-han-control-caida'],['Detox','shampoo-han-detox'],['Lino','shampoo-han-lino'],['Plex','shampoo-han-plex'],['Rulos','shampoo-han-rulos']] },

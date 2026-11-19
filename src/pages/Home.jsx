@@ -38,7 +38,7 @@ export default function Home() {
     <>
       <Hero />
       <Categorias />
-      <MasVendidos />
+      <FavoritosDeMar />
       <CintaMarcas />
       <RutinaHistoria />
       <HolaSoyMar />
@@ -288,14 +288,16 @@ function PanelesCategorias({ categorias }) {
   );
 }
 
-/* ═════════ MÁS VENDIDOS: full-bleed; desktop con controles arriba, mobile con card central ═════════ */
-function MasVendidos() {
+/* ═════════ FAVORITOS DE MAR (los `destacado` del catálogo) ═════════
+   No son "más vendidos": se eligieron sin datos de ventas. Cuando haya ventas reales, esta sección pasa a
+   mostrarlas (y vuelve a llamarse "Más vendidos"). */
+function FavoritosDeMar() {
   const { data: productos, loading } = useProducts();
   const desktop = useMediaQuery('(min-width: 768px)');
   const destacados = useMemo(() => (productos ?? []).filter((p) => p.destacado), [productos]);
   const titulo = (
     <RevealText id="dest-titulo" className="text-3xl leading-tight md:text-4xl">
-      Más vendidos
+      Favoritos de <em className="texto-dorado">Mar</em>
     </RevealText>
   );
   return (
@@ -310,7 +312,7 @@ function MasVendidos() {
           </div>
         </div>
       ) : desktop ? (
-        <Carousel label="Más vendidos" itemsClassName="gap-5" autoplay={4500} hint cabecera={<Reveal>{titulo}</Reveal>}>
+        <Carousel label="Favoritos de Mar" itemsClassName="gap-5" autoplay={4500} hint cabecera={<Reveal>{titulo}</Reveal>}>
           {destacados.map((p, i) => (
             <Reveal key={p.id} delay={cascada(i)} className="w-[17.5rem] shrink-0 snap-start lg:w-[19rem]">
               <ProductCard producto={p} className="h-full" />
@@ -325,7 +327,7 @@ function MasVendidos() {
               Ver todo
             </Link>
           </div>
-          <CarruselCentrado label="Más vendidos">
+          <CarruselCentrado label="Favoritos de Mar">
             {destacados.map((p) => (
               <ProductCard key={p.id} producto={p} className="h-full" />
             ))}

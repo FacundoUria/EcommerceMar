@@ -22,17 +22,12 @@ export default function Servicios() {
 
   return (
     <div className="contenedor pt-4 pb-10">
-      <Reveal as="header" className="flex items-end justify-between gap-4">
+      <Reveal as="header">
         <ConDestellos>
           <RevealText as="h1" className="text-4xl leading-tight md:text-5xl">
             Nuestros <em className="texto-dorado">servicios</em>
           </RevealText>
         </ConDestellos>
-        <a href={whatsappCon()} target="_blank" rel="noopener noreferrer" className="btn btn-primario shrink-0">
-          <Roll>
-            <Icon name="whatsapp" size={18} /> Reservar
-          </Roll>
-        </a>
       </Reveal>
 
       {loading ? (

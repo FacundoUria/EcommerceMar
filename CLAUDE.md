@@ -3,7 +3,7 @@
 Tienda online de productos para pelo con rulos (método curly) de **Mar**, dueña de la peluquería Dream Hair (Mendoza, Argentina).
 Desarrollador: Facu (FacundoUria). Repo: https://github.com/FacundoUria/EcommerceMar (público).
 Dominio final de Mar: **dreamhair.ar** (en `NEGOCIO.dominio`; "dreamhair.com" que aparece en un banner viejo es incorrecto).
-WhatsApp del estudio: +54 9 2616 95-1803 → `https://wa.me/5492616951803` (`NEGOCIO.whatsapp`). Links siempre con `whatsappCon(texto)` (`src/config/negocio.js`, por defecto "¡Hola Mar!").
+WhatsApp del estudio: +54 9 2616 95-1803 → `https://wa.me/5492616951803` (`NEGOCIO.whatsapp`). Links siempre con `whatsappCon(texto)` (`src/config/negocio.js`, por defecto "¡Hola Mar!"). **Sin redundancia**: el WhatsApp está SOLO en mini Mar (desktop), el botón central del bottom nav (mobile), los "¡Reservar!" de cada servicio y un link de texto en el footer.
 
 ## Estado actual
 **Fase 1 — MVP de diseño.** Demo para mostrarle a Mar cómo se vería su tienda (reemplaza a su Tiendanube: https://dreamhairarg.mitiendanube.com). NO es la versión final: prioridad = diseño moderno, muy interactivo, centrado en los productos, mobile-first (la mayoría de sus clientas entra desde el celular).
@@ -37,7 +37,7 @@ React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScri
 - Fotos del estudio: `assets/estudio/` (jpg máx 1200px, las eligió Mar; también las que muestran clientas). Originales en `assets/estudio/originales/` (ignorada).
 - Reseñas: `src/data/resenas.js` (vía el service). Fotos de las clientas: recorte cuadrado centrado en la cara en `assets/resenas/` → webp 96/192px (originales en `assets/resenas/originales/`, ignorada).
 - Videos: el único es el del proceso en /servicios (con audio, sin autoplay: play al tocar, `preload="none"` + poster). Mide 576px de ancho: se muestra a 288px (2x). El home ya no tiene sección Resultados ni video.
-- Banners de Mar (`assets/banners/`, traen su texto; originales tal como los mandó en `assets/banners/originales/`, ignorada): carrusel `<Banners>` al final del home (después de las reseñas). Autoplay 6 s, pausa con hover/toque, puntos. `marcas-lideres` va recortado abajo (sin "www.dreamhair.com"). `hola-soy-mar` NO va en el carrusel (tiene un typo).
+- Banners de Mar (`assets/banners/`, traen su texto; originales tal como los mandó en `assets/banners/originales/`, ignorada): carrusel `<Banners>` al final del home (después de las reseñas). Autoplay 6 s, pausa con hover/toque, puntos. `marcas-lideres` va recortado abajo (sin "www.dreamhair.com"). En el home van solo 4: asesoramiento-corte-en-seco, dream-hair-studio, promos-rulos y promociones-mensuales (envíos y medios de pago ya están en la barra de anuncio; marcas líderes, en la cinta de marcas; `hola-soy-mar` tiene un typo).
 - Producto sin foto → placeholder elegante (crema + marca + nombre en Playfair), nunca imagen rota.
 - **Fotos de producto siempre con `<FotoProducto>`** (cards, carruseles, quick view, producto, rutina, carrito): mismo fondo `fondo-foto` (salvia-media → arena). Fotos de fondo blanco → `mix-blend-mode: multiply` + padding; de escena → cover en marco con overlay salvia 10%. La clasificación la genera `scripts/optimizar-assets.mjs` en `src/data/fondos.json`.
 - Datos reales del negocio: `src/config/negocio.js`. Dato que falta = string vacío y la UI NO lo muestra (pendientes: dirección y horarios).

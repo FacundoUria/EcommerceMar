@@ -20,7 +20,7 @@ import { useMediaQuery } from '../hooks/useMediaQuery.js';
 import { ProductCardSkeleton, Skeleton } from '../components/ui/Skeleton.jsx';
 import { useBrands, useCategories, useProducts } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
-import { PASOS_RUTINA, whatsappCon } from '../config/negocio.js';
+import { PASOS_RUTINA } from '../config/negocio.js';
 import Precio from '../components/ui/Precio.jsx';
 import { imgSm } from '../lib/format.js';
 import { colorDe } from '../lib/colores.js';
@@ -49,15 +49,13 @@ export default function Home() {
 }
 
 /* ═════════ BANNERS de Mar (al final del home, después de "Hola, soy Mar") ═════════ */
+// Sin repetir lo que ya dice el sitio: envíos y medios de pago están en la barra de anuncio, las marcas
+// en la cinta de marcas, y hola-soy-mar en la sección "Hola, soy Mar" (además tiene un typo).
 const BANNERS = [
-  // hola-soy-mar no va: repite la sección "Hola, soy Mar" que está justo arriba
   ['asesoramiento-corte-en-seco', 'Asesoramiento y corte en seco'],
-  ['envios-mendoza', 'Envíos a todo Mendoza'],
-  ['medios-de-pago', 'Medios de pago'],
-  ['promociones-mensuales', 'Promociones mensuales'],
-  ['promos-rulos', 'Promos para rulos'],
-  ['marcas-lideres', 'Marcas líderes'],
   ['dream-hair-studio', 'Dream Hair Studio'],
+  ['promos-rulos', 'Promos para rulos'],
+  ['promociones-mensuales', 'Promociones mensuales'],
 ].map(([nombre, alt]) => ({ src: `/img/banners/${nombre}.webp`, alt }));
 
 /* ═════════ HERO full-screen: mesh animado, título gigante, foto blob + mini-cards flotantes ═════════ */
@@ -659,11 +657,6 @@ function HolaSoyMar() {
                 Conocé los servicios
               </Roll>
             </Link>
-            <a href={whatsappCon()} target="_blank" rel="noopener noreferrer" className="btn btn-borde">
-              <Roll>
-                <Icon name="whatsapp" size={18} /> Escribime
-              </Roll>
-            </a>
           </div>
         </Reveal>
       </div>

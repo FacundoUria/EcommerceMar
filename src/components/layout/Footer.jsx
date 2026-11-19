@@ -2,7 +2,6 @@ import { Link } from 'react-router';
 import Icon from '../ui/Icon.jsx';
 import Rulos from '../marca/Rulos.jsx';
 import { NEGOCIO, whatsappCon } from '../../config/negocio.js';
-import Roll from '../ui/Roll.jsx';
 
 const LINKS = [
   { to: '/tienda', label: 'Tienda' },
@@ -40,16 +39,13 @@ export default function Footer() {
           <div className="text-sm text-texto-suave">
             {NEGOCIO.direccion && <p>{NEGOCIO.direccion}</p>}
             {NEGOCIO.horarios && <p>{NEGOCIO.horarios}</p>}
-            <div className={`flex flex-wrap gap-2 ${NEGOCIO.direccion || NEGOCIO.horarios ? 'mt-4' : ''}`}>
-              <a href={whatsappCon()} target="_blank" rel="noopener noreferrer" className="btn btn-primario">
-                <Roll>
-                  <Icon name="whatsapp" size={18} /> WhatsApp
-                </Roll>
+            {/* Links de texto: el WhatsApp principal es mini Mar (desktop) / el botón central del bottom nav (mobile) */}
+            <div className={`flex flex-wrap gap-x-6 gap-y-2 font-semibold ${NEGOCIO.direccion || NEGOCIO.horarios ? 'mt-4' : ''}`}>
+              <a href={whatsappCon()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-tinta transition-colors hover:text-verde">
+                <Icon name="whatsapp" size={17} /> WhatsApp
               </a>
-              <a href={NEGOCIO.instagram} target="_blank" rel="noopener noreferrer" className="btn btn-borde">
-                <Roll>
-                  <Icon name="instagram" size={18} /> Instagram
-                </Roll>
+              <a href={NEGOCIO.instagram} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-tinta transition-colors hover:text-verde">
+                <Icon name="instagram" size={17} /> Instagram
               </a>
             </div>
           </div>

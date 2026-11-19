@@ -21,6 +21,7 @@ import { ProductCardSkeleton, Skeleton } from '../components/ui/Skeleton.jsx';
 import { useBrands, useCategories, useProducts } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
 import { PASOS_RUTINA } from '../config/negocio.js';
+import { HERO_CARDS } from '../config/hero.js';
 import Precio from '../components/ui/Precio.jsx';
 import { imgSm } from '../lib/format.js';
 import { colorDe } from '../lib/colores.js';
@@ -79,10 +80,17 @@ function Hero() {
   const yCard1 = useTransform(scrollY, [0, 600], [0, -70], { clamp: true });
   const yCard2 = useTransform(scrollY, [0, 600], [0, -140], { clamp: true });
 
-  const shampoo = productos?.find((p) => p.id === 'shampoo-low-poo-han');
-  // El pote que sostiene Mar en la foto es la crema Skala Cachonados: la mini-card muestra esa variante
-  const skala = productos?.find((p) => p.id === 'cremas-skala');
-  const cachonados = skala?.variantes.find((v) => v.nombre === 'Cachonados');
+  // Mini-cards: contenido en src/config/hero.js; acá solo dónde va cada una
+  const cards = HERO_CARDS.map((c) => {
+    const producto = productos?.find((p) => p.id === c.producto);
+    const variante = c.variante ? producto?.variantes.find((v) => v.nombre === c.variante) : null;
+    return producto ? { ...c, producto, variante } : null;
+  });
+  const POSICIONES = [
+    // junto al pote de Skala que sostiene Mar (abajo, a su derecha), sin taparlo
+    { y: yCard2, delay: 1.05, flotarDesfase: true, evitarMiniMar: true, className: '-right-[10%] bottom-[9%] md:-right-[14%]' },
+    { y: yCard1, delay: 0.9, className: '-left-[14%] -top-[3%] md:-left-[18%] md:top-[4%]' },
+  ];
 
   // data-hero: mini Mar entra recién cuando el hero salió de pantalla
   return (
@@ -133,13 +141,11 @@ function Hero() {
             </m.div>
           </div>
 
-          {shampoo && (
-            <MiniCard producto={shampoo} y={reducido ? 0 : yCard1} delay={0.9} className="-left-[14%] -top-[3%] md:-left-[18%] md:top-[4%]" />
-          )}
-          {/* Junto al pote de Skala que sostiene Mar (abajo, a su derecha), sin taparlo */}
-          {skala && (
-            <MiniCard producto={skala} variante={cachonados} y={reducido ? 0 : yCard2} delay={1.05} className="-right-[10%] bottom-[9%] md:-right-[14%]" flotarDesfase evitarMiniMar />
-          )}
+          {cards.map((c, i) => {
+            const pos = POSICIONES[i];
+            if (!c || !pos) return null;
+            return <MiniCard key={i} producto={c.producto} variante={c.variante} etiqueta={c.etiqueta} {...pos} y={reducido ? 0 : pos.y} />;
+          })}
         </div>
       </div>
 
@@ -154,9 +160,12 @@ function Hero() {
   );
 }
 
-/** `variante` (opcional): muestra esa variante (foto y nombre) y linkea directo a ella. */
-// evitarMiniMar: el botón compacto de mini Mar se esconde mientras se superpone con esta card
-function MiniCard({ producto, variante, y, delay, className, flotarDesfase = false, evitarMiniMar = false }) {
+/**
+ * `variante` (opcional): muestra esa variante (foto y nombre) y linkea directo a ella.
+ * `etiqueta`: texto chico arriba de la card ("El que uso yo", "Favorito").
+ * evitarMiniMar: el botón compacto de mini Mar se esconde mientras se superpone con esta card.
+ */
+function MiniCard({ producto, variante, etiqueta, y, delay, className, flotarDesfase = false, evitarMiniMar = false }) {
   const reducido = useReducedMotion();
   const imagen = variante?.imagen ?? producto.imagen;
   const nombre = variante ? `${producto.nombre} · ${variante.nombre}` : producto.nombre;
@@ -169,9 +178,14 @@ function MiniCard({ producto, variante, y, delay, className, flotarDesfase = fal
       >
         <Link
           to={`/producto/${producto.id}${variante ? `?v=${encodeURIComponent(variante.nombre)}` : ''}`}
-          className="anim-flotar flex w-[10.5rem] items-center gap-2.5 rounded-2xl border border-linea bg-crema-card/90 p-2 pr-3 shadow-flotante backdrop-blur-md transition hover:bg-crema-card md:w-[13rem] md:p-2.5"
+          className="anim-flotar relative flex w-[10.5rem] items-center gap-2.5 rounded-2xl border border-linea bg-crema-card/90 p-2 pr-3 shadow-flotante backdrop-blur-md transition hover:bg-crema-card md:w-[13rem] md:p-2.5"
           style={{ animation: `flotar ${flotarDesfase ? 5 : 4.5}s ease-in-out ${flotarDesfase ? '-2.2s' : '0s'} infinite` }}
         >
+          {etiqueta && (
+            <span className="absolute -top-2.5 left-3 rounded-full bg-dorado px-2 py-0.5 text-[10px] leading-none font-bold tracking-wide text-crema-card shadow-suave">
+              {etiqueta}
+            </span>
+          )}
           <span className="size-11 shrink-0 overflow-hidden rounded-xl md:size-14">
             <FotoProducto src={imgSm(imagen)} zoom={false} compacta />
           </span>

@@ -63,3 +63,9 @@ Hialurónico, Rulos Definidos, Prevención Caída, Avena & Miel). Quedan dos que
 - **Lino** (`shampoo-han-lino`)
 
 ¿Las sigue vendiendo? Si no, se sacan de las variantes.
+
+## 5. Foto de Mar en baja resolución
+
+El mazo de fotos de "Hola, soy Mar" (home) usa `assets/mar/mar-con-productos-1.jpg`, que mide **387×516 px**.
+Cuando queda adelante se ve más blanda que las otras dos (se muestra a ~450 px en desktop). Pedirle a Mar el
+original en mejor resolución y reemplazarlo en `assets/mar/` (después `npm run assets:optimizar`).

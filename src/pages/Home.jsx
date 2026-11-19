@@ -3,6 +3,8 @@ import { Link } from 'react-router';
 import { AnimatePresence, m, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import Icon from '../components/ui/Icon.jsx';
 import { usePausaFueraDePantalla } from '../hooks/usePausaFueraDePantalla.js';
+import FotosMar from '../components/marca/FotosMar.jsx';
+import FirmaMar from '../components/marca/FirmaMar.jsx';
 import Reveal, { cascada } from '../components/ui/Reveal.jsx';
 import RevealText from '../components/ui/RevealText.jsx';
 import RevealImagen from '../components/ui/RevealImagen.jsx';
@@ -621,32 +623,16 @@ function RutinaMobile() {
   );
 }
 
-/* ═════════ HOLA, SOY MAR (textos de Mar tal cual; "Leer más" despliega el resto; parallax de capas) ═════════ */
+/* ═════════ HOLA, SOY MAR (textos de Mar tal cual; "Leer más" despliega el resto; mazo de fotos, firma y etiquetas) ═════════ */
 function HolaSoyMar() {
   const ref = useRef(null);
-  const reducido = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  // Diferencia entre capas: máximo 30px.
-  const yMarco = useTransform(scrollYProgress, [0, 1], [15, -15]);
-  const yFoto = useTransform(scrollYProgress, [0, 1], [-15, 15]);
   return (
-    <section ref={ref} aria-labelledby="mar-titulo" className="contenedor pt-20 pb-8 md:py-28">
+    // overflow-x: clip → la foto que pasa al fondo sale un momento hacia el costado sin generar scroll horizontal
+    <section ref={ref} aria-labelledby="mar-titulo" className="contenedor overflow-x-clip pt-20 pb-8 md:py-28">
       <div className="grid items-center gap-10 md:grid-cols-2 md:gap-20">
-        <Reveal className="relative mx-auto w-[86%] max-w-md">
-          <m.div style={reducido ? undefined : { y: yMarco }} className="absolute -inset-3 rotate-[-4deg] rounded-5xl bg-salvia-media" />
-          <m.div style={reducido ? undefined : { y: yFoto }} className="relative aspect-[4/5] overflow-hidden rounded-5xl shadow-flotante">
-            <RevealImagen>
-            <SmartImg
-              src="/img/mar/mar-con-producto.webp"
-              srcSm="/img/mar/mar-con-producto-sm.webp"
-              sizes="(min-width: 768px) 448px, 90vw"
-              alt="Mar, especialista en rizos de Dream Hair"
-              width={900}
-              height={1575}
-              className="size-full object-cover object-top"
-            />
-            </RevealImagen>
-          </m.div>
+        {/* Mazo de fotos de Mar con etiquetas flotantes (tocar = pasa la de adelante al fondo) */}
+        <Reveal>
+          <FotosMar seccion={ref} />
         </Reveal>
         <Reveal delay={0.1}>
           <ConDestellos>
@@ -657,6 +643,8 @@ function HolaSoyMar() {
           <p className="mt-5 max-w-lg font-serif text-2xl leading-snug text-tinta md:text-[1.7rem]">
             Coach capilar, emprendedora y creadora de Dream Hair. Juntas vamos a potenciar la belleza natural de tu cabello ❤️
           </p>
+          {/* Firma de Mar, que se dibuja con el scroll */}
+          <FirmaMar className="mt-3 -ml-1" />
           <Expandible lineas={0} textoAbrir="Leer más" textoCerrar="Leer menos" className="mt-3 max-w-lg">
             <p className="pt-1 pb-2 text-base leading-relaxed text-texto-suave">
               También realizo cortes de cabellos ondulados, afro y rizados en seco, tratamientos, asesoramiento para que puedas

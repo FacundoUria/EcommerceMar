@@ -69,6 +69,8 @@ function reducer(lineas, accion) {
 export function CartProvider({ children }) {
   const [lineas, dispatch] = useReducer(reducer, undefined, leerStorage);
   const [abierto, setAbierto] = useState(false);
+  // Paso de datos del pedido por WhatsApp (bottom-sheet en mobile, panel lateral en desktop)
+  const [checkoutAbierto, setCheckoutAbierto] = useState(false);
   // contador que sube en cada "agregar": lo usan el badge (pop) y el toast
   const [ultimoAgregado, setUltimoAgregado] = useState(null);
 
@@ -113,13 +115,20 @@ export function CartProvider({ children }) {
       ultimoAgregado,
       abrir: () => setAbierto(true),
       cerrar: () => setAbierto(false),
+      checkoutAbierto,
+      // Desde el drawer: se cierra el drawer y entra el checkout
+      abrirCheckout: () => {
+        setAbierto(false);
+        setCheckoutAbierto(true);
+      },
+      cerrarCheckout: () => setCheckoutAbierto(false),
       agregar,
       agregarVarios,
       setCantidad: (clave, cantidad) => dispatch({ type: 'cantidad', clave, cantidad }),
       quitar: (clave) => dispatch({ type: 'quitar', clave }),
       vaciar: () => dispatch({ type: 'vaciar' }),
     };
-  }, [lineas, abierto, ultimoAgregado, agregar, agregarVarios]);
+  }, [lineas, abierto, checkoutAbierto, ultimoAgregado, agregar, agregarVarios]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

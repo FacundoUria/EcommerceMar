@@ -23,6 +23,12 @@ export const ANUNCIO = [
   { icono: 'tarjetaFina', texto: 'Aceptamos todos los medios de pago' },
 ];
 
+// Departamentos de Mendoza (envío a domicilio del pedido por WhatsApp)
+export const DEPARTAMENTOS_MENDOZA = [
+  'Capital', 'Godoy Cruz', 'Guaymallén', 'Las Heras', 'Luján de Cuyo', 'Maipú', 'Lavalle', 'San Martín', 'Junín',
+  'Rivadavia', 'Santa Rosa', 'La Paz', 'Tunuyán', 'Tupungato', 'San Carlos', 'San Rafael', 'General Alvear', 'Malargüe',
+];
+
 // Franja de beneficios (textos de sus banners)
 export const BENEFICIOS = [
   { icono: 'camion', texto: 'Envíos a todo Mendoza' },

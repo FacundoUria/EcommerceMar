@@ -9,6 +9,7 @@ import BottomNav from './components/layout/BottomNav.jsx';
 import Footer from './components/layout/Footer.jsx';
 import Toaster from './components/layout/Toaster.jsx';
 import CartDrawer from './components/cart/CartDrawer.jsx';
+import CheckoutGlobal from './components/cart/CheckoutGlobal.jsx';
 import QuickView from './components/product/QuickView.jsx';
 import { PageSkeleton } from './components/ui/Skeleton.jsx';
 import { useBotonesMagneticos } from './hooks/useBotonesMagneticos.js';
@@ -113,6 +114,7 @@ export default function App() {
               <Footer />
               <BottomNav />
               <CartDrawer />
+              <CheckoutGlobal />
               <QuickView />
               <Toaster />
               <ProgresoScroll />

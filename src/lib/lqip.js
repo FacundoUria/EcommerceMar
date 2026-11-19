@@ -1,6 +1,7 @@
 // Miniaturas de 20px (blur-up) generadas por scripts/optimizar-assets.mjs.
 // Se cargan en un chunk aparte, sin bloquear; mientras no llegan, el fondo es salvia-media.
 import { useSyncExternalStore } from 'react';
+import { claveImagen } from './imagenes.js';
 
 let mapa = null;
 let promesa = null;
@@ -27,7 +28,7 @@ const suscribir = (cb) => {
 export function useLqip(src) {
   return useSyncExternalStore(
     suscribir,
-    () => (src && mapa ? (mapa[src.replace(/-sm\.webp$/, '.webp')] ?? null) : null),
+    () => (src && mapa ? (mapa[`${claveImagen(src)}.webp`] ?? null) : null),
     () => null,
   );
 }

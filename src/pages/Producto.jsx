@@ -20,6 +20,7 @@ import Precio from '../components/ui/Precio.jsx';
 import { explotarDestellos } from '../lib/destellos.js';
 import { colorDe } from '../lib/colores.js';
 import { PASOS_RUTINA } from '../config/negocio.js';
+import { imgFija } from '../lib/imagenes.js';
 import Roll from '../components/ui/Roll.jsx';
 
 export default function Producto() {
@@ -170,7 +171,7 @@ function Detalle({ producto }) {
                         activa ? 'border-verde text-tinta shadow-suave' : 'border-verde/10 text-tinta hover:border-verde/40'
                       }`}
                     >
-                      <img src={imgSm(v.imagen)} alt="" width="36" height="36" loading="lazy" className="size-9 rounded-full object-cover" />
+                      <img {...imgFija(v.imagen, 36)} alt="" width="36" height="36" loading="lazy" className="size-9 rounded-full object-cover" />
                       {v.nombre}
                     </button>
                   );

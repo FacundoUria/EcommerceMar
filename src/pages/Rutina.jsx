@@ -12,6 +12,7 @@ import { usePageTitle } from '../hooks/usePageTitle.js';
 import { useCart } from '../context/CartContext.jsx';
 import { formatPrecio, imgSm } from '../lib/format.js';
 import { PASOS_RUTINA } from '../config/negocio.js';
+import { imgFija } from '../lib/imagenes.js';
 import Precio from '../components/ui/Precio.jsx';
 import { scrollA } from '../lib/smooth.js';
 import Roll from '../components/ui/Roll.jsx';
@@ -214,7 +215,7 @@ export default function Rutina() {
                     >
                       {e ? (
                         <img
-                          src={imgSm(e.variante?.imagen ?? e.producto.imagen)}
+                          {...imgFija(e.variante?.imagen ?? e.producto.imagen, 48)}
                           alt=""
                           width="48"
                           height="48"
@@ -260,7 +261,7 @@ export default function Rutina() {
               return e ? (
                 <img
                   key={p.paso}
-                  src={imgSm(e.variante?.imagen ?? e.producto.imagen)}
+                  {...imgFija(e.variante?.imagen ?? e.producto.imagen, 28)}
                   alt=""
                   width="32"
                   height="32"

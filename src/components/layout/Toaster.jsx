@@ -1,5 +1,6 @@
 import { AnimatePresence, m } from 'motion/react';
 import Icon from '../ui/Icon.jsx';
+import { imgFija } from '../../lib/imagenes.js';
 import { useUI } from '../../context/UIContext.jsx';
 import { useCart } from '../../context/CartContext.jsx';
 
@@ -24,7 +25,7 @@ export default function Toaster() {
             className="pointer-events-auto flex border border-linea bg-crema-card w-full max-w-sm items-center gap-3 rounded-3xl p-2.5 pr-3 text-tinta shadow-flotante"
           >
             {toast.imagen ? (
-              <img src={toast.imagen} alt="" width="48" height="48" className="size-12 shrink-0 rounded-2xl border border-linea bg-crema-card object-cover" />
+              <img {...imgFija(toast.imagen, 48)} alt="" width="48" height="48" className="size-12 shrink-0 rounded-2xl border border-linea bg-crema-card object-cover" />
             ) : (
               <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-arena text-tinta">
                 <Icon name="check" />

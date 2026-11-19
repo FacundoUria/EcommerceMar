@@ -1,4 +1,4 @@
-import { imgSm } from '../../lib/format.js';
+import { imgFija } from '../../lib/imagenes.js';
 
 /**
  * Swatches de variantes con la foto de cada una.
@@ -40,7 +40,7 @@ export default function Swatches({ variantes, seleccionada, onSelect, onPreview,
               activa ? 'border-verde ring-2 ring-salvia-media ring-offset-1' : 'border-crema-card shadow-suave'
             }`}
           >
-            <img src={imgSm(v.imagen)} alt="" width="56" height="56" loading="lazy" decoding="async" className="size-full object-cover" />
+            <img {...imgFija(v.imagen, 56)} alt="" width="56" height="56" loading="lazy" decoding="async" className="size-full object-cover" />
           </button>
         );
       })}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { espiral } from '../../lib/rulos.js';
+import { imgFija } from '../../lib/imagenes.js';
 
 const CLAVE = 'dh-intro';
 const ARO = espiral({ cx: 90, cy: 90, r0: 64, r1: 80, vueltas: 1.18, inicio: -100 });
@@ -47,7 +48,7 @@ export default function IntroMarca() {
       onAnimationEnd={(e) => e.target === e.currentTarget && setVisible(false)}
     >
       <span className="relative size-[180px]">
-        <img src="/img/marca/LOGO-sm.webp" alt="" width="112" height="112" className="intro-logo absolute top-1/2 left-1/2 size-28 -translate-x-1/2 -translate-y-1/2 rounded-full mix-blend-multiply" />
+        <img {...imgFija('/img/marca/LOGO.webp', 112)} alt="" width="112" height="112" className="intro-logo absolute top-1/2 left-1/2 size-28 -translate-x-1/2 -translate-y-1/2 rounded-full mix-blend-multiply" />
         <svg viewBox="0 0 180 180" className="absolute inset-0 overflow-visible" focusable="false">
           <path d={ARO} pathLength="1" fill="none" stroke="#7e602b" strokeWidth="1.6" strokeLinecap="round" className="intro-aro" />
         </svg>

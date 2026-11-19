@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useInView, useReducedMotion } from 'motion/react';
 import Icon from './Icon.jsx';
+import { fuenteImagen } from '../../lib/imagenes.js';
 
 /**
  * Carrusel de banners de Mar (los banners ya traen su texto: no se superpone nada).
@@ -13,6 +14,9 @@ import Icon from './Icon.jsx';
 const INTERVALO = 6000;
 const INTERVALO_REDUCIDO = 8000;
 const PAUSA_TOQUE = 10000;
+// Ancho real de cada banner: mobile (100vw − 2rem − 0.75rem de gap) / 1.12 (asoma el siguiente);
+// desktop 2 por vista dentro del contenedor (máx 84rem, padding 2rem, gap 1.25rem)
+const SIZES = '(min-width: 1344px) 630px, (min-width: 768px) calc(50vw - 42px), calc((100vw - 44px) / 1.12)';
 
 export default function Banners({ items, label = 'Novedades' }) {
   const ref = useRef(null);
@@ -144,9 +148,9 @@ export default function Banners({ items, label = 'Novedades' }) {
               className="aspect-[1504/704] w-[calc((100%-0.75rem)/1.12)] shrink-0 snap-start overflow-hidden rounded-3xl bg-salvia-media shadow-suave md:w-[calc(50%-0.625rem)]"
             >
               <img
-                src={cerca ? b.src : undefined}
-                srcSet={cerca ? `${b.src.replace(/\.webp$/, '-sm.webp')} 400w, ${b.src} 900w, ${b.src.replace(/\.webp$/, '-lg.webp')} 1504w` : undefined}
-                sizes="(min-width: 768px) 50vw, 90vw"
+                src={cerca ? fuenteImagen(b.src, 800).src : undefined}
+                srcSet={cerca ? fuenteImagen(b.src).srcSet : undefined}
+                sizes={SIZES}
                 alt={b.alt}
                 width="1504"
                 height="704"

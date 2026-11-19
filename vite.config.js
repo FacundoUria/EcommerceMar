@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
@@ -42,6 +43,31 @@ function precargarRutaInicial() {
   };
 }
 
+/**
+ * Imágenes de index.html (preload del hero, logo del shell, favicon) con las versiones reales de
+ * src/data/imagenes.json: el srcset del preload queda igual al del <img> del hero sin copiarlo a mano.
+ */
+const HERO = '/img/mar/inicio'; // = HERO_FOTO de Home.jsx
+function imagenesDelHtml() {
+  return {
+    name: 'imagenes-del-html',
+    transformIndexHtml: {
+      order: 'pre',
+      handler(html) {
+        const manifiesto = JSON.parse(readFileSync(new URL('./src/data/imagenes.json', import.meta.url), 'utf8'));
+        const srcset = (k) => manifiesto[k].w.map((w) => `${k}-${w}.webp ${w}w`).join(', ');
+        const cerca = (k, px) => `${k}-${manifiesto[k].w.find((w) => w >= px) ?? manifiesto[k].w.at(-1)}.webp`;
+        return html
+          .replaceAll('%HERO_SRC%', cerca(HERO, 640)) // = src de respaldo de SmartImg
+          .replaceAll('%HERO_SRCSET%', srcset(HERO))
+          .replaceAll('%LOGO_SRC%', cerca('/img/marca/LOGO', 96))
+          .replaceAll('%LOGO_SRCSET%', srcset('/img/marca/LOGO'))
+          .replaceAll('%FAVICON%', cerca('/img/marca/logocito', 192));
+      },
+    },
+  };
+}
+
 export default defineConfig({
-  plugins: [react(), tailwindcss(), precargarRutaInicial()],
+  plugins: [react(), tailwindcss(), imagenesDelHtml(), precargarRutaInicial()],
 });

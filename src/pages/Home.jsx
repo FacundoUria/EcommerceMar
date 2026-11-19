@@ -64,9 +64,9 @@ const BANNERS = [
 const TITULO_TEXTO = 'El cabello es el espejo de tu';
 const TITULO_EM = 'amor propio';
 const PARALLAX_PX = 60;
-// Foto del hero (también precargada en index.html con el mismo srcset/sizes: si cambia, cambiar los dos)
+// Foto del hero. index.html la precarga con el mismo srcset (vite.config.js lo saca de src/data/imagenes.json)
+// y los mismos sizes: si cambian HERO_FOTO o HERO_SIZES, cambiar también HERO en vite.config.js
 const HERO_FOTO = '/img/mar/inicio.webp';
-const HERO_FOTO_SM = '/img/mar/inicio-sm.webp';
 const HERO_SIZES = '(min-width: 768px) min(30rem, 42vw), 84vw';
 const HERO_ENCUADRE = 'object-[50%_30%]';
 const BLOB = 'rounded-[46%_54%_40%_60%/56%_44%_56%_44%]';
@@ -124,7 +124,6 @@ function Hero() {
               {/* Foto elegida por Mar (793×1064). Mismo srcset/sizes que el preload de index.html */}
               <SmartImg
                 src={HERO_FOTO}
-                srcSm={HERO_FOTO_SM}
                 sizes={HERO_SIZES}
                 alt="Mar, de Dream Hair, con rulos definidos y una crema Skala Cachonados"
                 width={793}

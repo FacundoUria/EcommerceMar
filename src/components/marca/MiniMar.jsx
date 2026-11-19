@@ -4,6 +4,7 @@ import { m } from 'motion/react';
 import Icon from '../ui/Icon.jsx';
 import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 import { whatsappCon } from '../../config/negocio.js';
+import { imgFija, urlImagen } from '../../lib/imagenes.js';
 
 const LINK = whatsappCon('¡Hola Mar! Tengo una consulta.');
 const TEXTO = '¿Te ayudo a elegir?';
@@ -33,7 +34,7 @@ function FiguraCanvas({ ancho, alto }) {
     canvas.height = Math.round(alto * dpr);
     const img = new Image();
     img.decoding = 'async';
-    img.src = canvas.width <= 400 ? '/img/marca/mini-mar-sm.webp' : '/img/marca/mini-mar.webp';
+    img.src = urlImagen('/img/marca/mini-mar.webp', canvas.width);
     let vivo = true;
     img.onload = () => {
       if (!vivo) return;
@@ -124,7 +125,7 @@ export default function MiniMar() {
       const dpr = Math.min(window.devicePixelRatio || 1, 3);
       const grande = window.matchMedia('(min-width: 768px)').matches ? MEDIDAS.desktop : MEDIDAS.mobile;
       const img = new Image();
-      img.src = grande.alto * ASPECTO * dpr <= 400 ? '/img/marca/mini-mar-sm.webp' : '/img/marca/mini-mar.webp';
+      img.src = urlImagen('/img/marca/mini-mar.webp', Math.round(grande.alto * ASPECTO * dpr));
       imagen.current = img.decode().catch(() => {});
     };
     if (document.readyState === 'complete') precargar();
@@ -297,7 +298,7 @@ export default function MiniMar() {
           animate={abierta ? { opacity: 0, scale: 0.5 } : { opacity: 1, scale: 1 }}
           transition={{ duration: 0.35, ease: EASE, delay: abierta ? 0 : 0.35 }}
         >
-          <img src="/img/marca/mini-mar-cara.webp" alt="" width="160" height="160" className="size-full object-cover" />
+          <img {...imgFija('/img/marca/mini-mar-cara.webp', 32)} alt="" width="160" height="160" className="size-full object-cover" />
         </m.button>
       </m.div>
     </div>

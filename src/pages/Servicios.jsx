@@ -117,7 +117,8 @@ function ProcesoVideo() {
           </Roll>
         </a>
       </Reveal>
-      <Reveal delay={0.1} className="mx-auto w-full max-w-xs">
+      {/* 288px: el video original mide 576px de ancho → se ve a 2x, no estirado */}
+      <Reveal delay={0.1} className="mx-auto w-full max-w-[18rem]">
         <div className="relative aspect-[9/16] overflow-hidden rounded-5xl border border-linea bg-salvia-media shadow-suave">
           {activo ? (
             <video

@@ -9,6 +9,7 @@ const DESTELLO_LOGO = [{ x: '78%', y: '-14%', tam: 12 }];
 import CartBadge from './CartBadge.jsx';
 import { useCart } from '../../context/CartContext.jsx';
 import { NEGOCIO } from '../../config/negocio.js';
+import { imgFija } from '../../lib/imagenes.js';
 
 const LINKS = [
   { to: '/', label: 'Inicio', end: true },
@@ -72,7 +73,7 @@ export default function Header() {
             className="flex origin-left items-center gap-2.5"
           >
           <span className="relative shrink-0">
-            <img src="/img/marca/LOGO-sm.webp" alt="" width="44" height="44" className="size-10 rounded-full mix-blend-multiply md:size-11" />
+            <img {...imgFija('/img/marca/LOGO.webp', 44)} alt="" width="44" height="44" className="size-10 rounded-full mix-blend-multiply md:size-11" />
             <Destellos puntos={DESTELLO_LOGO} />
           </span>
           <span className="leading-none">

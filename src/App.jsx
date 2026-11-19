@@ -18,6 +18,7 @@ import MiniMar from './components/marca/MiniMar.jsx';
 import ProgresoScroll from './components/marca/ProgresoScroll.jsx';
 import Rulos from './components/marca/Rulos.jsx';
 import { scrollA } from './lib/smooth.js';
+import { imgFija } from './lib/imagenes.js';
 import Home from './pages/Home.jsx'; // página de entrada: sin lazy para no sumar una cascada al LCP
 
 // Features de animación en un chunk aparte (no bloquean la primera pintura)
@@ -48,7 +49,7 @@ function Cortina() {
       animate={{ y: '-100%', transition: { duration: 0.36, ease: EASE_CORTINA } }}
       exit={{ y: ['100%', '0%'], transition: { duration: 0.32, ease: EASE_CORTINA } }}
     >
-      <img src="/img/marca/LOGO-sm.webp" alt="" width="96" height="96" className="size-24 rounded-full mix-blend-multiply" />
+      <img {...imgFija('/img/marca/LOGO.webp', 96)} alt="" width="96" height="96" className="size-24 rounded-full mix-blend-multiply" />
     </m.div>
   );
 }

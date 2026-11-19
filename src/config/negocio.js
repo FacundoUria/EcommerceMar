@@ -16,12 +16,11 @@ export const NEGOCIO = {
 /** Link de WhatsApp al estudio con un mensaje ya escrito (por defecto "¡Hola Mar!"). */
 export const whatsappCon = (texto = '¡Hola Mar!') => `${NEGOCIO.whatsapp}?text=${encodeURIComponent(texto)}`;
 
-// Barra de anuncio (arriba de todo). Texto de Mar, tal cual; cada frase es un tramo que puede
-// quedar oculto si no entra (versión quieta con movimiento reducido).
+// Barra de anuncio (arriba de todo): un mensaje a la vez, cada uno con su ícono (src/components/ui/Icon.jsx)
 export const ANUNCIO = [
-  '🫶🫶 La comunidad más grande de rulos de Mendoza 🫶🫶',
-  'Envíos a toda la provincia 📦🛵',
-  'Aceptamos todos los medios de pago 💰💵',
+  { icono: 'corazon', texto: 'La comunidad de rulos más grande de Mendoza' },
+  { icono: 'camionFino', texto: 'Envíos a toda la provincia' },
+  { icono: 'tarjetaFina', texto: 'Aceptamos todos los medios de pago' },
 ];
 
 // Franja de beneficios (textos de sus banners)

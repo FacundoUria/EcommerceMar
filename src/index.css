@@ -279,13 +279,29 @@
   }
 }
 
-/* Barra de anuncio: la cinta se corre media vuelta (3 de sus 6 tramos) a ≈ 40px/s */
-.cinta-anuncio {
-  animation: cinta 60s linear infinite;
+/* Barra de anuncio: brillo diagonal que pasa lento (1.6 s de pasada cada 7 s, solo transform) */
+.barra-brillo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 35%, rgb(255 253 248 / 0.13) 50%, transparent 65%);
+  transform: translateX(-100%);
+  animation: barra-brillo 7s cubic-bezier(0.45, 0, 0.25, 1) 1.5s infinite;
 }
-.cinta-anuncio:hover,
-.cinta-anuncio[data-pausa] {
+.barra-brillo:hover::after,
+.barra-brillo:focus-within::after {
   animation-play-state: paused;
+}
+@keyframes barra-brillo {
+  0% { transform: translateX(-100%); }
+  25%, 100% { transform: translateX(100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .barra-brillo::after {
+    animation: none;
+    opacity: 0;
+  }
 }
 
 /* Skeleton shimmer */

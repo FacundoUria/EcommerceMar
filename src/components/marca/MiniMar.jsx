@@ -278,12 +278,12 @@ function MiniMarDesktop() {
           tabIndex={-1}
           aria-hidden="true"
           onClick={() => abrir(4000)}
-          className={`absolute -top-3 -left-3 size-8 overflow-hidden rounded-full bg-salvia shadow-suave ring-2 ring-crema-card ${abierta || tapando ? 'pointer-events-none' : 'pointer-events-auto'}`}
+          className={`absolute -top-3 -left-3 size-8 overflow-hidden rounded-full bg-arena shadow-suave ring-2 ring-crema-card ${abierta || tapando ? 'pointer-events-none' : 'pointer-events-auto'}`}
           initial={{ opacity: 0, scale: 0.5 }}
           animate={abierta ? { opacity: 0, scale: 0.5 } : { opacity: 1, scale: 1 }}
           transition={{ duration: 0.35, ease: EASE, delay: abierta ? 0 : 0.35 }}
         >
-          <img {...imgFija('/img/marca/mini-mar-cara.webp', 32)} alt="" width="160" height="160" className="size-full object-cover" />
+          <img {...imgFija('/img/marca/mini-mar-cara.webp', 32)} alt="" width="192" height="192" className="size-full object-cover" />
         </m.button>
       </m.div>
     </div>

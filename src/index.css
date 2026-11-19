@@ -567,7 +567,31 @@ html.cursor-propio :is(input, textarea, select, [contenteditable='true']) {
   initial-value: 55%;
 }
 
-/* Miniatura tipo story (video del proceso): anillo con degradé dorado */
+/* Story del video del proceso: anillo dorado que gira lento (historia sin ver). Un cuadrado con degradé
+   cónico más grande que la card gira detrás (solo transform); la card lo recorta en un borde de 3px. */
 .anillo-historia {
-  background-image: linear-gradient(135deg, #e9d8a6 0%, #c9a55c 35%, #7e602b 70%, #c9a55c 100%);
+  overflow: hidden;
+  isolation: isolate;
+}
+.anillo-historia::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  width: 260%;
+  aspect-ratio: 1;
+  background: conic-gradient(from 0deg, #f4e3b8, #c9a55c, #7e602b, #c9a55c, #e9d8a6, #a8823f, #f4e3b8);
+  transform: translate(-50%, -50%);
+  animation: girar-anillo 7s linear infinite;
+}
+@keyframes girar-anillo {
+  to {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .anillo-historia::before {
+    animation: none;
+  }
 }

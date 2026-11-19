@@ -43,13 +43,14 @@ export default function Servicios() {
           <section key={g.titulo} aria-labelledby={`grupo-${g.titulo}`} className="relative isolate mt-10 md:mt-14">
             {/* Rulo que se dibuja con el scroll del último grupo (el de arriba lo monta App para toda la página) */}
             {n === todos.length - 1 && <Rulos variante="serviciosGrupo" />}
-            <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-4">
-              <RevealText id={`grupo-${g.titulo}`} className="text-3xl leading-tight md:text-4xl">
-                {g.titulo}
-              </RevealText>
-              {/* El video del proceso, como story, junto a los asesoramientos */}
+            <RevealText id={`grupo-${g.titulo}`} className="text-3xl leading-tight md:text-4xl">
+              {g.titulo}
+            </RevealText>
+            {/* Asesoramientos: el video del proceso como story protagonista (mobile arriba y centrada;
+                desktop en una columna fija a la izquierda de las cards) */}
+            <div className={g.titulo === 'Asesoramientos' ? 'mt-5 md:grid md:grid-cols-[220px_1fr] md:items-start md:gap-8' : 'mt-5'}>
               {g.titulo === 'Asesoramientos' && (
-                <Reveal delay={0.15}>
+                <Reveal delay={0.1} className="mb-8 flex justify-center md:sticky md:top-28 md:mb-0 md:block">
                   <HistoriaVideo
                     src="/video/proceso.mp4"
                     poster="/video/proceso.webp"
@@ -58,14 +59,14 @@ export default function Servicios() {
                   />
                 </Reveal>
               )}
+              <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 md:gap-6">
+                {g.servicios.map((s, i) => (
+                  <Reveal as="li" key={s.id} delay={cascada(i, 3)} className="h-full">
+                    <CardServicio servicio={s} />
+                  </Reveal>
+                ))}
+              </ul>
             </div>
-            <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 md:gap-6">
-              {g.servicios.map((s, i) => (
-                <Reveal as="li" key={s.id} delay={cascada(i, 3)} className="h-full">
-                  <CardServicio servicio={s} />
-                </Reveal>
-              ))}
-            </ul>
           </section>
         ))
       )}

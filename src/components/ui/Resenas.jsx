@@ -97,7 +97,7 @@ export default function Resenas() {
           </RevealText>
         </ConDestellos>
       </Reveal>
-      <Carrusel label="Reseñas" anchoMobile="86%" autoplay={7000} fondo="var(--color-salvia)">
+      <Carrusel label="Reseñas" anchoMobile="80%" autoplay={7000} fondo="var(--color-salvia)">
         {resenas.map((r, i) => (
           <Reveal key={r.id} delay={cascada(i)} className="h-full">
             <CardResena resena={r} />

@@ -44,8 +44,9 @@ export default function Carrusel({ children, label, anchoMobile = '72%', autopla
           interno.style.transform = '';
           continue;
         }
-        const r = slide.getBoundingClientRect();
-        const d = Math.min(1, Math.abs(r.left + r.width / 2 - centro) / r.width);
+        // Centro de la card (no del slide, que suma el espaciado); la escala no mueve su centro
+        const r = interno.getBoundingClientRect();
+        const d = Math.min(1, Math.abs(r.left + r.width / 2 - centro) / slide.offsetWidth);
         interno.style.transform = `scale(${(1 - (1 - ESCALA_LATERAL) * d).toFixed(4)})`;
       }
       if (barra.current) {
@@ -126,14 +127,22 @@ export default function Carrusel({ children, label, anchoMobile = '72%', autopla
     >
       <div className="relative">
         <div ref={viewportRef} className="overflow-hidden">
-          {/* Si todas entran (no hay para scrollear), centradas: quedan alineadas con el contenedor */}
-          <div className={`flex touch-pan-y gap-4 py-4 md:gap-5 ${puede ? '' : 'justify-center'}`} style={{ '--ancho-m': anchoMobile }}>
+          {/*
+            Espaciado como recomienda Embla: padding en cada slide + margen negativo en el contenedor (con
+            `gap` CSS no cuenta el espacio después de la última card y al dar la vuelta quedaban pegadas).
+            `safe center`: si todas entran quedan centradas (alineadas con el contenedor); si no, empiezan al
+            inicio. Es fijo desde el primer render: si la posición de las cards cambia después de iniciar,
+            Embla no vuelve a medir y los snaps quedan corridos (las cards se veían encimadas).
+          */}
+          <div className="-ml-4 flex touch-pan-y [justify-content:safe_center] py-4 select-none md:-ml-5" style={{ '--ancho-m': anchoMobile }}>
             {Children.map(children, (hijo, i) => (
               <div
                 role="group"
                 aria-label={`${i + 1} de ${total}`}
-                // Desktop: 4 cards en el ancho del contenedor (máx 84rem − padding 4rem − 3 gaps)
-                className="min-w-0 shrink-0 grow-0 basis-[var(--ancho-m)] md:basis-[calc((min(100vw,84rem)-4rem-3.75rem)/4)]"
+                // Ancho de la card + su espaciado. Desktop: 4 cards en el contenedor (máx 84rem − 4rem − 3 espacios)
+                // relative + z-10 en hover/foco: la card sube solo lo justo para que su sombra quede arriba de las
+                // vecinas. La escala (≤ 1) y el 3D se aplican al contenido, dentro del espacio de su slide.
+                className="relative min-w-0 shrink-0 grow-0 basis-[calc(var(--ancho-m)+1rem)] pl-4 focus-within:z-10 hover:z-10 md:basis-[calc((min(100vw,84rem)-4rem-3.75rem)/4+1.25rem)] md:pl-5"
               >
                 <div className="h-full origin-center will-change-transform">{hijo}</div>
               </div>

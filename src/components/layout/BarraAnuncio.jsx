@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useReducedMotion } from 'motion/react';
 import { ANUNCIO } from '../../config/negocio.js';
+import { Estrella } from '../marca/Destellos.jsx';
 
 const TEXTO = ANUNCIO.join(' ');
 
@@ -13,6 +14,8 @@ function Tramo() {
           {f}
         </span>
       ))}
+      {/* Entre vuelta y vuelta, el destello de la marca (dorado claro sobre el verde) */}
+      <Estrella className="mx-[0.6em] size-3 shrink-0 text-[#e9d8a6]" />
     </span>
   );
 }

@@ -50,10 +50,11 @@ export default function Expandible({
         style={{
           height: alto,
           overflow: recorta ? 'hidden' : undefined,
-          transition: `height 0.5s ${EASE}`,
-          // Cerrado: la última línea se esfuma en vez de cortarse seca
-          maskImage: recorta && !abierto && lineas > 0 ? 'linear-gradient(#000 55%, transparent)' : undefined,
-          WebkitMaskImage: recorta && !abierto && lineas > 0 ? 'linear-gradient(#000 55%, transparent)' : undefined,
+          transition: `height 0.5s ${EASE}, --corte 0.5s ${EASE}`,
+          // Cerrado: la última línea se esfuma; al abrir, el esfumado se corre hasta abajo junto con el alto
+          '--corte': abierto ? '100%' : '55%',
+          maskImage: recorta && lineas > 0 ? 'linear-gradient(#000 var(--corte), transparent)' : undefined,
+          WebkitMaskImage: recorta && lineas > 0 ? 'linear-gradient(#000 var(--corte), transparent)' : undefined,
         }}
         // Cerrado del todo: fuera del árbol de accesibilidad y del foco
         inert={recorta && !abierto && lineas === 0 ? true : undefined}

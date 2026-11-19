@@ -9,7 +9,11 @@ import { Skeleton } from '../components/ui/Skeleton.jsx';
 import { useServiceGroups } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
 import { whatsappCon } from '../config/negocio.js';
-import { imgSm } from '../lib/format.js';
+import { colorDe } from '../lib/colores.js';
+import RevealImagen from '../components/ui/RevealImagen.jsx';
+import Rulos from '../components/marca/Rulos.jsx';
+import { useTarjeta3D } from '../hooks/useTarjeta3D.jsx';
+import { m } from 'motion/react';
 import Roll from '../components/ui/Roll.jsx';
 
 export default function Servicios() {
@@ -20,9 +24,11 @@ export default function Servicios() {
     <div className="contenedor pt-4 pb-10">
       <Reveal as="header" className="flex items-end justify-between gap-4">
         <ConDestellos>
-          <RevealText as="h1" className="text-4xl leading-tight md:text-5xl">Servicios</RevealText>
+          <RevealText as="h1" className="text-4xl leading-tight md:text-5xl">
+            Nuestros <em className="texto-dorado">servicios</em>
+          </RevealText>
         </ConDestellos>
-        <a href={whatsappCon()} target="_blank" rel="noopener noreferrer" className="btn btn-primario">
+        <a href={whatsappCon()} target="_blank" rel="noopener noreferrer" className="btn btn-primario shrink-0">
           <Roll>
             <Icon name="whatsapp" size={18} /> Reservar
           </Roll>
@@ -33,13 +39,15 @@ export default function Servicios() {
         <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 3 }, (_, i) => (
             <li key={i}>
-              <Skeleton className="aspect-[4/5] rounded-5xl" />
+              <Skeleton className="aspect-[4/5] rounded-3xl" />
             </li>
           ))}
         </ul>
       ) : (
-        (grupos ?? []).map((g) => (
-          <section key={g.titulo} aria-labelledby={`grupo-${g.titulo}`} className="mt-10 md:mt-14">
+        (grupos ?? []).map((g, n, todos) => (
+          <section key={g.titulo} aria-labelledby={`grupo-${g.titulo}`} className="relative isolate mt-10 md:mt-14">
+            {/* Rulo que se dibuja con el scroll del último grupo (el de arriba lo monta App para toda la página) */}
+            {n === todos.length - 1 && <Rulos variante="serviciosGrupo" />}
             <RevealText id={`grupo-${g.titulo}`} className="text-3xl leading-tight md:text-4xl">
               {g.titulo}
             </RevealText>
@@ -59,26 +67,44 @@ export default function Servicios() {
   );
 }
 
-/** Card de servicio: foto, nombre, duración, descripción (3 líneas + "Ver más" en mobile) y reserva. */
+/**
+ * Card de servicio con el vocabulario de las de producto: 3D en desktop, borde y halo con el color de la
+ * foto, cortina al entrar, se eleva en hover. Foto, nombre, duración (el reloj gira una vez al entrar),
+ * descripción (3 líneas + "Ver más" en mobile) y "¡Reservar!".
+ */
 function CardServicio({ servicio: s }) {
+  const tarjeta = useTarjeta3D();
   return (
-    <article className="card group flex h-full flex-col overflow-hidden rounded-5xl">
-      <div className="aspect-[4/5] overflow-hidden bg-salvia-media">
-        <SmartImg
-          src={s.imagen}
-          srcSm={imgSm(s.imagen)}
-          sizes="(min-width: 1024px) 370px, (min-width: 640px) 50vw, 100vw"
-          alt=""
-          width={900}
-          height={1125}
-          placeholderTitulo={s.nombre}
-          className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
-        />
+    <article
+      ref={tarjeta.ref}
+      {...tarjeta.eventos}
+      style={{ '--color-producto': colorDe(s.imagen) }}
+      className="card borde-producto group relative flex h-full flex-col overflow-hidden rounded-3xl transition duration-500 ease-out md:hover:-translate-y-1.5 md:hover:shadow-flotante"
+    >
+      {tarjeta.brillo}
+      <div className="relative aspect-[4/5] overflow-hidden bg-salvia-media">
+        <RevealImagen>
+          <SmartImg
+            src={s.imagen}
+            alt=""
+            placeholderTitulo={s.nombre}
+            className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+        </RevealImagen>
+        <span className="halo-producto halo-foto" aria-hidden="true" />
       </div>
-      <div className="flex flex-1 flex-col p-5">
+      <div className="flex flex-1 flex-col px-4 pt-4 pb-4 md:px-5 md:pb-5">
         <h3 className="text-2xl leading-tight">{s.nombre}</h3>
         <p className="mt-2.5 inline-flex w-fit items-center gap-1.5 rounded-full bg-salvia px-3 py-1 text-xs font-bold text-verde">
-          <Icon name="reloj" size={14} strokeWidth={2} />
+          <m.span
+            className="inline-flex"
+            initial={{ rotate: -360 }}
+            whileInView={{ rotate: 0 }}
+            viewport={{ once: true, amount: 1 }}
+            transition={{ duration: 1.1, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Icon name="reloj" size={14} strokeWidth={2} />
+          </m.span>
           <span className="sr-only">Duración:</span> {s.duracion}
         </p>
         <Expandible lineas={3} soloMobile className="mt-3 text-[15px] leading-relaxed text-texto-suave">

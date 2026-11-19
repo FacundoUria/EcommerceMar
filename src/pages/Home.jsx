@@ -27,6 +27,7 @@ import { colorDe } from '../lib/colores.js';
 import Roll from '../components/ui/Roll.jsx';
 import Rulos from '../components/marca/Rulos.jsx';
 import AdornoTitulo from '../components/marca/AdornoTitulo.jsx';
+import { ConDestellos } from '../components/marca/Destellos.jsx';
 import { DEMORA_INTRO } from '../components/marca/IntroMarca.jsx';
 
 const EASE = [0.22, 1, 0.36, 1];
@@ -634,9 +635,11 @@ function HolaSoyMar() {
           </m.div>
         </Reveal>
         <Reveal delay={0.1}>
-          <RevealText id="mar-titulo" className="text-5xl leading-none md:text-7xl">
-            Hola, soy <em className="texto-dorado">Mar</em>
-          </RevealText>
+          <ConDestellos>
+            <RevealText id="mar-titulo" className="text-5xl leading-none md:text-7xl">
+              Hola, soy <em className="texto-dorado">Mar</em>
+            </RevealText>
+          </ConDestellos>
           <p className="mt-5 max-w-lg font-serif text-2xl leading-snug text-tinta md:text-[1.7rem]">
             Coach capilar, emprendedora y creadora de Dream Hair. Juntas vamos a potenciar la belleza natural de tu cabello ❤️
           </p>

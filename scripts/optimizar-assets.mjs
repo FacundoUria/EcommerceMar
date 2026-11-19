@@ -16,6 +16,7 @@ import sharp from 'sharp';
 import { CARPETAS, anchosPara, imagenesDe } from './fuentes-imagenes.mjs';
 
 const CON_LQIP = new Set(['productos', 'estudio', 'mar']); // las que se ven con blur-up
+const CON_COLOR = new Set(['productos', 'estudio', 'resenas']);
 const forzar = process.argv.includes('--forzar');
 const mtime = (f) => stat(f).then((s) => s.mtimeMs, () => 0);
 const ESTE_SCRIPT = Math.max(await mtime(new URL(import.meta.url)), await mtime(new URL('./fuentes-imagenes.mjs', import.meta.url)));
@@ -150,8 +151,9 @@ for (const [carpeta, conf] of Object.entries(CARPETAS)) {
       const buf = await base(img).resize({ width: 20 }).webp({ quality: 40 }).toBuffer();
       lqip[`${clave}.webp`] = `data:image/webp;base64,${buf.toString('base64')}`;
     }
-    if (carpeta === 'productos') {
-      fondos[`${clave}.webp`] = fondo;
+    if (carpeta === 'productos') fondos[`${clave}.webp`] = fondo;
+    // Color dominante: productos (halo, borde, destellos), estudio y reseñas (halo y borde de sus cards)
+    if (CON_COLOR.has(carpeta)) {
       const color = await colorDominante(img);
       if (color) colores[`${clave}.webp`] = color;
     }
@@ -171,7 +173,8 @@ await writeFile(path.resolve('src/data/imagenes.json'), JSON.stringify(manifiest
 await writeFile(path.resolve('src/data/lqip.json'), JSON.stringify(lqip) + '\n');
 await writeFile(path.resolve('src/data/fondos.json'), JSON.stringify(fondos, null, 1) + '\n');
 await writeFile(path.resolve('src/data/colores.json'), JSON.stringify(colores, null, 1) + '\n');
-console.log(`colores.json: ${Object.keys(colores).length} fotos con color (${Object.keys(fondos).length - Object.keys(colores).length} neutras → dorado)`);
+const conColorProductos = Object.keys(colores).filter((k) => k.startsWith("/img/productos/")).length;
+console.log(`colores.json: ${Object.keys(colores).length} fotos con color (${Object.keys(fondos).length - conColorProductos} de producto neutras → dorado)`);
 const blancos = Object.values(fondos).filter((v) => v === 'blanco').length;
 console.log(`fondos.json: ${blancos} con fondo blanco, ${Object.keys(fondos).length - blancos} de escena`);
 console.log(`Listo: ${total} imágenes · ${generadas} webp nuevos · ${borradas} viejos borrados · imagenes.json ${Object.keys(manifiesto).length} entradas`);

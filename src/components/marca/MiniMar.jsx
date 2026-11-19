@@ -2,10 +2,12 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router';
 import { m } from 'motion/react';
 import Icon from '../ui/Icon.jsx';
+import Destellos from './Destellos.jsx';
 import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 import { whatsappCon } from '../../config/negocio.js';
 import { imgFija, urlImagen } from '../../lib/imagenes.js';
 
+const DESTELLO_GLOBO = [{ x: '-6%', y: '-45%', tam: 11 }];
 const LINK = whatsappCon('¡Hola Mar! Tengo una consulta.');
 const TEXTO = '¿Te ayudo a elegir?';
 const ABIERTA_MS = 6000; // a los 6 s se achica
@@ -285,6 +287,7 @@ export default function MiniMar() {
           transition={{ duration: 0.35, ease: EASE, delay: abierta ? 0.55 : 0 }}
         >
           {TEXTO}
+          <Destellos puntos={DESTELLO_GLOBO} />
         </m.span>
 
         {/* Carita (modo compacto): tocarla vuelve a mostrar a mini Mar */}

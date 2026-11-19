@@ -63,6 +63,21 @@ const VARIANTES = {
       { d: rulo({ x: 160, y: 40, largo: 260, vueltas: 3, radio: 22, angulo: 115, afinar: 0.5 }), color: DORADO, rango: [0.35, 0.8] },
     ],
   },
+  // ── Secciones nuevas (se dibujan con el scroll de su propia sección) ──
+  resenas: {
+    caja: 'top-0 left-0 w-[76vw] max-w-[32rem] -translate-x-[30%] -translate-y-[10%] md:w-[34vw]',
+    trazos: [
+      { d: rulo({ x: 380, y: 60, largo: 340, vueltas: 4, radio: 28, angulo: 160 }), color: DORADO, rango: [0.08, 0.5] },
+      { d: rulo({ x: 390, y: 150, largo: 250, vueltas: 3, radio: 22, angulo: 172, afinar: 0.5 }), color: VERDE, rango: [0.15, 0.6] },
+    ],
+  },
+  serviciosGrupo: {
+    caja: 'top-[6rem] right-0 w-[72vw] max-w-[30rem] translate-x-[34%] md:w-[32vw]',
+    trazos: [
+      { d: rulo({ x: 30, y: 40, largo: 340, vueltas: 4, radio: 30, angulo: 70 }), color: VERDE, rango: [0.05, 0.5] },
+      { d: rulo({ x: 120, y: 20, largo: 260, vueltas: 3, radio: 22, angulo: 84, ovalo: 0.9 }), color: DORADO, rango: [0.12, 0.6] },
+    ],
+  },
   footer: {
     caja: 'top-0 right-0 w-[90vw] max-w-[40rem] translate-x-[12%] -translate-y-[14%] md:w-[46vw]',
     trazos: [

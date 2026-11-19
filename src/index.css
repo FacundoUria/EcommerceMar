@@ -519,3 +519,34 @@ html.cursor-propio * {
 html.cursor-propio :is(input, textarea, select, [contenteditable='true']) {
   cursor: auto !important;
 }
+
+/* ═════ Secciones nuevas con el mismo vocabulario (servicios, reseñas) ═════ */
+/* Halo de color sobre una foto a sangre (cards de servicio): el mismo .halo-producto, fundido con soft-light */
+.halo-foto {
+  mix-blend-mode: soft-light;
+  z-index: 1;
+}
+/* Estrellas de las reseñas: se encienden una por una al entrar (color + escala, --i = índice) */
+.estrella-resena {
+  color: color-mix(in srgb, var(--color-tinta) 14%, transparent);
+  transform: scale(0.7);
+  transition:
+    color 0.45s ease,
+    transform 0.5s var(--ease-salto);
+  transition-delay: calc(var(--i, 0) * 0.13s + 0.2s);
+}
+.estrellas-encendidas .estrella-resena {
+  color: var(--color-dorado);
+  transform: scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .estrella-resena {
+    transform: none;
+  }
+}
+/* "Ver más": el esfumado de la última línea se abre junto con el alto (en vez de cortarse de golpe) */
+@property --corte {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 55%;
+}

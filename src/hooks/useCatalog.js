@@ -48,6 +48,30 @@ export function precargarCatalogo() {
     .catch(() => {}); // si falla, cada hook lo reintenta y muestra su error/skeleton
 }
 
+/** Pide las descripciones de Mar (archivo aparte) y las deja resueltas para useDescripciones. */
+export const precargarDescripciones = () =>
+  service
+    .getDescripciones()
+    .then((d) => resueltos.set('descripciones', d))
+    .catch(() => {});
+
+/**
+ * Descripciones de Mar por id ({ [id]: texto }), o null mientras no estén. `activo`: recién ahí se piden
+ * (el buscador de la tienda las pide al enfocarlo o si la URL ya trae una búsqueda).
+ */
+export function useDescripciones(activo = true) {
+  const [data, setData] = useState(() => resueltos.get('descripciones') ?? null);
+  useEffect(() => {
+    if (!activo || data) return;
+    let vivo = true;
+    precargarDescripciones().then(() => vivo && setData(resueltos.get('descripciones') ?? null));
+    return () => {
+      vivo = false;
+    };
+  }, [activo, data]);
+  return data;
+}
+
 export const useProducts = () => useServicio('products', service.getProducts);
 export const useCategories = () => useServicio('categories', service.getCategories);
 export const useServiceGroups = () => useServicio('serviceGroups', service.getServiceGroups);

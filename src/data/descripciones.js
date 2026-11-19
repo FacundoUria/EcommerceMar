@@ -1,0 +1,112 @@
+// src/data/descripciones.js — descripciones de productos de Mar (textos tal cual), por id de producto.
+// Van aparte del catálogo para no sumar ~25 KB a la carga inicial: el service las pide con import() solo
+// en /producto y cuando se usa el buscador de la tienda.
+// ⚠️ Los componentes NO importan este archivo: todo pasa por src/services/productsService.js
+export default {
+  'shampoo-low-poo-han':
+    "Shampoos suaves libres de sulfatos, parabenos y siliconas en distintas variedades: Carbón Activado (purificante y detox), Action Plex (hidronutritivo y brillo intenso), Biotina + Ácido Hialurónico (fuerza y estímulo del crecimiento), Rulos Definidos (con aceite de palta y aloe vera), Prevención Caída (con centella asiática, aloe vera y D-pantenol) y Extracto de Avena & Miel (hidronutritivo y suavizante).",
+  'low-poo-kleno':
+    "Shampoo apto low-poo, sin sulfatos, parabenos, siliconas ni petrolatos, que limpia suavemente sin resecar, manteniendo la hidratación y el brillo natural.",
+  'kleno-acondicionador':
+    "Acondicionador apto low-poo, libre de sulfatos, parabenos, siliconas y petrolatos, diseñado para nutrir, desenredar y aportar brillo extremo.",
+  'cremas-skala':
+    "Potes de 1 kg, 100 % veganos y liberados, aptos como baño de crema o crema de peinar en distintas líneas según cada necesidad.",
+  'custard-cantu':
+    "Crema-gel definidora enriquecida con manteca de karité pura que aporta brillo intenso, hidratación y fijación duradera sin efecto rígido para ondas, rulos y afros.",
+  'curl-fusion':
+    "Crema-gel sin siliconas a base de lino que combina hidratación, reparación y fijación en un solo paso, dejando rulos definidos y brillantes.",
+  'crema-peinar-kleno':
+    "Crema de peinar libre de sulfatos, parabenos, siliconas y petrolatos, con aceites vegetales y filtro solar para hidratar, definir y dar brillo natural.",
+  'curl-mode':
+    "Crema de peinar libre de sulfatos, parabenos, siliconas y sal, vegana y cruelty-free, formulada para definir rulos y ondas con suavidad y control del frizz.",
+  'crema-bekim':
+    "Dos opciones para definir y cuidar el cabello con rulos u ondas: Memory (ayuda a mantener la forma y memoria del rulo) y Argán 4 Oils (tratamiento nutritivo que aporta suavidad y brillo).",
+  'cremas-salon-line':
+    "Dos opciones para personalizar la finalización: Definição Ostentação (efecto firme, anti-frizz y súper day after), Definição Natural (movimiento, hidratación y definición ligera).",
+  'salon-line-kids-hidra-multy':
+    "Crema multifuncional 4 en 1 con extracto de frutilla, vitamina B5 y vitamina E, hipoalergénica y testeada dermatológicamente para el cuidado diario del cabello infantil.",
+  'curl-girl-curling-cream':
+    "Crema modeladora con pantenol y glicerina vegetal que hidrata, suaviza y ayuda a dar forma y movimiento a ondas y rulos.",
+  'han-crema-rulos-definidos':
+    "Crema de peinar sin enjuague, libre de parabenos y siliconas, con filtro solar y protector térmico. Hidrata, controla el frizz y ayuda a lograr rulos más definidos y brillantes.",
+  'han-crema-alfa-keratina':
+    "Crema sin enjuague con filtro solar y sin parabenos ni siliconas. Facilita el desenredo, reduce el frizz y aporta suavidad, hidratación y brillo.",
+  'frenzzi-cremas-naturale':
+    "Línea de cremas sin siliconas con aceite de coco, acción anti-frizz y filtro solar en tres versiones: Cebolla & Ginseng (revitalizante y fortalecedora), Almendras Dulces & Chía (nutri-reparadora e hidratante) y Arándanos (nutri-hidratante y antioxidante).",
+  'gel-de-rich':
+    "Gel capilar formulado con proteína vegetal para aportar definición duradera, brillo y control del frizz en ondas y rulos sin resecar la fibra.",
+  'gel-rich-potenciador':
+    "Gel de alta fijación enriquecido con proteína vegetal, pensado especialmente para cabellos ondulados y en transición, que define sin resecar.",
+  'gelatinas-500':
+    "Geles de alta definición y efecto day after prolongado en distintas versiones (Verde y Amarilla de fijación 72 h, Definição Ostentação para brillo y definición intensa, y Xêrosa Baunilha Doce con aroma dulce y alta fijación).",
+  'gel-frenzzi':
+    "Línea de geles livianos y no grasos que definen, nutren y aportan brillo en tres opciones: Aloe y Pepino (fijación moderada e hidratante), Gel de Lino (finalizador nutritivo) y Gel de Chía (fijación alta).",
+  'gel-bekim-800':
+    "Gel de fijación fuerte en envase con dosificador que ayuda a sostener la forma del rulo o peinado por más tiempo sin dejar residuos.",
+  'gel-bekim-250':
+    "Gel de fijación fuerte en pote de 250 g que aporta textura, definición y control duradero para sostener la forma del rulo o peinado.",
+  'gel-fuerte-fidelite':
+    "Gel de fijación extrema y extra duración diseñado para modelar y sostener la definición de rulos y peinados con máximo control.",
+  'gel-aurill':
+    "Acondicionador no graso con efecto fijador y filtro UV que protege del sol, el viento y la polución, controla el frizz y ayuda a mantener la estructura de rulos y ondas con brillo natural.",
+  'gel-curl-mode':
+    "Gel finalizador ligero, libre de sulfatos, parabenos y siliconas, ideal para hacer scrunch, definir rulos y ondas y dejar brillo sin sensación pesada ni grasa.",
+  'curl-girl-gel-500':
+    "Gel hidratante en presentación de 500 cc que aporta definición, brillo y fijación flexible sin resecar, ideal para acompañar la finalización de rulos y ondas.",
+  'curl-girl-gel-300':
+    "Gel hidratante en formato de 300 cc formulado con aceites de jojoba y almendras para definir rulos y ondas, controlar el frizz y mantener la hidratación.",
+  'ossono-gel-500':
+    "Gel de fijación extrema y alta duración en envase de 500 ml con válvula, práctico para peinados definidos y de larga permanencia.",
+  'ossono-gel-250':
+    "Gel de fijación extrema y alta duración en pote de 250 g, ideal para lograr definición firme y duradera en el peinado.",
+  'skala-day-after':
+    "Gel líquido 100 % vegano y liberado, ideal para revitalizar y definir rulos y ondas al día siguiente sin frizz y con acabado natural.",
+  'mousse-kleno':
+    "Espuma definidora liviana enriquecida que hidrata, protege, controla el frizz y deja rulos definidos sin efecto rígido.",
+  'mousse-cantu':
+    "Mousse liviana sin sulfatos ni siliconas que define ondas y rulos sin dejar sensación acartonada, aportando volumen, suavidad y nutrición.",
+  'activador-kleno':
+    "Activador sin sulfatos, parabenos, siliconas ni petrolatos que disciplina, hidrata en profundidad y aporta volumen y brillo natural a rulos y ondas.",
+  'activador-cantu':
+    "Crema activadora formulada con manteca de karité pura que suaviza, aporta brillo y activa la forma natural de ondas, rulos y afros sin frizz.",
+  'salon-line-kids-chiclete':
+    "Activador infantil (+3 años) con aroma a chicle, pensado para hidratar, desenredar sin tirones y dar definición suave y brillo a rulos y ondas (2ABC a 4ABC).",
+  'salon-line-activadores':
+    "Variedad de activadores cremosos para potenciar la forma, la suavidad y el control del frizz según el tipo de rulo u onda y el nivel de definición buscado.",
+  'spray-revitalizante':
+    "Spray revitalizador formulado con manteca de karité y vitaminas para refrescar la forma, devolver el brillo y controlar el frizz de ondas y rulos entre lavados.",
+  'han-tonificante-in-one':
+    "Tratamiento multifunción sin sulfatos, parabenos ni siliconas. Ayuda a nivelar la porosidad, controlar el frizz, facilitar el peinado y aportar protección térmica y solar, dejando brillo natural.",
+  'han-alfa-keratina-solucion':
+    "Solución extra ácida con filtro solar que ayuda a sellar la cutícula, reducir el frizz y aportar brillo express con acabado liviano.",
+  'cascada-ginseng-bambu':
+    "Spray reparador sin alcohol y con filtro solar formulado con proteínas de soja, lino y arroz más extractos de ginseng y bambú. Fortalece la fibra, controla el frizz y devuelve vitalidad al instante.",
+  'cascada-manzanilla-vainilla':
+    "Bruma capilar sin alcohol y con filtro solar a base de proteínas de soja, lino y arroz con extractos de manzanilla y vainilla para reparar, iluminar y controlar el frizz.",
+  'funda-saten':
+    "Fundas suaves de satén que reducen la fricción al dormir para evitar el frizz, el quiebre y la pérdida de hidratación, ayudando a conservar la definición al despertar.",
+  'cofia-saten':
+    "Gorro de satén suave con elástico cómodo que protege rulos y ondas durante el descanso, evitando el roce, el frizz y la pérdida de hidratación.",
+  'oleos-pinga':
+    "Óleos multifuncionales de rápida absorción para usar solos, en la crema de peinar o en la máscara: Cenoura & Oliva (protección y brillo), Patauá & Moringa (pre y post shampoo, suavidad y luminosidad) y Açaí & Pracaxi (nutrición y reparación pre y post química).",
+  'han-suero-argan':
+    "Tratamiento intensivo con aceite de argán y filtro solar pensado para nutrir cabellos secos y opacos, suavizar las puntas y dar brillo express.",
+  'cepillo-viral':
+    "Cepillo específico para finalizar rulos y ondas, con bordes laterales dentados que ayudan a separar y armar mechones definidos con menos frizz.",
+  'cepillo-viral-tenedor':
+    "Cepillo específico para finalizar rulos y ondas con bordes laterales dentados que ayudan a armar mechones definidos, reducir el frizz y dar volumen desde la raíz con su peine tridente.",
+  'cepillo-detangle-bounce':
+    "Cepillo definidor con laterales ranurados diseñado para distribuir parejo el producto de finalización y formar rulos definidos y prolijos.",
+  'cepillo-maya-cuadrado':
+    "Cepillo de cuerpo flexible y ventilado que se adapta al contorno de la cabeza para desenredar suavemente sin tirones ni quiebre.",
+  'cepillo-definidor-lila':
+    "Combina cabezal flexible con bordes laterales dentados para desenredar y definir mechones de rulos y ondas en una sola pasada.",
+  'cepillo-pirulito':
+    "Cepillo ergonómico con cabezal en espiral flexible que acompaña el movimiento del cabello para desenredar con suavidad en húmedo o seco.",
+  'cepillo-pirulito-2':
+    "Cepillo de diseño curvo y cabezal flexible que se amolda al cuero cabelludo para desenredar rápido sin tirar y favorecer el secado.",
+  'cepillo-magico':
+    "Cepillo de hileras flexibles independientes que se adaptan a cada mechón para desenredar fácil, reducir el frizz y marcar la definición natural.",
+  'turbante-microfibra':
+    "Toalla tipo turbante de microfibra suave con botón de ajuste, ideal para absorber el exceso de agua sin fricción ni frizz y cuidar la forma del rulo.",
+};

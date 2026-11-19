@@ -12,7 +12,7 @@ import ProductCard from '../components/product/ProductCard.jsx';
 import CartBadge from '../components/layout/CartBadge.jsx';
 import { Skeleton } from '../components/ui/Skeleton.jsx';
 import NoEncontrado from './NoEncontrado.jsx';
-import { useCategories, useProduct, useProducts } from '../hooks/useCatalog.js';
+import { useCategories, useDescripciones, useProduct, useProducts } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
 import { useCart } from '../context/CartContext.jsx';
 import { imgSm } from '../lib/format.js';
@@ -42,6 +42,8 @@ function Detalle({ producto }) {
   const [preview, setPreview] = useState(null);
   const [aviso, setAviso] = useState(false);
   const imgRef = useRef(null);
+  // Descripción de Mar: archivo aparte, ya pedido junto con el chunk de esta página (App.jsx)
+  const descripcion = useDescripciones()?.[producto.id];
 
   const variante = producto.variantes.find((v) => v.nombre === params.get('v')) ?? null;
   // Consulta por WhatsApp con el producto (y la variante elegida) ya escritos
@@ -159,9 +161,9 @@ function Detalle({ producto }) {
               </p>
             )}
             {/* Descripción de Mar (tal cual): mobile 4 líneas + "Ver más"; desktop completa */}
-            {producto.descripcion && (
+            {descripcion && (
               <Expandible lineas={4} soloMobile className="mt-3 text-[15px] leading-relaxed text-texto-suave">
-                <p>{producto.descripcion}</p>
+                <p>{descripcion}</p>
               </Expandible>
             )}
             <Precio as="p" valor={producto.precio} className="mt-3 text-3xl text-tinta" />

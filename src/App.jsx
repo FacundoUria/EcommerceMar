@@ -19,6 +19,7 @@ import ProgresoScroll from './components/marca/ProgresoScroll.jsx';
 import Rulos from './components/marca/Rulos.jsx';
 import { scrollA } from './lib/smooth.js';
 import { imgFija } from './lib/imagenes.js';
+import { precargarDescripciones } from './hooks/useCatalog.js';
 import Home from './pages/Home.jsx'; // página de entrada: sin lazy para no sumar una cascada al LCP
 
 // Features de animación en un chunk aparte (no bloquean la primera pintura)
@@ -26,7 +27,9 @@ const cargarFeatures = () => import('./lib/motionFeatures.js').then((r) => r.def
 
 // Code-splitting por ruta
 const Tienda = lazy(() => import('./pages/Tienda.jsx'));
-const Producto = lazy(() => import('./pages/Producto.jsx'));
+// /producto: su chunk y las descripciones de Mar (archivo aparte) en paralelo → la descripción ya está al
+// pintar la página (sin salto de layout ni espera extra)
+const Producto = lazy(() => Promise.all([import('./pages/Producto.jsx'), precargarDescripciones()]).then(([m]) => m));
 const Rutina = lazy(() => import('./pages/Rutina.jsx'));
 const Servicios = lazy(() => import('./pages/Servicios.jsx'));
 const Carrito = lazy(() => import('./pages/Carrito.jsx'));

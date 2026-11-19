@@ -21,6 +21,23 @@ function cargar() {
   return cache;
 }
 
+let descripciones = null;
+/**
+ * Descripciones de Mar por id de producto ({ [id]: texto }). Van en un archivo aparte (~25 KB) que se pide
+ * recién cuando hace falta: /producto y el buscador de la tienda. Con base de datos: un fetch aparte.
+ */
+export function getDescripciones() {
+  if (!descripciones) {
+    descripciones = import('../data/descripciones.js')
+      .then((m) => m.default)
+      .catch((e) => {
+        descripciones = null;
+        throw e;
+      });
+  }
+  return descripciones;
+}
+
 /** Productos del catálogo (solo los activos). */
 export async function getProducts() {
   const { products } = await cargar();

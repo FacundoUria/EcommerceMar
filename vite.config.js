@@ -30,6 +30,9 @@ function precargarRutaInicial() {
           const m = c.facadeModuleId?.match(/[\\/]pages[\\/](\w+)\.jsx$/);
           if (m) mapa[m[1]] = [c.fileName, ...c.imports].map((f) => `/${f}`);
         }
+        // /producto también usa las descripciones de Mar (chunk aparte, src/data/descripciones.js)
+        const desc = chunks.find((c) => /[\\/]data[\\/]descripciones\.js$/.test(c.facadeModuleId ?? ''));
+        if (desc && mapa.Producto) mapa.Producto.push(`/${desc.fileName}`);
         const script = `(function(){var p=location.pathname,r=${JSON.stringify(RUTAS)},m=${JSON.stringify(mapa)};for(var k in r){if(p.indexOf(k)===0&&m[r[k]]){m[r[k]].forEach(function(f){var l=document.createElement('link');l.rel='modulepreload';l.href=f;document.head.appendChild(l)});break}}})();`;
         // Playfair (normal + cursiva) de los títulos: se pide con el HTML en vez de esperar al CSS.
         // (Manrope no: probado, no bajaba el CLS de /carrito y retrasaba el FCP del home 0.9 → 1.9 s)

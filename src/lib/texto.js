@@ -7,12 +7,15 @@ export const normalizar = (s = '') =>
     .toLowerCase()
     .trim();
 
-/** ¿El producto coincide con todas las palabras buscadas? (nombre, marca, categoría, descripción y variantes) */
-export function coincide(producto, consulta, nombreCategoria = '') {
+/**
+ * ¿El producto coincide con todas las palabras buscadas? (nombre, marca, categoría, variantes y, si ya
+ * está cargada, la descripción de Mar: va en un archivo aparte, ver useDescripciones)
+ */
+export function coincide(producto, consulta, nombreCategoria = '', descripcion = '') {
   const palabras = normalizar(consulta).split(/\s+/).filter(Boolean);
   if (!palabras.length) return true;
   const texto = normalizar(
-    [producto.nombre, producto.nombreCorto ?? '', producto.marca, nombreCategoria, producto.descripcion ?? '', ...producto.variantes.map((v) => v.nombre)].join(' '),
+    [producto.nombre, producto.nombreCorto ?? '', producto.marca, nombreCategoria, descripcion ?? '', ...producto.variantes.map((v) => v.nombre)].join(' '),
   );
   return palabras.every((p) => texto.includes(p));
 }

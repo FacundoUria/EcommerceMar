@@ -9,7 +9,7 @@ import Icon from '../components/ui/Icon.jsx';
 import ProductCard from '../components/product/ProductCard.jsx';
 import FotoProducto from '../components/product/FotoProducto.jsx';
 import { GridSkeleton, Skeleton } from '../components/ui/Skeleton.jsx';
-import { useBrands, useCategories, useProducts } from '../hooks/useCatalog.js';
+import { useBrands, useCategories, useDescripciones, useProducts } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
 import { useMediaQuery } from '../hooks/useMediaQuery.js';
 import { useFocusTrap } from '../hooks/useFocusTrap.js';
@@ -43,6 +43,10 @@ export default function Tienda() {
   // Buscador instantáneo: estado local + sincronización con la URL (replace, sin ensuciar el historial)
   const [q, setQ] = useState(qUrl);
   const inputRef = useRef(null);
+  // La búsqueda también mira las descripciones de Mar (archivo aparte): se piden al enfocar el buscador o
+  // si la URL ya trae una búsqueda (?q=frizz)
+  const [buscando, setBuscando] = useState(() => !!qUrl || !!params.get('buscar'));
+  const descripciones = useDescripciones(buscando || !!q);
   useEffect(() => setQ(qUrl), [qUrl]);
 
   const actualizar = (cambios, { replace = false } = {}) => {
@@ -77,13 +81,13 @@ export default function Tienda() {
   const resultados = useMemo(() => {
     if (!productos) return [];
     let lista = productos.filter(
-      (p) => (!cat || p.categoria === cat) && (!marcasSel.length || marcasSel.includes(p.marca)) && coincide(p, q, nombreCat[p.categoria]),
+      (p) => (!cat || p.categoria === cat) && (!marcasSel.length || marcasSel.includes(p.marca)) && coincide(p, q, nombreCat[p.categoria], descripciones?.[p.id]),
     );
     if (orden === 'menor') lista = [...lista].sort((a, b) => a.precio - b.precio);
     else if (orden === 'mayor') lista = [...lista].sort((a, b) => b.precio - a.precio);
     else lista = [...lista].sort((a, b) => Number(!!b.destacado) - Number(!!a.destacado));
     return lista;
-  }, [productos, cat, marcasSel, q, orden, nombreCat]);
+  }, [productos, cat, marcasSel, q, orden, nombreCat, descripciones]);
 
   const activos = marcasSel.length + (orden !== 'destacados' ? 1 : 0);
   const hayFiltros = cat || activos || q;
@@ -109,6 +113,8 @@ export default function Tienda() {
                 inputMode="search"
                 enterKeyHint="search"
                 value={q}
+                onFocus={() => setBuscando(true)}
+                onPointerDown={() => setBuscando(true)}
                 onChange={(e) => {
                   setQ(e.target.value);
                   actualizar({ q: e.target.value }, { replace: true });

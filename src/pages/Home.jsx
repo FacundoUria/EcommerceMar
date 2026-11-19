@@ -9,6 +9,7 @@ import Carousel from '../components/ui/Carousel.jsx';
 import SmartImg from '../components/ui/SmartImg.jsx';
 import Banners from '../components/ui/Banners.jsx';
 import Resenas from '../components/ui/Resenas.jsx';
+import Expandible from '../components/ui/Expandible.jsx';
 import MeshFondo from '../components/ui/MeshFondo.jsx';
 import SectionHeader from '../components/ui/SectionHeader.jsx';
 import LineaProgreso from '../components/ui/LineaProgreso.jsx';
@@ -603,7 +604,7 @@ function RutinaMobile() {
   );
 }
 
-/* ═════════ HOLA, SOY MAR (textos intactos; parallax de capas) ═════════ */
+/* ═════════ HOLA, SOY MAR (textos de Mar tal cual; "Leer más" despliega el resto; parallax de capas) ═════════ */
 function HolaSoyMar() {
   const ref = useRef(null);
   const reducido = useReducedMotion();
@@ -631,14 +632,21 @@ function HolaSoyMar() {
           </m.div>
         </Reveal>
         <Reveal delay={0.1}>
-          <p className="text-xs font-bold tracking-[0.22em] text-dorado uppercase">Detrás de Dream Hair</p>
-          <RevealText id="mar-titulo" className="mt-2 text-5xl leading-none md:text-7xl">
+          <RevealText id="mar-titulo" className="text-5xl leading-none md:text-7xl">
             Hola, soy <em className="texto-dorado">Mar</em>
           </RevealText>
-          <p className="mt-5 max-w-lg font-serif text-2xl leading-snug text-tinta md:text-3xl">
-            Especialista en rizos y apasionada por realzar la identidad de cada cabello.
+          <p className="mt-5 max-w-lg font-serif text-2xl leading-snug text-tinta md:text-[1.7rem]">
+            Coach capilar, emprendedora y creadora de Dream Hair. Juntas vamos a potenciar la belleza natural de tu cabello ❤️
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <Expandible lineas={0} textoAbrir="Leer más" textoCerrar="Leer menos" className="mt-3 max-w-lg">
+            <p className="pt-1 pb-2 text-base leading-relaxed text-texto-suave">
+              También realizo cortes de cabellos ondulados, afro y rizados en seco, tratamientos, asesoramiento para que puedas
+              aprender a identificar tu tipo de cabello, los productos adecuados y técnicas (de lavado, finalización, etc.) en
+              nuestro showroom, en el cual no solo vas a aprender, sino que también podrás conseguir los mejores productos
+              nacionales e importados. Espero poder ayudarlas en esta hermosa aventura de amar y cuidar nuestro cabello.
+            </p>
+          </Expandible>
+          <div className="mt-7 flex flex-wrap gap-3">
             <Link to="/servicios" className="btn btn-primario">
               <Roll>
                 Conocé los servicios

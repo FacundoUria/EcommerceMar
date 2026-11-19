@@ -550,3 +550,8 @@ html.cursor-propio :is(input, textarea, select, [contenteditable='true']) {
   inherits: false;
   initial-value: 55%;
 }
+
+/* Miniatura tipo story (video del proceso): anillo con degradé dorado */
+.anillo-historia {
+  background-image: linear-gradient(135deg, #e9d8a6 0%, #c9a55c 35%, #7e602b 70%, #c9a55c 100%);
+}

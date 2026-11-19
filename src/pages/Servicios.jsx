@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import Icon from '../components/ui/Icon.jsx';
+import HistoriaVideo from '../components/ui/HistoriaVideo.jsx';
 import Reveal, { cascada } from '../components/ui/Reveal.jsx';
 import RevealText from '../components/ui/RevealText.jsx';
 import Expandible from '../components/ui/Expandible.jsx';
@@ -43,9 +43,22 @@ export default function Servicios() {
           <section key={g.titulo} aria-labelledby={`grupo-${g.titulo}`} className="relative isolate mt-10 md:mt-14">
             {/* Rulo que se dibuja con el scroll del último grupo (el de arriba lo monta App para toda la página) */}
             {n === todos.length - 1 && <Rulos variante="serviciosGrupo" />}
-            <RevealText id={`grupo-${g.titulo}`} className="text-3xl leading-tight md:text-4xl">
-              {g.titulo}
-            </RevealText>
+            <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-4">
+              <RevealText id={`grupo-${g.titulo}`} className="text-3xl leading-tight md:text-4xl">
+                {g.titulo}
+              </RevealText>
+              {/* El video del proceso, como story, junto a los asesoramientos */}
+              {g.titulo === 'Asesoramientos' && (
+                <Reveal delay={0.15}>
+                  <HistoriaVideo
+                    src="/video/proceso.mp4"
+                    poster="/video/proceso.webp"
+                    texto="Mirá cómo es un asesoramiento"
+                    etiqueta="Video: cómo es un asesoramiento (con sonido)"
+                  />
+                </Reveal>
+              )}
+            </div>
             <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 md:gap-6">
               {g.servicios.map((s, i) => (
                 <Reveal as="li" key={s.id} delay={cascada(i, 3)} className="h-full">
@@ -57,7 +70,6 @@ export default function Servicios() {
         ))
       )}
 
-      <ProcesoVideo />
     </div>
   );
 }
@@ -120,51 +132,5 @@ function CardServicio({ servicio: s }) {
         </div>
       </div>
     </article>
-  );
-}
-
-/** Video del proceso: con audio, NO se reproduce solo. Click → se carga y reproduce. */
-function ProcesoVideo() {
-  const [activo, setActivo] = useState(false);
-  return (
-    <section aria-labelledby="proceso-titulo" className="fondo-salvia grano mt-14 mx-[calc(50%-50vw)] grid items-center gap-8 px-[calc(50vw-50%)] py-16 md:grid-cols-2 md:gap-20 md:py-24">
-      <Reveal>
-        <RevealText id="proceso-titulo" className="text-4xl leading-tight md:text-5xl">
-          El <em className="texto-dorado">proceso</em>
-        </RevealText>
-        <a href={whatsappCon()} target="_blank" rel="noopener noreferrer" className="btn btn-primario mt-6">
-          <Roll>
-            <Icon name="whatsapp" size={18} /> Reservar
-          </Roll>
-        </a>
-      </Reveal>
-      {/* 288px: el video original mide 576px de ancho → se ve a 2x, no estirado */}
-      <Reveal delay={0.1} className="mx-auto w-full max-w-[18rem]">
-        <div className="relative aspect-[9/16] overflow-hidden rounded-5xl border border-linea bg-salvia-media shadow-suave">
-          {activo ? (
-            <video
-              src="/video/proceso.mp4"
-              poster="/video/proceso.webp"
-              controls
-              autoPlay
-              preload="none"
-              playsInline
-              className="size-full object-cover"
-            >
-              Tu navegador no puede reproducir este video.
-            </video>
-          ) : (
-            <button type="button" onClick={() => setActivo(true)} className="group absolute inset-0" aria-label="Reproducir video del proceso de asesoramiento (con sonido)">
-              <img src="/video/proceso.webp" alt="" width="576" height="1024" loading="lazy" className="size-full object-cover" />
-              <span className="absolute inset-0 bg-black/5 transition group-hover:bg-transparent" />
-              <span className="absolute top-1/2 left-1/2 flex size-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-crema-card text-verde shadow-flotante transition group-hover:scale-110 group-active:scale-95">
-                <span className="pulso absolute inset-0 rounded-full" />
-                <Icon name="play" size={30} className="ml-1" />
-              </span>
-            </button>
-          )}
-        </div>
-      </Reveal>
-    </section>
   );
 }

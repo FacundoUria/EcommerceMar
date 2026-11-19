@@ -88,6 +88,32 @@ const VARIANTES = {
   },
 };
 
+// Todos los rulos de la página comparten UN listener de scroll y UN requestAnimationFrame: primero se leen
+// todas las cajas y después se escriben todos los trazos. Con un listener por instancia, cada una leía su
+// caja después de que la anterior había escrito sus trazos (recálculo de estilos forzado por instancia).
+const capasRulos = new Set();
+let rafRulos = 0;
+function cuadroRulos() {
+  rafRulos = 0;
+  const medidas = [...capasRulos].map((c) => [c, c.el.getBoundingClientRect()]);
+  for (const [c, r] of medidas) c.pintar(r);
+}
+function pedirCuadro() {
+  if (!rafRulos) rafRulos = requestAnimationFrame(cuadroRulos);
+}
+function registrar(c) {
+  if (!capasRulos.size) window.addEventListener('scroll', pedirCuadro, { passive: true });
+  capasRulos.add(c);
+}
+function desregistrar(c) {
+  capasRulos.delete(c);
+  if (!capasRulos.size) {
+    window.removeEventListener('scroll', pedirCuadro);
+    cancelAnimationFrame(rafRulos);
+    rafRulos = 0;
+  }
+}
+
 /**
  * Rulos decorativos detrás del contenido de una sección, que se dibujan con el scroll de esa sección.
  * - Progreso: de "el borde de arriba entra por abajo de la pantalla" a "el de abajo sale por arriba"
@@ -113,11 +139,8 @@ export default function Rulos({ variante, fijo = false, hastaElFinal = false }) 
     const el = capa.current;
     if (!el || reducido) return;
     const paths = [...el.querySelectorAll('path')];
-    let raf = 0;
     let ultimo = -1;
-    const medir = () => {
-      raf = 0;
-      const r = el.getBoundingClientRect();
+    const pintar = (r) => {
       const vh = window.innerHeight;
       const recorrido = hastaElFinal ? r.height : vh + r.height;
       const p = Math.min(1, Math.max(0, (vh - r.top) / Math.max(1, recorrido)));
@@ -129,17 +152,14 @@ export default function Rulos({ variante, fijo = false, hastaElFinal = false }) 
         path.style.strokeDashoffset = String(1 - t);
       });
     };
-    const pedir = () => {
-      if (!raf) raf = requestAnimationFrame(medir);
-    };
-    medir();
-    window.addEventListener('scroll', pedir, { passive: true });
-    const ro = new ResizeObserver(pedir);
+    const capaRulos = { el, pintar };
+    pintar(el.getBoundingClientRect());
+    registrar(capaRulos);
+    const ro = new ResizeObserver(pedirCuadro);
     ro.observe(el);
     return () => {
-      window.removeEventListener('scroll', pedir);
+      desregistrar(capaRulos);
       ro.disconnect();
-      cancelAnimationFrame(raf);
     };
   }, [reducido, hastaElFinal, v]);
 

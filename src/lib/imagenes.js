@@ -3,8 +3,16 @@
 // reales son "<nombre>-<ancho>.webp" en una escalera de anchos que nunca supera al original.
 import manifiesto from '../data/imagenes.json';
 
-/** "/img/x/foto.webp" | "-sm.webp" | "-640.webp" → "/img/x/foto" */
-export const claveImagen = (src) => (src ? src.replace(/(-sm|-lg|-\d+)?\.webp$/, '') : '');
+/**
+ * "/img/x/foto.webp" | "-sm.webp" | "-640.webp" → "/img/x/foto". Si el nombre ya es una imagen del manifiesto
+ * se usa tal cual: hay fotos cuyo nombre termina en número ("ghee-lola-350", "cepillo-pirulito-2") y sacarles
+ * el "-350" como si fuera un ancho las confundía con otra foto (o con ninguna: quedaba el placeholder).
+ */
+export function claveImagen(src) {
+  if (!src) return '';
+  const nombre = src.replace(/\.webp$/, '');
+  return manifiesto[nombre] ? nombre : src.replace(/(-sm|-lg|-\d+)?\.webp$/, '');
+}
 
 /** { w: [anchos], o: [ancho, alto del original] } o null si no es una imagen de /img */
 export const infoImagen = (src) => manifiesto[claveImagen(src)] ?? null;

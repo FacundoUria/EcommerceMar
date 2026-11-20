@@ -22,6 +22,7 @@ export const categories = [
 //   mensaje de WhatsApp (máx ~32 caracteres; si falta, se usa `nombre`).
 // - marca: nombres cortos y consistentes (filtro de marcas). tamano: texto de Mar, tal cual.
 // - Las descripciones de Mar van aparte, en src/data/descripciones.js (se cargan solo cuando se usan).
+// - alias: otros nombres con los que lo buscan (solo para el buscador, no se muestran). Ej. "difusor de agua".
 // - foto: archivo en assets/productos (sin extensión). tn: slug de Tiendanube para bajar la foto que falta.
 // - variantes: [nombre, foto, precio]; sin foto propia usan la del producto y sin precio propio, el del producto
 //   (foto null si solo cambia el precio). Con precios distintos el producto vale el más bajo y la card dice
@@ -211,7 +212,7 @@ export const products = [
     categoria: 'varios', precio: 19000 },
   // Mar lo llama "difusor de agua"
   { id: 'atomizador-day-after', nombre: 'Atomizador de Bruma Continua para Day After', nombreCorto: 'Atomizador de Bruma Continua',
-    categoria: 'varios', precio: 18000 },
+    categoria: 'varios', precio: 18000, alias: ['difusor de agua'] },
 ].map((p) => {
   const imagen = img(p.foto || p.id);
   // Precio base: el del producto o, si solo lo traen las variantes, el más bajo de ellas

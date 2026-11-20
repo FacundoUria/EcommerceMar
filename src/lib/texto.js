@@ -8,14 +8,14 @@ export const normalizar = (s = '') =>
     .trim();
 
 /**
- * ¿El producto coincide con todas las palabras buscadas? (nombre, marca, categoría, variantes y, si ya
- * está cargada, la descripción de Mar: va en un archivo aparte, ver useDescripciones)
+ * ¿El producto coincide con todas las palabras buscadas? (nombre, marca, categoría, variantes, `alias` y, si
+ * ya está cargada, la descripción de Mar: va en un archivo aparte, ver useDescripciones)
  */
 export function coincide(producto, consulta, nombreCategoria = '', descripcion = '') {
   const palabras = normalizar(consulta).split(/\s+/).filter(Boolean);
   if (!palabras.length) return true;
   const texto = normalizar(
-    [producto.nombre, producto.nombreCorto ?? '', producto.marca, nombreCategoria, descripcion ?? '', ...producto.variantes.map((v) => v.nombre)].join(' '),
+    [producto.nombre, producto.nombreCorto ?? '', producto.marca, nombreCategoria, descripcion ?? '', ...producto.variantes.map((v) => v.nombre), ...(producto.alias ?? [])].join(' '),
   );
   return palabras.every((p) => texto.includes(p));
 }

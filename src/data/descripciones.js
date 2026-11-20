@@ -129,7 +129,7 @@ export default {
   'crema-arbell-argan':
     "Crema de peinar sin enjuague, protectora y reparadora, con argán, keratina vegetal y filtro solar. Fórmula vegana que protege y repara el cabello expuesto al sol dejándolo suave.",
   'atomizador-day-after':
-    "Libera una bruma fina y pareja sin empapar el pelo para refrescar rulos y ondas entre lavados. Ideal para reactivar cremas o geles, bajar el frizz y dar forma al instante.",
+    "Libera una bruma fina y pareja sin empapar el pelo para refrescar rulos y ondas entre lavados. Ideal para reactivar cremas o geles, bajar el frizz y dar forma al instante. También conocido como difusor de agua.",
   'difusor-plegable':
     "Accesorio plegable y liviano que se adapta a la mayoría de los secadores. Reparte el aire de forma pareja para definir rulos y ondas, reducir el frizz y guardarlo sin ocupar espacio.",
   'tratamientos-fidelite':

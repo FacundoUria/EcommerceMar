@@ -233,7 +233,8 @@ export default function Tienda() {
                   exit={reducido ? undefined : { opacity: 0, transition: { duration: 0.2 } }}
                   transition={{ duration: 0.6, delay: cascada(i), ease: EASE }}
                 >
-                  <ProductCard producto={p} priority={i < 4} nivelTitulo="h2" className="h-full" />
+                  {/* Las 4 primeras se piden ya; solo la 1.ª (el LCP) con prioridad alta */}
+                  <ProductCard producto={p} priority={i === 0 ? true : i < 4 ? 'eager' : false} nivelTitulo="h2" className="h-full" />
                 </m.li>
               ))}
             </AnimatePresence>

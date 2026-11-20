@@ -95,6 +95,8 @@ export default function SmartImg({
   className = '',
   placeholderTitulo,
   placeholderSubtitulo,
+  // true: arriba de todo y candidata a LCP (eager + fetchpriority high, sin fade). 'eager': arriba de todo
+  // pero no es el LCP (eager, sin fetchpriority: no le saca ancho de banda a la del LCP)
   priority = false,
   sinFondo = false, // true: sin fondo ni blur-up (fotos con mix-blend multiply sobre un fondo propio)
   ...rest
@@ -134,7 +136,7 @@ export default function SmartImg({
         width={width ?? info?.o[0] ?? 900}
         height={height ?? info?.o[1] ?? 900}
         loading={priority ? 'eager' : 'lazy'}
-        fetchPriority={priority ? 'high' : undefined}
+        fetchPriority={priority === true ? 'high' : undefined}
         decoding={priority ? 'sync' : 'async'}
         onError={() => setError(true)}
         onLoad={() => setCargada(true)}

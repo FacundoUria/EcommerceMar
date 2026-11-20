@@ -23,6 +23,7 @@ export const CARPETAS = {
 };
 
 const O = (carpeta, archivo) => `assets/${carpeta}/originales/${archivo}`;
+const W = (hora) => `WhatsApp Image 2026-11-20 at ${hora}.jpeg`; // fotos que mandó Mar por WhatsApp
 
 /** Originales de mayor resolución (y recorte, en px del original) por imagen "carpeta/nombre". */
 export const FUENTES = {
@@ -47,12 +48,40 @@ export const FUENTES = {
   'resenas/abril-cabrera': { archivo: O('resenas', 'IMG_6502.PNG'), recorte: { left: 60, top: 19, width: 280, height: 280 } },
   'resenas/magali-gonzalez': { archivo: O('resenas', 'IMG_6500.PNG'), recorte: { left: 144, top: 170, width: 900, height: 900 } },
   'resenas/carina-luna': { archivo: O('resenas', 'IMG_6498.PNG'), recorte: { left: 125, top: 160, width: 750, height: 750 } },
+  // Productos nuevos de Mar (nov 2026). Las de modelo o fondo de color: `fondo: 'escena'` (sin multiply,
+  // cover en su marco aunque el borde sea blanco) y `encuadre` = object-position del cover (CSS).
+  'productos/cofia-xl-saten': { archivo: O('productos', W('10.06.10')), fondo: 'escena', encuadre: '55% 50%' },
+  'productos/cofia-long-saten': { archivo: O('productos', W('10.06.35')), fondo: 'escena', encuadre: '40% 50%' },
+  'productos/ondulador-saten': { archivo: O('productos', W('10.07.20')), fondo: 'escena' },
+  'productos/practiplopping': { archivo: O('productos', W('10.08.16')), fondo: 'escena', encuadre: '50% 30%' },
+  'productos/cepillo-tangle': { archivo: O('productos', W('10.08.45')) },
+  'productos/cepillo-pinza': { archivo: O('productos', W('10.09.22')) },
+  'productos/shampoo-skala-mais-cachos': { archivo: O('productos', W('10.10.30')) },
+  'productos/crema-arbell-argan': { archivo: O('productos', W('10.10.52')) },
+  'productos/atomizador-day-after': { archivo: O('productos', W('10.11.24')) }, // 425 px: pedir una mejor
+  'productos/difusor-plegable': { archivo: O('productos', W('10.11.50')), fondo: 'escena' },
+  'productos/mascara-han-alfa-keratina': { archivo: O('productos', W('10.12.52')) },
+  'productos/ghee-lola-100': { archivo: O('productos', W('10.13.17')) },
+  'productos/ghee-lola-350': { archivo: O('productos', W('10.13.33')) },
+  // Álbumes (zips): mascarillas Lola 450 g y tratamientos Fidelité 270 g
+  'productos/mascarillas-lola': { archivo: O('productos', W('10.10.01')) },
+  'productos/mascarillas-lola-milagre': { archivo: O('productos', W('10.10.01 (1)')) },
+  'productos/mascarillas-lola-dream-cream': { archivo: O('productos', W('10.10.01 (2)')) },
+  'productos/mascarillas-lola-danos-vorazes': { archivo: O('productos', W('10.10.01 (3)')) },
+  'productos/mascarillas-lola-morte-subita': { archivo: O('productos', W('10.10.02')) },
+  'productos/tratamientos-fidelite': { archivo: O('productos', W('10.12.26')) },
+  'productos/tratamientos-fidelite-keratina': { archivo: O('productos', W('10.12.26 (1)')) },
+  'productos/tratamientos-fidelite-almendras': { archivo: O('productos', W('10.12.26 (2)')) },
+  'productos/tratamientos-fidelite-coco-vainilla': { archivo: O('productos', W('10.12.27')) },
 };
 
 const EXT = /\.(jpe?g|png|webp)$/i;
 const IGNORAR = /^(VERIFICAR-|personita)/i; // fotos a confirmar / sin permiso
 
-/** Imágenes de una carpeta: [{ nombre, archivo, recorte, desdeOriginal }] (solo el primer nivel). */
+/**
+ * Imágenes de una carpeta: [{ nombre, archivo, recorte, desdeOriginal, fondo, encuadre }] (solo el primer
+ * nivel). `fondo` ('blanco' | 'escena') pisa la detección automática; `encuadre` es el object-position.
+ */
 export async function imagenesDe(carpeta) {
   const dir = path.resolve('assets', carpeta);
   const lista = [];
@@ -68,6 +97,9 @@ export async function imagenesDe(carpeta) {
       recorte: original ? f.recorte : undefined,
       desdeOriginal: !!original,
       faltaOriginal: !!f && !original, // hay original definido pero no está en esta máquina
+      // valen con o sin original (la copia de assets/ es la misma foto)
+      fondo: f?.fondo,
+      encuadre: f?.encuadre,
     });
   }
   return lista;

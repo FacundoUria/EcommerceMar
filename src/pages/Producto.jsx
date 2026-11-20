@@ -52,9 +52,13 @@ function Detalle({ producto }) {
   const tieneVariantes = producto.variantes.length > 0;
   const categoria = categorias?.find((c) => c.id === producto.categoria);
 
-  // Galería: foto principal + una por variante
+  // Galería: foto principal + una por variante (sin repetir: las variantes sin foto propia usan la del
+  // producto y se eligen desde los chips)
   const galeria = useMemo(
-    () => [{ nombre: null, imagen: producto.imagen }, ...producto.variantes],
+    () =>
+      [{ nombre: null, imagen: producto.imagen }, ...producto.variantes].filter(
+        (g, i, todas) => todas.findIndex((o) => o.imagen === g.imagen) === i,
+      ),
     [producto],
   );
   const imagen = (preview ?? variante)?.imagen ?? producto.imagen;

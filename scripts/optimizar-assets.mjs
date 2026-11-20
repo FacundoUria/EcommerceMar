@@ -5,7 +5,8 @@
 //    el original. Los componentes arman srcset + sizes con src/data/imagenes.json (src/lib/imagenes.js) y el
 //    navegador elige la versión para 1x / 2x / 3x.
 //  - Calidad webp: fotos q82, banners y marca q88 (texto nítido). Al achicar, unsharp muy suave (sigma 0.5).
-//  - src/data/imagenes.json → { "/img/<carpeta>/<nombre>": { w: [anchos], o: [ancho, alto del original] } }
+//  - src/data/imagenes.json → { "/img/<carpeta>/<nombre>": { w: [anchos], o: [ancho, alto del original],
+//    p: object-position (opcional, `encuadre` de fuentes-imagenes.mjs) } }
 //  - src/data/lqip.json     → miniatura de 20px en base64 (blur-up mientras carga la real)
 //  - src/data/fondos.json   → foto de producto con fondo 'blanco' (multiply) o 'escena'
 //  - src/data/colores.json  → color dominante de cada foto de producto (halo, borde, destellos)
@@ -130,7 +131,8 @@ for (const [carpeta, conf] of Object.entries(CARPETAS)) {
     const tFuente = Math.max(await mtime(img.archivo), ESTE_SCRIPT);
     if (img.faltaOriginal) sinOriginal.push(`${carpeta}/${img.nombre}`);
 
-    const fondo = carpeta === 'productos' ? await tipoDeFondo(img) : null;
+    // Fotos con modelo sobre blanco (cofias, difusor…): fuentes-imagenes.mjs fuerza 'escena' (sin multiply)
+    const fondo = carpeta === 'productos' ? (img.fondo ?? (await tipoDeFondo(img))) : null;
     const blanca = fondo === 'blanco' ? await blanquear(img) : null;
     const fuente = () => (blanca ? sharp(blanca.data, { raw: blanca.info }) : base(img));
 
@@ -146,6 +148,7 @@ for (const [carpeta, conf] of Object.entries(CARPETAS)) {
     }
     const clave = `/img/${carpeta}/${img.nombre}`;
     manifiesto[clave] = { w: anchos, o: [ancho, alto] };
+    if (img.encuadre) manifiesto[clave].p = img.encuadre; // object-position de las fotos de escena (cover)
 
     if (CON_LQIP.has(carpeta)) {
       const buf = await base(img).resize({ width: 20 }).webp({ quality: 40 }).toBuffer();

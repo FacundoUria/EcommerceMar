@@ -54,6 +54,9 @@ descripción va con esa foto:
 Además, `cepillo-viral-flexible` y `cepillo-viral-doble` quedan como estaban, sin descripción de Mar (cada
 uno comparte foto con otro cepillo).
 
+Los dos cepillos Viñeta que mandó Mar en noviembre (`cepillo-tangle`, lila y menta, y `cepillo-pinza`) **no
+coinciden con ninguno de estos**: se cargaron como productos nuevos y esta tabla sigue igual.
+
 ## 4. Shampoos HAN: variantes que Mar no menciona
 
 Las variantes se renombraron con los nombres de Mar (Carbón Activado, Action Plex, Biotina + Ácido
@@ -69,3 +72,37 @@ Hialurónico, Rulos Definidos, Prevención Caída, Avena & Miel). Quedan dos que
 El mazo de fotos de "Hola, soy Mar" (home) usa `assets/mar/mar-con-productos-1.jpg`, que mide **387×516 px**.
 Cuando queda adelante se ve más blanda que las otras dos (se muestra a ~450 px en desktop). Pedirle a Mar el
 original en mejor resolución y reemplazarlo en `assets/mar/` (después `npm run assets:optimizar`).
+
+## 6. Falta precio
+
+Productos nuevos que mandó Mar el 20/11/2026, **con foto y descripción**, cargados con `activo: false` y
+`precio: null` (no se ven en el sitio). Para publicarlos: poner el precio y sacar `activo: false`.
+
+| # | Marca | Producto | Tamaño | id | Categoría |
+|---|---|---|---|---|---|
+| 1 | Skala | Shampoo Expert #Mais Cachos | 600 ml | `shampoo-skala-mais-cachos` | Low poo |
+| 2 | Arbell | Crema de Peinar Protectora Argán y Filtro Solar | 150 ml | `crema-arbell-argan` | Cremas de peinar |
+| 3 | — | Atomizador de Bruma Continua para Day After | — | `atomizador-day-after` | Varios |
+| 4 | — | Difusor Plegable Universal de Silicona | — | `difusor-plegable` | Varios |
+| 5 | Fidelité | Tratamientos Profundos (Coco y Vainilla, Almendras, Keratina, Colormaster Crema Ácida) | 270 g | `tratamientos-fidelite` | Tratamientos |
+| 6 | HAN | Máscara Capilar Alfa Keratina | 200 cm³ | `mascara-han-alfa-keratina` | Tratamientos |
+| 7 | Lola Cosmetics | Manteca Vegetal Be(M)dita Ghee Reconstrução (100 g y 350 g) | 100 g / 350 g | `ghee-lola` | Tratamientos |
+
+- **Ghee: un precio por tamaño.** Hoy el catálogo tiene un solo precio por producto (las variantes no
+  tienen precio propio). Cuando Mar pase los dos precios: o se suma precio por variante al catálogo
+  (carrito, rutina y pedido lo tienen que respetar), o se separa en dos productos (100 g y 350 g).
+- **Fidelité Colormaster Crema Ácida:** no vino foto suelta; usa la foto grupal de los cuatro potes.
+
+## 7. Fotos para pedirle a Mar
+
+- **Atomizador de Bruma Continua** (`atomizador-day-after`): la foto pesa 5 KB y mide 425×470 px. Se usa
+  igual, pero **pedir una foto mejor**.
+- **Difusor Plegable** (`difusor-plegable`): 448×448 px, con modelo. Se ve bien en las cards, pero en la
+  ficha de producto queda más chica que las demás (nunca se estira). Si hay una más grande, mejor.
+
+## 8. Datos que se asumieron al cargar (nov 2026)
+
+- **Cofias XL y Long:** marca "Dream Hair", como la cofia de satén que ya estaba. Confirmar.
+- **Practiplopping:** las variantes Microfibra y Algodón usan la misma foto (vino una sola).
+- **Mascarillas Lola 450 g:** el álbum trae exactamente las cuatro del texto (Milagre, Dream Cream, Danos
+  Vorazes, Morte Súbita): no hay variantes de más.

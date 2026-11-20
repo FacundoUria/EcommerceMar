@@ -6,6 +6,7 @@ export const categories = [
   { id: 'low-poo', nombre: 'Low poo', paso: 1, portada: 'shampoo-low-poo-han' },
   { id: 'cremas-2en1', nombre: 'Cremas 2 en 1', paso: 2, portada: 'cremas-skala' },
   { id: 'cremas-peinar', nombre: 'Cremas de peinar', paso: 2, portada: 'cremas-salon-line' },
+  { id: 'tratamientos', nombre: 'Tratamientos', paso: 2, portada: 'mascarillas-lola' },
   { id: 'geles', nombre: 'Geles y gelatinas', paso: 3, portada: 'gelatinas-500gr' },
   { id: 'mousses', nombre: 'Mousses', paso: 3, portada: 'mousse-cantu' },
   { id: 'activadores', nombre: 'Activadores de rulos', paso: 3, portada: 'activador-cantu' },
@@ -35,6 +36,8 @@ export const products = [
   { id: 'low-poo-kleno', marca: 'Kleno', nombre: 'Perfect Curly Shampoo Rulos Perfectos', nombreCorto: 'Shampoo Rulos Perfectos', tamano: '350 cc',
     categoria: 'low-poo', precio: 13000, tn: 'low-poo-kleno-bvfi1' },
   { id: 'kleno-acondicionador', marca: 'Kleno', nombre: 'Perfect Curly Acondicionador Rulos Perfectos', nombreCorto: 'Acondicionador Rulos Perfectos', tamano: '350 cc',
+    categoria: 'low-poo', precio: null, activo: false },
+  { id: 'shampoo-skala-mais-cachos', marca: 'Skala', nombre: 'Shampoo Expert #Mais Cachos', nombreCorto: 'Shampoo #Mais Cachos', tamano: '600 ml',
     categoria: 'low-poo', precio: null, activo: false },
 
   // ── Cremas 2 en 1 ──
@@ -68,6 +71,23 @@ export const products = [
   { id: 'frenzzi-cremas-naturale', marca: 'Frenzzi', nombre: 'Naturale Cremas de Peinar Sin Siliconas', nombreCorto: 'Cremas de Peinar Naturale', tamano: '200 ml',
     categoria: 'cremas-peinar', precio: null, activo: false,
     variantes: [['Cebolla & Ginseng'],['Almendras Dulces & Chía'],['Arándanos']] },
+  { id: 'crema-arbell-argan', marca: 'Arbell', nombre: 'Crema de Peinar Protectora Argán y Filtro Solar', nombreCorto: 'Crema Argán y Filtro Solar', tamano: '150 ml',
+    categoria: 'cremas-peinar', precio: null, activo: false },
+
+  // ── Tratamientos ──
+  { id: 'mascarillas-lola', marca: 'Lola Cosmetics', nombre: 'Mascarillas Ultra Profundas', nombreCorto: 'Mascarillas Ultra Profundas', tamano: '450 g',
+    categoria: 'tratamientos', precio: 29000,
+    variantes: [['Milagre','mascarillas-lola-milagre'],['Dream Cream','mascarillas-lola-dream-cream'],['Danos Vorazes','mascarillas-lola-danos-vorazes'],['Morte Súbita','mascarillas-lola-morte-subita']] },
+  { id: 'tratamientos-fidelite', marca: 'Fidelité', nombre: 'Tratamientos Profundos', nombreCorto: 'Tratamientos Profundos', tamano: '270 g',
+    categoria: 'tratamientos', precio: null, activo: false,
+    // Colormaster no tiene foto suelta: usa la grupal
+    variantes: [['Coco y Vainilla','tratamientos-fidelite-coco-vainilla'],['Almendras','tratamientos-fidelite-almendras'],['Keratina','tratamientos-fidelite-keratina'],['Colormaster Crema Ácida']] },
+  { id: 'mascara-han-alfa-keratina', marca: 'HAN', nombre: 'Máscara Capilar Alfa Keratina', nombreCorto: 'Máscara Capilar Alfa Keratina', tamano: '200 cm³',
+    categoria: 'tratamientos', precio: null, activo: false },
+  // Un producto con dos tamaños: el precio va por tamaño (docs/confirmar-con-mar.md)
+  { id: 'ghee-lola', marca: 'Lola Cosmetics', nombre: 'Manteca Vegetal Be(M)dita Ghee Reconstrução', nombreCorto: 'Be(M)dita Ghee Reconstrução', tamano: '100 g / 350 g',
+    categoria: 'tratamientos', precio: null, activo: false, foto: 'ghee-lola-350',
+    variantes: [['100 g','ghee-lola-100'],['350 g','ghee-lola-350']] },
 
   // ── Geles y gelatinas ──
   { id: 'gel-de-rich', marca: 'Rich', nombre: 'Gel Capilar con Proteína Vegetal (Envase Botella)', nombreCorto: 'Gel con Proteína Vegetal',
@@ -140,6 +160,12 @@ export const products = [
     categoria: 'saten', precio: 15000, foto: 'funda-saten' },
   { id: 'cofia-saten', marca: 'Dream Hair', nombre: 'Cofia de Satén Anti-Frizz (Varios Colores)', nombreCorto: 'Cofia de satén',
     categoria: 'saten', precio: 7000, foto: 'cofia-saten' },
+  { id: 'cofia-xl-saten', marca: 'Dream Hair', nombre: 'Cofia XL de Satén', nombreCorto: 'Cofia XL de satén',
+    categoria: 'saten', precio: 10000 },
+  { id: 'cofia-long-saten', marca: 'Dream Hair', nombre: 'Cofia Long de Satén Ajustable', nombreCorto: 'Cofia Long de satén',
+    categoria: 'saten', precio: 13000 },
+  { id: 'ondulador-saten', nombre: 'Ondulador sin Calor de Satén (Set completo)', nombreCorto: 'Ondulador sin calor de satén',
+    categoria: 'saten', precio: 7000 },
 
   // ── Óleos ──
   { id: 'oleos-pinga', marca: 'Lola Cosmetics', nombre: 'Pinga! Aceites Multifuncionales', nombreCorto: 'Pinga! Aceites', tamano: '50 ml',
@@ -167,10 +193,21 @@ export const products = [
     categoria: 'cepillos', precio: 9000, tn: 'cepillo-pirulito-lo7tv' },
   { id: 'cepillo-magico', nombre: 'Cepillo Pulpo Desenredante para Rulos y Ondas', nombreCorto: 'Cepillo Pulpo',
     categoria: 'cepillos', precio: 12000, tn: 'cepillo-magico-ty1bj' },
+  { id: 'cepillo-tangle', marca: 'Viñeta', nombre: 'Cepillo Desenredante tipo Tangle', nombreCorto: 'Cepillo Tangle',
+    categoria: 'cepillos', precio: 12000 },
+  { id: 'cepillo-pinza', marca: 'Viñeta', nombre: 'Cepillo Pinza Alisador y Definidor', nombreCorto: 'Cepillo Pinza Alisador',
+    categoria: 'cepillos', precio: 5000 },
 
   // ── Varios ──
   { id: 'turbante-microfibra', nombre: 'Turbante de Microfibra Anti-Frizz', nombreCorto: 'Turbante de microfibra',
     categoria: 'varios', precio: 13000, foto: 'turbante-microfibra' },
+  { id: 'practiplopping', nombre: 'Practiplopping (4 puntas)', nombreCorto: 'Practiplopping 4 puntas',
+    categoria: 'varios', precio: 16000,
+    variantes: [['Microfibra'],['Algodón']] },
+  { id: 'difusor-plegable', nombre: 'Difusor Plegable Universal de Silicona', nombreCorto: 'Difusor Plegable de Silicona',
+    categoria: 'varios', precio: null, activo: false },
+  { id: 'atomizador-day-after', nombre: 'Atomizador de Bruma Continua para Day After', nombreCorto: 'Atomizador de Bruma Continua',
+    categoria: 'varios', precio: null, activo: false },
 ].map((p) => {
   const imagen = img(p.foto || p.id);
   return {

@@ -44,6 +44,8 @@ export default function FotoProducto({
   // en vez de estirar la foto. Las de fondo blanco las topea SmartImg.
   const info = !cover && !blanco && conTope() ? infoImagen(src) : null;
   const tope = info ? { maxWidth: info.o[0] / 2, maxHeight: info.o[1] / 2, margin: 'auto' } : undefined;
+  // Encuadre del cover (fotos con modelo: que no se corte la cara ni el producto). scripts/fuentes-imagenes.mjs
+  const encuadre = blanco ? undefined : infoImagen(src)?.p;
 
   return (
     <span className={`fondo-foto relative isolate block size-full overflow-hidden ${className}`} style={{ '--color-producto': colorDe(src), ...style }}>
@@ -59,6 +61,7 @@ export default function FotoProducto({
           alt={alt}
           priority={priority}
           sinFondo={blanco}
+          style={encuadre ? { objectPosition: encuadre } : undefined}
           placeholderTitulo={placeholderTitulo}
           placeholderSubtitulo={placeholderSubtitulo}
           className={`size-full transition-transform duration-700 ease-out ${hover} ${ajuste}`}

@@ -109,4 +109,33 @@ export default {
     "Cepillo de hileras flexibles independientes que se adaptan a cada mechón para desenredar fácil, reducir el frizz y marcar la definición natural.",
   'turbante-microfibra':
     "Toalla tipo turbante de microfibra suave con botón de ajuste, ideal para absorber el exceso de agua sin fricción ni frizz y cuidar la forma del rulo.",
+  // ── Productos nuevos de Mar (nov 2026) ──
+  'cofia-xl-saten':
+    "Tamaño amplio para mayor volumen o largo, con lazo ajustable para un calce cómodo y seguro toda la noche sin frizz.",
+  'cofia-long-saten':
+    "Pensada para melenas largas, protege el largo de rulos y ondas sin aplastarlos ni generar frizz. Incluye lazo ajustable para adaptarla a tu medida y un botón trasero para recogerla y llevarla más corta cuando quieras.",
+  'ondulador-saten':
+    "Lográ ondas definidas, suaves y sin frizz cuidando la salud de tu cabello sin usar calor. Su recubrimiento de satén evita el quiebre e incluye el ondulador flexible, una traba para sujetarlo y dos colitas.",
+  'practiplopping':
+    "Diseño práctico con cuatro puntas para atar fácilmente tipo turbante sin que se suelte. Ideal para hacer plopping, acelerar el secado, reducir el frizz y potenciar la definición de rulos y ondas.",
+  'cepillo-tangle':
+    "Sus cerdas flexibles de doble altura desenredan suavemente sin tirones ni quiebre, tanto en húmedo bajo la ducha como en seco. Ideal para distribuir acondicionador o crema de peinar de forma pareja y cuidar la fibra de rulos y ondas.",
+  'cepillo-pinza':
+    "Su diseño tipo pinza sujeta y guía cada mechón de forma uniforme. Ideal para acompañar el uso de la planchita alineando las fibras sin quemarte, o para definir ondas y rulos logrando una distribución pareja y profunda de los productos de finalización.",
+  'mascarillas-lola':
+    "Variedades: Milagre (crema de peinar y tratamiento de uso diario con karité y agua de coco), Dream Cream (hidratación profunda para cabellos secos y rebeldes), Danos Vorazes (reparación intensiva para recuperar la fibra dañada) y Morte Súbita (hidratación y suavidad intensiva para cabellos muy resecos o castigados).",
+  'shampoo-skala-mais-cachos':
+    "Fórmula 100 % vegana y liberada (sin sulfatos, parabenos, siliconas, petrolato ni aceite mineral) para rulos, crespos o en transición. Con D-pantenol, óleo de ricino y manteca de karité, limpia suavemente sin resecar, aporta fuerza, hidratación y brillo.",
+  'crema-arbell-argan':
+    "Crema de peinar sin enjuague, protectora y reparadora, con argán, keratina vegetal y filtro solar. Fórmula vegana que protege y repara el cabello expuesto al sol dejándolo suave.",
+  'atomizador-day-after':
+    "Libera una bruma fina y pareja sin empapar el pelo para refrescar rulos y ondas entre lavados. Ideal para reactivar cremas o geles, bajar el frizz y dar forma al instante.",
+  'difusor-plegable':
+    "Accesorio plegable y liviano que se adapta a la mayoría de los secadores. Reparte el aire de forma pareja para definir rulos y ondas, reducir el frizz y guardarlo sin ocupar espacio.",
+  'tratamientos-fidelite':
+    "Variedades: Coco y Vainilla (nutre, remueve residuos y aporta brillo y suavidad), Almendras (hidrata en profundidad, desenreda y suaviza), Keratina (repara la fibra dañada o debilitada y aporta fuerza y sedosidad) y Colormaster Crema Ácida (sella la cutícula, cuida el color y desenreda tras la coloración).",
+  'mascara-han-alfa-keratina':
+    "Tratamiento de nutrición reparadora con alfa keratina, libre de parabenos y siliconas. Reestructura y revitaliza la fibra dañada o porosa, aportando suavidad, brillo y control del frizz.",
+  'ghee-lola':
+    "Tratamiento reconstructor vegano y liberado para cabellos quebradizos, frágiles o debilitados. Con papaya, queratina vegetal, aminoácidos y agua de coco, ayuda a devolver fuerza, resistencia y elasticidad a la fibra capilar.",
 };

@@ -99,6 +99,7 @@ export default function SmartImg({
   // pero no es el LCP (eager, sin fetchpriority: no le saca ancho de banda a la del LCP)
   priority = false,
   sinFondo = false, // true: sin fondo ni blur-up (fotos con mix-blend multiply sobre un fondo propio)
+  style, // se suma al tope de las fotos chicas (ej. object-position de las de escena)
   ...rest
 }) {
   const [error, setError] = useState(false);
@@ -140,7 +141,7 @@ export default function SmartImg({
         decoding={priority ? 'sync' : 'async'}
         onError={() => setError(true)}
         onLoad={() => setCargada(true)}
-        style={limitada ? { maxWidth: info.o[0] / 2, maxHeight: info.o[1] / 2 } : undefined}
+        style={limitada ? { maxWidth: info.o[0] / 2, maxHeight: info.o[1] / 2, ...style } : style}
         // Las prioritarias (arriba de todo / LCP) se pintan apenas llegan; el resto aparece con fade.
         // Topeada y sin fondo (foto blanca con multiply): el esfumado de bordes va en la foto, no en el marco
         className={`${className} ${limitada && sinFondo ? 'foto-bordes-suaves' : ''} ${priority ? '' : `transition-opacity duration-[600ms] ease-out ${cargada ? 'opacity-100' : 'opacity-0'}`}`}

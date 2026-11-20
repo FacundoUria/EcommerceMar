@@ -40,3 +40,9 @@ assets/resenas/originales/
 
 # fotos del estudio: originales en resolución completa (en assets/estudio/ van las optimizadas)
 assets/estudio/originales/
+
+# productos: originales tal como los mandó Mar (en assets/productos/ van las copias renombradas)
+assets/productos/originales/
+
+# envíos: tabla de tarifas de MC Mensajería que mandó Mar (los precios están en src/config/envios.js)
+assets/envios/originales/

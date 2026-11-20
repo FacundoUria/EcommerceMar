@@ -33,7 +33,7 @@ export const BENEFICIOS = [
 // Pasos de la rutina curly → categorías del catálogo
 export const PASOS_RUTINA = [
   { paso: 1, titulo: 'Lavar', bajada: 'Low poo', categorias: ['low-poo'] },
-  { paso: 2, titulo: 'Hidratar y peinar', bajada: 'Cremas 2 en 1 y de peinar', categorias: ['cremas-2en1', 'cremas-peinar'] },
+  { paso: 2, titulo: 'Hidratar y peinar', bajada: 'Cremas 2 en 1, de peinar y tratamientos', categorias: ['cremas-2en1', 'cremas-peinar', 'tratamientos'] },
   { paso: 3, titulo: 'Definir', bajada: 'Geles, mousses, activadores y spray', categorias: ['geles', 'mousses', 'activadores', 'spray'] },
   { paso: 4, titulo: 'Proteger', bajada: 'Satén y óleos', categorias: ['saten', 'oleos'] },
 ];

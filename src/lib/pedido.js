@@ -2,7 +2,7 @@
 // coordina pago y entrega). Funciones puras: número de pedido, envío, mensaje y link.
 import { formatPrecio, plural } from './format.js';
 import { whatsappCon } from '../config/negocio.js';
-import { departamentoEnvio, zonaEnvio, zonasDe } from '../config/envios.js';
+import { departamentoEnvio, localidadEnvio, localidadesDe } from '../config/envios.js';
 
 /** Si el mensaje pasa este largo, además del link se ofrece "Copiar pedido" (WhatsApp puede cortarlo). */
 export const LARGO_MAXIMO = 1800;
@@ -11,21 +11,22 @@ export const LARGO_MAXIMO = 1800;
 export const numeroPedido = () => `DH-${Math.floor(1000 + Math.random() * 9000)}`;
 
 /**
- * Envío del pedido según la entrega elegida. null = retiro en el estudio, o envío sin departamento/zona
- * todavía. Si no: { depto, zona (null si el departamento no tiene tarifa), precio (null = a cotizar) }.
+ * Envío del pedido según la entrega elegida. null = retiro en el estudio, o envío sin departamento/localidad
+ * todavía. Si no: { depto, localidad (null si el departamento no tiene tarifa; "Otra / no sé" tiene
+ * `otra: true`), precio (el de la zona de la localidad; null = a coordinar) }.
  */
-export function envioDe({ entrega, departamento, zona }) {
+export function envioDe({ entrega, departamento, localidad }) {
   if (entrega !== 'envio') return null;
   const depto = departamentoEnvio(departamento);
   if (!depto) return null;
-  if (!zonasDe(depto).length) return { depto, zona: null, precio: null };
-  const z = zonaEnvio(depto, zona);
-  return z ? { depto, zona: z, precio: z.precio } : null;
+  if (!localidadesDe(depto).length) return { depto, localidad: null, precio: null };
+  const l = localidadEnvio(depto, localidad);
+  return l ? { depto, localidad: l, precio: l.precio } : null;
 }
 
 /**
  * Mensaje en texto plano con el formato de WhatsApp (*negrita*). `datos`: { nombre, entrega ('envio' |
- * 'retiro'), direccion, departamento, zona, pago, nota }. Precios con el mismo formato ARS del sitio.
+ * 'retiro'), direccion, departamento, localidad, pago, nota }. Precios con el mismo formato ARS del sitio.
  */
 export function armarMensaje({ lineas, datos, numero }) {
   const items = lineas.map((l) => {
@@ -52,7 +53,8 @@ export function armarMensaje({ lineas, datos, numero }) {
     `👤 Nombre: ${datos.nombre.trim()}`,
   ];
   if (envio) {
-    const localidad = envio.zona?.localidades.length ? `, ${envio.zona.localidades.join(' / ')}` : '';
+    // Solo la localidad elegida ("Otra / no sé" y los departamentos sin tarifa: sin localidad)
+    const localidad = envio.localidad && !envio.localidad.otra ? `, ${envio.localidad.nombre}` : '';
     partes.push(
       `📦 Entrega: Envío a domicilio — ${datos.direccion.trim()}${localidad} (${envio.depto.nombre})`,
       `🚚 Envío: ${conCosto ? formatPrecio(envio.precio) : 'a coordinar'}`,
@@ -77,7 +79,7 @@ export function validarDatos(d) {
   if (d.entrega === 'envio') {
     const depto = departamentoEnvio(d.departamento);
     if (!depto) e.departamento = 'Elegí el departamento';
-    else if (zonasDe(depto).length && !zonaEnvio(depto, d.zona)) e.zona = 'Elegí tu zona';
+    else if (localidadesDe(depto).length && !localidadEnvio(depto, d.localidad)) e.localidad = 'Elegí tu localidad o barrio';
     if (d.direccion.trim().length < 4) e.direccion = 'Escribí la dirección de entrega';
   }
   return e;
@@ -88,22 +90,22 @@ const CLAVE = 'dreamhair:datos-pedido:v1';
 export function leerDatosGuardados() {
   try {
     const d = JSON.parse(localStorage.getItem(CLAVE) || '{}');
-    // Departamento por id (los pedidos viejos lo guardaban por nombre); zona solo si sigue existiendo
+    // Departamento por id (los pedidos viejos lo guardaban por nombre); localidad solo si sigue existiendo
     const depto = typeof d.departamento === 'string' ? departamentoEnvio(d.departamento) : null;
     return {
       nombre: typeof d.nombre === 'string' ? d.nombre : '',
       entrega: d.entrega === 'envio' || d.entrega === 'retiro' ? d.entrega : '',
       direccion: typeof d.direccion === 'string' ? d.direccion : '',
       departamento: depto?.id ?? '',
-      zona: (depto && zonaEnvio(depto, d.zona)?.id) ?? '',
+      localidad: localidadEnvio(depto, d.localidad)?.id ?? '',
     };
   } catch {
     return {};
   }
 }
-export function guardarDatos({ nombre, entrega, direccion, departamento, zona }) {
+export function guardarDatos({ nombre, entrega, direccion, departamento, localidad }) {
   try {
-    localStorage.setItem(CLAVE, JSON.stringify({ nombre, entrega, direccion, departamento, zona }));
+    localStorage.setItem(CLAVE, JSON.stringify({ nombre, entrega, direccion, departamento, localidad }));
   } catch {
     /* sin localStorage: no se precarga la próxima vez */
   }

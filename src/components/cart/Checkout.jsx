@@ -14,7 +14,7 @@ import { useBloquearScroll } from '../../hooks/useBloquearScroll.js';
 import { formatPrecio, plural } from '../../lib/format.js';
 import { fuenteImagen } from '../../lib/imagenes.js';
 import { explotarDestellos } from '../../lib/destellos.js';
-import { DEPARTAMENTOS_ENVIO, NOTA_ENVIOS, departamentoEnvio, zonasDe } from '../../config/envios.js';
+import { DEPARTAMENTOS_ENVIO, NOTA_ENVIOS, departamentoEnvio, localidadesDe } from '../../config/envios.js';
 import {
   LARGO_MAXIMO,
   armarMensaje,
@@ -34,11 +34,11 @@ const ENTREGAS = [
   { id: 'retiro', titulo: 'Retiro en el estudio', icono: 'local' },
 ];
 // Orden de los campos obligatorios (al enviar con errores, el foco va al primero)
-const OBLIGATORIOS = ['nombre', 'entrega', 'departamento', 'zona', 'direccion'];
+const OBLIGATORIOS = ['nombre', 'entrega', 'departamento', 'localidad', 'direccion'];
 // Errores que se borran al cambiar un campo (cambiar la entrega o el departamento invalida lo que depende de eso)
 const BORRA_ERRORES = {
-  entrega: ['entrega', 'departamento', 'zona', 'direccion'],
-  departamento: ['departamento', 'zona'],
+  entrega: ['entrega', 'departamento', 'localidad', 'direccion'],
+  departamento: ['departamento', 'localidad'],
 };
 
 const ETIQUETA = 'mb-1.5 block text-sm font-bold text-tinta';
@@ -95,16 +95,16 @@ export default function Checkout({ onClose }) {
     entrega: '',
     direccion: '',
     departamento: '',
-    zona: '',
+    localidad: '',
     pago: '',
     nota: '',
     ...leerDatosGuardados(),
   }));
-  // Retiro (o envío sin zona elegida) = null: el total queda sin envío
+  // Retiro (o envío sin localidad elegida) = null: el total queda sin envío
   const envio = envioDe(datos);
   const costoEnvio = envio?.precio ?? null;
   const deptoElegido = departamentoEnvio(datos.departamento);
-  const zonas = zonasDe(deptoElegido);
+  const localidades = localidadesDe(deptoElegido);
   const [errores, setErrores] = useState({});
   const [enviado, setEnviado] = useState(null); // { mensaje, url } después de tocar "Enviar"
   useFocusTrap(ref, onClose, true, { enfocarContenedor: true });
@@ -128,8 +128,8 @@ export default function Checkout({ onClose }) {
     setDatos((d) => ({
       ...d,
       [campo]: valor,
-      // Otro departamento = otras zonas: hay que volver a elegir
-      ...(campo === 'departamento' && valor !== d.departamento ? { zona: '' } : null),
+      // Otro departamento = otras localidades: hay que volver a elegir
+      ...(campo === 'departamento' && valor !== d.departamento ? { localidad: '' } : null),
     }));
     setErrores((e) => {
       const borrar = BORRA_ERRORES[campo] ?? [campo];
@@ -295,7 +295,7 @@ export default function Checkout({ onClose }) {
 
                   <AnimatePresence initial={false} mode="wait">
                     {datos.entrega === 'envio' && (
-                      // Departamento → zona (con el precio) → dirección, todo a la vista
+                      // Departamento → localidad (con el precio de su zona) → dirección, todo a la vista
                       <Desplegable key="envio" className="pt-5">
                         <Campo id="departamento" etiqueta="Departamento" error={errores.departamento}>
                           {(aria) => (
@@ -323,22 +323,22 @@ export default function Checkout({ onClose }) {
                         <AnimatePresence initial={false} mode="wait">
                           {deptoElegido && (
                             <Desplegable key={deptoElegido.id} className="pt-5">
-                              {zonas.length ? (
+                              {localidades.length ? (
                                 <fieldset data-bloque>
-                                  <legend className={ETIQUETA}>Zona</legend>
-                                  <div className="grid gap-2.5">
-                                    {zonas.map((z, i) => (
-                                      <OpcionZona
-                                        key={z.id}
-                                        zona={z}
-                                        seleccionada={datos.zona === z.id}
-                                        error={errores.zona}
+                                  <legend className={ETIQUETA}>Localidad o barrio</legend>
+                                  <div className="grid gap-2">
+                                    {localidades.map((l, i) => (
+                                      <OpcionLocalidad
+                                        key={l.id}
+                                        localidad={l}
+                                        seleccionada={datos.localidad === l.id}
+                                        error={errores.localidad}
                                         primera={i === 0}
-                                        onElegir={() => set('zona', z.id)}
+                                        onElegir={() => set('localidad', l.id)}
                                       />
                                     ))}
                                   </div>
-                                  <ErrorCampo id="checkout-error-zona" texto={errores.zona} />
+                                  <ErrorCampo id="checkout-error-localidad" texto={errores.localidad} />
                                   <p className="mt-3 text-xs leading-relaxed text-texto-suave">{NOTA_ENVIOS}</p>
                                 </fieldset>
                               ) : (
@@ -424,7 +424,7 @@ export default function Checkout({ onClose }) {
               </div>
 
               <div className="shrink-0 border-t border-linea bg-arena px-6 pt-4 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
-                {/* Con zona elegida: subtotal + envío arriba y el total ya con el envío */}
+                {/* Con localidad elegida: subtotal + envío arriba y el total ya con el envío */}
                 <div aria-live="polite">
                   <AnimatePresence initial={false}>
                     {costoEnvio != null && (
@@ -493,12 +493,12 @@ function Desplegable({ children, className = '' }) {
   );
 }
 
-/** Zona de envío: botón grande con las localidades y el precio (o "A cotizar"). */
-function OpcionZona({ zona, seleccionada, error, primera, onElegir }) {
-  const conPrecio = zona.precio != null;
+/** Localidad o barrio: botón grande con el nombre y el precio de su zona (o "A coordinar"). */
+function OpcionLocalidad({ localidad, seleccionada, error, primera, onElegir }) {
+  const conPrecio = localidad.precio != null;
   return (
     <label
-      className={`flex min-h-16 cursor-pointer items-center gap-3 rounded-3xl border px-4 py-3.5 transition duration-200 active:scale-[0.98] has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-verde ${
+      className={`flex min-h-14 cursor-pointer items-center gap-3 rounded-3xl border px-4 py-3 transition duration-200 active:scale-[0.98] has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-verde ${
         seleccionada
           ? 'border-verde bg-salvia text-verde shadow-suave'
           : error
@@ -508,13 +508,13 @@ function OpcionZona({ zona, seleccionada, error, primera, onElegir }) {
     >
       <input
         type="radio"
-        name="zona"
-        value={zona.id}
+        name="localidad"
+        value={localidad.id}
         checked={seleccionada}
         onChange={onElegir}
-        data-campo={primera ? 'zona' : undefined}
+        data-campo={primera ? 'localidad' : undefined}
         aria-invalid={error ? true : undefined}
-        aria-describedby={error ? 'checkout-error-zona' : undefined}
+        aria-describedby={error ? 'checkout-error-localidad' : undefined}
         className="sr-only"
       />
       <span
@@ -525,14 +525,11 @@ function OpcionZona({ zona, seleccionada, error, primera, onElegir }) {
       >
         {seleccionada && <Icon name="check" size={14} strokeWidth={3} />}
       </span>
-      <span className="min-w-0 flex-1 text-base leading-snug font-semibold">
-        {/* espacio duro después de la abreviatura: "H. Lagomaggiore" no se corta en dos renglones */}
-        {zona.titulo ?? zona.localidades.map((l) => l.replace(/\. /g, '. ')).join(', ')}
-      </span>
+      <span className="min-w-0 flex-1 text-base leading-snug font-semibold">{localidad.nombre}</span>
       {conPrecio ? (
-        <span className="precio shrink-0 text-[17px]">{formatPrecio(zona.precio)}</span>
+        <span className="precio shrink-0 text-[17px]">{formatPrecio(localidad.precio)}</span>
       ) : (
-        <span className={`shrink-0 text-sm font-semibold ${seleccionada ? '' : 'text-texto-suave'}`}>A cotizar</span>
+        <span className={`shrink-0 text-sm font-semibold ${seleccionada ? '' : 'text-texto-suave'}`}>A coordinar</span>
       )}
     </label>
   );

@@ -1,8 +1,10 @@
 // Costo de envío a domicilio por zona (tarifa de MC Mensajería). Se edita a mano.
 // Departamento → zonas { id, localidades, precio }. precio: número en pesos, o null = "a cotizar" (lo
-// coordina Mar). Al final de cada departamento la UI suma sola "Otra zona / no sé" (a cotizar).
+// coordina Mar). La clienta elige su localidad o barrio y le corresponde el precio de su zona; al final de
+// cada departamento la UI suma sola "Otra / no sé" (a coordinar).
 // Departamento sin zonas (fuera del Gran Mendoza) = el envío se cotiza siempre.
-// Los ids quedan guardados en el navegador de las clientas (próximo pedido): no cambiarlos.
+// Los ids de departamento y los nombres de localidad quedan guardados en el navegador de las clientas
+// (próximo pedido): si se renombra una localidad, la tiene que volver a elegir (nada más).
 
 export const NOTA_ENVIOS =
   'Tarifas de cadetería. Días de lluvia o pago en efectivo pueden tener un pequeño adicional; Mar te lo confirma.';
@@ -13,15 +15,15 @@ export const DEPARTAMENTOS_ENVIO = [
     nombre: 'Ciudad de Mendoza',
     zonas: [
       { id: 'ciudad-1', localidades: ['Microcentro', '4ta sección', '5ta sección', '6ta sección'], precio: 3000 },
-      { id: 'ciudad-2', localidades: ['7ma sección', 'UNC', 'Dalvian', 'H. Lagomaggiore'], precio: 3500 },
+      { id: 'ciudad-2', localidades: ['7ma sección', 'UNC', 'Dalvian', 'Hospital Lagomaggiore'], precio: 3500 },
     ],
   },
   {
     id: 'godoy-cruz',
     nombre: 'Godoy Cruz',
     zonas: [
-      { id: 'godoy-cruz-1', localidades: ['Ciudad', 'V. Hipódromo', 'Cementerio'], precio: 3500 },
-      { id: 'godoy-cruz-2', localidades: ['Palmares', 'Las Tortugas', 'R. Peña', 'San Francisco del Monte'], precio: 4500 },
+      { id: 'godoy-cruz-1', localidades: ['Ciudad', 'Villa Hipódromo', 'Cementerio'], precio: 3500 },
+      { id: 'godoy-cruz-2', localidades: ['Palmares', 'Las Tortugas', 'Rodríguez Peña', 'San Francisco del Monte'], precio: 4500 },
     ],
   },
   {
@@ -29,7 +31,7 @@ export const DEPARTAMENTOS_ENVIO = [
     nombre: 'Guaymallén',
     zonas: [
       { id: 'guaymallen-1', localidades: ['San José', 'Dorrego'], precio: 3500 },
-      { id: 'guaymallen-2', localidades: ['B. Nueva', 'Villa Nueva', 'San Francisco del Monte', 'Bermejo', 'J. Nazareno'], precio: 4500 },
+      { id: 'guaymallen-2', localidades: ['Buena Nueva', 'Villa Nueva', 'San Francisco del Monte', 'Bermejo', 'Jesús Nazareno'], precio: 4500 },
       { id: 'guaymallen-3', localidades: ['El Sauce', 'Capilla del Rosario', 'Rodeo de la Cruz'], precio: 6000 },
       { id: 'guaymallen-4', localidades: ['Fray Luis Beltrán', 'Palmira'], precio: null },
     ],
@@ -73,8 +75,8 @@ export const DEPARTAMENTOS_ENVIO = [
   })),
 ];
 
-/** Última opción de cada departamento con zonas. */
-export const ZONA_OTRA = { id: 'otra', localidades: [], titulo: 'Otra zona / no sé', precio: null };
+/** Última opción de cada departamento con zonas: a coordinar con Mar. */
+export const LOCALIDAD_OTRA = { id: 'otra', nombre: 'Otra / no sé', precio: null, otra: true };
 
 /** Nombres viejos (pedidos guardados antes de las zonas) → id. */
 const ALIAS = { Capital: 'ciudad' };
@@ -84,7 +86,16 @@ export const departamentoEnvio = (id) =>
   DEPARTAMENTOS_ENVIO.find((d) => d.nombre === id || d.id === ALIAS[id]) ??
   null;
 
-/** Zonas para elegir en el checkout (con "Otra zona / no sé" al final); [] si el departamento no tiene tarifa. */
-export const zonasDe = (depto) => (depto?.zonas.length ? [...depto.zonas, ZONA_OTRA] : []);
+/**
+ * Localidades para elegir en el checkout, cada una con el precio de su zona (en el orden de la tarifa) y
+ * "Otra / no sé" al final. [] si el departamento no tiene tarifa. id = nombre de la localidad.
+ */
+export const localidadesDe = (depto) =>
+  depto?.zonas.length
+    ? [
+        ...depto.zonas.flatMap((z) => z.localidades.map((nombre) => ({ id: nombre, nombre, precio: z.precio }))),
+        LOCALIDAD_OTRA,
+      ]
+    : [];
 
-export const zonaEnvio = (depto, id) => zonasDe(depto).find((z) => z.id === id) ?? null;
+export const localidadEnvio = (depto, id) => (id ? localidadesDe(depto).find((l) => l.id === id) ?? null : null);

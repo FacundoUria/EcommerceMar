@@ -23,6 +23,7 @@ import { PASOS_RUTINA, whatsappCon } from '../config/negocio.js';
 import { imgFija } from '../lib/imagenes.js';
 import Roll from '../components/ui/Roll.jsx';
 import Expandible from '../components/ui/Expandible.jsx';
+import FilaDeslizable from '../components/ui/FilaDeslizable.jsx';
 
 export default function Producto() {
   const { id } = useParams();
@@ -130,7 +131,7 @@ function Detalle({ producto }) {
             </AnimatePresence>
           </div>
           {galeria.length > 1 && (
-            <div className="no-scrollbar -mx-4 mt-3 flex gap-2 overflow-x-auto px-4 pb-1" aria-label="Fotos del producto">
+            <FilaDeslizable className="-mx-4 mt-3" claseFila="gap-2 px-4 pb-1" activo={variante?.nombre ?? null} aria-label="Fotos del producto">
               {galeria.map((g) => {
                 const activa = (variante?.nombre ?? null) === g.nombre;
                 return (
@@ -148,7 +149,7 @@ function Detalle({ producto }) {
                   </button>
                 );
               })}
-            </div>
+            </FilaDeslizable>
           )}
         </Reveal>
 

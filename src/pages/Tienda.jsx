@@ -9,6 +9,7 @@ import Icon from '../components/ui/Icon.jsx';
 import ProductCard from '../components/product/ProductCard.jsx';
 import FotoProducto from '../components/product/FotoProducto.jsx';
 import { GridSkeleton, Skeleton } from '../components/ui/Skeleton.jsx';
+import FilaDeslizable from '../components/ui/FilaDeslizable.jsx';
 import { useBrands, useCategories, useDescripciones, useProducts } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
 import { useMediaQuery } from '../hooks/useMediaQuery.js';
@@ -169,9 +170,12 @@ export default function Tienda() {
             </div>
           </div>
 
-          {/* Una sola fila de categorías con mini-foto; fade en los bordes */}
-          <div
-            className="no-scrollbar -mx-4 mt-3 flex gap-2 overflow-x-auto px-4 [mask-image:linear-gradient(90deg,transparent,#000_16px,#000_calc(100%-24px),transparent)]"
+          {/* Categorías con mini-foto. Mobile: una fila deslizable (esfumado + "›"; la activa se centra).
+              Desde md: todas a la vista, en varias líneas. */}
+          <FilaDeslizable
+            className="-mx-4 mt-3"
+            claseFila="gap-2 px-4 md:flex-wrap"
+            activo={cat}
             role="group"
             aria-label="Filtrar por categoría"
           >
@@ -191,7 +195,7 @@ export default function Tienda() {
                   </Pildora>
                 ))
               : Array.from({ length: 5 }, (_, i) => <Skeleton key={i} className="h-11 w-28 shrink-0 rounded-full" />)}
-          </div>
+          </FilaDeslizable>
         </div>
       </div>
 

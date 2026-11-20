@@ -583,6 +583,25 @@
   initial-value: 55%;
 }
 
+/* Fila deslizable (FilaDeslizable.jsx): esfumado al color del fondo en el borde que tiene más contenido.
+   Los anchos (--fila-izq / --fila-der) los pone el componente; @property los deja transicionar. */
+@property --fila-izq {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+@property --fila-der {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+.fila-deslizable {
+  mask-image: linear-gradient(90deg, transparent, #000 var(--fila-izq), #000 calc(100% - var(--fila-der)), transparent);
+  transition:
+    --fila-izq 0.3s ease-out,
+    --fila-der 0.3s ease-out;
+}
+
 /* Story del video del proceso: anillo dorado que gira lento (historia sin ver). Un cuadrado con degradé
    cónico más grande que la card gira detrás (solo transform); la card lo recorta en un borde de 3px. */
 .anillo-historia {

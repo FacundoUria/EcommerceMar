@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useState } from 'react';
 import { getProducts } from '../services/productsService.js';
+import { precioDe } from '../lib/precios.js';
 
 const STORAGE_KEY = 'dreamhair:carrito:v1';
 const MAX_CANTIDAD = 99;
@@ -42,7 +43,7 @@ function reducer(lineas, accion) {
           marca: producto.marca ?? null,
           variante: variante?.nombre ?? null,
           imagen: variante?.imagen ?? producto.imagen,
-          precio: producto.precio,
+          precio: precioDe(producto, variante), // el de la variante si tiene uno propio
           cantidad: limitar(cantidad),
         },
       ];
@@ -62,12 +63,13 @@ function reducer(lineas, accion) {
       for (const l of lineas) {
         const p = porId.get(l.id);
         if (!p) continue;
-        const existe = !l.variante || p.variantes?.some((v) => v.nombre === l.variante);
+        const variante = l.variante ? p.variantes?.find((v) => v.nombre === l.variante) : null;
+        const existe = !l.variante || !!variante;
         const linea = {
           ...l,
           nombre: p.nombreCorto ?? p.nombre,
           marca: p.marca ?? null,
-          precio: p.precio,
+          precio: precioDe(p, variante),
           ...(existe ? {} : { variante: null, imagen: p.imagen, clave: claveLinea(p.id, null) }),
         };
         const igual = resultado.find((r) => r.clave === linea.clave);

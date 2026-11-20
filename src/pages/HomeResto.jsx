@@ -301,7 +301,7 @@ function RutinaDesktop() {
                     </span>
                     <span className="absolute -bottom-5 left-6 rounded-2xl border border-linea bg-crema-card/95 px-4 py-3 shadow-flotante backdrop-blur">
                       <span className="block text-sm font-semibold text-tinta">{producto.nombreCorto}</span>
-                      <Precio valor={producto.precio} className="block text-sm text-verde" />
+                      <Precio valor={producto.precio} desde={producto.desde} className="block text-sm text-verde" />
                     </span>
                   </Link>
                 </m.div>

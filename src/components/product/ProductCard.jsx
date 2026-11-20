@@ -31,7 +31,7 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
   const tieneVariantes = producto.variantes.length > 0;
   const fotoVariante = conHover && tieneVariantes ? producto.variantes[0].imagen : null;
   const url = `/producto/${producto.id}`;
-  const precio = formatPrecio(producto.precio);
+  const precio = `${producto.desde ? 'Desde ' : ''}${formatPrecio(producto.precio)}`;
   const color = colorDe(producto.imagen);
 
   const agregarRapido = async (e) => {
@@ -120,7 +120,7 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
             {producto.nombreCorto}
           </Link>
         </Titulo>
-        <Precio as="p" valor={producto.precio} className="mt-1 text-base text-tinta" />
+        <Precio as="p" valor={producto.precio} desde={producto.desde} className="mt-1 text-base text-tinta" />
       </div>
     </article>
   );

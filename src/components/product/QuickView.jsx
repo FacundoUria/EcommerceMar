@@ -3,6 +3,7 @@ import { AnimatePresence, m, useDragControls, useReducedMotion } from 'motion/re
 import { Link } from 'react-router';
 import Icon from '../ui/Icon.jsx';
 import FotoProducto from './FotoProducto.jsx';
+import { esDesde, precioDe } from '../../lib/precios.js';
 import QuantityStepper from '../ui/QuantityStepper.jsx';
 import Swatches from './Swatches.jsx';
 import { useUI } from '../../context/UIContext.jsx';
@@ -124,7 +125,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
             <h2 id="qv-titulo" className="mt-1 text-3xl leading-tight">
               {producto.nombreCorto}
             </h2>
-            <Precio as="p" valor={producto.precio} className="mt-2 text-2xl text-tinta" />
+            <Precio as="p" valor={precioDe(producto, preview ?? variante)} desde={esDesde(producto, preview ?? variante)} className="mt-2 text-2xl text-tinta" />
           </div>
 
           {tieneVariantes && (

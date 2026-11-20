@@ -23,7 +23,9 @@ export const categories = [
 // - marca: nombres cortos y consistentes (filtro de marcas). tamano: texto de Mar, tal cual.
 // - Las descripciones de Mar van aparte, en src/data/descripciones.js (se cargan solo cuando se usan).
 // - foto: archivo en assets/productos (sin extensión). tn: slug de Tiendanube para bajar la foto que falta.
-// - variantes: [nombre, foto]; sin foto propia usan la del producto.
+// - variantes: [nombre, foto, precio]; sin foto propia usan la del producto y sin precio propio, el del producto
+//   (foto null si solo cambia el precio). Con precios distintos el producto vale el más bajo y la card dice
+//   "Desde $ X" (`desde`); ficha, rutina, carrito y pedido usan el de la variante elegida (lib/precios.js).
 // - `destacado`: los "Favoritos de Mar" del home (elegidos a mano, no son datos de ventas).
 // - activo: false + precio: null → producto nuevo de Mar, oculto hasta tener precio y foto
 //   (lista en docs/confirmar-con-mar.md). El service los filtra.
@@ -38,7 +40,7 @@ export const products = [
   { id: 'kleno-acondicionador', marca: 'Kleno', nombre: 'Perfect Curly Acondicionador Rulos Perfectos', nombreCorto: 'Acondicionador Rulos Perfectos', tamano: '350 cc',
     categoria: 'low-poo', precio: null, activo: false },
   { id: 'shampoo-skala-mais-cachos', marca: 'Skala', nombre: 'Shampoo Expert #Mais Cachos', nombreCorto: 'Shampoo #Mais Cachos', tamano: '600 ml',
-    categoria: 'low-poo', precio: null, activo: false },
+    categoria: 'low-poo', precio: 12000 },
 
   // ── Cremas 2 en 1 ──
   { id: 'cremas-skala', marca: 'Skala', nombre: 'Cremas de Tratamiento y Peinar 2 en 1', nombreCorto: 'Cremas 2 en 1', tamano: '1000 g',
@@ -72,22 +74,22 @@ export const products = [
     categoria: 'cremas-peinar', precio: null, activo: false,
     variantes: [['Cebolla & Ginseng'],['Almendras Dulces & Chía'],['Arándanos']] },
   { id: 'crema-arbell-argan', marca: 'Arbell', nombre: 'Crema de Peinar Protectora Argán y Filtro Solar', nombreCorto: 'Crema Argán y Filtro Solar', tamano: '150 ml',
-    categoria: 'cremas-peinar', precio: null, activo: false },
+    categoria: 'cremas-peinar', precio: 7000 },
 
   // ── Tratamientos ──
   { id: 'mascarillas-lola', marca: 'Lola Cosmetics', nombre: 'Mascarillas Ultra Profundas', nombreCorto: 'Mascarillas Ultra Profundas', tamano: '450 g',
     categoria: 'tratamientos', precio: 29000,
     variantes: [['Milagre','mascarillas-lola-milagre'],['Dream Cream','mascarillas-lola-dream-cream'],['Danos Vorazes','mascarillas-lola-danos-vorazes'],['Morte Súbita','mascarillas-lola-morte-subita']] },
   { id: 'tratamientos-fidelite', marca: 'Fidelité', nombre: 'Tratamientos Profundos', nombreCorto: 'Tratamientos Profundos', tamano: '270 g',
-    categoria: 'tratamientos', precio: null, activo: false,
+    categoria: 'tratamientos', precio: 7500,
     // Colormaster no tiene foto suelta: usa la grupal
     variantes: [['Coco y Vainilla','tratamientos-fidelite-coco-vainilla'],['Almendras','tratamientos-fidelite-almendras'],['Keratina','tratamientos-fidelite-keratina'],['Colormaster Crema Ácida']] },
   { id: 'mascara-han-alfa-keratina', marca: 'HAN', nombre: 'Máscara Capilar Alfa Keratina', nombreCorto: 'Máscara Capilar Alfa Keratina', tamano: '200 cm³',
-    categoria: 'tratamientos', precio: null, activo: false },
-  // Un producto con dos tamaños: el precio va por tamaño (docs/confirmar-con-mar.md)
+    categoria: 'tratamientos', precio: 12000 },
+  // Un producto con dos tamaños, cada uno con su precio (la card dice "Desde $ 25.000")
   { id: 'ghee-lola', marca: 'Lola Cosmetics', nombre: 'Manteca Vegetal Be(M)dita Ghee Reconstrução', nombreCorto: 'Be(M)dita Ghee Reconstrução', tamano: '100 g / 350 g',
-    categoria: 'tratamientos', precio: null, activo: false, foto: 'ghee-lola-350',
-    variantes: [['100 g','ghee-lola-100'],['350 g','ghee-lola-350']] },
+    categoria: 'tratamientos', foto: 'ghee-lola-350',
+    variantes: [['100 g','ghee-lola-100',25000],['350 g · taza','ghee-lola-350',39000]] },
 
   // ── Geles y gelatinas ──
   { id: 'gel-de-rich', marca: 'Rich', nombre: 'Gel Capilar con Proteína Vegetal (Envase Botella)', nombreCorto: 'Gel con Proteína Vegetal',
@@ -155,7 +157,8 @@ export const products = [
   { id: 'cascada-manzanilla-vainilla', marca: 'Cascada de Proteínas', nombre: 'Nutri-Reparación Instantánea Manzanilla y Vainilla', nombreCorto: 'Nutri-Reparación Manzanilla', tamano: '120 ml',
     categoria: 'spray', precio: null, activo: false },
 
-  // ── Satén ──
+  // ── Satén ── Los accesorios de tela (cofias, fundas, y en Varios turbante y practiplopping) los hace un
+  // modisto y van en bolsita con su nombre: marca Dream Hair
   { id: 'funda-saten', marca: 'Dream Hair', nombre: 'Fundas de Almohada de Satén Anti-Frizz', nombreCorto: 'Funda de almohada satén',
     categoria: 'saten', precio: 15000, foto: 'funda-saten' },
   { id: 'cofia-saten', marca: 'Dream Hair', nombre: 'Cofia de Satén Anti-Frizz (Varios Colores)', nombreCorto: 'Cofia de satén',
@@ -199,22 +202,30 @@ export const products = [
     categoria: 'cepillos', precio: 5000 },
 
   // ── Varios ──
-  { id: 'turbante-microfibra', nombre: 'Turbante de Microfibra Anti-Frizz', nombreCorto: 'Turbante de microfibra',
+  { id: 'turbante-microfibra', marca: 'Dream Hair', nombre: 'Turbante de Microfibra Anti-Frizz', nombreCorto: 'Turbante de microfibra',
     categoria: 'varios', precio: 13000, foto: 'turbante-microfibra' },
-  { id: 'practiplopping', nombre: 'Practiplopping (4 puntas)', nombreCorto: 'Practiplopping 4 puntas',
+  { id: 'practiplopping', marca: 'Dream Hair', nombre: 'Practiplopping (4 puntas)', nombreCorto: 'Practiplopping 4 puntas',
     categoria: 'varios', precio: 16000,
     variantes: [['Microfibra'],['Algodón']] },
   { id: 'difusor-plegable', nombre: 'Difusor Plegable Universal de Silicona', nombreCorto: 'Difusor Plegable de Silicona',
-    categoria: 'varios', precio: null, activo: false },
+    categoria: 'varios', precio: 19000 },
+  // Mar lo llama "difusor de agua"
   { id: 'atomizador-day-after', nombre: 'Atomizador de Bruma Continua para Day After', nombreCorto: 'Atomizador de Bruma Continua',
-    categoria: 'varios', precio: null, activo: false },
+    categoria: 'varios', precio: 18000 },
 ].map((p) => {
   const imagen = img(p.foto || p.id);
+  // Precio base: el del producto o, si solo lo traen las variantes, el más bajo de ellas
+  const propios = (p.variantes || []).map((v) => v[2]).filter((x) => x != null);
+  const base = p.precio ?? (propios.length ? Math.min(...propios) : null);
+  const variantes = (p.variantes || []).map(([nombre, f, precio]) => ({ nombre, imagen: f ? img(f) : imagen, precio: precio ?? base }));
+  const precios = variantes.map((v) => v.precio).filter((x) => x != null);
   return {
     ...p,
     nombreCorto: p.nombreCorto || p.nombre,
     imagen,
-    variantes: (p.variantes || []).map(([nombre, f]) => ({ nombre, imagen: f ? img(f) : imagen })),
+    precio: precios.length ? Math.min(...precios) : base,
+    desde: new Set(precios).size > 1, // variantes con precios distintos: "Desde $ X"
+    variantes,
   };
 });
 

@@ -38,6 +38,10 @@ cada uno (y sacar `activo: false`).
 de Mar, la foto es la botella con dosificador). En Tiendanube decía **800 g** y el precio actual
 ($ 19.000) viene de ahí. **Confirmar tamaño y precio.**
 
+**Listo para cargar cuando Mar confirme precios de cada tamaño:** el catálogo ya admite precio por variante
+(como el Ghee de Lola). Si vende los dos, queda un solo producto con variantes `300 ml` y `800 g`, cada una
+con su precio (`['300 ml', foto, precio]`), y la card dice "Desde $ X".
+
 ## 3. Cepillos asignados por foto (dudosos)
 
 Las descripciones de Mar se asignaron a los cepillos que ya estaban comparando las fotos. Confirmar que cada
@@ -75,34 +79,23 @@ original en mejor resolución y reemplazarlo en `assets/mar/` (después `npm run
 
 ## 6. Falta precio
 
-Productos nuevos que mandó Mar el 20/11/2026, **con foto y descripción**, cargados con `activo: false` y
-`precio: null` (no se ven en el sitio). Para publicarlos: poner el precio y sacar `activo: false`.
-
-| # | Marca | Producto | Tamaño | id | Categoría |
-|---|---|---|---|---|---|
-| 1 | Skala | Shampoo Expert #Mais Cachos | 600 ml | `shampoo-skala-mais-cachos` | Low poo |
-| 2 | Arbell | Crema de Peinar Protectora Argán y Filtro Solar | 150 ml | `crema-arbell-argan` | Cremas de peinar |
-| 3 | — | Atomizador de Bruma Continua para Day After | — | `atomizador-day-after` | Varios |
-| 4 | — | Difusor Plegable Universal de Silicona | — | `difusor-plegable` | Varios |
-| 5 | Fidelité | Tratamientos Profundos (Coco y Vainilla, Almendras, Keratina, Colormaster Crema Ácida) | 270 g | `tratamientos-fidelite` | Tratamientos |
-| 6 | HAN | Máscara Capilar Alfa Keratina | 200 cm³ | `mascara-han-alfa-keratina` | Tratamientos |
-| 7 | Lola Cosmetics | Manteca Vegetal Be(M)dita Ghee Reconstrução (100 g y 350 g) | 100 g / 350 g | `ghee-lola` | Tratamientos |
-
-- **Ghee: un precio por tamaño.** Hoy el catálogo tiene un solo precio por producto (las variantes no
-  tienen precio propio). Cuando Mar pase los dos precios: o se suma precio por variante al catálogo
-  (carrito, rutina y pedido lo tienen que respetar), o se separa en dos productos (100 g y 350 g).
-- **Fidelité Colormaster Crema Ácida:** no vino foto suelta; usa la foto grupal de los cuatro potes.
+Nada pendiente: los 7 productos que mandó Mar el 20/11/2026 ya tienen precio (21/11) y están publicados
+(Skala #Mais Cachos, Arbell, Atomizador, Difusor, Fidelité, HAN Alfa Keratina y Ghee con un precio por tamaño).
 
 ## 7. Fotos para pedirle a Mar
 
 - **Atomizador de Bruma Continua** (`atomizador-day-after`): la foto pesa 5 KB y mide 425×470 px. Se usa
   igual, pero **pedir una foto mejor**.
+- **Fidelité Colormaster Crema Ácida** (`tratamientos-fidelite`): no vino foto suelta; usa la foto grupal de
+  los cuatro potes.
 - **Difusor Plegable** (`difusor-plegable`): 448×448 px, con modelo. Se ve bien en las cards, pero en la
   ficha de producto queda más chica que las demás (nunca se estira). Si hay una más grande, mejor.
 
 ## 8. Datos que se asumieron al cargar (nov 2026)
 
-- **Cofias XL y Long:** marca "Dream Hair", como la cofia de satén que ya estaba. Confirmar.
+- **Accesorios de tela** (cofias, fundas de satén, turbante y practiplopping): Mar confirmó que los hace un
+  modisto y van en bolsita con su nombre → marca "Dream Hair".
+- **¿El ondulador también es del modisto?** (`ondulador-saten`) Hoy va sin marca; si lo es, marca "Dream Hair".
 - **Practiplopping:** las variantes Microfibra y Algodón usan la misma foto (vino una sola).
 - **Mascarillas Lola 450 g:** el álbum trae exactamente las cuatro del texto (Milagre, Dream Cream, Danos
   Vorazes, Morte Súbita): no hay variantes de más.

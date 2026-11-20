@@ -10,6 +10,7 @@ import SmartImg from '../components/ui/SmartImg.jsx';
 import MeshFondo from '../components/ui/MeshFondo.jsx';
 import SectionHeader from '../components/ui/SectionHeader.jsx';
 import FotoProducto from '../components/product/FotoProducto.jsx';
+import { esDesde, precioDe } from '../lib/precios.js';
 import { useMediaQuery } from '../hooks/useMediaQuery.js';
 import { Skeleton } from '../components/ui/Skeleton.jsx';
 import { useCategories, useProducts } from '../hooks/useCatalog.js';
@@ -204,7 +205,7 @@ function MiniCard({ producto, variante, etiqueta, y, delay, className, flotarDes
           </span>
           <span className="min-w-0">
             <span className="line-clamp-2 block text-xs leading-tight font-semibold text-tinta md:text-[13px]">{nombre}</span>
-            <Precio valor={producto.precio} className="mt-0.5 block text-xs text-verde md:text-sm" />
+            <Precio valor={precioDe(producto, variante)} desde={esDesde(producto, variante)} className="mt-0.5 block text-xs text-verde md:text-sm" />
           </span>
         </Link>
       </m.div>

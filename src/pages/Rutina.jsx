@@ -6,6 +6,7 @@ import RevealText from '../components/ui/RevealText.jsx';
 import LineaProgreso from '../components/ui/LineaProgreso.jsx';
 import Icon from '../components/ui/Icon.jsx';
 import FotoProducto from '../components/product/FotoProducto.jsx';
+import { esDesde, precioDe } from '../lib/precios.js';
 import Swatches from '../components/product/Swatches.jsx';
 import { GridSkeleton } from '../components/ui/Skeleton.jsx';
 import { useCategories, useProducts } from '../hooks/useCatalog.js';
@@ -43,7 +44,7 @@ export default function Rutina() {
 
   const delPaso = (p) => eleccion[p.paso] ?? [];
   const elegidos = PASOS_RUTINA.flatMap(delPaso);
-  const total = elegidos.reduce((s, e) => s + e.producto.precio, 0);
+  const total = elegidos.reduce((s, e) => s + precioDe(e.producto, e.variante), 0);
   // Primer producto marcado que tiene variantes y todavía no eligió cuál (y en qué paso está)
   const faltaVariante = (() => {
     for (const p of PASOS_RUTINA) {
@@ -254,7 +255,7 @@ export default function Rutina() {
                               <span className="block truncate text-sm font-semibold">{e.producto.nombreCorto}</span>
                               {e.variante && <span className="block truncate text-xs text-texto-suave">{e.variante.nombre}</span>}
                             </span>
-                            <Precio valor={e.producto.precio} className="text-sm text-tinta" />
+                            <Precio valor={precioDe(e.producto, e.variante)} className="text-sm text-tinta" />
                           </m.li>
                         ))}
                       </AnimatePresence>
@@ -428,7 +429,7 @@ function OpcionProducto({ producto, seleccion, onElegir, onVariante, indice = 0 
           <span className={`block ${activo && producto.variantes.length ? '' : 'p-3'}`}>
             {producto.marca && <span className="block text-[11px] font-bold tracking-[0.12em] text-dorado uppercase">{producto.marca}</span>}
             <span className="line-clamp-2 block text-sm leading-snug font-semibold">{producto.nombreCorto}</span>
-            <Precio valor={producto.precio} className="mt-1 block text-tinta" />
+            <Precio valor={precioDe(producto, seleccion?.variante)} desde={esDesde(producto, seleccion?.variante)} className="mt-1 block text-tinta" />
           </span>
           <CheckAnimado activo={activo} />
         </button>

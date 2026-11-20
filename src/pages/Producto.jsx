@@ -24,6 +24,7 @@ import { imgFija } from '../lib/imagenes.js';
 import Roll from '../components/ui/Roll.jsx';
 import Expandible from '../components/ui/Expandible.jsx';
 import FilaDeslizable from '../components/ui/FilaDeslizable.jsx';
+import { esDesde, precioDe } from '../lib/precios.js';
 
 export default function Producto() {
   const { id } = useParams();
@@ -53,15 +54,13 @@ function Detalle({ producto }) {
   const tieneVariantes = producto.variantes.length > 0;
   const categoria = categorias?.find((c) => c.id === producto.categoria);
 
-  // Galería: foto principal + una por variante (sin repetir: las variantes sin foto propia usan la del
-  // producto y se eligen desde los chips)
-  const galeria = useMemo(
-    () =>
-      [{ nombre: null, imagen: producto.imagen }, ...producto.variantes].filter(
-        (g, i, todas) => todas.findIndex((o) => o.imagen === g.imagen) === i,
-      ),
-    [producto],
-  );
+  // Galería: una miniatura por foto distinta. Si una variante usa la misma foto que el producto (Ghee 350 g),
+  // queda la de la variante (así se marca al elegirla); las variantes sin foto propia se eligen desde los chips
+  const galeria = useMemo(() => {
+    const vistas = new Set();
+    const variantes = producto.variantes.filter((v) => !vistas.has(v.imagen) && vistas.add(v.imagen));
+    return vistas.has(producto.imagen) ? variantes : [{ nombre: null, imagen: producto.imagen }, ...variantes];
+  }, [producto]);
   const imagen = (preview ?? variante)?.imagen ?? producto.imagen;
 
   const elegir = (v) => {
@@ -171,7 +170,7 @@ function Detalle({ producto }) {
                 <p>{descripcion}</p>
               </Expandible>
             )}
-            <Precio as="p" valor={producto.precio} className="mt-3 text-3xl text-tinta" />
+            <Precio as="p" valor={precioDe(producto, preview ?? variante)} desde={esDesde(producto, preview ?? variante)} className="mt-3 text-3xl text-tinta" />
           </div>
 
           {tieneVariantes && (

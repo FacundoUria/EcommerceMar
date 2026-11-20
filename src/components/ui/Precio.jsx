@@ -10,19 +10,29 @@ const vistos = new WeakSet();
  * - El número se escribe directo en el DOM (sin re-renders).
  * - Con movimiento reducido o sin IntersectionObserver: el precio final directo.
  * - Lectores de pantalla: siempre el precio final.
+ * - `desde`: antepone "Desde" (producto con variantes de precios distintos, sin variante elegida).
+ * - Si el valor cambia después (otra variante en la ficha), se muestra el nuevo directo, sin contar.
  */
-export default function Precio({ valor, className = '', as: Tag = 'span' }) {
+export default function Precio({ valor, desde = false, className = '', as: Tag = 'span' }) {
   const ref = useRef(null);
   const final = formatPrecio(valor);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    // El número se escribe a mano (textContent): React ya no actualiza ese texto, así que el valor
+    // actual se escribe siempre que no se anime (si no, al cambiar de variante quedaba el precio viejo)
+    const quieto = () => {
+      el.textContent = formatPrecio(valor);
+    };
     const reducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reducido || !('IntersectionObserver' in window) || vistos.has(el)) return;
+    if (reducido || !('IntersectionObserver' in window) || vistos.has(el)) return quieto();
     // Ya visible al montar (arriba de todo): no se anima, se ve el precio final sin parpadeo.
     const r = el.getBoundingClientRect();
-    if (r.top < window.innerHeight && r.bottom > 0) return;
+    if (r.top < window.innerHeight && r.bottom > 0) {
+      vistos.add(el);
+      return quieto();
+    }
     el.textContent = formatPrecio(0);
     let raf;
     const io = new IntersectionObserver(
@@ -52,13 +62,18 @@ export default function Precio({ valor, className = '', as: Tag = 'span' }) {
 
   return (
     <Tag className={`precio ${className}`}>
+      {desde && (
+        <span aria-hidden="true" className="mr-1 text-[0.8em] font-medium">
+          Desde
+        </span>
+      )}
       <span className="relative inline-block">
         <span className="invisible" aria-hidden="true">{final}</span>
         <span ref={ref} aria-hidden="true" className="absolute inset-y-0 left-0 whitespace-nowrap">
           {final}
         </span>
       </span>
-      <span className="sr-only">{final}</span>
+      <span className="sr-only">{desde ? `Desde ${final}` : final}</span>
     </Tag>
   );
 }

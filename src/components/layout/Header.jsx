@@ -87,7 +87,7 @@ export default function Header() {
           >
           <span className="relative shrink-0">
             <img {...imgFija('/img/marca/LOGO.webp', 44)} alt="" width="44" height="44" className="size-10 rounded-full mix-blend-multiply md:size-11" />
-            <Destellos puntos={DESTELLO_LOGO} />
+            <Destellos puntos={DESTELLO_LOGO} pausarFuera={false} />
           </span>
           <span className="leading-none">
             <span className="block font-serif text-xl font-semibold tracking-tight text-tinta md:text-2xl">{NEGOCIO.nombre}</span>

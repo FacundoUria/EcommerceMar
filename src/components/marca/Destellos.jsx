@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { usePausaFueraDePantalla } from '../../hooks/usePausaFueraDePantalla.js';
 import { PATH_ESTRELLA } from '../../lib/rulos.js';
 
 export function Estrella({ className = '', style }) {
@@ -33,10 +34,14 @@ export function ConDestellos({ children, className = '' }) {
  * elegidos una vez al montar. `puntos`: [{ x, y, tam }] en % de la caja / px.
  * Con movimiento reducido no se muestran (ver index.css).
  */
-export default function Destellos({ puntos, className = '' }) {
+export default function Destellos({ puntos, className = '', pausarFuera = true }) {
   const [tiempos] = useState(() => puntos.map(() => ({ dur: azar(2.4, 4.2), delay: azar(0.6, 3.4) })));
+  // Fuera de pantalla los destellos quedan en pausa (no recalculan estilos en cada frame). `pausarFuera`:
+  // false en los que están siempre a la vista (logo del header)
+  const caja = useRef(null);
+  usePausaFueraDePantalla(caja, { listo: pausarFuera });
   return (
-    <span aria-hidden="true" className={`pointer-events-none absolute inset-0 ${className}`}>
+    <span ref={caja} aria-hidden="true" className={`pointer-events-none absolute inset-0 ${className}`}>
       {puntos.map((p, i) => (
         <Estrella
           key={i}

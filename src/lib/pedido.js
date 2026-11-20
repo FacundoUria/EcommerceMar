@@ -1,7 +1,8 @@
 // Pedido por WhatsApp (decisión de Mar: no hay pago online; el pedido le llega a su WhatsApp y ella
-// coordina pago y entrega). Funciones puras: número de pedido, mensaje y link.
+// coordina pago y entrega). Funciones puras: número de pedido, envío, mensaje y link.
 import { formatPrecio, plural } from './format.js';
 import { whatsappCon } from '../config/negocio.js';
+import { departamentoEnvio, zonaEnvio, zonasDe } from '../config/envios.js';
 
 /** Si el mensaje pasa este largo, además del link se ofrece "Copiar pedido" (WhatsApp puede cortarlo). */
 export const LARGO_MAXIMO = 1800;
@@ -10,8 +11,21 @@ export const LARGO_MAXIMO = 1800;
 export const numeroPedido = () => `DH-${Math.floor(1000 + Math.random() * 9000)}`;
 
 /**
+ * Envío del pedido según la entrega elegida. null = retiro en el estudio, o envío sin departamento/zona
+ * todavía. Si no: { depto, zona (null si el departamento no tiene tarifa), precio (null = a cotizar) }.
+ */
+export function envioDe({ entrega, departamento, zona }) {
+  if (entrega !== 'envio') return null;
+  const depto = departamentoEnvio(departamento);
+  if (!depto) return null;
+  if (!zonasDe(depto).length) return { depto, zona: null, precio: null };
+  const z = zonaEnvio(depto, zona);
+  return z ? { depto, zona: z, precio: z.precio } : null;
+}
+
+/**
  * Mensaje en texto plano con el formato de WhatsApp (*negrita*). `datos`: { nombre, entrega ('envio' |
- * 'retiro'), direccion, departamento, pago, nota }. Precios con el mismo formato ARS del sitio.
+ * 'retiro'), direccion, departamento, zona, pago, nota }. Precios con el mismo formato ARS del sitio.
  */
 export function armarMensaje({ lineas, datos, numero }) {
   const items = lineas.map((l) => {
@@ -24,19 +38,29 @@ export function armarMensaje({ lineas, datos, numero }) {
   });
   const unidades = lineas.reduce((s, l) => s + l.cantidad, 0);
   const total = lineas.reduce((s, l) => s + l.cantidad * l.precio, 0);
+  const envio = envioDe(datos);
+  const conCosto = envio?.precio != null;
   const partes = [
     '¡Hola Mar! 👋 Quiero hacer este pedido:',
     `*Pedido ${numero}*`,
     '',
     ...items,
     '',
-    `*Total: ${formatPrecio(total)}* (${lineas.length === 1 ? '1 producto' : `${lineas.length} productos distintos`}, ${plural(unidades, 'unidad', 'unidades')})`,
+    // Con costo de envío, el total de los productos pasa a ser el subtotal (el total va abajo, con el envío)
+    `*${conCosto ? 'Subtotal' : 'Total'}: ${formatPrecio(total)}* (${lineas.length === 1 ? '1 producto' : `${lineas.length} productos distintos`}, ${plural(unidades, 'unidad', 'unidades')})`,
     '',
     `👤 Nombre: ${datos.nombre.trim()}`,
-    datos.entrega === 'envio'
-      ? `📦 Entrega: Envío a domicilio — ${datos.direccion.trim()}, ${datos.departamento}`
-      : '🏠 Entrega: Retiro en el estudio',
   ];
+  if (envio) {
+    const localidad = envio.zona?.localidades.length ? `, ${envio.zona.localidades.join(' / ')}` : '';
+    partes.push(
+      `📦 Entrega: Envío a domicilio — ${datos.direccion.trim()}${localidad} (${envio.depto.nombre})`,
+      `🚚 Envío: ${conCosto ? formatPrecio(envio.precio) : 'a coordinar'}`,
+    );
+    if (conCosto) partes.push(`*Total con envío: ${formatPrecio(total + envio.precio)}*`);
+  } else {
+    partes.push('🏠 Entrega: Retiro en el estudio');
+  }
   if (datos.pago) partes.push(`💳 Pago: ${datos.pago}`);
   if (datos.nota?.trim()) partes.push(`📝 Nota: ${datos.nota.trim()}`);
   return partes.join('\n');
@@ -45,14 +69,16 @@ export function armarMensaje({ lineas, datos, numero }) {
 /** Link de WhatsApp al estudio con el mensaje (URL-encoded). */
 export const linkPedido = (texto) => whatsappCon(texto);
 
-/** Errores de validación por campo ({} si está todo bien). */
+/** Errores de validación por campo ({} si está todo bien). Retiro: solo el nombre. */
 export function validarDatos(d) {
   const e = {};
   if (d.nombre.trim().length < 3) e.nombre = 'Escribí tu nombre y apellido';
   if (!d.entrega) e.entrega = 'Elegí cómo querés recibir tu pedido';
   if (d.entrega === 'envio') {
+    const depto = departamentoEnvio(d.departamento);
+    if (!depto) e.departamento = 'Elegí el departamento';
+    else if (zonasDe(depto).length && !zonaEnvio(depto, d.zona)) e.zona = 'Elegí tu zona';
     if (d.direccion.trim().length < 4) e.direccion = 'Escribí la dirección de entrega';
-    if (!d.departamento) e.departamento = 'Elegí el departamento';
   }
   return e;
 }
@@ -62,19 +88,22 @@ const CLAVE = 'dreamhair:datos-pedido:v1';
 export function leerDatosGuardados() {
   try {
     const d = JSON.parse(localStorage.getItem(CLAVE) || '{}');
+    // Departamento por id (los pedidos viejos lo guardaban por nombre); zona solo si sigue existiendo
+    const depto = typeof d.departamento === 'string' ? departamentoEnvio(d.departamento) : null;
     return {
       nombre: typeof d.nombre === 'string' ? d.nombre : '',
       entrega: d.entrega === 'envio' || d.entrega === 'retiro' ? d.entrega : '',
       direccion: typeof d.direccion === 'string' ? d.direccion : '',
-      departamento: typeof d.departamento === 'string' ? d.departamento : '',
+      departamento: depto?.id ?? '',
+      zona: (depto && zonaEnvio(depto, d.zona)?.id) ?? '',
     };
   } catch {
     return {};
   }
 }
-export function guardarDatos({ nombre, entrega, direccion, departamento }) {
+export function guardarDatos({ nombre, entrega, direccion, departamento, zona }) {
   try {
-    localStorage.setItem(CLAVE, JSON.stringify({ nombre, entrega, direccion, departamento }));
+    localStorage.setItem(CLAVE, JSON.stringify({ nombre, entrega, direccion, departamento, zona }));
   } catch {
     /* sin localStorage: no se precarga la próxima vez */
   }

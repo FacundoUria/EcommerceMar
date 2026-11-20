@@ -14,10 +14,11 @@ import { useBloquearScroll } from '../../hooks/useBloquearScroll.js';
 import { formatPrecio, plural } from '../../lib/format.js';
 import { fuenteImagen } from '../../lib/imagenes.js';
 import { explotarDestellos } from '../../lib/destellos.js';
-import { DEPARTAMENTOS_MENDOZA } from '../../config/negocio.js';
+import { DEPARTAMENTOS_ENVIO, NOTA_ENVIOS, departamentoEnvio, zonasDe } from '../../config/envios.js';
 import {
   LARGO_MAXIMO,
   armarMensaje,
+  envioDe,
   guardarDatos,
   leerDatosGuardados,
   linkPedido,
@@ -33,7 +34,12 @@ const ENTREGAS = [
   { id: 'retiro', titulo: 'Retiro en el estudio', icono: 'local' },
 ];
 // Orden de los campos obligatorios (al enviar con errores, el foco va al primero)
-const OBLIGATORIOS = ['nombre', 'entrega', 'direccion', 'departamento'];
+const OBLIGATORIOS = ['nombre', 'entrega', 'departamento', 'zona', 'direccion'];
+// Errores que se borran al cambiar un campo (cambiar la entrega o el departamento invalida lo que depende de eso)
+const BORRA_ERRORES = {
+  entrega: ['entrega', 'departamento', 'zona', 'direccion'],
+  departamento: ['departamento', 'zona'],
+};
 
 const ETIQUETA = 'mb-1.5 block text-sm font-bold text-tinta';
 const campoClase = (error) =>
@@ -89,10 +95,16 @@ export default function Checkout({ onClose }) {
     entrega: '',
     direccion: '',
     departamento: '',
+    zona: '',
     pago: '',
     nota: '',
     ...leerDatosGuardados(),
   }));
+  // Retiro (o envío sin zona elegida) = null: el total queda sin envío
+  const envio = envioDe(datos);
+  const costoEnvio = envio?.precio ?? null;
+  const deptoElegido = departamentoEnvio(datos.departamento);
+  const zonas = zonasDe(deptoElegido);
   const [errores, setErrores] = useState({});
   const [enviado, setEnviado] = useState(null); // { mensaje, url } después de tocar "Enviar"
   useFocusTrap(ref, onClose, true, { enfocarContenedor: true });
@@ -113,9 +125,14 @@ export default function Checkout({ onClose }) {
   }, [lineas.length, enviado, onClose]);
 
   const set = (campo, valor) => {
-    setDatos((d) => ({ ...d, [campo]: valor }));
+    setDatos((d) => ({
+      ...d,
+      [campo]: valor,
+      // Otro departamento = otras zonas: hay que volver a elegir
+      ...(campo === 'departamento' && valor !== d.departamento ? { zona: '' } : null),
+    }));
     setErrores((e) => {
-      const borrar = campo === 'entrega' ? ['entrega', 'direccion', 'departamento'] : [campo];
+      const borrar = BORRA_ERRORES[campo] ?? [campo];
       if (!borrar.some((k) => e[k])) return e;
       const resto = { ...e };
       borrar.forEach((k) => delete resto[k]);
@@ -278,53 +295,80 @@ export default function Checkout({ onClose }) {
 
                   <AnimatePresence initial={false} mode="wait">
                     {datos.entrega === 'envio' && (
-                      <m.div
-                        key="envio"
-                        initial={{ opacity: 0, y: -8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, transition: { duration: 0.15 } }}
-                        transition={{ duration: 0.4, ease: EASE }}
-                        className="mt-5 space-y-5"
-                      >
-                        <Campo id="direccion" etiqueta="Dirección" error={errores.direccion}>
-                          {(aria) => (
-                            <input
-                              {...aria}
-                              type="text"
-                              autoComplete="street-address"
-                              enterKeyHint="next"
-                              maxLength={120}
-                              placeholder="Calle, número, piso"
-                              value={datos.direccion}
-                              onChange={(e) => set('direccion', e.target.value)}
-                              className={`h-12 ${campoClase(errores.direccion)}`}
-                            />
-                          )}
-                        </Campo>
+                      // Departamento → zona (con el precio) → dirección, todo a la vista
+                      <Desplegable key="envio" className="pt-5">
                         <Campo id="departamento" etiqueta="Departamento" error={errores.departamento}>
                           {(aria) => (
                             <span className="relative block">
                               <select
                                 {...aria}
-                                value={datos.departamento}
+                                value={deptoElegido?.id ?? ''}
                                 onChange={(e) => set('departamento', e.target.value)}
-                                className={`h-12 appearance-none pr-11 ${campoClase(errores.departamento)} ${datos.departamento ? '' : 'text-texto-suave'}`}
+                                className={`h-14 appearance-none pr-11 text-[17px] ${campoClase(errores.departamento)} ${deptoElegido ? '' : 'text-texto-suave'}`}
                               >
                                 <option value="" disabled>
                                   Elegí uno
                                 </option>
-                                {DEPARTAMENTOS_MENDOZA.map((d) => (
-                                  <option key={d} value={d} className="text-tinta">
-                                    {d}
+                                {DEPARTAMENTOS_ENVIO.map((d) => (
+                                  <option key={d.id} value={d.id} className="text-tinta">
+                                    {d.nombre}
                                   </option>
                                 ))}
                               </select>
-                              <Icon name="abajo" size={18} className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-texto-suave" />
+                              <Icon name="abajo" size={20} className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-texto-suave" />
                             </span>
                           )}
                         </Campo>
-                        <p className="text-xs text-texto-suave">El costo de envío lo coordinás con Mar</p>
-                      </m.div>
+
+                        <AnimatePresence initial={false} mode="wait">
+                          {deptoElegido && (
+                            <Desplegable key={deptoElegido.id} className="pt-5">
+                              {zonas.length ? (
+                                <fieldset data-bloque>
+                                  <legend className={ETIQUETA}>Zona</legend>
+                                  <div className="grid gap-2.5">
+                                    {zonas.map((z, i) => (
+                                      <OpcionZona
+                                        key={z.id}
+                                        zona={z}
+                                        seleccionada={datos.zona === z.id}
+                                        error={errores.zona}
+                                        primera={i === 0}
+                                        onElegir={() => set('zona', z.id)}
+                                      />
+                                    ))}
+                                  </div>
+                                  <ErrorCampo id="checkout-error-zona" texto={errores.zona} />
+                                  <p className="mt-3 text-xs leading-relaxed text-texto-suave">{NOTA_ENVIOS}</p>
+                                </fieldset>
+                              ) : (
+                                <p className="flex items-center gap-3 rounded-3xl bg-salvia/70 px-4 py-3.5 text-[15px] text-tinta">
+                                  <Icon name="camionFino" size={22} strokeWidth={1.6} className="shrink-0 text-verde" />
+                                  El envío a {deptoElegido.nombre} lo coordinás con Mar
+                                </p>
+                              )}
+                            </Desplegable>
+                          )}
+                        </AnimatePresence>
+
+                        <div className="pt-5">
+                          <Campo id="direccion" etiqueta="Dirección" error={errores.direccion}>
+                            {(aria) => (
+                              <input
+                                {...aria}
+                                type="text"
+                                autoComplete="street-address"
+                                enterKeyHint="next"
+                                maxLength={120}
+                                placeholder="Calle, número, piso"
+                                value={datos.direccion}
+                                onChange={(e) => set('direccion', e.target.value)}
+                                className={`h-12 ${campoClase(errores.direccion)}`}
+                              />
+                            )}
+                          </Campo>
+                        </div>
+                      </Desplegable>
                     )}
                     {datos.entrega === 'retiro' && (
                       <m.p
@@ -380,12 +424,35 @@ export default function Checkout({ onClose }) {
               </div>
 
               <div className="shrink-0 border-t border-linea bg-arena px-6 pt-4 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
-                <div className="flex items-center justify-between gap-3">
-                  <span className="flex min-w-0 items-center gap-2.5">
-                    <Miniaturas lineas={lineas} />
-                    <span className="text-sm text-texto-suave">{plural(cantidadTotal, 'producto', 'productos')}</span>
-                  </span>
-                  <span className="precio text-2xl text-tinta">{formatPrecio(total)}</span>
+                {/* Con zona elegida: subtotal + envío arriba y el total ya con el envío */}
+                <div aria-live="polite">
+                  <AnimatePresence initial={false}>
+                    {costoEnvio != null && (
+                      <Desplegable key="subtotal" className="pb-1">
+                        <FilaResumen etiqueta={`Subtotal (${plural(cantidadTotal, 'producto', 'productos')})`}>
+                          <span className="precio">{formatPrecio(total)}</span>
+                        </FilaResumen>
+                      </Desplegable>
+                    )}
+                    {envio && (
+                      <Desplegable key="envio" className="pb-2.5">
+                        <FilaResumen etiqueta="Envío">
+                          {costoEnvio != null ? <span className="precio">{formatPrecio(costoEnvio)}</span> : 'a coordinar con Mar'}
+                        </FilaResumen>
+                      </Desplegable>
+                    )}
+                  </AnimatePresence>
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="flex min-w-0 items-center gap-2.5">
+                      <Miniaturas lineas={lineas} />
+                      {costoEnvio != null ? (
+                        <span className="text-sm font-bold text-tinta">Total con envío</span>
+                      ) : (
+                        <span className="text-sm text-texto-suave">{plural(cantidadTotal, 'producto', 'productos')}</span>
+                      )}
+                    </span>
+                    <span className="precio text-2xl text-tinta">{formatPrecio(total + (costoEnvio ?? 0))}</span>
+                  </div>
                 </div>
                 <p className="mt-1.5 text-[11px] text-texto-suave">Precios y stock sujetos a confirmación de Mar</p>
                 <button type="submit" className="btn btn-primario mt-3 w-full">
@@ -404,6 +471,80 @@ export default function Checkout({ onClose }) {
 
 function Opcional() {
   return <span className="ml-1 text-xs font-medium text-texto-suave">(opcional)</span>;
+}
+
+/**
+ * Bloque que se despliega animando el alto (excepción pedida a "solo transform/opacity": lo de abajo
+ * acompaña). Movimiento reducido: solo fade. El margen negativo + padding deja lugar a los anillos de foco.
+ */
+function Desplegable({ children, className = '' }) {
+  const reducido = useReducedMotion();
+  const cerrado = reducido ? { opacity: 0 } : { height: 0, opacity: 0 };
+  return (
+    <m.div
+      initial={cerrado}
+      animate={reducido ? { opacity: 1 } : { height: 'auto', opacity: 1 }}
+      exit={{ ...cerrado, transition: { duration: 0.25, ease: EASE } }}
+      transition={{ duration: 0.45, ease: EASE }}
+      className="-mx-1.5 overflow-hidden px-1.5"
+    >
+      <div className={`pb-1.5 ${className}`}>{children}</div>
+    </m.div>
+  );
+}
+
+/** Zona de envío: botón grande con las localidades y el precio (o "A cotizar"). */
+function OpcionZona({ zona, seleccionada, error, primera, onElegir }) {
+  const conPrecio = zona.precio != null;
+  return (
+    <label
+      className={`flex min-h-16 cursor-pointer items-center gap-3 rounded-3xl border px-4 py-3.5 transition duration-200 active:scale-[0.98] has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-verde ${
+        seleccionada
+          ? 'border-verde bg-salvia text-verde shadow-suave'
+          : error
+            ? 'border-red-700 bg-crema-card text-tinta'
+            : 'border-linea bg-arena/60 text-tinta hover:border-verde/40'
+      }`}
+    >
+      <input
+        type="radio"
+        name="zona"
+        value={zona.id}
+        checked={seleccionada}
+        onChange={onElegir}
+        data-campo={primera ? 'zona' : undefined}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={error ? 'checkout-error-zona' : undefined}
+        className="sr-only"
+      />
+      <span
+        aria-hidden="true"
+        className={`flex size-6 shrink-0 items-center justify-center rounded-full border transition ${
+          seleccionada ? 'scale-100 border-verde bg-verde text-arena' : 'scale-90 border-tinta/25 bg-crema-card'
+        }`}
+      >
+        {seleccionada && <Icon name="check" size={14} strokeWidth={3} />}
+      </span>
+      <span className="min-w-0 flex-1 text-base leading-snug font-semibold">
+        {/* espacio duro después de la abreviatura: "H. Lagomaggiore" no se corta en dos renglones */}
+        {zona.titulo ?? zona.localidades.map((l) => l.replace(/\. /g, '. ')).join(', ')}
+      </span>
+      {conPrecio ? (
+        <span className="precio shrink-0 text-[17px]">{formatPrecio(zona.precio)}</span>
+      ) : (
+        <span className={`shrink-0 text-sm font-semibold ${seleccionada ? '' : 'text-texto-suave'}`}>A cotizar</span>
+      )}
+    </label>
+  );
+}
+
+function FilaResumen({ etiqueta, children }) {
+  return (
+    <div className="flex items-center justify-between gap-3 text-sm">
+      <span className="text-texto-suave">{etiqueta}</span>
+      <span className="font-semibold text-tinta">{children}</span>
+    </div>
+  );
 }
 
 /** Etiqueta + campo + error. `children(aria)` recibe id/aria-invalid/aria-describedby/data-campo. */

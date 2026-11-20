@@ -33,7 +33,9 @@ function precargarRutaInicial() {
         // /producto también usa las descripciones de Mar (chunk aparte, src/data/descripciones.js)
         const desc = chunks.find((c) => /[\\/]data[\\/]descripciones\.js$/.test(c.facadeModuleId ?? ''));
         if (desc && mapa.Producto) mapa.Producto.push(`/${desc.fileName}`);
-        const script = `(function(){var p=location.pathname,r=${JSON.stringify(RUTAS)},m=${JSON.stringify(mapa)};for(var k in r){if(p.indexOf(k)===0&&m[r[k]]){m[r[k]].forEach(function(f){var l=document.createElement('link');l.rel='modulepreload';l.href=f;document.head.appendChild(l)});break}}})();`;
+        // En el inicio: las secciones de abajo del pliegue (HomeResto.jsx, chunk aparte) se piden junto con el
+        // JS principal, así están listas apenas se pinta el hero (con 3G llegaban ~2 s después del load).
+        const script = `(function(){var p=location.pathname,r=${JSON.stringify(RUTAS)},m=${JSON.stringify(mapa)},pre=function(l){l.forEach(function(f){var e=document.createElement('link');e.rel='modulepreload';e.href=f;document.head.appendChild(e)})};if(p==='/'&&m.HomeResto)pre(m.HomeResto);else for(var k in r){if(p.indexOf(k)===0&&m[r[k]]){pre(m[r[k]]);break}}})();`;
         // Playfair (normal + cursiva) de los títulos: se pide con el HTML en vez de esperar al CSS.
         // (Manrope no: probado, no bajaba el CLS de /carrito y retrasaba el FCP del home 0.9 → 1.9 s)
         const fuentes = Object.values(ctx.bundle)

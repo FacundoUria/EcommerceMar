@@ -35,9 +35,12 @@ function precargarRutaInicial() {
         // esperar a que este lo descubra. Con copia no hace falta: el catálogo se muestra desde la copia.
         const supa = chunks.find((c) => /[\\/]lib[\\/]supabase\.js$/.test(c.facadeModuleId ?? ''));
         const supaArchivos = supa ? [supa.fileName, ...supa.imports].map((f) => `/${f}`) : [];
+        // Panel de Mar (/admin, src/admin/AdminApp.jsx): su chunk y supabase-js completo
+        const admin = chunks.find((c) => /[\\/]admin[\\/]AdminApp\.jsx$/.test(c.facadeModuleId ?? ''));
+        const adminArchivos = admin ? [admin.fileName, ...admin.imports].map((f) => `/${f}`) : [];
         // En el inicio: las secciones de abajo del pliegue (HomeResto.jsx, chunk aparte) se piden junto con el
         // JS principal, así están listas apenas se pinta el hero (con 3G llegaban ~2 s después del load).
-        const script = `(function(){var p=location.pathname,r=${JSON.stringify(RUTAS)},m=${JSON.stringify(mapa)},pre=function(l){l.forEach(function(f){var e=document.createElement('link');e.rel='modulepreload';e.href=f;document.head.appendChild(e)})};try{if(!localStorage.getItem('dreamhair:catalogo:v1'))pre(${JSON.stringify(supaArchivos)})}catch(e){}if(p==='/'&&m.HomeResto)pre(m.HomeResto);else for(var k in r){if(p.indexOf(k)===0&&m[r[k]]){pre(m[r[k]]);break}}})();`;
+        const script = `(function(){var p=location.pathname,r=${JSON.stringify(RUTAS)},m=${JSON.stringify(mapa)},pre=function(l){l.forEach(function(f){var e=document.createElement('link');e.rel='modulepreload';e.href=f;document.head.appendChild(e)})};if(/^\\/admin(\\/|$)/.test(p)){pre(${JSON.stringify(adminArchivos)});return}try{if(!localStorage.getItem('dreamhair:catalogo:v1'))pre(${JSON.stringify(supaArchivos)})}catch(e){}if(p==='/'&&m.HomeResto)pre(m.HomeResto);else for(var k in r){if(p.indexOf(k)===0&&m[r[k]]){pre(m[r[k]]);break}}})();`;
         // Playfair (normal + cursiva) de los títulos: se pide con el HTML en vez de esperar al CSS.
         // (Manrope no: probado, no bajaba el CLS de /carrito y retrasaba el FCP del home 0.9 → 1.9 s)
         const fuentes = Object.values(ctx.bundle)

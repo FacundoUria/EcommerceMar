@@ -14,8 +14,36 @@ export function claveImagen(src) {
   return manifiesto[nombre] ? nombre : src.replace(/(-sm|-lg|-\d+)?\.webp$/, '');
 }
 
-/** { w: [anchos], o: [ancho, alto del original] } o null si no es una imagen de /img */
-export const infoImagen = (src) => manifiesto[claveImagen(src)] ?? null;
+// ───────── Fotos subidas desde el panel (bucket "productos" de Supabase) ─────────
+// El panel recorta cuadrado y sube 3 tamaños: 400, 800 y 1200 px, sin agrandar nunca (si el recorte mide
+// menos de 1200, el más grande es el del recorte: 1000 → 400, 800, 1000). En los datos se guarda la URL de
+// la versión más grande, "<base>-<ancho>.webp" (o .jpg si el navegador no sabe hacer webp): con ese ancho
+// alcanza para saber cuáles hay.
+export const ESCALERA_SUBIDAS = [400, 800, 1200];
+const SUBIDA = /^(.+\/storage\/v1\/object\/public\/productos\/.+)-(\d+)\.(webp|jpg)$/;
+
+/** Anchos que genera el panel para un recorte de `lado` px (nunca más grande que el recorte). */
+export const anchosSubida = (lado) => {
+  const max = Math.min(Math.round(lado), ESCALERA_SUBIDAS.at(-1));
+  return [...ESCALERA_SUBIDAS.filter((w) => w < max), max];
+};
+
+/** { base, ext, w, o } de una foto del bucket, o null si no es una. */
+function subida(src) {
+  const m = typeof src === 'string' && src.match(SUBIDA);
+  if (!m) return null;
+  const max = Number(m[2]);
+  return { base: m[1], ext: m[3], w: anchosSubida(max), o: [max, max] };
+}
+
+/** Todas las URLs (una por tamaño) de una foto del bucket: para borrarla. [] si no es del bucket. */
+export const archivosSubida = (src) => {
+  const s = subida(src);
+  return s ? s.w.map((w) => `${s.base}-${w}.${s.ext}`) : [];
+};
+
+/** { w: [anchos], o: [ancho, alto del original] } o null si no es una imagen de /img ni del bucket */
+export const infoImagen = (src) => manifiesto[claveImagen(src)] ?? subida(src);
 
 /**
  * Atributos de <img>: src (la versión más chica que cubra `anchoPx`, de fallback) + srcset con todos
@@ -24,11 +52,14 @@ export const infoImagen = (src) => manifiesto[claveImagen(src)] ?? null;
 export function fuenteImagen(src, anchoPx = 640) {
   const clave = claveImagen(src);
   const m = manifiesto[clave];
-  if (!m) return { src, srcSet: undefined };
-  const w = m.w.find((x) => x >= anchoPx) ?? m.w[m.w.length - 1];
+  const s = m ? null : subida(src);
+  if (!m && !s) return { src, srcSet: undefined };
+  const anchos = (m ?? s).w;
+  const url = m ? (x) => `${clave}-${x}.webp` : (x) => `${s.base}-${x}.${s.ext}`;
+  const w = anchos.find((x) => x >= anchoPx) ?? anchos[anchos.length - 1];
   return {
-    src: `${clave}-${w}.webp`,
-    srcSet: m.w.map((x) => `${clave}-${x}.webp ${x}w`).join(', '),
+    src: url(w),
+    srcSet: anchos.map((x) => `${url(x)} ${x}w`).join(', '),
   };
 }
 

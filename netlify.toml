@@ -26,3 +26,14 @@
   for = "/video/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"
+
+# Panel de Mar: que ningún buscador lo indexe (además del meta robots que pone la página)
+[[headers]]
+  for = "/admin"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

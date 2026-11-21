@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import * as service from '../services/productsService.js';
+import { PASOS_RUTINA } from '../config/negocio.js';
 
 // Resultados ya resueltos: si el dato está, se devuelve sincrónico y no hay skeleton.
 const resueltos = new Map();
@@ -114,3 +115,18 @@ export const useServiceGroups = () => useServicio('serviceGroups', service.getSe
 export const useReviews = () => useServicio('reviews', service.getReviews);
 export const useBrands =() => useServicio('brands', service.getBrands);
 export const useProduct = (id) => useServicio(`product:${id}`, () => service.getProductById(id));
+
+/**
+ * Pasos de /rutina (config/negocio.js) con sus categorías según el campo `paso` de cada categoría (lo elige
+ * Mar en el panel). Mientras las categorías no están, las de negocio.js (son las mismas).
+ */
+export function usePasosRutina() {
+  const { data: categorias } = useCategories();
+  return useMemo(
+    () =>
+      categorias
+        ? PASOS_RUTINA.map((p) => ({ ...p, categorias: categorias.filter((c) => c.paso === p.paso).map((c) => c.id) }))
+        : PASOS_RUTINA,
+    [categorias],
+  );
+}

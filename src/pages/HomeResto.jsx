@@ -16,8 +16,7 @@ import LineaProgreso from '../components/ui/LineaProgreso.jsx';
 import ProductCard from '../components/product/ProductCard.jsx';
 import FotoProducto from '../components/product/FotoProducto.jsx';
 import { ProductCardSkeleton } from '../components/ui/Skeleton.jsx';
-import { useBrands, useProducts } from '../hooks/useCatalog.js';
-import { PASOS_RUTINA } from '../config/negocio.js';
+import { useBrands, usePasosRutina, useProducts } from '../hooks/useCatalog.js';
 import Precio from '../components/ui/Precio.jsx';
 import { imgSm } from '../lib/format.js';
 import Roll from '../components/ui/Roll.jsx';
@@ -173,12 +172,13 @@ const PASOS_CHIPS = ['Lavar', 'Hidratar', 'Definir', 'Proteger'];
 /** Opciones de cada paso (destacados primero). En /rutina se puede elegir más de una por paso. */
 function useOpcionesPorPaso() {
   const { data: productos } = useProducts();
+  const pasos = usePasosRutina();
   return useMemo(
     () =>
-      PASOS_RUTINA.map((p) =>
+      pasos.map((p) =>
         (productos ?? []).filter((x) => p.categorias.includes(x.categoria)).sort((a, b) => Number(!!b.destacado) - Number(!!a.destacado)),
       ),
-    [productos],
+    [productos, pasos],
   );
 }
 const useProductosPorPaso = () => useOpcionesPorPaso().map((l) => l[0] ?? null);

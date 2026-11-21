@@ -12,14 +12,14 @@ import ProductCard from '../components/product/ProductCard.jsx';
 import CartBadge from '../components/layout/CartBadge.jsx';
 import { Skeleton } from '../components/ui/Skeleton.jsx';
 import NoEncontrado from './NoEncontrado.jsx';
-import { useCategories, useDescripciones, useProduct, useProducts } from '../hooks/useCatalog.js';
+import { useCategories, useDescripciones, usePasosRutina, useProduct, useProducts } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
 import { useCartAcciones } from '../context/CartContext.jsx';
 import { imgSm } from '../lib/format.js';
 import Precio from '../components/ui/Precio.jsx';
 import { explotarDestellos } from '../lib/destellos.js';
 import { colorDe } from '../lib/colores.js';
-import { PASOS_RUTINA, whatsappCon } from '../config/negocio.js';
+import { whatsappCon } from '../config/negocio.js';
 import { imgFija } from '../lib/imagenes.js';
 import Roll from '../components/ui/Roll.jsx';
 import Expandible from '../components/ui/Expandible.jsx';
@@ -270,16 +270,17 @@ function Detalle({ producto }) {
 /** Productos de los otros grupos de categorías de la rutina (destacados primero). */
 function CompletaTuRutina({ producto }) {
   const { data: productos } = useProducts();
+  const pasos = usePasosRutina();
   const sugeridos = useMemo(() => {
     if (!productos) return [];
-    const otrosGrupos = PASOS_RUTINA.map((p) => p.categorias).filter((cats) => !cats.includes(producto.categoria));
+    const otrosGrupos = pasos.map((p) => p.categorias).filter((cats) => !cats.includes(producto.categoria));
     return otrosGrupos.flatMap((cats) =>
       productos
         .filter((x) => cats.includes(x.categoria) && x.id !== producto.id)
         .sort((a, b) => Number(!!b.destacado) - Number(!!a.destacado))
         .slice(0, 2),
     );
-  }, [productos, producto]);
+  }, [productos, producto, pasos]);
 
   if (!sugeridos.length) return null;
   return (

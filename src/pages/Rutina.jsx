@@ -9,11 +9,10 @@ import FotoProducto from '../components/product/FotoProducto.jsx';
 import { esDesde, precioDe } from '../lib/precios.js';
 import Swatches from '../components/product/Swatches.jsx';
 import { GridSkeleton } from '../components/ui/Skeleton.jsx';
-import { useCategories, useProducts } from '../hooks/useCatalog.js';
+import { useCategories, usePasosRutina, useProducts } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
 import { useCartAcciones } from '../context/CartContext.jsx';
 import { formatPrecio, imgSm } from '../lib/format.js';
-import { PASOS_RUTINA } from '../config/negocio.js';
 import { imgFija } from '../lib/imagenes.js';
 import Precio from '../components/ui/Precio.jsx';
 import { scrollA } from '../lib/smooth.js';
@@ -25,6 +24,7 @@ export default function Rutina() {
   usePageTitle('Armá tu rutina curly');
   const { data: productos, loading } = useProducts();
   const { data: categorias } = useCategories();
+  const pasos = usePasosRutina(); // los 4 pasos con sus categorías (campo `paso` de cada una)
   const { agregarVarios } = useCartAcciones();
   const pagina = useRef(null);
   const { scrollYProgress } = useScroll({ target: pagina, offset: ['start start', 'end end'] });
@@ -33,21 +33,21 @@ export default function Rutina() {
   const [params, setParams] = useSearchParams();
   const [actual, setActual] = useState(() => {
     const n = Number(params.get('paso'));
-    return n >= 1 && n <= PASOS_RUTINA.length ? n - 1 : 0;
+    return n >= 1 && n <= pasos.length ? n - 1 : 0;
   }); // índice del paso
   const [direccion, setDireccion] = useState(1);
   const [eleccion, setEleccion] = useState({}); // { [paso]: [{ producto, variante }, …] } (varios por paso)
   const [aviso, setAviso] = useState(null);
 
-  const paso = PASOS_RUTINA[actual];
+  const paso = pasos[actual];
   const nombreCat = useMemo(() => Object.fromEntries((categorias ?? []).map((c) => [c.id, c.nombre])), [categorias]);
 
   const delPaso = (p) => eleccion[p.paso] ?? [];
-  const elegidos = PASOS_RUTINA.flatMap(delPaso);
+  const elegidos = pasos.flatMap(delPaso);
   const total = elegidos.reduce((s, e) => s + precioDe(e.producto, e.variante), 0);
   // Primer producto marcado que tiene variantes y todavía no eligió cuál (y en qué paso está)
   const faltaVariante = (() => {
-    for (const p of PASOS_RUTINA) {
+    for (const p of pasos) {
       const e = delPaso(p).find((x) => x.producto.variantes.length > 0 && !x.variante);
       if (e) return { paso: p, e };
     }
@@ -81,8 +81,8 @@ export default function Rutina() {
 
   // "¡Tu rutina está lista!": con al menos un producto en el paso 4, o al llegar al último paso con algo
   // elegido. La lluvia de destellos sale una vez, cuando se cumple.
-  const ultimo = PASOS_RUTINA[PASOS_RUTINA.length - 1];
-  const rutinaLista = elegidos.length > 0 && (delPaso(ultimo).length > 0 || actual === PASOS_RUTINA.length - 1);
+  const ultimo = pasos[pasos.length - 1];
+  const rutinaLista = elegidos.length > 0 && (delPaso(ultimo).length > 0 || actual === pasos.length - 1);
   const listaAntes = useRef(rutinaLista);
   useEffect(() => {
     if (rutinaLista && !listaAntes.current) lluviaDestellos();
@@ -91,7 +91,7 @@ export default function Rutina() {
 
   const agregarRutina = (e) => {
     if (faltaVariante) {
-      irA(PASOS_RUTINA.indexOf(faltaVariante.paso)); // (irA limpia el aviso: va primero)
+      irA(pasos.indexOf(faltaVariante.paso)); // (irA limpia el aviso: va primero)
       setAviso(`Elegí una variante de ${faltaVariante.e.producto.nombreCorto}`);
       return;
     }
@@ -113,7 +113,7 @@ export default function Rutina() {
       <div className="relative mt-6">
         <LineaProgreso progreso={scrollYProgress} className="absolute top-[18px] right-[12.5%] left-[12.5%]" />
         <ol className="relative grid grid-cols-4" aria-label="Pasos de la rutina">
-          {PASOS_RUTINA.map((p, i) => {
+          {pasos.map((p, i) => {
             const hecho = delPaso(p).length > 0;
             const activo = i === actual;
             return (
@@ -201,7 +201,7 @@ export default function Rutina() {
                     <Icon name="flechaIzq" size={18} /> Anterior
                   </Roll>
                 </button>
-                {actual < PASOS_RUTINA.length - 1 ? (
+                {actual < pasos.length - 1 ? (
                   <button type="button" onClick={() => irA(actual + 1)} className="btn btn-primario">
                     <Roll>
                       {delPaso(paso).length ? 'Siguiente' : 'Saltear'} <Icon name="flecha" size={18} />
@@ -224,7 +224,7 @@ export default function Rutina() {
           <div className="card sticky top-24 rounded-5xl p-6">
             <RevealText className="text-2xl">Tu rutina</RevealText>
             <ol className="mt-4 space-y-3">
-              {PASOS_RUTINA.map((p, i) => {
+              {pasos.map((p, i) => {
                 const lista = delPaso(p);
                 return (
                   <li key={p.paso}>
@@ -283,7 +283,7 @@ export default function Rutina() {
         <MensajeLista visible={rutinaLista} total={total} className="mb-2" />
         <div className="glass-arena flex items-center gap-3 rounded-4xl p-2 pl-4 shadow-flotante ring-1 ring-verde/10">
           <div className="flex gap-1.5">
-            {PASOS_RUTINA.map((p) => {
+            {pasos.map((p) => {
               const lista = delPaso(p);
               if (!lista.length)
                 return (

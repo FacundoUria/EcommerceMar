@@ -1,0 +1,30 @@
+# Supabase pausa los proyectos del plan gratis después de 7 días sin actividad. Cada 3 días se hace una
+# lectura mínima (un id de categorias) con la publishable key, la misma que usa la web.
+# Secrets del repo (Settings → Secrets and variables → Actions): SUPABASE_URL y SUPABASE_ANON_KEY.
+name: Supabase anti-pausa
+
+on:
+  schedule:
+    - cron: '17 12 */3 * *' # días 1, 4, 7… del mes a las 12:17 UTC (nunca más de 3 días entre corridas)
+  workflow_dispatch: # para correrla a mano desde la pestaña Actions
+
+permissions: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Select mínimo a categorias
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_ANON_KEY" ]; then
+            echo "Faltan los secrets SUPABASE_URL / SUPABASE_ANON_KEY" >&2
+            exit 1
+          fi
+          curl --fail --silent --show-error --max-time 30 --retry 3 --retry-delay 10 \
+            -H "apikey: $SUPABASE_ANON_KEY" \
+            -o /dev/null -w "HTTP %{http_code}\n" \
+            "$SUPABASE_URL/rest/v1/categorias?select=id&limit=1"

@@ -1,6 +1,8 @@
-// src/data/products.js — precios de su Tiendanube (nov 2026)
+// src/data/products.js — RESPALDO LOCAL del catálogo (la fuente es Supabase desde la fase 2).
+// El service lo usa si Supabase falla o tarda más de 3 s, y para la carga inicial (npm run supabase:migrar).
+// Precios de su Tiendanube (nov 2026). Cuando Mar edite desde /admin, este archivo deja de ser la verdad.
 // ⚠️ Los componentes NO importan este archivo: todo pasa por src/services/productsService.js
-const img = (f) => `/img/productos/${f}.webp`;
+import { productoLocal, servicioLocal } from '../lib/catalogo.js';
 
 export const categories = [
   { id: 'low-poo', nombre: 'Low poo', paso: 1, portada: 'shampoo-low-poo-han' },
@@ -30,7 +32,8 @@ export const categories = [
 // - `destacado`: los "Favoritos de Mar" del home (elegidos a mano, no son datos de ventas).
 // - activo: false + precio: null → producto nuevo de Mar, oculto hasta tener precio y foto
 //   (lista en docs/confirmar-con-mar.md). El service los filtra.
-export const products = [
+// Datos crudos (tal cual se cargan en Supabase: scripts/migrar-a-supabase.mjs). La web usa `products`, ya armado.
+export const productosCrudos = [
   // ── Low poo (paso 1: lavar) ──
   { id: 'shampoo-low-poo-han', marca: 'HAN', nombre: 'Línea de Shampoos Profesionales Sin Sulfatos, Parabenos ni Siliconas', nombreCorto: 'Shampoo low poo', tamano: '500 ml',
     categoria: 'low-poo', precio: 15000, foto: 'shampoo-low-poo-han', destacado: true,
@@ -213,28 +216,14 @@ export const products = [
   // Mar lo llama "difusor de agua"
   { id: 'atomizador-day-after', nombre: 'Atomizador de Bruma Continua para Day After', nombreCorto: 'Atomizador de Bruma Continua',
     categoria: 'varios', precio: 18000, alias: ['difusor de agua'] },
-].map((p) => {
-  const imagen = img(p.foto || p.id);
-  // Precio base: el del producto o, si solo lo traen las variantes, el más bajo de ellas
-  const propios = (p.variantes || []).map((v) => v[2]).filter((x) => x != null);
-  const base = p.precio ?? (propios.length ? Math.min(...propios) : null);
-  const variantes = (p.variantes || []).map(([nombre, f, precio]) => ({ nombre, imagen: f ? img(f) : imagen, precio: precio ?? base }));
-  const precios = variantes.map((v) => v.precio).filter((x) => x != null);
-  return {
-    ...p,
-    nombreCorto: p.nombreCorto || p.nombre,
-    imagen,
-    precio: precios.length ? Math.min(...precios) : base,
-    desde: new Set(precios).size > 1, // variantes con precios distintos: "Desde $ X"
-    variantes,
-  };
-});
+];
+
+// Armados como los usa la web (lib/catalogo.js) + los campos crudos (`tn`, `foto`) que usan los scripts.
+export const products = /* @__PURE__ */ productosCrudos.map((p) => ({ ...p, ...productoLocal(p) }));
 
 // Servicios del estudio (textos, duraciones y fotos de Mar, nov 2026). Sin precio: se reservan por WhatsApp.
-// `grupo` arma las secciones de /servicios (en este orden).
-export const serviceGroups = ['Asesoramientos', 'Cortes y clases', 'Tratamientos'];
-
-export const services = [
+// `grupo` arma las secciones de /servicios, en el orden en que aparece cada grupo.
+export const serviciosCrudos = [
   {
     id: 'asesoramiento-basico',
     nombre: 'Asesoramiento básico',
@@ -307,4 +296,6 @@ export const services = [
     descripcion:
       'Reconstrucción extrema, suavidad y control total del frizz. Combina activos regeneradores con fototerapia infrarroja para reparar la fibra desde adentro y sellar la cutícula, logrando rulos elásticos y con brillo espejo.',
   },
-].map(({ foto, ...s }) => ({ ...s, imagen: `/img/estudio/${foto}.webp` }));
+];
+
+export const services = /* @__PURE__ */ serviciosCrudos.map(servicioLocal);

@@ -4,10 +4,41 @@ import * as service from '../services/productsService.js';
 // Resultados ya resueltos: si el dato está, se devuelve sincrónico y no hay skeleton.
 const resueltos = new Map();
 
+// Cuando el service avisa que llegó una versión distinta (stale-while-revalidate), se vuelve a armar todo lo
+// resuelto y se avisa a cada hook montado: la página se actualiza sin skeleton.
+const suscriptores = new Set();
+const avisarHooks = () => suscriptores.forEach((fn) => fn());
+service.alActualizar((tipo) => {
+  if (tipo === 'descripciones') {
+    precargarDescripciones().then(avisarHooks);
+    return;
+  }
+  for (const k of [...resueltos.keys()]) if (k !== 'descripciones') resueltos.delete(k);
+  precargarCatalogo().then(avisarHooks);
+});
+
 function useServicio(clave, fn) {
   const [estado, setEstado] = useState(() =>
     resueltos.has(clave) ? { data: resueltos.get(clave), loading: false, error: null } : { data: null, loading: true, error: null },
   );
+
+  useEffect(() => {
+    const refrescar = () => {
+      if (resueltos.has(clave)) {
+        setEstado({ data: resueltos.get(clave), loading: false, error: null });
+        return;
+      }
+      fn()
+        .then((data) => {
+          resueltos.set(clave, data);
+          setEstado({ data, loading: false, error: null });
+        })
+        .catch(() => {});
+    };
+    suscriptores.add(refrescar);
+    return () => suscriptores.delete(refrescar);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [clave]);
 
   useEffect(() => {
     if (resueltos.has(clave)) {
@@ -61,6 +92,11 @@ export const precargarDescripciones = () =>
  */
 export function useDescripciones(activo = true) {
   const [data, setData] = useState(() => resueltos.get('descripciones') ?? null);
+  useEffect(() => {
+    const refrescar = () => setData((d) => (d ? (resueltos.get('descripciones') ?? d) : d));
+    suscriptores.add(refrescar);
+    return () => suscriptores.delete(refrescar);
+  }, []);
   useEffect(() => {
     if (!activo || data) return;
     let vivo = true;

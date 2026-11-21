@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useState } from 'react';
-import { getProducts } from '../services/productsService.js';
+import { alActualizar, getProducts } from '../services/productsService.js';
 import { precioDe } from '../lib/precios.js';
 
 const STORAGE_KEY = 'dreamhair:carrito:v1';
@@ -99,13 +99,18 @@ export function CartProvider({ children }) {
     }
   }, [lineas]);
 
+  // Precios y nombres al día con el catálogo: al abrir la app y cada vez que llega una versión nueva de Supabase
   useEffect(() => {
     let vivo = true;
-    getProducts()
-      .then((productos) => vivo && dispatch({ type: 'sincronizar', productos }))
-      .catch(() => {});
+    const sincronizar = () =>
+      getProducts()
+        .then((productos) => vivo && dispatch({ type: 'sincronizar', productos }))
+        .catch(() => {});
+    sincronizar();
+    const desuscribir = alActualizar((tipo) => tipo === 'catalogo' && sincronizar());
     return () => {
       vivo = false;
+      desuscribir();
     };
   }, []);
 

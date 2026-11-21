@@ -30,12 +30,14 @@ function precargarRutaInicial() {
           const m = c.facadeModuleId?.match(/[\\/]pages[\\/](\w+)\.jsx$/);
           if (m) mapa[m[1]] = [c.fileName, ...c.imports].map((f) => `/${f}`);
         }
-        // /producto también usa las descripciones de Mar (chunk aparte, src/data/descripciones.js)
-        const desc = chunks.find((c) => /[\\/]data[\\/]descripciones\.js$/.test(c.facadeModuleId ?? ''));
-        if (desc && mapa.Producto) mapa.Producto.push(`/${desc.fileName}`);
+        // Cliente de Supabase (chunk aparte, src/lib/supabase.js). En la primera visita (sin copia del catálogo
+        // en localStorage) la página espera a Supabase: el chunk se pide junto con el JS principal en vez de
+        // esperar a que este lo descubra. Con copia no hace falta: el catálogo se muestra desde la copia.
+        const supa = chunks.find((c) => /[\\/]lib[\\/]supabase\.js$/.test(c.facadeModuleId ?? ''));
+        const supaArchivos = supa ? [supa.fileName, ...supa.imports].map((f) => `/${f}`) : [];
         // En el inicio: las secciones de abajo del pliegue (HomeResto.jsx, chunk aparte) se piden junto con el
         // JS principal, así están listas apenas se pinta el hero (con 3G llegaban ~2 s después del load).
-        const script = `(function(){var p=location.pathname,r=${JSON.stringify(RUTAS)},m=${JSON.stringify(mapa)},pre=function(l){l.forEach(function(f){var e=document.createElement('link');e.rel='modulepreload';e.href=f;document.head.appendChild(e)})};if(p==='/'&&m.HomeResto)pre(m.HomeResto);else for(var k in r){if(p.indexOf(k)===0&&m[r[k]]){pre(m[r[k]]);break}}})();`;
+        const script = `(function(){var p=location.pathname,r=${JSON.stringify(RUTAS)},m=${JSON.stringify(mapa)},pre=function(l){l.forEach(function(f){var e=document.createElement('link');e.rel='modulepreload';e.href=f;document.head.appendChild(e)})};try{if(!localStorage.getItem('dreamhair:catalogo:v1'))pre(${JSON.stringify(supaArchivos)})}catch(e){}if(p==='/'&&m.HomeResto)pre(m.HomeResto);else for(var k in r){if(p.indexOf(k)===0&&m[r[k]]){pre(m[r[k]]);break}}})();`;
         // Playfair (normal + cursiva) de los títulos: se pide con el HTML en vez de esperar al CSS.
         // (Manrope no: probado, no bajaba el CLS de /carrito y retrasaba el FCP del home 0.9 → 1.9 s)
         const fuentes = Object.values(ctx.bundle)
@@ -81,9 +83,10 @@ export default defineConfig({
         // Lo que comparten 2+ chunks (React, motion, componentes y helpers comunes) va en UN chunk común.
         // Sin esto, Rolldown saca un chunk chico por cada combinación de módulos compartidos y el home
         // pedía 14 archivos de JS en vez de 8 (peor LCP con red lenta). Las miniaturas (lqip) quedan aparte:
-        // se cargan después del load.
+        // se cargan después del load. supabase-js también (~50 KB gzip): va solo en su chunk, aunque en la
+        // etapa 2 lo use además /admin, para que nunca caiga en `comun` (lo baja el home).
         codeSplitting: {
-          groups: [{ name: 'comun', minShareCount: 2, test: (id) => !/[\/]lqip/.test(id) }],
+          groups: [{ name: 'comun', minShareCount: 2, test: (id) => !/[\/]lqip/.test(id) && !/[\/]@supabase[\/]/.test(id) }],
         },
       },
     },

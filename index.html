@@ -7,6 +7,8 @@
     <meta name="description" content="Dream Hair — The Curly Studio. Productos para rulos y método curly en Mendoza." />
     <title>Dream Hair · The Curly Studio</title>
     <link rel="icon" href="%FAVICON%" type="image/webp" />
+    <!-- Catálogo en Supabase: la conexión se abre mientras baja el JS (Vite reemplaza la variable de entorno) -->
+    <link rel="preconnect" href="%VITE_SUPABASE_URL%" crossorigin />
     <!-- LCP del home: la foto del hero se pide desde el HTML (no espera al JS) y solo en "/"
          (en las otras páginas no se usa). srcset/sizes iguales a los del <img> del hero (Home.jsx). -->
     <script>

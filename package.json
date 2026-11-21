@@ -10,9 +10,12 @@
     "fotos:importar": "node scripts/importar-fotos-faltantes.mjs",
     "assets:optimizar": "node scripts/optimizar-assets.mjs",
     "videos:optimizar": "node scripts/optimizar-videos.mjs",
-    "imagenes:auditar": "node scripts/auditar-imagenes.mjs"
+    "imagenes:auditar": "node scripts/auditar-imagenes.mjs",
+    "supabase:migrar": "node scripts/migrar-a-supabase.mjs"
   },
   "dependencies": {
+    "@supabase/postgrest-js": "2.119.0",
+    "@supabase/supabase-js": "2.119.0",
     "embla-carousel-react": "^8.6.0",
     "motion": "^14.14.0",
     "react": "^19.3.1",

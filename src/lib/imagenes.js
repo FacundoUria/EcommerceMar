@@ -42,6 +42,29 @@ export const archivosSubida = (src) => {
   return s ? s.w.map((w) => `${s.base}-${w}.${s.ext}`) : [];
 };
 
+// Datos de las fotos subidas (tabla `fotos` de Supabase): color dominante, fondo y miniatura borrosa. Son los
+// mismos que tienen las de /img en colores.json, fondos.json y lqip.json. Los registra el service al armar el
+// catálogo (color y fondo) y lib/lqip.js (miniaturas); se buscan por la foto, sea cual sea el tamaño pedido.
+const datosSubidas = new Map(); // base de la URL → { color, fondo, lqip }
+
+/** Filas { url, color?, fondo?, lqip? } de la tabla `fotos`. */
+export function registrarFotos(filas) {
+  for (const f of filas ?? []) {
+    const s = subida(f.url);
+    if (!s) continue;
+    const antes = datosSubidas.get(s.base) ?? {};
+    const nuevo = { ...antes };
+    for (const k of ['color', 'fondo', 'lqip']) if (k in f) nuevo[k] = f[k];
+    datosSubidas.set(s.base, nuevo);
+  }
+}
+
+/** { color, fondo, lqip } de una foto subida, o undefined (foto de /img o sin datos). */
+export const datosFoto = (src) => {
+  const s = subida(src);
+  return s ? datosSubidas.get(s.base) : undefined;
+};
+
 /** { w: [anchos], o: [ancho, alto del original] } o null si no es una imagen de /img ni del bucket */
 export const infoImagen = (src) => manifiesto[claveImagen(src)] ?? subida(src);
 

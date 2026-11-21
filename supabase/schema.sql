@@ -80,6 +80,16 @@ create table if not exists public.servicios (
   actualizado timestamptz not null default now()
 );
 
+-- Datos de las fotos que sube Mar desde el panel (las de /img los tienen en src/data/colores.json, fondos.json
+-- y lqip.json): los calcula el navegador al subir, con el mismo método que scripts/optimizar-assets.mjs.
+create table if not exists public.fotos (
+  url    text primary key check (url like 'https://%/storage/v1/object/public/productos/%'), -- la que va en los datos (la más grande)
+  color  text check (color ~ '^#[0-9a-f]{6}$'),                                -- color dominante (halo); null = neutra → dorado
+  fondo  text not null default 'escena' check (fondo in ('blanco', 'escena')), -- blanco = multiply (el producto "flota")
+  lqip   text check (lqip like 'data:image/%' and length(lqip) <= 2000),       -- miniatura borrosa de 20 px (blur-up)
+  creado timestamptz not null default now()
+);
+
 create table if not exists public.admins (
   email  text primary key check (email = lower(trim(email)) and email like '%_@_%'),
   creado timestamptz not null default now()
@@ -125,14 +135,14 @@ grant execute on function public.es_admin() to authenticated, service_role;
 
 grant usage on schema public to anon, authenticated, service_role;
 
-revoke all on public.categorias, public.productos, public.variantes, public.servicios, public.admins
+revoke all on public.categorias, public.productos, public.variantes, public.servicios, public.fotos, public.admins
   from anon, authenticated;
 
-grant select on public.categorias, public.productos, public.variantes, public.servicios to anon, authenticated;
-grant insert, update, delete on public.categorias, public.productos, public.variantes, public.servicios to authenticated;
+grant select on public.categorias, public.productos, public.variantes, public.servicios, public.fotos to anon, authenticated;
+grant insert, update, delete on public.categorias, public.productos, public.variantes, public.servicios, public.fotos to authenticated;
 grant select on public.admins to authenticated;
 
-grant all on public.categorias, public.productos, public.variantes, public.servicios, public.admins to service_role;
+grant all on public.categorias, public.productos, public.variantes, public.servicios, public.fotos, public.admins to service_role;
 
 -- ───────────────────────────── RLS ─────────────────────────────
 
@@ -140,6 +150,7 @@ alter table public.categorias enable row level security;
 alter table public.productos  enable row level security;
 alter table public.variantes  enable row level security;
 alter table public.servicios  enable row level security;
+alter table public.fotos      enable row level security;
 alter table public.admins     enable row level security;
 
 -- categorías
@@ -177,6 +188,15 @@ create policy "servicios: lectura publica de los activos" on public.servicios
 
 drop policy if exists "servicios: admins todo" on public.servicios;
 create policy "servicios: admins todo" on public.servicios
+  for all to authenticated using ((select public.es_admin())) with check ((select public.es_admin()));
+
+-- fotos: sus datos (color, fondo, miniatura) los lee cualquiera; los escriben los admins al subir
+drop policy if exists "fotos: lectura publica" on public.fotos;
+create policy "fotos: lectura publica" on public.fotos
+  for select to anon, authenticated using (true);
+
+drop policy if exists "fotos: admins todo" on public.fotos;
+create policy "fotos: admins todo" on public.fotos
   for all to authenticated using ((select public.es_admin())) with check ((select public.es_admin()));
 
 -- admins: cada usuario ve solo su propia fila. Sin escritura por la API (se cargan desde el SQL Editor).

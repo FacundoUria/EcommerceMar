@@ -1,10 +1,13 @@
 import SmartImg from '../ui/SmartImg.jsx';
 import fondos from '../../data/fondos.json';
 import { colorDe } from '../../lib/colores.js';
-import { claveImagen, conTope, infoImagen } from '../../lib/imagenes.js';
+import { claveImagen, conTope, datosFoto, infoImagen } from '../../lib/imagenes.js';
 
-/** 'blanco' (foto de estudio) o 'escena' (madera, exterior…). Lo calcula scripts/optimizar-assets.mjs. */
-export const tipoFondo = (src) => (src && fondos[`${claveImagen(src)}.webp`]) || 'escena';
+/**
+ * 'blanco' (foto de estudio) o 'escena' (madera, exterior…). Lo calcula scripts/optimizar-assets.mjs; las fotos
+ * subidas desde el panel, el navegador al subirlas (tabla `fotos`).
+ */
+export const tipoFondo = (src) => (src && (fondos[`${claveImagen(src)}.webp`] || datosFoto(src)?.fondo)) || 'escena';
 
 /**
  * Foto de producto consistente en todo el sitio: siempre sobre el mismo fondo de la marca
@@ -22,13 +25,14 @@ export default function FotoProducto({
   zoom = true,
   compacta = false,
   cover = false, // a sangre (categorías): sin padding; las fotos blancas igual usan multiply sobre el fondo
+  fondo, // 'blanco' | 'escena' para forzar (vista previa del panel antes de guardar); si falta, el de la foto
   halo = true, // halo de luz del color del producto detrás de la foto (se intensifica con el hover del `.group`)
   placeholderTitulo,
   placeholderSubtitulo,
   className = '',
   style,
 }) {
-  const blanco = tipoFondo(src) === 'blanco';
+  const blanco = (fondo ?? tipoFondo(src)) === 'blanco';
   const hover = zoom ? 'group-hover:scale-[1.07]' : '';
   const inset = cover
     ? 'inset-0'

@@ -1144,20 +1144,20 @@
  ],
  "servicios": [
   {
-   "id": "asesoramiento-basico",
-   "nombre": "Asesoramiento básico",
-   "grupo": "Asesoramientos",
-   "descripcion": "Diagnóstico personalizado y rutina a medida para tus rulos. Evaluamos tu patrón y las necesidades reales de tu hebra para diseñar el cuidado ideal. Incluye lavado, tratamiento nutritivo, clase práctica de finalización para que aprendas a definirte en casa y secado.",
-   "duracion": "1 h",
-   "foto": "/img/estudio/asesoramiento-basico.webp"
-  },
-  {
    "id": "asesoramiento-completo",
    "nombre": "Asesoramiento completo",
    "grupo": "Asesoramientos",
    "descripcion": "Diagnóstico capilar, corte en seco, tratamiento y clase de finalización. Todo el asesoramiento personalizado para conocer las necesidades de tu cabello, sumado al corte a medida, lavado, tratamiento específico, clase de definición para tu casa y secado.",
    "duracion": "1 h 40 min",
    "foto": "/img/estudio/asesoramiento-completo.webp"
+  },
+  {
+   "id": "asesoramiento-basico",
+   "nombre": "Asesoramiento básico",
+   "grupo": "Asesoramientos",
+   "descripcion": "Diagnóstico personalizado y rutina a medida para tus rulos. Evaluamos tu patrón y las necesidades reales de tu hebra para diseñar el cuidado ideal. Incluye lavado, tratamiento nutritivo, clase práctica de finalización para que aprendas a definirte en casa y secado.",
+   "duracion": "1 h",
+   "foto": "/img/estudio/asesoramiento-basico.webp"
   },
   {
    "id": "asesoramiento-deluxe",
@@ -1207,5 +1207,6 @@
    "duracion": "1 h",
    "foto": "/img/estudio/celulas-madre-infrarrojo.webp"
   }
- ]
+ ],
+ "fotos": []
 }

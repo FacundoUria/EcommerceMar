@@ -12,7 +12,8 @@
 import { reviews } from '../data/resenas.js';
 import respaldo from '../data/respaldo-catalogo.json';
 import { categoriaDeFila, productoDeFila, servicioDeFila } from '../lib/catalogo.js';
-import { consultarCatalogo, consultarDescripciones } from '../lib/consultas.js';
+import { consultarCatalogo, consultarDescripciones, consultarLqip } from '../lib/consultas.js';
+import { registrarFotos } from '../lib/imagenes.js';
 
 const ESPERA_MAX = 3000; // primera visita: cuánto se espera a Supabase antes de usar el respaldo local
 const REVALIDAR_CADA = 5 * 60 * 1000; // al volver a la pestaña
@@ -137,6 +138,7 @@ const visibles = (products) => products.filter((p) => p.activo !== false);
  * (una categoría nueva y vacía no aparece en la tienda) y, si no tienen portada, la foto de su primer producto.
  */
 function armarCatalogo(f) {
+  registrarFotos(f.fotos); // color y fondo de las fotos subidas desde el panel (antes de que las dibuje la UI)
   const products = visibles(f.productos.map(productoDeFila));
   if (!products.length) throw new Error('sin productos');
   const primero = new Map();
@@ -166,6 +168,20 @@ const descripciones = crearFuente({
   },
   local: () => import('../data/respaldo-descripciones.json').then((m) => m.default),
 });
+
+// Miniaturas borrosas de las fotos subidas desde el panel (las pide lib/lqip.js después del load).
+const lqipFotos = crearFuente({
+  tipo: 'lqip',
+  clave: 'dreamhair:lqip-fotos:v1',
+  remoto: () => cliente().then(consultarLqip),
+  armar: (d) => {
+    if (!d || typeof d !== 'object') throw new Error('miniaturas raras');
+    return d;
+  },
+  local: () => ({}),
+});
+/** { [url]: data URI } de las fotos subidas. */
+export const getLqipFotos = () => lqipFotos.cargar();
 
 /**
  * Descripciones de Mar por id de producto ({ [id]: texto }). Van aparte del catálogo (~14 KB): se piden recién

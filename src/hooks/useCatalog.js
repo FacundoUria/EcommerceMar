@@ -14,6 +14,7 @@ service.alActualizar((tipo) => {
     precargarDescripciones().then(avisarHooks);
     return;
   }
+  if (tipo !== 'catalogo') return; // (las miniaturas las maneja lib/lqip.js)
   for (const k of [...resueltos.keys()]) if (k !== 'descripciones') resueltos.delete(k);
   precargarCatalogo().then(avisarHooks);
 });

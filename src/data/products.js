@@ -1,7 +1,7 @@
-// src/data/products.js — RESPALDO LOCAL del catálogo (la fuente es Supabase desde la fase 2).
-// El service lo usa si Supabase falla o tarda más de 3 s, y para la carga inicial (npm run supabase:migrar).
-// Precios de su Tiendanube (nov 2026). Cuando Mar edite desde /admin, este archivo deja de ser la verdad.
-// ⚠️ Los componentes NO importan este archivo: todo pasa por src/services/productsService.js
+// src/data/products.js — CARGA INICIAL del catálogo (precios de su Tiendanube, nov 2026). Ya NO es la verdad:
+// los datos están en Supabase y los edita Mar desde /admin. Editar este archivo no cambia la web.
+// Lo usan: la migración (protegida: npm run supabase:migrar -- --confirmo-pisar-todo) y los scripts de fotos.
+// La web usa como respaldo src/data/respaldo-catalogo.json (se baja de Supabase en cada build).
 import { productoLocal, servicioLocal } from '../lib/catalogo.js';
 
 export const categories = [

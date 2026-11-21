@@ -1,7 +1,6 @@
 // src/data/descripciones.js — descripciones de productos de Mar (textos tal cual), por id de producto.
-// Van aparte del catálogo para no sumar ~25 KB a la carga inicial: el service las pide con import() solo
-// en /producto y cuando se usa el buscador de la tienda.
-// ⚠️ Los componentes NO importan este archivo: todo pasa por src/services/productsService.js
+// CARGA INICIAL: ya no es la verdad (están en Supabase, columna productos.descripcion, y las edita Mar en
+// /admin). Solo lo usa la migración. El respaldo de la web es src/data/respaldo-descripciones.json.
 export default {
   'shampoo-low-poo-han':
     "Shampoos suaves libres de sulfatos, parabenos y siliconas en distintas variedades: Carbón Activado (purificante y detox), Action Plex (hidronutritivo y brillo intenso), Biotina + Ácido Hialurónico (fuerza y estímulo del crecimiento), Rulos Definidos (con aceite de palta y aloe vera), Prevención Caída (con centella asiática, aloe vera y D-pantenol) y Extracto de Avena & Miel (hidronutritivo y suavizante).",

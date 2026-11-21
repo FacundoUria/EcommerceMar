@@ -6,10 +6,12 @@
 // prueba los permisos con la publishable key (lo que ve la web).
 //
 // Usa la secret key (SUPABASE_SERVICE_ROLE_KEY del .env, rol service_role: salta RLS). Nunca se imprime.
-// ⚠️ Pisa lo que haya en la base con lo de products.js. Cuando Mar edite desde /admin, NO volver a correrlo.
+// ⚠️ PISA lo que haya en la base con lo de products.js (que quedó viejo: los datos los maneja Mar en /admin).
+//    Sin --confirmo-pisar-todo NO escribe nada: solo avisa y muestra cuántas filas pisaría.
 //
 // Opciones:
-//   --podar   además borra de la base lo que ya no está en products.js (sin esto solo lo avisa).
+//   --confirmo-pisar-todo   escribe de verdad (espera 5 s antes, para cancelar con Ctrl+C).
+//   --podar                 además borra de la base lo que ya no está en products.js (sin esto solo lo avisa).
 import { fileURLToPath } from 'node:url';
 import { createClient } from '@supabase/supabase-js';
 import { categories, productosCrudos, services } from '../src/data/products.js';
@@ -109,6 +111,49 @@ const filasServicios = services.map((s, i) => ({
 const idsProductos = new Set(productosCrudos.map((p) => p.id));
 const descSueltas = Object.keys(descripciones).filter((id) => !idsProductos.has(id));
 if (descSueltas.length) console.warn(`⚠️  Descripciones sin producto: ${descSueltas.join(', ')}`);
+
+// ───────── Protección: sin --confirmo-pisar-todo no se escribe NADA ─────────
+// Desde la etapa 2 los datos los maneja Mar en /admin: products.js quedó viejo y esto pisaría sus cambios.
+
+const iguales = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+async function cuantosPisa(tabla, filas, claveDe = (f) => f.id) {
+  const columnas = Object.keys(filas[0]);
+  const enBase = ok(await db.from(tabla).select(columnas.join(', ')), tabla);
+  const porClave = new Map(enBase.map((f) => [claveDe(f), f]));
+  let cambian = 0;
+  let nuevas = 0;
+  for (const f of filas) {
+    const b = porClave.get(claveDe(f));
+    if (!b) nuevas++;
+    else if (!columnas.every((c) => iguales(f[c], b[c]))) cambian++;
+  }
+  return { cambian, nuevas };
+}
+
+console.log(`
+⚠️  ATENCIÓN: este script PISA lo que hay en Supabase con lo de src/data/products.js.
+   Los cambios que Mar hizo desde el panel /admin (precios, fotos, productos, categorías y servicios)
+   se pierden. products.js ya no se actualiza: la verdad está en Supabase.
+`);
+const pisa = {
+  categorías: await cuantosPisa('categorias', filasCategorias),
+  productos: await cuantosPisa('productos', filasProductos),
+  variantes: await cuantosPisa('variantes', filasVariantes, (v) => `${v.producto_id}\u0000${v.nombre}`),
+  servicios: await cuantosPisa('servicios', filasServicios),
+};
+console.log('   Si sigue, esto pasaría en la base:');
+for (const [tabla, { cambian, nuevas }] of Object.entries(pisa))
+  console.log(`     ${tabla.padEnd(11)} ${String(cambian).padStart(3)} se pisan · ${String(nuevas).padStart(3)} se agregan`);
+
+if (!process.argv.includes('--confirmo-pisar-todo')) {
+  console.log(`
+   No se escribió nada. Si de verdad querés pisar todo (por ejemplo, para volver a cargar la base desde cero):
+     npm run supabase:migrar -- --confirmo-pisar-todo
+`);
+  process.exit(1);
+}
+console.log('\n   --confirmo-pisar-todo: se pisa en 5 segundos (Ctrl+C para cancelar)…');
+await new Promise((r) => setTimeout(r, 5000));
 
 // ───────── Upserts (categorías → productos → variantes: por las claves foráneas) ─────────
 

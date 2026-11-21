@@ -171,3 +171,37 @@ Capturas finales (webp a la mitad del tamaño) en `docs/performance/final/`; las
 
 - Probar en un celular de gama baja real (el throttling de DevTools frena la CPU pero no la GPU).
 - Si se agregan secciones al inicio debajo del pliegue, que vayan en `HomeResto.jsx`.
+
+## Fase 2: catálogo desde Supabase (2026-11-21)
+
+Mismo método que arriba (build servido con brotli, Lighthouse mobile estándar mediana de 3, capturas
+390/1440 congeladas + pixelmatch). Base: commit `dffefd6` (catálogo estático en el bundle). Lighthouse mide
+siempre una **primera visita** (sin copia en localStorage): la página espera a Supabase (hasta 3 s).
+
+| Página | Base | supabase-js completo | **postgrest-js + preconnect (final)** |
+|---|---|---|---|
+| Inicio | 87 | 86 | **87** |
+| Productos | 85 | 83 | **87** |
+| Producto | 88 | 83 | **85** |
+| Rutina | 92 | 86 | **90** |
+| Carrito | 94 | 92 | **93** |
+| Servicios | 92 | 87 | **88** |
+
+- **supabase-js completo** (chunk de 56 KB gzip, precargado en la primera visita): FCP +150 ms en todas las
+  páginas (compite con el JS principal) y /rutina −6. **Descartado**.
+- **Final**: `@supabase/postgrest-js` (el cliente de consultas de supabase-js, chunk de 5 KB gzip) +
+  `preconnect` a Supabase + `modulepreload` del chunk solo sin copia guardada. Peor caso: servicios −4.
+  Accesibilidad 100 en todas. En visitas con copia el catálogo se pinta desde localStorage (~150 ms en la
+  prueba), sin esperar la red.
+- **Capturas**: 0 px en todas, comparando en igualdad de condiciones. La única diferencia es el **rasterizado
+  del logo del header** en la primera visita al inicio (168 px en 390, 212 px en 1440, mismo artefacto que
+  en O9); con el catálogo ya cargado da 0 px. /producto 390 varía su ancho de captura entre corridas
+  (390–399 px, ya pasaba): con el mismo ancho, 0 px.
+- **Comportamiento** (Playwright): primera visita desde Supabase y guarda la copia; segunda visita desde la
+  copia + revalidación; Supabase caído → respaldo local en ~290 ms (con los reintentos de postgrest-js
+  tardaba 3,5 s: se apagaron); Supabase lento (5 s) → respaldo a los 3 s y la copia se guarda cuando llega;
+  copia vieja → precio y descripción viejos al instante y se corrigen solos (también el carrito); producto
+  que no está en la copia → espera a Supabase sin mostrar "No encontrado"; producto oculto → "No encontrado".
+- **Datos**: lo que devuelve el service es idéntico (comparación profunda) entre la versión vieja, el
+  respaldo local nuevo y Supabase: 51 productos, 12 categorías, 8 servicios, 3 grupos, 16 marcas,
+  47 descripciones.

@@ -232,3 +232,23 @@ Mismo método. "Etapa 1" = lo que está en `main` antes del panel; "Original" = 
 - **Datos**: idénticos al catálogo original desde el respaldo JSON y desde Supabase (51 productos, 12 categorías,
   8 servicios, 3 grupos, 16 marcas, 47 descripciones) y los pasos de la rutina derivados del campo `paso` dan
   exactamente los de `PASOS_RUTINA`.
+
+## Fotos subidas con color, fondo y miniatura (2026-11-21)
+
+| Página | Etapa 2 | **Con datos de fotos** |
+|---|---|---|
+| Inicio | 88 | **89** |
+| Productos | 85 | **87** |
+| Producto | 85 | **85** |
+| Rutina | 90 | **88** |
+| Carrito | 93 | **91** |
+| Servicios | 87 | **87** |
+
+- JS de la tienda +0,11 KB gzip (`comun` + `index`), CSS +0,02 KB. La consulta de `fotos` (url, color, fondo)
+  va en paralelo con las otras tres; las miniaturas, después del load.
+- **Capturas**: 0 px en todas las páginas (390 y 1440) comparando el build anterior con el nuevo sobre los mismos
+  datos (Ghee 390 con el mismo ancho de captura). Contra la base original, /servicios ahora difiere porque
+  alguien cambió el orden de dos servicios desde el panel (datos, no código).
+- **Igual que las de /img**: una foto del sitio subida desde el panel (Gelatina líquida, fondo blanco; Cofia XL,
+  escena) se ve igual en la tienda que la original: mismo modo (multiply / marco), halo del mismo color
+  (#02bac8 vs #02b9c8; #d99469 vs #da9569) y miniatura de blur-up.

@@ -1,6 +1,6 @@
-// Arma los objetos del catálogo tal cual los usa la web, desde los datos de Supabase o desde el respaldo local
-// (src/data/products.js). Las dos fuentes pasan por las mismas funciones: la UI no se entera de dónde vienen.
-// Solo lo usan el service (src/services/productsService.js), products.js y los scripts.
+// Arma los objetos del catálogo tal cual los usa la web desde las filas de Supabase (las mismas del respaldo
+// src/data/respaldo-catalogo.json): la UI no se entera de dónde vienen. Lo usan el service, el panel (precio
+// de la lista) y, con productoLocal / servicioLocal, products.js para los scripts.
 
 const img = (carpeta, nombre) => `/img/${carpeta}/${nombre}.webp`;
 
@@ -63,7 +63,7 @@ export const servicioDeFila = (f) => ({
   imagen: f.foto,
 });
 
-// ───────── Desde src/data/products.js (respaldo local) ─────────
+// ───────── Desde src/data/products.js (carga inicial; lo usan los scripts) ─────────
 
 /** Variantes como [nombre, foto, precio]; `foto` = nombre del archivo en /img/productos (sin extensión). */
 export const productoLocal = (p) =>

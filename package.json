@@ -5,13 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/respaldo-catalogo.mjs",
     "build": "vite build",
     "preview": "vite preview",
     "fotos:importar": "node scripts/importar-fotos-faltantes.mjs",
     "assets:optimizar": "node scripts/optimizar-assets.mjs",
     "videos:optimizar": "node scripts/optimizar-videos.mjs",
     "imagenes:auditar": "node scripts/auditar-imagenes.mjs",
-    "supabase:migrar": "node scripts/migrar-a-supabase.mjs"
+    "supabase:migrar": "node scripts/migrar-a-supabase.mjs",
+    "respaldo": "node scripts/respaldo-catalogo.mjs",
+    "supabase:probar-permisos": "node scripts/probar-permisos.mjs"
   },
   "dependencies": {
     "@supabase/postgrest-js": "2.119.0",

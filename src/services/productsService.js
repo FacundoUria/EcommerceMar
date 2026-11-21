@@ -4,13 +4,14 @@
 // Stale-while-revalidate:
 //   1. Si hay una copia en localStorage, se muestra al instante y se pide la versión nueva en segundo plano.
 //   2. Primera visita (sin copia): se espera a Supabase hasta 3 s; si falla o tarda más, se usa el respaldo
-//      local (src/data/products.js, src/data/descripciones.js). La tienda nunca queda vacía.
+//      (src/data/respaldo-catalogo.json y respaldo-descripciones.json: los baja de Supabase cada build,
+//      scripts/respaldo-catalogo.mjs). La tienda nunca queda vacía.
 //   3. Cuando llega una versión distinta de la que se ve, se guarda y se avisa (`alActualizar`): los hooks de
 //      useCatalog y el carrito se actualizan solos. Al volver a la pestaña después de 5 min se vuelve a pedir.
 // El cliente de Supabase va en un chunk aparte (lib/supabase.js), pedido con import().
 import { reviews } from '../data/resenas.js';
-import { categories as categoriasLocales, productosCrudos, serviciosCrudos } from '../data/products.js';
-import { categoriaDeFila, categoriaLocal, productoDeFila, productoLocal, servicioDeFila, servicioLocal } from '../lib/catalogo.js';
+import respaldo from '../data/respaldo-catalogo.json';
+import { categoriaDeFila, productoDeFila, servicioDeFila } from '../lib/catalogo.js';
 import { consultarCatalogo, consultarDescripciones } from '../lib/consultas.js';
 
 const ESPERA_MAX = 3000; // primera visita: cuánto se espera a Supabase antes de usar el respaldo local
@@ -131,20 +132,28 @@ function crearFuente({ tipo, clave, remoto, armar, local }) {
 // búsqueda, chat y carrito (y su página da "No encontrado"). Supabase ya devuelve solo los activos.
 const visibles = (products) => products.filter((p) => p.activo !== false);
 
+/**
+ * Filas (de Supabase o del respaldo) → catálogo de la web. Categorías: solo las que tienen productos visibles
+ * (una categoría nueva y vacía no aparece en la tienda) y, si no tienen portada, la foto de su primer producto.
+ */
+function armarCatalogo(f) {
+  const products = visibles(f.productos.map(productoDeFila));
+  if (!products.length) throw new Error('sin productos');
+  const primero = new Map();
+  for (const p of products) if (!primero.has(p.categoria)) primero.set(p.categoria, p);
+  const categories = f.categorias
+    .map(categoriaDeFila)
+    .filter((c) => primero.has(c.id))
+    .map((c) => (c.imagen ? c : { ...c, imagen: primero.get(c.id).imagen }));
+  return { products, categories, services: f.servicios.map(servicioDeFila) };
+}
+
 const catalogo = crearFuente({
   tipo: 'catalogo',
   clave: 'dreamhair:catalogo:v1',
   remoto: () => cliente().then(consultarCatalogo),
-  armar: (f) => {
-    const products = visibles(f.productos.map(productoDeFila));
-    if (!products.length) throw new Error('sin productos');
-    return { products, categories: f.categorias.map(categoriaDeFila), services: f.servicios.map(servicioDeFila) };
-  },
-  local: () => ({
-    products: visibles(productosCrudos.map(productoLocal)),
-    categories: categoriasLocales.map(categoriaLocal),
-    services: serviciosCrudos.map(servicioLocal),
-  }),
+  armar: armarCatalogo,
+  local: () => armarCatalogo(respaldo),
 });
 
 const descripciones = crearFuente({
@@ -155,7 +164,7 @@ const descripciones = crearFuente({
     if (!d || typeof d !== 'object') throw new Error('descripciones raras');
     return d;
   },
-  local: () => import('../data/descripciones.js').then((m) => m.default),
+  local: () => import('../data/respaldo-descripciones.json').then((m) => m.default),
 });
 
 /**

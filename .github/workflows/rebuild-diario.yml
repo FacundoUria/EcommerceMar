@@ -1,0 +1,28 @@
+# Rebuild diario en Netlify: así el respaldo del catálogo (src/data/respaldo-*.json, que se baja de Supabase en
+# cada build) nunca queda más viejo que un día, aunque nadie haga push.
+# Secret del repo (Settings → Secrets and variables → Actions): NETLIFY_BUILD_HOOK (URL del build hook de Netlify).
+name: Rebuild diario
+
+on:
+  schedule:
+    - cron: '0 9 * * *' # todos los días 9:00 UTC = 6:00 en Argentina
+  workflow_dispatch: # para correrla a mano desde la pestaña Actions
+
+permissions: {}
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Disparar el build hook de Netlify
+        env:
+          NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          if [ -z "$NETLIFY_BUILD_HOOK" ]; then
+            echo "Falta el secret NETLIFY_BUILD_HOOK" >&2
+            exit 1
+          fi
+          curl --fail --silent --show-error --max-time 30 --retry 3 --retry-delay 10 \
+            -X POST -d '{}' -o /dev/null -w "HTTP %{http_code}\n" \
+            "$NETLIFY_BUILD_HOOK?trigger_title=Rebuild+diario+(respaldo+del+catalogo)"

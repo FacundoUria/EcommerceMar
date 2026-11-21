@@ -1,0 +1,1211 @@
+{
+ "categorias": [
+  {
+   "id": "low-poo",
+   "nombre": "Low poo",
+   "paso": 1,
+   "portada": "/img/productos/shampoo-low-poo-han.webp"
+  },
+  {
+   "id": "cremas-2en1",
+   "nombre": "Cremas 2 en 1",
+   "paso": 2,
+   "portada": "/img/productos/cremas-skala.webp"
+  },
+  {
+   "id": "cremas-peinar",
+   "nombre": "Cremas de peinar",
+   "paso": 2,
+   "portada": "/img/productos/cremas-salon-line.webp"
+  },
+  {
+   "id": "tratamientos",
+   "nombre": "Tratamientos",
+   "paso": 2,
+   "portada": "/img/productos/mascarillas-lola.webp"
+  },
+  {
+   "id": "geles",
+   "nombre": "Geles y gelatinas",
+   "paso": 3,
+   "portada": "/img/productos/gelatinas-500gr.webp"
+  },
+  {
+   "id": "mousses",
+   "nombre": "Mousses",
+   "paso": 3,
+   "portada": "/img/productos/mousse-cantu.webp"
+  },
+  {
+   "id": "activadores",
+   "nombre": "Activadores de rulos",
+   "paso": 3,
+   "portada": "/img/productos/activador-cantu.webp"
+  },
+  {
+   "id": "spray",
+   "nombre": "Spray",
+   "paso": 3,
+   "portada": "/img/productos/spray-revitalizante.webp"
+  },
+  {
+   "id": "saten",
+   "nombre": "Satén",
+   "paso": 4,
+   "portada": "/img/productos/cofia-saten.webp"
+  },
+  {
+   "id": "oleos",
+   "nombre": "Óleos",
+   "paso": 4,
+   "portada": "/img/productos/oleos-pinga.webp"
+  },
+  {
+   "id": "cepillos",
+   "nombre": "Cepillos",
+   "paso": null,
+   "portada": "/img/productos/cepillo-viral-tenedor.webp"
+  },
+  {
+   "id": "varios",
+   "nombre": "Varios",
+   "paso": null,
+   "portada": "/img/productos/turbante-microfibra.webp"
+  }
+ ],
+ "productos": [
+  {
+   "id": "shampoo-low-poo-han",
+   "nombre": "Línea de Shampoos Profesionales Sin Sulfatos, Parabenos ni Siliconas",
+   "nombre_corto": "Shampoo low poo",
+   "marca": "HAN",
+   "categoria_id": "low-poo",
+   "precio": 15000,
+   "tamano": "500 ml",
+   "alias": [],
+   "destacado": true,
+   "fotos": [
+    "/img/productos/shampoo-low-poo-han.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "/img/productos/shampoo-han-detox.webp",
+     "orden": 1,
+     "nombre": "Carbón Activado",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/shampoo-han-plex.webp",
+     "orden": 2,
+     "nombre": "Action Plex",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/shampoo-han-biotina.webp",
+     "orden": 3,
+     "nombre": "Biotina + Ácido Hialurónico",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/shampoo-han-rulos.webp",
+     "orden": 4,
+     "nombre": "Rulos Definidos",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/shampoo-han-control-caida.webp",
+     "orden": 5,
+     "nombre": "Prevención Caída",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/shampoo-han-avena-miel.webp",
+     "orden": 6,
+     "nombre": "Avena & Miel",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/shampoo-han-acido-hialuronico.webp",
+     "orden": 7,
+     "nombre": "Ácido hialurónico",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/shampoo-han-lino.webp",
+     "orden": 8,
+     "nombre": "Lino",
+     "precio": null
+    }
+   ]
+  },
+  {
+   "id": "low-poo-kleno",
+   "nombre": "Perfect Curly Shampoo Rulos Perfectos",
+   "nombre_corto": "Shampoo Rulos Perfectos",
+   "marca": "Kleno",
+   "categoria_id": "low-poo",
+   "precio": 13000,
+   "tamano": "350 cc",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/low-poo-kleno.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "shampoo-skala-mais-cachos",
+   "nombre": "Shampoo Expert #Mais Cachos",
+   "nombre_corto": "Shampoo #Mais Cachos",
+   "marca": "Skala",
+   "categoria_id": "low-poo",
+   "precio": 12000,
+   "tamano": "600 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/shampoo-skala-mais-cachos.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "cremas-skala",
+   "nombre": "Cremas de Tratamiento y Peinar 2 en 1",
+   "nombre_corto": "Cremas 2 en 1",
+   "marca": "Skala",
+   "categoria_id": "cremas-2en1",
+   "precio": 6900,
+   "tamano": "1000 g",
+   "alias": [],
+   "destacado": true,
+   "fotos": [
+    "/img/productos/cremas-skala.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "/img/productos/cremas-skala-mais-cachinhos.webp",
+     "orden": 1,
+     "nombre": "Mais Cachinhos",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/cremas-skala-dona-skala.webp",
+     "orden": 2,
+     "nombre": "Dona Skala",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/cremas-skala-divina-cor.webp",
+     "orden": 3,
+     "nombre": "Divina Cor",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/cremas-skala-divino-potao.webp",
+     "orden": 4,
+     "nombre": "Divino Potão",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/cremas-skala-mais-cachos.webp",
+     "orden": 5,
+     "nombre": "Mais Cachos",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/cremas-skala-cachonados.webp",
+     "orden": 6,
+     "nombre": "Cachonados",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/cremas-skala-potao-do-amor.webp",
+     "orden": 7,
+     "nombre": "Potão do Amor",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/cremas-skala-divino-potinho.webp",
+     "orden": 8,
+     "nombre": "Divino Potinho",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/cremas-skala-mais-crespos.webp",
+     "orden": 9,
+     "nombre": "Mais Crespos",
+     "precio": null
+    }
+   ]
+  },
+  {
+   "id": "custard-cantu",
+   "nombre": "Shea Butter Define & Shine Custard",
+   "nombre_corto": "Define & Shine Custard",
+   "marca": "Cantu",
+   "categoria_id": "cremas-2en1",
+   "precio": 35000,
+   "tamano": "340 g / 12 oz",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/custard-cantu.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "curl-fusion",
+   "nombre": "Vesta CurlFusion Crema Gel de Lino",
+   "nombre_corto": "CurlFusion Crema Gel de Lino",
+   "marca": "Frenzzi",
+   "categoria_id": "cremas-2en1",
+   "precio": 16000,
+   "tamano": "300 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/curl-fusion.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "crema-peinar-kleno",
+   "nombre": "Perfect Curly Crema de Peinar Definition",
+   "nombre_corto": "Crema de Peinar Definition",
+   "marca": "Kleno",
+   "categoria_id": "cremas-peinar",
+   "precio": 8500,
+   "tamano": "250 g",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/crema-peinar-kleno.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "curl-mode",
+   "nombre": "Curl Mode Crema de Peinar",
+   "nombre_corto": "Curl Mode Crema de Peinar",
+   "marca": "Alfa",
+   "categoria_id": "cremas-peinar",
+   "precio": 10500,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/curl-mode.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "crema-bekim",
+   "nombre": "Cremas de Peinar Rulos: Memory y Argán",
+   "nombre_corto": "Cremas de Peinar Rulos",
+   "marca": "Bekim",
+   "categoria_id": "cremas-peinar",
+   "precio": 7000,
+   "tamano": "250 g",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/crema-bekim.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "/img/productos/crema-bekim-memory.webp",
+     "orden": 1,
+     "nombre": "Memory",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/crema-bekim-argan.webp",
+     "orden": 2,
+     "nombre": "Argán",
+     "precio": null
+    }
+   ]
+  },
+  {
+   "id": "cremas-salon-line",
+   "nombre": "Cremas de Peinar Definición",
+   "nombre_corto": "Cremas de Peinar Definición",
+   "marca": "Salon Line",
+   "categoria_id": "cremas-peinar",
+   "precio": 28000,
+   "tamano": "300 ml / 300 g",
+   "alias": [],
+   "destacado": true,
+   "fotos": [
+    "/img/productos/cremas-salon-line.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "/img/productos/cremas-salon-line-definicion-natural.webp",
+     "orden": 1,
+     "nombre": "Definição Natural",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/cremas-salon-line-ostentacao.webp",
+     "orden": 2,
+     "nombre": "Ostentação",
+     "precio": null
+    }
+   ]
+  },
+  {
+   "id": "crema-arbell-argan",
+   "nombre": "Crema de Peinar Protectora Argán y Filtro Solar",
+   "nombre_corto": "Crema Argán y Filtro Solar",
+   "marca": "Arbell",
+   "categoria_id": "cremas-peinar",
+   "precio": 7000,
+   "tamano": "150 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/crema-arbell-argan.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "mascarillas-lola",
+   "nombre": "Mascarillas Ultra Profundas",
+   "nombre_corto": "Mascarillas Ultra Profundas",
+   "marca": "Lola Cosmetics",
+   "categoria_id": "tratamientos",
+   "precio": 29000,
+   "tamano": "450 g",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/mascarillas-lola.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "/img/productos/mascarillas-lola-milagre.webp",
+     "orden": 1,
+     "nombre": "Milagre",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/mascarillas-lola-dream-cream.webp",
+     "orden": 2,
+     "nombre": "Dream Cream",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/mascarillas-lola-danos-vorazes.webp",
+     "orden": 3,
+     "nombre": "Danos Vorazes",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/mascarillas-lola-morte-subita.webp",
+     "orden": 4,
+     "nombre": "Morte Súbita",
+     "precio": null
+    }
+   ]
+  },
+  {
+   "id": "tratamientos-fidelite",
+   "nombre": "Tratamientos Profundos",
+   "nombre_corto": "Tratamientos Profundos",
+   "marca": "Fidelité",
+   "categoria_id": "tratamientos",
+   "precio": 7500,
+   "tamano": "270 g",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/tratamientos-fidelite.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "/img/productos/tratamientos-fidelite-coco-vainilla.webp",
+     "orden": 1,
+     "nombre": "Coco y Vainilla",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/tratamientos-fidelite-almendras.webp",
+     "orden": 2,
+     "nombre": "Almendras",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/tratamientos-fidelite-keratina.webp",
+     "orden": 3,
+     "nombre": "Keratina",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 4,
+     "nombre": "Colormaster Crema Ácida",
+     "precio": null
+    }
+   ]
+  },
+  {
+   "id": "mascara-han-alfa-keratina",
+   "nombre": "Máscara Capilar Alfa Keratina",
+   "nombre_corto": "Máscara Capilar Alfa Keratina",
+   "marca": "HAN",
+   "categoria_id": "tratamientos",
+   "precio": 12000,
+   "tamano": "200 cm³",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/mascara-han-alfa-keratina.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "ghee-lola",
+   "nombre": "Manteca Vegetal Be(M)dita Ghee Reconstrução",
+   "nombre_corto": "Be(M)dita Ghee Reconstrução",
+   "marca": "Lola Cosmetics",
+   "categoria_id": "tratamientos",
+   "precio": null,
+   "tamano": "100 g / 350 g",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/ghee-lola-350.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "/img/productos/ghee-lola-100.webp",
+     "orden": 1,
+     "nombre": "100 g",
+     "precio": 25000
+    },
+    {
+     "foto": "/img/productos/ghee-lola-350.webp",
+     "orden": 2,
+     "nombre": "350 g · taza",
+     "precio": 39000
+    }
+   ]
+  },
+  {
+   "id": "gel-de-rich",
+   "nombre": "Gel Capilar con Proteína Vegetal (Envase Botella)",
+   "nombre_corto": "Gel con Proteína Vegetal",
+   "marca": "Rich",
+   "categoria_id": "geles",
+   "precio": 35000,
+   "tamano": null,
+   "alias": [],
+   "destacado": true,
+   "fotos": [
+    "/img/productos/gel-de-rich.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "gelatina-liquida-salon-line",
+   "nombre": "Gelatina líquida Salon Line",
+   "nombre_corto": "Gelatina líquida",
+   "marca": "Salon Line",
+   "categoria_id": "geles",
+   "precio": 28000,
+   "tamano": null,
+   "alias": [],
+   "destacado": true,
+   "fotos": [
+    "/img/productos/gelatina-liquida-salon-line.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "gelatinas-500",
+   "nombre": "Línea #todecacho Gelatinas Capilares",
+   "nombre_corto": "Gelatinas #todecacho",
+   "marca": "Salon Line",
+   "categoria_id": "geles",
+   "precio": 26000,
+   "tamano": "500 / 550 g",
+   "alias": [],
+   "destacado": true,
+   "fotos": [
+    "/img/productos/gelatinas-500gr.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "/img/productos/gelatinas-500gr-ostentacao.webp",
+     "orden": 1,
+     "nombre": "Ostentação",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/gelatinas-500gr-baunilha.webp",
+     "orden": 2,
+     "nombre": "Baunilha Doce",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/gelatinas-500gr-7x.webp",
+     "orden": 3,
+     "nombre": "Amarilla 72 h",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/gelatinas-500gr-14x.webp",
+     "orden": 4,
+     "nombre": "Verde 72 h",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/gelatinas-500gr-transicao.webp",
+     "orden": 5,
+     "nombre": "Super Transição",
+     "precio": null
+    }
+   ]
+  },
+  {
+   "id": "gelatinas-kids",
+   "nombre": "Gelatinas Salon Line Kids",
+   "nombre_corto": "Gelatinas Kids",
+   "marca": "Salon Line",
+   "categoria_id": "geles",
+   "precio": 26000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/gelatinas-kids.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "/img/productos/gelatinas-kids-melao.webp",
+     "orden": 1,
+     "nombre": "Melão",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/gelatinas-kids-melancia.webp",
+     "orden": 2,
+     "nombre": "Melancia",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/gelatinas-kids-uva.webp",
+     "orden": 3,
+     "nombre": "Uva",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/gelatinas-kids-acai.webp",
+     "orden": 4,
+     "nombre": "Açaí",
+     "precio": null
+    }
+   ]
+  },
+  {
+   "id": "gel-frenzzi",
+   "nombre": "Geles Finalizadores Sin Siliconas ni Parabenos",
+   "nombre_corto": "Geles Finalizadores",
+   "marca": "Frenzzi",
+   "categoria_id": "geles",
+   "precio": 18000,
+   "tamano": "350 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/gel-frenzzi.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "/img/productos/gel-frenzzi-chia.webp",
+     "orden": 1,
+     "nombre": "Chía",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/gel-frenzzi-pepino.webp",
+     "orden": 2,
+     "nombre": "Aloe y Pepino",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/gel-frenzzi-lino.webp",
+     "orden": 3,
+     "nombre": "Lino",
+     "precio": null
+    }
+   ]
+  },
+  {
+   "id": "gel-bekim-800",
+   "nombre": "Supreme Fixer Gel de Fijación Fuerte",
+   "nombre_corto": "Supreme Fixer con dosificador",
+   "marca": "Bekim",
+   "categoria_id": "geles",
+   "precio": 19000,
+   "tamano": "300 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/gel-bekim-800gr.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "gel-bekim-250",
+   "nombre": "Supreme Fixer Gel de Fijación Fuerte en Pote",
+   "nombre_corto": "Supreme Fixer en pote",
+   "marca": "Bekim",
+   "categoria_id": "geles",
+   "precio": 10000,
+   "tamano": "250 g",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/gel-bekim-250gr.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "gel-fuerte-fidelite",
+   "nombre": "Super Fix Gel Fijación Extrema",
+   "nombre_corto": "Super Fix Gel",
+   "marca": "Fidelité",
+   "categoria_id": "geles",
+   "precio": 10000,
+   "tamano": "230 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/gel-fuerte-fidelite.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "gel-aurill",
+   "nombre": "Protector No Graso Oil Non Oil",
+   "nombre_corto": "Protector Oil Non Oil",
+   "marca": "Aurill",
+   "categoria_id": "geles",
+   "precio": 18500,
+   "tamano": "375 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/gel-aurill.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "gel-curl-mode",
+   "nombre": "Oil Non Oil Curl Scrunch Gel Finalizador",
+   "nombre_corto": "Oil Non Oil Curl Scrunch",
+   "marca": "Alfa",
+   "categoria_id": "geles",
+   "precio": 11000,
+   "tamano": "250 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/gel-curl-mode.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "mousse-kleno",
+   "nombre": "Mousse Rulos Definidos con ácido hialurónico",
+   "nombre_corto": "Mousse Rulos Definidos",
+   "marca": "Kleno",
+   "categoria_id": "mousses",
+   "precio": 19000,
+   "tamano": "150 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/mousse-kleno.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "mousse-cantu",
+   "nombre": "Shea Butter Wave Whip Curling Mousse",
+   "nombre_corto": "Wave Whip Curling Mousse",
+   "marca": "Cantu",
+   "categoria_id": "mousses",
+   "precio": 43000,
+   "tamano": "248 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/mousse-cantu.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "activador-kleno",
+   "nombre": "Perfect Curly Activador de Rulos en gel, Sin Enjuague",
+   "nombre_corto": "Activador de Rulos en gel",
+   "marca": "Kleno",
+   "categoria_id": "activadores",
+   "precio": 8000,
+   "tamano": "150 cc",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/activador-kleno.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "activador-cantu",
+   "nombre": "Shea Butter Moisturizing Curl Activator Cream",
+   "nombre_corto": "Curl Activator Cream",
+   "marca": "Cantu",
+   "categoria_id": "activadores",
+   "precio": 39000,
+   "tamano": "355 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/activador-cantu.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "spray-revitalizante",
+   "nombre": "Shea Butter Comeback Curl Next Day Curl Revitalizer",
+   "nombre_corto": "Comeback Curl Revitalizer",
+   "marca": "Cantu",
+   "categoria_id": "spray",
+   "precio": 25000,
+   "tamano": "355 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/spray-revitalizante.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "funda-saten",
+   "nombre": "Fundas de Almohada de Satén Anti-Frizz",
+   "nombre_corto": "Funda de almohada satén",
+   "marca": "Dream Hair",
+   "categoria_id": "saten",
+   "precio": 15000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/funda-saten.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "cofia-saten",
+   "nombre": "Cofia de Satén Anti-Frizz (Varios Colores)",
+   "nombre_corto": "Cofia de satén",
+   "marca": "Dream Hair",
+   "categoria_id": "saten",
+   "precio": 7000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/cofia-saten.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "cofia-xl-saten",
+   "nombre": "Cofia XL de Satén",
+   "nombre_corto": "Cofia XL de satén",
+   "marca": "Dream Hair",
+   "categoria_id": "saten",
+   "precio": 10000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/cofia-xl-saten.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "cofia-long-saten",
+   "nombre": "Cofia Long de Satén Ajustable",
+   "nombre_corto": "Cofia Long de satén",
+   "marca": "Dream Hair",
+   "categoria_id": "saten",
+   "precio": 13000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/cofia-long-saten.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "ondulador-saten",
+   "nombre": "Ondulador sin Calor de Satén (Set completo)",
+   "nombre_corto": "Ondulador sin calor de satén",
+   "marca": null,
+   "categoria_id": "saten",
+   "precio": 7000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/ondulador-saten.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "oleos-pinga",
+   "nombre": "Pinga! Aceites Multifuncionales",
+   "nombre_corto": "Pinga! Aceites",
+   "marca": "Lola Cosmetics",
+   "categoria_id": "oleos",
+   "precio": 19000,
+   "tamano": "50 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/oleos-pinga.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "/img/productos/oleos-pinga-cenoura-oliva.webp",
+     "orden": 1,
+     "nombre": "Cenoura & Oliva",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/oleos-pinga-acai.webp",
+     "orden": 2,
+     "nombre": "Açaí & Pracaxi",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/oleos-pinga-pataua.webp",
+     "orden": 3,
+     "nombre": "Patauá & Moringa",
+     "precio": null
+    }
+   ]
+  },
+  {
+   "id": "cepillo-viral",
+   "nombre": "Cepillo Definidor de Rulos y Ondas Anti-Frizz (Rosa)",
+   "nombre_corto": "Cepillo Definidor Rosa",
+   "marca": null,
+   "categoria_id": "cepillos",
+   "precio": 16000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/cepillo-viral.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "cepillo-viral-flexible",
+   "nombre": "Cepillo viral flexible",
+   "nombre_corto": null,
+   "marca": null,
+   "categoria_id": "cepillos",
+   "precio": 13000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/cepillo-viral-flexible.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "cepillo-viral-doble",
+   "nombre": "Cepillo viral doble",
+   "nombre_corto": null,
+   "marca": null,
+   "categoria_id": "cepillos",
+   "precio": 13000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/cepillo-viral-doble.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "cepillo-viral-tenedor",
+   "nombre": "Cepillo Definidor de Rulos y Ondas Anti-Frizz / tenedor",
+   "nombre_corto": "Cepillo Definidor tenedor",
+   "marca": null,
+   "categoria_id": "cepillos",
+   "precio": 15000,
+   "tamano": null,
+   "alias": [],
+   "destacado": true,
+   "fotos": [
+    "/img/productos/cepillo-viral-tenedor.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "cepillo-detangle-bounce",
+   "nombre": "Cepillo Definidor de Rulos y Ondas Anti-Frizz detangle (Fucsia)",
+   "nombre_corto": "Cepillo Definidor Fucsia",
+   "marca": null,
+   "categoria_id": "cepillos",
+   "precio": 12000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/cepillo-detangle-bounce.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "cepillo-maya-cuadrado",
+   "nombre": "Cepillo Flexible Rectangular Desenredante",
+   "nombre_corto": "Cepillo Flexible Rectangular",
+   "marca": "Dompel",
+   "categoria_id": "cepillos",
+   "precio": 12000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/cepillo-maya-cuadrado.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "cepillo-pirulito",
+   "nombre": "Cepillo Flexible Espiral Desenredante",
+   "nombre_corto": "Cepillo Espiral",
+   "marca": "Dompel",
+   "categoria_id": "cepillos",
+   "precio": 8000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/cepillo-pirulito.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "cepillo-pirulito-2",
+   "nombre": "Cepillo Flexible Curvo Desenredante y Ventilado",
+   "nombre_corto": "Cepillo Curvo Ventilado",
+   "marca": null,
+   "categoria_id": "cepillos",
+   "precio": 9000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/cepillo-pirulito-2.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "cepillo-magico",
+   "nombre": "Cepillo Pulpo Desenredante para Rulos y Ondas",
+   "nombre_corto": "Cepillo Pulpo",
+   "marca": null,
+   "categoria_id": "cepillos",
+   "precio": 12000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/cepillo-magico.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "cepillo-tangle",
+   "nombre": "Cepillo Desenredante tipo Tangle",
+   "nombre_corto": "Cepillo Tangle",
+   "marca": "Viñeta",
+   "categoria_id": "cepillos",
+   "precio": 12000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/cepillo-tangle.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "cepillo-pinza",
+   "nombre": "Cepillo Pinza Alisador y Definidor",
+   "nombre_corto": "Cepillo Pinza Alisador",
+   "marca": "Viñeta",
+   "categoria_id": "cepillos",
+   "precio": 5000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/cepillo-pinza.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "turbante-microfibra",
+   "nombre": "Turbante de Microfibra Anti-Frizz",
+   "nombre_corto": "Turbante de microfibra",
+   "marca": "Dream Hair",
+   "categoria_id": "varios",
+   "precio": 13000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/turbante-microfibra.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "practiplopping",
+   "nombre": "Practiplopping (4 puntas)",
+   "nombre_corto": "Practiplopping 4 puntas",
+   "marca": "Dream Hair",
+   "categoria_id": "varios",
+   "precio": 16000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/practiplopping.webp"
+   ],
+   "variantes": [
+    {
+     "foto": null,
+     "orden": 1,
+     "nombre": "Microfibra",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 2,
+     "nombre": "Algodón",
+     "precio": null
+    }
+   ]
+  },
+  {
+   "id": "difusor-plegable",
+   "nombre": "Difusor Plegable Universal de Silicona",
+   "nombre_corto": "Difusor Plegable de Silicona",
+   "marca": null,
+   "categoria_id": "varios",
+   "precio": 19000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/difusor-plegable.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "atomizador-day-after",
+   "nombre": "Atomizador de Bruma Continua para Day After",
+   "nombre_corto": "Atomizador de Bruma Continua",
+   "marca": null,
+   "categoria_id": "varios",
+   "precio": 18000,
+   "tamano": null,
+   "alias": [
+    "difusor de agua"
+   ],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/atomizador-day-after.webp"
+   ],
+   "variantes": []
+  }
+ ],
+ "servicios": [
+  {
+   "id": "asesoramiento-basico",
+   "nombre": "Asesoramiento básico",
+   "grupo": "Asesoramientos",
+   "descripcion": "Diagnóstico personalizado y rutina a medida para tus rulos. Evaluamos tu patrón y las necesidades reales de tu hebra para diseñar el cuidado ideal. Incluye lavado, tratamiento nutritivo, clase práctica de finalización para que aprendas a definirte en casa y secado.",
+   "duracion": "1 h",
+   "foto": "/img/estudio/asesoramiento-basico.webp"
+  },
+  {
+   "id": "asesoramiento-completo",
+   "nombre": "Asesoramiento completo",
+   "grupo": "Asesoramientos",
+   "descripcion": "Diagnóstico capilar, corte en seco, tratamiento y clase de finalización. Todo el asesoramiento personalizado para conocer las necesidades de tu cabello, sumado al corte a medida, lavado, tratamiento específico, clase de definición para tu casa y secado.",
+   "duracion": "1 h 40 min",
+   "foto": "/img/estudio/asesoramiento-completo.webp"
+  },
+  {
+   "id": "asesoramiento-deluxe",
+   "nombre": "Asesoramiento De luxe",
+   "grupo": "Asesoramientos",
+   "descripcion": "La experiencia capilar más completa y avanzada. Incluye diagnóstico completo, corte en seco, lavado, tratamiento, análisis con cámara y un tratamiento con tecnología avanzada (ozonoterapia, infrarrojo o ambos según lo que tu fibra necesite).",
+   "duracion": "2 h",
+   "foto": "/img/estudio/asesoramiento-deluxe.webp"
+  },
+  {
+   "id": "corte-rulos",
+   "nombre": "Corte de rulos",
+   "grupo": "Cortes y clases",
+   "descripcion": "Corte especializado, ritual de lavado, tratamiento e hidratación profunda. Diseñado específicamente para respetar la forma natural de tus rulos y ondas en seco, finalizando con secado profesional.",
+   "duracion": "1 h",
+   "foto": "/img/estudio/corte-en-seco.webp"
+  },
+  {
+   "id": "lo-hiciste-tu",
+   "nombre": "Lo hiciste tú",
+   "grupo": "Cortes y clases",
+   "descripcion": "Clase teórico-práctica de finalización. Incluye productos y materiales para usar durante la clase. Vas a aprender a finalizar tu cabello según tus gustos, tiempos y tipo de cabello. Incluye tratamiento y lavado.",
+   "duracion": "1 h 20 min",
+   "foto": "/img/estudio/lo-hiciste-tu.webp"
+  },
+  {
+   "id": "tratamiento-finalizacion",
+   "nombre": "Tratamiento y finalización",
+   "grupo": "Cortes y clases",
+   "descripcion": "Tratamiento específico según tu tipo de cabello (se evalúa en el momento). Finalización (peinado) de rulos, ondas o afro y secado.",
+   "duracion": "50 min",
+   "foto": "/img/estudio/lavado.webp"
+  },
+  {
+   "id": "ozonoterapia",
+   "nombre": "Ozonoterapia",
+   "grupo": "Tratamientos",
+   "descripcion": "Oxigenación y detox profundo para el cuero cabelludo. Purifica el folículo, estimula el crecimiento y devuelve la vitalidad a los rizos fatigados, potenciando la absorción de cada nutriente.",
+   "duracion": "1 h",
+   "foto": "/img/estudio/ozonoterapia.webp"
+  },
+  {
+   "id": "celulas-madre-infrarrojo",
+   "nombre": "Células madre + infrarrojo",
+   "grupo": "Tratamientos",
+   "descripcion": "Reconstrucción extrema, suavidad y control total del frizz. Combina activos regeneradores con fototerapia infrarroja para reparar la fibra desde adentro y sellar la cutícula, logrando rulos elásticos y con brillo espejo.",
+   "duracion": "1 h",
+   "foto": "/img/estudio/celulas-madre-infrarrojo.webp"
+  }
+ ]
+}

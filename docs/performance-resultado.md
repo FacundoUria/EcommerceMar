@@ -205,3 +205,30 @@ siempre una **primera visita** (sin copia en localStorage): la página espera a 
 - **Datos**: lo que devuelve el service es idéntico (comparación profunda) entre la versión vieja, el
   respaldo local nuevo y Supabase: 51 productos, 12 categorías, 8 servicios, 3 grupos, 16 marcas,
   47 descripciones.
+
+## Fase 2, etapa 2: panel /admin (2026-11-21)
+
+Mismo método. "Etapa 1" = lo que está en `main` antes del panel; "Original" = antes de Supabase.
+
+| Página | Original | Etapa 1 | **Etapa 2** |
+|---|---|---|---|
+| Inicio | 87 | 87 | **88** |
+| Productos | 85 | 87 | **85** |
+| Producto | 88 | 85 | **85** |
+| Rutina | 92 | 90 | **90** |
+| Carrito | 94 | 93 | **93** |
+| Servicios | 92 | 88 | **87** |
+
+- **JS de la tienda igual**: `comun` + `index` = 150,56 KB gzip (antes 150,57). El respaldo JSON reemplazó a
+  products.js en el bundle. El panel (68 KB gzip, con supabase-js completo) es un chunk que solo baja /admin.
+- **Descartado**: react-router data router (`createBrowserRouter` + `useBlocker`) en el panel: como react-router
+  es un módulo compartido, todo ese código cayó en `comun` (+19 KB gzip que bajaba el home). El panel usa un
+  ruteo propio de 80 líneas (`src/admin/ruta.jsx`).
+- CSS +0,7 KB gzip (clases del panel: Tailwind genera un solo CSS para todo el sitio).
+- **Capturas**: 0 px en todas en igualdad de condiciones (mismo ancho de captura en /producto 390; catálogo ya
+  cargado en el inicio). Diferencias restantes: el rasterizado del logo del header en la primera visita al inicio
+  (168/212 px, igual que en la etapa 1) y en productos-1440 con el catálogo cargado (232 px en el logo y la
+  miniatura de un chip; dos capturas de la misma base difieren en 12.857 px ahí).
+- **Datos**: idénticos al catálogo original desde el respaldo JSON y desde Supabase (51 productos, 12 categorías,
+  8 servicios, 3 grupos, 16 marcas, 47 descripciones) y los pasos de la rutina derivados del campo `paso` dan
+  exactamente los de `PASOS_RUTINA`.

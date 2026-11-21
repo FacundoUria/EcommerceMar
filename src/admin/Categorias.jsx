@@ -5,7 +5,7 @@ import { Enlace, irA } from './ruta.jsx';
 import { PASOS_RUTINA } from '../config/negocio.js';
 import { imgFija } from '../lib/imagenes.js';
 import { useCambiosSinGuardar, useDatos } from './contexto.jsx';
-import { borrarCategoria, guardarCategoria, reordenar } from './datos.js';
+import { borrarCategoria, guardarCategoria, guardarFondos, reordenar } from './datos.js';
 import FotoCampo from './FotoCampo.jsx';
 import { borrarFotos } from './fotos.js';
 import { BarraGuardar, EncabezadoForm, ErrorCarga, SubirBajar } from './partes.jsx';
@@ -84,7 +84,7 @@ export function ListaCategorias() {
   );
 }
 
-const aForm = (c) => ({ nombre: c?.nombre ?? '', portada: c?.portada ?? null, paso: c?.paso ?? null });
+const aForm = (c) => ({ nombre: c?.nombre ?? '', portada: c?.portada ?? null, paso: c?.paso ?? null, fondos: {} });
 
 export function FormCategoria({ id }) {
   const { datos, error, recargar } = useDatos();
@@ -131,6 +131,7 @@ function Formulario({ original, datos, recargar }) {
     setGuardando(true);
     try {
       const id = await guardarCategoria({ nombre: form.nombre.trim(), portada: form.portada, paso: form.paso }, original, datos.categorias);
+      if (form.portada && form.fondos[form.portada]) await guardarFondos({ [form.portada]: form.fondos[form.portada] }, datos.fotos);
       const viejas = [original?.portada, ...subidas.current].filter((u) => u && u !== form.portada);
       subidas.current = [];
       borrarFotos(viejas).catch(() => {});
@@ -190,6 +191,9 @@ function Formulario({ original, datos, recargar }) {
         valor={form.portada}
         onCambio={(v) => setForm((f) => ({ ...f, portada: v }))}
         onSubida={(u) => subidas.current.push(u)}
+        vista="categoria"
+        fondo={form.fondos[form.portada]}
+        onFondo={(url, x) => setForm((f) => ({ ...f, fondos: { ...f.fondos, [url]: x } }))}
       />
 
       <details className="group rounded-2xl border border-linea bg-crema-card">

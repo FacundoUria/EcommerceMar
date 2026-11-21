@@ -272,7 +272,7 @@ function Formulario({ original, datos, recargar }) {
         )}
       </Campo>
 
-      <FotoCampo etiqueta="Foto" opcional valor={form.foto} onCambio={(v) => cambiar('foto', v)} onSubida={(u) => subidas.current.push(u)} />
+      <FotoCampo etiqueta="Foto" opcional vista="servicio" valor={form.foto} onCambio={(v) => cambiar('foto', v)} onSubida={(u) => subidas.current.push(u)} />
 
       {original && (
         <section className="border-t border-linea pt-6">

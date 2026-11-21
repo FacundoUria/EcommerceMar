@@ -19,15 +19,30 @@ const una = (r) => {
 const porOrden = (a, b) => (a.orden ?? 0) - (b.orden ?? 0) || String(a.id).localeCompare(String(b.id));
 const siguienteOrden = (filas) => filas.reduce((m, f) => Math.max(m, f.orden ?? 0), 0) + 1;
 
-/** { categorias, productos (con variantes ordenadas), servicios }, todo ordenado. */
+/** { categorias, productos (con variantes ordenadas), servicios, fotos (datos de las subidas) }, todo ordenado. */
 export async function cargarTodo() {
-  const [categorias, productos, servicios] = await Promise.all([
+  const [categorias, productos, servicios, fotos] = await Promise.all([
     sb.from('categorias').select('*').order('orden').order('id').then(revisar),
     sb.from('productos').select('*, variantes(*)').order('orden').order('id').then(revisar),
     sb.from('servicios').select('*').order('orden').order('id').then(revisar),
+    sb.from('fotos').select('*').then(revisar),
   ]);
   for (const p of productos) p.variantes.sort(porOrden);
-  return { categorias, productos, servicios };
+  return { categorias, productos, servicios, fotos };
+}
+
+/**
+ * "¿Cómo es la foto?": guarda el fondo elegido de las fotos subidas que cambiaron. `fondos`: { [url]: fondo };
+ * `actuales`: filas de la tabla `fotos`. Solo se tocan las que de verdad cambiaron.
+ */
+export async function guardarFondos(fondos, actuales) {
+  const antes = new Map(actuales.map((f) => [f.url, f.fondo]));
+  for (const [url, fondo] of Object.entries(fondos ?? {})) {
+    if (antes.get(url) === fondo) continue;
+    const r = await sb.from('fotos').update({ fondo }).eq('url', url).select('url');
+    if (antes.has(url)) una(r); // (una recién subida ya se guardó con su fondo)
+    else revisar(r);
+  }
 }
 
 // ───────── Productos ─────────

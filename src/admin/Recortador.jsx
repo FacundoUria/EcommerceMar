@@ -1,30 +1,32 @@
-// Recorte cuadrado de una foto: se mueve arrastrando (un dedo o el mouse) y se agranda con dos dedos, la
-// rueda del mouse o la barra de zoom (grande, para no depender de gestos). Lo que se ve en el cuadro es
-// exactamente lo que se sube.
+// Recorte cuadrado de una foto: se mueve arrastrando (un dedo o el mouse) y se agranda o achica con dos
+// dedos, la rueda del mouse o la barra de zoom (grande, para no depender de gestos). Se puede alejar hasta ver
+// la foto entera (un producto alto no queda cortado): lo que sobra es blanco, como un fondo de estudio. Lo que se
+// ve en el cuadro es exactamente lo que se sube.
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { LADO_MINIMO } from './fotos.js';
 import { Boton } from './ui.jsx';
 
-const ZOOM_MAX = 4; // hasta 4 veces el encuadre inicial
+const ZOOM_MAX = 4; // hasta 4 veces lo que cubre el cuadro
 
 /**
- * `foto`: { bitmap, ancho, alto, url } de abrirFoto(). `onListo({ x, y, lado })` en px de la foto.
+ * `foto`: { bitmap, ancho, alto, url } de abrirFoto(). `onListo({ x, y, lado })` en px de la foto (puede salirse
+ * de la foto si se alejó). `entera`: empezar con la foto entera (producto sobre blanco) en vez de cubriendo.
  */
-export default function Recortador({ foto, onListo, onCancelar, ocupado = false }) {
+export default function Recortador({ foto, onListo, onCancelar, ocupado = false, entera = false }) {
   const marco = useRef(null);
   const [vista, setVista] = useState(0); // lado del cuadro en px de pantalla
   const [estado, setEstado] = useState(null); // { s, x, y }: escala y posición de la foto dentro del cuadro
   const punteros = useRef(new Map());
   const gesto = useRef(null);
 
-  const minimo = vista ? Math.max(vista / foto.ancho, vista / foto.alto) : 1; // la foto siempre cubre el cuadro
+  const cubrir = vista ? Math.max(vista / foto.ancho, vista / foto.alto) : 1; // la foto llena el cuadro
+  const minimo = vista ? Math.min(vista / foto.ancho, vista / foto.alto) : 1; // la foto entera adentro
+  const maximo = cubrir * ZOOM_MAX;
+  // Si la foto es más grande que el cuadro, no puede dejar huecos; si es más chica, no puede salirse
+  const entre = (v, a, b) => Math.min(Math.max(v, Math.min(a, b)), Math.max(a, b));
   const limitar = ({ s, x, y }) => {
-    const esc = Math.min(Math.max(s, minimo), minimo * ZOOM_MAX);
-    return {
-      s: esc,
-      x: Math.min(0, Math.max(vista - foto.ancho * esc, x)),
-      y: Math.min(0, Math.max(vista - foto.alto * esc, y)),
-    };
+    const esc = Math.min(Math.max(s, minimo), maximo);
+    return { s: esc, x: entre(x, 0, vista - foto.ancho * esc), y: entre(y, 0, vista - foto.alto * esc) };
   };
 
   useLayoutEffect(() => {
@@ -36,18 +38,18 @@ export default function Recortador({ foto, onListo, onCancelar, ocupado = false 
     return () => ro.disconnect();
   }, []);
 
-  // Encuadre inicial: la foto cubre el cuadro, centrada
+  // Encuadre inicial, centrado: la foto entera (producto sobre blanco) o cubriendo el cuadro
   useEffect(() => {
     if (!vista) return;
-    const s = Math.max(vista / foto.ancho, vista / foto.alto);
+    const s = entera ? Math.min(vista / foto.ancho, vista / foto.alto) : Math.max(vista / foto.ancho, vista / foto.alto);
     setEstado({ s, x: (vista - foto.ancho * s) / 2, y: (vista - foto.alto * s) / 2 });
-  }, [vista, foto]);
+  }, [vista, foto, entera]);
 
   /** Zoom manteniendo quieto el punto (px, py) del cuadro. */
   const zoomEn = (nueva, px = vista / 2, py = vista / 2) =>
     setEstado((e) => {
       if (!e) return e;
-      const k = Math.min(Math.max(nueva, minimo), minimo * ZOOM_MAX) / e.s;
+      const k = Math.min(Math.max(nueva, minimo), maximo) / e.s;
       return limitar({ s: e.s * k, x: px - (px - e.x) * k, y: py - (py - e.y) * k });
     });
 
@@ -77,7 +79,7 @@ export default function Recortador({ foto, onListo, onCancelar, ocupado = false 
       const [mx, my] = medio(ahora);
       const [ox, oy] = medio(antes);
       setEstado((e) => {
-        const s = Math.min(Math.max(e.s * k, minimo), minimo * ZOOM_MAX);
+        const s = Math.min(Math.max(e.s * k, minimo), maximo);
         const f = s / e.s;
         return limitar({ s, x: mx - (ox - e.x) * f, y: my - (oy - e.y) * f });
       });
@@ -92,7 +94,7 @@ export default function Recortador({ foto, onListo, onCancelar, ocupado = false 
       const [px, py] = local(ev);
       setEstado((e) => {
         if (!e) return e;
-        const s = Math.min(Math.max(e.s * (ev.deltaY < 0 ? 1.1 : 1 / 1.1), minimo), minimo * ZOOM_MAX);
+        const s = Math.min(Math.max(e.s * (ev.deltaY < 0 ? 1.1 : 1 / 1.1), minimo), maximo);
         const k = s / e.s;
         return limitar({ s, x: px - (px - e.x) * k, y: py - (py - e.y) * k });
       });
@@ -103,14 +105,14 @@ export default function Recortador({ foto, onListo, onCancelar, ocupado = false 
 
   const recorte = estado ? { x: -estado.x / estado.s, y: -estado.y / estado.s, lado: vista / estado.s } : null;
   const borrosa = recorte && recorte.lado < LADO_MINIMO;
-  const nivel = estado ? Math.round(((estado.s / minimo - 1) / (ZOOM_MAX - 1)) * 100) : 0;
+  const nivel = estado ? Math.round(((estado.s - minimo) / (maximo - minimo || 1)) * 100) : 0;
 
   return (
     <div className="space-y-4">
-      <p className="text-[17px] text-texto-suave">Mové la foto con el dedo y agrandala para encuadrar. Lo que ves en el cuadro es lo que se va a ver en la tienda.</p>
+      <p className="text-[17px] text-texto-suave">Mové la foto con el dedo y agrandala o achicala para encuadrar. Lo que ves en el cuadro es lo que se va a ver en la tienda.</p>
       <div
         ref={marco}
-        className="relative mx-auto aspect-square w-full max-w-[28rem] cursor-grab touch-none overflow-hidden rounded-2xl bg-tinta/10 select-none active:cursor-grabbing"
+        className="relative mx-auto aspect-square w-full max-w-[28rem] cursor-grab touch-none overflow-hidden rounded-2xl bg-white ring-1 ring-tinta/15 select-none active:cursor-grabbing"
         onPointerDown={alBajar}
         onPointerMove={alMover}
         onPointerUp={alSoltar}
@@ -142,7 +144,7 @@ export default function Recortador({ foto, onListo, onCancelar, ocupado = false 
             min="0"
             max="100"
             value={nivel}
-            onChange={(e) => zoomEn(minimo * (1 + (Number(e.target.value) / 100) * (ZOOM_MAX - 1)))}
+            onChange={(e) => zoomEn(minimo + (Number(e.target.value) / 100) * (maximo - minimo))}
             className="h-12 w-full accent-verde"
           />
         </label>

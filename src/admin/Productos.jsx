@@ -4,7 +4,7 @@ import { Enlace, irA } from './ruta.jsx';
 import { productoDeFila } from '../lib/catalogo.js';
 import { imgFija } from '../lib/imagenes.js';
 import { useCambiosSinGuardar, useDatos } from './contexto.jsx';
-import { borrarProducto, cambiarVisible, fotosDeProducto, guardarCategoria, guardarProducto } from './datos.js';
+import { borrarProducto, cambiarVisible, fotosDeProducto, guardarCategoria, guardarFondos, guardarProducto } from './datos.js';
 import FotoCampo from './FotoCampo.jsx';
 import { borrarFotos } from './fotos.js';
 import { BarraGuardar, DialogoBorrar, EncabezadoForm, ErrorCarga, SubirBajar } from './partes.jsx';
@@ -142,6 +142,7 @@ const aForm = (p) => ({
   activo: p ? p.activo : true,
   foto: p?.fotos?.[0] ?? null,
   variantes: (p?.variantes ?? []).map((v) => ({ clave: v.id, id: v.id, nombre: v.nombre, precio: textoPrecio(v.precio), foto: v.foto })),
+  fondos: {}, // "¿Cómo es la foto?" que cambió Mar: { [url]: 'blanco' | 'escena' }
 });
 
 const limpio = (s) => s.trim() || null;
@@ -241,6 +242,7 @@ function Formulario({ original, datos, recargar }) {
     setForm((f) => ({ ...f, variantes: [...f.variantes, { clave: `nueva-${++claveNueva}`, id: null, nombre: '', precio: '', foto: null }] }));
   const quitarVariante = (clave) => setForm((f) => ({ ...f, variantes: f.variantes.filter((v) => v.clave !== clave) }));
   const subio = (url) => subidas.current.push(url);
+  const elegirFondo = (url, f) => setForm((x) => ({ ...x, fondos: { ...x.fondos, [url]: f } }));
 
   const crearCategoria = async () => {
     const nombre = nuevaCat?.trim();
@@ -276,6 +278,7 @@ function Formulario({ original, datos, recargar }) {
       const id = await guardarProducto(d, original, datos.productos);
       // Fotos que dejaron de usarse (las reemplazadas o quitadas): se borran del bucket
       const usadas = new Set([...d.fotos, ...d.variantes.map((v) => v.foto)]);
+      await guardarFondos(Object.fromEntries(Object.entries(form.fondos).filter(([u]) => usadas.has(u))), datos.fotos);
       const viejas = [...fotosDeProducto(original ?? {}), ...subidas.current].filter((u) => !usadas.has(u));
       subidas.current = [];
       borrarFotos(viejas).catch(() => {});
@@ -451,7 +454,14 @@ function Formulario({ original, datos, recargar }) {
         <h2 id="sec-foto" className="font-serif text-2xl text-tinta">
           Foto
         </h2>
-        <FotoCampo etiqueta="Foto del producto" valor={form.foto} onCambio={(v) => cambiar('foto', v)} onSubida={subio} />
+        <FotoCampo
+          etiqueta="Foto del producto"
+          valor={form.foto}
+          onCambio={(v) => cambiar('foto', v)}
+          onSubida={subio}
+          fondo={form.fondos[form.foto]}
+          onFondo={elegirFondo}
+        />
       </section>
 
       <section className="space-y-4" aria-labelledby="sec-variantes">
@@ -495,6 +505,8 @@ function Formulario({ original, datos, recargar }) {
               valor={v.foto}
               onCambio={(x) => cambiarVariante(v.clave, 'foto', x)}
               onSubida={subio}
+              fondo={form.fondos[v.foto]}
+              onFondo={elegirFondo}
             />
           </fieldset>
         ))}

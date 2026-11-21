@@ -4,7 +4,7 @@
 //   1. sin login (publishable key, como la tienda)
 //   2. logueado con una cuenta que NO está en admins
 //   3. logueado como admin
-// En cada tabla (categorías, productos, variantes, servicios, admins) intenta crear, editar y borrar, y en el
+// En cada tabla (categorías, productos, variantes, servicios, datos de fotos, admins) intenta crear, editar y borrar, y en el
 // bucket "productos" subir y borrar una foto. Además, si puede ver un producto oculto. Lo que "pasó" se
 // verifica después con la secret key (con RLS un update sin permiso no da error: afecta 0 filas).
 //
@@ -36,6 +36,8 @@ const emails = { admin: `prueba-panel-admin-${T}@example.com`, comun: `prueba-pa
 const usuarios = [];
 const foto = await sharp({ create: { width: 8, height: 8, channels: 3, background: '#3e6450' } }).webp().toBuffer();
 
+const urlFoto = (n) => `${URL_SB}/storage/v1/object/public/productos/fotos/${P}-${n}-1200.webp`;
+
 const ok = (r, que) => {
   if (r.error) throw new Error(`${que}: ${r.error.message}`);
   return r.data;
@@ -47,6 +49,7 @@ async function limpiar() {
   await db.from('categorias').delete().like('id', `${P}%`);
   await db.from('servicios').delete().like('id', `${P}%`);
   await db.from('admins').delete().like('email', `prueba-panel-%-${T}@example.com`);
+  await db.from('fotos').delete().like('url', `%/fotos/${P}-%`);
   const { data: archivos } = await db.storage.from('productos').list('fotos', { search: P });
   if (archivos?.length) await db.storage.from('productos').remove(archivos.map((a) => `fotos/${a.name}`));
   for (const id of usuarios) await db.auth.admin.deleteUser(id);
@@ -81,6 +84,7 @@ try {
     const [vari] = ok(await db.from('variantes').insert({ producto_id: `${id}-prod`, nombre: `${P}-v` }).select('id'), 'fixture variante');
     ok(await db.from('servicios').insert({ id: `${id}-serv`, nombre: 'Prueba', grupo: 'Prueba', activo: false, orden: 999 }), 'fixture servicio');
     ok(await db.storage.from('productos').upload(`fotos/${id}-fija.webp`, foto, { contentType: 'image/webp' }), 'fixture foto');
+    ok(await db.from('fotos').insert({ url: urlFoto(`${rol}-fija`), color: '#3e6450', fondo: 'escena' }), 'fixture datos de foto');
 
     // Ver un producto oculto
     const { data: vistos } = await c.from('productos').select('id').eq('id', `${id}-prod`);
@@ -100,6 +104,9 @@ try {
     anotar('Admins: agregarse', intruso.length > 0);
     if (intruso.length) await db.from('admins').delete().eq('email', intruso[0].email);
 
+    await c.from('fotos').insert({ url: urlFoto(`${rol}-nueva`), color: '#123456', fondo: 'blanco' });
+    anotar('Datos de fotos: crear', ok(await db.from('fotos').select('url').eq('url', urlFoto(`${rol}-nueva`)), 'v').length > 0);
+
     // Editar (update): pasa si el valor cambió
     await c.from('categorias').update({ nombre: 'Cambiada' }).eq('id', `${id}-cat`);
     anotar('Categorías: editar', ok(await db.from('categorias').select('nombre').eq('id', `${id}-cat`), 'v')[0]?.nombre === 'Cambiada');
@@ -110,12 +117,18 @@ try {
     await c.from('servicios').update({ duracion: '9 h' }).eq('id', `${id}-serv`);
     anotar('Servicios: editar', ok(await db.from('servicios').select('duracion').eq('id', `${id}-serv`), 'v')[0]?.duracion === '9 h');
 
+    await c.from('fotos').update({ color: '#654321' }).eq('url', urlFoto(`${rol}-fija`));
+    anotar('Datos de fotos: editar', ok(await db.from('fotos').select('color').eq('url', urlFoto(`${rol}-fija`)), 'v')[0]?.color === '#654321');
+
     // Fotos: subir y borrar
     const subida = await c.storage.from('productos').upload(`fotos/${id}-nueva.webp`, foto, { contentType: 'image/webp' });
     anotar('Fotos: subir', !subida.error);
     await c.storage.from('productos').remove([`fotos/${id}-fija.webp`]);
     const { data: quedan } = await db.storage.from('productos').list('fotos', { search: `${id}-fija` });
     anotar('Fotos: borrar', !quedan?.length);
+
+    await c.from('fotos').delete().eq('url', urlFoto(`${rol}-fija`));
+    anotar('Datos de fotos: borrar', ok(await db.from('fotos').select('url').eq('url', urlFoto(`${rol}-fija`)), 'v').length === 0);
 
     // Borrar (delete): pasa si la fila ya no está (variante antes que su producto)
     await c.from('variantes').delete().eq('id', vari.id);

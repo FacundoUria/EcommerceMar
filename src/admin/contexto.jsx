@@ -1,5 +1,6 @@
 // Estado compartido del panel: los datos de Supabase y "hay cambios sin guardar".
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { registrarFotos } from '../lib/imagenes.js';
 import { cargarTodo } from './datos.js';
 import { useGuardia } from './ruta.jsx';
 import { Boton, Dialogo } from './ui.jsx';
@@ -16,6 +17,7 @@ export function DatosProvider({ children }) {
   const recargar = useCallback(async () => {
     try {
       const d = await cargarTodo();
+      registrarFotos(d.fotos); // color, fondo y miniatura de las subidas: la vista previa se ve como en la tienda
       setDatos(d);
       setError(null);
       return d;

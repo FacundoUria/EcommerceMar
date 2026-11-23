@@ -169,12 +169,137 @@
    "variantes": []
   },
   {
+   "id": "han-shampoo-silver",
+   "nombre": "Shampoo Silver Matizador",
+   "nombre_corto": "Shampoo Silver Matizador",
+   "marca": "HAN",
+   "categoria_id": "low-poo",
+   "precio": 12000,
+   "tamano": "375 cm³",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5aa6273c-908a-458f-a91d-bb2f781f503b-661.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "han-emulsiones-enjuague",
+   "nombre": "Emulsiones de Enjuague",
+   "nombre_corto": "Emulsiones de enjuague",
+   "marca": "HAN",
+   "categoria_id": "low-poo",
+   "precio": 13000,
+   "tamano": "500 cm³",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d308b015-3b7a-4406-a690-08f117a9ce32-896.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/51ceeb91-cdee-451f-a7c8-68de5e3b6b7e-447.webp",
+     "orden": 1,
+     "nombre": "Avena & Miel",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/aedd27e2-135b-4bf0-99f6-9c80e3b06666-429.webp",
+     "orden": 2,
+     "nombre": "Action Plex",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/03e7c51a-18de-498a-aa41-d4161e71d04a-473.webp",
+     "orden": 3,
+     "nombre": "Biotina + Ácido Hialurónico",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1163335e-8af3-47dc-8323-6ef6bd605ac2-447.webp",
+     "orden": 4,
+     "nombre": "Rulos Definidos",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/fd6f62a6-8136-4d02-b2ce-661d5dd04327-387.webp",
+     "orden": 5,
+     "nombre": "Prevención Caída",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/233e1b02-84cb-4b26-a16d-5dc4129eb306-240.webp",
+     "orden": 6,
+     "nombre": "Ácido Hialurónico",
+     "precio": null
+    }
+   ]
+  },
+  {
+   "id": "han-kids-shampoo-frutales",
+   "nombre": "Shampoo Extractos Frutales HAN Kids",
+   "nombre_corto": "Kids Shampoo Extractos Frutales",
+   "marca": "HAN",
+   "categoria_id": "low-poo",
+   "precio": 13000,
+   "tamano": "350 cm³",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a20a2129-422e-42ea-b084-eb19ed13f9a4-504.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "curl-girl-shampoo",
+   "nombre": "Shampoo Hidratante",
+   "nombre_corto": "Shampoo Hidratante",
+   "marca": "Curl Girl",
+   "categoria_id": "low-poo",
+   "precio": 10000,
+   "tamano": "250 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9911efda-fb32-48a7-8899-fb532e72e272-394.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "bekim-shampoos",
+   "nombre": "Shampoos: Memory Low Shampoo y Organic Treatment Argán",
+   "nombre_corto": "Shampoos Memory y Argán",
+   "marca": "Bekim",
+   "categoria_id": "low-poo",
+   "precio": 7000,
+   "tamano": "250 g",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/cb2b82f2-6c42-485c-9f7c-c6628a6a5744-896.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/7f52d4c9-c381-4770-aa0d-26e028cd24e7-517.webp",
+     "orden": 1,
+     "nombre": "Memory Low Shampoo",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/19c15e52-114e-465b-9ac9-3dde880f1da7-404.webp",
+     "orden": 2,
+     "nombre": "Organic Treatment Argán",
+     "precio": null
+    }
+   ]
+  },
+  {
    "id": "cremas-skala",
    "nombre": "Cremas de Tratamiento y Peinar 2 en 1",
    "nombre_corto": "Cremas 2 en 1",
    "marca": "Skala",
    "categoria_id": "cremas-2en1",
-   "precio": 6900,
+   "precio": 7000,
    "tamano": "1000 g",
    "alias": [],
    "destacado": true,
@@ -182,6 +307,36 @@
     "/img/productos/cremas-skala.webp"
    ],
    "variantes": [
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/57573e56-99cb-4838-9542-929781204814-510.webp",
+     "orden": 10,
+     "nombre": "Manteca de Karité",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/6811a852-2c91-48cf-8239-b62873082bc3-437.webp",
+     "orden": 11,
+     "nombre": "Óleo de Argán",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a375f3eb-9ebf-4589-9843-5c82dc0bee0c-439.webp",
+     "orden": 12,
+     "nombre": "Aguacate",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/22da3284-285c-4226-8b41-c4bb012f0ee6-458.webp",
+     "orden": 13,
+     "nombre": "Vitamina",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/0530e30b-0551-45d1-acec-a7b1be52128a-568.webp",
+     "orden": 14,
+     "nombre": "Biotina",
+     "precio": null
+    },
     {
      "foto": "/img/productos/cremas-skala-mais-cachinhos.webp",
      "orden": 1,
@@ -355,6 +510,83 @@
    ]
   },
   {
+   "id": "curl-girl-curling-cream",
+   "nombre": "Curling Cream Modeladora con Pantenol y Glicerina Vegetal",
+   "nombre_corto": "Curling Cream Modeladora",
+   "marca": "Curl Girl",
+   "categoria_id": "cremas-peinar",
+   "precio": 12000,
+   "tamano": "300 cc",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/dc44db22-242a-4cea-9e03-934e4ecac720-389.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "han-cremas-de-peinar",
+   "nombre": "Cremas de Peinar Sin Enjuague",
+   "nombre_corto": "Cremas de Peinar",
+   "marca": "HAN",
+   "categoria_id": "cremas-peinar",
+   "precio": 10000,
+   "tamano": "200 cm³",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/30c440f0-8af5-4f1b-b219-3f5082cde43f-896.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/466beb39-3a1b-442e-83ed-e95645307ebf-717.webp",
+     "orden": 2,
+     "nombre": "Alfa Keratina",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/ecdbfea9-9314-40c1-b6a9-3c6baf8b58da-461.webp",
+     "orden": 1,
+     "nombre": "Rulos Definidos",
+     "precio": null
+    }
+   ]
+  },
+  {
+   "id": "frenzzi-cremas-naturale",
+   "nombre": "Naturals Cremas de Peinar Sin Siliconas",
+   "nombre_corto": "Cremas de Peinar Naturals",
+   "marca": "Frenzzi",
+   "categoria_id": "cremas-peinar",
+   "precio": 13000,
+   "tamano": "200 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9d254109-7c37-4317-b869-2de7c9da94b8-768.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d5ed517b-ff3d-445f-b0f9-218fa8a185f4-554.webp",
+     "orden": 1,
+     "nombre": "Cebolla & Ginseng",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1183e272-75ae-440c-bdb3-c913731a743d-554.webp",
+     "orden": 2,
+     "nombre": "Almendras Dulces & Chía",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c4e366e1-ee1c-46b0-a9b4-288aab727f3b-554.webp",
+     "orden": 3,
+     "nombre": "Arándanos",
+     "precio": null
+    }
+   ]
+  },
+  {
    "id": "crema-arbell-argan",
    "nombre": "Crema de Peinar Protectora Argán y Filtro Solar",
    "nombre_corto": "Crema Argán y Filtro Solar",
@@ -366,6 +598,21 @@
    "destacado": false,
    "fotos": [
     "/img/productos/crema-arbell-argan.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "salon-line-creme-cachos-dos-sonhos",
+   "nombre": "Creme Modelador Cachos dos Sonhos Fixação Forte #todecacho",
+   "nombre_corto": "Creme Modelador Cachos dos Sonhos",
+   "marca": "Salon Line",
+   "categoria_id": "cremas-peinar",
+   "precio": 29000,
+   "tamano": "500 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/4690f8f0-29c5-4f91-83ef-c9670193b2ca-1200.webp"
    ],
    "variantes": []
   },
@@ -493,6 +740,85 @@
    ]
   },
   {
+   "id": "fidelite-ampolla-keratin-complex",
+   "nombre": "Ampolla Complejo Keratínico Keratin Complex",
+   "nombre_corto": "Ampolla Keratin Complex",
+   "marca": "Fidelité",
+   "categoria_id": "tratamientos",
+   "precio": 3500,
+   "tamano": "15 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1e4f96b4-1386-4969-ac78-261b7d209f4a-367.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "skala-mascarillas-brasil",
+   "nombre": "Mascarillas Skala Brasil",
+   "nombre_corto": "Mascarillas Brasil",
+   "marca": "Skala",
+   "categoria_id": "tratamientos",
+   "precio": 14000,
+   "tamano": "450 g",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/0bba05e0-ddfc-4750-b427-648a051e0d31-447.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5aef45a7-67b6-4e47-a60d-0fdac5981e5c-164.webp",
+     "orden": 1,
+     "nombre": "Hidratación",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/4b99eb19-324d-4186-91e5-f5423e064ac0-164.webp",
+     "orden": 2,
+     "nombre": "Nutrición",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/fd1ac436-3264-488e-9f39-adb9638e57ef-288.webp",
+     "orden": 3,
+     "nombre": "Reconstrucción",
+     "precio": null
+    }
+   ]
+  },
+  {
+   "id": "lola-loira-de-farmacia",
+   "nombre": "Máscara Matizadora Loira de Farmácia",
+   "nombre_corto": "Máscara Loira de Farmácia",
+   "marca": "Lola Cosmetics",
+   "categoria_id": "tratamientos",
+   "precio": 25000,
+   "tamano": "230 g",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9a1afe57-ad90-4005-aa2d-7e45912f1685-758.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "lola-ela-e-carioca",
+   "nombre": "Proteína Capilar Ela é Carioca (Lola Vai à Praia)",
+   "nombre_corto": "Proteína Ela é Carioca",
+   "marca": "Lola Cosmetics",
+   "categoria_id": "tratamientos",
+   "precio": 29000,
+   "tamano": "500 g",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8e83ac15-1321-41d4-bdad-0b4461b1b8a5-479.webp"
+   ],
+   "variantes": []
+  },
+  {
    "id": "gel-de-rich",
    "nombre": "Gel Capilar con Proteína Vegetal (Envase Botella)",
    "nombre_corto": "Gel con Proteína Vegetal",
@@ -504,6 +830,21 @@
    "destacado": true,
    "fotos": [
     "/img/productos/gel-de-rich.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "gel-rich-potenciador",
+   "nombre": "Gel Potenciador con Proteína Vegetal",
+   "nombre_corto": "Gel Potenciador",
+   "marca": "Rich",
+   "categoria_id": "geles",
+   "precio": 26000,
+   "tamano": "250 g",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/gel-de-rich-potenciador.webp"
    ],
    "variantes": []
   },
@@ -718,6 +1059,173 @@
    "variantes": []
   },
   {
+   "id": "curl-girl-gel",
+   "nombre": "Curling Gel Hidratante con Aceite de Jojoba y Almendras",
+   "nombre_corto": "Curling Gel Hidratante",
+   "marca": "Curl Girl",
+   "categoria_id": "geles",
+   "precio": null,
+   "tamano": "300 cc / 500 cc",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/3e62eec0-177d-4dd0-b59d-0a70afc5abdd-432.webp"
+   ],
+   "variantes": [
+    {
+     "foto": null,
+     "orden": 1,
+     "nombre": "300 cc",
+     "precio": 15000
+    },
+    {
+     "foto": null,
+     "orden": 2,
+     "nombre": "500 cc",
+     "precio": 18000
+    }
+   ]
+  },
+  {
+   "id": "ossono-gel-500",
+   "nombre": "Gel High Power Ful con Dosificador",
+   "nombre_corto": "Gel High Power con dosificador",
+   "marca": "Ossono",
+   "categoria_id": "geles",
+   "precio": 23000,
+   "tamano": "500 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/33308322-fb48-438f-8583-9714c09b678a-467.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "ossono-gel-250",
+   "nombre": "Style Fix Gel Fijador High Powerful",
+   "nombre_corto": "Style Fix gel fijador",
+   "marca": "Ossono",
+   "categoria_id": "geles",
+   "precio": 15000,
+   "tamano": "250 g",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/f7f319ec-e1bf-4bb9-8a76-9a9cd053f5ab-459.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "skala-day-after",
+   "nombre": "Gel Líquido Day After Cachos",
+   "nombre_corto": "Day After Cachos Gel Líquido",
+   "marca": "Skala",
+   "categoria_id": "geles",
+   "precio": 17000,
+   "tamano": "250 g",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1ed3501b-896e-4edc-952f-8eb32d9974e9-520.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "salon-line-kids-gelatina",
+   "nombre": "Gelatina Activadora S.O.S Cachos Kids Hidratação",
+   "nombre_corto": "S.O.S Cachos Kids Gelatina",
+   "marca": "Salon Line",
+   "categoria_id": "geles",
+   "precio": 25000,
+   "tamano": "400 g",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/ce93322a-0726-4a85-ae77-30a4c518b144-213.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "skala-gelatinas-frutastica",
+   "nombre": "Gelatinas Capilares Frutástica",
+   "nombre_corto": "Gelatinas Frutástica",
+   "marca": "Skala",
+   "categoria_id": "geles",
+   "precio": 16000,
+   "tamano": "550 g",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/470da90e-7d84-47d5-8d38-9bf3b49a8c10-812.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d49f643b-55c1-4d84-b219-e2e8b0000b11-510.webp",
+     "orden": 1,
+     "nombre": "Melancia",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 2,
+     "nombre": "Uva",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9b4519de-1fe3-48a5-86d8-89d35fa105be-500.webp",
+     "orden": 3,
+     "nombre": "Maracujá",
+     "precio": null
+    }
+   ]
+  },
+  {
+   "id": "skala-hair-jelly-mais-cachos",
+   "nombre": "Gelatina Capilar #Mais Cachos Hair Jelly",
+   "nombre_corto": "Hair Jelly #Mais Cachos",
+   "marca": "Skala",
+   "categoria_id": "geles",
+   "precio": 16000,
+   "tamano": "550 g",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/7dd0dd5a-b53d-43c7-9775-87c38d132b89-1014.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "han-gel-modelador",
+   "nombre": "Gel Modelador No Graso",
+   "nombre_corto": "Gel Modelador No Graso",
+   "marca": "HAN",
+   "categoria_id": "geles",
+   "precio": 19000,
+   "tamano": "375 cm³",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/208b3a49-4f4b-41ee-84cd-1861626f020e-719.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "salon-line-gelatina-fixacao-7",
+   "nombre": "Gelatina Alta Definição Fixação 7 #todecacho",
+   "nombre_corto": "Gelatina Alta Definição Fixação 7",
+   "marca": "Salon Line",
+   "categoria_id": "geles",
+   "precio": 27000,
+   "tamano": "320 g",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9451817b-82c6-48da-b53e-0a55d7a291ee-351.webp"
+   ],
+   "variantes": []
+  },
+  {
    "id": "mousse-kleno",
    "nombre": "Mousse Rulos Definidos con ácido hialurónico",
    "nombre_corto": "Mousse Rulos Definidos",
@@ -778,6 +1286,40 @@
    "variantes": []
   },
   {
+   "id": "salon-line-activadores",
+   "nombre": "Línea #todecacho Activadores de Rulos",
+   "nombre_corto": "Activadores #todecacho",
+   "marca": "Salon Line",
+   "categoria_id": "activadores",
+   "precio": 23000,
+   "tamano": "300 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/443ea46f-fa5a-4d0c-b1bf-14573cb06e12-768.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c3c83c3f-e604-4841-9e2c-d6d8407ba11e-569.webp",
+     "orden": 1,
+     "nombre": "Cachos dos Sonhos",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/4b3fdf94-6bea-4df5-b2ad-c4ac0f8d4d2f-511.webp",
+     "orden": 2,
+     "nombre": "Day After",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/ebbf71d7-fa4e-4afc-8890-2fc25bc55c93-1063.webp",
+     "orden": 3,
+     "nombre": "Definição Prolongada",
+     "precio": null
+    }
+   ]
+  },
+  {
    "id": "spray-revitalizante",
    "nombre": "Shea Butter Comeback Curl Next Day Curl Revitalizer",
    "nombre_corto": "Comeback Curl Revitalizer",
@@ -791,6 +1333,62 @@
     "/img/productos/spray-revitalizante.webp"
    ],
    "variantes": []
+  },
+  {
+   "id": "cascada-de-proteinas",
+   "nombre": "Nutri-Reparación Instantánea",
+   "nombre_corto": "Nutri-Reparación Instantánea",
+   "marca": "Cascada de Proteínas",
+   "categoria_id": "spray",
+   "precio": 17000,
+   "tamano": "125 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c7e707fc-71e3-4d73-98db-f1288f7d5496-928.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/bfc8c3c6-9f72-44cb-b32f-285ed5062177-447.webp",
+     "orden": 1,
+     "nombre": "Ginseng y Bambú",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9cc0d4fe-5c57-48b6-aa76-1cc07d4d22e5-427.webp",
+     "orden": 2,
+     "nombre": "Manzanilla y Vainilla",
+     "precio": null
+    }
+   ]
+  },
+  {
+   "id": "han-sprays",
+   "nombre": "Sprays: Emulsión de Peinar Aceite de Coco y Protector Térmico Ácido Hialurónico",
+   "nombre_corto": "Sprays de Peinar",
+   "marca": "HAN",
+   "categoria_id": "spray",
+   "precio": 13000,
+   "tamano": "200 cm³",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c7e8ca94-2cb9-4b82-84ac-447c8336d775-896.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/794d3a28-42bf-4c42-bdbb-e76d0072ee09-459.webp",
+     "orden": 1,
+     "nombre": "Emulsión de Peinar Aceite de Coco",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/591ae085-786b-47d5-b737-efcdabef2a15-400.webp",
+     "orden": 2,
+     "nombre": "Protector Térmico Ácido Hialurónico",
+     "precio": null
+    }
+   ]
   },
   {
    "id": "funda-saten",
@@ -900,6 +1498,21 @@
      "precio": null
     }
    ]
+  },
+  {
+   "id": "salon-line-oleo-coco",
+   "nombre": "Óleo Umectante Coco Puro #todecacho",
+   "nombre_corto": "Óleo Umectante Coco Puro",
+   "marca": "Salon Line",
+   "categoria_id": "oleos",
+   "precio": 22000,
+   "tamano": "100 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/e90630b2-6914-452f-b8a8-e52142f172d4-435.webp"
+   ],
+   "variantes": []
   },
   {
    "id": "cepillo-viral",
@@ -1067,6 +1680,55 @@
    "variantes": []
   },
   {
+   "id": "cepillo-masajeador",
+   "nombre": "Cepillo Masajeador Capilar de Silicona",
+   "nombre_corto": "Cepillo masajeador de silicona",
+   "marca": null,
+   "categoria_id": "cepillos",
+   "precio": 7000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/3ba6d8e2-3d98-4069-8d64-e1950275c532-508.webp"
+   ],
+   "variantes": [
+    {
+     "foto": null,
+     "orden": 1,
+     "nombre": "Rosa",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 2,
+     "nombre": "Celeste",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 3,
+     "nombre": "Lila",
+     "precio": null
+    }
+   ]
+  },
+  {
+   "id": "cepillo-crepar-eurostil",
+   "nombre": "Cepillo de Crepar con Púa",
+   "nombre_corto": "Cepillo de crepar con púa",
+   "marca": "Eurostil",
+   "categoria_id": "cepillos",
+   "precio": 6000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/35e9c595-41f7-4f21-b6a2-b92c5f9980ff-459.webp"
+   ],
+   "variantes": []
+  },
+  {
    "id": "turbante-microfibra",
    "nombre": "Turbante de Microfibra Anti-Frizz",
    "nombre_corto": "Turbante de microfibra",
@@ -1140,6 +1802,53 @@
     "/img/productos/atomizador-day-after.webp"
    ],
    "variantes": []
+  },
+  {
+   "id": "sujetadores-articulados",
+   "nombre": "Sujetadores Articulados (Pinzas) x2",
+   "nombre_corto": "Sujetadores articulados x2",
+   "marca": null,
+   "categoria_id": "varios",
+   "precio": 4000,
+   "tamano": null,
+   "alias": [
+    "pinzas"
+   ],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/65d09793-29d8-48b9-8a17-ebdc2c4cdec8-1200.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "gorro-difusor",
+   "nombre": "Gorro Difusor para Secador",
+   "nombre_corto": "Gorro difusor para secador",
+   "marca": null,
+   "categoria_id": "varios",
+   "precio": 25000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/13103875-3990-47e2-80af-113d48c5fb00-333.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "gorro-termico-aluminio",
+   "nombre": "Gorro Térmico de Aluminio",
+   "nombre_corto": "Gorro térmico de aluminio",
+   "marca": null,
+   "categoria_id": "varios",
+   "precio": 5000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/2f1f66f7-81af-4cad-ab8c-25cdef934f53-444.webp"
+   ],
+   "variantes": []
   }
  ],
  "servicios": [
@@ -1208,5 +1917,311 @@
    "foto": "/img/estudio/celulas-madre-infrarrojo.webp"
   }
  ],
- "fotos": []
+ "fotos": [
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/03e7c51a-18de-498a-aa41-d4161e71d04a-473.webp",
+   "color": "#96d9b8",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/0530e30b-0551-45d1-acec-a7b1be52128a-568.webp",
+   "color": "#93674c",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/0bba05e0-ddfc-4750-b427-648a051e0d31-447.webp",
+   "color": "#e8ccc7",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1163335e-8af3-47dc-8323-6ef6bd605ac2-447.webp",
+   "color": "#365409",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1183e272-75ae-440c-bdb3-c913731a743d-554.webp",
+   "color": "#edd38a",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/13103875-3990-47e2-80af-113d48c5fb00-333.webp",
+   "color": "#d9a887",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/19c15e52-114e-465b-9ac9-3dde880f1da7-404.webp",
+   "color": null,
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1e4f96b4-1386-4969-ac78-261b7d209f4a-367.webp",
+   "color": "#b85708",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1ed3501b-896e-4edc-952f-8eb32d9974e9-520.webp",
+   "color": "#fdf1c6",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/208b3a49-4f4b-41ee-84cd-1861626f020e-719.webp",
+   "color": "#b48bc8",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/22da3284-285c-4226-8b41-c4bb012f0ee6-458.webp",
+   "color": "#03667a",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/233e1b02-84cb-4b26-a16d-5dc4129eb306-240.webp",
+   "color": "#c8ebf5",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/2f1f66f7-81af-4cad-ab8c-25cdef934f53-444.webp",
+   "color": "#c7a489",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/30c440f0-8af5-4f1b-b219-3f5082cde43f-896.webp",
+   "color": "#ca98a7",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/33308322-fb48-438f-8583-9714c09b678a-467.webp",
+   "color": "#02465a",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/35e9c595-41f7-4f21-b6a2-b92c5f9980ff-459.webp",
+   "color": null,
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/3ba6d8e2-3d98-4069-8d64-e1950275c532-508.webp",
+   "color": "#e88598",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/3e62eec0-177d-4dd0-b59d-0a70afc5abdd-432.webp",
+   "color": null,
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/443ea46f-fa5a-4d0c-b1bf-14573cb06e12-768.webp",
+   "color": "#c7b7dc",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/466beb39-3a1b-442e-83ed-e95645307ebf-717.webp",
+   "color": "#c697a6",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/4690f8f0-29c5-4f91-83ef-c9670193b2ca-1200.webp",
+   "color": "#781846",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/470da90e-7d84-47d5-8d38-9bf3b49a8c10-812.webp",
+   "color": "#98b654",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/4b3fdf94-6bea-4df5-b2ad-c4ac0f8d4d2f-511.webp",
+   "color": "#fa0378",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/4b99eb19-324d-4186-91e5-f5423e064ac0-164.webp",
+   "color": "#fc6837",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/51ceeb91-cdee-451f-a7c8-68de5e3b6b7e-447.webp",
+   "color": "#452b18",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/57573e56-99cb-4838-9542-929781204814-510.webp",
+   "color": "#869959",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/591ae085-786b-47d5-b737-efcdabef2a15-400.webp",
+   "color": null,
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5aa6273c-908a-458f-a91d-bb2f781f503b-661.webp",
+   "color": "#0a093c",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5aef45a7-67b6-4e47-a60d-0fdac5981e5c-164.webp",
+   "color": "#3598fb",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/65d09793-29d8-48b9-8a17-ebdc2c4cdec8-1200.webp",
+   "color": null,
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/6811a852-2c91-48cf-8239-b62873082bc3-437.webp",
+   "color": "#797a4a",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/794d3a28-42bf-4c42-bdbb-e76d0072ee09-459.webp",
+   "color": "#d9dce9",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/7dd0dd5a-b53d-43c7-9775-87c38d132b89-1014.webp",
+   "color": "#02c6fa",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/7f52d4c9-c381-4770-aa0d-26e028cd24e7-517.webp",
+   "color": "#a6e7e3",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8e83ac15-1321-41d4-bdad-0b4461b1b8a5-479.webp",
+   "color": "#fb563b",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9451817b-82c6-48da-b53e-0a55d7a291ee-351.webp",
+   "color": "#a97ac9",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9911efda-fb32-48a7-8899-fb532e72e272-394.webp",
+   "color": "#dae2ea",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9a1afe57-ad90-4005-aa2d-7e45912f1685-758.webp",
+   "color": "#eac6e7",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9b4519de-1fe3-48a5-86d8-89d35fa105be-500.webp",
+   "color": "#97b553",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9cc0d4fe-5c57-48b6-aa76-1cc07d4d22e5-427.webp",
+   "color": "#cab946",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9d254109-7c37-4317-b869-2de7c9da94b8-768.webp",
+   "color": "#edd48b",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a20a2129-422e-42ea-b084-eb19ed13f9a4-504.webp",
+   "color": "#e97704",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a375f3eb-9ebf-4589-9843-5c82dc0bee0c-439.webp",
+   "color": "#858b37",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/aedd27e2-135b-4bf0-99f6-9c80e3b06666-429.webp",
+   "color": "#eae8d6",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/bfc8c3c6-9f72-44cb-b32f-285ed5062177-447.webp",
+   "color": "#ebe3da",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c3c83c3f-e604-4841-9e2c-d6d8407ba11e-569.webp",
+   "color": "#780398",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c4e366e1-ee1c-46b0-a9b4-288aab727f3b-554.webp",
+   "color": "#e7c977",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c7e707fc-71e3-4d73-98db-f1288f7d5496-928.webp",
+   "color": "#672708",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c7e8ca94-2cb9-4b82-84ac-447c8336d775-896.webp",
+   "color": null,
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/cb2b82f2-6c42-485c-9f7c-c6628a6a5744-896.webp",
+   "color": "#88dad9",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/ce93322a-0726-4a85-ae77-30a4c518b144-213.webp",
+   "color": "#f436a9",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d308b015-3b7a-4406-a690-08f117a9ce32-896.webp",
+   "color": "#664628",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d49f643b-55c1-4d84-b219-e2e8b0000b11-510.webp",
+   "color": "#98b553",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d5ed517b-ff3d-445f-b0f9-218fa8a185f4-554.webp",
+   "color": "#f3d994",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/dc44db22-242a-4cea-9e03-934e4ecac720-389.webp",
+   "color": "#d3dce7",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/e90630b2-6914-452f-b8a8-e52142f172d4-435.webp",
+   "color": "#fab697",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/ebbf71d7-fa4e-4afc-8890-2fc25bc55c93-1063.webp",
+   "color": "#fd6897",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/ecdbfea9-9314-40c1-b6a9-3c6baf8b58da-461.webp",
+   "color": "#bab5d5",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/f7f319ec-e1bf-4bb9-8a76-9a9cd053f5ab-459.webp",
+   "color": "#eae6d7",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/fd1ac436-3264-488e-9f39-adb9638e57ef-288.webp",
+   "color": "#fd66d8",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/fd6f62a6-8136-4d02-b2ce-661d5dd04327-387.webp",
+   "color": "#fac499",
+   "fondo": "escena"
+  }
+ ]
 }

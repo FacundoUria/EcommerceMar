@@ -109,6 +109,8 @@ Ideal: la foto original del proveedor, de 1000 px o más. Se reemplazan desde /a
 | Cremas 2 en 1 Skala | Manteca de Karité | 400×500 |
 | | Óleo de Argán, Aguacate, Vitamina | 447×447 |
 | | Biotina | 554×554 |
+| | Caju | **224×224** |
+| | las otras 16 nuevas (ver sección 9) | 392×500 a 500×500 |
 | Ossono | Gel High Power Ful 500 ml / Style Fix 250 g | 432×462 / 442×452 |
 | Gorro térmico de aluminio | — | 444×450 |
 | Cepillo de crepar Eurostil | — | 449×445 |
@@ -142,13 +144,13 @@ Ideal: la foto original del proveedor, de 1000 px o más. Se reemplazan desde /a
 - **Curling Gel Curl Girl:** un solo producto con variantes **300 cc** ($ 15.000) y **500 cc** ($ 18.000)
   ("cc" como dice la etiqueta; en el texto decía "g"). Antes eran dos productos ocultos, uno por tamaño.
 - **Shampoo Hidratante Curl Girl:** 250 ml (confirmado).
-- **Cremas Skala 1 kg** (`cremas-skala`): se sumaron las 5 de tratamiento Expert (Manteca de Karité, Óleo de
-  Argán, Aguacate, Vitamina, Biotina) a las 9 que ya estaban, y el precio pasó de $ 6.900 a **$ 7.000 para
-  todas**. ¿Siguen todas las de antes (Mais Cachinhos, Dona Skala, Divina Cor, Divino Potão, Mais Cachos,
-  Cachonados, Potão do Amor, Divino Potinho, Mais Crespos)?
+- **Cremas Skala 1 kg** (`cremas-skala`): **precio por variante**: las 5 de tratamiento Expert (Manteca de
+  Karité, Óleo de Argán, Aguacate, Vitamina, Biotina) a **$ 7.000** y todas las demás a **$ 6.900** (la card
+  dice "Desde $ 6.900"). ¿Siguen todas las de antes (Mais Cachinhos, Dona Skala, Divina Cor, Divino Potão,
+  Mais Cachos, Cachonados, Potão do Amor, Divino Potinho, Mais Crespos)? Las 17 nuevas, en la sección 9.
 - **Cascada de Proteínas:** un solo producto con las dos variantes, **125 ml** (antes figuraba 120 ml).
-- **Cremas de Peinar HAN:** un solo producto con variantes Rulos Definidos y **Alfa Keratina** (así dice la
-  etiqueta; en el texto, "Keratina").
+- **Cremas de Peinar HAN:** un solo producto con variantes Rulos Definidos y **Keratina** (como en su texto;
+  la etiqueta dice "α Keratina").
 - **Frenzzi:** la línea quedó como **"Naturals"** (antes figuraba "Naturale").
 - **Ossono 250 g:** el "Gel High Power Ful en pote" que estaba oculto es el **Style Fix** de la foto.
 - **Shampoo Silver Matizador, Emulsiones de Enjuague HAN y Shampoos Bekim** van en la categoría **Low poo**
@@ -156,14 +158,30 @@ Ideal: la foto original del proveedor, de 1000 px o más. Se reemplazan desde /a
 - **Creme Modelador Cachos dos Sonhos** va en **Cremas de peinar** (como la Curling Cream de Curl Girl).
 - **Gorro térmico de aluminio:** foto con maniquí → se muestra "en su marco" (como las cofias), no flotando.
 
-## 9. Fotos del 23/11 que no se usaron
+## 9. Cremas Skala 1 kg: variantes nuevas para confirmar
+
+Las 18 fotos de cremas 2 en 1 del 23/11 (álbum de las 11:48 + 11.49.02) **no coinciden con ninguna de las 9
+variantes que ya estaban**: se agregaron como **17 variantes nuevas a $ 6.900** (visibles). Confirmar que las
+vende todas y a ese precio:
+
+| Línea | Variantes nuevas |
+|---|---|
+| Skala Expert | Maionese Capilar, Amido de Milho, Coquetel de Frutas Family, Mais Lisos, Glicólico 3 em 1 |
+| Skala | Restauração Espetacular 12 em 1 |
+| Skala Brasil | Caju, Babosa |
+| Skala Frutástica | Banana, Maracujá, Melancia, Uva, Morango, Cereja, Cacau, Coco, Coquetel de Frutas 3 em 1 |
+
+- **Amido de Milho:** vinieron dos fotos, el envase viejo (dice "Co-Wash") y el nuevo. Quedó una sola
+  variante con la foto del nuevo. ¿Es el mismo producto?
+- **Coquetel de Frutas:** son dos distintos: el Expert "Family" (2 en 1) y el Frutástica (3 en 1,
+  melancia + coco + uva). Quedaron como dos variantes.
+- **Glicólico** y **Restauração Espetacular** dicen "3 em 1" y "12 em 1" en el pote, no "2 en 1": quedaron
+  igual dentro de Cremas 2 en 1.
+
+## 10. Fotos del 23/11 que no se usaron
 
 Están en `assets/productos/originales/2026-11-23/` (no se suben al repo).
 
-- **Álbum de las 11:48 (17 fotos) y 11.49.02:** cremas **Skala 1 kg 2 en 1** (Banana, Maionese Capilar, Amido
-  de Milho ×2, Maracujá, Restauração Espetacular 12 em 1, Caju, Melancia, Coquetel de Frutas ×2, Uva,
-  Morango, Mais Lisos, Glicólico 3 em 1, Babosa, Cereja, Cacau y Coco). No venían en la lista. ¿Las vende?
-  Si sí, se suman como variantes de Cremas 2 en 1 Skala.
 - **14.59.15:** el flyer de **Black Friday** (martes 24/11 al viernes 27/11: El preferido $ 28.000, Cepillo
   viral $ 13.000, Kit Kleno $ 38.000, Kit Antifrizz $ 17.000). No es un producto.
 - **11.18.57:** la misma foto que 11.16.01 (Curling Gel).

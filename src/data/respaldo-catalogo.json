@@ -210,12 +210,6 @@
      "precio": null
     },
     {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/03e7c51a-18de-498a-aa41-d4161e71d04a-473.webp",
-     "orden": 3,
-     "nombre": "Biotina + Ácido Hialurónico",
-     "precio": null
-    },
-    {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1163335e-8af3-47dc-8323-6ef6bd605ac2-447.webp",
      "orden": 4,
      "nombre": "Rulos Definidos",
@@ -231,6 +225,12 @@
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/233e1b02-84cb-4b26-a16d-5dc4129eb306-240.webp",
      "orden": 6,
      "nombre": "Ácido Hialurónico",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/03e7c51a-18de-498a-aa41-d4161e71d04a-473.webp",
+     "orden": 3,
+     "nombre": "Biotina & Ácido Hialurónico",
      "precio": null
     }
    ]
@@ -299,7 +299,7 @@
    "nombre_corto": "Cremas 2 en 1",
    "marca": "Skala",
    "categoria_id": "cremas-2en1",
-   "precio": 7000,
+   "precio": 6900,
    "tamano": "1000 g",
    "alias": [],
    "destacado": true,
@@ -311,30 +311,48 @@
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/57573e56-99cb-4838-9542-929781204814-510.webp",
      "orden": 10,
      "nombre": "Manteca de Karité",
-     "precio": null
+     "precio": 7000
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/6811a852-2c91-48cf-8239-b62873082bc3-437.webp",
      "orden": 11,
      "nombre": "Óleo de Argán",
-     "precio": null
+     "precio": 7000
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a375f3eb-9ebf-4589-9843-5c82dc0bee0c-439.webp",
      "orden": 12,
      "nombre": "Aguacate",
-     "precio": null
+     "precio": 7000
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/22da3284-285c-4226-8b41-c4bb012f0ee6-458.webp",
      "orden": 13,
      "nombre": "Vitamina",
-     "precio": null
+     "precio": 7000
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/0530e30b-0551-45d1-acec-a7b1be52128a-568.webp",
      "orden": 14,
      "nombre": "Biotina",
+     "precio": 7000
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d6b5401b-4c05-4974-b9fe-4c1e19a458b9-447.webp",
+     "orden": 15,
+     "nombre": "Maionese Capilar",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1e863590-d9dc-430a-a4da-6d45cb66d708-460.webp",
+     "orden": 16,
+     "nombre": "Amido de Milho",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/6a6fd0f8-003d-4ef8-8115-49eece81d5b2-488.webp",
+     "orden": 17,
+     "nombre": "Coquetel de Frutas Family",
      "precio": null
     },
     {
@@ -389,6 +407,90 @@
      "foto": "/img/productos/cremas-skala-mais-crespos.webp",
      "orden": 9,
      "nombre": "Mais Crespos",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5a4b4d1a-79cc-4bfa-a9ae-9f7eb2e79367-353.webp",
+     "orden": 18,
+     "nombre": "Mais Lisos",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/240aa27e-7e3a-4752-bb42-e0d93eddf558-309.webp",
+     "orden": 19,
+     "nombre": "Glicólico 3 em 1",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/82408e6e-4f78-4455-b675-8ad26ed8d096-469.webp",
+     "orden": 20,
+     "nombre": "Restauração Espetacular 12 em 1",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/4de336a2-d0d5-40cf-9f61-83241949edf0-223.webp",
+     "orden": 21,
+     "nombre": "Caju",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a547f3a8-11d7-467e-82f3-dc6616c5988d-506.webp",
+     "orden": 22,
+     "nombre": "Babosa",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5b3b43ff-6940-4610-a606-e38935279cda-507.webp",
+     "orden": 23,
+     "nombre": "Banana",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/57b16e3c-582c-4396-9d17-7f48bbe09584-447.webp",
+     "orden": 24,
+     "nombre": "Maracujá",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/f4e8d5e1-551a-4362-8515-8ce3bf25e68b-383.webp",
+     "orden": 25,
+     "nombre": "Melancia",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/ce326a0a-0cf7-494b-890b-51102f097b98-506.webp",
+     "orden": 26,
+     "nombre": "Uva",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/2cc166d0-0ae4-495b-938b-2d52722cccff-420.webp",
+     "orden": 27,
+     "nombre": "Morango",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d514ba13-0b7e-4393-97fe-599941afbb9e-366.webp",
+     "orden": 28,
+     "nombre": "Cereja",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/f5152d78-902a-48e3-8942-34abfad0b62c-400.webp",
+     "orden": 29,
+     "nombre": "Cacau",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8ee9e4a2-c7f2-41bb-b5ac-6ca4875bcb18-512.webp",
+     "orden": 30,
+     "nombre": "Coco",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/2a063155-5658-4d5f-a89b-3d6e8724a78b-430.webp",
+     "orden": 31,
+     "nombre": "Coquetel de Frutas 3 em 1",
      "precio": null
     }
    ]
@@ -541,7 +643,7 @@
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/466beb39-3a1b-442e-83ed-e95645307ebf-717.webp",
      "orden": 2,
-     "nombre": "Alfa Keratina",
+     "nombre": "Keratina",
      "precio": null
     },
     {
@@ -567,21 +669,21 @@
    ],
    "variantes": [
     {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c4e366e1-ee1c-46b0-a9b4-288aab727f3b-554.webp",
+     "orden": 2,
+     "nombre": "Arándanos",
+     "precio": null
+    },
+    {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d5ed517b-ff3d-445f-b0f9-218fa8a185f4-554.webp",
-     "orden": 1,
-     "nombre": "Cebolla & Ginseng",
+     "orden": 3,
+     "nombre": "Cebolla y Ginseng",
      "precio": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1183e272-75ae-440c-bdb3-c913731a743d-554.webp",
-     "orden": 2,
-     "nombre": "Almendras Dulces & Chía",
-     "precio": null
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c4e366e1-ee1c-46b0-a9b4-288aab727f3b-554.webp",
-     "orden": 3,
-     "nombre": "Arándanos",
+     "orden": 1,
+     "nombre": "Almendras Dulces y Chía",
      "precio": null
     }
    ]
@@ -1959,6 +2061,11 @@
    "fondo": "blanco"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1e863590-d9dc-430a-a4da-6d45cb66d708-460.webp",
+   "color": "#eac637",
+   "fondo": "blanco"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1ed3501b-896e-4edc-952f-8eb32d9974e9-520.webp",
    "color": "#fdf1c6",
    "fondo": "blanco"
@@ -1976,6 +2083,21 @@
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/233e1b02-84cb-4b26-a16d-5dc4129eb306-240.webp",
    "color": "#c8ebf5",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/240aa27e-7e3a-4752-bb42-e0d93eddf558-309.webp",
+   "color": "#e8c9c9",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/2a063155-5658-4d5f-a89b-3d6e8724a78b-430.webp",
+   "color": "#eab6b8",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/2cc166d0-0ae4-495b-938b-2d52722cccff-420.webp",
+   "color": "#a63639",
    "fondo": "blanco"
   },
   {
@@ -2039,6 +2161,11 @@
    "fondo": "blanco"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/4de336a2-d0d5-40cf-9f61-83241949edf0-223.webp",
+   "color": "#c86734",
+   "fondo": "blanco"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/51ceeb91-cdee-451f-a7c8-68de5e3b6b7e-447.webp",
    "color": "#452b18",
    "fondo": "escena"
@@ -2049,8 +2176,18 @@
    "fondo": "blanco"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/57b16e3c-582c-4396-9d17-7f48bbe09584-447.webp",
+   "color": "#ebe4d9",
+   "fondo": "escena"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/591ae085-786b-47d5-b737-efcdabef2a15-400.webp",
    "color": null,
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5a4b4d1a-79cc-4bfa-a9ae-9f7eb2e79367-353.webp",
+   "color": "#693879",
    "fondo": "blanco"
   },
   {
@@ -2064,6 +2201,11 @@
    "fondo": "blanco"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5b3b43ff-6940-4610-a606-e38935279cda-507.webp",
+   "color": "#e9c548",
+   "fondo": "blanco"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/65d09793-29d8-48b9-8a17-ebdc2c4cdec8-1200.webp",
    "color": null,
    "fondo": "blanco"
@@ -2071,6 +2213,11 @@
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/6811a852-2c91-48cf-8239-b62873082bc3-437.webp",
    "color": "#797a4a",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/6a6fd0f8-003d-4ef8-8115-49eece81d5b2-488.webp",
+   "color": "#f3d4da",
    "fondo": "blanco"
   },
   {
@@ -2089,8 +2236,18 @@
    "fondo": "blanco"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/82408e6e-4f78-4455-b675-8ad26ed8d096-469.webp",
+   "color": "#d72946",
+   "fondo": "blanco"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8e83ac15-1321-41d4-bdad-0b4461b1b8a5-479.webp",
    "color": "#fb563b",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8ee9e4a2-c7f2-41bb-b5ac-6ca4875bcb18-512.webp",
+   "color": "#d78826",
    "fondo": "blanco"
   },
   {
@@ -2134,6 +2291,11 @@
    "fondo": "blanco"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a547f3a8-11d7-467e-82f3-dc6616c5988d-506.webp",
+   "color": "#d8ece6",
+   "fondo": "blanco"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/aedd27e2-135b-4bf0-99f6-9c80e3b06666-429.webp",
    "color": "#eae8d6",
    "fondo": "blanco"
@@ -2169,6 +2331,11 @@
    "fondo": "escena"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/ce326a0a-0cf7-494b-890b-51102f097b98-506.webp",
+   "color": "#acc538",
+   "fondo": "blanco"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/ce93322a-0726-4a85-ae77-30a4c518b144-213.webp",
    "color": "#f436a9",
    "fondo": "blanco"
@@ -2184,8 +2351,18 @@
    "fondo": "blanco"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d514ba13-0b7e-4393-97fe-599941afbb9e-366.webp",
+   "color": "#ba1859",
+   "fondo": "blanco"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d5ed517b-ff3d-445f-b0f9-218fa8a185f4-554.webp",
    "color": "#f3d994",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d6b5401b-4c05-4974-b9fe-4c1e19a458b9-447.webp",
+   "color": "#ebe4d9",
    "fondo": "escena"
   },
   {
@@ -2206,6 +2383,16 @@
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/ecdbfea9-9314-40c1-b6a9-3c6baf8b58da-461.webp",
    "color": "#bab5d5",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/f4e8d5e1-551a-4362-8515-8ce3bf25e68b-383.webp",
+   "color": "#c93655",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/f5152d78-902a-48e3-8942-34abfad0b62c-400.webp",
+   "color": "#461b07",
    "fondo": "blanco"
   },
   {

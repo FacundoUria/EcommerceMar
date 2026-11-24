@@ -17,7 +17,8 @@ function armarProducto({ id, nombre, nombreCorto, marca, tamano, categoria, prec
   const enPromo = promo?.precio != null;
   const propios = variantes.map((v) => v.precio).filter((x) => x != null);
   const base = enPromo ? promo.precio : (precio ?? (propios.length ? Math.min(...propios) : null));
-  const vs = variantes.map((v) => ({ nombre: v.nombre, imagen: v.imagen || imagen, precio: enPromo ? base : (v.precio ?? base) }));
+  // propia: la variante tiene foto suya (la galería de /producto muestra solo esas además de la principal)
+  const vs = variantes.map((v) => ({ nombre: v.nombre, imagen: v.imagen || imagen, propia: !!v.imagen, precio: enPromo ? base : (v.precio ?? base) }));
   const precios = vs.map((v) => v.precio).filter((x) => x != null);
   return {
     // promo: { nombre (el cartel), hasta } y precioAntes (tachado). Solo mientras está vigente.

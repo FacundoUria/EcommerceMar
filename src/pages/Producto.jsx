@@ -56,11 +56,12 @@ function Detalle({ producto }) {
   const tieneVariantes = producto.variantes.length > 0;
   const categoria = categorias?.find((c) => c.id === producto.categoria);
 
-  // Galería: una miniatura por foto distinta. Si una variante usa la misma foto que el producto (Ghee 350 g),
-  // queda la de la variante (así se marca al elegirla); las variantes sin foto propia se eligen desde los chips
+  // Galería: la foto principal + una miniatura por cada foto propia de una variante. Si una variante tiene como
+  // foto la misma del producto (Ghee 350 g), queda la de la variante (así se marca al elegirla); las variantes
+  // sin foto propia se eligen desde los chips (la principal, que muestra todos los colores, no elige ninguna)
   const galeria = useMemo(() => {
     const vistas = new Set();
-    const variantes = producto.variantes.filter((v) => !vistas.has(v.imagen) && vistas.add(v.imagen));
+    const variantes = producto.variantes.filter((v) => v.propia && !vistas.has(v.imagen) && vistas.add(v.imagen));
     return vistas.has(producto.imagen) ? variantes : [{ nombre: null, imagen: producto.imagen }, ...variantes];
   }, [producto]);
   const imagen = (preview ?? variante)?.imagen ?? producto.imagen;
@@ -147,7 +148,8 @@ function Detalle({ producto }) {
           {galeria.length > 1 && (
             <FilaDeslizable className="-mx-4 mt-3" claseFila="gap-2 px-4 pb-1" activo={variante?.nombre ?? null} aria-label="Fotos del producto">
               {galeria.map((g) => {
-                const activa = (variante?.nombre ?? null) === g.nombre;
+                // La principal queda marcada también con una variante sin foto propia (es la que se ve)
+                const activa = g.nombre === null ? !variante?.propia : variante?.nombre === g.nombre;
                 return (
                   <button
                     key={g.nombre ?? 'principal'}

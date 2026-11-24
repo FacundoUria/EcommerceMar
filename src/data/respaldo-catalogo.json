@@ -1982,8 +1982,8 @@
   },
   {
    "id": "cepillo-viral",
-   "nombre": "Cepillo Definidor de Rulos y Ondas Anti-Frizz (Rosa)",
-   "nombre_corto": "Cepillo Definidor Rosa",
+   "nombre": "Cepillo Definidor de Rulos y Ondas Anti-Frizz",
+   "nombre_corto": "Cepillo Definidor viral",
    "marca": null,
    "categoria_id": "cepillos-definidores",
    "precio": 16000,
@@ -1991,7 +1991,7 @@
    "alias": [],
    "destacado": false,
    "fotos": [
-    "/img/productos/cepillo-viral.webp"
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/77503b45-c1f2-41aa-8aed-906627b6812c-554.webp"
    ],
    "precio_promo": 13000,
    "precio_antes": null,
@@ -2001,12 +2001,43 @@
    "solo_en_promo": false,
    "incluye": null,
    "elecciones": [],
-   "variantes": []
+   "variantes": [
+    {
+     "foto": null,
+     "orden": 2,
+     "nombre": "Negro",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 4,
+     "nombre": "Lila",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/cepillo-viral.webp",
+     "orden": 1,
+     "nombre": "Rosa",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 3,
+     "nombre": "Verde agua",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 5,
+     "nombre": "Beige",
+     "precio": null
+    }
+   ]
   },
   {
    "id": "cepillo-viral-doble",
    "nombre": "Cepillo viral doble",
-   "nombre_corto": null,
+   "nombre_corto": "Cepillo Definidor doble",
    "marca": null,
    "categoria_id": "cepillos-definidores",
    "precio": 13000,
@@ -2014,7 +2045,7 @@
    "alias": [],
    "destacado": false,
    "fotos": [
-    "/img/productos/cepillo-viral-doble.webp"
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8be00e01-d68f-4a10-b78c-b84d7598f116-1200.webp"
    ],
    "precio_promo": null,
    "precio_antes": null,
@@ -2037,7 +2068,7 @@
    "alias": [],
    "destacado": true,
    "fotos": [
-    "/img/productos/cepillo-viral-tenedor.webp"
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/3afbf078-8af1-44cf-94cd-3875b9a19b89-1080.webp"
    ],
    "precio_promo": null,
    "precio_antes": null,
@@ -2047,7 +2078,32 @@
    "solo_en_promo": false,
    "incluye": null,
    "elecciones": [],
-   "variantes": []
+   "variantes": [
+    {
+     "foto": null,
+     "orden": 1,
+     "nombre": "Rosa",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 2,
+     "nombre": "Verde agua",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 4,
+     "nombre": "Negro",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/cepillo-viral-tenedor.webp",
+     "orden": 3,
+     "nombre": "Lila",
+     "precio": null
+    }
+   ]
   },
   {
    "id": "cepillo-detangle-bounce",
@@ -2924,6 +2980,11 @@
    "fondo": "blanco"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/3afbf078-8af1-44cf-94cd-3875b9a19b89-1080.webp",
+   "color": "#e9dbeb",
+   "fondo": "escena"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/3ba6d8e2-3d98-4069-8d64-e1950275c532-508.webp",
    "color": "#e88598",
    "fondo": "blanco"
@@ -3024,6 +3085,11 @@
    "fondo": "blanco"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/77503b45-c1f2-41aa-8aed-906627b6812c-554.webp",
+   "color": "#fa9498",
+   "fondo": "escena"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/794d3a28-42bf-4c42-bdbb-e76d0072ee09-459.webp",
    "color": "#d9dce9",
    "fondo": "blanco"
@@ -3041,6 +3107,11 @@
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/82408e6e-4f78-4455-b675-8ad26ed8d096-469.webp",
    "color": "#d72946",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8be00e01-d68f-4a10-b78c-b84d7598f116-1200.webp",
+   "color": "#fac7d9",
    "fondo": "blanco"
   },
   {

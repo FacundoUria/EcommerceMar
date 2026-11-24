@@ -69,13 +69,13 @@ descripción va con esa foto:
 | # de Mar | Descripción de Mar | Producto | Foto asignada |
 |---|---|---|---|
 | 30 | Dompel — Cepillo Flexible Rectangular Desenredante | `cepillo-maya-cuadrado` | `cepillo-maya-cuadrado.webp` (Dompel rosa; es la misma foto que `cepillo-viral-flexible`) |
-| 31 | Cepillo Definidor de Rulos y Ondas Anti-Frizz (Rosa) | `cepillo-viral` | `cepillo-viral.webp` (definidor rosa; misma foto que `cepillo-viral-doble`) |
+| 31 | Cepillo Definidor de Rulos y Ondas Anti-Frizz (Rosa) | `cepillo-viral` | `cepillo-viral.webp` (definidor rosa): desde el 23/11 es la foto de la variante Rosa (ver sección 11) |
 | 33 | Dompel — Cepillo Definidor Flexible con Bordes Dentados (Lila) | `cepillo-definidor-lila` (nuevo, oculto) | `cepillo-definidor-lila.jpg` (ex `VERIFICAR-cepillo-violeta`) |
 | 35 | Cepillo Pulpo Desenredante para Rulos y Ondas | `cepillo-magico` | `cepillo-magico.webp` (varios colores, hileras sueltas) |
 | 37 | Cepillo Flexible Curvo Desenredante y Ventilado | `cepillo-pirulito-2` | `cepillo-pirulito-2.webp` (varios colores, cabezal ventilado) |
 
-Además, `cepillo-viral-flexible` y `cepillo-viral-doble` quedan como estaban, sin descripción de Mar (cada
-uno comparte foto con otro cepillo).
+Además, `cepillo-viral-flexible` queda como estaba, sin descripción de Mar (comparte foto con otro cepillo).
+`cepillo-viral-doble` tiene foto propia desde el 23/11 (sección 11), pero sigue sin descripción de Mar.
 
 Los dos cepillos Viñeta que mandó Mar en noviembre (`cepillo-tangle`, lila y menta, y `cepillo-pinza`) **no
 coinciden con ninguno de estos**: se cargaron como productos nuevos y esta tabla sigue igual.
@@ -154,6 +154,8 @@ Ideal: la foto original del proveedor, de 1000 px o más. Se reemplazan desde /a
 | Cepillo masajeador de silicona | — | 500×442 |
 | Cremas de Peinar Naturals (Frenzzi) | Cebolla & Ginseng, Almendras Dulces & Chía, Arándanos | 554×554 |
 | Activadores #todecacho (Salon Line) | Cachos dos Sonhos | 554×554 |
+| Cepillo Definidor viral | foto principal (los 5 colores) / Rosa | 554×554 / 447×447 |
+| Cepillo Definidor tenedor | Lila (la foto de antes, en la mano) | 387×387 |
 
 ## 8. Datos que se asumieron al cargar (nov 2026)
 
@@ -220,3 +222,32 @@ Están en `assets/productos/originales/2026-11-23/` (no se suben al repo).
 - **11.06.16 (Gel Potenciador Rich):** se dejó la que ya estaba, que es más grande (600×900).
 - Repetidas o de menor calidad: Emulsión Action Plex en escena, la góndola de las Gelatinas Frutástica
   (357 px; la principal es la de Uva), el grupo de Skala Expert y el gorro azul de satén.
+- **22.34.51** (álbum del cepillo doble, 430×465): varios cepillos sobre madera; no queda claro cuáles son el
+  doble (ver sección 11).
+- El álbum de las **20.56.58** era el de Skala Expert repetido (las mismas 6 fotos): se borró.
+
+## 11. Cepillos definidores (23/11, noche)
+
+Cada cepillo quedó como **un solo producto con variantes de color** (no hay un producto por color). Precio
+igual para todos los colores.
+
+| Producto | Precio | Colores | Fotos |
+|---|---|---|---|
+| **Cepillo Definidor viral** (`cepillo-viral`, con picos) | $ 16.000 (Black Friday $ 13.000) | Rosa, Negro, Verde agua, Lila, Beige | principal: los 5 colores (22.33.42); Rosa: la de siempre (frente y dorso) |
+| **Cepillo Definidor tenedor** (`cepillo-viral-tenedor`) | $ 15.000 | Rosa, Verde agua, Lila, Negro | principal: los 4 colores (22.34.29); Lila: la de antes (en la mano, el lila adelante) |
+| **Cepillo Definidor doble** (`cepillo-viral-doble`) | **$ 13.000** | — | frente y dorso, sacados de la infografía rosa (22.34.52) |
+
+Confirmar:
+
+1. **Doble: ¿$ 13.000?** Mar escribió «13.009»; se tomó como $ 13.000.
+2. **Doble: ¿en qué colores viene?** Quedó sin variantes. En la otra foto del álbum (22.34.51) se ve uno lila
+   y otros rosa, fucsia y negro, pero no queda claro cuáles son el doble. Tampoco tiene descripción de Mar.
+3. **Tenedor:** el tercero de la foto es un **lila muy claro**: ¿se llama «Lila»? En la foto de antes (en la
+   mano) también se ve uno **beige/crema**: ¿viene en ese color?
+4. **Tenedor: la foto nueva tiene la marca de agua de otra tienda** (una «Y» abajo a la derecha). Se usó
+   porque es la que mandó Mar, pero lo ideal es una foto propia o la del proveedor sin marca.
+5. **Viral:** ¿Rosa, Negro, Verde agua, Lila y Beige son los nombres con los que los vende?
+6. No se unificaron (son otros modelos): el **Definidor Fucsia** (`cepillo-detangle-bounce`, $ 12.000, cabezal
+   rectangular con bordes en ondas) y el **Dompel lila** (`cepillo-definidor-lila`, oculto).
+7. Los carritos que ya tenían el viral (antes era solo el rosa) siguen andando, con el precio de Black
+   Friday, pero el pedido dice «Cepillo Definidor viral» sin el color.

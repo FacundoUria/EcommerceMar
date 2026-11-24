@@ -1,7 +1,10 @@
 import { imgFija } from '../../lib/imagenes.js';
+import { esColorClaro } from '../../lib/variantes.js';
+import Icon from '../ui/Icon.jsx';
 
 /**
- * Swatches de variantes con la foto de cada una.
+ * Swatches de variantes con la foto de cada una (quick view, rutina). Si la variante es un color, un
+ * cuadradito lleno de ese color (con tilde si está elegida) en vez de la foto.
  * - onPreview: al pasar el mouse / foco (cambia la foto sin elegir)
  * - onSelect: al tocar / click (elige la variante)
  */
@@ -36,11 +39,17 @@ export default function Swatches({ variantes, seleccionada, onSelect, onPreview,
             onMouseEnter={() => onPreview?.(v)}
             onFocus={() => onPreview?.(v)}
             onBlur={() => onPreview?.(null)}
-            className={`${dim} shrink-0 overflow-hidden rounded-full border-2 bg-crema-card transition duration-200 hover:scale-110 active:scale-95 ${
-              activa ? 'border-verde ring-2 ring-salvia-media ring-offset-1' : 'border-crema-card shadow-suave'
-            }`}
+            className={`${dim} shrink-0 overflow-hidden border-2 bg-crema-card transition duration-200 hover:scale-110 active:scale-95 ${
+              v.color ? 'rounded-xl' : 'rounded-full'
+            } ${activa ? 'border-verde ring-2 ring-salvia-media ring-offset-1' : 'border-crema-card shadow-suave'}`}
           >
-            <img {...imgFija(v.imagen, 56)} alt="" width="56" height="56" loading="lazy" decoding="async" className="size-full object-cover" />
+            {v.color ? (
+              <span className="flex size-full items-center justify-center rounded-[10px] inset-ring inset-ring-tinta/20" style={{ backgroundColor: v.color }}>
+                {activa && size !== 'sm' && <Icon name="check" size={20} strokeWidth={3} className={esColorClaro(v.color) ? 'text-tinta' : 'text-white'} />}
+              </span>
+            ) : (
+              <img {...imgFija(v.imagen, 56)} alt="" width="56" height="56" loading="lazy" decoding="async" className="size-full object-cover" />
+            )}
           </button>
         );
       })}

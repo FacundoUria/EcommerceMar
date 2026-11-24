@@ -27,6 +27,7 @@ import FilaDeslizable from '../components/ui/FilaDeslizable.jsx';
 import { esDesde, precioDe } from '../lib/precios.js';
 import { terminaEn } from '../lib/promo.js';
 import CartelPromo from '../components/product/CartelPromo.jsx';
+import SelectorColores from '../components/product/Colores.jsx';
 
 export default function Producto() {
   const { id } = useParams();
@@ -265,7 +266,25 @@ function Detalle({ producto }) {
             </div>
           ))}
 
-          {tieneVariantes && (
+          {/* Variantes que son colores: cuadraditos de color con el nombre abajo */}
+          {producto.deColores && (
+            <div id="variantes">
+              <SelectorColores
+                variantes={producto.variantes}
+                seleccionada={variante?.nombre}
+                onSelect={elegir}
+                onPreview={setPreview}
+                nombreProducto={producto.nombre}
+              />
+              {aviso && (
+                <p className="mt-3 text-sm font-semibold text-dorado" role="alert">
+                  Elegí un color
+                </p>
+              )}
+            </div>
+          )}
+
+          {tieneVariantes && !producto.deColores && (
             <div id="variantes">
               <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={`Variantes de ${producto.nombre}`} onMouseLeave={() => setPreview(null)}>
                 {producto.variantes.map((v) => {

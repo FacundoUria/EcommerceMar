@@ -5,6 +5,7 @@ import FotoProducto from '../product/FotoProducto.jsx';
 import QuantityStepper from '../ui/QuantityStepper.jsx';
 import { formatPrecio, imgSm } from '../../lib/format.js';
 import { textoElecciones, useCartAcciones } from '../../context/CartContext.jsx';
+import { MuestraColor } from '../product/Colores.jsx';
 
 /** Una línea del carrito (producto + variante). Se usa en el drawer y en /carrito. */
 export default function CartLine({ linea, compacta = false, onNavigate, delay = 0 }) {
@@ -29,7 +30,12 @@ export default function CartLine({ linea, compacta = false, onNavigate, delay = 
             <Link to={url} onClick={onNavigate} className="line-clamp-2 text-sm leading-snug font-bold text-tinta hover:text-verde">
               {linea.nombre}
             </Link>
-            {linea.variante && <p className="truncate text-xs text-texto-suave">{linea.variante}</p>}
+            {linea.variante && (
+              <p className="flex items-center gap-1.5 text-xs text-texto-suave">
+                {linea.color && <MuestraColor color={linea.color} />}
+                <span className="truncate">{linea.variante}</span>
+              </p>
+            )}
             {linea.elecciones?.map(([k, v]) => (
               <p key={k} className="text-xs leading-snug text-texto-suave">
                 {k}: <span className="font-semibold text-tinta">{v}</span>

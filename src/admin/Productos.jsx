@@ -6,6 +6,8 @@ import { imgFija } from '../lib/imagenes.js';
 import { useCambiosSinGuardar, useDatos } from './contexto.jsx';
 import { borrarProducto, cambiarVisible, fotosDeProducto, guardarCategoria, guardarFondos, guardarProducto } from './datos.js';
 import FotoCampo from './FotoCampo.jsx';
+import ColorCampo from './ColorCampo.jsx';
+import { colorSugerido } from '../config/colores-variantes.js';
 import PromoCampos, { aDatosPromo, aFormPromo, validarPromo } from './PromoCampos.jsx';
 import { borrarFotos } from './fotos.js';
 import { BarraGuardar, DialogoBorrar, EncabezadoForm, ErrorCarga, SubirBajar } from './partes.jsx';
@@ -142,7 +144,15 @@ const aForm = (p) => ({
   destacado: Boolean(p?.destacado),
   activo: p ? p.activo : true,
   foto: p?.fotos?.[0] ?? null,
-  variantes: (p?.variantes ?? []).map((v) => ({ clave: v.id, id: v.id, nombre: v.nombre, precio: textoPrecio(v.precio), foto: v.foto })),
+  variantes: (p?.variantes ?? []).map((v) => ({
+    clave: v.id,
+    id: v.id,
+    nombre: v.nombre,
+    precio: textoPrecio(v.precio),
+    foto: v.foto,
+    esColor: Boolean(v.color_hex), // "Esta variante es un color" (cuadradito de color en la tienda)
+    color: v.color_hex ?? '',
+  })),
   fondos: {}, // "¿Cómo es la foto?" que cambió Mar: { [url]: 'blanco' | 'escena' }
   promo: aFormPromo(p), // "Promoción" (plegable): precio promo, antes, fechas, kit
 });
@@ -162,7 +172,13 @@ const aDatos = (f, original, conPromo) => ({
   destacado: f.destacado,
   activo: f.activo,
   fotos: [f.foto, ...(original?.fotos?.slice(1) ?? [])].filter(Boolean),
-  variantes: f.variantes.map((v) => ({ id: v.id, nombre: v.nombre.trim(), precio: leerPrecio(v.precio), foto: v.foto })),
+  variantes: f.variantes.map((v) => ({
+    id: v.id,
+    nombre: v.nombre.trim(),
+    precio: leerPrecio(v.precio),
+    foto: v.foto,
+    color_hex: v.esColor && v.color ? v.color.toLowerCase() : null,
+  })),
 });
 
 function validar(f) {
@@ -175,6 +191,7 @@ function validar(f) {
     if (!n) e[`v-${v.clave}`] = 'Escribí el nombre de la variante (o quitala).';
     else if (vistos.has(n)) e[`v-${v.clave}`] = 'Ya hay otra variante con este nombre.';
     vistos.add(n);
+    if (v.esColor && !/^#[0-9a-f]{6}$/i.test(v.color)) e[`vc-${v.clave}`] = 'Elegí el color (o apagá «Esta variante es un color»).';
   });
   return e;
 }
@@ -233,8 +250,24 @@ function Formulario({ original, datos, recargar }) {
     setErrores((e) => ({ ...e, [campo]: undefined }));
   };
   const cambiarVariante = (clave, campo, valor) => {
-    setForm((f) => ({ ...f, variantes: f.variantes.map((v) => (v.clave === clave ? { ...v, [campo]: valor } : v)) }));
+    setForm((f) => ({
+      ...f,
+      variantes: f.variantes.map((v) => {
+        if (v.clave !== clave) return v;
+        const nueva = { ...v, [campo]: valor };
+        // Es un color y todavía no eligió cuál: se sugiere por el nombre ("Rosa bebé" → rosa bebé)
+        if (campo === 'nombre' && nueva.esColor && !v.color) nueva.color = colorSugerido(valor) ?? '';
+        return nueva;
+      }),
+    }));
     setErrores((e) => ({ ...e, [`v-${clave}`]: undefined }));
+  };
+  const cambiarColorVariante = (clave, { esColor, color }) => {
+    setForm((f) => ({
+      ...f,
+      variantes: f.variantes.map((v) => (v.clave === clave ? { ...v, esColor, color: esColor ? color || colorSugerido(v.nombre) || '' : color } : v)),
+    }));
+    setErrores((e) => ({ ...e, [`vc-${clave}`]: undefined }));
   };
   const moverVariante = (i, d) =>
     setForm((f) => {
@@ -242,8 +275,15 @@ function Formulario({ original, datos, recargar }) {
       [vs[i], vs[i + d]] = [vs[i + d], vs[i]];
       return { ...f, variantes: vs };
     });
+  // Si las otras variantes son colores, la nueva también arranca como color
   const agregarVariante = () =>
-    setForm((f) => ({ ...f, variantes: [...f.variantes, { clave: `nueva-${++claveNueva}`, id: null, nombre: '', precio: '', foto: null }] }));
+    setForm((f) => ({
+      ...f,
+      variantes: [
+        ...f.variantes,
+        { clave: `nueva-${++claveNueva}`, id: null, nombre: '', precio: '', foto: null, esColor: f.variantes.length > 0 && f.variantes.every((v) => v.esColor), color: '' },
+      ],
+    }));
   const quitarVariante = (clave) => setForm((f) => ({ ...f, variantes: f.variantes.filter((v) => v.clave !== clave) }));
   const subio = (url) => subidas.current.push(url);
   const elegirFondo = (url, f) => setForm((x) => ({ ...x, fondos: { ...x.fondos, [url]: f } }));
@@ -495,6 +535,13 @@ function Formulario({ original, datos, recargar }) {
             <Campo etiqueta="Nombre" error={errores[`v-${v.clave}`]}>
               {(id, a) => <input id={id} {...a} className={ENTRADA} value={v.nombre} onChange={(e) => cambiarVariante(v.clave, 'nombre', e.target.value)} />}
             </Campo>
+            <ColorCampo
+              esColor={v.esColor}
+              color={v.color}
+              error={errores[`vc-${v.clave}`]}
+              nombreVariante={v.nombre.trim()}
+              onCambio={(x) => cambiarColorVariante(v.clave, x)}
+            />
             <Campo
               etiqueta="Precio"
               opcional

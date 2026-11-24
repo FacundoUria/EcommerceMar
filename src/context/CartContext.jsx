@@ -53,6 +53,7 @@ function reducer(lineas, accion) {
           nombre: producto.nombreCorto ?? producto.nombre,
           marca: producto.marca ?? null,
           variante: variante?.nombre ?? null,
+          ...(variante?.color && { color: variante.color }), // cuadradito de color al lado de la variante
           ...(elecciones?.length && { elecciones }),
           // Sin selector de color (config/color.js): el pedido dice "(color a coordinar)"
           ...(producto.colorACoordinar && { colorACoordinar: true }),
@@ -84,7 +85,7 @@ function reducer(lineas, accion) {
         // Lo elegido en un kit que el kit ya no pide (Mar sacó ese selector) se descarta
         const claves = new Set((p.elecciones ?? []).map((e) => e.clave));
         const elecciones = (l.elecciones ?? []).filter(([k]) => claves.has(k));
-        const { promo: _promoAnterior, elecciones: _eleccionesAnteriores, colorACoordinar: _colorAnterior, ...resto } = l;
+        const { promo: _promoAnterior, elecciones: _eleccionesAnteriores, colorACoordinar: _colorAnterior, color: _colorVariante, ...resto } = l;
         const linea = {
           ...resto,
           nombre: p.nombreCorto ?? p.nombre,
@@ -94,6 +95,7 @@ function reducer(lineas, accion) {
           ...(p.promo && { promo: p.promo.nombre }),
           ...(elecciones.length && { elecciones }),
           ...(p.colorACoordinar && { colorACoordinar: true }),
+          ...(variante?.color && { color: variante.color }),
           ...(existe ? variante && { variante: variante.nombre } : { variante: null, imagen: p.imagen }),
           clave: claveLinea(p.id, variante?.nombre ?? null, elecciones),
         };

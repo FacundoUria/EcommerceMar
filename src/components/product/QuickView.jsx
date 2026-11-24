@@ -6,6 +6,7 @@ import FotoProducto from './FotoProducto.jsx';
 import { esDesde, precioDe } from '../../lib/precios.js';
 import QuantityStepper from '../ui/QuantityStepper.jsx';
 import Swatches from './Swatches.jsx';
+import { MuestraColor } from './Colores.jsx';
 import { useUI } from '../../context/UIContext.jsx';
 import { useCart } from '../../context/CartContext.jsx';
 import { useMediaQuery } from '../../hooks/useMediaQuery.js';
@@ -140,8 +141,9 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
 
           {tieneVariantes && (
             <div>
-              <p className="mb-2 text-sm font-semibold">
-                {(preview ?? variante)?.nombre ?? 'Variante'}
+              <p className="mb-2 flex items-center gap-2 text-sm font-semibold">
+                {(preview ?? variante)?.color && <MuestraColor color={(preview ?? variante).color} />}
+                {(preview ?? variante)?.nombre ?? (producto.deColores ? 'Color' : 'Variante')}
               </p>
               <Swatches
                 variantes={producto.variantes}
@@ -155,7 +157,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
               />
               {aviso && (
                 <p className="mt-2 text-sm font-semibold text-dorado" role="alert">
-                  Elegí una variante
+                  {producto.deColores ? 'Elegí un color' : 'Elegí una variante'}
                 </p>
               )}
             </div>

@@ -8,6 +8,7 @@ import Icon from '../components/ui/Icon.jsx';
 import FotoProducto from '../components/product/FotoProducto.jsx';
 import { esDesde, precioDe } from '../lib/precios.js';
 import Swatches from '../components/product/Swatches.jsx';
+import { MuestraColor } from '../components/product/Colores.jsx';
 import { GridSkeleton } from '../components/ui/Skeleton.jsx';
 import { useCategories, usePasosRutina, useProducts } from '../hooks/useCatalog.js';
 import { usePageTitle } from '../hooks/usePageTitle.js';
@@ -253,7 +254,12 @@ export default function Rutina() {
                             <img {...imgFija(e.variante?.imagen ?? e.producto.imagen, 40)} alt="" width="40" height="40" className="size-10 shrink-0 rounded-xl bg-arena object-cover" />
                             <span className="min-w-0 flex-1">
                               <span className="block truncate text-sm font-semibold">{e.producto.nombreCorto}</span>
-                              {e.variante && <span className="block truncate text-xs text-texto-suave">{e.variante.nombre}</span>}
+                              {e.variante && (
+                                <span className="flex items-center gap-1.5 text-xs text-texto-suave">
+                                  {e.variante.color && <MuestraColor color={e.variante.color} className="size-3" />}
+                                  <span className="truncate">{e.variante.nombre}</span>
+                                </span>
+                              )}
                             </span>
                             <Precio valor={precioDe(e.producto, e.variante)} className="text-sm text-tinta" />
                           </m.li>
@@ -435,8 +441,9 @@ function OpcionProducto({ producto, seleccion, onElegir, onVariante, indice = 0 
         </button>
         {activo && producto.variantes.length > 0 && (
           <div className="border-t border-verde/10 px-4 pt-3 pb-4">
-            <p className="mb-2 text-sm font-semibold">
-              {seleccion.variante?.nombre ?? 'Variante'}
+            <p className="mb-2 flex items-center gap-2 text-sm font-semibold">
+              {seleccion.variante?.color && <MuestraColor color={seleccion.variante.color} />}
+              {seleccion.variante?.nombre ?? (producto.deColores ? 'Color' : 'Variante')}
             </p>
             <Swatches
               variantes={producto.variantes}

@@ -18,8 +18,15 @@ function armarProducto({ id, nombre, nombreCorto, marca, tamano, categoria, prec
   const enPromo = promo?.precio != null;
   const propios = variantes.map((v) => v.precio).filter((x) => x != null);
   const base = enPromo ? promo.precio : (precio ?? (propios.length ? Math.min(...propios) : null));
-  // propia: la variante tiene foto suya (la galería de /producto muestra solo esas además de la principal)
-  const vs = variantes.map((v) => ({ nombre: v.nombre, imagen: v.imagen || imagen, propia: !!v.imagen, precio: enPromo ? base : (v.precio ?? base) }));
+  // propia: la variante tiene foto suya (la galería de /producto muestra solo esas además de la principal).
+  // color: '#rrggbb' si la variante es un color (Mar lo marca en /admin)
+  const vs = variantes.map((v) => ({
+    nombre: v.nombre,
+    imagen: v.imagen || imagen,
+    propia: !!v.imagen,
+    precio: enPromo ? base : (v.precio ?? base),
+    ...(v.color && { color: v.color }),
+  }));
   const precios = vs.map((v) => v.precio).filter((x) => x != null);
   return {
     // promo: { nombre (el cartel), hasta } y precioAntes (tachado). Solo mientras está vigente.
@@ -38,6 +45,8 @@ function armarProducto({ id, nombre, nombreCorto, marca, tamano, categoria, prec
     precio: precios.length ? Math.min(...precios) : base,
     desde: new Set(precios).size > 1,
     variantes: vs,
+    // Todas sus variantes son colores: la ficha las muestra como cuadraditos de color
+    ...(vs.length && vs.every((v) => v.color) && { deColores: true }),
     // Sin selector de color (config/color.js), solo si no tiene variantes: "color a coordinar" o un único color
     ...(!vs.length && COLOR_A_COORDINAR.includes(id) && { colorACoordinar: true }),
     ...(!vs.length && COLOR_UNICO[id] && { colorUnico: COLOR_UNICO[id] }),
@@ -86,7 +95,7 @@ export const productoDeFila = (f, filas = [], t = ahoraPromo()) => {
     // Kit "solo durante la promo": fuera de fechas, como oculto
     activo: f.activo === false || (f.solo_en_promo && !promo) ? false : f.activo,
     imagen: f.fotos?.[0] ?? img('productos', f.id),
-    variantes: [...(f.variantes ?? [])].sort(porOrden).map((v) => ({ nombre: v.nombre, precio: v.precio, imagen: v.foto })),
+    variantes: [...(f.variantes ?? [])].sort(porOrden).map((v) => ({ nombre: v.nombre, precio: v.precio, imagen: v.foto, color: v.color_hex })),
     promo,
     incluye: (f.incluye ?? '').split('\n').map((x) => x.trim()).filter(Boolean),
     elecciones,

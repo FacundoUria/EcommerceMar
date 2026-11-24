@@ -2,11 +2,18 @@
 // (cliente del navegador, lib/supabase.js) y también scripts de Node para verificar.
 // Devuelven las filas tal cual (se guardan así en localStorage); lib/catalogo.js las arma para la web.
 
-const PRODUCTO =
-  'id, nombre, nombre_corto, marca, categoria_id, precio, tamano, alias, destacado, fotos, variantes (nombre, precio, foto, orden)';
-// Promos (supabase/migraciones/2026-11-23-promos.sql). Si la base todavía no tiene esas columnas, se piden
-// los productos sin ellas (la tienda anda igual, sin promos).
+const PRODUCTO = 'id, nombre, nombre_corto, marca, categoria_id, precio, tamano, alias, destacado, fotos';
+// Promos (supabase/migraciones/2026-11-23-promos.sql) y color de las variantes (2026-11-24-color-variantes.sql).
+// Si la base todavía no tiene esas columnas, se piden los productos sin ellas (la tienda anda igual, sin
+// promos o sin cuadraditos de color): se prueba de la consulta más completa a la más simple.
 const PROMO = 'precio_promo, precio_antes, promo_nombre, promo_desde, promo_hasta, solo_en_promo, incluye, elecciones';
+const VARIANTES = 'variantes (nombre, precio, foto, orden, color_hex)';
+const VARIANTES_SIN_COLOR = 'variantes (nombre, precio, foto, orden)';
+const CONSULTAS_PRODUCTOS = [
+  `${PRODUCTO}, ${VARIANTES}, ${PROMO}`,
+  `${PRODUCTO}, ${VARIANTES_SIN_COLOR}, ${PROMO}`,
+  `${PRODUCTO}, ${VARIANTES_SIN_COLOR}`,
+];
 const faltaColumna = (r) => r.error && /column|42703|schema cache/i.test(`${r.error.code} ${r.error.message}`);
 
 const revisar = (r, tabla) => {
@@ -20,10 +27,13 @@ const revisar = (r, tabla) => {
  */
 export async function consultarCatalogo(sb) {
   // El filtro por activo/a también lo hace RLS; va explícito por si algún día el cliente tiene sesión de admin.
-  const pedirProductos = (columnas) => sb.from('productos').select(columnas).eq('activo', true).order('orden').order('id');
+  const pedirProductos = async (i = 0) => {
+    const r = await sb.from('productos').select(CONSULTAS_PRODUCTOS[i]).eq('activo', true).order('orden').order('id');
+    return faltaColumna(r) && i + 1 < CONSULTAS_PRODUCTOS.length ? pedirProductos(i + 1) : r;
+  };
   const [categorias, productos, servicios, fotos] = await Promise.all([
     sb.from('categorias').select('id, nombre, paso, portada').eq('activa', true).order('orden').order('id'),
-    pedirProductos(`${PRODUCTO}, ${PROMO}`).then((r) => (faltaColumna(r) ? pedirProductos(PRODUCTO) : r)),
+    pedirProductos(),
     sb.from('servicios').select('id, nombre, grupo, descripcion, duracion, foto').eq('activo', true).order('orden').order('id'),
     sb.from('fotos').select('url, color, fondo').order('url'),
   ]);

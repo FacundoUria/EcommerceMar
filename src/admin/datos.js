@@ -49,7 +49,7 @@ export async function guardarFondos(fondos, actuales) {
 
 /**
  * Guarda un producto con sus variantes. `datos`: columnas de productos + variantes [{ id?, nombre, precio,
- * foto }] en orden. `original`: la fila como estaba (null si es nuevo). Devuelve el id.
+ * foto, color_hex }] en orden. `original`: la fila como estaba (null si es nuevo). Devuelve el id.
  */
 export async function guardarProducto(datos, original, todos) {
   const { variantes, ...producto } = datos;
@@ -82,6 +82,7 @@ export async function guardarProducto(datos, original, todos) {
       nombre: v.nombre,
       precio: v.precio,
       foto: v.foto,
+      color_hex: v.color_hex ?? null,
       orden: i + 1,
     }));
     una(await sb.from('variantes').upsert(filas, { onConflict: 'id' }).select('id'));

@@ -198,49 +198,57 @@
      "foto": "/img/productos/shampoo-han-acido-hialuronico.webp",
      "orden": 7,
      "nombre": "Ácido hialurónico",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/shampoo-han-plex.webp",
      "orden": 2,
      "nombre": "Action Plex",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/shampoo-han-avena-miel.webp",
      "orden": 6,
      "nombre": "Avena & Miel",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/shampoo-han-biotina.webp",
      "orden": 3,
      "nombre": "Biotina + Ácido Hialurónico",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/shampoo-han-detox.webp",
      "orden": 1,
      "nombre": "Carbón Activado",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/shampoo-han-lino.webp",
      "orden": 8,
      "nombre": "Lino",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/shampoo-han-control-caida.webp",
      "orden": 5,
      "nombre": "Prevención Caída",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/shampoo-han-rulos.webp",
      "orden": 4,
      "nombre": "Rulos Definidos",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     }
    ]
   },
@@ -339,37 +347,43 @@
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/233e1b02-84cb-4b26-a16d-5dc4129eb306-240.webp",
      "orden": 6,
      "nombre": "Ácido Hialurónico",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/aedd27e2-135b-4bf0-99f6-9c80e3b06666-429.webp",
      "orden": 2,
      "nombre": "Action Plex",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/51ceeb91-cdee-451f-a7c8-68de5e3b6b7e-447.webp",
      "orden": 1,
      "nombre": "Avena & Miel",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/03e7c51a-18de-498a-aa41-d4161e71d04a-473.webp",
      "orden": 3,
      "nombre": "Biotina & Ácido Hialurónico",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/fd6f62a6-8136-4d02-b2ce-661d5dd04327-387.webp",
      "orden": 5,
      "nombre": "Prevención Caída",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1163335e-8af3-47dc-8323-6ef6bd605ac2-447.webp",
      "orden": 4,
      "nombre": "Rulos Definidos",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     }
    ]
   },
@@ -445,13 +459,15 @@
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/7f52d4c9-c381-4770-aa0d-26e028cd24e7-517.webp",
      "orden": 1,
      "nombre": "Memory Low Shampoo",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/19c15e52-114e-465b-9ac9-3dde880f1da7-404.webp",
      "orden": 2,
      "nombre": "Organic Treatment Argán",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     }
    ]
   },
@@ -481,175 +497,204 @@
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9b8258b1-22fa-4f76-aa95-bc6f49fd1b24-224.webp",
      "orden": 19,
      "nombre": "Açaí",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1e863590-d9dc-430a-a4da-6d45cb66d708-460.webp",
      "orden": 11,
      "nombre": "Amido de Milho",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a547f3a8-11d7-467e-82f3-dc6616c5988d-506.webp",
      "orden": 18,
      "nombre": "Babosa",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5b3b43ff-6940-4610-a606-e38935279cda-507.webp",
      "orden": 20,
      "nombre": "Banana",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/f5152d78-902a-48e3-8942-34abfad0b62c-400.webp",
      "orden": 27,
      "nombre": "Cacau",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/cremas-skala-cachonados.webp",
      "orden": 6,
      "nombre": "Cachonados",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/4de336a2-d0d5-40cf-9f61-83241949edf0-223.webp",
      "orden": 17,
      "nombre": "Caju",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d514ba13-0b7e-4393-97fe-599941afbb9e-366.webp",
      "orden": 26,
      "nombre": "Cereja",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8ee9e4a2-c7f2-41bb-b5ac-6ca4875bcb18-512.webp",
      "orden": 28,
      "nombre": "Coco",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/2a063155-5658-4d5f-a89b-3d6e8724a78b-430.webp",
      "orden": 29,
      "nombre": "Coquetel de Frutas 3 em 1",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/6a6fd0f8-003d-4ef8-8115-49eece81d5b2-488.webp",
      "orden": 12,
      "nombre": "Coquetel de Frutas Family",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/cremas-skala-divina-cor.webp",
      "orden": 3,
      "nombre": "Divina Cor",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/cremas-skala-divino-potao.webp",
      "orden": 4,
      "nombre": "Divino Potão",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/cremas-skala-divino-potinho.webp",
      "orden": 8,
      "nombre": "Divino Potinho",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/cremas-skala-dona-skala.webp",
      "orden": 2,
      "nombre": "Dona Skala",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/240aa27e-7e3a-4752-bb42-e0d93eddf558-309.webp",
      "orden": 14,
      "nombre": "Glicólico 3 em 1",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/6f215915-d963-444f-86fd-680d4514147d-1024.webp",
      "orden": 16,
      "nombre": "Jaborandi",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d6b5401b-4c05-4974-b9fe-4c1e19a458b9-447.webp",
      "orden": 10,
      "nombre": "Maionese Capilar",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/cremas-skala-mais-cachinhos.webp",
      "orden": 1,
      "nombre": "Mais Cachinhos",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/cremas-skala-mais-cachos.webp",
      "orden": 5,
      "nombre": "Mais Cachos",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/cremas-skala-mais-crespos.webp",
      "orden": 9,
      "nombre": "Mais Crespos",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5a4b4d1a-79cc-4bfa-a9ae-9f7eb2e79367-353.webp",
      "orden": 13,
      "nombre": "Mais Lisos",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d9e17381-741a-4263-82cb-8483fadcd7c0-224.webp",
      "orden": 21,
      "nombre": "Mango",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/57b16e3c-582c-4396-9d17-7f48bbe09584-447.webp",
      "orden": 22,
      "nombre": "Maracujá",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/f4e8d5e1-551a-4362-8515-8ce3bf25e68b-383.webp",
      "orden": 23,
      "nombre": "Melancia",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/2cc166d0-0ae4-495b-938b-2d52722cccff-420.webp",
      "orden": 25,
      "nombre": "Morango",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/cremas-skala-potao-do-amor.webp",
      "orden": 7,
      "nombre": "Potão do Amor",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/7aa592f8-ae19-4040-a261-6a6dc0516b66-1200.webp",
      "orden": 15,
      "nombre": "Raízes do Morro",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/ce326a0a-0cf7-494b-890b-51102f097b98-506.webp",
      "orden": 24,
      "nombre": "Uva",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     }
    ]
   },
@@ -725,13 +770,15 @@
      "foto": "/img/productos/crema-bekim-argan.webp",
      "orden": 2,
      "nombre": "Argán",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/crema-bekim-memory.webp",
      "orden": 1,
      "nombre": "Memory",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     }
    ]
   },
@@ -761,13 +808,15 @@
      "foto": "/img/productos/cremas-salon-line-definicion-natural.webp",
      "orden": 1,
      "nombre": "Definição Natural",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/cremas-salon-line-ostentacao.webp",
      "orden": 2,
      "nombre": "Ostentação",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     }
    ]
   },
@@ -843,13 +892,15 @@
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/466beb39-3a1b-442e-83ed-e95645307ebf-717.webp",
      "orden": 2,
      "nombre": "Keratina",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/ecdbfea9-9314-40c1-b6a9-3c6baf8b58da-461.webp",
      "orden": 1,
      "nombre": "Rulos Definidos",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     }
    ]
   },
@@ -879,19 +930,22 @@
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1183e272-75ae-440c-bdb3-c913731a743d-554.webp",
      "orden": 1,
      "nombre": "Almendras Dulces y Chía",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c4e366e1-ee1c-46b0-a9b4-288aab727f3b-554.webp",
      "orden": 2,
      "nombre": "Arándanos",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d5ed517b-ff3d-445f-b0f9-218fa8a185f4-554.webp",
      "orden": 3,
      "nombre": "Cebolla y Ginseng",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     }
    ]
   },
@@ -967,25 +1021,29 @@
      "foto": "/img/productos/mascarillas-lola-danos-vorazes.webp",
      "orden": 3,
      "nombre": "Danos Vorazes",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/mascarillas-lola-dream-cream.webp",
      "orden": 2,
      "nombre": "Dream Cream",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/mascarillas-lola-milagre.webp",
      "orden": 1,
      "nombre": "Milagre",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/mascarillas-lola-morte-subita.webp",
      "orden": 4,
      "nombre": "Morte Súbita",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     }
    ]
   },
@@ -1015,25 +1073,29 @@
      "foto": "/img/productos/tratamientos-fidelite-almendras.webp",
      "orden": 2,
      "nombre": "Almendras",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/tratamientos-fidelite-coco-vainilla.webp",
      "orden": 1,
      "nombre": "Coco y Vainilla",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": null,
      "orden": 4,
      "nombre": "Colormaster Crema Ácida",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/tratamientos-fidelite-keratina.webp",
      "orden": 3,
      "nombre": "Keratina",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     }
    ]
   },
@@ -1086,13 +1148,15 @@
      "foto": "/img/productos/ghee-lola-100.webp",
      "orden": 1,
      "nombre": "100 g",
-     "precio": 25000
+     "precio": 25000,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/ghee-lola-350.webp",
      "orden": 2,
      "nombre": "350 g · taza",
-     "precio": 39000
+     "precio": 39000,
+     "color_hex": null
     }
    ]
   },
@@ -1145,19 +1209,22 @@
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5aef45a7-67b6-4e47-a60d-0fdac5981e5c-164.webp",
      "orden": 1,
      "nombre": "Hidratación",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/4b99eb19-324d-4186-91e5-f5423e064ac0-164.webp",
      "orden": 2,
      "nombre": "Nutrición",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/fd1ac436-3264-488e-9f39-adb9638e57ef-288.webp",
      "orden": 3,
      "nombre": "Reconstrucción",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     }
    ]
   },
@@ -1210,37 +1277,43 @@
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a375f3eb-9ebf-4589-9843-5c82dc0bee0c-439.webp",
      "orden": 3,
      "nombre": "Aguacate",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/0530e30b-0551-45d1-acec-a7b1be52128a-568.webp",
      "orden": 5,
      "nombre": "Biotina",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/57573e56-99cb-4838-9542-929781204814-510.webp",
      "orden": 1,
      "nombre": "Manteca de Karité",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/6811a852-2c91-48cf-8239-b62873082bc3-437.webp",
      "orden": 2,
      "nombre": "Óleo de Argán",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/82408e6e-4f78-4455-b675-8ad26ed8d096-469.webp",
      "orden": 6,
      "nombre": "Restauração Espetacular 12 em 1",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/22da3284-285c-4226-8b41-c4bb012f0ee6-458.webp",
      "orden": 4,
      "nombre": "Vitamina",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     }
    ]
   },
@@ -1385,31 +1458,36 @@
      "foto": "/img/productos/gelatinas-500gr-7x.webp",
      "orden": 3,
      "nombre": "Amarilla 72 h",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/gelatinas-500gr-baunilha.webp",
      "orden": 2,
      "nombre": "Baunilha Doce",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/gelatinas-500gr-ostentacao.webp",
      "orden": 1,
      "nombre": "Ostentação",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/gelatinas-500gr-transicao.webp",
      "orden": 5,
      "nombre": "Super Transição",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/gelatinas-500gr-14x.webp",
      "orden": 4,
      "nombre": "Verde 72 h",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     }
    ]
   },
@@ -1439,25 +1517,29 @@
      "foto": "/img/productos/gelatinas-kids-acai.webp",
      "orden": 4,
      "nombre": "Açaí",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/gelatinas-kids-melancia.webp",
      "orden": 2,
      "nombre": "Melancia",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/gelatinas-kids-melao.webp",
      "orden": 1,
      "nombre": "Melão",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/gelatinas-kids-uva.webp",
      "orden": 3,
      "nombre": "Uva",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     }
    ]
   },
@@ -1487,19 +1569,22 @@
      "foto": "/img/productos/gel-frenzzi-pepino.webp",
      "orden": 2,
      "nombre": "Aloe y Pepino",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/gel-frenzzi-chia.webp",
      "orden": 1,
      "nombre": "Chía",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/gel-frenzzi-lino.webp",
      "orden": 3,
      "nombre": "Lino",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     }
    ]
   },
@@ -1644,13 +1729,15 @@
      "foto": null,
      "orden": 1,
      "nombre": "300 cc",
-     "precio": 15000
+     "precio": 15000,
+     "color_hex": null
     },
     {
      "foto": null,
      "orden": 2,
      "nombre": "500 cc",
-     "precio": 18000
+     "precio": 18000,
+     "color_hex": null
     }
    ]
   },
@@ -1772,19 +1859,22 @@
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9b4519de-1fe3-48a5-86d8-89d35fa105be-500.webp",
      "orden": 3,
      "nombre": "Maracujá",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d49f643b-55c1-4d84-b219-e2e8b0000b11-510.webp",
      "orden": 1,
      "nombre": "Melancia",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": null,
      "orden": 2,
      "nombre": "Uva",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     }
    ]
   },
@@ -2021,19 +2111,22 @@
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c3c83c3f-e604-4841-9e2c-d6d8407ba11e-569.webp",
      "orden": 1,
      "nombre": "Cachos dos Sonhos",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/4b3fdf94-6bea-4df5-b2ad-c4ac0f8d4d2f-511.webp",
      "orden": 2,
      "nombre": "Day After",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/ebbf71d7-fa4e-4afc-8890-2fc25bc55c93-1063.webp",
      "orden": 3,
      "nombre": "Definição Prolongada",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     }
    ]
   },
@@ -2063,31 +2156,36 @@
      "foto": null,
      "orden": 2,
      "nombre": "Blanco",
-     "precio": null
+     "precio": null,
+     "color_hex": "#f8f8f6"
     },
     {
      "foto": null,
      "orden": 5,
      "nombre": "Lila",
-     "precio": null
+     "precio": null,
+     "color_hex": "#c4a7dc"
     },
     {
      "foto": null,
      "orden": 3,
      "nombre": "Negro",
-     "precio": null
+     "precio": null,
+     "color_hex": "#1f1f1f"
     },
     {
      "foto": "/img/productos/cepillo-viral.webp",
      "orden": 1,
      "nombre": "Rosa rojizo",
-     "precio": null
+     "precio": null,
+     "color_hex": "#d9727e"
     },
     {
      "foto": null,
      "orden": 4,
      "nombre": "Verde agua",
-     "precio": null
+     "precio": null,
+     "color_hex": "#8ed8c8"
     }
    ]
   },
@@ -2117,19 +2215,22 @@
      "foto": null,
      "orden": 2,
      "nombre": "Crema clarito",
-     "precio": null
+     "precio": null,
+     "color_hex": "#f4ecd9"
     },
     {
      "foto": null,
      "orden": 3,
      "nombre": "Rosa clarito",
-     "precio": null
+     "precio": null,
+     "color_hex": "#f8d5dd"
     },
     {
      "foto": null,
      "orden": 1,
      "nombre": "Verde manzana",
-     "precio": null
+     "precio": null,
+     "color_hex": "#9bcf53"
     }
    ]
   },
@@ -2159,19 +2260,22 @@
      "foto": null,
      "orden": 2,
      "nombre": "Celeste",
-     "precio": null
+     "precio": null,
+     "color_hex": "#8ec8ea"
     },
     {
      "foto": null,
      "orden": 3,
      "nombre": "Rosa claro",
-     "precio": null
+     "precio": null,
+     "color_hex": "#f5c3cf"
     },
     {
      "foto": null,
      "orden": 1,
      "nombre": "Verde claro",
-     "precio": null
+     "precio": null,
+     "color_hex": "#b4e0a6"
     }
    ]
   },
@@ -2201,25 +2305,29 @@
      "foto": null,
      "orden": 4,
      "nombre": "Fucsia",
-     "precio": null
+     "precio": null,
+     "color_hex": "#d63384"
     },
     {
      "foto": null,
      "orden": 3,
      "nombre": "Lila",
-     "precio": null
+     "precio": null,
+     "color_hex": "#c4a7dc"
     },
     {
      "foto": null,
      "orden": 1,
      "nombre": "Negro",
-     "precio": null
+     "precio": null,
+     "color_hex": "#1f1f1f"
     },
     {
      "foto": null,
      "orden": 2,
      "nombre": "Rosa bebé",
-     "precio": null
+     "precio": null,
+     "color_hex": "#f6c6d2"
     }
    ]
   },
@@ -2249,19 +2357,22 @@
      "foto": null,
      "orden": 3,
      "nombre": "Azul · sin llavero",
-     "precio": null
+     "precio": null,
+     "color_hex": "#2e5daa"
     },
     {
      "foto": null,
      "orden": 2,
      "nombre": "Fucsia · con llavero",
-     "precio": null
+     "precio": null,
+     "color_hex": "#d63384"
     },
     {
      "foto": null,
      "orden": 1,
      "nombre": "Lila · con llavero",
-     "precio": null
+     "precio": null,
+     "color_hex": "#c4a7dc"
     }
    ]
   },
@@ -2291,25 +2402,29 @@
      "foto": null,
      "orden": 1,
      "nombre": "Celeste oscuro",
-     "precio": null
+     "precio": null,
+     "color_hex": "#5f93c2"
     },
     {
      "foto": null,
      "orden": 2,
      "nombre": "Negro",
-     "precio": null
+     "precio": null,
+     "color_hex": "#1f1f1f"
     },
     {
      "foto": null,
      "orden": 3,
      "nombre": "Rojo",
-     "precio": null
+     "precio": null,
+     "color_hex": "#c8323c"
     },
     {
      "foto": null,
      "orden": 4,
      "nombre": "Rosa claro",
-     "precio": null
+     "precio": null,
+     "color_hex": "#f5c3cf"
     }
    ]
   },
@@ -2339,25 +2454,29 @@
      "foto": null,
      "orden": 1,
      "nombre": "Celeste claro",
-     "precio": null
+     "precio": null,
+     "color_hex": "#bfdff2"
     },
     {
      "foto": null,
      "orden": 2,
      "nombre": "Celeste oscuro",
-     "precio": null
+     "precio": null,
+     "color_hex": "#5f93c2"
     },
     {
      "foto": null,
      "orden": 4,
      "nombre": "Negro",
-     "precio": null
+     "precio": null,
+     "color_hex": "#1f1f1f"
     },
     {
      "foto": null,
      "orden": 3,
      "nombre": "Rosa claro",
-     "precio": null
+     "precio": null,
+     "color_hex": "#f5c3cf"
     }
    ]
   },
@@ -2456,19 +2575,22 @@
      "foto": "/img/productos/oleos-pinga-acai.webp",
      "orden": 2,
      "nombre": "Açaí & Pracaxi",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/oleos-pinga-cenoura-oliva.webp",
      "orden": 1,
      "nombre": "Cenoura & Oliva",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "/img/productos/oleos-pinga-pataua.webp",
      "orden": 3,
      "nombre": "Patauá & Moringa",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     }
    ]
   },
@@ -2636,13 +2758,15 @@
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/bfc8c3c6-9f72-44cb-b32f-285ed5062177-447.webp",
      "orden": 1,
      "nombre": "Ginseng y Bambú",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9cc0d4fe-5c57-48b6-aa76-1cc07d4d22e5-427.webp",
      "orden": 2,
      "nombre": "Manzanilla y Vainilla",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     }
    ]
   },
@@ -2672,13 +2796,15 @@
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/794d3a28-42bf-4c42-bdbb-e76d0072ee09-459.webp",
      "orden": 1,
      "nombre": "Emulsión de Peinar Aceite de Coco",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/591ae085-786b-47d5-b737-efcdabef2a15-400.webp",
      "orden": 2,
      "nombre": "Protector Térmico Ácido Hialurónico",
-     "precio": null
+     "precio": null,
+     "color_hex": null
     }
    ]
   },
@@ -2710,19 +2836,22 @@
      "foto": null,
      "orden": 2,
      "nombre": "Crema",
-     "precio": null
+     "precio": null,
+     "color_hex": "#efe3c8"
     },
     {
      "foto": null,
      "orden": 3,
      "nombre": "Gris topo",
-     "precio": null
+     "precio": null,
+     "color_hex": "#8a7e74"
     },
     {
      "foto": null,
      "orden": 1,
      "nombre": "Lila",
-     "precio": null
+     "precio": null,
+     "color_hex": "#c4a7dc"
     }
    ]
   },
@@ -2754,25 +2883,29 @@
      "foto": null,
      "orden": 1,
      "nombre": "Algodón Negro",
-     "precio": null
+     "precio": null,
+     "color_hex": "#1f1f1f"
     },
     {
      "foto": null,
      "orden": 2,
      "nombre": "Microfibra Amarillo",
-     "precio": null
+     "precio": null,
+     "color_hex": "#f5d443"
     },
     {
      "foto": null,
      "orden": 4,
      "nombre": "Microfibra Celeste claro",
-     "precio": null
+     "precio": null,
+     "color_hex": "#bfdff2"
     },
     {
      "foto": null,
      "orden": 3,
      "nombre": "Microfibra Verde manzana",
-     "precio": null
+     "precio": null,
+     "color_hex": "#9bcf53"
     }
    ]
   },
@@ -2802,19 +2935,22 @@
      "foto": null,
      "orden": 2,
      "nombre": "Lila · uva",
-     "precio": null
+     "precio": null,
+     "color_hex": "#c4a7dc"
     },
     {
      "foto": null,
      "orden": 1,
      "nombre": "Rojo · frutilla",
-     "precio": null
+     "precio": null,
+     "color_hex": "#c8323c"
     },
     {
      "foto": null,
      "orden": 3,
      "nombre": "Verde agua · manzana",
-     "precio": null
+     "precio": null,
+     "color_hex": "#8ed8c8"
     }
    ]
   },
@@ -2844,19 +2980,22 @@
      "foto": null,
      "orden": 2,
      "nombre": "Rosa",
-     "precio": null
+     "precio": null,
+     "color_hex": "#f09bb3"
     },
     {
      "foto": null,
      "orden": 3,
      "nombre": "Verde agua",
-     "precio": null
+     "precio": null,
+     "color_hex": "#8ed8c8"
     },
     {
      "foto": null,
      "orden": 1,
      "nombre": "Violeta",
-     "precio": null
+     "precio": null,
+     "color_hex": "#8a5cb8"
     }
    ]
   },
@@ -2886,19 +3025,22 @@
      "foto": null,
      "orden": 1,
      "nombre": "Amarillo · limón",
-     "precio": null
+     "precio": null,
+     "color_hex": "#f5d443"
     },
     {
      "foto": null,
      "orden": 3,
      "nombre": "Rojo · frutilla",
-     "precio": null
+     "precio": null,
+     "color_hex": "#c8323c"
     },
     {
      "foto": null,
      "orden": 2,
      "nombre": "Verde agua · manzana",
-     "precio": null
+     "precio": null,
+     "color_hex": "#8ed8c8"
     }
    ]
   },
@@ -2951,13 +3093,15 @@
      "foto": null,
      "orden": 2,
      "nombre": "Blanco",
-     "precio": null
+     "precio": null,
+     "color_hex": "#f8f8f6"
     },
     {
      "foto": null,
      "orden": 1,
      "nombre": "Rosa",
-     "precio": null
+     "precio": null,
+     "color_hex": "#f09bb3"
     }
    ]
   },
@@ -2987,13 +3131,15 @@
      "foto": null,
      "orden": 1,
      "nombre": "Azul",
-     "precio": null
+     "precio": null,
+     "color_hex": "#2e5daa"
     },
     {
      "foto": null,
      "orden": 2,
      "nombre": "Fucsia",
-     "precio": null
+     "precio": null,
+     "color_hex": "#d63384"
     }
    ]
   },
@@ -3023,25 +3169,29 @@
      "foto": null,
      "orden": 1,
      "nombre": "Blanco",
-     "precio": null
+     "precio": null,
+     "color_hex": "#f8f8f6"
     },
     {
      "foto": null,
      "orden": 4,
      "nombre": "Celeste",
-     "precio": null
+     "precio": null,
+     "color_hex": "#8ec8ea"
     },
     {
      "foto": null,
      "orden": 3,
      "nombre": "Lila",
-     "precio": null
+     "precio": null,
+     "color_hex": "#c4a7dc"
     },
     {
      "foto": null,
      "orden": 2,
      "nombre": "Rosa",
-     "precio": null
+     "precio": null,
+     "color_hex": "#f09bb3"
     }
    ]
   },

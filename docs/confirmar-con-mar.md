@@ -306,5 +306,10 @@ ya no existe). El viral Rosa pasó a Rosa rojizo con su foto.
 - Color a coordinar (ficha y pedido): Kit Antifrizz, Ondulador, Cofia XL, Cofia Long y Gorro difusor.
 - Un solo color: Sujetadores articulados (trabas cocodrilo) → «Color: Negro» en la ficha.
 
+**Cuadraditos de color (24/11):** los tonos de los 16 productos con colores (cepillos, cofia, funda, turbante,
+practiplopping) se cargaron por el nombre, a ojo. Si alguno no se parece al real (sobre todo Rosa rojizo, Gris
+topo, Celeste oscuro, Verde oscuro del Dompel), Mar lo cambia en /admin → el producto → la variante → «Otro
+color». El turbante dice Lila, Crema y Gris topo, pero la foto muestra verde, celeste y rosa: ¿cuáles son?
+
 **Carritos viejos:** si tenían un color que ya no existe (viral Rosa o Beige, practiplopping «Microfibra» o
 «Algodón», tenedor, Restauração en 2 en 1), la línea queda como el producto sin color y el pedido va sin color.

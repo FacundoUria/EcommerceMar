@@ -86,6 +86,13 @@ create table if not exists public.variantes (
   constraint variantes_producto_nombre_key unique (producto_id, nombre)
 );
 
+-- Color de la variante (nov 2026): '#rrggbb' = la variante es un color (la ficha la muestra como cuadradito de
+-- color); null = no es un color (sabor, tamaño…: botón con texto y foto).
+alter table public.variantes add column if not exists color_hex text;
+do $$ begin
+  alter table public.variantes add constraint variantes_color_hex check (color_hex is null or color_hex ~ '^#[0-9a-f]{6}$');
+exception when duplicate_object then null; end $$;
+
 create table if not exists public.servicios (
   id          text primary key check (id ~ '^[a-z0-9]+(-[a-z0-9]+)*$'),
   nombre      text not null check (length(trim(nombre)) > 0),

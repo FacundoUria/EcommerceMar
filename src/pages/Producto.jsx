@@ -216,6 +216,19 @@ function Detalle({ producto }) {
             </div>
           )}
 
+          {/* Sin selector de color (config/color.js) */}
+          {producto.colorACoordinar && (
+            <p className="flex items-start gap-2.5 rounded-2xl bg-salvia px-4 py-3 text-[15px] font-semibold text-tinta">
+              <Icon name="whatsapp" size={20} className="mt-px shrink-0 text-verde" />
+              El color lo coordinás con Mar por WhatsApp
+            </p>
+          )}
+          {producto.colorUnico && (
+            <p className="text-[15px] text-tinta">
+              <span className="font-bold">Color:</span> {producto.colorUnico}
+            </p>
+          )}
+
           {/* Kit: lo que se elige (selectores grandes, uno por cosa) */}
           {producto.elecciones?.map((x, i) => (
             <div key={x.clave}>

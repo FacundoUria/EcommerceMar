@@ -134,6 +134,8 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
               className="mt-2 text-2xl text-tinta"
             />
             {producto.promo && <CartelPromo promo={producto.promo} className="mt-3" />}
+            {producto.colorACoordinar && <p className="mt-3 text-sm font-semibold text-texto-suave">El color lo coordinás con Mar por WhatsApp</p>}
+            {producto.colorUnico && <p className="mt-3 text-sm text-texto-suave">Color: {producto.colorUnico}</p>}
           </div>
 
           {tieneVariantes && (

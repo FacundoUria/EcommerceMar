@@ -169,20 +169,7 @@
    "promo_hasta": "2026-11-28T02:59:59+00:00",
    "solo_en_promo": true,
    "incluye": "Cofia de satén\nFunda de almohada de satén\nScrunchie de satén",
-   "elecciones": [
-    {
-     "clave": "Color",
-     "titulo": "Elegí el color",
-     "opciones": [
-      "Rosa",
-      "Durazno",
-      "Fucsia",
-      "Lila",
-      "Azul",
-      "Negro"
-     ]
-    }
-   ],
+   "elecciones": [],
    "variantes": []
   },
   {

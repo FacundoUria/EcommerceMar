@@ -3,6 +3,7 @@
 // de la lista) y, con productoLocal / servicioLocal, products.js para los scripts.
 
 import { ahoraPromo, vigente } from './promo.js';
+import { COLOR_A_COORDINAR, COLOR_UNICO } from '../config/color.js';
 
 const img = (carpeta, nombre) => `/img/${carpeta}/${nombre}.webp`;
 
@@ -37,6 +38,9 @@ function armarProducto({ id, nombre, nombreCorto, marca, tamano, categoria, prec
     precio: precios.length ? Math.min(...precios) : base,
     desde: new Set(precios).size > 1,
     variantes: vs,
+    // Sin selector de color (config/color.js), solo si no tiene variantes: "color a coordinar" o un único color
+    ...(!vs.length && COLOR_A_COORDINAR.includes(id) && { colorACoordinar: true }),
+    ...(!vs.length && COLOR_UNICO[id] && { colorUnico: COLOR_UNICO[id] }),
     ...(alias?.length && { alias }),
     ...(destacado && { destacado: true }),
     ...(activo === false && { activo: false }),

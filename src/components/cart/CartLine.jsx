@@ -35,6 +35,7 @@ export default function CartLine({ linea, compacta = false, onNavigate, delay = 
                 {k}: <span className="font-semibold text-tinta">{v}</span>
               </p>
             ))}
+            {linea.colorACoordinar && <p className="text-xs leading-snug text-texto-suave">Color a coordinar con Mar</p>}
             <p className="mt-0.5 text-xs text-texto-suave"><span className="precio">{formatPrecio(linea.precio)}</span> c/u</p>
           </div>
           <button

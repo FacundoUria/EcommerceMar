@@ -48,6 +48,8 @@ function reducer(lineas, accion) {
           marca: producto.marca ?? null,
           variante: variante?.nombre ?? null,
           ...(elecciones?.length && { elecciones }),
+          // Sin selector de color (config/color.js): el pedido dice "(color a coordinar)"
+          ...(producto.colorACoordinar && { colorACoordinar: true }),
           imagen: variante?.imagen ?? producto.imagen,
           precio: precioDe(producto, variante), // el de la variante si tiene uno propio
           ...(producto.promo && { promo: producto.promo.nombre }),
@@ -72,7 +74,10 @@ function reducer(lineas, accion) {
         if (!p) continue;
         const variante = l.variante ? p.variantes?.find((v) => v.nombre === l.variante) : null;
         const existe = !l.variante || !!variante;
-        const { promo: _promoAnterior, ...resto } = l;
+        // Lo elegido en un kit que el kit ya no pide (Mar sacó ese selector) se descarta
+        const claves = new Set((p.elecciones ?? []).map((e) => e.clave));
+        const elecciones = (l.elecciones ?? []).filter(([k]) => claves.has(k));
+        const { promo: _promoAnterior, elecciones: _eleccionesAnteriores, colorACoordinar: _colorAnterior, ...resto } = l;
         const linea = {
           ...resto,
           nombre: p.nombreCorto ?? p.nombre,
@@ -80,7 +85,10 @@ function reducer(lineas, accion) {
           precio: precioDe(p, variante),
           // La promo se prende y se apaga sola: el precio y la marca de promo siguen al catálogo
           ...(p.promo && { promo: p.promo.nombre }),
-          ...(existe ? {} : { variante: null, imagen: p.imagen, clave: claveLinea(p.id, null, l.elecciones) }),
+          ...(elecciones.length && { elecciones }),
+          ...(p.colorACoordinar && { colorACoordinar: true }),
+          ...(existe ? {} : { variante: null, imagen: p.imagen }),
+          clave: claveLinea(p.id, existe ? l.variante : null, elecciones),
         };
         const igual = resultado.find((r) => r.clave === linea.clave);
         if (igual) igual.cantidad = limitar(igual.cantidad + linea.cantidad);

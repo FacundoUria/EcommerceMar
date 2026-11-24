@@ -172,10 +172,13 @@ Ideal: la foto original del proveedor, de 1000 px o más. Se reemplazan desde /a
 - **Curling Gel Curl Girl:** un solo producto con variantes **300 cc** ($ 15.000) y **500 cc** ($ 18.000)
   ("cc" como dice la etiqueta; en el texto decía "g"). Antes eran dos productos ocultos, uno por tamaño.
 - **Shampoo Hidratante Curl Girl:** 250 ml (confirmado).
-- **Cremas Skala 1 kg** (`cremas-skala`): **precio por variante**: las 5 de tratamiento Expert (Manteca de
-  Karité, Óleo de Argán, Aguacate, Vitamina, Biotina) y las 5 Expert nuevas de la sección 9 a **$ 7.000**, y
-  todas las demás a **$ 6.900** (la card dice "Desde $ 6.900"). ¿Siguen todas las de antes (Mais Cachinhos, Dona Skala, Divina Cor, Divino Potão,
-  Mais Cachos, Cachonados, Potão do Amor, Divino Potinho, Mais Crespos)? Las 17 nuevas, en la sección 9.
+- **Skala 1 kg, separado en dos productos (23/11, pedido de Mar):**
+  - **Tratamientos Skala Expert 1 kg** (`skala-expert-tratamientos`, Tratamientos, **$ 7.000**): las 10 Expert
+    (Manteca de Karité, Óleo de Argán, Aguacate, Vitamina, Biotina, Maionese Capilar, Amido de Milho,
+    Coquetel de Frutas Family, Mais Lisos, Glicólico 3 em 1), con su texto. Foto: la grupal de los potes Expert.
+  - **Cremas 2 en 1 Skala 1 kg** (`cremas-skala`, **$ 6.900**): las 21 restantes. ¿Siguen todas las de antes
+    (Mais Cachinhos, Dona Skala, Divina Cor, Divino Potão, Mais Cachos, Cachonados, Potão do Amor, Divino
+    Potinho, Mais Crespos)? Las nuevas, en la sección 9.
 - **Cascada de Proteínas:** un solo producto con las dos variantes, **125 ml** (antes figuraba 120 ml).
 - **Cremas de Peinar HAN:** un solo producto con variantes Rulos Definidos y **Keratina** (como en su texto;
   la etiqueta dice "α Keratina").
@@ -183,7 +186,7 @@ Ideal: la foto original del proveedor, de 1000 px o más. Se reemplazan desde /a
 - **Ossono 250 g:** el "Gel High Power Ful en pote" que estaba oculto es el **Style Fix** de la foto.
 - **Shampoo Silver Matizador, Emulsiones de Enjuague HAN y Shampoos Bekim** van en la categoría **Low poo**
   (es la de lavado, paso 1 de la rutina). ¿El Silver es sin sulfatos?
-- **Creme Modelador Cachos dos Sonhos** va en **Cremas de peinar** (como la Curling Cream de Curl Girl).
+- **Creme Modelador Cachos dos Sonhos**: ahora en **Activadores y modeladores** (pedido de Mar, 23/11).
 - **Gorro térmico de aluminio:** foto con maniquí → se muestra "en su marco" (como las cofias), no flotando.
 
 ## 9. Cremas Skala 1 kg: variantes nuevas para confirmar
@@ -194,7 +197,7 @@ todas y a esos precios:
 
 | Línea | Variantes nuevas | Precio |
 |---|---|---|
-| Skala Expert | Maionese Capilar, Amido de Milho, Coquetel de Frutas Family, Mais Lisos, Glicólico 3 em 1 | **$ 7.000** (como las otras Expert: Karité, Argán, Aguacate, Vitamina, Biotina) |
+| Skala Expert | Maionese Capilar, Amido de Milho, Coquetel de Frutas Family, Mais Lisos, Glicólico 3 em 1 | **$ 7.000** (como las otras Expert; están en «Tratamientos Skala Expert 1 kg») |
 | Skala | Restauração Espetacular 12 em 1 | $ 6.900 |
 | Skala Brasil | Caju, Babosa | $ 6.900 |
 | Skala Frutástica | Banana, Maracujá, Melancia, Uva, Morango, Cereja, Cacau, Coco, Coquetel de Frutas 3 em 1 | $ 6.900 |

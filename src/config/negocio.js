@@ -34,6 +34,6 @@ export const BENEFICIOS = [
 export const PASOS_RUTINA = [
   { paso: 1, titulo: 'Lavar', bajada: 'Low poo', categorias: ['low-poo'] },
   { paso: 2, titulo: 'Hidratar y peinar', bajada: 'Cremas 2 en 1, de peinar y tratamientos', categorias: ['cremas-2en1', 'cremas-peinar', 'tratamientos'] },
-  { paso: 3, titulo: 'Definir', bajada: 'Geles, mousses, activadores y spray', categorias: ['geles', 'mousses', 'activadores', 'spray'] },
-  { paso: 4, titulo: 'Proteger', bajada: 'Satén y óleos', categorias: ['saten', 'oleos'] },
+  { paso: 3, titulo: 'Definir', bajada: 'Geles, mousses, activadores y cepillos definidores', categorias: ['geles', 'mousses', 'activadores', 'cepillos-definidores'] },
+  { paso: 4, titulo: 'Proteger', bajada: 'Satén, óleos, sprays y toallas', categorias: ['saten', 'oleos', 'spray', 'toallas'] },
 ];

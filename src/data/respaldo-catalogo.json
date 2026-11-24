@@ -1,6 +1,12 @@
 {
  "categorias": [
   {
+   "id": "promos",
+   "nombre": "Promos",
+   "paso": null,
+   "portada": null
+  },
+  {
    "id": "low-poo",
    "nombre": "Low poo",
    "paso": 1,
@@ -38,15 +44,15 @@
   },
   {
    "id": "activadores",
-   "nombre": "Activadores de rulos",
+   "nombre": "Activadores y modeladores",
    "paso": 3,
    "portada": "/img/productos/activador-cantu.webp"
   },
   {
-   "id": "spray",
-   "nombre": "Spray",
+   "id": "cepillos-definidores",
+   "nombre": "Cepillos definidores",
    "paso": 3,
-   "portada": "/img/productos/spray-revitalizante.webp"
+   "portada": null
   },
   {
    "id": "saten",
@@ -59,6 +65,18 @@
    "nombre": "Óleos",
    "paso": 4,
    "portada": "/img/productos/oleos-pinga.webp"
+  },
+  {
+   "id": "spray",
+   "nombre": "Spray y termoprotectores/UV",
+   "paso": 4,
+   "portada": "/img/productos/spray-revitalizante.webp"
+  },
+  {
+   "id": "toallas",
+   "nombre": "Toallas y turbantes",
+   "paso": 4,
+   "portada": null
   },
   {
    "id": "cepillos",
@@ -308,54 +326,6 @@
    ],
    "variantes": [
     {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/57573e56-99cb-4838-9542-929781204814-510.webp",
-     "orden": 10,
-     "nombre": "Manteca de Karité",
-     "precio": 7000
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/6811a852-2c91-48cf-8239-b62873082bc3-437.webp",
-     "orden": 11,
-     "nombre": "Óleo de Argán",
-     "precio": 7000
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a375f3eb-9ebf-4589-9843-5c82dc0bee0c-439.webp",
-     "orden": 12,
-     "nombre": "Aguacate",
-     "precio": 7000
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/22da3284-285c-4226-8b41-c4bb012f0ee6-458.webp",
-     "orden": 13,
-     "nombre": "Vitamina",
-     "precio": 7000
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/0530e30b-0551-45d1-acec-a7b1be52128a-568.webp",
-     "orden": 14,
-     "nombre": "Biotina",
-     "precio": 7000
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d6b5401b-4c05-4974-b9fe-4c1e19a458b9-447.webp",
-     "orden": 15,
-     "nombre": "Maionese Capilar",
-     "precio": 7000
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1e863590-d9dc-430a-a4da-6d45cb66d708-460.webp",
-     "orden": 16,
-     "nombre": "Amido de Milho",
-     "precio": 7000
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/6a6fd0f8-003d-4ef8-8115-49eece81d5b2-488.webp",
-     "orden": 17,
-     "nombre": "Coquetel de Frutas Family",
-     "precio": 7000
-    },
-    {
      "foto": "/img/productos/cremas-skala-mais-cachinhos.webp",
      "orden": 1,
      "nombre": "Mais Cachinhos",
@@ -410,120 +380,78 @@
      "precio": null
     },
     {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5a4b4d1a-79cc-4bfa-a9ae-9f7eb2e79367-353.webp",
-     "orden": 18,
-     "nombre": "Mais Lisos",
-     "precio": 7000
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/240aa27e-7e3a-4752-bb42-e0d93eddf558-309.webp",
-     "orden": 19,
-     "nombre": "Glicólico 3 em 1",
-     "precio": 7000
-    },
-    {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/82408e6e-4f78-4455-b675-8ad26ed8d096-469.webp",
-     "orden": 20,
+     "orden": 10,
      "nombre": "Restauração Espetacular 12 em 1",
      "precio": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/4de336a2-d0d5-40cf-9f61-83241949edf0-223.webp",
-     "orden": 21,
+     "orden": 11,
      "nombre": "Caju",
      "precio": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a547f3a8-11d7-467e-82f3-dc6616c5988d-506.webp",
-     "orden": 22,
+     "orden": 12,
      "nombre": "Babosa",
      "precio": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5b3b43ff-6940-4610-a606-e38935279cda-507.webp",
-     "orden": 23,
+     "orden": 13,
      "nombre": "Banana",
      "precio": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/57b16e3c-582c-4396-9d17-7f48bbe09584-447.webp",
-     "orden": 24,
+     "orden": 14,
      "nombre": "Maracujá",
      "precio": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/f4e8d5e1-551a-4362-8515-8ce3bf25e68b-383.webp",
-     "orden": 25,
+     "orden": 15,
      "nombre": "Melancia",
      "precio": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/ce326a0a-0cf7-494b-890b-51102f097b98-506.webp",
-     "orden": 26,
+     "orden": 16,
      "nombre": "Uva",
      "precio": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/2cc166d0-0ae4-495b-938b-2d52722cccff-420.webp",
-     "orden": 27,
+     "orden": 17,
      "nombre": "Morango",
      "precio": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d514ba13-0b7e-4393-97fe-599941afbb9e-366.webp",
-     "orden": 28,
+     "orden": 18,
      "nombre": "Cereja",
      "precio": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/f5152d78-902a-48e3-8942-34abfad0b62c-400.webp",
-     "orden": 29,
+     "orden": 19,
      "nombre": "Cacau",
      "precio": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8ee9e4a2-c7f2-41bb-b5ac-6ca4875bcb18-512.webp",
-     "orden": 30,
+     "orden": 20,
      "nombre": "Coco",
      "precio": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/2a063155-5658-4d5f-a89b-3d6e8724a78b-430.webp",
-     "orden": 31,
+     "orden": 21,
      "nombre": "Coquetel de Frutas 3 em 1",
      "precio": null
     }
    ]
-  },
-  {
-   "id": "custard-cantu",
-   "nombre": "Shea Butter Define & Shine Custard",
-   "nombre_corto": "Define & Shine Custard",
-   "marca": "Cantu",
-   "categoria_id": "cremas-2en1",
-   "precio": 35000,
-   "tamano": "340 g / 12 oz",
-   "alias": [],
-   "destacado": false,
-   "fotos": [
-    "/img/productos/custard-cantu.webp"
-   ],
-   "variantes": []
-  },
-  {
-   "id": "curl-fusion",
-   "nombre": "Vesta CurlFusion Crema Gel de Lino",
-   "nombre_corto": "CurlFusion Crema Gel de Lino",
-   "marca": "Frenzzi",
-   "categoria_id": "cremas-2en1",
-   "precio": 16000,
-   "tamano": "300 ml",
-   "alias": [],
-   "destacado": false,
-   "fotos": [
-    "/img/productos/curl-fusion.webp"
-   ],
-   "variantes": []
   },
   {
    "id": "crema-peinar-kleno",
@@ -704,17 +632,17 @@
    "variantes": []
   },
   {
-   "id": "salon-line-creme-cachos-dos-sonhos",
-   "nombre": "Creme Modelador Cachos dos Sonhos Fixação Forte #todecacho",
-   "nombre_corto": "Creme Modelador Cachos dos Sonhos",
-   "marca": "Salon Line",
+   "id": "lola-ela-e-carioca",
+   "nombre": "Proteína Capilar Ela é Carioca (Lola Vai à Praia)",
+   "nombre_corto": "Proteína Ela é Carioca",
+   "marca": "Lola Cosmetics",
    "categoria_id": "cremas-peinar",
    "precio": 29000,
-   "tamano": "500 ml",
+   "tamano": "500 g",
    "alias": [],
    "destacado": false,
    "fotos": [
-    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/4690f8f0-29c5-4f91-83ef-c9670193b2ca-1200.webp"
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8e83ac15-1321-41d4-bdad-0b4461b1b8a5-479.webp"
    ],
    "variantes": []
   },
@@ -906,17 +834,108 @@
    "variantes": []
   },
   {
-   "id": "lola-ela-e-carioca",
-   "nombre": "Proteína Capilar Ela é Carioca (Lola Vai à Praia)",
-   "nombre_corto": "Proteína Ela é Carioca",
-   "marca": "Lola Cosmetics",
+   "id": "skala-expert-tratamientos",
+   "nombre": "Tratamientos Skala Expert 1 kg",
+   "nombre_corto": "Tratamientos Expert",
+   "marca": "Skala",
    "categoria_id": "tratamientos",
-   "precio": 29000,
-   "tamano": "500 g",
+   "precio": 7000,
+   "tamano": "1000 g",
    "alias": [],
    "destacado": false,
    "fotos": [
-    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8e83ac15-1321-41d4-bdad-0b4461b1b8a5-479.webp"
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a08ec167-d871-4fea-bf75-df0a1c12c210-1024.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a375f3eb-9ebf-4589-9843-5c82dc0bee0c-439.webp",
+     "orden": 3,
+     "nombre": "Aguacate",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/22da3284-285c-4226-8b41-c4bb012f0ee6-458.webp",
+     "orden": 4,
+     "nombre": "Vitamina",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/0530e30b-0551-45d1-acec-a7b1be52128a-568.webp",
+     "orden": 5,
+     "nombre": "Biotina",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d6b5401b-4c05-4974-b9fe-4c1e19a458b9-447.webp",
+     "orden": 6,
+     "nombre": "Maionese Capilar",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1e863590-d9dc-430a-a4da-6d45cb66d708-460.webp",
+     "orden": 7,
+     "nombre": "Amido de Milho",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/6a6fd0f8-003d-4ef8-8115-49eece81d5b2-488.webp",
+     "orden": 8,
+     "nombre": "Coquetel de Frutas Family",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/57573e56-99cb-4838-9542-929781204814-510.webp",
+     "orden": 1,
+     "nombre": "Manteca de Karité",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/6811a852-2c91-48cf-8239-b62873082bc3-437.webp",
+     "orden": 2,
+     "nombre": "Óleo de Argán",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5a4b4d1a-79cc-4bfa-a9ae-9f7eb2e79367-353.webp",
+     "orden": 9,
+     "nombre": "Mais Lisos",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/240aa27e-7e3a-4752-bb42-e0d93eddf558-309.webp",
+     "orden": 10,
+     "nombre": "Glicólico 3 em 1",
+     "precio": null
+    }
+   ]
+  },
+  {
+   "id": "custard-cantu",
+   "nombre": "Shea Butter Define & Shine Custard",
+   "nombre_corto": "Define & Shine Custard",
+   "marca": "Cantu",
+   "categoria_id": "geles",
+   "precio": 35000,
+   "tamano": "340 g / 12 oz",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/custard-cantu.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "curl-fusion",
+   "nombre": "Vesta CurlFusion Crema Gel de Lino",
+   "nombre_corto": "CurlFusion Crema Gel de Lino",
+   "marca": "Frenzzi",
+   "categoria_id": "geles",
+   "precio": 16000,
+   "tamano": "300 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/curl-fusion.webp"
    ],
    "variantes": []
   },
@@ -1358,6 +1377,21 @@
    "variantes": []
   },
   {
+   "id": "salon-line-creme-cachos-dos-sonhos",
+   "nombre": "Creme Modelador Cachos dos Sonhos Fixação Forte #todecacho",
+   "nombre_corto": "Creme Modelador Cachos dos Sonhos",
+   "marca": "Salon Line",
+   "categoria_id": "activadores",
+   "precio": 29000,
+   "tamano": "500 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/4690f8f0-29c5-4f91-83ef-c9670193b2ca-1200.webp"
+   ],
+   "variantes": []
+  },
+  {
    "id": "activador-kleno",
    "nombre": "Perfect Curly Activador de Rulos en gel, Sin Enjuague",
    "nombre_corto": "Activador de Rulos en gel",
@@ -1422,75 +1456,79 @@
    ]
   },
   {
-   "id": "spray-revitalizante",
-   "nombre": "Shea Butter Comeback Curl Next Day Curl Revitalizer",
-   "nombre_corto": "Comeback Curl Revitalizer",
-   "marca": "Cantu",
-   "categoria_id": "spray",
-   "precio": 25000,
-   "tamano": "355 ml",
+   "id": "cepillo-viral",
+   "nombre": "Cepillo Definidor de Rulos y Ondas Anti-Frizz (Rosa)",
+   "nombre_corto": "Cepillo Definidor Rosa",
+   "marca": null,
+   "categoria_id": "cepillos-definidores",
+   "precio": 16000,
+   "tamano": null,
    "alias": [],
    "destacado": false,
    "fotos": [
-    "/img/productos/spray-revitalizante.webp"
+    "/img/productos/cepillo-viral.webp"
    ],
    "variantes": []
   },
   {
-   "id": "cascada-de-proteinas",
-   "nombre": "Nutri-Reparación Instantánea",
-   "nombre_corto": "Nutri-Reparación Instantánea",
-   "marca": "Cascada de Proteínas",
-   "categoria_id": "spray",
-   "precio": 17000,
-   "tamano": "125 ml",
+   "id": "cepillo-viral-doble",
+   "nombre": "Cepillo viral doble",
+   "nombre_corto": null,
+   "marca": null,
+   "categoria_id": "cepillos-definidores",
+   "precio": 13000,
+   "tamano": null,
    "alias": [],
    "destacado": false,
    "fotos": [
-    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c7e707fc-71e3-4d73-98db-f1288f7d5496-928.webp"
+    "/img/productos/cepillo-viral-doble.webp"
    ],
-   "variantes": [
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/bfc8c3c6-9f72-44cb-b32f-285ed5062177-447.webp",
-     "orden": 1,
-     "nombre": "Ginseng y Bambú",
-     "precio": null
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9cc0d4fe-5c57-48b6-aa76-1cc07d4d22e5-427.webp",
-     "orden": 2,
-     "nombre": "Manzanilla y Vainilla",
-     "precio": null
-    }
-   ]
+   "variantes": []
   },
   {
-   "id": "han-sprays",
-   "nombre": "Sprays: Emulsión de Peinar Aceite de Coco y Protector Térmico Ácido Hialurónico",
-   "nombre_corto": "Sprays de Peinar",
-   "marca": "HAN",
-   "categoria_id": "spray",
-   "precio": 13000,
-   "tamano": "200 cm³",
+   "id": "cepillo-viral-tenedor",
+   "nombre": "Cepillo Definidor de Rulos y Ondas Anti-Frizz / tenedor",
+   "nombre_corto": "Cepillo Definidor tenedor",
+   "marca": null,
+   "categoria_id": "cepillos-definidores",
+   "precio": 15000,
+   "tamano": null,
+   "alias": [],
+   "destacado": true,
+   "fotos": [
+    "/img/productos/cepillo-viral-tenedor.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "cepillo-detangle-bounce",
+   "nombre": "Cepillo Definidor de Rulos y Ondas Anti-Frizz detangle (Fucsia)",
+   "nombre_corto": "Cepillo Definidor Fucsia",
+   "marca": null,
+   "categoria_id": "cepillos-definidores",
+   "precio": 12000,
+   "tamano": null,
    "alias": [],
    "destacado": false,
    "fotos": [
-    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c7e8ca94-2cb9-4b82-84ac-447c8336d775-896.webp"
+    "/img/productos/cepillo-detangle-bounce.webp"
    ],
-   "variantes": [
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/794d3a28-42bf-4c42-bdbb-e76d0072ee09-459.webp",
-     "orden": 1,
-     "nombre": "Emulsión de Peinar Aceite de Coco",
-     "precio": null
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/591ae085-786b-47d5-b737-efcdabef2a15-400.webp",
-     "orden": 2,
-     "nombre": "Protector Térmico Ácido Hialurónico",
-     "precio": null
-    }
-   ]
+   "variantes": []
+  },
+  {
+   "id": "cepillo-magico",
+   "nombre": "Cepillo Pulpo Desenredante para Rulos y Ondas",
+   "nombre_corto": "Cepillo Pulpo",
+   "marca": null,
+   "categoria_id": "cepillos-definidores",
+   "precio": 12000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/cepillo-magico.webp"
+   ],
+   "variantes": []
   },
   {
    "id": "funda-saten",
@@ -1617,19 +1655,122 @@
    "variantes": []
   },
   {
-   "id": "cepillo-viral",
-   "nombre": "Cepillo Definidor de Rulos y Ondas Anti-Frizz (Rosa)",
-   "nombre_corto": "Cepillo Definidor Rosa",
-   "marca": null,
-   "categoria_id": "cepillos",
-   "precio": 16000,
-   "tamano": null,
+   "id": "spray-revitalizante",
+   "nombre": "Shea Butter Comeback Curl Next Day Curl Revitalizer",
+   "nombre_corto": "Comeback Curl Revitalizer",
+   "marca": "Cantu",
+   "categoria_id": "spray",
+   "precio": 25000,
+   "tamano": "355 ml",
    "alias": [],
    "destacado": false,
    "fotos": [
-    "/img/productos/cepillo-viral.webp"
+    "/img/productos/spray-revitalizante.webp"
    ],
    "variantes": []
+  },
+  {
+   "id": "cascada-de-proteinas",
+   "nombre": "Nutri-Reparación Instantánea",
+   "nombre_corto": "Nutri-Reparación Instantánea",
+   "marca": "Cascada de Proteínas",
+   "categoria_id": "spray",
+   "precio": 17000,
+   "tamano": "125 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c7e707fc-71e3-4d73-98db-f1288f7d5496-928.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/bfc8c3c6-9f72-44cb-b32f-285ed5062177-447.webp",
+     "orden": 1,
+     "nombre": "Ginseng y Bambú",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9cc0d4fe-5c57-48b6-aa76-1cc07d4d22e5-427.webp",
+     "orden": 2,
+     "nombre": "Manzanilla y Vainilla",
+     "precio": null
+    }
+   ]
+  },
+  {
+   "id": "han-sprays",
+   "nombre": "Sprays: Emulsión de Peinar Aceite de Coco y Protector Térmico Ácido Hialurónico",
+   "nombre_corto": "Sprays de Peinar",
+   "marca": "HAN",
+   "categoria_id": "spray",
+   "precio": 13000,
+   "tamano": "200 cm³",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c7e8ca94-2cb9-4b82-84ac-447c8336d775-896.webp"
+   ],
+   "variantes": [
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/794d3a28-42bf-4c42-bdbb-e76d0072ee09-459.webp",
+     "orden": 1,
+     "nombre": "Emulsión de Peinar Aceite de Coco",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/591ae085-786b-47d5-b737-efcdabef2a15-400.webp",
+     "orden": 2,
+     "nombre": "Protector Térmico Ácido Hialurónico",
+     "precio": null
+    }
+   ]
+  },
+  {
+   "id": "turbante-microfibra",
+   "nombre": "Turbante de Microfibra Anti-Frizz",
+   "nombre_corto": "Turbante de microfibra",
+   "marca": "Dream Hair",
+   "categoria_id": "toallas",
+   "precio": 13000,
+   "tamano": null,
+   "alias": [
+    "toalla"
+   ],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/turbante-microfibra.webp"
+   ],
+   "variantes": []
+  },
+  {
+   "id": "practiplopping",
+   "nombre": "Practiplopping (4 puntas)",
+   "nombre_corto": "Practiplopping 4 puntas",
+   "marca": "Dream Hair",
+   "categoria_id": "toallas",
+   "precio": 16000,
+   "tamano": null,
+   "alias": [
+    "toalla"
+   ],
+   "destacado": false,
+   "fotos": [
+    "/img/productos/practiplopping.webp"
+   ],
+   "variantes": [
+    {
+     "foto": null,
+     "orden": 1,
+     "nombre": "Microfibra",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 2,
+     "nombre": "Algodón",
+     "precio": null
+    }
+   ]
   },
   {
    "id": "cepillo-viral-flexible",
@@ -1643,51 +1784,6 @@
    "destacado": false,
    "fotos": [
     "/img/productos/cepillo-viral-flexible.webp"
-   ],
-   "variantes": []
-  },
-  {
-   "id": "cepillo-viral-doble",
-   "nombre": "Cepillo viral doble",
-   "nombre_corto": null,
-   "marca": null,
-   "categoria_id": "cepillos",
-   "precio": 13000,
-   "tamano": null,
-   "alias": [],
-   "destacado": false,
-   "fotos": [
-    "/img/productos/cepillo-viral-doble.webp"
-   ],
-   "variantes": []
-  },
-  {
-   "id": "cepillo-viral-tenedor",
-   "nombre": "Cepillo Definidor de Rulos y Ondas Anti-Frizz / tenedor",
-   "nombre_corto": "Cepillo Definidor tenedor",
-   "marca": null,
-   "categoria_id": "cepillos",
-   "precio": 15000,
-   "tamano": null,
-   "alias": [],
-   "destacado": true,
-   "fotos": [
-    "/img/productos/cepillo-viral-tenedor.webp"
-   ],
-   "variantes": []
-  },
-  {
-   "id": "cepillo-detangle-bounce",
-   "nombre": "Cepillo Definidor de Rulos y Ondas Anti-Frizz detangle (Fucsia)",
-   "nombre_corto": "Cepillo Definidor Fucsia",
-   "marca": null,
-   "categoria_id": "cepillos",
-   "precio": 12000,
-   "tamano": null,
-   "alias": [],
-   "destacado": false,
-   "fotos": [
-    "/img/productos/cepillo-detangle-bounce.webp"
    ],
    "variantes": []
   },
@@ -1733,21 +1829,6 @@
    "destacado": false,
    "fotos": [
     "/img/productos/cepillo-pirulito-2.webp"
-   ],
-   "variantes": []
-  },
-  {
-   "id": "cepillo-magico",
-   "nombre": "Cepillo Pulpo Desenredante para Rulos y Ondas",
-   "nombre_corto": "Cepillo Pulpo",
-   "marca": null,
-   "categoria_id": "cepillos",
-   "precio": 12000,
-   "tamano": null,
-   "alias": [],
-   "destacado": false,
-   "fotos": [
-    "/img/productos/cepillo-magico.webp"
    ],
    "variantes": []
   },
@@ -1829,49 +1910,6 @@
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/35e9c595-41f7-4f21-b6a2-b92c5f9980ff-459.webp"
    ],
    "variantes": []
-  },
-  {
-   "id": "turbante-microfibra",
-   "nombre": "Turbante de Microfibra Anti-Frizz",
-   "nombre_corto": "Turbante de microfibra",
-   "marca": "Dream Hair",
-   "categoria_id": "varios",
-   "precio": 13000,
-   "tamano": null,
-   "alias": [],
-   "destacado": false,
-   "fotos": [
-    "/img/productos/turbante-microfibra.webp"
-   ],
-   "variantes": []
-  },
-  {
-   "id": "practiplopping",
-   "nombre": "Practiplopping (4 puntas)",
-   "nombre_corto": "Practiplopping 4 puntas",
-   "marca": "Dream Hair",
-   "categoria_id": "varios",
-   "precio": 16000,
-   "tamano": null,
-   "alias": [],
-   "destacado": false,
-   "fotos": [
-    "/img/productos/practiplopping.webp"
-   ],
-   "variantes": [
-    {
-     "foto": null,
-     "orden": 1,
-     "nombre": "Microfibra",
-     "precio": null
-    },
-    {
-     "foto": null,
-     "orden": 2,
-     "nombre": "Algodón",
-     "precio": null
-    }
-   ]
   },
   {
    "id": "difusor-plegable",
@@ -2241,6 +2279,11 @@
    "fondo": "blanco"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8ca3d055-cfc7-45e8-86ff-514bf06ff2ba-720.webp",
+   "color": "#03b8c8",
+   "fondo": "escena"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8e83ac15-1321-41d4-bdad-0b4461b1b8a5-479.webp",
    "color": "#fb563b",
    "fondo": "blanco"
@@ -2278,6 +2321,11 @@
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9d254109-7c37-4317-b869-2de7c9da94b8-768.webp",
    "color": "#edd48b",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a08ec167-d871-4fea-bf75-df0a1c12c210-1024.webp",
+   "color": "#ad8b63",
    "fondo": "escena"
   },
   {
@@ -2351,6 +2399,11 @@
    "fondo": "blanco"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d4e399c2-5e22-4f56-abd2-98185de2d11f-1000.webp",
+   "color": "#ece8da",
+   "fondo": "escena"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d514ba13-0b7e-4393-97fe-599941afbb9e-366.webp",
    "color": "#ba1859",
    "fondo": "blanco"
@@ -2369,6 +2422,11 @@
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/dc44db22-242a-4cea-9e03-934e4ecac720-389.webp",
    "color": "#d3dce7",
    "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/e1023e06-3b94-4874-87eb-42e3ae2bbaf3-1000.webp",
+   "color": "#e8aba5",
+   "fondo": "escena"
   },
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/e90630b2-6914-452f-b8a8-e52142f172d4-435.webp",

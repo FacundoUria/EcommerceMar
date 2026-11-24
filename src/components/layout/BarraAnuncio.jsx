@@ -1,8 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { usePausaFueraDePantalla } from '../../hooks/usePausaFueraDePantalla.js';
 import { AnimatePresence, m, useReducedMotion } from 'motion/react';
 import Icon from '../ui/Icon.jsx';
 import { ANUNCIO } from '../../config/negocio.js';
+import { CAMPANA } from '../../config/promo.js';
+import { useCampanaActiva } from '../../hooks/useCampana.js';
+import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 
 const CADA_MS = 4000;
 const EASE = [0.22, 1, 0.36, 1];
@@ -22,14 +25,21 @@ export default function BarraAnuncio() {
   // Fuera de pantalla: brillo en pausa y sin cambiar de mensaje
   const barra = useRef(null);
   const visible = usePausaFueraDePantalla(barra, { margen: '0px' });
+  // Campaña (Black Friday): su mensaje reemplaza a los de siempre; en mobile, partido en dos que rotan
+  const campana = useCampanaActiva();
+  const ancha = useMediaQuery('(min-width: 640px)');
+  const mensajes = useMemo(
+    () => (campana ? (ancha ? [CAMPANA.anuncio] : CAMPANA.anuncioMobile).map((texto) => ({ texto })) : ANUNCIO),
+    [campana, ancha],
+  );
 
   useEffect(() => {
-    if (pausa || !visible) return;
-    const id = setInterval(() => !document.hidden && setI((n) => (n + 1) % ANUNCIO.length), CADA_MS);
+    if (pausa || !visible || mensajes.length < 2) return;
+    const id = setInterval(() => !document.hidden && setI((n) => (n + 1) % mensajes.length), CADA_MS);
     return () => clearInterval(id);
-  }, [pausa, visible]);
+  }, [pausa, visible, mensajes]);
 
-  const msj = ANUNCIO[i];
+  const msj = mensajes[i % mensajes.length];
   const anim = reducido
     ? { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 } }
     : {
@@ -51,7 +61,7 @@ export default function BarraAnuncio() {
       className="barra-brillo relative h-[34px] overflow-hidden bg-verde text-[13px] font-semibold text-arena outline-none focus-visible:ring-2 focus-visible:ring-arena/70 focus-visible:ring-inset"
     >
       <ul className="sr-only">
-        {ANUNCIO.map((a) => (
+        {(campana ? [{ texto: CAMPANA.anuncio }] : ANUNCIO).map((a) => (
           <li key={a.texto}>{a.texto}</li>
         ))}
       </ul>
@@ -63,7 +73,7 @@ export default function BarraAnuncio() {
           transition={{ duration: reducido ? 0.4 : 0.55, ease: EASE }}
           className="absolute inset-0 flex items-center justify-center gap-2 px-4 whitespace-nowrap"
         >
-          <Icon name={msj.icono} size={16} strokeWidth={1.5} className="shrink-0 text-[#e5cf96]" />
+          {msj.icono && <Icon name={msj.icono} size={16} strokeWidth={1.5} className="shrink-0 text-[#e5cf96]" />}
           {msj.texto}
         </m.p>
       </AnimatePresence>

@@ -6,6 +6,7 @@ import { imgFija } from '../lib/imagenes.js';
 import { useCambiosSinGuardar, useDatos } from './contexto.jsx';
 import { borrarProducto, cambiarVisible, fotosDeProducto, guardarCategoria, guardarFondos, guardarProducto } from './datos.js';
 import FotoCampo from './FotoCampo.jsx';
+import PromoCampos, { aDatosPromo, aFormPromo, validarPromo } from './PromoCampos.jsx';
 import { borrarFotos } from './fotos.js';
 import { BarraGuardar, DialogoBorrar, EncabezadoForm, ErrorCarga, SubirBajar } from './partes.jsx';
 import { Boton, Campo, Cargando, Dialogo, ENTRADA, EntradaPrecio, Insignia, Interruptor, useAvisos } from './ui.jsx';
@@ -143,10 +144,13 @@ const aForm = (p) => ({
   foto: p?.fotos?.[0] ?? null,
   variantes: (p?.variantes ?? []).map((v) => ({ clave: v.id, id: v.id, nombre: v.nombre, precio: textoPrecio(v.precio), foto: v.foto })),
   fondos: {}, // "¿Cómo es la foto?" que cambió Mar: { [url]: 'blanco' | 'escena' }
+  promo: aFormPromo(p), // "Promoción" (plegable): precio promo, antes, fechas, kit
 });
 
 const limpio = (s) => s.trim() || null;
-const aDatos = (f, original) => ({
+// conPromo: la base ya tiene las columnas de promos (supabase/migraciones/2026-11-23-promos.sql)
+const aDatos = (f, original, conPromo) => ({
+  ...(conPromo && aDatosPromo(f.promo)),
   nombre: f.nombre.trim(),
   nombre_corto: limpio(f.nombreCorto),
   marca: limpio(f.marca),
@@ -162,7 +166,7 @@ const aDatos = (f, original) => ({
 });
 
 function validar(f) {
-  const e = {};
+  const e = { ...validarPromo(f.promo) };
   if (!f.nombre.trim()) e.nombre = 'Escribí el nombre del producto.';
   if (!f.categoria || f.categoria === '__nueva__') e.categoria = 'Elegí una categoría.';
   const vistos = new Set();
@@ -274,7 +278,7 @@ function Formulario({ original, datos, recargar }) {
     setDialogo(null);
     try {
       const f = comoOculto ? { ...form, activo: false } : form;
-      const d = aDatos(f, original);
+      const d = aDatos(f, original, conPromo);
       const id = await guardarProducto(d, original, datos.productos);
       // Fotos que dejaron de usarse (las reemplazadas o quitadas): se borran del bucket
       const usadas = new Set([...d.fotos, ...d.variantes.map((v) => v.foto)]);
@@ -322,6 +326,7 @@ function Formulario({ original, datos, recargar }) {
   };
 
   const falta = faltaParaMostrar(form);
+  const conPromo = datos.productos.some((p) => 'precio_promo' in p);
   const precioProducto = leerPrecio(form.precio);
   const marcas = [...new Set(datos.productos.map((p) => p.marca).filter(Boolean))].sort();
 
@@ -514,6 +519,19 @@ function Formulario({ original, datos, recargar }) {
           ＋ Agregar variante
         </Boton>
       </section>
+
+      {conPromo && (
+        <PromoCampos
+          promo={form.promo}
+          onCambio={(v) => {
+            cambiar('promo', v);
+            setErrores((e) => Object.fromEntries(Object.entries(e).filter(([k]) => k !== 'promo' && !k.startsWith('e-'))));
+          }}
+          errores={errores}
+          precioProducto={precioProducto}
+          productos={datos.productos}
+        />
+      )}
 
       {original && (
         <section className="space-y-3 border-t border-linea pt-6" aria-label="Ocultar o borrar">

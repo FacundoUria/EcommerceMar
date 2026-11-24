@@ -4,6 +4,10 @@
 
 const PRODUCTO =
   'id, nombre, nombre_corto, marca, categoria_id, precio, tamano, alias, destacado, fotos, variantes (nombre, precio, foto, orden)';
+// Promos (supabase/migraciones/2026-11-23-promos.sql). Si la base todavía no tiene esas columnas, se piden
+// los productos sin ellas (la tienda anda igual, sin promos).
+const PROMO = 'precio_promo, precio_antes, promo_nombre, promo_desde, promo_hasta, solo_en_promo, incluye, elecciones';
+const faltaColumna = (r) => r.error && /column|42703|schema cache/i.test(`${r.error.code} ${r.error.message}`);
 
 const revisar = (r, tabla) => {
   if (r.error) throw new Error(`${tabla}: ${r.error.message}`);
@@ -16,9 +20,10 @@ const revisar = (r, tabla) => {
  */
 export async function consultarCatalogo(sb) {
   // El filtro por activo/a también lo hace RLS; va explícito por si algún día el cliente tiene sesión de admin.
+  const pedirProductos = (columnas) => sb.from('productos').select(columnas).eq('activo', true).order('orden').order('id');
   const [categorias, productos, servicios, fotos] = await Promise.all([
     sb.from('categorias').select('id, nombre, paso, portada').eq('activa', true).order('orden').order('id'),
-    sb.from('productos').select(PRODUCTO).eq('activo', true).order('orden').order('id'),
+    pedirProductos(`${PRODUCTO}, ${PROMO}`).then((r) => (faltaColumna(r) ? pedirProductos(PRODUCTO) : r)),
     sb.from('servicios').select('id, nombre, grupo, descripcion, duracion, foto').eq('activo', true).order('orden').order('id'),
     sb.from('fotos').select('url, color, fondo').order('url'),
   ]);

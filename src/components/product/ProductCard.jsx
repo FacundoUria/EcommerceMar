@@ -2,6 +2,7 @@ import { memo, useRef } from 'react';
 import { Link } from 'react-router';
 import Icon from '../ui/Icon.jsx';
 import FotoProducto from './FotoProducto.jsx';
+import CartelPromo from './CartelPromo.jsx';
 import { formatPrecio, imgSm } from '../../lib/format.js';
 import { flyToCart } from '../../lib/flyToCart.js';
 import { explotarDestellos } from '../../lib/destellos.js';
@@ -33,8 +34,14 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
   const url = `/producto/${producto.id}`;
   const precio = `${producto.desde ? 'Desde ' : ''}${formatPrecio(producto.precio)}`;
   const color = colorDe(producto.imagen);
+  const linkRef = useRef(null); // kits: "Agregar" lleva a la ficha (sin useNavigate: re-renderizaría todas las cards al navegar)
 
   const agregarRapido = async (e) => {
+    // Kit con cosas para elegir ("Elegí tu shampoo"): se eligen en su página
+    if (producto.elecciones) {
+      linkRef.current?.click();
+      return;
+    }
     // Con variantes: la quick view deja elegir cuál.
     if (tieneVariantes) {
       abrirQuickView(producto);
@@ -45,7 +52,11 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
     agregar(producto, null, 1, { abrir: false });
     mostrarToast({ tipo: 'carrito', titulo: 'Agregado', texto: producto.nombreCorto, imagen: imgSm(producto.imagen) });
   };
-  const etiquetaAgregar = tieneVariantes ? `Elegir variante de ${producto.nombreCorto}` : `Agregar ${producto.nombreCorto} al carrito`;
+  const etiquetaAgregar = producto.elecciones
+    ? `Elegir las opciones de ${producto.nombreCorto}`
+    : tieneVariantes
+      ? `Elegir variante de ${producto.nombreCorto}`
+      : `Agregar ${producto.nombreCorto} al carrito`;
 
   // Card 3D en desktop (ver useTarjeta3D)
   const tarjeta = useTarjeta3D();
@@ -60,7 +71,7 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
     >
       {tarjeta.brillo}
       <div className="relative">
-        <Link to={url} className="block" aria-label={`${producto.nombreCorto}, ${precio}`}>
+        <Link ref={linkRef} to={url} className="block" aria-label={`${producto.nombreCorto}, ${precio}`}>
           <div ref={imgRef} className="relative aspect-[4/5] overflow-hidden">
             <FotoProducto
               src={producto.imagen}
@@ -76,12 +87,13 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
                 <FotoProducto src={fotoVariante} srcSm={imgSm(fotoVariante)} sizes={SIZES} />
               </span>
             )}
+            {producto.promo && <CartelPromo promo={producto.promo} className="absolute top-3 left-3" />}
           </div>
         </Link>
 
         <button
           type="button"
-          onClick={() => abrirQuickView(producto)}
+          onClick={() => (producto.elecciones ? linkRef.current?.click() : abrirQuickView(producto))}
           aria-label={`Vista rápida de ${producto.nombreCorto}`}
           className="glass absolute top-3 right-3 flex size-10 items-center justify-center rounded-full text-tinta shadow-suave transition duration-500 hover:scale-110 active:scale-90 md:translate-y-1 md:opacity-0 md:group-focus-within:translate-y-0 md:group-focus-within:opacity-100 md:group-hover:translate-y-0 md:group-hover:opacity-100"
         >
@@ -120,7 +132,7 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
             {producto.nombreCorto}
           </Link>
         </Titulo>
-        <Precio as="p" valor={producto.precio} desde={producto.desde} className="mt-1 text-base text-tinta" />
+        <Precio as="p" valor={producto.precio} desde={producto.desde} antes={producto.precioAntes} className="mt-1 text-base text-tinta" />
       </div>
     </article>
   );

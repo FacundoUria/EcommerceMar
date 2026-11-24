@@ -23,6 +23,8 @@ import Roll from '../components/ui/Roll.jsx';
 import Rulos from '../components/marca/Rulos.jsx';
 import AdornoTitulo from '../components/marca/AdornoTitulo.jsx';
 import { DEMORA_INTRO } from '../components/marca/IntroMarca.jsx';
+import { campanaActiva } from '../lib/promo.js';
+import { CAMPANA } from '../config/promo.js';
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -52,12 +54,30 @@ function useResto() {
   return listo;
 }
 
+// Promos vigentes (Black Friday): sección entre el hero y las categorías, en un chunk que se pide solo si hay
+// alguna. El resto del año no se dibuja ni se baja nada.
+const PromoInicio = lazy(() => import('./PromoInicio.jsx'));
+
+function Promos() {
+  const { data: productos } = useProducts();
+  const enPromo = productos?.filter((p) => p.promo) ?? [];
+  if (!enPromo.length) return null;
+  const campana = campanaActiva();
+  const hasta = campana ? CAMPANA.hasta : enPromo.map((p) => p.promo.hasta).sort()[0];
+  return (
+    <Suspense fallback={null}>
+      <PromoInicio productos={enPromo} titulo={campana ? CAMPANA.nombre : 'Promos'} hasta={hasta} />
+    </Suspense>
+  );
+}
+
 export default function Home() {
   usePageTitle(null);
   const resto = useResto();
   return (
     <>
       <Hero />
+      <Promos />
       <Categorias />
       {resto ? (
         <Suspense fallback={ESPACIO_RESTO}>

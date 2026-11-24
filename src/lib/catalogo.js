@@ -2,6 +2,8 @@
 // src/data/respaldo-catalogo.json): la UI no se entera de dónde vienen. Lo usan el service, el panel (precio
 // de la lista) y, con productoLocal / servicioLocal, products.js para los scripts.
 
+import { ahoraPromo, vigente } from './promo.js';
+
 const img = (carpeta, nombre) => `/img/${carpeta}/${nombre}.webp`;
 
 /**
@@ -10,12 +12,20 @@ const img = (carpeta, nombre) => `/img/${carpeta}/${nombre}.webp`;
  * variantes de precios distintos, el producto vale el más bajo y `desde` = true ("Desde $ X").
  * Los campos opcionales (marca, tamaño, alias, destacado, activo: false) solo aparecen si tienen valor.
  */
-function armarProducto({ id, nombre, nombreCorto, marca, tamano, categoria, precio, alias, destacado, activo, imagen, variantes }) {
+function armarProducto({ id, nombre, nombreCorto, marca, tamano, categoria, precio, alias, destacado, activo, imagen, variantes, promo, incluye, elecciones }) {
+  // Promo vigente (ver promoDe): con precio promo, ese precio va para todo el producto (también sus variantes)
+  const enPromo = promo?.precio != null;
   const propios = variantes.map((v) => v.precio).filter((x) => x != null);
-  const base = precio ?? (propios.length ? Math.min(...propios) : null);
-  const vs = variantes.map((v) => ({ nombre: v.nombre, imagen: v.imagen || imagen, precio: v.precio ?? base }));
+  const base = enPromo ? promo.precio : (precio ?? (propios.length ? Math.min(...propios) : null));
+  const vs = variantes.map((v) => ({ nombre: v.nombre, imagen: v.imagen || imagen, precio: enPromo ? base : (v.precio ?? base) }));
   const precios = vs.map((v) => v.precio).filter((x) => x != null);
   return {
+    // promo: { nombre (el cartel), hasta } y precioAntes (tachado). Solo mientras está vigente.
+    ...(promo && { promo: { nombre: promo.nombre, hasta: promo.hasta } }),
+    ...(promo?.antes != null && { precioAntes: promo.antes }),
+    // Kits: qué trae (renglones) y qué se elige al comprarlo ([{ titulo, clave, opciones }])
+    ...(incluye?.length && { incluye }),
+    ...(elecciones?.length && { elecciones }),
     id,
     nombre,
     nombreCorto: nombreCorto || nombre,
@@ -36,8 +46,29 @@ const porOrden = (a, b) => (a.orden ?? 0) - (b.orden ?? 0);
 
 // ───────── Desde Supabase (filas tal cual las devuelve la API) ─────────
 
-export const productoDeFila = (f) =>
-  armarProducto({
+/**
+ * Promo vigente de una fila (a la hora de `ahoraPromo`), o null. precio: el promo (null = el de siempre);
+ * antes: el tachado (si Mar no lo cargó y hay precio promo, el precio de siempre).
+ */
+export function promoDe(f, t = ahoraPromo()) {
+  if (!vigente(f.promo_desde, f.promo_hasta, t)) return null;
+  const precio = f.precio_promo ?? null;
+  const antes = f.precio_antes ?? (precio != null ? f.precio : null);
+  return { nombre: f.promo_nombre?.trim() || 'Promo', hasta: f.promo_hasta, precio, antes: antes != null && antes > (precio ?? f.precio ?? 0) ? antes : null };
+}
+
+/** Opciones de un "Elegí…" de kit: las escritas a mano o las variantes de otro producto (`variantesDe`). */
+const opcionesDe = (e, filas) =>
+  e.variantesDe
+    ? [...(filas.find((p) => p.id === e.variantesDe)?.variantes ?? [])].sort(porOrden).map((v) => v.nombre)
+    : (e.opciones ?? []).map((o) => String(o).trim()).filter(Boolean);
+
+export const productoDeFila = (f, filas = [], t = ahoraPromo()) => {
+  const promo = promoDe(f, t);
+  const elecciones = (Array.isArray(f.elecciones) ? f.elecciones : [])
+    .map((e) => ({ titulo: e.titulo?.trim() || `Elegí ${e.clave}`, clave: e.clave?.trim() || e.titulo, opciones: opcionesDe(e, filas) }))
+    .filter((e) => e.clave && e.opciones.length);
+  return armarProducto({
     id: f.id,
     nombre: f.nombre,
     nombreCorto: f.nombre_corto,
@@ -47,10 +78,15 @@ export const productoDeFila = (f) =>
     precio: f.precio,
     alias: f.alias,
     destacado: f.destacado,
-    activo: f.activo,
+    // Kit "solo durante la promo": fuera de fechas, como oculto
+    activo: f.activo === false || (f.solo_en_promo && !promo) ? false : f.activo,
     imagen: f.fotos?.[0] ?? img('productos', f.id),
     variantes: [...(f.variantes ?? [])].sort(porOrden).map((v) => ({ nombre: v.nombre, precio: v.precio, imagen: v.foto })),
+    promo,
+    incluye: (f.incluye ?? '').split('\n').map((x) => x.trim()).filter(Boolean),
+    elecciones,
   });
+};
 
 export const categoriaDeFila = (f) => ({ id: f.id, nombre: f.nombre, paso: f.paso ?? null, imagen: f.portada });
 

@@ -341,19 +341,19 @@
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d6b5401b-4c05-4974-b9fe-4c1e19a458b9-447.webp",
      "orden": 15,
      "nombre": "Maionese Capilar",
-     "precio": null
+     "precio": 7000
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1e863590-d9dc-430a-a4da-6d45cb66d708-460.webp",
      "orden": 16,
      "nombre": "Amido de Milho",
-     "precio": null
+     "precio": 7000
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/6a6fd0f8-003d-4ef8-8115-49eece81d5b2-488.webp",
      "orden": 17,
      "nombre": "Coquetel de Frutas Family",
-     "precio": null
+     "precio": 7000
     },
     {
      "foto": "/img/productos/cremas-skala-mais-cachinhos.webp",
@@ -413,13 +413,13 @@
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5a4b4d1a-79cc-4bfa-a9ae-9f7eb2e79367-353.webp",
      "orden": 18,
      "nombre": "Mais Lisos",
-     "precio": null
+     "precio": 7000
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/240aa27e-7e3a-4752-bb42-e0d93eddf558-309.webp",
      "orden": 19,
      "nombre": "Glicólico 3 em 1",
-     "precio": null
+     "precio": 7000
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/82408e6e-4f78-4455-b675-8ad26ed8d096-469.webp",

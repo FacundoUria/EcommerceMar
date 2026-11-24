@@ -25,6 +25,8 @@ import Roll from '../components/ui/Roll.jsx';
 import Expandible from '../components/ui/Expandible.jsx';
 import FilaDeslizable from '../components/ui/FilaDeslizable.jsx';
 import { esDesde, precioDe } from '../lib/precios.js';
+import { terminaEn } from '../lib/promo.js';
+import CartelPromo from '../components/product/CartelPromo.jsx';
 
 export default function Producto() {
   const { id } = useParams();
@@ -71,14 +73,26 @@ function Detalle({ producto }) {
     setAviso(false);
   };
 
+  // Kits: lo que se elige al comprarlo ("Elegí tu shampoo") → { [clave]: opción }
+  const [elegidas, setElegidas] = useState({});
+  const [falta, setFalta] = useState(null); // clave de la elección que falta (aviso)
+
   const agregarAlCarrito = (e) => {
     if (tieneVariantes && !variante) {
       setAviso(true);
       document.getElementById('variantes')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
+    const sinElegir = producto.elecciones?.find((x) => !elegidas[x.clave]);
+    if (sinElegir) {
+      setFalta(sinElegir.clave);
+      const el = document.getElementById(`eleccion-${producto.elecciones.indexOf(sinElegir)}`);
+      el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el?.focus({ preventScroll: true });
+      return;
+    }
     explotarDestellos(e?.currentTarget, colorDe(imagen));
-    agregar(producto, variante, cantidad);
+    agregar(producto, variante, cantidad, { elecciones: producto.elecciones?.map((x) => [x.clave, elegidas[x.clave]]) ?? null });
   };
 
   return (
@@ -128,6 +142,7 @@ function Detalle({ producto }) {
                 />
               </m.div>
             </AnimatePresence>
+            {producto.promo && <CartelPromo promo={producto.promo} className="absolute top-4 left-4" />}
           </div>
           {galeria.length > 1 && (
             <FilaDeslizable className="-mx-4 mt-3" claseFila="gap-2 px-4 pb-1" activo={variante?.nombre ?? null} aria-label="Fotos del producto">
@@ -170,8 +185,70 @@ function Detalle({ producto }) {
                 <p>{descripcion}</p>
               </Expandible>
             )}
-            <Precio as="p" valor={precioDe(producto, preview ?? variante)} desde={esDesde(producto, preview ?? variante)} className="mt-3 text-3xl text-tinta" />
+            <Precio
+              as="p"
+              valor={precioDe(producto, preview ?? variante)}
+              desde={esDesde(producto, preview ?? variante)}
+              antes={producto.precioAntes}
+              className="mt-3 text-3xl text-tinta"
+            />
+            {producto.promo && (
+              <p className="mt-1.5 text-sm font-bold text-dorado">
+                {producto.promo.nombre} · {terminaEn(producto.promo.hasta)}
+              </p>
+            )}
           </div>
+
+          {/* Kit: qué trae */}
+          {producto.incluye && (
+            <div>
+              <p className="text-sm font-bold text-tinta">Incluye</p>
+              <ul className="mt-2 space-y-1.5">
+                {producto.incluye.map((x) => (
+                  <li key={x} className="flex items-start gap-2 text-[15px] text-tinta">
+                    <Icon name="check" size={18} strokeWidth={2.4} className="mt-0.5 shrink-0 text-verde" />
+                    {x}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Kit: lo que se elige (selectores grandes, uno por cosa) */}
+          {producto.elecciones?.map((x, i) => (
+            <div key={x.clave}>
+              <label htmlFor={`eleccion-${i}`} className="mb-2 block text-[17px] font-bold text-tinta">
+                {x.titulo}
+              </label>
+              <select
+                id={`eleccion-${i}`}
+                value={elegidas[x.clave] ?? ''}
+                onChange={(ev) => {
+                  setElegidas((s) => ({ ...s, [x.clave]: ev.target.value }));
+                  setFalta(null);
+                }}
+                aria-invalid={falta === x.clave}
+                aria-describedby={falta === x.clave ? `eleccion-${i}-error` : undefined}
+                className={`block h-14 w-full rounded-2xl border-2 bg-crema-card px-4 text-[17px] text-tinta outline-none focus-visible:border-verde ${
+                  falta === x.clave ? 'border-red-700' : 'border-verde/20'
+                }`}
+              >
+                <option value="" disabled>
+                  Tocá para elegir
+                </option>
+                {x.opciones.map((o) => (
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
+                ))}
+              </select>
+              {falta === x.clave && (
+                <p id={`eleccion-${i}-error`} className="mt-2 text-sm font-semibold text-red-700" role="alert">
+                  {x.titulo} antes de agregar
+                </p>
+              )}
+            </div>
+          ))}
 
           {tieneVariantes && (
             <div id="variantes">

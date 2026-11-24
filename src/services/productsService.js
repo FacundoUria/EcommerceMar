@@ -14,6 +14,7 @@ import respaldo from '../data/respaldo-catalogo.json';
 import { categoriaDeFila, productoDeFila, servicioDeFila } from '../lib/catalogo.js';
 import { consultarCatalogo, consultarDescripciones, consultarLqip } from '../lib/consultas.js';
 import { registrarFotos } from '../lib/imagenes.js';
+import { ahoraPromo, proximoCambio } from '../lib/promo.js';
 
 const ESPERA_MAX = 3000; // primera visita: cuánto se espera a Supabase antes de usar el respaldo local
 const REVALIDAR_CADA = 5 * 60 * 1000; // al volver a la pestaña
@@ -53,6 +54,7 @@ export function alActualizar(fn) {
  */
 function crearFuente({ tipo, clave, remoto, armar, local }) {
   let valor; // lo que se está entregando (armado)
+  let crudosEnUso = null; // los datos crudos de `valor` (para volver a armarlos: rearmar)
   let firma = null; // JSON de los datos crudos en uso (null = respaldo local)
   let fresco = false; // ya llegó la versión de Supabase en esta visita
   let primera = null;
@@ -74,6 +76,7 @@ function crearFuente({ tipo, clave, remoto, armar, local }) {
       const armado = armar(crudos);
       const habia = valor !== undefined;
       valor = armado;
+      crudosEnUso = crudos;
       firma = nueva;
       guardarCopia(clave, crudos);
       if (habia) for (const fn of oyentes) fn(tipo);
@@ -88,6 +91,7 @@ function crearFuente({ tipo, clave, remoto, armar, local }) {
     if (copia) {
       try {
         valor = armar(copia);
+        crudosEnUso = copia;
         firma = JSON.stringify(copia);
         revalidar();
         return;
@@ -98,10 +102,25 @@ function crearFuente({ tipo, clave, remoto, armar, local }) {
     }
     const llego = await Promise.race([revalidar(), esperar(ESPERA_MAX).then(() => false)]);
     if (!llego) {
-      const respaldo = await local();
-      if (valor === undefined) valor = respaldo; // si Supabase llegó mientras tanto, gana Supabase
+      const crudos = await local();
+      if (valor === undefined) {
+        // si Supabase llegó mientras tanto, gana Supabase
+        valor = armar(crudos);
+        crudosEnUso = crudos;
+      }
     }
   }
+
+  /** Vuelve a armar lo que se está mostrando (empezó o terminó una promo) y avisa. */
+  const rearmar = () => {
+    if (crudosEnUso === null || valor === undefined) return;
+    try {
+      valor = armar(crudosEnUso);
+      for (const fn of oyentes) fn(tipo);
+    } catch {
+      // queda lo que había
+    }
+  };
 
   const cargar = () => {
     if (!primera) {
@@ -126,7 +145,7 @@ function crearFuente({ tipo, clave, remoto, armar, local }) {
     });
   }
 
-  return { cargar, actualizado };
+  return { cargar, actualizado, rearmar };
 }
 
 // Productos nuevos de Mar sin precio ni foto: `activo: false` → ocultos en tienda, rutina, carruseles,
@@ -139,7 +158,9 @@ const visibles = (products) => products.filter((p) => p.activo !== false);
  */
 function armarCatalogo(f) {
   registrarFotos(f.fotos); // color y fondo de las fotos subidas desde el panel (antes de que las dibuje la UI)
-  const products = visibles(f.productos.map(productoDeFila));
+  const t = ahoraPromo();
+  programarCambioDePromo(f.productos, t);
+  const products = visibles(f.productos.map((p) => productoDeFila(p, f.productos, t)));
   if (!products.length) throw new Error('sin productos');
   const primero = new Map();
   for (const p of products) if (!primero.has(p.categoria)) primero.set(p.categoria, p);
@@ -150,12 +171,23 @@ function armarCatalogo(f) {
   return { products, categories, services: f.servicios.map(servicioDeFila) };
 }
 
+// Las promos se prenden y se apagan solas: cuando empieza o termina alguna, se vuelve a armar el catálogo
+// (precios, kits visibles) y los hooks y el carrito se actualizan como con una versión nueva.
+let cambioDePromo = null;
+function programarCambioDePromo(filas, t) {
+  if (typeof window === 'undefined') return;
+  clearTimeout(cambioDePromo);
+  const prox = proximoCambio(filas.map((p) => ({ desde: p.promo_desde, hasta: p.promo_hasta })), t);
+  // setTimeout no acepta más de ~24 días; más allá, se vuelve a calcular en la próxima carga
+  if (prox !== null && prox - t < 20 * 86400000) cambioDePromo = setTimeout(() => catalogo.rearmar(), prox - t + 50);
+}
+
 const catalogo = crearFuente({
   tipo: 'catalogo',
   clave: 'dreamhair:catalogo:v1',
   remoto: () => cliente().then(consultarCatalogo),
   armar: armarCatalogo,
-  local: () => armarCatalogo(respaldo),
+  local: () => respaldo,
 });
 
 const descripciones = crearFuente({

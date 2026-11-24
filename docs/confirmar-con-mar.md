@@ -3,6 +3,34 @@
 Pendientes del catálogo (la verdad está en Supabase: se edita desde /admin). Lo que figura acá está cargado,
 pero oculto o con un dato a revisar. Cuando Mar responda, se actualiza el producto y se borra de esta lista.
 
+## 0. Black Friday (martes 24/11 0:00 al viernes 27/11 23:59) — URGENTE
+
+Cargado y programado: se prende y se apaga solo. Mientras dura, la barra de arriba dice «🖤 BLACK FRIDAY ·
+hasta el viernes 27/11 · solo efectivo o transferencia» (no aparece «Aceptamos todos los medios de pago»), el
+inicio muestra las 4 ofertas y, si el carrito tiene algo en promo, el pedido solo ofrece efectivo o
+transferencia. Confirmar:
+
+1. **Cepillo viral** ($ 13.000, «antes $ 18.000»): en la web estaba a **$ 16.000**. ¿El «antes» es $ 18.000
+   o $ 16.000? (Mostrar un «antes» más alto que el precio que tenía la web puede traer reclamos.)
+2. **Kit El preferido** ($ 28.000, antes $ 32.000): Shampoo HAN a elección + Gel Supreme Fixer **en pote**
+   (Bekim, el de la foto) + Skala 1 kg a elección.
+   - «Elegí tu shampoo»: las variantes del **Shampoo low poo HAN** (Carbón Activado, Action Plex, Biotina +
+     Ácido Hialurónico, Rulos Definidos, Prevención Caída, Avena & Miel, Ácido hialurónico, Lino). ¿Puede ser
+     otro shampoo (Kleno, Skala, Bekim…)?
+   - «Elegí tu Skala»: las variantes de **Cremas 2 en 1 Skala 1 kg** (las 21 de $ 6.900; las Expert de
+     $ 7.000 no entran). ¿Entran también las Expert?
+   - Las dos listas se toman solas del catálogo: si Mar oculta o agrega una variante, el kit se actualiza.
+3. **Kit Kleno** ($ 38.000, antes $ 49.000): Shampoo Rulos Perfectos, Crema de Peinar Definition, Activador
+   de Rulos en gel y Mousse Rulos Definidos. ¿Son esos cuatro?
+4. **Kit Antifrizz** ($ 17.000, antes $ 27.000): cofia, funda y scrunchie de satén. «Elegí el color»
+   **provisorio** con los colores de la foto de las cofias: **Rosa, Durazno, Fucsia, Lila, Azul, Negro**.
+   ¿Cuáles hay? ¿La funda y el scrunchie vienen del mismo color? **No hay foto del scrunchie**: la foto del
+   kit tiene las cofias y la funda.
+5. **Fotos de los kits**: armadas con las fotos reales de cada producto sobre el arena de la marca. Las de
+   Kleno y el Supreme Fixer miden 225 px: el Kit Kleno se ve algo blando. Si Mar tiene fotos mejores, se
+   cambian desde /admin.
+6. Los kits están en la categoría **«Promos»** (aparece en Productos solo durante el Black Friday).
+
 ## 1. Productos ocultos: falta precio y foto
 
 Están cargados con la descripción de Mar, pero ocultos y sin precio: no se ven en la tienda, la rutina, los
@@ -145,8 +173,8 @@ Ideal: la foto original del proveedor, de 1000 px o más. Se reemplazan desde /a
   ("cc" como dice la etiqueta; en el texto decía "g"). Antes eran dos productos ocultos, uno por tamaño.
 - **Shampoo Hidratante Curl Girl:** 250 ml (confirmado).
 - **Cremas Skala 1 kg** (`cremas-skala`): **precio por variante**: las 5 de tratamiento Expert (Manteca de
-  Karité, Óleo de Argán, Aguacate, Vitamina, Biotina) a **$ 7.000** y todas las demás a **$ 6.900** (la card
-  dice "Desde $ 6.900"). ¿Siguen todas las de antes (Mais Cachinhos, Dona Skala, Divina Cor, Divino Potão,
+  Karité, Óleo de Argán, Aguacate, Vitamina, Biotina) y las 5 Expert nuevas de la sección 9 a **$ 7.000**, y
+  todas las demás a **$ 6.900** (la card dice "Desde $ 6.900"). ¿Siguen todas las de antes (Mais Cachinhos, Dona Skala, Divina Cor, Divino Potão,
   Mais Cachos, Cachonados, Potão do Amor, Divino Potinho, Mais Crespos)? Las 17 nuevas, en la sección 9.
 - **Cascada de Proteínas:** un solo producto con las dos variantes, **125 ml** (antes figuraba 120 ml).
 - **Cremas de Peinar HAN:** un solo producto con variantes Rulos Definidos y **Keratina** (como en su texto;
@@ -161,15 +189,15 @@ Ideal: la foto original del proveedor, de 1000 px o más. Se reemplazan desde /a
 ## 9. Cremas Skala 1 kg: variantes nuevas para confirmar
 
 Las 18 fotos de cremas 2 en 1 del 23/11 (álbum de las 11:48 + 11.49.02) **no coinciden con ninguna de las 9
-variantes que ya estaban**: se agregaron como **17 variantes nuevas a $ 6.900** (visibles). Confirmar que las
-vende todas y a ese precio:
+variantes que ya estaban**: se agregaron como **17 variantes nuevas** (visibles). Confirmar que las vende
+todas y a esos precios:
 
-| Línea | Variantes nuevas |
-|---|---|
-| Skala Expert | Maionese Capilar, Amido de Milho, Coquetel de Frutas Family, Mais Lisos, Glicólico 3 em 1 |
-| Skala | Restauração Espetacular 12 em 1 |
-| Skala Brasil | Caju, Babosa |
-| Skala Frutástica | Banana, Maracujá, Melancia, Uva, Morango, Cereja, Cacau, Coco, Coquetel de Frutas 3 em 1 |
+| Línea | Variantes nuevas | Precio |
+|---|---|---|
+| Skala Expert | Maionese Capilar, Amido de Milho, Coquetel de Frutas Family, Mais Lisos, Glicólico 3 em 1 | **$ 7.000** (como las otras Expert: Karité, Argán, Aguacate, Vitamina, Biotina) |
+| Skala | Restauração Espetacular 12 em 1 | $ 6.900 |
+| Skala Brasil | Caju, Babosa | $ 6.900 |
+| Skala Frutástica | Banana, Maracujá, Melancia, Uva, Morango, Cereja, Cacau, Coco, Coquetel de Frutas 3 em 1 | $ 6.900 |
 
 - **Amido de Milho:** vinieron dos fotos, el envase viejo (dice "Co-Wash") y el nuevo. Quedó una sola
   variante con la foto del nuevo. ¿Es el mismo producto?

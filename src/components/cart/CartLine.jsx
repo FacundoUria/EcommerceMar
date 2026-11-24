@@ -4,7 +4,7 @@ import Icon from '../ui/Icon.jsx';
 import FotoProducto from '../product/FotoProducto.jsx';
 import QuantityStepper from '../ui/QuantityStepper.jsx';
 import { formatPrecio, imgSm } from '../../lib/format.js';
-import { useCartAcciones } from '../../context/CartContext.jsx';
+import { textoElecciones, useCartAcciones } from '../../context/CartContext.jsx';
 
 /** Una línea del carrito (producto + variante). Se usa en el drawer y en /carrito. */
 export default function CartLine({ linea, compacta = false, onNavigate, delay = 0 }) {
@@ -30,12 +30,17 @@ export default function CartLine({ linea, compacta = false, onNavigate, delay = 
               {linea.nombre}
             </Link>
             {linea.variante && <p className="truncate text-xs text-texto-suave">{linea.variante}</p>}
+            {linea.elecciones?.map(([k, v]) => (
+              <p key={k} className="text-xs leading-snug text-texto-suave">
+                {k}: <span className="font-semibold text-tinta">{v}</span>
+              </p>
+            ))}
             <p className="mt-0.5 text-xs text-texto-suave"><span className="precio">{formatPrecio(linea.precio)}</span> c/u</p>
           </div>
           <button
             type="button"
             onClick={() => quitar(linea.clave)}
-            aria-label={`Quitar ${linea.nombre}${linea.variante ? ` (${linea.variante})` : ''} del carrito`}
+            aria-label={`Quitar ${linea.nombre}${linea.variante ? ` (${linea.variante})` : ''}${linea.elecciones ? ` (${textoElecciones(linea.elecciones)})` : ''} del carrito`}
             className="-mt-1 -mr-1 flex size-9 shrink-0 items-center justify-center rounded-full text-texto-suave transition hover:bg-red-50 hover:text-red-700 active:scale-90"
           >
             <Icon name="basura" size={18} />

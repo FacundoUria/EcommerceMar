@@ -11,6 +11,7 @@ import { useCart } from '../../context/CartContext.jsx';
 import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 import { useFocusTrap } from '../../hooks/useFocusTrap.js';
 import Precio from '../ui/Precio.jsx';
+import CartelPromo from './CartelPromo.jsx';
 import { useOcultarBottomNav } from '../../hooks/useOcultarBottomNav.js';
 import Roll from '../ui/Roll.jsx';
 import { explotarDestellos } from '../../lib/destellos.js';
@@ -125,7 +126,14 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
             <h2 id="qv-titulo" className="mt-1 text-3xl leading-tight">
               {producto.nombreCorto}
             </h2>
-            <Precio as="p" valor={precioDe(producto, preview ?? variante)} desde={esDesde(producto, preview ?? variante)} className="mt-2 text-2xl text-tinta" />
+            <Precio
+              as="p"
+              valor={precioDe(producto, preview ?? variante)}
+              desde={esDesde(producto, preview ?? variante)}
+              antes={producto.precioAntes}
+              className="mt-2 text-2xl text-tinta"
+            />
+            {producto.promo && <CartelPromo promo={producto.promo} className="mt-3" />}
           </div>
 
           {tieneVariantes && (
@@ -151,15 +159,22 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
             </div>
           )}
 
-          <div className="flex items-center gap-3">
-            <QuantityStepper value={cantidad} onChange={setCantidad} />
-            <button type="button" onClick={confirmar} className="btn btn-primario flex-1 px-4 whitespace-nowrap">
-              <Roll>
-                <Icon name="carrito" size={18} />
-                Agregar
-              </Roll>
-            </button>
-          </div>
+          {producto.elecciones ? (
+            // Kit con cosas para elegir: se eligen en su página
+            <Link to={`/producto/${producto.id}`} onClick={onClose} className="btn btn-primario px-4">
+              Elegir opciones
+            </Link>
+          ) : (
+            <div className="flex items-center gap-3">
+              <QuantityStepper value={cantidad} onChange={setCantidad} />
+              <button type="button" onClick={confirmar} className="btn btn-primario flex-1 px-4 whitespace-nowrap">
+                <Roll>
+                  <Icon name="carrito" size={18} />
+                  Agregar
+                </Roll>
+              </button>
+            </div>
+          )}
 
           <Link
             to={`/producto/${producto.id}${variante ? `?v=${encodeURIComponent(variante.nombre)}` : ''}`}

@@ -14,6 +14,8 @@ import { useBloquearScroll } from '../../hooks/useBloquearScroll.js';
 import { formatPrecio, plural } from '../../lib/format.js';
 import { fuenteImagen } from '../../lib/imagenes.js';
 import { explotarDestellos } from '../../lib/destellos.js';
+import { campanaActiva } from '../../lib/promo.js';
+import { CAMPANA } from '../../config/promo.js';
 import { DEPARTAMENTOS_ENVIO, NOTA_ENVIOS, departamentoEnvio, localidadesDe } from '../../config/envios.js';
 import {
   LARGO_MAXIMO,
@@ -82,6 +84,9 @@ async function copiarTexto(texto) {
  */
 export default function Checkout({ onClose }) {
   const { lineas, cantidadTotal, total, vaciar } = useCart();
+  // Con algún producto en promo durante la campaña (Black Friday): solo efectivo o transferencia
+  const conPromo = campanaActiva() && lineas.some((l) => l.promo);
+  const pagos = conPromo ? CAMPANA.pagos : PAGOS;
   const { mostrarToast } = useUI();
   const navigate = useNavigate();
   const desktop = useMediaQuery('(min-width: 768px)');
@@ -152,7 +157,12 @@ export default function Checkout({ onClose }) {
       return;
     }
     guardarDatos(datos);
-    const mensaje = armarMensaje({ lineas, datos, numero });
+    const mensaje = armarMensaje({
+      lineas,
+      datos: { ...datos, pago: pagos.includes(datos.pago) ? datos.pago : '' },
+      numero,
+      encabezado: conPromo ? CAMPANA.encabezadoPedido : null,
+    });
     const url = linkPedido(mensaje);
     explotarDestellos(e.nativeEvent?.submitter);
     abrirWhatsApp(url);
@@ -389,8 +399,14 @@ export default function Checkout({ onClose }) {
                   <legend className={ETIQUETA}>
                     Forma de pago <Opcional />
                   </legend>
+                  {conPromo && (
+                    <p className="mb-2.5 flex items-start gap-2 rounded-2xl bg-salvia px-3 py-2.5 text-sm font-semibold text-tinta" role="note">
+                      <span aria-hidden="true">🖤</span>
+                      {CAMPANA.avisoPago}
+                    </p>
+                  )}
                   <div className="flex flex-wrap gap-2">
-                    {PAGOS.map((p) => {
+                    {pagos.map((p) => {
                       const sel = datos.pago === p;
                       return (
                         <button

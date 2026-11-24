@@ -13,7 +13,7 @@ const vistos = new WeakSet();
  * - `desde`: antepone "Desde" (producto con variantes de precios distintos, sin variante elegida).
  * - Si el valor cambia después (otra variante en la ficha), se muestra el nuevo directo, sin contar.
  */
-export default function Precio({ valor, desde = false, className = '', as: Tag = 'span' }) {
+export default function Precio({ valor, desde = false, antes = null, className = '', as: Tag = 'span' }) {
   const ref = useRef(null);
   const final = formatPrecio(valor);
 
@@ -74,6 +74,14 @@ export default function Precio({ valor, desde = false, className = '', as: Tag =
         </span>
       </span>
       <span className="sr-only">{desde ? `Desde ${final}` : final}</span>
+      {/* Promo: "Antes $ X" tachado al lado (solo si hay) */}
+      {antes != null && (
+        <s className="ml-2 inline-block text-[0.72em] font-medium whitespace-nowrap text-texto-suave decoration-[1.5px]">
+          <span className="sr-only">, antes </span>
+          <span aria-hidden="true">Antes </span>
+          {formatPrecio(antes)}
+        </s>
+      )}
     </Tag>
   );
 }

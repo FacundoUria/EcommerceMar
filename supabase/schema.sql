@@ -54,6 +54,26 @@ create table if not exists public.productos (
 );
 create index if not exists productos_categoria_idx on public.productos (categoria_id);
 
+-- Promociones (nov 2026, Black Friday): entre promo_desde y promo_hasta la tienda muestra precio_promo (o el
+-- precio, si no hay) con "Antes $ precio_antes" tachado y el cartel promo_nombre. Fuera de fechas, todo vuelve
+-- solo a lo normal. solo_en_promo = el producto (un kit) se ve únicamente mientras dura su promo.
+-- elecciones: lo que se elige al comprar un kit [{ "titulo": "Elegí tu shampoo", "clave": "Shampoo",
+-- "opciones": ["…", "…"] }]; incluye: qué trae el kit (un renglón por cosa).
+alter table public.productos add column if not exists precio_promo  integer check (precio_promo >= 0);
+alter table public.productos add column if not exists precio_antes  integer check (precio_antes >= 0);
+alter table public.productos add column if not exists promo_nombre  text;
+alter table public.productos add column if not exists promo_desde   timestamptz;
+alter table public.productos add column if not exists promo_hasta   timestamptz;
+alter table public.productos add column if not exists solo_en_promo boolean not null default false;
+alter table public.productos add column if not exists incluye       text;
+alter table public.productos add column if not exists elecciones    jsonb not null default '[]';
+do $$ begin
+  alter table public.productos add constraint productos_elecciones_lista check (jsonb_typeof(elecciones) = 'array');
+exception when duplicate_object then null; end $$;
+do $$ begin
+  alter table public.productos add constraint productos_promo_fechas check (promo_hasta is null or promo_desde is null or promo_hasta > promo_desde);
+exception when duplicate_object then null; end $$;
+
 create table if not exists public.variantes (
   id          uuid primary key default gen_random_uuid(),
   producto_id text not null references public.productos (id) on update cascade on delete cascade,

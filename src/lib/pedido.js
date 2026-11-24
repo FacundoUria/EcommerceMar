@@ -28,11 +28,13 @@ export function envioDe({ entrega, departamento, localidad }) {
  * Mensaje en texto plano con el formato de WhatsApp (*negrita*). `datos`: { nombre, entrega ('envio' |
  * 'retiro'), direccion, departamento, localidad, pago, nota }. Precios con el mismo formato ARS del sitio.
  */
-export function armarMensaje({ lineas, datos, numero }) {
+export function armarMensaje({ lineas, datos, numero, encabezado = null }) {
   const items = lineas.map((l) => {
     // Con la marca adelante: los nombres cortos no la llevan ("Cantu Comeback Curl Revitalizer")
     const conMarca = l.marca && l.marca !== 'Dream Hair' ? `${l.marca} ${l.nombre}` : l.nombre;
-    const nombre = l.variante ? `${conMarca} (${l.variante})` : conMarca;
+    // Variante y lo elegido en un kit: "Kit El preferido (Shampoo: X, Skala: Y)"
+    const detalle = [l.variante, ...(l.elecciones ?? []).map(([k, v]) => `${k}: ${v}`)].filter(Boolean).join(', ');
+    const nombre = detalle ? `${conMarca} (${detalle})` : conMarca;
     return l.cantidad > 1
       ? `• ${l.cantidad} × ${nombre} — ${formatPrecio(l.precio)} c/u = ${formatPrecio(l.precio * l.cantidad)}`
       : `• 1 × ${nombre} — ${formatPrecio(l.precio)}`;
@@ -43,7 +45,8 @@ export function armarMensaje({ lineas, datos, numero }) {
   const conCosto = envio?.precio != null;
   const partes = [
     '¡Hola Mar! 👋 Quiero hacer este pedido:',
-    `*Pedido ${numero}*`,
+    // Con productos en promo de la campaña: "🖤 Pedido Black Friday DH-1234"
+    encabezado ? `*${encabezado} ${numero}*` : `*Pedido ${numero}*`,
     '',
     ...items,
     '',

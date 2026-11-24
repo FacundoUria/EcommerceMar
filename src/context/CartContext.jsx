@@ -10,8 +10,13 @@ const CartContext = createContext(null);
 // renderizar cada vez que cambia el carrito.
 const CartAccionesContext = createContext(null);
 
-// Cada línea = producto + variante. La clave las distingue.
-export const claveLinea = (id, variante) => `${id}::${variante ?? ''}`;
+// Cada línea = producto + variante (+ lo elegido en un kit). La clave las distingue.
+// `elecciones`: [[clave, opción], …] en el orden del kit ("Shampoo", "Skala").
+export const claveLinea = (id, variante, elecciones) =>
+  `${id}::${variante ?? ''}${elecciones?.length ? `::${elecciones.map(([k, v]) => `${k}=${v}`).join('|')}` : ''}`;
+
+/** "Shampoo: X, Skala: Y" (lo elegido en un kit), o ''. */
+export const textoElecciones = (elecciones) => (elecciones ?? []).map(([k, v]) => `${k}: ${v}`).join(', ');
 
 function leerStorage() {
   try {
@@ -28,8 +33,8 @@ const limitar = (n) => Math.max(1, Math.min(MAX_CANTIDAD, Math.floor(n) || 1));
 function reducer(lineas, accion) {
   switch (accion.type) {
     case 'agregar': {
-      const { producto, variante, cantidad = 1 } = accion;
-      const clave = claveLinea(producto.id, variante?.nombre);
+      const { producto, variante, cantidad = 1, elecciones = null } = accion;
+      const clave = claveLinea(producto.id, variante?.nombre, elecciones);
       const existente = lineas.find((l) => l.clave === clave);
       if (existente) {
         return lineas.map((l) => (l.clave === clave ? { ...l, cantidad: limitar(l.cantidad + cantidad) } : l));
@@ -42,8 +47,10 @@ function reducer(lineas, accion) {
           nombre: producto.nombreCorto ?? producto.nombre,
           marca: producto.marca ?? null,
           variante: variante?.nombre ?? null,
+          ...(elecciones?.length && { elecciones }),
           imagen: variante?.imagen ?? producto.imagen,
           precio: precioDe(producto, variante), // el de la variante si tiene uno propio
+          ...(producto.promo && { promo: producto.promo.nombre }),
           cantidad: limitar(cantidad),
         },
       ];
@@ -65,12 +72,15 @@ function reducer(lineas, accion) {
         if (!p) continue;
         const variante = l.variante ? p.variantes?.find((v) => v.nombre === l.variante) : null;
         const existe = !l.variante || !!variante;
+        const { promo: _promoAnterior, ...resto } = l;
         const linea = {
-          ...l,
+          ...resto,
           nombre: p.nombreCorto ?? p.nombre,
           marca: p.marca ?? null,
           precio: precioDe(p, variante),
-          ...(existe ? {} : { variante: null, imagen: p.imagen, clave: claveLinea(p.id, null) }),
+          // La promo se prende y se apaga sola: el precio y la marca de promo siguen al catálogo
+          ...(p.promo && { promo: p.promo.nombre }),
+          ...(existe ? {} : { variante: null, imagen: p.imagen, clave: claveLinea(p.id, null, l.elecciones) }),
         };
         const igual = resultado.find((r) => r.clave === linea.clave);
         if (igual) igual.cantidad = limitar(igual.cantidad + linea.cantidad);
@@ -114,8 +124,8 @@ export function CartProvider({ children }) {
     };
   }, []);
 
-  const agregar = useCallback((producto, variante = null, cantidad = 1, { abrir = true } = {}) => {
-    dispatch({ type: 'agregar', producto, variante, cantidad });
+  const agregar = useCallback((producto, variante = null, cantidad = 1, { abrir = true, elecciones = null } = {}) => {
+    dispatch({ type: 'agregar', producto, variante, cantidad, elecciones });
     setUltimoAgregado({ n: Date.now(), producto, variante, cantidad });
     if (abrir) setAbierto(true);
   }, []);

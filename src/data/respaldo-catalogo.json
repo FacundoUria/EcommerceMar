@@ -93,6 +93,99 @@
  ],
  "productos": [
   {
+   "id": "kit-el-preferido",
+   "nombre": "Kit El preferido",
+   "nombre_corto": "Kit El preferido",
+   "marca": null,
+   "categoria_id": "promos",
+   "precio": 28000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d4e399c2-5e22-4f56-abd2-98185de2d11f-1000.webp"
+   ],
+   "precio_promo": null,
+   "precio_antes": 32000,
+   "promo_nombre": "Black Friday",
+   "promo_desde": "2026-11-24T03:00:00+00:00",
+   "promo_hasta": "2026-11-28T02:59:59+00:00",
+   "solo_en_promo": true,
+   "incluye": "Shampoo HAN a elección\nGel de peinar Supreme Fixer en pote (Bekim)\nCrema Skala 1 kg a elección",
+   "elecciones": [
+    {
+     "clave": "Shampoo",
+     "titulo": "Elegí tu shampoo",
+     "variantesDe": "shampoo-low-poo-han"
+    },
+    {
+     "clave": "Skala",
+     "titulo": "Elegí tu Skala",
+     "variantesDe": "cremas-skala"
+    }
+   ],
+   "variantes": []
+  },
+  {
+   "id": "kit-kleno",
+   "nombre": "Kit Kleno",
+   "nombre_corto": "Kit Kleno",
+   "marca": null,
+   "categoria_id": "promos",
+   "precio": 38000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8ca3d055-cfc7-45e8-86ff-514bf06ff2ba-720.webp"
+   ],
+   "precio_promo": null,
+   "precio_antes": 49000,
+   "promo_nombre": "Black Friday",
+   "promo_desde": "2026-11-24T03:00:00+00:00",
+   "promo_hasta": "2026-11-28T02:59:59+00:00",
+   "solo_en_promo": true,
+   "incluye": "Shampoo Rulos Perfectos\nCrema de Peinar Definition\nActivador de Rulos en gel\nMousse Rulos Definidos",
+   "elecciones": [],
+   "variantes": []
+  },
+  {
+   "id": "kit-antifrizz",
+   "nombre": "Kit Antifrizz",
+   "nombre_corto": "Kit Antifrizz",
+   "marca": "Dream Hair",
+   "categoria_id": "promos",
+   "precio": 17000,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/e1023e06-3b94-4874-87eb-42e3ae2bbaf3-1000.webp"
+   ],
+   "precio_promo": null,
+   "precio_antes": 27000,
+   "promo_nombre": "Black Friday",
+   "promo_desde": "2026-11-24T03:00:00+00:00",
+   "promo_hasta": "2026-11-28T02:59:59+00:00",
+   "solo_en_promo": true,
+   "incluye": "Cofia de satén\nFunda de almohada de satén\nScrunchie de satén",
+   "elecciones": [
+    {
+     "clave": "Color",
+     "titulo": "Elegí el color",
+     "opciones": [
+      "Rosa",
+      "Durazno",
+      "Fucsia",
+      "Lila",
+      "Azul",
+      "Negro"
+     ]
+    }
+   ],
+   "variantes": []
+  },
+  {
    "id": "shampoo-low-poo-han",
    "nombre": "Línea de Shampoos Profesionales Sin Sulfatos, Parabenos ni Siliconas",
    "nombre_corto": "Shampoo low poo",
@@ -105,6 +198,14 @@
    "fotos": [
     "/img/productos/shampoo-low-poo-han.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "/img/productos/shampoo-han-detox.webp",
@@ -169,6 +270,14 @@
    "fotos": [
     "/img/productos/low-poo-kleno.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -184,6 +293,14 @@
    "fotos": [
     "/img/productos/shampoo-skala-mais-cachos.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -199,6 +316,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5aa6273c-908a-458f-a91d-bb2f781f503b-661.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -214,6 +339,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d308b015-3b7a-4406-a690-08f117a9ce32-896.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/51ceeb91-cdee-451f-a7c8-68de5e3b6b7e-447.webp",
@@ -266,6 +399,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a20a2129-422e-42ea-b084-eb19ed13f9a4-504.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -281,6 +422,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9911efda-fb32-48a7-8899-fb532e72e272-394.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -296,6 +445,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/cb2b82f2-6c42-485c-9f7c-c6628a6a5744-896.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/7f52d4c9-c381-4770-aa0d-26e028cd24e7-517.webp",
@@ -324,6 +481,14 @@
    "fotos": [
     "/img/productos/cremas-skala.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "/img/productos/cremas-skala-mais-cachinhos.webp",
@@ -466,6 +631,14 @@
    "fotos": [
     "/img/productos/crema-peinar-kleno.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -481,6 +654,14 @@
    "fotos": [
     "/img/productos/curl-mode.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -496,6 +677,14 @@
    "fotos": [
     "/img/productos/crema-bekim.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "/img/productos/crema-bekim-memory.webp",
@@ -524,6 +713,14 @@
    "fotos": [
     "/img/productos/cremas-salon-line.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "/img/productos/cremas-salon-line-definicion-natural.webp",
@@ -552,6 +749,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/dc44db22-242a-4cea-9e03-934e4ecac720-389.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -567,6 +772,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/30c440f0-8af5-4f1b-b219-3f5082cde43f-896.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/466beb39-3a1b-442e-83ed-e95645307ebf-717.webp",
@@ -595,6 +808,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9d254109-7c37-4317-b869-2de7c9da94b8-768.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c4e366e1-ee1c-46b0-a9b4-288aab727f3b-554.webp",
@@ -629,6 +850,14 @@
    "fotos": [
     "/img/productos/crema-arbell-argan.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -644,6 +873,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8e83ac15-1321-41d4-bdad-0b4461b1b8a5-479.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -659,6 +896,14 @@
    "fotos": [
     "/img/productos/mascarillas-lola.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "/img/productos/mascarillas-lola-milagre.webp",
@@ -699,6 +944,14 @@
    "fotos": [
     "/img/productos/tratamientos-fidelite.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "/img/productos/tratamientos-fidelite-coco-vainilla.webp",
@@ -739,6 +992,14 @@
    "fotos": [
     "/img/productos/mascara-han-alfa-keratina.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -754,6 +1015,14 @@
    "fotos": [
     "/img/productos/ghee-lola-350.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "/img/productos/ghee-lola-100.webp",
@@ -782,6 +1051,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1e4f96b4-1386-4969-ac78-261b7d209f4a-367.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -797,6 +1074,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/0bba05e0-ddfc-4750-b427-648a051e0d31-447.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5aef45a7-67b6-4e47-a60d-0fdac5981e5c-164.webp",
@@ -831,6 +1116,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9a1afe57-ad90-4005-aa2d-7e45912f1685-758.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -846,6 +1139,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a08ec167-d871-4fea-bf75-df0a1c12c210-1024.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a375f3eb-9ebf-4589-9843-5c82dc0bee0c-439.webp",
@@ -922,6 +1223,14 @@
    "fotos": [
     "/img/productos/custard-cantu.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -937,6 +1246,14 @@
    "fotos": [
     "/img/productos/curl-fusion.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -952,6 +1269,14 @@
    "fotos": [
     "/img/productos/gel-de-rich.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -967,6 +1292,14 @@
    "fotos": [
     "/img/productos/gel-de-rich-potenciador.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -982,6 +1315,14 @@
    "fotos": [
     "/img/productos/gelatina-liquida-salon-line.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -997,6 +1338,14 @@
    "fotos": [
     "/img/productos/gelatinas-500gr.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "/img/productos/gelatinas-500gr-ostentacao.webp",
@@ -1043,6 +1392,14 @@
    "fotos": [
     "/img/productos/gelatinas-kids.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "/img/productos/gelatinas-kids-melao.webp",
@@ -1083,6 +1440,14 @@
    "fotos": [
     "/img/productos/gel-frenzzi.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "/img/productos/gel-frenzzi-chia.webp",
@@ -1117,6 +1482,14 @@
    "fotos": [
     "/img/productos/gel-bekim-800gr.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1132,6 +1505,14 @@
    "fotos": [
     "/img/productos/gel-bekim-250gr.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1147,6 +1528,14 @@
    "fotos": [
     "/img/productos/gel-fuerte-fidelite.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1162,6 +1551,14 @@
    "fotos": [
     "/img/productos/gel-aurill.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1177,6 +1574,14 @@
    "fotos": [
     "/img/productos/gel-curl-mode.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1192,6 +1597,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/3e62eec0-177d-4dd0-b59d-0a70afc5abdd-432.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": null,
@@ -1220,6 +1633,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/33308322-fb48-438f-8583-9714c09b678a-467.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1235,6 +1656,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/f7f319ec-e1bf-4bb9-8a76-9a9cd053f5ab-459.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1250,6 +1679,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1ed3501b-896e-4edc-952f-8eb32d9974e9-520.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1265,6 +1702,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/ce93322a-0726-4a85-ae77-30a4c518b144-213.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1280,6 +1725,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/470da90e-7d84-47d5-8d38-9bf3b49a8c10-812.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d49f643b-55c1-4d84-b219-e2e8b0000b11-510.webp",
@@ -1314,6 +1767,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/7dd0dd5a-b53d-43c7-9775-87c38d132b89-1014.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1329,6 +1790,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/208b3a49-4f4b-41ee-84cd-1861626f020e-719.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1344,6 +1813,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9451817b-82c6-48da-b53e-0a55d7a291ee-351.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1359,6 +1836,14 @@
    "fotos": [
     "/img/productos/mousse-kleno.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1374,6 +1859,14 @@
    "fotos": [
     "/img/productos/mousse-cantu.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1389,6 +1882,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/4690f8f0-29c5-4f91-83ef-c9670193b2ca-1200.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1404,6 +1905,14 @@
    "fotos": [
     "/img/productos/activador-kleno.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1419,6 +1928,14 @@
    "fotos": [
     "/img/productos/activador-cantu.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1434,6 +1951,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/443ea46f-fa5a-4d0c-b1bf-14573cb06e12-768.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c3c83c3f-e604-4841-9e2c-d6d8407ba11e-569.webp",
@@ -1468,6 +1993,14 @@
    "fotos": [
     "/img/productos/cepillo-viral.webp"
    ],
+   "precio_promo": 13000,
+   "precio_antes": null,
+   "promo_nombre": "Black Friday",
+   "promo_desde": "2026-11-24T03:00:00+00:00",
+   "promo_hasta": "2026-11-28T02:59:59+00:00",
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1483,6 +2016,14 @@
    "fotos": [
     "/img/productos/cepillo-viral-doble.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1498,6 +2039,14 @@
    "fotos": [
     "/img/productos/cepillo-viral-tenedor.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1513,6 +2062,14 @@
    "fotos": [
     "/img/productos/cepillo-detangle-bounce.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1528,6 +2085,14 @@
    "fotos": [
     "/img/productos/cepillo-magico.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1543,6 +2108,14 @@
    "fotos": [
     "/img/productos/funda-saten.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1558,6 +2131,14 @@
    "fotos": [
     "/img/productos/cofia-saten.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1573,6 +2154,14 @@
    "fotos": [
     "/img/productos/cofia-xl-saten.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1588,6 +2177,14 @@
    "fotos": [
     "/img/productos/cofia-long-saten.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1603,6 +2200,14 @@
    "fotos": [
     "/img/productos/ondulador-saten.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1618,6 +2223,14 @@
    "fotos": [
     "/img/productos/oleos-pinga.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "/img/productos/oleos-pinga-cenoura-oliva.webp",
@@ -1652,6 +2265,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/e90630b2-6914-452f-b8a8-e52142f172d4-435.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1667,6 +2288,14 @@
    "fotos": [
     "/img/productos/spray-revitalizante.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1682,6 +2311,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c7e707fc-71e3-4d73-98db-f1288f7d5496-928.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/bfc8c3c6-9f72-44cb-b32f-285ed5062177-447.webp",
@@ -1710,6 +2347,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c7e8ca94-2cb9-4b82-84ac-447c8336d775-896.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/794d3a28-42bf-4c42-bdbb-e76d0072ee09-459.webp",
@@ -1740,6 +2385,14 @@
    "fotos": [
     "/img/productos/turbante-microfibra.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1757,6 +2410,14 @@
    "fotos": [
     "/img/productos/practiplopping.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": null,
@@ -1785,6 +2446,14 @@
    "fotos": [
     "/img/productos/cepillo-viral-flexible.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1800,6 +2469,14 @@
    "fotos": [
     "/img/productos/cepillo-maya-cuadrado.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1815,6 +2492,14 @@
    "fotos": [
     "/img/productos/cepillo-pirulito.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1830,6 +2515,14 @@
    "fotos": [
     "/img/productos/cepillo-pirulito-2.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1845,6 +2538,14 @@
    "fotos": [
     "/img/productos/cepillo-tangle.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1860,6 +2561,14 @@
    "fotos": [
     "/img/productos/cepillo-pinza.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1875,6 +2584,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/3ba6d8e2-3d98-4069-8d64-e1950275c532-508.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": [
     {
      "foto": null,
@@ -1909,6 +2626,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/35e9c595-41f7-4f21-b6a2-b92c5f9980ff-459.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1924,6 +2649,14 @@
    "fotos": [
     "/img/productos/difusor-plegable.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1941,6 +2674,14 @@
    "fotos": [
     "/img/productos/atomizador-day-after.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1958,6 +2699,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/65d09793-29d8-48b9-8a17-ebdc2c4cdec8-1200.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1973,6 +2722,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/13103875-3990-47e2-80af-113d48c5fb00-333.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   },
   {
@@ -1988,6 +2745,14 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/2f1f66f7-81af-4cad-ab8c-25cdef934f53-444.webp"
    ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
    "variantes": []
   }
  ],

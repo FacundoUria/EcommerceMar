@@ -33,15 +33,17 @@ transferencia. Confirmar:
 
 ## 1. Productos ocultos: falta precio y foto
 
-Están cargados con la descripción de Mar, pero ocultos: no se ven en la tienda, la rutina, los carruseles,
-la búsqueda ni el chat. Para publicarlos hace falta **el precio** (y una foto, si no tiene). In One, Chiclete,
-Solución de Alfa Keratina, Kids Hidra Multy y Suero Argan Oil se publicaron con la tanda del 24/11.
+Están cargados, pero ocultos: no se ven en la tienda, la rutina, los carruseles, la búsqueda ni el chat. Para
+publicarlos hace falta **el precio** y **una foto**. In One, Chiclete, Solución de Alfa Keratina, Kids Hidra
+Multy y Suero Argan Oil se publicaron con la tanda del 24/11, y la Máscara Action Plex ($ 16.000) después.
 
 | # | Marca | Producto | Tamaño | id | Falta |
 |---|---|---|---|---|---|
-| 1 | Kleno | Perfect Curly Acondicionador Rulos Perfectos | 350 cc | `kleno-acondicionador` | precio y foto |
-| 2 | HAN | Máscara Capilar Action Plex Solution (24/11) | 200 cm³ | `han-mascara-action-plex` | **precio** (foto y descripción ya están) |
-| 3 | Dompel | Cepillo Dompel Flexible perfumado con llavero de regalo (24/11: foto nueva, descripción y colores Rosa bebé, Lila y Verde oscuro, confirmados por Mar) | — | `cepillo-definidor-lila` | **precio** |
+| 1 | Kleno | Perfect Curly Acondicionador Rulos Perfectos ($ 10.000 desde el 24/11) | 350 cc | `kleno-acondicionador` | **foto** (no está en su Tiendanube) |
+| 2 | Dompel | Cepillo Dompel Flexible perfumado con llavero de regalo (24/11: foto nueva, descripción y colores Rosa bebé, Lila y Verde oscuro, confirmados por Mar) | — | `cepillo-definidor-lila` | **precio** |
+| 3 | Dream Hair | Scrunchies de satén (24/11): «1 unidad» $ 1.900 y «Pack x2» $ 3.000, color a coordinar con Mar (como las cofias) | — | `scrunchies-saten` | **foto** (y descripción, si quiere) |
+
+Cuando Mar suba la foto desde /admin, los muestra con «Mostrar en la tienda».
 
 ## 2. Bekim Supreme Fixer con dosificador: ¿300 ml u 800 g?
 
@@ -293,7 +295,8 @@ Amarillo (limón), Verde agua (manzana) y Rojo (frutilla), sin foto propia: los 
 producto (verde, coral y violeta, sin amarillo). **Pendiente:** una foto con estos 3 colores (se cambia desde
 /admin).
 
-**Scrunchies** («color a coordinar»): no hay un producto scrunchie suelto, solo dentro del Kit Antifrizz.
+**Scrunchies** («color a coordinar»): desde el 24/11 hay un producto suelto (`scrunchies-saten`, oculto hasta
+que haya foto; ver la sección 1). También van dentro del Kit Antifrizz.
 
 **Dompel Flexible (confirmado por Mar):** la foto 15.00.55 es el **Cepillo Dompel Flexible perfumado con
 llavero de regalo** (`cepillo-definidor-lila`): Rosa bebé (frutilla), Lila (uva, con la foto lila de antes) y

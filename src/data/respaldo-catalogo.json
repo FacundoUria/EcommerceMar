@@ -1100,6 +1100,29 @@
    ]
   },
   {
+   "id": "han-mascara-action-plex",
+   "nombre": "Máscara Capilar Action Plex Solution",
+   "nombre_corto": "Máscara Action Plex Solution",
+   "marca": "HAN",
+   "categoria_id": "tratamientos",
+   "precio": 16000,
+   "tamano": "200 cm³",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/af56f9d0-110d-4003-981d-07908466db5d-667.webp"
+   ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
+   "variantes": []
+  },
+  {
    "id": "mascara-han-alfa-keratina",
    "nombre": "Máscara Capilar Alfa Keratina",
    "nombre_corto": "Máscara Capilar Alfa Keratina",

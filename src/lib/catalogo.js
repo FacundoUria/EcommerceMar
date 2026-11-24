@@ -47,9 +47,10 @@ function armarProducto({ id, nombre, nombreCorto, marca, tamano, categoria, prec
     variantes: vs,
     // Todas sus variantes son colores: la ficha las muestra como cuadraditos de color
     ...(vs.length && vs.every((v) => v.color) && { deColores: true }),
-    // Sin selector de color (config/color.js), solo si no tiene variantes: "color a coordinar" o un único color
-    ...(!vs.length && COLOR_A_COORDINAR.includes(id) && { colorACoordinar: true }),
-    ...(!vs.length && COLOR_UNICO[id] && { colorUnico: COLOR_UNICO[id] }),
+    // Sin selector de color (config/color.js), solo si ninguna variante es un color: "color a coordinar" o un
+    // único color
+    ...(!vs.some((v) => v.color) && COLOR_A_COORDINAR.includes(id) && { colorACoordinar: true }),
+    ...(!vs.some((v) => v.color) && COLOR_UNICO[id] && { colorUnico: COLOR_UNICO[id] }),
     ...(alias?.length && { alias }),
     ...(destacado && { destacado: true }),
     ...(activo === false && { activo: false }),

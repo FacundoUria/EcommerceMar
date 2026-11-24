@@ -30,6 +30,12 @@ function leerStorage() {
 
 const limitar = (n) => Math.max(1, Math.min(MAX_CANTIDAD, Math.floor(n) || 1));
 
+// "Amarillo (limón)" y "Amarillo · limón" son la misma variante escrita de otra forma (Mar cambió el formato
+// de los cepillos perfumados): un carrito guardado con el nombre viejo no pierde el color.
+const formaVariante = (nombre) => nombre.toLowerCase().replace(/[()·]/g, ' ').replace(/\s+/g, ' ').trim();
+const buscarVariante = (variantes = [], nombre) =>
+  variantes.find((v) => v.nombre === nombre) ?? variantes.find((v) => formaVariante(v.nombre) === formaVariante(nombre));
+
 function reducer(lineas, accion) {
   switch (accion.type) {
     case 'agregar': {
@@ -67,12 +73,13 @@ function reducer(lineas, accion) {
       // Los precios cambian seguido: al cargar el catálogo, actualizamos precio/nombre de lo guardado y
       // sacamos productos que ya no existen (o están ocultos). Si la variante guardada ya no existe (se
       // renombró o se sacó), la línea queda como el producto sin variante; si ya había una así, se suman.
+      // Si solo cambió la forma de escribirla ("X (y)" → "X · y"), pasa al nombre nuevo.
       const porId = new Map(accion.productos.map((p) => [p.id, p]));
       const resultado = [];
       for (const l of lineas) {
         const p = porId.get(l.id);
         if (!p) continue;
-        const variante = l.variante ? p.variantes?.find((v) => v.nombre === l.variante) : null;
+        const variante = l.variante ? buscarVariante(p.variantes, l.variante) : null;
         const existe = !l.variante || !!variante;
         // Lo elegido en un kit que el kit ya no pide (Mar sacó ese selector) se descarta
         const claves = new Set((p.elecciones ?? []).map((e) => e.clave));
@@ -87,8 +94,8 @@ function reducer(lineas, accion) {
           ...(p.promo && { promo: p.promo.nombre }),
           ...(elecciones.length && { elecciones }),
           ...(p.colorACoordinar && { colorACoordinar: true }),
-          ...(existe ? {} : { variante: null, imagen: p.imagen }),
-          clave: claveLinea(p.id, existe ? l.variante : null, elecciones),
+          ...(existe ? variante && { variante: variante.nombre } : { variante: null, imagen: p.imagen }),
+          clave: claveLinea(p.id, variante?.nombre ?? null, elecciones),
         };
         const igual = resultado.find((r) => r.clave === linea.clave);
         if (igual) igual.cantidad = limitar(igual.cantidad + linea.cantidad);

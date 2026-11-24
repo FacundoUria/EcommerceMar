@@ -2801,19 +2801,19 @@
     {
      "foto": null,
      "orden": 2,
-     "nombre": "Lila (uva)",
+     "nombre": "Lila · uva",
      "precio": null
     },
     {
      "foto": null,
      "orden": 1,
-     "nombre": "Rojo (frutilla)",
+     "nombre": "Rojo · frutilla",
      "precio": null
     },
     {
      "foto": null,
      "orden": 3,
-     "nombre": "Verde agua (manzana)",
+     "nombre": "Verde agua · manzana",
      "precio": null
     }
    ]
@@ -2885,19 +2885,19 @@
     {
      "foto": null,
      "orden": 1,
-     "nombre": "Amarillo (limón)",
+     "nombre": "Amarillo · limón",
      "precio": null
     },
     {
      "foto": null,
      "orden": 3,
-     "nombre": "Rojo (frutilla)",
+     "nombre": "Rojo · frutilla",
      "precio": null
     },
     {
      "foto": null,
      "orden": 2,
-     "nombre": "Verde agua (manzana)",
+     "nombre": "Verde agua · manzana",
      "precio": null
     }
    ]

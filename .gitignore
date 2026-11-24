@@ -46,3 +46,6 @@ assets/productos/originales/
 
 # envíos: tabla de tarifas de MC Mensajería que mandó Mar (los precios están en src/config/envios.js)
 assets/envios/originales/
+
+# respaldos de la base antes de cargas grandes (filas completas de Supabase, solo locales)
+assets/respaldos/

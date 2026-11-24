@@ -2881,7 +2881,26 @@
    "solo_en_promo": false,
    "incluye": null,
    "elecciones": [],
-   "variantes": []
+   "variantes": [
+    {
+     "foto": null,
+     "orden": 1,
+     "nombre": "Amarillo (limón)",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 3,
+     "nombre": "Rojo (frutilla)",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 2,
+     "nombre": "Verde agua (manzana)",
+     "precio": null
+    }
+   ]
   },
   {
    "id": "cepillo-pirulito-2",

@@ -41,7 +41,7 @@ Solución de Alfa Keratina, Kids Hidra Multy y Suero Argan Oil se publicaron con
 |---|---|---|---|---|---|
 | 1 | Kleno | Perfect Curly Acondicionador Rulos Perfectos | 350 cc | `kleno-acondicionador` | precio y foto |
 | 2 | HAN | Máscara Capilar Action Plex Solution (24/11) | 200 cm³ | `han-mascara-action-plex` | **precio** (foto y descripción ya están) |
-| 3 | Dompel | Cepillo Definidor Flexible con mini llavero perfumado (24/11: foto nueva, descripción y colores Rosa bebé, Lila y Verde oscuro) | — | `cepillo-definidor-lila` | **precio** |
+| 3 | Dompel | Cepillo Dompel Flexible perfumado con llavero de regalo (24/11: foto nueva, descripción y colores Rosa bebé, Lila y Verde oscuro, confirmados por Mar) | — | `cepillo-definidor-lila` | **precio** |
 
 ## 2. Bekim Supreme Fixer con dosificador: ¿300 ml u 800 g?
 
@@ -277,7 +277,7 @@ Fotos originales en `assets/productos/originales/2026-11-24/` (no se suben al re
 | **Tratamientos Skala Expert 1 kg** (`skala-expert-tratamientos`) | $ 7.000 | Manteca de Karité, Óleo de Argán, Aguacate, Vitamina, Biotina, Restauração Espetacular 12 em 1 (6) |
 | **Cremas 2 en 1 Skala 1 kg** (`cremas-skala`) | $ 6.900 | Mais Cachinhos, Dona Skala, Divina Cor, Divino Potão, Mais Cachos, Cachonados, Potão do Amor, Divino Potinho, Mais Crespos, Maionese Capilar, Amido de Milho, Coquetel de Frutas Family, Mais Lisos, Glicólico 3 em 1, Raízes do Morro, Jaborandi, Caju, Babosa, Açaí, Banana, Mango, Maracujá, Melancia, Uva, Morango, Cereja, Cacau, Coco, Coquetel de Frutas 3 em 1 (29) |
 
-Confirmar:
+**Confirmado por Mar (24/11): quedan así.** Cómo se decidió:
 
 1. **Pasaron de Expert a 2 en 1 por el criterio** (pote de color): Amido de Milho (lo pidió Mar), Mais Lisos y
    Glicólico (venían en el álbum de «2 en 1 que faltan») y **Maionese Capilar y Coquetel de Frutas Family**
@@ -288,17 +288,16 @@ Confirmar:
    2 en 1 (Cachonados es la mini-card del inicio).
 4. Nuevas en 2 en 1: Açaí, Mango (Frutástica), Jaborandi (Botânica) y Raízes do Morro.
 
-**Colores sin identificar (no se tocaron):**
+**Pirulito (confirmado por Mar):** es `cepillo-pirulito` (el espiral redondito de Dompel). Colores perfumados:
+Amarillo (limón), Verde agua (manzana) y Rojo (frutilla), sin foto propia: los chips muestran la foto del
+producto (verde, coral y violeta, sin amarillo). **Pendiente:** una foto con estos 3 colores (se cambia desde
+/admin).
 
-- **Pirulito** (Amarillo/limón, Verde agua/manzana, Rojo/frutilla): hay dos candidatos. `cepillo-pirulito`
-  (Espiral Dompel, $ 8.000: la forma de chupetín; foto verde, coral y violeta) y `cepillo-pirulito-2` (Curvo
-  Ventilado, $ 9.000: en su Tiendanube se llamaba «cepillo pirulito»; foto menta, rosa, violeta y negro).
-  Ninguna foto tiene amarillo. ¿Cuál es?
-- **Scrunchies** («color a coordinar»): no hay un producto scrunchie suelto, solo dentro del Kit Antifrizz.
+**Scrunchies** («color a coordinar»): no hay un producto scrunchie suelto, solo dentro del Kit Antifrizz.
 
-**Asignado por la foto (confirmar):** el «Flexible perfumado con llavero (¿Dompel?)» se cargó en el Dompel
-(`cepillo-definidor-lila`, oculto): Rosa bebé (frutilla), Lila (uva, con la foto lila de antes) y Verde oscuro
-(manzana). En la foto 15.00.55 se ven un lila y un verde claro, no oscuro.
+**Dompel Flexible (confirmado por Mar):** la foto 15.00.55 es el **Cepillo Dompel Flexible perfumado con
+llavero de regalo** (`cepillo-definidor-lila`): Rosa bebé (frutilla), Lila (uva, con la foto lila de antes) y
+Verde oscuro (manzana). Sigue oculto hasta que Mar pase el precio.
 
 **Fotos que se perdieron al cambiar colores:** la del tenedor «en la mano» (era la de la variante Lila, que
 ya no existe). El viral Rosa pasó a Rosa rojizo con su foto.

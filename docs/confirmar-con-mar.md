@@ -23,10 +23,9 @@ transferencia. Confirmar:
    - Las dos listas se toman solas del catálogo: si Mar oculta o agrega una variante, el kit se actualiza.
 3. **Kit Kleno** ($ 38.000, antes $ 49.000): Shampoo Rulos Perfectos, Crema de Peinar Definition, Activador
    de Rulos en gel y Mousse Rulos Definidos. ¿Son esos cuatro?
-4. **Kit Antifrizz** ($ 17.000, antes $ 27.000): cofia, funda y scrunchie de satén. «Elegí el color»
-   **provisorio** con los colores de la foto de las cofias: **Rosa, Durazno, Fucsia, Lila, Azul, Negro**.
-   ¿Cuáles hay? ¿La funda y el scrunchie vienen del mismo color? **No hay foto del scrunchie**: la foto del
-   kit tiene las cofias y la funda.
+4. **Kit Antifrizz** ($ 17.000, antes $ 27.000): cofia, funda y scrunchie de satén. **Resuelto (24/11):**
+   sin selector de color; la ficha dice «El color lo coordinás con Mar por WhatsApp» y el pedido «Kit
+   Antifrizz (color a coordinar)». **No hay foto del scrunchie**: la foto del kit tiene las cofias y la funda.
 5. **Fotos de los kits**: armadas con las fotos reales de cada producto sobre el arena de la marca. Las de
    Kleno y el Supreme Fixer miden 225 px: el Kit Kleno se ve algo blando. Si Mar tiene fotos mejores, se
    cambian desde /admin.
@@ -34,19 +33,15 @@ transferencia. Confirmar:
 
 ## 1. Productos ocultos: falta precio y foto
 
-Están cargados con la descripción de Mar, pero ocultos y sin precio: no se ven en la tienda, la rutina, los
-carruseles, la búsqueda ni el chat. Para publicarlos hace falta **el precio y una foto** de cada uno.
-Ninguno vino en la tanda del 23/11 (los demás de esta lista ya se publicaron con esa tanda).
+Están cargados con la descripción de Mar, pero ocultos: no se ven en la tienda, la rutina, los carruseles,
+la búsqueda ni el chat. Para publicarlos hace falta **el precio** (y una foto, si no tiene). In One, Chiclete,
+Solución de Alfa Keratina, Kids Hidra Multy y Suero Argan Oil se publicaron con la tanda del 24/11.
 
-| # | Marca | Producto | Tamaño | id | Foto |
+| # | Marca | Producto | Tamaño | id | Falta |
 |---|---|---|---|---|---|
-| 1 | HAN | Tonificante Multipropósito In One | 200 cc | `han-tonificante-in-one` | falta |
-| 2 | Salon Line | S.O.S Cachos Kids Hidratação Chiclete Activador de Rulos | 300 ml | `salon-line-kids-chiclete` | falta (el 23/11 vino la **Gelatina** S.O.S Cachos Kids 400 g: es otro producto, `salon-line-kids-gelatina`) |
-| 3 | HAN | Solución de Alfa Keratina Extra Ácida Anti Frizz | 200 cc | `han-alfa-keratina-solucion` | falta |
-| 4 | Salon Line | Kids Hidra Multy Crema Multifuncional 4 en 1 | 300 ml | `salon-line-kids-hidra-multy` | falta |
-| 5 | HAN | Suero Oleoso Argan Oil | 85 cc | `han-suero-argan` | falta |
-| 6 | Kleno | Perfect Curly Acondicionador Rulos Perfectos | 350 cc | `kleno-acondicionador` | falta |
-| 7 | Dompel | Cepillo Definidor Flexible con Bordes Dentados (Lila) | — | `cepillo-definidor-lila` | hay (`cepillo-definidor-lila.jpg`, ex `VERIFICAR-cepillo-violeta`): confirmar que es este cepillo; es chica (224 px) |
+| 1 | Kleno | Perfect Curly Acondicionador Rulos Perfectos | 350 cc | `kleno-acondicionador` | precio y foto |
+| 2 | HAN | Máscara Capilar Action Plex Solution (24/11) | 200 cm³ | `han-mascara-action-plex` | **precio** (foto y descripción ya están) |
+| 3 | Dompel | Cepillo Definidor Flexible con mini llavero perfumado (24/11: foto nueva, descripción y colores Rosa bebé, Lila y Verde oscuro) | — | `cepillo-definidor-lila` | **precio** |
 
 ## 2. Bekim Supreme Fixer con dosificador: ¿300 ml u 800 g?
 
@@ -155,7 +150,21 @@ Ideal: la foto original del proveedor, de 1000 px o más. Se reemplazan desde /a
 | Cremas de Peinar Naturals (Frenzzi) | Cebolla & Ginseng, Almendras Dulces & Chía, Arándanos | 554×554 |
 | Activadores #todecacho (Salon Line) | Cachos dos Sonhos | 554×554 |
 | Cepillo Definidor viral | foto principal (los 5 colores) / Rosa | 554×554 / 447×447 |
-| Cepillo Definidor tenedor | Lila (la foto de antes, en la mano) | 387×387 |
+
+**Tanda del 24/11** (se subieron igual; en la ficha quedan chicas):
+
+| Producto | Foto (variante) | Medida que llegó |
+|---|---|---|
+| In One Tonificante (HAN) | — | **185×218** |
+| Solución de Alfa Keratina (HAN) | — | **185×216** |
+| Suero Oleoso Argan Oil (HAN) | — | **224×224** |
+| Kids Hidra Multy 4 en 1 (Salon Line) | — | **224×224** |
+| Cremas 2 en 1 Skala | Açaí / Mango | **224×224** |
+| Tónico Capilar Biotina (HAN) | — | 387×516 |
+| Cepillo Dompel con mini llavero (oculto) | — | 399×501 |
+| Máscara Action Plex (HAN, oculta) | — | 459×667 |
+
+La foto 14.39.42 (Restauração Espetacular, 199×234) no se usó: la que ya estaba es más grande (469 px).
 
 ## 8. Datos que se asumieron al cargar (nov 2026)
 
@@ -194,6 +203,8 @@ Ideal: la foto original del proveedor, de 1000 px o más. Se reemplazan desde /a
 
 ## 9. Cremas Skala 1 kg: variantes nuevas para confirmar
 
+**24/11:** reclasificadas con el criterio de Mar (sección 12). Lo de abajo es cómo quedaron el 23/11.
+
 Las 18 fotos de cremas 2 en 1 del 23/11 (álbum de las 11:48 + 11.49.02) **no coinciden con ninguna de las 9
 variantes que ya estaban**: se agregaron como **17 variantes nuevas** (visibles). Confirmar que las vende
 todas y a esos precios:
@@ -228,6 +239,9 @@ Están en `assets/productos/originales/2026-11-23/` (no se suben al repo).
 
 ## 11. Cepillos definidores (23/11, noche)
 
+**24/11:** Mar mandó los colores de todos los cepillos (sección 12): reemplazan a los de esta tabla y
+responden las preguntas 2, 3 y 5.
+
 Cada cepillo quedó como **un solo producto con variantes de color** (no hay un producto por color). Precio
 igual para todos los colores.
 
@@ -251,3 +265,47 @@ Confirmar:
    rectangular con bordes en ondas) y el **Dompel lila** (`cepillo-definidor-lila`, oculto).
 7. Los carritos que ya tenían el viral (antes era solo el rosa) siguen andando, con el precio de Black
    Friday, pero el pedido dice «Cepillo Definidor viral» sin el color.
+
+## 12. Tanda del 24/11
+
+Fotos originales en `assets/productos/originales/2026-11-24/` (no se suben al repo).
+
+**Skala 1 kg con el criterio de Mar** (potes de colores = 2 en 1; potes negros de tratamiento = Expert):
+
+| Producto | Precio | Variantes |
+|---|---|---|
+| **Tratamientos Skala Expert 1 kg** (`skala-expert-tratamientos`) | $ 7.000 | Manteca de Karité, Óleo de Argán, Aguacate, Vitamina, Biotina, Restauração Espetacular 12 em 1 (6) |
+| **Cremas 2 en 1 Skala 1 kg** (`cremas-skala`) | $ 6.900 | Mais Cachinhos, Dona Skala, Divina Cor, Divino Potão, Mais Cachos, Cachonados, Potão do Amor, Divino Potinho, Mais Crespos, Maionese Capilar, Amido de Milho, Coquetel de Frutas Family, Mais Lisos, Glicólico 3 em 1, Raízes do Morro, Jaborandi, Caju, Babosa, Açaí, Banana, Mango, Maracujá, Melancia, Uva, Morango, Cereja, Cacau, Coco, Coquetel de Frutas 3 em 1 (29) |
+
+Confirmar:
+
+1. **Pasaron de Expert a 2 en 1 por el criterio** (pote de color): Amido de Milho (lo pidió Mar), Mais Lisos y
+   Glicólico (venían en el álbum de «2 en 1 que faltan») y **Maionese Capilar y Coquetel de Frutas Family**
+   (no venían en el álbum, pero el pote es de color y dice «2 em 1»).
+2. **Vitamina y Biotina** tienen pote **blanco** (no negro): quedaron en Expert porque son tratamientos («Bomba
+   de Vitaminas / de Biotina»), están en la foto grupal de Expert y la descripción de Mar los nombra.
+3. **Cachonados y Divina Cor** tienen pote negro, pero son las 2 en 1 de peinar (con ilustración): quedaron en
+   2 en 1 (Cachonados es la mini-card del inicio).
+4. Nuevas en 2 en 1: Açaí, Mango (Frutástica), Jaborandi (Botânica) y Raízes do Morro.
+
+**Colores sin identificar (no se tocaron):**
+
+- **Pirulito** (Amarillo/limón, Verde agua/manzana, Rojo/frutilla): hay dos candidatos. `cepillo-pirulito`
+  (Espiral Dompel, $ 8.000: la forma de chupetín; foto verde, coral y violeta) y `cepillo-pirulito-2` (Curvo
+  Ventilado, $ 9.000: en su Tiendanube se llamaba «cepillo pirulito»; foto menta, rosa, violeta y negro).
+  Ninguna foto tiene amarillo. ¿Cuál es?
+- **Scrunchies** («color a coordinar»): no hay un producto scrunchie suelto, solo dentro del Kit Antifrizz.
+
+**Asignado por la foto (confirmar):** el «Flexible perfumado con llavero (¿Dompel?)» se cargó en el Dompel
+(`cepillo-definidor-lila`, oculto): Rosa bebé (frutilla), Lila (uva, con la foto lila de antes) y Verde oscuro
+(manzana). En la foto 15.00.55 se ven un lila y un verde claro, no oscuro.
+
+**Fotos que se perdieron al cambiar colores:** la del tenedor «en la mano» (era la de la variante Lila, que
+ya no existe). El viral Rosa pasó a Rosa rojizo con su foto.
+
+**Sin selector de color** (`src/config/color.js`, solo mientras el producto no tenga variantes):
+- Color a coordinar (ficha y pedido): Kit Antifrizz, Ondulador, Cofia XL, Cofia Long y Gorro difusor.
+- Un solo color: Sujetadores articulados (trabas cocodrilo) → «Color: Negro» en la ficha.
+
+**Carritos viejos:** si tenían un color que ya no existe (viral Rosa o Beige, practiplopping «Microfibra» o
+«Algodón», tenedor, Restauração en 2 en 1), la línea queda como el producto sin color y el pedido va sin color.

@@ -195,9 +195,9 @@
    "elecciones": [],
    "variantes": [
     {
-     "foto": "/img/productos/shampoo-han-detox.webp",
-     "orden": 1,
-     "nombre": "Carbón Activado",
+     "foto": "/img/productos/shampoo-han-acido-hialuronico.webp",
+     "orden": 7,
+     "nombre": "Ácido hialurónico",
      "precio": null
     },
     {
@@ -207,15 +207,27 @@
      "precio": null
     },
     {
+     "foto": "/img/productos/shampoo-han-avena-miel.webp",
+     "orden": 6,
+     "nombre": "Avena & Miel",
+     "precio": null
+    },
+    {
      "foto": "/img/productos/shampoo-han-biotina.webp",
      "orden": 3,
      "nombre": "Biotina + Ácido Hialurónico",
      "precio": null
     },
     {
-     "foto": "/img/productos/shampoo-han-rulos.webp",
-     "orden": 4,
-     "nombre": "Rulos Definidos",
+     "foto": "/img/productos/shampoo-han-detox.webp",
+     "orden": 1,
+     "nombre": "Carbón Activado",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/shampoo-han-lino.webp",
+     "orden": 8,
+     "nombre": "Lino",
      "precio": null
     },
     {
@@ -225,21 +237,9 @@
      "precio": null
     },
     {
-     "foto": "/img/productos/shampoo-han-avena-miel.webp",
-     "orden": 6,
-     "nombre": "Avena & Miel",
-     "precio": null
-    },
-    {
-     "foto": "/img/productos/shampoo-han-acido-hialuronico.webp",
-     "orden": 7,
-     "nombre": "Ácido hialurónico",
-     "precio": null
-    },
-    {
-     "foto": "/img/productos/shampoo-han-lino.webp",
-     "orden": 8,
-     "nombre": "Lino",
+     "foto": "/img/productos/shampoo-han-rulos.webp",
+     "orden": 4,
+     "nombre": "Rulos Definidos",
      "precio": null
     }
    ]
@@ -336,9 +336,9 @@
    "elecciones": [],
    "variantes": [
     {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/51ceeb91-cdee-451f-a7c8-68de5e3b6b7e-447.webp",
-     "orden": 1,
-     "nombre": "Avena & Miel",
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/233e1b02-84cb-4b26-a16d-5dc4129eb306-240.webp",
+     "orden": 6,
+     "nombre": "Ácido Hialurónico",
      "precio": null
     },
     {
@@ -348,9 +348,15 @@
      "precio": null
     },
     {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1163335e-8af3-47dc-8323-6ef6bd605ac2-447.webp",
-     "orden": 4,
-     "nombre": "Rulos Definidos",
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/51ceeb91-cdee-451f-a7c8-68de5e3b6b7e-447.webp",
+     "orden": 1,
+     "nombre": "Avena & Miel",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/03e7c51a-18de-498a-aa41-d4161e71d04a-473.webp",
+     "orden": 3,
+     "nombre": "Biotina & Ácido Hialurónico",
      "precio": null
     },
     {
@@ -360,15 +366,9 @@
      "precio": null
     },
     {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/233e1b02-84cb-4b26-a16d-5dc4129eb306-240.webp",
-     "orden": 6,
-     "nombre": "Ácido Hialurónico",
-     "precio": null
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/03e7c51a-18de-498a-aa41-d4161e71d04a-473.webp",
-     "orden": 3,
-     "nombre": "Biotina & Ácido Hialurónico",
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1163335e-8af3-47dc-8323-6ef6bd605ac2-447.webp",
+     "orden": 4,
+     "nombre": "Rulos Definidos",
      "precio": null
     }
    ]
@@ -478,15 +478,69 @@
    "elecciones": [],
    "variantes": [
     {
-     "foto": "/img/productos/cremas-skala-mais-cachinhos.webp",
-     "orden": 1,
-     "nombre": "Mais Cachinhos",
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9b8258b1-22fa-4f76-aa95-bc6f49fd1b24-224.webp",
+     "orden": 19,
+     "nombre": "Açaí",
      "precio": null
     },
     {
-     "foto": "/img/productos/cremas-skala-dona-skala.webp",
-     "orden": 2,
-     "nombre": "Dona Skala",
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1e863590-d9dc-430a-a4da-6d45cb66d708-460.webp",
+     "orden": 11,
+     "nombre": "Amido de Milho",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a547f3a8-11d7-467e-82f3-dc6616c5988d-506.webp",
+     "orden": 18,
+     "nombre": "Babosa",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5b3b43ff-6940-4610-a606-e38935279cda-507.webp",
+     "orden": 20,
+     "nombre": "Banana",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/f5152d78-902a-48e3-8942-34abfad0b62c-400.webp",
+     "orden": 27,
+     "nombre": "Cacau",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/cremas-skala-cachonados.webp",
+     "orden": 6,
+     "nombre": "Cachonados",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/4de336a2-d0d5-40cf-9f61-83241949edf0-223.webp",
+     "orden": 17,
+     "nombre": "Caju",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d514ba13-0b7e-4393-97fe-599941afbb9e-366.webp",
+     "orden": 26,
+     "nombre": "Cereja",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8ee9e4a2-c7f2-41bb-b5ac-6ca4875bcb18-512.webp",
+     "orden": 28,
+     "nombre": "Coco",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/2a063155-5658-4d5f-a89b-3d6e8724a78b-430.webp",
+     "orden": 29,
+     "nombre": "Coquetel de Frutas 3 em 1",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/6a6fd0f8-003d-4ef8-8115-49eece81d5b2-488.webp",
+     "orden": 12,
+     "nombre": "Coquetel de Frutas Family",
      "precio": null
     },
     {
@@ -502,27 +556,45 @@
      "precio": null
     },
     {
-     "foto": "/img/productos/cremas-skala-mais-cachos.webp",
-     "orden": 5,
-     "nombre": "Mais Cachos",
-     "precio": null
-    },
-    {
-     "foto": "/img/productos/cremas-skala-cachonados.webp",
-     "orden": 6,
-     "nombre": "Cachonados",
-     "precio": null
-    },
-    {
-     "foto": "/img/productos/cremas-skala-potao-do-amor.webp",
-     "orden": 7,
-     "nombre": "Potão do Amor",
-     "precio": null
-    },
-    {
      "foto": "/img/productos/cremas-skala-divino-potinho.webp",
      "orden": 8,
      "nombre": "Divino Potinho",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/cremas-skala-dona-skala.webp",
+     "orden": 2,
+     "nombre": "Dona Skala",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/240aa27e-7e3a-4752-bb42-e0d93eddf558-309.webp",
+     "orden": 14,
+     "nombre": "Glicólico 3 em 1",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/6f215915-d963-444f-86fd-680d4514147d-1024.webp",
+     "orden": 16,
+     "nombre": "Jaborandi",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d6b5401b-4c05-4974-b9fe-4c1e19a458b9-447.webp",
+     "orden": 10,
+     "nombre": "Maionese Capilar",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/cremas-skala-mais-cachinhos.webp",
+     "orden": 1,
+     "nombre": "Mais Cachinhos",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/cremas-skala-mais-cachos.webp",
+     "orden": 5,
+     "nombre": "Mais Cachos",
      "precio": null
     },
     {
@@ -532,75 +604,51 @@
      "precio": null
     },
     {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/82408e6e-4f78-4455-b675-8ad26ed8d096-469.webp",
-     "orden": 10,
-     "nombre": "Restauração Espetacular 12 em 1",
-     "precio": null
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/4de336a2-d0d5-40cf-9f61-83241949edf0-223.webp",
-     "orden": 11,
-     "nombre": "Caju",
-     "precio": null
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a547f3a8-11d7-467e-82f3-dc6616c5988d-506.webp",
-     "orden": 12,
-     "nombre": "Babosa",
-     "precio": null
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5b3b43ff-6940-4610-a606-e38935279cda-507.webp",
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5a4b4d1a-79cc-4bfa-a9ae-9f7eb2e79367-353.webp",
      "orden": 13,
-     "nombre": "Banana",
+     "nombre": "Mais Lisos",
+     "precio": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d9e17381-741a-4263-82cb-8483fadcd7c0-224.webp",
+     "orden": 21,
+     "nombre": "Mango",
      "precio": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/57b16e3c-582c-4396-9d17-7f48bbe09584-447.webp",
-     "orden": 14,
+     "orden": 22,
      "nombre": "Maracujá",
      "precio": null
     },
     {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/f4e8d5e1-551a-4362-8515-8ce3bf25e68b-383.webp",
-     "orden": 15,
+     "orden": 23,
      "nombre": "Melancia",
      "precio": null
     },
     {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/ce326a0a-0cf7-494b-890b-51102f097b98-506.webp",
-     "orden": 16,
-     "nombre": "Uva",
-     "precio": null
-    },
-    {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/2cc166d0-0ae4-495b-938b-2d52722cccff-420.webp",
-     "orden": 17,
+     "orden": 25,
      "nombre": "Morango",
      "precio": null
     },
     {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d514ba13-0b7e-4393-97fe-599941afbb9e-366.webp",
-     "orden": 18,
-     "nombre": "Cereja",
+     "foto": "/img/productos/cremas-skala-potao-do-amor.webp",
+     "orden": 7,
+     "nombre": "Potão do Amor",
      "precio": null
     },
     {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/f5152d78-902a-48e3-8942-34abfad0b62c-400.webp",
-     "orden": 19,
-     "nombre": "Cacau",
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/7aa592f8-ae19-4040-a261-6a6dc0516b66-1200.webp",
+     "orden": 15,
+     "nombre": "Raízes do Morro",
      "precio": null
     },
     {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8ee9e4a2-c7f2-41bb-b5ac-6ca4875bcb18-512.webp",
-     "orden": 20,
-     "nombre": "Coco",
-     "precio": null
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/2a063155-5658-4d5f-a89b-3d6e8724a78b-430.webp",
-     "orden": 21,
-     "nombre": "Coquetel de Frutas 3 em 1",
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/ce326a0a-0cf7-494b-890b-51102f097b98-506.webp",
+     "orden": 24,
+     "nombre": "Uva",
      "precio": null
     }
    ]
@@ -674,15 +722,15 @@
    "elecciones": [],
    "variantes": [
     {
-     "foto": "/img/productos/crema-bekim-memory.webp",
-     "orden": 1,
-     "nombre": "Memory",
-     "precio": null
-    },
-    {
      "foto": "/img/productos/crema-bekim-argan.webp",
      "orden": 2,
      "nombre": "Argán",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/crema-bekim-memory.webp",
+     "orden": 1,
+     "nombre": "Memory",
      "precio": null
     }
    ]
@@ -722,6 +770,29 @@
      "precio": null
     }
    ]
+  },
+  {
+   "id": "salon-line-kids-hidra-multy",
+   "nombre": "Kids Hidra Multy Crema Multifuncional 4 en 1",
+   "nombre_corto": "Kids Hidra Multy 4 en 1",
+   "marca": "Salon Line",
+   "categoria_id": "cremas-peinar",
+   "precio": 18000,
+   "tamano": "300 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/01e202fd-0bb8-48c6-a008-21a5d5c17019-224.webp"
+   ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
+   "variantes": []
   },
   {
    "id": "curl-girl-curling-cream",
@@ -805,6 +876,12 @@
    "elecciones": [],
    "variantes": [
     {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1183e272-75ae-440c-bdb3-c913731a743d-554.webp",
+     "orden": 1,
+     "nombre": "Almendras Dulces y Chía",
+     "precio": null
+    },
+    {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c4e366e1-ee1c-46b0-a9b4-288aab727f3b-554.webp",
      "orden": 2,
      "nombre": "Arándanos",
@@ -814,12 +891,6 @@
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d5ed517b-ff3d-445f-b0f9-218fa8a185f4-554.webp",
      "orden": 3,
      "nombre": "Cebolla y Ginseng",
-     "precio": null
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1183e272-75ae-440c-bdb3-c913731a743d-554.webp",
-     "orden": 1,
-     "nombre": "Almendras Dulces y Chía",
      "precio": null
     }
    ]
@@ -893,9 +964,9 @@
    "elecciones": [],
    "variantes": [
     {
-     "foto": "/img/productos/mascarillas-lola-milagre.webp",
-     "orden": 1,
-     "nombre": "Milagre",
+     "foto": "/img/productos/mascarillas-lola-danos-vorazes.webp",
+     "orden": 3,
+     "nombre": "Danos Vorazes",
      "precio": null
     },
     {
@@ -905,9 +976,9 @@
      "precio": null
     },
     {
-     "foto": "/img/productos/mascarillas-lola-danos-vorazes.webp",
-     "orden": 3,
-     "nombre": "Danos Vorazes",
+     "foto": "/img/productos/mascarillas-lola-milagre.webp",
+     "orden": 1,
+     "nombre": "Milagre",
      "precio": null
     },
     {
@@ -941,27 +1012,27 @@
    "elecciones": [],
    "variantes": [
     {
-     "foto": "/img/productos/tratamientos-fidelite-coco-vainilla.webp",
-     "orden": 1,
-     "nombre": "Coco y Vainilla",
-     "precio": null
-    },
-    {
      "foto": "/img/productos/tratamientos-fidelite-almendras.webp",
      "orden": 2,
      "nombre": "Almendras",
      "precio": null
     },
     {
-     "foto": "/img/productos/tratamientos-fidelite-keratina.webp",
-     "orden": 3,
-     "nombre": "Keratina",
+     "foto": "/img/productos/tratamientos-fidelite-coco-vainilla.webp",
+     "orden": 1,
+     "nombre": "Coco y Vainilla",
      "precio": null
     },
     {
      "foto": null,
      "orden": 4,
      "nombre": "Colormaster Crema Ácida",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/tratamientos-fidelite-keratina.webp",
+     "orden": 3,
+     "nombre": "Keratina",
      "precio": null
     }
    ]
@@ -1142,33 +1213,9 @@
      "precio": null
     },
     {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/22da3284-285c-4226-8b41-c4bb012f0ee6-458.webp",
-     "orden": 4,
-     "nombre": "Vitamina",
-     "precio": null
-    },
-    {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/0530e30b-0551-45d1-acec-a7b1be52128a-568.webp",
      "orden": 5,
      "nombre": "Biotina",
-     "precio": null
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d6b5401b-4c05-4974-b9fe-4c1e19a458b9-447.webp",
-     "orden": 6,
-     "nombre": "Maionese Capilar",
-     "precio": null
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1e863590-d9dc-430a-a4da-6d45cb66d708-460.webp",
-     "orden": 7,
-     "nombre": "Amido de Milho",
-     "precio": null
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/6a6fd0f8-003d-4ef8-8115-49eece81d5b2-488.webp",
-     "orden": 8,
-     "nombre": "Coquetel de Frutas Family",
      "precio": null
     },
     {
@@ -1184,15 +1231,15 @@
      "precio": null
     },
     {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5a4b4d1a-79cc-4bfa-a9ae-9f7eb2e79367-353.webp",
-     "orden": 9,
-     "nombre": "Mais Lisos",
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/82408e6e-4f78-4455-b675-8ad26ed8d096-469.webp",
+     "orden": 6,
+     "nombre": "Restauração Espetacular 12 em 1",
      "precio": null
     },
     {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/240aa27e-7e3a-4752-bb42-e0d93eddf558-309.webp",
-     "orden": 10,
-     "nombre": "Glicólico 3 em 1",
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/22da3284-285c-4226-8b41-c4bb012f0ee6-458.webp",
+     "orden": 4,
+     "nombre": "Vitamina",
      "precio": null
     }
    ]
@@ -1335,9 +1382,9 @@
    "elecciones": [],
    "variantes": [
     {
-     "foto": "/img/productos/gelatinas-500gr-ostentacao.webp",
-     "orden": 1,
-     "nombre": "Ostentação",
+     "foto": "/img/productos/gelatinas-500gr-7x.webp",
+     "orden": 3,
+     "nombre": "Amarilla 72 h",
      "precio": null
     },
     {
@@ -1347,21 +1394,21 @@
      "precio": null
     },
     {
-     "foto": "/img/productos/gelatinas-500gr-7x.webp",
-     "orden": 3,
-     "nombre": "Amarilla 72 h",
-     "precio": null
-    },
-    {
-     "foto": "/img/productos/gelatinas-500gr-14x.webp",
-     "orden": 4,
-     "nombre": "Verde 72 h",
+     "foto": "/img/productos/gelatinas-500gr-ostentacao.webp",
+     "orden": 1,
+     "nombre": "Ostentação",
      "precio": null
     },
     {
      "foto": "/img/productos/gelatinas-500gr-transicao.webp",
      "orden": 5,
      "nombre": "Super Transição",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/gelatinas-500gr-14x.webp",
+     "orden": 4,
+     "nombre": "Verde 72 h",
      "precio": null
     }
    ]
@@ -1389,9 +1436,9 @@
    "elecciones": [],
    "variantes": [
     {
-     "foto": "/img/productos/gelatinas-kids-melao.webp",
-     "orden": 1,
-     "nombre": "Melão",
+     "foto": "/img/productos/gelatinas-kids-acai.webp",
+     "orden": 4,
+     "nombre": "Açaí",
      "precio": null
     },
     {
@@ -1401,15 +1448,15 @@
      "precio": null
     },
     {
-     "foto": "/img/productos/gelatinas-kids-uva.webp",
-     "orden": 3,
-     "nombre": "Uva",
+     "foto": "/img/productos/gelatinas-kids-melao.webp",
+     "orden": 1,
+     "nombre": "Melão",
      "precio": null
     },
     {
-     "foto": "/img/productos/gelatinas-kids-acai.webp",
-     "orden": 4,
-     "nombre": "Açaí",
+     "foto": "/img/productos/gelatinas-kids-uva.webp",
+     "orden": 3,
+     "nombre": "Uva",
      "precio": null
     }
    ]
@@ -1437,15 +1484,15 @@
    "elecciones": [],
    "variantes": [
     {
-     "foto": "/img/productos/gel-frenzzi-chia.webp",
-     "orden": 1,
-     "nombre": "Chía",
-     "precio": null
-    },
-    {
      "foto": "/img/productos/gel-frenzzi-pepino.webp",
      "orden": 2,
      "nombre": "Aloe y Pepino",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/gel-frenzzi-chia.webp",
+     "orden": 1,
+     "nombre": "Chía",
      "precio": null
     },
     {
@@ -1722,6 +1769,12 @@
    "elecciones": [],
    "variantes": [
     {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9b4519de-1fe3-48a5-86d8-89d35fa105be-500.webp",
+     "orden": 3,
+     "nombre": "Maracujá",
+     "precio": null
+    },
+    {
      "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d49f643b-55c1-4d84-b219-e2e8b0000b11-510.webp",
      "orden": 1,
      "nombre": "Melancia",
@@ -1731,12 +1784,6 @@
      "foto": null,
      "orden": 2,
      "nombre": "Uva",
-     "precio": null
-    },
-    {
-     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9b4519de-1fe3-48a5-86d8-89d35fa105be-500.webp",
-     "orden": 3,
-     "nombre": "Maracujá",
      "precio": null
     }
    ]
@@ -1926,6 +1973,29 @@
    "variantes": []
   },
   {
+   "id": "salon-line-kids-chiclete",
+   "nombre": "S.O.S Cachos Kids Hidratação Chiclete Activador de Rulos",
+   "nombre_corto": "S.O.S Cachos Kids Chiclete",
+   "marca": "Salon Line",
+   "categoria_id": "activadores",
+   "precio": 19000,
+   "tamano": "300 ml",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/57f777d1-bd74-469b-82d4-b944c234f50f-1200.webp"
+   ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
+   "variantes": []
+  },
+  {
    "id": "salon-line-activadores",
    "nombre": "Línea #todecacho Activadores de Rulos",
    "nombre_corto": "Activadores #todecacho",
@@ -1992,31 +2062,31 @@
     {
      "foto": null,
      "orden": 2,
-     "nombre": "Negro",
-     "precio": null
-    },
-    {
-     "foto": null,
-     "orden": 4,
-     "nombre": "Lila",
-     "precio": null
-    },
-    {
-     "foto": "/img/productos/cepillo-viral.webp",
-     "orden": 1,
-     "nombre": "Rosa",
-     "precio": null
-    },
-    {
-     "foto": null,
-     "orden": 3,
-     "nombre": "Verde agua",
+     "nombre": "Blanco",
      "precio": null
     },
     {
      "foto": null,
      "orden": 5,
-     "nombre": "Beige",
+     "nombre": "Lila",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 3,
+     "nombre": "Negro",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/cepillo-viral.webp",
+     "orden": 1,
+     "nombre": "Rosa rojizo",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 4,
+     "nombre": "Verde agua",
      "precio": null
     }
    ]
@@ -2042,7 +2112,26 @@
    "solo_en_promo": false,
    "incluye": null,
    "elecciones": [],
-   "variantes": []
+   "variantes": [
+    {
+     "foto": null,
+     "orden": 2,
+     "nombre": "Crema clarito",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 3,
+     "nombre": "Rosa clarito",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 1,
+     "nombre": "Verde manzana",
+     "precio": null
+    }
+   ]
   },
   {
    "id": "cepillo-viral-tenedor",
@@ -2068,34 +2157,28 @@
    "variantes": [
     {
      "foto": null,
-     "orden": 1,
-     "nombre": "Rosa",
-     "precio": null
-    },
-    {
-     "foto": null,
      "orden": 2,
-     "nombre": "Verde agua",
+     "nombre": "Celeste",
      "precio": null
     },
     {
      "foto": null,
-     "orden": 4,
-     "nombre": "Negro",
+     "orden": 3,
+     "nombre": "Rosa claro",
      "precio": null
     },
     {
-     "foto": "/img/productos/cepillo-viral-tenedor.webp",
-     "orden": 3,
-     "nombre": "Lila",
+     "foto": null,
+     "orden": 1,
+     "nombre": "Verde claro",
      "precio": null
     }
    ]
   },
   {
    "id": "cepillo-detangle-bounce",
-   "nombre": "Cepillo Definidor de Rulos y Ondas Anti-Frizz detangle (Fucsia)",
-   "nombre_corto": "Cepillo Definidor Fucsia",
+   "nombre": "Cepillo Definidor de Rulos y Ondas Anti-Frizz detangle",
+   "nombre_corto": "Cepillo Definidor Detangle",
    "marca": null,
    "categoria_id": "cepillos-definidores",
    "precio": 12000,
@@ -2113,7 +2196,32 @@
    "solo_en_promo": false,
    "incluye": null,
    "elecciones": [],
-   "variantes": []
+   "variantes": [
+    {
+     "foto": null,
+     "orden": 4,
+     "nombre": "Fucsia",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 3,
+     "nombre": "Lila",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 1,
+     "nombre": "Negro",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 2,
+     "nombre": "Rosa bebé",
+     "precio": null
+    }
+   ]
   },
   {
    "id": "cepillo-magico",
@@ -2136,7 +2244,26 @@
    "solo_en_promo": false,
    "incluye": null,
    "elecciones": [],
-   "variantes": []
+   "variantes": [
+    {
+     "foto": null,
+     "orden": 3,
+     "nombre": "Azul (sin llavero)",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 2,
+     "nombre": "Fucsia (con llavero)",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 1,
+     "nombre": "Lila (con llavero)",
+     "precio": null
+    }
+   ]
   },
   {
    "id": "funda-saten",
@@ -2144,7 +2271,7 @@
    "nombre_corto": "Funda de almohada satén",
    "marca": "Dream Hair",
    "categoria_id": "saten",
-   "precio": 15000,
+   "precio": 14000,
    "tamano": null,
    "alias": [],
    "destacado": false,
@@ -2159,7 +2286,32 @@
    "solo_en_promo": false,
    "incluye": null,
    "elecciones": [],
-   "variantes": []
+   "variantes": [
+    {
+     "foto": null,
+     "orden": 1,
+     "nombre": "Celeste oscuro",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 2,
+     "nombre": "Negro",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 3,
+     "nombre": "Rojo",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 4,
+     "nombre": "Rosa claro",
+     "precio": null
+    }
+   ]
   },
   {
    "id": "cofia-saten",
@@ -2167,7 +2319,7 @@
    "nombre_corto": "Cofia de satén",
    "marca": "Dream Hair",
    "categoria_id": "saten",
-   "precio": 7000,
+   "precio": 8500,
    "tamano": null,
    "alias": [],
    "destacado": false,
@@ -2182,7 +2334,32 @@
    "solo_en_promo": false,
    "incluye": null,
    "elecciones": [],
-   "variantes": []
+   "variantes": [
+    {
+     "foto": null,
+     "orden": 1,
+     "nombre": "Celeste claro",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 2,
+     "nombre": "Celeste oscuro",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 4,
+     "nombre": "Negro",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 3,
+     "nombre": "Rosa claro",
+     "precio": null
+    }
+   ]
   },
   {
    "id": "cofia-xl-saten",
@@ -2190,7 +2367,7 @@
    "nombre_corto": "Cofia XL de satén",
    "marca": "Dream Hair",
    "categoria_id": "saten",
-   "precio": 10000,
+   "precio": 12000,
    "tamano": null,
    "alias": [],
    "destacado": false,
@@ -2213,7 +2390,7 @@
    "nombre_corto": "Cofia Long de satén",
    "marca": "Dream Hair",
    "categoria_id": "saten",
-   "precio": 13000,
+   "precio": 15000,
    "tamano": null,
    "alias": [],
    "destacado": false,
@@ -2276,15 +2453,15 @@
    "elecciones": [],
    "variantes": [
     {
-     "foto": "/img/productos/oleos-pinga-cenoura-oliva.webp",
-     "orden": 1,
-     "nombre": "Cenoura & Oliva",
-     "precio": null
-    },
-    {
      "foto": "/img/productos/oleos-pinga-acai.webp",
      "orden": 2,
      "nombre": "Açaí & Pracaxi",
+     "precio": null
+    },
+    {
+     "foto": "/img/productos/oleos-pinga-cenoura-oliva.webp",
+     "orden": 1,
+     "nombre": "Cenoura & Oliva",
      "precio": null
     },
     {
@@ -2294,6 +2471,29 @@
      "precio": null
     }
    ]
+  },
+  {
+   "id": "han-suero-argan",
+   "nombre": "Suero Oleoso Argan Oil",
+   "nombre_corto": "Suero Oleoso Argan Oil",
+   "marca": "HAN",
+   "categoria_id": "oleos",
+   "precio": 8000,
+   "tamano": "85 cc",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/924f7f3c-885e-46df-9975-914371c8f4fb-224.webp"
+   ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
+   "variantes": []
   },
   {
    "id": "salon-line-oleo-coco",
@@ -2330,6 +2530,75 @@
    "destacado": false,
    "fotos": [
     "/img/productos/spray-revitalizante.webp"
+   ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
+   "variantes": []
+  },
+  {
+   "id": "han-tonico-biotina",
+   "nombre": "Tónico Capilar Biotina y Ácido Hialurónico",
+   "nombre_corto": "Tónico Capilar Biotina",
+   "marca": "HAN",
+   "categoria_id": "spray",
+   "precio": 15000,
+   "tamano": "200 cm³",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/daabdfd9-b941-452c-9903-3b0044dcb9da-387.webp"
+   ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
+   "variantes": []
+  },
+  {
+   "id": "han-tonificante-in-one",
+   "nombre": "In One Tonificante Capilar Multipropósito",
+   "nombre_corto": "Tonificante In One",
+   "marca": "HAN",
+   "categoria_id": "spray",
+   "precio": 13000,
+   "tamano": "200 cm³",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/0f881184-07cb-48ae-abda-1d1868ff9725-218.webp"
+   ],
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
+   "variantes": []
+  },
+  {
+   "id": "han-alfa-keratina-solucion",
+   "nombre": "Solución de Alfa Keratina Extra Ácida Anti Frizz",
+   "nombre_corto": "Alfa Keratina Extra Ácida",
+   "marca": "HAN",
+   "categoria_id": "spray",
+   "precio": 12000,
+   "tamano": "200 cc",
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/711032f7-b640-46c4-9835-cc018863080e-216.webp"
    ],
    "precio_promo": null,
    "precio_antes": null,
@@ -2436,7 +2705,26 @@
    "solo_en_promo": false,
    "incluye": null,
    "elecciones": [],
-   "variantes": []
+   "variantes": [
+    {
+     "foto": null,
+     "orden": 2,
+     "nombre": "Crema",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 3,
+     "nombre": "Gris topo",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 1,
+     "nombre": "Lila",
+     "precio": null
+    }
+   ]
   },
   {
    "id": "practiplopping",
@@ -2465,13 +2753,25 @@
     {
      "foto": null,
      "orden": 1,
-     "nombre": "Microfibra",
+     "nombre": "Algodón Negro",
      "precio": null
     },
     {
      "foto": null,
      "orden": 2,
-     "nombre": "Algodón",
+     "nombre": "Microfibra Amarillo",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 4,
+     "nombre": "Microfibra Celeste claro",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 3,
+     "nombre": "Microfibra Verde manzana",
      "precio": null
     }
    ]
@@ -2497,7 +2797,26 @@
    "solo_en_promo": false,
    "incluye": null,
    "elecciones": [],
-   "variantes": []
+   "variantes": [
+    {
+     "foto": null,
+     "orden": 2,
+     "nombre": "Lila (uva)",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 1,
+     "nombre": "Rojo (frutilla)",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 3,
+     "nombre": "Verde agua (manzana)",
+     "precio": null
+    }
+   ]
   },
   {
    "id": "cepillo-maya-cuadrado",
@@ -2520,7 +2839,26 @@
    "solo_en_promo": false,
    "incluye": null,
    "elecciones": [],
-   "variantes": []
+   "variantes": [
+    {
+     "foto": null,
+     "orden": 2,
+     "nombre": "Rosa",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 3,
+     "nombre": "Verde agua",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 1,
+     "nombre": "Violeta",
+     "precio": null
+    }
+   ]
   },
   {
    "id": "cepillo-pirulito",
@@ -2589,7 +2927,20 @@
    "solo_en_promo": false,
    "incluye": null,
    "elecciones": [],
-   "variantes": []
+   "variantes": [
+    {
+     "foto": null,
+     "orden": 2,
+     "nombre": "Blanco",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 1,
+     "nombre": "Rosa",
+     "precio": null
+    }
+   ]
   },
   {
    "id": "cepillo-pinza",
@@ -2612,7 +2963,20 @@
    "solo_en_promo": false,
    "incluye": null,
    "elecciones": [],
-   "variantes": []
+   "variantes": [
+    {
+     "foto": null,
+     "orden": 1,
+     "nombre": "Azul",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 2,
+     "nombre": "Fucsia",
+     "precio": null
+    }
+   ]
   },
   {
    "id": "cepillo-masajeador",
@@ -2639,12 +3003,12 @@
     {
      "foto": null,
      "orden": 1,
-     "nombre": "Rosa",
+     "nombre": "Blanco",
      "precio": null
     },
     {
      "foto": null,
-     "orden": 2,
+     "orden": 4,
      "nombre": "Celeste",
      "precio": null
     },
@@ -2652,6 +3016,12 @@
      "foto": null,
      "orden": 3,
      "nombre": "Lila",
+     "precio": null
+    },
+    {
+     "foto": null,
+     "orden": 2,
+     "nombre": "Rosa",
      "precio": null
     }
    ]
@@ -2867,6 +3237,11 @@
  ],
  "fotos": [
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/01e202fd-0bb8-48c6-a008-21a5d5c17019-224.webp",
+   "color": "#f9d606",
+   "fondo": "blanco"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/03e7c51a-18de-498a-aa41-d4161e71d04a-473.webp",
    "color": "#96d9b8",
    "fondo": "blanco"
@@ -2880,6 +3255,11 @@
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/0bba05e0-ddfc-4750-b427-648a051e0d31-447.webp",
    "color": "#e8ccc7",
    "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/0f881184-07cb-48ae-abda-1d1868ff9725-218.webp",
+   "color": "#e7dbc9",
+   "fondo": "blanco"
   },
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1163335e-8af3-47dc-8323-6ef6bd605ac2-447.webp",
@@ -3032,6 +3412,11 @@
    "fondo": "escena"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/57f777d1-bd74-469b-82d4-b944c234f50f-1200.webp",
+   "color": "#01bdc9",
+   "fondo": "blanco"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/591ae085-786b-47d5-b737-efcdabef2a15-400.webp",
    "color": null,
    "fondo": "blanco"
@@ -3072,6 +3457,16 @@
    "fondo": "blanco"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/6f215915-d963-444f-86fd-680d4514147d-1024.webp",
+   "color": "#aac686",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/711032f7-b640-46c4-9835-cc018863080e-216.webp",
+   "color": "#f5642a",
+   "fondo": "blanco"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/77503b45-c1f2-41aa-8aed-906627b6812c-554.webp",
    "color": "#fa9498",
    "fondo": "escena"
@@ -3079,6 +3474,11 @@
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/794d3a28-42bf-4c42-bdbb-e76d0072ee09-459.webp",
    "color": "#d9dce9",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/7aa592f8-ae19-4040-a261-6a6dc0516b66-1200.webp",
+   "color": "#fde7c7",
    "fondo": "blanco"
   },
   {
@@ -3090,6 +3490,11 @@
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/7f52d4c9-c381-4770-aa0d-26e028cd24e7-517.webp",
    "color": "#a6e7e3",
    "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8073be09-9064-4bf2-a1ea-297f7b7e97ea-501.webp",
+   "color": "#0296b2",
+   "fondo": "escena"
   },
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/82408e6e-4f78-4455-b675-8ad26ed8d096-469.webp",
@@ -3117,6 +3522,11 @@
    "fondo": "blanco"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/924f7f3c-885e-46df-9975-914371c8f4fb-224.webp",
+   "color": "#ece6d7",
+   "fondo": "blanco"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9451817b-82c6-48da-b53e-0a55d7a291ee-351.webp",
    "color": "#a97ac9",
    "fondo": "blanco"
@@ -3134,6 +3544,11 @@
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9b4519de-1fe3-48a5-86d8-89d35fa105be-500.webp",
    "color": "#97b553",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9b8258b1-22fa-4f76-aa95-bc6f49fd1b24-224.webp",
+   "color": "#ebe4d9",
    "fondo": "escena"
   },
   {
@@ -3169,6 +3584,11 @@
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/aedd27e2-135b-4bf0-99f6-9c80e3b06666-429.webp",
    "color": "#eae8d6",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/af56f9d0-110d-4003-981d-07908466db5d-667.webp",
+   "color": "#ebdbcc",
    "fondo": "blanco"
   },
   {
@@ -3239,6 +3659,16 @@
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d6b5401b-4c05-4974-b9fe-4c1e19a458b9-447.webp",
    "color": "#ebe4d9",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d9e17381-741a-4263-82cb-8483fadcd7c0-224.webp",
+   "color": "#ea8559",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/daabdfd9-b941-452c-9903-3b0044dcb9da-387.webp",
+   "color": "#a8c9b8",
    "fondo": "escena"
   },
   {

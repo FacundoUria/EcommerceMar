@@ -10,8 +10,9 @@ hasta el viernes 27/11 · solo efectivo o transferencia» (no aparece «Aceptamo
 inicio muestra las 4 ofertas y, si el carrito tiene algo en promo, el pedido solo ofrece efectivo o
 transferencia. Confirmar:
 
-1. **Cepillo viral** ($ 13.000, «antes $ 18.000»): en la web estaba a **$ 16.000**. ¿El «antes» es $ 18.000
-   o $ 16.000? (Mostrar un «antes» más alto que el precio que tenía la web puede traer reclamos.)
+1. **Cepillo viral** ($ 13.000): el flyer dice «antes $ 18.000», pero en la web estaba a **$ 16.000**. Por
+   ahora se tacha **$ 16.000** (el precio que tenía la web). Si Mar confirma que era $ 18.000, se carga en
+   /admin → el producto → Promoción → «Precio de antes (tachado)».
 2. **Kit El preferido** ($ 28.000, antes $ 32.000): Shampoo HAN a elección + Gel Supreme Fixer **en pote**
    (Bekim, el de la foto) + Skala 1 kg a elección.
    - «Elegí tu shampoo»: las variantes del **Shampoo low poo HAN** (Carbón Activado, Action Plex, Biotina +

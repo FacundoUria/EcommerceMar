@@ -24,6 +24,7 @@ import Rulos from '../components/marca/Rulos.jsx';
 import AdornoTitulo from '../components/marca/AdornoTitulo.jsx';
 import { DEMORA_INTRO } from '../components/marca/IntroMarca.jsx';
 import { campanaActiva } from '../lib/promo.js';
+import { useNavidadActiva } from '../hooks/useCampana.js';
 import { CAMPANA } from '../config/promo.js';
 
 const EASE = [0.22, 1, 0.36, 1];
@@ -57,6 +58,17 @@ function useResto() {
 // Promos vigentes (Black Friday): sección entre el hero y las categorías, en un chunk que se pide solo si hay
 // alguna. El resto del año no se dibuja ni se baja nada.
 const PromoInicio = lazy(() => import('./PromoInicio.jsx'));
+// Especial de Navidad (config/navidad.js): mismo lugar, mismo criterio (chunk aparte, solo mientras dura)
+const EspecialNavidad = lazy(() => import('../components/promo/EspecialNavidad.jsx'));
+
+function Navidad() {
+  if (!useNavidadActiva()) return null;
+  return (
+    <Suspense fallback={null}>
+      <EspecialNavidad enInicio />
+    </Suspense>
+  );
+}
 
 function Promos() {
   const { data: productos } = useProducts();
@@ -77,6 +89,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <Navidad />
       <Promos />
       <Categorias />
       {resto ? (

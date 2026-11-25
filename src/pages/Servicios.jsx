@@ -15,10 +15,16 @@ import Rulos from '../components/marca/Rulos.jsx';
 import { useTarjeta3D } from '../hooks/useTarjeta3D.jsx';
 import { m } from 'motion/react';
 import Roll from '../components/ui/Roll.jsx';
+import { lazy, Suspense } from 'react';
+import { useNavidadActiva } from '../hooks/useCampana.js';
+
+// Especial de Navidad (config/navidad.js): arriba de todo mientras dura; chunk aparte (el mismo del inicio)
+const EspecialNavidad = lazy(() => import('../components/promo/EspecialNavidad.jsx'));
 
 export default function Servicios() {
   usePageTitle('Servicios');
   const { data: grupos, loading } = useServiceGroups();
+  const navidad = useNavidadActiva();
 
   return (
     <div className="contenedor pt-4 pb-10">
@@ -29,6 +35,12 @@ export default function Servicios() {
           </RevealText>
         </ConDestellos>
       </Reveal>
+
+      {navidad && (
+        <Suspense fallback={null}>
+          <EspecialNavidad />
+        </Suspense>
+      )}
 
       {loading ? (
         <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

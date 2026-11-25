@@ -156,6 +156,12 @@ React + Vite + Tailwind CSS v4 + React Router + motion (framer-motion), JavaScri
 - **UI**: `CartelPromo` sobre la foto (píldora tinta, no negro neón), `<Precio antes>` tachado al lado, ficha con "Black Friday · Termina en X días". Inicio: `PromoInicio.jsx` entre el hero y las categorías, chunk aparte que se pide solo si hay alguna promo vigente.
 - **Vista previa**: `?promo=preview` en cualquier URL simula el primer día de la campaña al mediodía (queda en la pestaña; `?promo=off` la saca). Sin link desde ningún lado.
 
+## Especial de Navidad (28/11 al 31/12/2026)
+- Promo de **servicios** (no va al carrito): $ 70.000 (antes $ 100.000), dos opciones con código (NAVIDADOZONO, NAVIDADINFRARROJO). **Todo lo editable en `src/config/navidad.js`** (textos, precios, códigos, fechas, barra de anuncio y mensaje de WhatsApp con `{precio}`, `{codigo}`, `{nombre}`); no está en el panel (necesitaría una tabla nueva).
+- Se prende y se apaga sola por fecha (`navidadActiva` en `lib/promo.js`, `useNavidadActiva` en `hooks/useCampana.js`). No se superpone con el Black Friday (termina el 27/11 23:59); la barra de anuncio usa el de Black Friday, si no el de Navidad, si no los de siempre (en mobile, partido en dos).
+- `src/components/promo/EspecialNavidad.jsx` (chunk aparte, `lazy` en Home y en Servicios: fuera de fecha no se baja): en el inicio entre el hero y las categorías (`enInicio`: borde a borde con `fondo-salvia` y destellos dorados) y en /servicios debajo del título. Título con "Navidad" en cursiva dorada, bajada, "Incluye", una card por opción (precio tachado y nuevo, el código en un "ticket" punteado dorado con "Copiar código" — `lib/copiar.js`, también lo usa el checkout — y "Reservar con este código" → WhatsApp) y la letra chica.
+- Vista previa: `?promo=navidad-preview` (simula el 28/11 al mediodía; `?promo=preview` sigue siendo el Black Friday; `?promo=off` vuelve a hoy). El flyer original de Mar está en `assets/banners/originales/navidad.jpeg` (no se usa: la sección no copia su ilustración).
+
 ## Decisiones pendientes (preguntar antes de asumir)
 1. **Carga de productos y precios:** resuelto: panel /admin sobre Supabase (ver "Panel /admin").
 2. **Turnos:** por ahora solo link a WhatsApp.

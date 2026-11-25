@@ -1,28 +1,37 @@
 // Hora de las promos y si una promo está vigente. Todo en el navegador: la promo se prende y se apaga sola.
-// Vista previa: `?promo=preview` en cualquier URL simula estar adentro de la campaña (queda en la pestaña hasta
-// cerrarla o abrir `?promo=off`). No hay link a esto en ningún lado.
+// Vista previa: `?promo=preview` en cualquier URL simula estar adentro del Black Friday y
+// `?promo=navidad-preview`, adentro del Especial de Navidad (el primer día de cada una, al mediodía). Queda en
+// la pestaña hasta cerrarla o abrir `?promo=off`. No hay link a esto en ningún lado.
 import { CAMPANA } from '../config/promo.js';
+import { NAVIDAD } from '../config/navidad.js';
 
 const CLAVE = 'dh-promo-preview';
-let preview = null;
+const MEDIODIA = 12 * 3600 * 1000;
+// valor de ?promo= → desde cuándo simula
+const PREVIEWS = { preview: CAMPANA.desde, 'navidad-preview': NAVIDAD.desde };
+let preview; // undefined = sin leer todavía; null = sin vista previa; si no, la clave de PREVIEWS
 
 function enPreview() {
-  if (preview !== null) return preview;
-  preview = false;
+  if (preview !== undefined) return preview;
+  preview = null;
   if (typeof window === 'undefined') return preview;
+  const p = new URLSearchParams(window.location.search).get('promo');
   try {
-    const p = new URLSearchParams(window.location.search).get('promo');
-    if (p === 'preview') sessionStorage.setItem(CLAVE, '1');
+    if (p in PREVIEWS) sessionStorage.setItem(CLAVE, p);
     if (p === 'off') sessionStorage.removeItem(CLAVE);
-    preview = sessionStorage.getItem(CLAVE) === '1';
+    const guardada = sessionStorage.getItem(CLAVE);
+    preview = guardada === '1' ? 'preview' : guardada in PREVIEWS ? guardada : null; // '1': como se guardaba antes
   } catch {
-    preview = new URLSearchParams(window.location.search).get('promo') === 'preview';
+    preview = p in PREVIEWS ? p : null;
   }
   return preview;
 }
 
-/** Hora para las promos (ms). En vista previa: el primer día de la campaña al mediodía. */
-export const ahoraPromo = () => (enPreview() ? Date.parse(CAMPANA.desde) + 12 * 3600 * 1000 : Date.now());
+/** Hora para las promos (ms). En vista previa: el primer día de esa promo al mediodía. */
+export const ahoraPromo = () => {
+  const p = enPreview();
+  return p ? Date.parse(PREVIEWS[p]) + MEDIODIA : Date.now();
+};
 
 const ms = (f) => (f ? Date.parse(f) : NaN);
 
@@ -35,6 +44,9 @@ export function vigente(desde, hasta, t = ahoraPromo()) {
 
 /** ¿Está en curso la campaña de toda la tienda (barra de anuncio, forma de pago, pedido)? */
 export const campanaActiva = (t = ahoraPromo()) => vigente(CAMPANA.desde, CAMPANA.hasta, t);
+
+/** ¿Está en curso el Especial de Navidad (inicio, /servicios y barra de anuncio)? */
+export const navidadActiva = (t = ahoraPromo()) => vigente(NAVIDAD.desde, NAVIDAD.hasta, t);
 
 /** Próximo momento (ms) en que empieza o termina alguna de estas promos, o null. */
 export function proximoCambio(rangos, t = ahoraPromo()) {

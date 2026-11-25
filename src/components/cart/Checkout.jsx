@@ -14,6 +14,7 @@ import { useBloquearScroll } from '../../hooks/useBloquearScroll.js';
 import { formatPrecio, plural } from '../../lib/format.js';
 import { fuenteImagen } from '../../lib/imagenes.js';
 import { explotarDestellos } from '../../lib/destellos.js';
+import { copiarTexto } from '../../lib/copiar.js';
 import { campanaActiva } from '../../lib/promo.js';
 import { CAMPANA } from '../../config/promo.js';
 import { DEPARTAMENTOS_ENVIO, NOTA_ENVIOS, departamentoEnvio, localidadesDe } from '../../config/envios.js';
@@ -54,27 +55,6 @@ function abrirWhatsApp(url) {
   const w = window.open(url, '_blank');
   if (w) w.opener = null;
   else window.location.href = url;
-}
-
-async function copiarTexto(texto) {
-  try {
-    await navigator.clipboard.writeText(texto);
-    return true;
-  } catch {
-    try {
-      const t = document.createElement('textarea');
-      t.value = texto;
-      t.setAttribute('readonly', '');
-      t.style.cssText = 'position:fixed;opacity:0';
-      document.body.appendChild(t);
-      t.select();
-      const ok = document.execCommand('copy');
-      t.remove();
-      return ok;
-    } catch {
-      return false;
-    }
-  }
 }
 
 /**

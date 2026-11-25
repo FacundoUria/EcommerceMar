@@ -4,11 +4,19 @@ import { AnimatePresence, m, useReducedMotion } from 'motion/react';
 import Icon from '../ui/Icon.jsx';
 import { ANUNCIO } from '../../config/negocio.js';
 import { CAMPANA } from '../../config/promo.js';
-import { useCampanaActiva } from '../../hooks/useCampana.js';
+import { NAVIDAD, textoNavidad } from '../../config/navidad.js';
+import { useCampanaActiva, useNavidadActiva } from '../../hooks/useCampana.js';
 import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 
 const CADA_MS = 4000;
 const EASE = [0.22, 1, 0.36, 1];
+
+/** Mensaje de la promo en curso ({ anuncio, anuncioMobile }) o null: Black Friday o Especial de Navidad. */
+function especialDe(campana, navidad) {
+  if (campana) return { anuncio: CAMPANA.anuncio, anuncioMobile: CAMPANA.anuncioMobile };
+  if (navidad) return { anuncio: textoNavidad(NAVIDAD.anuncio), anuncioMobile: NAVIDAD.anuncioMobile.map((x) => textoNavidad(x)) };
+  return null;
+}
 
 /**
  * Franja fina arriba de todo (sobre el header, en todas las páginas). Alto fijo (34px) y en el flujo
@@ -25,12 +33,15 @@ export default function BarraAnuncio() {
   // Fuera de pantalla: brillo en pausa y sin cambiar de mensaje
   const barra = useRef(null);
   const visible = usePausaFueraDePantalla(barra, { margen: '0px' });
-  // Campaña (Black Friday): su mensaje reemplaza a los de siempre; en mobile, partido en dos que rotan
+  // Campaña (Black Friday) o Especial de Navidad (no se superponen): su mensaje reemplaza a los de siempre;
+  // en mobile, partido en dos que rotan
   const campana = useCampanaActiva();
+  const navidad = useNavidadActiva();
   const ancha = useMediaQuery('(min-width: 640px)');
+  const especial = useMemo(() => especialDe(campana, navidad), [campana, navidad]);
   const mensajes = useMemo(
-    () => (campana ? (ancha ? [CAMPANA.anuncio] : CAMPANA.anuncioMobile).map((texto) => ({ texto })) : ANUNCIO),
-    [campana, ancha],
+    () => (especial ? (ancha ? [especial.anuncio] : especial.anuncioMobile).map((texto) => ({ texto })) : ANUNCIO),
+    [especial, ancha],
   );
 
   useEffect(() => {
@@ -61,7 +72,7 @@ export default function BarraAnuncio() {
       className="barra-brillo relative h-[34px] overflow-hidden bg-verde text-[13px] font-semibold text-arena outline-none focus-visible:ring-2 focus-visible:ring-arena/70 focus-visible:ring-inset"
     >
       <ul className="sr-only">
-        {(campana ? [{ texto: CAMPANA.anuncio }] : ANUNCIO).map((a) => (
+        {(especial ? [{ texto: especial.anuncio }] : ANUNCIO).map((a) => (
           <li key={a.texto}>{a.texto}</li>
         ))}
       </ul>

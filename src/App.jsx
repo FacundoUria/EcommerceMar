@@ -77,7 +77,11 @@ function Paginas() {
         key={location.pathname}
         // Alto mínimo = pantalla: mientras carga el chunk de la página, el footer queda abajo del pliegue
         // (con 70vh se veía en desktop y saltaba al llegar la página: CLS 0.12–0.16)
-        className="relative min-h-svh"
+        // overflow-x: clip: lo que asoma por los costados (los destellos de un título que ocupa todo el ancho,
+        // que titilan con escala) se corta en el borde de la pantalla y no genera scroll horizontal. El
+        // overflow-x: clip del body no alcanza: el del body pasa al viewport como hidden y el ancho de la página
+        // igual crece. clip no crea un contenedor de scroll (los sticky siguen andando) y no corta los fixed.
+        className="relative min-h-svh overflow-x-clip"
         {...(reducido && {
           initial: { opacity: 0 },
           animate: { opacity: 1, transition: { duration: 0.2 } },

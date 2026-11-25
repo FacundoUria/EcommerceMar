@@ -4156,8 +4156,7 @@
    ],
    "destacado": false,
    "fotos": [
-    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c0bd333c-7e01-41bb-8770-2a0d5638bc05-1200.webp",
-    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1c2e889b-3866-4b67-982a-62b4ff66a9a9-1200.webp"
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c0bd333c-7e01-41bb-8770-2a0d5638bc05-1200.webp"
    ],
    "perfumado": false,
    "llavero_regalo": false,
@@ -4416,11 +4415,6 @@
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/19c15e52-114e-465b-9ac9-3dde880f1da7-404.webp",
    "color": null,
-   "fondo": "blanco"
-  },
-  {
-   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1c2e889b-3866-4b67-982a-62b4ff66a9a9-1200.webp",
-   "color": "#3c1538",
    "fondo": "blanco"
   },
   {

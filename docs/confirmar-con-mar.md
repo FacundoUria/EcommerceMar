@@ -372,8 +372,12 @@ otro cepillo a la rutina (el Flexible, el Espiral…), lo marca ahí. Los links 
 Confirmar:
 1. **Asumido: «la gelatina roja $22.000»** = Gelatina #todecacho Super Fixação 200 g (el pomo rojo de la foto
    de las 9:42). No estaba cargada: se creó con esa foto y ese precio, **sin descripción** (no vino texto).
-2. **Descripción de la línea #todecacho**: la de Mar todavía nombra «Verde y Amarilla de fijación 72 h» y
-   «Xêrosa Baunilha Doce», y no las nuevas. No se tocó (es su texto): ¿la actualiza desde /admin?
+2. **Descripción de la línea #todecacho** (actualizada el 25/11, en el estilo de la de Mar; no la escribió
+   ella): ya no nombra la Amarilla ni la Baunilha Doce y suma las nuevas. Lo de cada versión sale de sus
+   potes: «…(Verde 72 h y Super Transição de fijación 72 h, Definição Ostentação para brillo y definición
+   intensa, Super Volume para más volumen y movimiento, Pink Lemonade de fijación fuerte, Xêrosa Vainilla con
+   aroma dulce y Xêrosa Glamour Chic con perfume frutado, las dos de alta fijación).» Si Mar quiere otro
+   texto, lo cambia en /admin.
 3. **Koiri y Vanilla Cream** llegan la semana que viene: se ven con «Sin stock · llega pronto» y no se pueden
    pedir. Cuando lleguen: /admin → el producto → apagar «Sin stock».
 4. **Hubba Gum**: falta la foto de la chica con los dos frascos (no vino en la tanda). Va en «Cremas de
@@ -381,8 +385,8 @@ Confirmar:
 5. **Óleo de Argán**: la descripción **no es de Mar** (la escribimos corta): «Óleo de argán finalizador: aporta
    brillo, nutre y controla el frizz en las puntas.»
 6. **Vanilla Cream**: sin marca (la foto no la muestra). ¿De qué marca es?
-7. **Super Volume**: la foto grande (1024 px) que reenvió a las 14:00 tiene la firma de otra tienda («Que
-   Rulazos») sobre el fondo: no se usó. Va la de 224 px, que se ve chica. ¿Tiene una sin firma?
+7. **Super Volume**: va la de 224 px (se ve chica). La grande (1024 px) de las 14:00 tiene la firma de otra
+   tienda: no se usan fotos con firma de otra tienda. Si Mar consigue una grande sin firma, se cambia en /admin.
 8. **Pink Lemonade**: de las dos de las 14:00 se usó la de fondo blanco (480 px, como las otras de la línea),
    no la de los pomelos (500 px).
 9. **Fotos chicas** (se ven más chicas, nunca estiradas): Super Definição 1 kg (400×500), Óleo de Argán

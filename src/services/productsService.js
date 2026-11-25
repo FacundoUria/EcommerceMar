@@ -160,7 +160,12 @@ function armarCatalogo(f) {
   registrarFotos(f.fotos); // color y fondo de las fotos subidas desde el panel (antes de que las dibuje la UI)
   const t = ahoraPromo();
   programarCambioDePromo(f.productos, t);
-  const products = visibles(f.productos.map((p) => productoDeFila(p, f.productos, t)));
+  // Paso de /rutina de cada producto: el suyo (Mar lo elige en /admin) o, si no tiene, el de su categoría
+  const pasoCat = new Map(f.categorias.map((c) => [c.id, c.paso ?? null]));
+  const products = visibles(f.productos.map((p) => productoDeFila(p, f.productos, t))).map((p) => {
+    const paso = pasoCat.get(p.categoria);
+    return p.paso || !paso ? p : { ...p, paso };
+  });
   if (!products.length) throw new Error('sin productos');
   const primero = new Map();
   for (const p of products) if (!primero.has(p.categoria)) primero.set(p.categoria, p);

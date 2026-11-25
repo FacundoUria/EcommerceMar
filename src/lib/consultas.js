@@ -6,13 +6,16 @@ const PRODUCTO = 'id, nombre, nombre_corto, marca, categoria_id, precio, tamano,
 // Promos (supabase/migraciones/2026-11-23-promos.sql), color de las variantes (2026-11-24-color-variantes.sql)
 // y etiquetas (2026-11-24-etiquetas.sql). Si la base todavía no tiene esas columnas, se piden los productos sin
 // ellas (la tienda anda igual, sin eso): se prueba de la consulta más completa a la más simple.
-// Variantes agotadas: 2026-11-24-variantes-agotadas.sql.
+// Variantes agotadas: 2026-11-24-variantes-agotadas.sql. Sin stock y paso de la rutina del producto:
+// 2026-11-25-stock-y-paso-por-producto.sql.
 const PROMO = 'precio_promo, precio_antes, promo_nombre, promo_desde, promo_hasta, solo_en_promo, incluye, elecciones';
 const ETIQUETAS = 'perfumado, llavero_regalo, llavero_colores';
-const consulta = ({ promo, color, etiquetas, agotado }) =>
+const POR_PRODUCTO = 'agotado, paso';
+const consulta = ({ promo, color, etiquetas, agotado, porProducto }) =>
   [
     PRODUCTO,
     etiquetas && ETIQUETAS,
+    porProducto && POR_PRODUCTO,
     `variantes (nombre, precio, foto, orden${color ? ', color_hex' : ''}${agotado ? ', agotado' : ''})`,
     promo && PROMO,
   ]
@@ -20,6 +23,7 @@ const consulta = ({ promo, color, etiquetas, agotado }) =>
     .join(', ');
 // De la más completa a la más simple: cada paso saca lo más nuevo
 const CONSULTAS_PRODUCTOS = [
+  { promo: 1, color: 1, etiquetas: 1, agotado: 1, porProducto: 1 },
   { promo: 1, color: 1, etiquetas: 1, agotado: 1 },
   { promo: 1, color: 1, etiquetas: 1 },
   { promo: 1, color: 1 },

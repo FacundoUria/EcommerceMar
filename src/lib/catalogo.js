@@ -13,7 +13,7 @@ const img = (carpeta, nombre) => `/img/${carpeta}/${nombre}.webp`;
  * variantes de precios distintos, el producto vale el más bajo y `desde` = true ("Desde $ X").
  * Los campos opcionales (marca, tamaño, alias, destacado, activo: false) solo aparecen si tienen valor.
  */
-function armarProducto({ id, nombre, nombreCorto, marca, tamano, categoria, precio, alias, destacado, activo, imagen, galeria, variantes, promo, incluye, elecciones, perfumado, llavero }) {
+function armarProducto({ id, nombre, nombreCorto, marca, tamano, categoria, paso, precio, alias, destacado, activo, agotado, imagen, galeria, variantes, promo, incluye, elecciones, perfumado, llavero }) {
   // Promo vigente (ver promoDe): con precio promo, ese precio va para todo el producto (también sus variantes)
   const enPromo = promo?.precio != null;
   const propios = variantes.map((v) => v.precio).filter((x) => x != null);
@@ -42,6 +42,8 @@ function armarProducto({ id, nombre, nombreCorto, marca, tamano, categoria, prec
     ...(marca && { marca }),
     ...(tamano && { tamano }),
     categoria,
+    // Paso de /rutina propio (1-4; Mar lo elige en /admin). Sin uno propio, el service le pone el de su categoría.
+    ...(paso && { paso }),
     imagen,
     // Más fotos del producto (después de la principal): van en la galería de /producto
     ...(galeria?.length && { galeria }),
@@ -50,8 +52,10 @@ function armarProducto({ id, nombre, nombreCorto, marca, tamano, categoria, prec
     variantes: vs,
     // Todas sus variantes son colores: la ficha las muestra como cuadraditos de color
     ...(vs.length && vs.every((v) => v.color) && { deColores: true }),
-    // Todas sus variantes agotadas: "Sin stock" (no se puede agregar)
-    ...(vs.length && vs.every((v) => v.agotado) && { sinStock: true }),
+    // "Sin stock" (no se puede agregar ni sale en /rutina): todas sus variantes agotadas, o el producto entero
+    // (agotado: interruptor de Mar en /admin; la tienda dice "Sin stock · llega pronto", ver lib/stock.js)
+    ...(((vs.length && vs.every((v) => v.agotado)) || agotado) && { sinStock: true }),
+    ...(agotado && { agotado: true }),
     // Sin selector de color (config/color.js), solo si ninguna variante es un color: "color a coordinar" o un
     // único color
     ...(!vs.some((v) => v.color) && COLOR_A_COORDINAR.includes(id) && { colorACoordinar: true }),
@@ -99,9 +103,11 @@ export const productoDeFila = (f, filas = [], t = ahoraPromo()) => {
     marca: f.marca,
     tamano: f.tamano,
     categoria: f.categoria_id,
+    paso: f.paso,
     precio: f.precio,
     alias: f.alias,
     destacado: f.destacado,
+    agotado: f.agotado,
     // Kit "solo durante la promo": fuera de fechas, como oculto
     activo: f.activo === false || (f.solo_en_promo && !promo) ? false : f.activo,
     imagen: f.fotos?.[0] ?? img('productos', f.id),

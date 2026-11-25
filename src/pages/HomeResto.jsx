@@ -169,14 +169,14 @@ function CintaMarcas() {
 /* ═════════ ARMÁ TU RUTINA: scroll storytelling (sticky en desktop, apilado en mobile) ═════════ */
 const PASOS_CHIPS = ['Lavar', 'Hidratar', 'Definir', 'Proteger'];
 
-/** Opciones de cada paso (destacados primero). En /rutina se puede elegir más de una por paso. */
+/** Opciones de cada paso (destacados primero; sin stock, no). En /rutina se puede elegir más de una por paso. */
 function useOpcionesPorPaso() {
   const { data: productos } = useProducts();
   const pasos = usePasosRutina();
   return useMemo(
     () =>
       pasos.map((p) =>
-        (productos ?? []).filter((x) => p.categorias.includes(x.categoria)).sort((a, b) => Number(!!b.destacado) - Number(!!a.destacado)),
+        (productos ?? []).filter((x) => x.paso === p.paso && !x.sinStock).sort((a, b) => Number(!!b.destacado) - Number(!!a.destacado)),
       ),
     [productos, pasos],
   );

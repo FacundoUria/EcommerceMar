@@ -172,8 +172,9 @@ export default function Rutina() {
                 </div>
               ) : (
                 paso.categorias.map((catId) => {
-                  // Sin stock (todas las variantes agotadas): no se ofrece en la rutina
-                  const lista = (productos ?? []).filter((p) => p.categoria === catId && !p.sinStock);
+                  // Los de esta categoría que van en este paso (el del producto o el de su categoría). Sin stock: no
+                  // se ofrece en la rutina
+                  const lista = (productos ?? []).filter((p) => p.categoria === catId && p.paso === paso.paso && !p.sinStock);
                   if (!lista.length) return null;
                   return (
                     <div key={catId} className="mt-6">

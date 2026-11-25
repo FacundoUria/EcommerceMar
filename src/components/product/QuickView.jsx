@@ -19,6 +19,7 @@ import Roll from '../ui/Roll.jsx';
 import { explotarDestellos } from '../../lib/destellos.js';
 import { colorDe } from '../../lib/colores.js';
 import { useBloquearScroll } from '../../hooks/useBloquearScroll.js';
+import { textoSinStock } from '../../lib/stock.js';
 
 /** Vista rápida: bottom-sheet en mobile (arrastrable para cerrar), modal en desktop. */
 export default function QuickView() {
@@ -136,6 +137,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
               antes={producto.precioAntes}
               className="mt-2 text-2xl text-tinta"
             />
+            {producto.sinStock && <p className="mt-1.5 text-sm font-bold tracking-wide text-red-800 uppercase">{textoSinStock(producto)}</p>}
             {producto.promo && <CartelPromo promo={producto.promo} className="mt-3" />}
             <Etiquetas producto={producto} className="mt-3" />
             {producto.colorACoordinar && <p className="mt-3 text-sm font-semibold text-texto-suave">El color lo coordinás con Mar por WhatsApp</p>}

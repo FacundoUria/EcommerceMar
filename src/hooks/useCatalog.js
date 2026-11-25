@@ -118,16 +118,17 @@ export const useBrands =() => useServicio('brands', service.getBrands);
 export const useProduct = (id) => useServicio(`product:${id}`, () => service.getProductById(id));
 
 /**
- * Pasos de /rutina (config/negocio.js) con sus categorías según el campo `paso` de cada categoría (lo elige
- * Mar en el panel). Mientras las categorías no están, las de negocio.js (son las mismas).
+ * Pasos de /rutina (config/negocio.js) con las categorías que tienen productos en cada paso, en el orden de
+ * Mar. El paso de cada producto (`producto.paso`) es el suyo o, si no eligió uno, el de su categoría: una
+ * categoría sin paso (Cepillos) puede aportar algunos productos (los definidores, al 3). Las listas de cada
+ * paso filtran por `producto.paso`. Mientras las categorías no están, las de negocio.js.
  */
 export function usePasosRutina() {
   const { data: categorias } = useCategories();
-  return useMemo(
-    () =>
-      categorias
-        ? PASOS_RUTINA.map((p) => ({ ...p, categorias: categorias.filter((c) => c.paso === p.paso).map((c) => c.id) }))
-        : PASOS_RUTINA,
-    [categorias],
-  );
+  const { data: productos } = useProducts();
+  return useMemo(() => {
+    if (!categorias) return PASOS_RUTINA;
+    const conPaso = (paso, catId) => productos?.some((x) => x.categoria === catId && x.paso === paso);
+    return PASOS_RUTINA.map((p) => ({ ...p, categorias: categorias.filter((c) => c.paso === p.paso || conPaso(p.paso, c.id)).map((c) => c.id) }));
+  }, [categorias, productos]);
 }

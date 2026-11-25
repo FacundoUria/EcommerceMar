@@ -81,7 +81,8 @@ function reducer(lineas, accion) {
       // renombró o se sacó), la línea queda como el producto sin variante; si ya había una así, se suman.
       // Si solo cambió la forma de escribirla ("X (y)" → "X · y") o Mar la renombró (config/renombrados.js),
       // pasa al nombre nuevo; un producto con id nuevo, igual. La foto sigue a la del catálogo (las subidas
-      // que se reemplazan se borran del bucket). Una variante que se agotó queda marcada ("Agotado").
+      // que se reemplazan se borran del bucket). Lo que se agotó (la variante o el producto) queda marcado
+      // ("Agotado").
       const porId = new Map(accion.productos.map((p) => [p.id, p]));
       const resultado = [];
       for (const l of lineas) {
@@ -112,7 +113,8 @@ function reducer(lineas, accion) {
           ...(elecciones.length && { elecciones }),
           ...(p.colorACoordinar && { colorACoordinar: true }),
           ...(variante?.color && { color: variante.color }),
-          ...(variante?.agotado && { agotado: true }),
+          // Se agotó la variante o el producto entero (todas sus variantes, o lo marcó Mar)
+          ...((variante?.agotado || p.sinStock) && { agotado: true }),
           clave: claveLinea(p.id, variante?.nombre ?? null, elecciones),
         };
         const igual = resultado.find((r) => r.clave === linea.clave);

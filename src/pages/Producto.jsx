@@ -30,6 +30,7 @@ import CartelPromo from '../components/product/CartelPromo.jsx';
 import SelectorColores from '../components/product/Colores.jsx';
 import Etiquetas from '../components/product/Etiquetas.jsx';
 import { IDS_RENOMBRADOS } from '../config/renombrados.js';
+import { textoSinStock } from '../lib/stock.js';
 
 export default function Producto() {
   const { id } = useParams();
@@ -217,7 +218,7 @@ function Detalle({ producto }) {
                 {producto.promo.nombre} · {terminaEn(producto.promo.hasta)}
               </p>
             )}
-            {producto.sinStock && <p className="mt-1.5 text-sm font-bold tracking-wide text-red-800 uppercase">Sin stock</p>}
+            {producto.sinStock && <p className="mt-1.5 text-sm font-bold tracking-wide text-red-800 uppercase">{textoSinStock(producto)}</p>}
           </div>
 
           {/* Kit: qué trae */}
@@ -405,19 +406,20 @@ function Detalle({ producto }) {
   );
 }
 
-/** Productos de los otros grupos de categorías de la rutina (destacados primero). */
+/** Dos productos de cada uno de los otros pasos de la rutina (destacados primero; sin stock, no). */
 function CompletaTuRutina({ producto }) {
   const { data: productos } = useProducts();
   const pasos = usePasosRutina();
   const sugeridos = useMemo(() => {
     if (!productos) return [];
-    const otrosGrupos = pasos.map((p) => p.categorias).filter((cats) => !cats.includes(producto.categoria));
-    return otrosGrupos.flatMap((cats) =>
-      productos
-        .filter((x) => cats.includes(x.categoria) && x.id !== producto.id)
-        .sort((a, b) => Number(!!b.destacado) - Number(!!a.destacado))
-        .slice(0, 2),
-    );
+    return pasos
+      .filter((p) => p.paso !== producto.paso)
+      .flatMap((p) =>
+        productos
+          .filter((x) => x.paso === p.paso && x.id !== producto.id && !x.sinStock)
+          .sort((a, b) => Number(!!b.destacado) - Number(!!a.destacado))
+          .slice(0, 2),
+      );
   }, [productos, producto, pasos]);
 
   if (!sugeridos.length) return null;

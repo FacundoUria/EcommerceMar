@@ -1688,25 +1688,17 @@
    "elecciones": [],
    "variantes": [
     {
-     "foto": "/img/productos/gelatinas-500gr-7x.webp",
-     "orden": 3,
-     "nombre": "Amarilla 72 h",
-     "precio": null,
-     "agotado": false,
-     "color_hex": null
-    },
-    {
-     "foto": "/img/productos/gelatinas-500gr-baunilha.webp",
-     "orden": 2,
-     "nombre": "Baunilha Doce",
-     "precio": null,
-     "agotado": false,
-     "color_hex": null
-    },
-    {
      "foto": "/img/productos/gelatinas-500gr-ostentacao.webp",
-     "orden": 1,
+     "orden": 6,
      "nombre": "Ostentação",
+     "precio": null,
+     "agotado": true,
+     "color_hex": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/066301b4-8b6f-444b-b5b3-797cccc8895c-480.webp",
+     "orden": 4,
+     "nombre": "Pink Lemonade",
      "precio": null,
      "agotado": false,
      "color_hex": null
@@ -1720,14 +1712,96 @@
      "color_hex": null
     },
     {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9ef954f5-4400-4b38-9fdd-4594f7a6d63f-224.webp",
+     "orden": 3,
+     "nombre": "Super Volume",
+     "precio": null,
+     "agotado": false,
+     "color_hex": null
+    },
+    {
      "foto": "/img/productos/gelatinas-500gr-14x.webp",
-     "orden": 4,
+     "orden": 7,
      "nombre": "Verde 72 h",
+     "precio": null,
+     "agotado": true,
+     "color_hex": null
+    },
+    {
+     "foto": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/48194220-a086-4f12-99a0-9536e810ebd2-940.webp",
+     "orden": 2,
+     "nombre": "Xêrosa Glamour Chic",
+     "precio": null,
+     "agotado": false,
+     "color_hex": null
+    },
+    {
+     "foto": "/img/productos/gelatinas-500gr-baunilha.webp",
+     "orden": 1,
+     "nombre": "Xêrosa Vainilla",
      "precio": null,
      "agotado": false,
      "color_hex": null
     }
    ]
+  },
+  {
+   "id": "salon-line-gelatina-super-definicao-1kg",
+   "nombre": "Gelatina #todecacho Super Definição 1 kg",
+   "nombre_corto": "Gelatina Super Definição 1 kg",
+   "marca": "Salon Line",
+   "categoria_id": "geles",
+   "precio": 39500,
+   "tamano": "1 kg",
+   "alias": [
+    "gelatina 1 kg",
+    "todecacho"
+   ],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/2c89eeb8-0c13-49e5-9b70-e39b18ee5662-500.webp"
+   ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
+   "variantes": []
+  },
+  {
+   "id": "salon-line-gelatina-super-fixacao",
+   "nombre": "Gelatina #todecacho Super Fixação 200 g",
+   "nombre_corto": "Gelatina Super Fixação",
+   "marca": "Salon Line",
+   "categoria_id": "geles",
+   "precio": 22000,
+   "tamano": "200 g",
+   "alias": [
+    "gelatina roja",
+    "todecacho"
+   ],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/32a2c2ac-a5e0-44b9-8f2b-115d354e3d45-940.webp"
+   ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
+   "variantes": []
   },
   {
    "id": "gelatinas-kids",
@@ -3013,6 +3087,35 @@
    "variantes": []
   },
   {
+   "id": "lola-oleo-argan",
+   "nombre": "Óleo de Argán finalizador",
+   "nombre_corto": "Óleo de Argán",
+   "marca": "Lola Cosmetics",
+   "categoria_id": "oleos",
+   "precio": 19000,
+   "tamano": "50 ml",
+   "alias": [
+    "argan oil",
+    "aceite de argán"
+   ],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/adbcdcca-b398-4770-a596-1c2bf6965c6d-447.webp"
+   ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
+   "variantes": []
+  },
+  {
    "id": "salon-line-oleo-coco",
    "nombre": "Óleo Umectante Coco Puro #todecacho",
    "nombre_corto": "Óleo Umectante Coco Puro",
@@ -3941,6 +4044,11 @@
    "fondo": "blanco"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/066301b4-8b6f-444b-b5b3-797cccc8895c-480.webp",
+   "color": "#ea2c9b",
+   "fondo": "blanco"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/0bba05e0-ddfc-4750-b427-648a051e0d31-447.webp",
    "color": "#e8ccc7",
    "fondo": "escena"
@@ -3958,6 +4066,11 @@
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1183e272-75ae-440c-bdb3-c913731a743d-554.webp",
    "color": "#edd38a",
+   "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/127bb075-778d-45c9-82e5-4d4cc2d1b1e6-760.webp",
+   "color": "#c98549",
    "fondo": "escena"
   },
   {
@@ -4016,6 +4129,11 @@
    "fondo": "blanco"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/2c89eeb8-0c13-49e5-9b70-e39b18ee5662-500.webp",
+   "color": "#a2dc17",
+   "fondo": "blanco"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/2cc166d0-0ae4-495b-938b-2d52722cccff-420.webp",
    "color": "#a63639",
    "fondo": "blanco"
@@ -4031,6 +4149,11 @@
    "fondo": "escena"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/32a2c2ac-a5e0-44b9-8f2b-115d354e3d45-940.webp",
+   "color": "#f73767",
+   "fondo": "blanco"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/33308322-fb48-438f-8583-9714c09b678a-467.webp",
    "color": "#02465a",
    "fondo": "blanco"
@@ -4039,6 +4162,11 @@
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/35e9c595-41f7-4f21-b6a2-b92c5f9980ff-459.webp",
    "color": null,
    "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/3892f87f-9e5a-4b45-849e-a460fa5df11b-1196.webp",
+   "color": "#c9a887",
+   "fondo": "escena"
   },
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/3afbf078-8af1-44cf-94cd-3875b9a19b89-1080.webp",
@@ -4073,6 +4201,11 @@
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/470da90e-7d84-47d5-8d38-9bf3b49a8c10-812.webp",
    "color": "#98b654",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/48194220-a086-4f12-99a0-9536e810ebd2-940.webp",
+   "color": "#fd5719",
    "fondo": "blanco"
   },
   {
@@ -4266,6 +4399,11 @@
    "fondo": "blanco"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9ef954f5-4400-4b38-9fdd-4594f7a6d63f-224.webp",
+   "color": "#fb25a6",
+   "fondo": "blanco"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a08ec167-d871-4fea-bf75-df0a1c12c210-1024.webp",
    "color": "#ad8b63",
    "fondo": "escena"
@@ -4288,6 +4426,11 @@
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a991dfe5-6452-402e-8b89-3e0441637945-500.webp",
    "color": "#e74957",
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/adbcdcca-b398-4770-a596-1c2bf6965c6d-447.webp",
+   "color": "#f8eb56",
    "fondo": "blanco"
   },
   {

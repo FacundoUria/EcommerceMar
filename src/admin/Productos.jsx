@@ -8,6 +8,7 @@ import { borrarProducto, cambiarVisible, fotosDeProducto, guardarCategoria, guar
 import FotoCampo from './FotoCampo.jsx';
 import ColorCampo from './ColorCampo.jsx';
 import { colorSugerido } from '../config/colores-variantes.js';
+import { PASOS_RUTINA } from '../config/negocio.js';
 import PromoCampos, { aDatosPromo, aFormPromo, validarPromo } from './PromoCampos.jsx';
 import { borrarFotos } from './fotos.js';
 import { BarraGuardar, DialogoBorrar, EncabezadoForm, ErrorCarga, SubirBajar } from './partes.jsx';
@@ -115,6 +116,7 @@ export function ListaProductos() {
                     <span className="flex flex-wrap items-center gap-2">
                       <span className={`text-[17px] font-semibold tabular-nums ${precio.falta ? 'text-red-800' : 'text-tinta'}`}>{precio.texto}</span>
                       <Insignia visible={fila.activo} />
+                      {fila.agotado && <span className="inline-flex items-center rounded-full bg-red-50 px-3 py-1 text-[15px] font-bold text-red-800">Sin stock</span>}
                     </span>
                   </span>
                   <span className="text-2xl text-texto-suave" aria-hidden="true">
@@ -147,6 +149,9 @@ const aForm = (p) => ({
   llavero: Boolean(p?.llavero_regalo),
   llaveroColores: p?.llavero_colores ?? '',
   activo: p ? p.activo : true,
+  // Sin stock del producto entero y paso propio de la rutina (supabase/migraciones/2026-11-25-stock-y-paso-por-producto.sql)
+  agotado: Boolean(p?.agotado),
+  paso: p?.paso ?? null,
   foto: p?.fotos?.[0] ?? null,
   variantes: (p?.variantes ?? []).map((v) => ({
     clave: v.id,
@@ -163,10 +168,12 @@ const aForm = (p) => ({
 });
 
 const limpio = (s) => s.trim() || null;
-// conPromo / conEtiquetas / conAgotado: la base ya tiene esas columnas (supabase/migraciones/
-// 2026-11-23-promos.sql, 2026-11-24-etiquetas.sql y 2026-11-24-variantes-agotadas.sql)
-const aDatos = (f, original, { conPromo, conEtiquetas, conAgotado }) => ({
+// conPromo / conEtiquetas / conAgotado / conPorProducto: la base ya tiene esas columnas (supabase/migraciones/
+// 2026-11-23-promos.sql, 2026-11-24-etiquetas.sql, 2026-11-24-variantes-agotadas.sql y
+// 2026-11-25-stock-y-paso-por-producto.sql)
+const aDatos = (f, original, { conPromo, conEtiquetas, conAgotado, conPorProducto }) => ({
   ...(conPromo && aDatosPromo(f.promo)),
+  ...(conPorProducto && { agotado: f.agotado, paso: f.paso }),
   ...(conEtiquetas && { perfumado: f.perfumado, llavero_regalo: f.llavero, llavero_colores: f.llavero ? limpio(f.llaveroColores) : null }),
   nombre: f.nombre.trim(),
   nombre_corto: limpio(f.nombreCorto),
@@ -335,7 +342,7 @@ function Formulario({ original, datos, recargar }) {
     setDialogo(null);
     try {
       const f = comoOculto ? { ...form, activo: false } : form;
-      const d = aDatos(f, original, { conPromo, conEtiquetas, conAgotado });
+      const d = aDatos(f, original, { conPromo, conEtiquetas, conAgotado, conPorProducto });
       const id = await guardarProducto(d, original, datos.productos);
       // Fotos que dejaron de usarse (las reemplazadas o quitadas): se borran del bucket
       const usadas = new Set([...d.fotos, ...d.variantes.map((v) => v.foto)]);
@@ -386,6 +393,8 @@ function Formulario({ original, datos, recargar }) {
   const conPromo = datos.productos.some((p) => 'precio_promo' in p);
   const conEtiquetas = datos.productos.some((p) => 'perfumado' in p);
   const conAgotado = datos.productos.some((p) => p.variantes?.some((v) => 'agotado' in v));
+  const conPorProducto = datos.productos.some((p) => 'paso' in p);
+  const pasoCategoria = PASOS_RUTINA.find((p) => p.paso === datos.categorias.find((c) => c.id === form.categoria)?.paso);
   const precioProducto = leerPrecio(form.precio);
   const marcas = [...new Set(datos.productos.map((p) => p.marca).filter(Boolean))].sort();
 
@@ -411,6 +420,20 @@ function Formulario({ original, datos, recargar }) {
         <p className="rounded-xl bg-amber-50 px-4 py-3 text-base font-semibold text-amber-900">
           Para mostrarlo en la tienda le falta {falta.join(' y ')}.
         </p>
+      )}
+      {conPorProducto && (
+        <Interruptor
+          activo={form.agotado}
+          onCambio={(v) => cambiar('agotado', v)}
+          etiqueta="Sin stock"
+          descripcion={
+            form.agotado
+              ? 'Se ve en la tienda con «Sin stock · llega pronto», pero no se puede pedir.'
+              : 'Prendelo si se terminó (o está por llegar): se sigue viendo, pero no se puede pedir. Si es solo un color o una variante, marcala abajo, en esa variante.'
+          }
+          textoSi="Sin stock"
+          textoNo="Hay stock"
+        />
       )}
 
       <section className="space-y-5" aria-labelledby="sec-datos">
@@ -534,6 +557,40 @@ function Formulario({ original, datos, recargar }) {
               </Campo>
             )}
           </>
+        )}
+        {conPorProducto && (
+          <details className="group rounded-2xl border border-linea bg-crema-card">
+            <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 px-4 py-2 text-[17px] font-bold">
+              <span>
+                Opciones avanzadas
+                {/* Paso propio de la rutina: se ve sin abrir */}
+                {form.paso && (
+                  <span className="block text-base font-normal text-verde">
+                    Rutina: paso {form.paso} ({PASOS_RUTINA.find((p) => p.paso === form.paso)?.titulo})
+                  </span>
+                )}
+              </span>
+              <span className="text-xl transition group-open:rotate-180" aria-hidden="true">
+                ⌄
+              </span>
+            </summary>
+            <fieldset className="space-y-2 px-4 pb-4">
+              <legend className="mb-2 text-base text-texto-suave">¿En qué paso de «Armá tu rutina» aparece este producto?</legend>
+              {[null, ...PASOS_RUTINA.map((p) => p.paso)].map((paso) => (
+                <label
+                  key={paso ?? 'cat'}
+                  className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border-2 px-4 ${form.paso === paso ? 'border-verde bg-salvia' : 'border-transparent'}`}
+                >
+                  <input type="radio" name="paso-producto" className="size-5 shrink-0 accent-verde" checked={form.paso === paso} onChange={() => cambiar('paso', paso)} />
+                  <span className="text-[17px]">
+                    {paso
+                      ? `Paso ${paso} (${PASOS_RUTINA.find((p) => p.paso === paso).titulo})`
+                      : `Como su categoría (${pasoCategoria ? `paso ${pasoCategoria.paso}: ${pasoCategoria.titulo}` : 'no aparece en la rutina'})`}
+                  </span>
+                </label>
+              ))}
+            </fieldset>
+          </details>
         )}
       </section>
 

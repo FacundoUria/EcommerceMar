@@ -42,6 +42,7 @@ Acondicionador Kleno ($ 10.000, con su foto). El Flexible perfumado con llavero 
 | # | Marca | Producto | Tamaño | id | Falta |
 |---|---|---|---|---|---|
 | 1 | Dream Hair | Scrunchies de satén (24/11): «1 unidad» $ 1.900 y «Pack x2» $ 3.000, color a coordinar con Mar (como las cofias) | — | `scrunchies-saten` | **foto** (y descripción, si quiere) |
+| 2 | Lua & Neve | Creme Finalizador Hubba Gum (25/11): $ 12.000, variantes Uva y Banana | 250 ml | `lua-neve-hubba-gum` | **foto** (la de la chica con los dos frascos no llegó; ver la sección 13) |
 
 Cuando Mar suba la foto desde /admin, los muestra con «Mostrar en la tienda».
 
@@ -338,3 +339,54 @@ color». El turbante dice Lila, Crema y Gris topo, pero la foto muestra verde, c
 «Algodón», tenedor, Restauração en 2 en 1), la línea queda como el producto sin color y el pedido va sin color.
 Los colores que solo cambiaron de nombre (Pulpo «Fucsia» → «Rosa», Viral doble «Verde manzana» → «Verde
 agua») pasan al nombre nuevo, y los productos con id nuevo, al id nuevo.
+
+## 13. Tanda del 25/11
+
+Fotos originales en `assets/productos/originales/2026-11-25/` (no se suben al repo).
+
+**Una sola categoría «Cepillos»** (pedido de Mar): los 5 que estaban en «Cepillos definidores» (viral, doble,
+tenedor, Detangle y Pulpo) pasaron a «Cepillos». En «Armá tu rutina» siguen en el paso 3 (Definir): desde
+ahora el paso también se elige por producto (/admin → el producto → «Opciones avanzadas»). Si Mar quiere sumar
+otro cepillo a la rutina (el Flexible, el Espiral…), lo marca ahí. Los links viejos
+(`/tienda?cat=cepillos-definidores`) abren «Cepillos».
+
+**Línea #todecacho Gelatinas Capilares** (`gelatinas-500`, $ 26.000):
+- Ostentação y Verde 72 h: **sin stock** (tachadas, al final de la lista).
+- Amarilla 72 h: **se borró** (es la misma que la Super Transição). Los carritos que la tenían pasan a la
+  Super Transição.
+- Baunilha Doce → **Xêrosa Vainilla** (los carritos pasan solos al nombre nuevo).
+- Nuevas, al mismo precio y con su foto: **Xêrosa Glamour Chic** (500 g), **Super Volume** (550 g) y **Pink
+  Lemonade** (550 g).
+
+**Productos nuevos:**
+
+| Producto | id | Precio | Estado |
+|---|---|---|---|
+| Gelatina #todecacho Super Definição 1 kg (Salon Line) | `salon-line-gelatina-super-definicao-1kg` | $ 39.500 | visible |
+| Gelatina #todecacho Super Fixação 200 g (Salon Line) | `salon-line-gelatina-super-fixacao` | $ 22.000 | visible |
+| Óleo de Argán finalizador (Lola Cosmetics, 50 ml) | `lola-oleo-argan` | $ 19.000 (= Pinga!) | visible |
+| Definidor en Gel Enrulate (Koiri, 200 ml) | `koiri-gel-enrulate` | $ 27.000 | «Sin stock · llega pronto» |
+| Vanilla Cream Óleo Capilar de Almendras y Coco (50 ml) | `vanilla-cream-oleo` | $ 6.500 | «Sin stock · llega pronto» |
+| Creme Finalizador Hubba Gum (Lua & Neve, 250 ml) | `lua-neve-hubba-gum` | $ 12.000 | oculto: falta la foto |
+
+Confirmar:
+1. **Asumido: «la gelatina roja $22.000»** = Gelatina #todecacho Super Fixação 200 g (el pomo rojo de la foto
+   de las 9:42). No estaba cargada: se creó con esa foto y ese precio, **sin descripción** (no vino texto).
+2. **Descripción de la línea #todecacho**: la de Mar todavía nombra «Verde y Amarilla de fijación 72 h» y
+   «Xêrosa Baunilha Doce», y no las nuevas. No se tocó (es su texto): ¿la actualiza desde /admin?
+3. **Koiri y Vanilla Cream** llegan la semana que viene: se ven con «Sin stock · llega pronto» y no se pueden
+   pedir. Cuando lleguen: /admin → el producto → apagar «Sin stock».
+4. **Hubba Gum**: falta la foto de la chica con los dos frascos (no vino en la tanda). Va en «Cremas de
+   peinar» (crema finalizadora sin enjuague): ¿o en «Activadores y modeladores»?
+5. **Óleo de Argán**: la descripción **no es de Mar** (la escribimos corta): «Óleo de argán finalizador: aporta
+   brillo, nutre y controla el frizz en las puntas.»
+6. **Vanilla Cream**: sin marca (la foto no la muestra). ¿De qué marca es?
+7. **Super Volume**: la foto grande (1024 px) que reenvió a las 14:00 tiene la firma de otra tienda («Que
+   Rulazos») sobre el fondo: no se usó. Va la de 224 px, que se ve chica. ¿Tiene una sin firma?
+8. **Pink Lemonade**: de las dos de las 14:00 se usó la de fondo blanco (480 px, como las otras de la línea),
+   no la de los pomelos (500 px).
+9. **Fotos chicas** (se ven más chicas, nunca estiradas): Super Definição 1 kg (400×500), Óleo de Argán
+   (447 px), Pink Lemonade (480 px), Super Volume (224 px) y Koiri (600×900; para que entre el frasco entero se
+   completaron los costados con el mismo fondo).
+10. Otros nombres para el buscador (no se ven): «gelatina roja» (Super Fixação), «argan oil» y «aceite de
+    argán» (Óleo de Argán), «crema finalizadora» (Hubba Gum), «aceite de almendras / de coco» (Vanilla Cream).

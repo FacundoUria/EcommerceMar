@@ -8,8 +8,18 @@ export const IDS_RENOMBRADOS = {
   'cepillo-pirulito-2': 'cepillo-maya',
 };
 
-/** { [id]: { nombre viejo: nombre nuevo } }: el mismo color, con otro nombre. */
+/**
+ * { [id]: { nombre viejo: nombre nuevo } }: la misma variante con otro nombre (o una que Mar sacó porque era
+ * igual a otra: la línea del carrito pasa a esa).
+ */
 export const VARIANTES_RENOMBRADAS = {
   'cepillo-magico': { 'Fucsia · con llavero': 'Rosa · con llavero' },
   'cepillo-viral-doble': { 'Verde manzana': 'Verde agua' },
+  // 25/11: la Amarilla 72 h es la misma que la Super Transição; la Baunilha Doce es la Xêrosa de vainilla
+  'gelatinas-500': { 'Amarilla 72 h': 'Super Transição', 'Baunilha Doce': 'Xêrosa Vainilla' },
+};
+
+/** Categoría vieja → nueva: los links viejos (/tienda?cat=…) abren la nueva. 25/11: una sola "Cepillos". */
+export const CATEGORIAS_RENOMBRADAS = {
+  'cepillos-definidores': 'cepillos',
 };

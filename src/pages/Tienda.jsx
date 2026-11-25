@@ -18,6 +18,7 @@ import { useOcultarBottomNav } from '../hooks/useOcultarBottomNav.js';
 import { coincide } from '../lib/texto.js';
 import { imgSm, plural } from '../lib/format.js';
 import Roll from '../components/ui/Roll.jsx';
+import { CATEGORIAS_RENOMBRADAS } from '../config/renombrados.js';
 import { useBloquearScroll } from '../hooks/useBloquearScroll.js';
 
 const ORDENES = [
@@ -29,7 +30,7 @@ const EASE = [0.22, 1, 0.36, 1];
 
 export default function Tienda() {
   const [params, setParams] = useSearchParams();
-  const cat = params.get('cat') ?? '';
+  const catUrl = params.get('cat') ?? '';
   // Marcas: varias, separadas por coma en la URL (?marca=Skala,Bekim). Compatible con ?marca=Skala.
   const marcasSel = useMemo(() => (params.get('marca') ?? '').split(',').filter(Boolean), [params]);
   const orden = ORDENES.some((o) => o.id === params.get('orden')) ? params.get('orden') : 'destacados';
@@ -38,6 +39,9 @@ export default function Tienda() {
   const reducido = useReducedMotion();
   const { data: productos, loading } = useProducts();
   const { data: categorias } = useCategories();
+  // Link viejo de una categoría que se unificó con otra (config/renombrados.js): abre la nueva
+  const catNueva = categorias && !categorias.some((c) => c.id === catUrl) ? (CATEGORIAS_RENOMBRADAS[catUrl] ?? null) : null;
+  const cat = catNueva ?? catUrl;
   const { data: marcas } = useBrands();
   const [panel, setPanel] = useState(false);
 
@@ -59,6 +63,12 @@ export default function Tienda() {
     next.delete('buscar');
     setParams(next, { replace, preventScrollReset: true });
   };
+  // …y la URL pasa a la categoría nueva (sin sumar un paso al historial)
+  useEffect(() => {
+    if (catNueva) actualizar({ cat: catNueva }, { replace: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [catNueva]);
+
   const toggleMarca = (mk) => {
     const set = new Set(marcasSel);
     if (set.has(mk)) set.delete(mk);

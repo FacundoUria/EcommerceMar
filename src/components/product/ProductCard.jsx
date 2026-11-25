@@ -72,7 +72,7 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
     >
       {tarjeta.brillo}
       <div className="relative">
-        <Link ref={linkRef} to={url} className="block" aria-label={`${producto.nombreCorto}, ${precio}`}>
+        <Link ref={linkRef} to={url} className="block" aria-label={`${producto.nombreCorto}, ${precio}${producto.sinStock ? ', sin stock' : ''}`}>
           <div ref={imgRef} className="relative aspect-[4/5] overflow-hidden">
             <FotoProducto
               src={producto.imagen}
@@ -101,29 +101,34 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
           <Icon name="ojo" size={18} />
         </button>
 
-        {/* Mobile: "+" fijo */}
-        <button
-          type="button"
-          onClick={agregarRapido}
-          aria-label={etiquetaAgregar}
-          className="absolute right-3 bottom-3 flex size-11 items-center justify-center rounded-full bg-verde text-arena shadow-flotante transition duration-200 active:scale-90 md:hidden"
-        >
-          <Icon name="mas" size={20} strokeWidth={2.4} />
-        </button>
+        {/* Sin stock: sin botones de agregar (la card lo dice abajo del precio; la vista rápida sigue) */}
+        {!producto.sinStock && (
+          <>
+            {/* Mobile: "+" fijo */}
+            <button
+              type="button"
+              onClick={agregarRapido}
+              aria-label={etiquetaAgregar}
+              className="absolute right-3 bottom-3 flex size-11 items-center justify-center rounded-full bg-verde text-arena shadow-flotante transition duration-200 active:scale-90 md:hidden"
+            >
+              <Icon name="mas" size={20} strokeWidth={2.4} />
+            </button>
 
-        {/* Desktop: "Agregar" sube desde abajo en hover / foco */}
-        <div className="pointer-events-none absolute inset-x-3 bottom-3 hidden overflow-hidden rounded-full md:block">
-          <button
-            type="button"
-            onClick={agregarRapido}
-            aria-label={etiquetaAgregar}
-            className="btn btn-primario pointer-events-auto w-full translate-y-[120%] py-3 opacity-0 transition duration-500 ease-out group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:translate-y-0 group-hover:opacity-100"
-          >
-            <Roll>
-              <Icon name="carrito" size={17} /> Agregar
-            </Roll>
-          </button>
-        </div>
+            {/* Desktop: "Agregar" sube desde abajo en hover / foco */}
+            <div className="pointer-events-none absolute inset-x-3 bottom-3 hidden overflow-hidden rounded-full md:block">
+              <button
+                type="button"
+                onClick={agregarRapido}
+                aria-label={etiquetaAgregar}
+                className="btn btn-primario pointer-events-auto w-full translate-y-[120%] py-3 opacity-0 transition duration-500 ease-out group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:translate-y-0 group-hover:opacity-100"
+              >
+                <Roll>
+                  <Icon name="carrito" size={17} /> Agregar
+                </Roll>
+              </button>
+            </div>
+          </>
+        )}
       </div>
 
       <div className="px-3.5 pt-3 pb-3.5 md:px-4 md:pb-4">
@@ -135,6 +140,8 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
         </Titulo>
         <Precio as="p" valor={producto.precio} desde={producto.desde} antes={producto.precioAntes} className="mt-1 text-base text-tinta" />
         {producto.sinStock && <p className="mt-0.5 text-xs font-bold tracking-wide text-red-800 uppercase">Sin stock</p>}
+        {/* Sin stock del producto entero (lo marcó Mar): está por llegar */}
+        {producto.agotado && <p className="text-xs font-semibold text-texto-suave">Llega pronto</p>}
         {/* Etiquetas cortas ("Perfumado", "Llavero de regalo"): desde 640 px, donde entran en una línea */}
         {(producto.perfumado || producto.llavero) && <Etiquetas producto={producto} corta className="mt-2 hidden sm:flex" />}
       </div>

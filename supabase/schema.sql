@@ -80,6 +80,13 @@ alter table public.productos add column if not exists perfumado       boolean no
 alter table public.productos add column if not exists llavero_regalo  boolean not null default false;
 alter table public.productos add column if not exists llavero_colores text;
 
+-- Sin stock del producto entero (nov 2026; para los que no tienen variantes): la ficha y la card dicen "Sin
+-- stock · llega pronto", se ve pero no se puede agregar al carrito ni sale en /rutina.
+alter table public.productos add column if not exists agotado boolean not null default false;
+-- Paso de /rutina del producto (nov 2026): null = el de su categoría. Así una categoría sin paso (Cepillos) puede
+-- tener productos en un paso (los cepillos definidores en el 3, Definir).
+alter table public.productos add column if not exists paso smallint check (paso between 1 and 4);
+
 create table if not exists public.variantes (
   id          uuid primary key default gen_random_uuid(),
   producto_id text not null references public.productos (id) on update cascade on delete cascade,

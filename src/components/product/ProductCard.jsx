@@ -134,6 +134,7 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
           </Link>
         </Titulo>
         <Precio as="p" valor={producto.precio} desde={producto.desde} antes={producto.precioAntes} className="mt-1 text-base text-tinta" />
+        {producto.sinStock && <p className="mt-0.5 text-xs font-bold tracking-wide text-red-800 uppercase">Sin stock</p>}
         {/* Etiquetas cortas ("Perfumado", "Llavero de regalo"): desde 640 px, donde entran en una línea */}
         {(producto.perfumado || producto.llavero) && <Etiquetas producto={producto} corta className="mt-2 hidden sm:flex" />}
       </div>

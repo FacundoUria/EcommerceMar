@@ -156,15 +156,16 @@ const aForm = (p) => ({
     foto: v.foto,
     esColor: Boolean(v.color_hex), // "Esta variante es un color" (cuadradito de color en la tienda)
     color: v.color_hex ?? '',
+    agotado: Boolean(v.agotado), // "Sin stock" (supabase/migraciones/2026-11-24-variantes-agotadas.sql)
   })),
   fondos: {}, // "¿Cómo es la foto?" que cambió Mar: { [url]: 'blanco' | 'escena' }
   promo: aFormPromo(p), // "Promoción" (plegable): precio promo, antes, fechas, kit
 });
 
 const limpio = (s) => s.trim() || null;
-// conPromo / conEtiquetas: la base ya tiene esas columnas (supabase/migraciones/2026-11-23-promos.sql y
-// 2026-11-24-etiquetas.sql)
-const aDatos = (f, original, conPromo, conEtiquetas) => ({
+// conPromo / conEtiquetas / conAgotado: la base ya tiene esas columnas (supabase/migraciones/
+// 2026-11-23-promos.sql, 2026-11-24-etiquetas.sql y 2026-11-24-variantes-agotadas.sql)
+const aDatos = (f, original, { conPromo, conEtiquetas, conAgotado }) => ({
   ...(conPromo && aDatosPromo(f.promo)),
   ...(conEtiquetas && { perfumado: f.perfumado, llavero_regalo: f.llavero, llavero_colores: f.llavero ? limpio(f.llaveroColores) : null }),
   nombre: f.nombre.trim(),
@@ -184,6 +185,7 @@ const aDatos = (f, original, conPromo, conEtiquetas) => ({
     precio: leerPrecio(v.precio),
     foto: v.foto,
     color_hex: v.esColor && v.color ? v.color.toLowerCase() : null,
+    ...(conAgotado && { agotado: v.agotado }),
   })),
 });
 
@@ -287,7 +289,16 @@ function Formulario({ original, datos, recargar }) {
       ...f,
       variantes: [
         ...f.variantes,
-        { clave: `nueva-${++claveNueva}`, id: null, nombre: '', precio: '', foto: null, esColor: f.variantes.length > 0 && f.variantes.every((v) => v.esColor), color: '' },
+        {
+          clave: `nueva-${++claveNueva}`,
+          id: null,
+          nombre: '',
+          precio: '',
+          foto: null,
+          esColor: f.variantes.length > 0 && f.variantes.every((v) => v.esColor),
+          color: '',
+          agotado: false,
+        },
       ],
     }));
   const quitarVariante = (clave) => setForm((f) => ({ ...f, variantes: f.variantes.filter((v) => v.clave !== clave) }));
@@ -324,7 +335,7 @@ function Formulario({ original, datos, recargar }) {
     setDialogo(null);
     try {
       const f = comoOculto ? { ...form, activo: false } : form;
-      const d = aDatos(f, original, conPromo, conEtiquetas);
+      const d = aDatos(f, original, { conPromo, conEtiquetas, conAgotado });
       const id = await guardarProducto(d, original, datos.productos);
       // Fotos que dejaron de usarse (las reemplazadas o quitadas): se borran del bucket
       const usadas = new Set([...d.fotos, ...d.variantes.map((v) => v.foto)]);
@@ -374,6 +385,7 @@ function Formulario({ original, datos, recargar }) {
   const falta = faltaParaMostrar(form);
   const conPromo = datos.productos.some((p) => 'precio_promo' in p);
   const conEtiquetas = datos.productos.some((p) => 'perfumado' in p);
+  const conAgotado = datos.productos.some((p) => p.variantes?.some((v) => 'agotado' in v));
   const precioProducto = leerPrecio(form.precio);
   const marcas = [...new Set(datos.productos.map((p) => p.marca).filter(Boolean))].sort();
 
@@ -572,6 +584,15 @@ function Formulario({ original, datos, recargar }) {
               nombreVariante={v.nombre.trim()}
               onCambio={(x) => cambiarColorVariante(v.clave, x)}
             />
+            {conAgotado && (
+              <Interruptor
+                activo={v.agotado}
+                onCambio={(x) => cambiarVariante(v.clave, 'agotado', x)}
+                etiqueta="Sin stock"
+                descripcion="En la tienda se ve tachada con «Agotado» y no se puede elegir. Si todas están sin stock, el producto dice «Sin stock»."
+                textoSi="Agotada"
+              />
+            )}
             <Campo
               etiqueta="Precio"
               opcional

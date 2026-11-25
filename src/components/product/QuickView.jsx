@@ -34,7 +34,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
   const { agregar } = useCart();
   const desktop = useMediaQuery('(min-width: 768px)');
   const reducido = useReducedMotion();
-  const [variante, setVariante] = useState(varianteInicial ?? null);
+  const [variante, setVariante] = useState(varianteInicial?.agotado ? null : (varianteInicial ?? null));
   const [preview, setPreview] = useState(null);
   const [cantidad, setCantidad] = useState(1);
   const [aviso, setAviso] = useState(false);
@@ -49,6 +49,7 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
   const imagen = (preview ?? variante)?.imagen ?? producto.imagen;
 
   const confirmar = (e) => {
+    if (producto.sinStock) return;
     if (tieneVariantes && !variante) {
       setAviso(true);
       return;
@@ -173,11 +174,20 @@ function Panel({ producto, variante: varianteInicial, onClose }) {
           ) : (
             <div className="flex items-center gap-3">
               <QuantityStepper value={cantidad} onChange={setCantidad} />
-              <button type="button" onClick={confirmar} className="btn btn-primario flex-1 px-4 whitespace-nowrap">
-                <Roll>
-                  <Icon name="carrito" size={18} />
-                  Agregar
-                </Roll>
+              <button
+                type="button"
+                onClick={confirmar}
+                disabled={producto.sinStock}
+                className="btn btn-primario flex-1 px-4 whitespace-nowrap disabled:opacity-50"
+              >
+                {producto.sinStock ? (
+                  'Sin stock'
+                ) : (
+                  <Roll>
+                    <Icon name="carrito" size={18} />
+                    Agregar
+                  </Roll>
+                )}
               </button>
             </div>
           )}

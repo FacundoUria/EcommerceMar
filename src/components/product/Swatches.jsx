@@ -23,25 +23,27 @@ export default function Swatches({ variantes, seleccionada, onSelect, onPreview,
     >
       {visibles.map((v) => {
         const activa = seleccionada === v.nombre;
+        const agotada = !!v.agotado; // sin stock: atenuada, tachada y no se puede elegir
         return (
           <button
             key={v.nombre}
             type="button"
             role="radio"
             aria-checked={activa}
-            aria-label={v.nombre}
-            title={v.nombre}
+            aria-disabled={agotada || undefined}
+            aria-label={agotada ? `${v.nombre}, agotado` : v.nombre}
+            title={agotada ? `${v.nombre} (agotado)` : v.nombre}
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              onSelect?.(v);
+              if (!agotada) onSelect?.(v);
             }}
-            onMouseEnter={() => onPreview?.(v)}
-            onFocus={() => onPreview?.(v)}
+            onMouseEnter={() => !agotada && onPreview?.(v)}
+            onFocus={() => !agotada && onPreview?.(v)}
             onBlur={() => onPreview?.(null)}
-            className={`${dim} shrink-0 overflow-hidden border-2 bg-crema-card transition duration-200 hover:scale-110 active:scale-95 ${
-              v.color ? 'rounded-xl' : 'rounded-full'
-            } ${activa ? 'border-verde ring-2 ring-salvia-media ring-offset-1' : 'border-crema-card shadow-suave'}`}
+            className={`${dim} relative shrink-0 overflow-hidden border-2 bg-crema-card transition duration-200 ${
+              agotada ? 'cursor-not-allowed opacity-40' : 'hover:scale-110 active:scale-95'
+            } ${v.color ? 'rounded-xl' : 'rounded-full'} ${activa ? 'border-verde ring-2 ring-salvia-media ring-offset-1' : 'border-crema-card shadow-suave'}`}
           >
             {v.color ? (
               <span className="flex size-full items-center justify-center rounded-[10px] inset-ring inset-ring-tinta/20" style={{ backgroundColor: v.color }}>
@@ -50,6 +52,7 @@ export default function Swatches({ variantes, seleccionada, onSelect, onPreview,
             ) : (
               <img {...imgFija(v.imagen, 56)} alt="" width="56" height="56" loading="lazy" decoding="async" className="size-full object-cover" />
             )}
+            {agotada && <span aria-hidden="true" className="absolute top-1/2 left-1/2 h-0.5 w-[150%] -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-tinta" />}
           </button>
         );
       })}

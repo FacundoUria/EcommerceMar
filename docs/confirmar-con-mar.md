@@ -35,13 +35,13 @@ transferencia. Confirmar:
 
 Están cargados, pero ocultos: no se ven en la tienda, la rutina, los carruseles, la búsqueda ni el chat. Para
 publicarlos hace falta **el precio** y **una foto**. In One, Chiclete, Solución de Alfa Keratina, Kids Hidra
-Multy y Suero Argan Oil se publicaron con la tanda del 24/11, y la Máscara Action Plex ($ 16.000) después.
+Multy y Suero Argan Oil se publicaron con la tanda del 24/11; después la Máscara Action Plex ($ 16.000) y el
+Acondicionador Kleno ($ 10.000, con su foto). El Flexible perfumado con llavero se unificó con el publicado
+(ver la sección 12).
 
 | # | Marca | Producto | Tamaño | id | Falta |
 |---|---|---|---|---|---|
-| 1 | Kleno | Perfect Curly Acondicionador Rulos Perfectos ($ 10.000 desde el 24/11) | 350 cc | `kleno-acondicionador` | **foto** (no está en su Tiendanube) |
-| 2 | Dompel | Cepillo Flexible perfumado con llavero de regalo (24/11: el de la foto del cepillo rosa ovalado; colores Rosa bebé · frutilla, Lila · uva y Verde oscuro · manzana, confirmados por Mar) | — | `cepillo-definidor-lila` | **precio** |
-| 3 | Dream Hair | Scrunchies de satén (24/11): «1 unidad» $ 1.900 y «Pack x2» $ 3.000, color a coordinar con Mar (como las cofias) | — | `scrunchies-saten` | **foto** (y descripción, si quiere) |
+| 1 | Dream Hair | Scrunchies de satén (24/11): «1 unidad» $ 1.900 y «Pack x2» $ 3.000, color a coordinar con Mar (como las cofias) | — | `scrunchies-saten` | **foto** (y descripción, si quiere) |
 
 Cuando Mar suba la foto desde /admin, los muestra con «Mostrar en la tienda».
 
@@ -290,37 +290,41 @@ Fotos originales en `assets/productos/originales/2026-11-24/` (no se suben al re
    2 en 1 (Cachonados es la mini-card del inicio).
 4. Nuevas en 2 en 1: Açaí, Mango (Frutástica), Jaborandi (Botânica) y Raízes do Morro.
 
-**Pirulito (confirmado por Mar):** es `cepillo-pirulito` (el espiral redondito de Dompel), perfumado y **sin
-llavero**. Colores: Amarillo · limón, Verde agua · manzana y Rojo · frutilla. **Pendiente:** la foto muestra
-verde, coral y **violeta** (y no amarillo): pedirle una con estos 3 colores (se cambia desde /admin).
+**Cepillos: cómo quedaron (tanda completa de Mar, 24/11 a la noche).** Los ids de dos cepillos estaban
+cruzados y se corrigieron; los links y carritos viejos siguen andando (`src/config/renombrados.js`). Respaldo
+de las filas de antes en `assets/respaldos/2026-11-24/cepillos-antes-tanda3.json`.
 
-**Cepillos, aclaraciones de Mar (24/11 a la noche):**
-- **Viral flexible** (`cepillo-viral-flexible`): es el de la foto Dompel (la de 15.00.55 = 20:24, lila y verde con
-  bordes dentados). Marca Dompel, perfumado, llavero de regalo. Esa foto estaba puesta en el Flexible y se pasó
-  acá; el color Lila · uva usa la foto del lila de bordes dentados (también estaba en el Flexible). La
-  descripción del 24/11 («Cepillo perfumado con mini llavero de regalo…») es de este y se pasó acá.
-- **Flexible perfumado con llavero** (`cepillo-definidor-lila`, oculto): es el de la foto del cepillo rosa
-  ovalado (antes la tenía el Viral flexible). Nombre: «Cepillo Flexible perfumado con llavero de regalo».
-  Descripción propia (la escribió Facu, no Mar): «Cepillo flexible de paleta ovalada, perfumado y con mini
-  llavero de regalo. Desenreda sin tirones ondas, rulos y afro, y cada color tiene su aroma.»
-- **Pulpo** (`cepillo-magico`): foto nueva (la misma imagen, al doble de resolución). Colores: Rosa · con
-  llavero (antes «Fucsia»), Lila · con llavero y Azul · sin llavero, mismo precio. **Pendiente:** la foto
-  muestra también uno **amarillo** que no se vende: pedirle otra. Los carritos con «Fucsia» quedan sin color.
-- **Maya** (`cepillo-maya-cuadrado`): sin perfume ni llavero; Violeta, Rosa y Verde agua. La foto muestra
-  también uno **negro**: ¿se vende o pedir otra foto?
-- Etiquetas (se prenden y apagan en /admin): Viral flexible y Flexible «Perfumado: cada color tiene su aroma» +
-  «Llavero de regalo»; Pirulito solo «Perfumado…»; Pulpo «Llavero de regalo en Rosa y Lila».
+| Cepillo | id | Precio | Colores | Etiquetas | Foto |
+|---|---|---|---|---|---|
+| **Flexible perfumado con llavero de regalo** (Dompel) | `cepillo-flexible-perfumado` (antes `cepillo-maya-cuadrado`; el oculto `cepillo-definidor-lila` se unificó acá y se borró) | $ 12.000 | Rosa bebé · frutilla, Lila · uva, Verde oscuro · manzana | Perfumado + Llavero | 21:52 (paletas con espiral) |
+| **Maya** («Cepillo Flexible Curvo Desenredante y Ventilado») | `cepillo-maya` (antes `cepillo-pirulito-2`) | $ 9.000 | Violeta, Rosa, Verde agua | — | la del abanico |
+| **Viral flexible** (Dompel) | `cepillo-viral-flexible` | $ 13.000 | Rojo · frutilla, Lila · uva, Verde agua · manzana | Perfumado + Llavero | 21:53 (tres colores sobre blanco); el Lila, la del lila de bordes dentados |
+| **Espiral / Pirulito** (Dompel) | `cepillo-pirulito` | $ 8.000 | Amarillo · limón, Verde agua · manzana, Rojo · frutilla | Perfumado | fondo blanco + madera + exhibidor (galería) |
+| **Pulpo** | `cepillo-magico` | $ 12.000 | Rosa · con llavero, Lila · con llavero, Azul · sin llavero, Amarillo (**agotado**) | Llavero en Rosa y Lila | 21:53 (blísteres Dompel PRO) |
+| **Viral doble** | `cepillo-viral-doble` | $ 13.000 | Verde agua (antes «Verde manzana»), Crema clarito, Rosa clarito | — | sin cambios |
+
+Confirmar o pedir:
+1. **Fotos chicas**: la del Viral flexible (224 px) y la principal del Pirulito (246 px) se ven chicas en la
+   ficha (nunca se agrandan). Si Mar tiene esas mismas fotos más grandes, se cambian desde /admin.
+2. **Flexible por color**: no se recortó una foto por color: en la foto de 447 px cada par mide ~190 px y se
+   vería diminuto al elegir el color.
+3. **Maya**: la foto del abanico muestra también uno **negro**: ¿se vende o pedir otra foto?
+4. La descripción que tenía el publicado («Cepillo de cuerpo flexible y ventilado que se adapta al contorno de
+   la cabeza…») se reemplazó por la del Flexible (la escribió Facu, no Mar: «Cepillo flexible de paleta
+   ovalada, perfumado y con mini llavero de regalo…»). Está en el respaldo por si era del Maya.
+5. Al Maya y al Pirulito se les agregó «maya» / «pirulito» como otros nombres para el buscador (no se ven).
 
 **Scrunchies** («color a coordinar»): desde el 24/11 hay un producto suelto (`scrunchies-saten`, oculto hasta
 que haya foto; ver la sección 1). También van dentro del Kit Antifrizz.
 
-**Dompel Flexible:** ver «Cepillos, aclaraciones de Mar» arriba (la foto 15.00.55 resultó ser del Viral
-flexible). El Flexible sigue oculto hasta que Mar pase el precio.
+**Sin stock por variante** (pedido de Mar): en /admin, cada variante tiene «Sin stock». En la ficha se ve
+tachada con «Agotado» y no se puede elegir; si todas están agotadas, el producto dice «Sin stock» y no se
+puede agregar. Hoy: el Amarillo del Pulpo.
 
 **Fotos que se perdieron al cambiar colores:** la del tenedor «en la mano» (era la de la variante Lila, que
 ya no existe). El viral Rosa pasó a Rosa rojizo con su foto.
 
-**Sin selector de color** (`src/config/color.js`, solo mientras el producto no tenga variantes):
+**Sin selector de color** (`src/config/color.js`, solo mientras ninguna variante del producto sea un color):
 - Color a coordinar (ficha y pedido): Kit Antifrizz, Ondulador, Cofia XL, Cofia Long y Gorro difusor.
 - Un solo color: Sujetadores articulados (trabas cocodrilo) → «Color: Negro» en la ficha.
 
@@ -331,3 +335,5 @@ color». El turbante dice Lila, Crema y Gris topo, pero la foto muestra verde, c
 
 **Carritos viejos:** si tenían un color que ya no existe (viral Rosa o Beige, practiplopping «Microfibra» o
 «Algodón», tenedor, Restauração en 2 en 1), la línea queda como el producto sin color y el pedido va sin color.
+Los colores que solo cambiaron de nombre (Pulpo «Fucsia» → «Rosa», Viral doble «Verde manzana» → «Verde
+agua») pasan al nombre nuevo, y los productos con id nuevo, al id nuevo.

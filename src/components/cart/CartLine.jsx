@@ -42,6 +42,8 @@ export default function CartLine({ linea, compacta = false, onNavigate, delay = 
               </p>
             ))}
             {linea.colorACoordinar && <p className="text-xs leading-snug text-texto-suave">Color a coordinar con Mar</p>}
+            {/* Se agotó después de agregarla: queda marcada (también en el pedido) y Mar coordina */}
+            {linea.agotado && <p className="text-xs leading-snug font-bold text-red-800">Agotado</p>}
             <p className="mt-0.5 text-xs text-texto-suave"><span className="precio">{formatPrecio(linea.precio)}</span> c/u</p>
           </div>
           <button

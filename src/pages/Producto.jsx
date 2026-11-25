@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from 'react';
-import { Link, useParams, useSearchParams } from 'react-router';
+import { Link, Navigate, useLocation, useParams, useSearchParams } from 'react-router';
 import { AnimatePresence, m } from 'motion/react';
 import Icon from '../components/ui/Icon.jsx';
 import FotoProducto from '../components/product/FotoProducto.jsx';
@@ -29,12 +29,17 @@ import { terminaEn } from '../lib/promo.js';
 import CartelPromo from '../components/product/CartelPromo.jsx';
 import SelectorColores from '../components/product/Colores.jsx';
 import Etiquetas from '../components/product/Etiquetas.jsx';
+import { IDS_RENOMBRADOS } from '../config/renombrados.js';
 
 export default function Producto() {
   const { id } = useParams();
-  const { data: producto, loading } = useProduct(id);
+  const { search } = useLocation();
+  // Producto que cambió de id (config/renombrados.js): el link viejo lleva al nuevo
+  const idNuevo = IDS_RENOMBRADOS[id];
+  const { data: producto, loading } = useProduct(idNuevo ?? id);
   usePageTitle(producto?.nombre ?? (loading ? 'Producto' : 'No encontrado'));
 
+  if (idNuevo) return <Navigate to={`/producto/${idNuevo}${search}`} replace />;
   if (loading) return <ProductoSkeleton />;
   if (!producto) return <NoEncontrado />;
   return <Detalle key={producto.id} producto={producto} />;
@@ -51,28 +56,33 @@ function Detalle({ producto }) {
   // Descripción de Mar: archivo aparte, ya pedido junto con el chunk de esta página (App.jsx)
   const descripcion = useDescripciones()?.[producto.id];
 
-  const variante = producto.variantes.find((v) => v.nombre === params.get('v')) ?? null;
+  // La de la URL (?v=), salvo que esté agotada
+  const variante = producto.variantes.find((v) => v.nombre === params.get('v') && !v.agotado) ?? null;
+  const [vista, setVista] = useState(null); // otra foto del producto elegida en la galería (no es una variante)
   // Consulta por WhatsApp con el producto (y la variante elegida) ya escritos
   const nombreMensaje = `${producto.marca && producto.marca !== 'Dream Hair' ? `${producto.marca} ` : ''}${producto.nombreCorto}`;
   const consulta = whatsappCon(`¡Hola Mar! Tengo una consulta sobre: ${nombreMensaje}${variante ? ` (${variante.nombre})` : ''}`);
   const tieneVariantes = producto.variantes.length > 0;
   const categoria = categorias?.find((c) => c.id === producto.categoria);
 
-  // Galería: la foto principal + una miniatura por cada foto propia de una variante. Si una variante tiene como
-  // foto la misma del producto (Ghee 350 g), queda la de la variante (así se marca al elegirla); las variantes
-  // sin foto propia se eligen desde los chips (la principal, que muestra todos los colores, no elige ninguna)
+  // Galería: la foto principal + las otras fotos del producto (`galeria`: Pirulito sobre madera, exhibidor…) +
+  // una miniatura por cada foto propia de una variante. Si una variante tiene como foto la misma del producto
+  // (Ghee 350 g), queda la de la variante (así se marca al elegirla); las variantes sin foto propia se eligen
+  // desde los chips (la principal, que muestra todos los colores, no elige ninguna)
   const galeria = useMemo(() => {
     const vistas = new Set();
     const variantes = producto.variantes.filter((v) => v.propia && !vistas.has(v.imagen) && vistas.add(v.imagen));
-    return vistas.has(producto.imagen) ? variantes : [{ nombre: null, imagen: producto.imagen }, ...variantes];
+    const extras = (producto.galeria ?? []).filter((src) => !vistas.has(src)).map((src) => ({ nombre: null, extra: true, imagen: src }));
+    return [...(vistas.has(producto.imagen) ? [] : [{ nombre: null, imagen: producto.imagen }]), ...extras, ...variantes];
   }, [producto]);
-  const imagen = (preview ?? variante)?.imagen ?? producto.imagen;
+  const imagen = preview?.imagen ?? vista ?? variante?.imagen ?? producto.imagen;
 
   const elegir = (v) => {
     const next = new URLSearchParams(params);
     if (v?.nombre) next.set('v', v.nombre);
     else next.delete('v');
     setParams(next, { replace: true, preventScrollReset: true });
+    setVista(null);
     setAviso(false);
   };
 
@@ -81,6 +91,7 @@ function Detalle({ producto }) {
   const [falta, setFalta] = useState(null); // clave de la elección que falta (aviso)
 
   const agregarAlCarrito = (e) => {
+    if (producto.sinStock) return; // todas las variantes agotadas: el botón dice "Sin stock"
     if (tieneVariantes && !variante) {
       setAviso(true);
       document.getElementById('variantes')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -148,16 +159,18 @@ function Detalle({ producto }) {
             {producto.promo && <CartelPromo promo={producto.promo} className="absolute top-4 left-4" />}
           </div>
           {galeria.length > 1 && (
-            <FilaDeslizable className="-mx-4 mt-3" claseFila="gap-2 px-4 pb-1" activo={variante?.nombre ?? null} aria-label="Fotos del producto">
-              {galeria.map((g) => {
+            <FilaDeslizable className="-mx-4 mt-3" claseFila="gap-2 px-4 pb-1" activo={vista ?? variante?.nombre ?? null} aria-label="Fotos del producto">
+              {galeria.map((g, i) => {
                 // La principal queda marcada también con una variante sin foto propia (es la que se ve)
-                const activa = g.nombre === null ? !variante?.propia : variante?.nombre === g.nombre;
+                const activa = g.extra
+                  ? vista === g.imagen
+                  : !vista && (g.nombre === null ? !variante?.propia : variante?.nombre === g.nombre);
                 return (
                   <button
-                    key={g.nombre ?? 'principal'}
+                    key={g.nombre ?? g.imagen}
                     type="button"
-                    onClick={() => elegir(g.nombre ? g : null)}
-                    aria-label={g.nombre ? `Ver variante ${g.nombre}` : 'Ver foto principal'}
+                    onClick={() => (g.extra ? setVista(g.imagen) : elegir(g.nombre ? g : null))}
+                    aria-label={g.nombre ? `Ver variante ${g.nombre}` : g.extra ? `Ver foto ${i + 1}` : 'Ver foto principal'}
                     aria-pressed={activa}
                     className={`size-16 shrink-0 overflow-hidden rounded-2xl border-2 bg-crema-card transition active:scale-95 md:size-20 ${
                       activa ? 'border-verde' : 'border-transparent opacity-70 hover:opacity-100'
@@ -204,6 +217,7 @@ function Detalle({ producto }) {
                 {producto.promo.nombre} · {terminaEn(producto.promo.hasta)}
               </p>
             )}
+            {producto.sinStock && <p className="mt-1.5 text-sm font-bold tracking-wide text-red-800 uppercase">Sin stock</p>}
           </div>
 
           {/* Kit: qué trae */}
@@ -293,22 +307,29 @@ function Detalle({ producto }) {
               <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={`Variantes de ${producto.nombre}`} onMouseLeave={() => setPreview(null)}>
                 {producto.variantes.map((v) => {
                   const activa = variante?.nombre === v.nombre;
+                  const agotada = !!v.agotado; // tachada con "Agotado", no se puede elegir
                   return (
                     <button
                       key={v.nombre}
                       type="button"
                       role="radio"
                       aria-checked={activa}
-                      onClick={() => elegir(v)}
-                      onMouseEnter={() => setPreview(v)}
-                      onFocus={() => setPreview(v)}
+                      aria-disabled={agotada || undefined}
+                      onClick={() => !agotada && elegir(v)}
+                      onMouseEnter={() => !agotada && setPreview(v)}
+                      onFocus={() => !agotada && setPreview(v)}
                       onBlur={() => setPreview(null)}
-                      className={`flex items-center gap-2 rounded-full border-2 bg-crema-card py-1 pr-4 pl-1 text-sm font-semibold transition active:scale-95 ${
-                        activa ? 'border-verde text-tinta shadow-suave' : 'border-verde/10 text-tinta hover:border-verde/40'
+                      className={`flex items-center gap-2 rounded-full border-2 bg-crema-card py-1 pr-4 pl-1 text-sm font-semibold transition ${
+                        agotada
+                          ? 'cursor-not-allowed border-verde/10 text-texto-suave opacity-60'
+                          : activa
+                            ? 'border-verde text-tinta shadow-suave active:scale-95'
+                            : 'border-verde/10 text-tinta hover:border-verde/40 active:scale-95'
                       }`}
                     >
-                      <img {...imgFija(v.imagen, 36)} alt="" width="36" height="36" loading="lazy" className="size-9 rounded-full object-cover" />
-                      {v.nombre}
+                      <img {...imgFija(v.imagen, 36)} alt="" width="36" height="36" loading="lazy" className={`size-9 rounded-full object-cover ${agotada ? 'grayscale' : ''}`} />
+                      <span className={agotada ? 'line-through' : ''}>{v.nombre}</span>
+                      {agotada && <span className="text-[11px] font-bold tracking-wide text-red-800 uppercase">Agotado</span>}
                     </button>
                   );
                 })}
@@ -324,10 +345,14 @@ function Detalle({ producto }) {
           {/* Cantidad + agregar (desktop / en flujo) */}
           <div className="hidden items-center gap-3 md:flex">
             <QuantityStepper value={cantidad} onChange={setCantidad} />
-            <button type="button" onClick={agregarAlCarrito} className="btn btn-primario flex-1 py-4 text-base">
-              <Roll>
-                <Icon name="carrito" size={20} /> Agregar
-              </Roll>
+            <button type="button" onClick={agregarAlCarrito} disabled={producto.sinStock} className="btn btn-primario flex-1 py-4 text-base disabled:opacity-50">
+              {producto.sinStock ? (
+                'Sin stock'
+              ) : (
+                <Roll>
+                  <Icon name="carrito" size={20} /> Agregar
+                </Roll>
+              )}
             </button>
           </div>
           <a
@@ -371,10 +396,8 @@ function Detalle({ producto }) {
               <CartBadge />
             </span>
           </button>
-          <button type="button" onClick={agregarAlCarrito} className="btn btn-primario h-12 flex-1 py-0">
-            <Roll>
-              Agregar
-            </Roll>
+          <button type="button" onClick={agregarAlCarrito} disabled={producto.sinStock} className="btn btn-primario h-12 flex-1 py-0 disabled:opacity-50">
+            {producto.sinStock ? 'Sin stock' : <Roll>Agregar</Roll>}
           </button>
         </div>
       </div>

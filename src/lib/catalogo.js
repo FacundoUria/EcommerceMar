@@ -13,7 +13,7 @@ const img = (carpeta, nombre) => `/img/${carpeta}/${nombre}.webp`;
  * variantes de precios distintos, el producto vale el más bajo y `desde` = true ("Desde $ X").
  * Los campos opcionales (marca, tamaño, alias, destacado, activo: false) solo aparecen si tienen valor.
  */
-function armarProducto({ id, nombre, nombreCorto, marca, tamano, categoria, precio, alias, destacado, activo, imagen, variantes, promo, incluye, elecciones, perfumado, llavero }) {
+function armarProducto({ id, nombre, nombreCorto, marca, tamano, categoria, precio, alias, destacado, activo, imagen, galeria, variantes, promo, incluye, elecciones, perfumado, llavero }) {
   // Promo vigente (ver promoDe): con precio promo, ese precio va para todo el producto (también sus variantes)
   const enPromo = promo?.precio != null;
   const propios = variantes.map((v) => v.precio).filter((x) => x != null);
@@ -26,6 +26,7 @@ function armarProducto({ id, nombre, nombreCorto, marca, tamano, categoria, prec
     propia: !!v.imagen,
     precio: enPromo ? base : (v.precio ?? base),
     ...(v.color && { color: v.color }),
+    ...(v.agotado && { agotado: true }), // sin stock: se ve tachada y no se puede elegir
   }));
   const precios = vs.map((v) => v.precio).filter((x) => x != null);
   return {
@@ -42,11 +43,15 @@ function armarProducto({ id, nombre, nombreCorto, marca, tamano, categoria, prec
     ...(tamano && { tamano }),
     categoria,
     imagen,
+    // Más fotos del producto (después de la principal): van en la galería de /producto
+    ...(galeria?.length && { galeria }),
     precio: precios.length ? Math.min(...precios) : base,
     desde: new Set(precios).size > 1,
     variantes: vs,
     // Todas sus variantes son colores: la ficha las muestra como cuadraditos de color
     ...(vs.length && vs.every((v) => v.color) && { deColores: true }),
+    // Todas sus variantes agotadas: "Sin stock" (no se puede agregar)
+    ...(vs.length && vs.every((v) => v.agotado) && { sinStock: true }),
     // Sin selector de color (config/color.js), solo si ninguna variante es un color: "color a coordinar" o un
     // único color
     ...(!vs.some((v) => v.color) && COLOR_A_COORDINAR.includes(id) && { colorACoordinar: true }),
@@ -100,7 +105,10 @@ export const productoDeFila = (f, filas = [], t = ahoraPromo()) => {
     // Kit "solo durante la promo": fuera de fechas, como oculto
     activo: f.activo === false || (f.solo_en_promo && !promo) ? false : f.activo,
     imagen: f.fotos?.[0] ?? img('productos', f.id),
-    variantes: [...(f.variantes ?? [])].sort(porOrden).map((v) => ({ nombre: v.nombre, precio: v.precio, imagen: v.foto, color: v.color_hex })),
+    galeria: (f.fotos ?? []).slice(1),
+    variantes: [...(f.variantes ?? [])]
+      .sort(porOrden)
+      .map((v) => ({ nombre: v.nombre, precio: v.precio, imagen: v.foto, color: v.color_hex, agotado: v.agotado })),
     promo,
     incluye: (f.incluye ?? '').split('\n').map((x) => x.trim()).filter(Boolean),
     elecciones,

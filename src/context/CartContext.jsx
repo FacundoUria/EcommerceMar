@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useState } from 'react';
 import { alActualizar, getProducts } from '../services/productsService.js';
 import { precioDe } from '../lib/precios.js';
+import { IDS_RENOMBRADOS, VARIANTES_RENOMBRADAS } from '../config/renombrados.js';
 
 const STORAGE_KEY = 'dreamhair:carrito:v1';
 const MAX_CANTIDAD = 99;
@@ -35,11 +36,15 @@ const limitar = (n) => Math.max(1, Math.min(MAX_CANTIDAD, Math.floor(n) || 1));
 const formaVariante = (nombre) => nombre.toLowerCase().replace(/[()·]/g, ' ').replace(/\s+/g, ' ').trim();
 const buscarVariante = (variantes = [], nombre) =>
   variantes.find((v) => v.nombre === nombre) ?? variantes.find((v) => formaVariante(v.nombre) === formaVariante(nombre));
+// El mismo color con otro nombre (config/renombrados.js: "Fucsia · con llavero" → "Rosa · con llavero")
+const nombreNuevo = (id, nombre) =>
+  Object.entries(VARIANTES_RENOMBRADAS[id] ?? {}).find(([viejo]) => formaVariante(viejo) === formaVariante(nombre))?.[1] ?? nombre;
 
 function reducer(lineas, accion) {
   switch (accion.type) {
     case 'agregar': {
       const { producto, variante, cantidad = 1, elecciones = null } = accion;
+      if (variante?.agotado || producto.sinStock) return lineas; // agotada: no se agrega (la UI ya no deja)
       const clave = claveLinea(producto.id, variante?.nombre, elecciones);
       const existente = lineas.find((l) => l.clave === clave);
       if (existente) {
@@ -74,29 +79,40 @@ function reducer(lineas, accion) {
       // Los precios cambian seguido: al cargar el catálogo, actualizamos precio/nombre de lo guardado y
       // sacamos productos que ya no existen (o están ocultos). Si la variante guardada ya no existe (se
       // renombró o se sacó), la línea queda como el producto sin variante; si ya había una así, se suman.
-      // Si solo cambió la forma de escribirla ("X (y)" → "X · y"), pasa al nombre nuevo.
+      // Si solo cambió la forma de escribirla ("X (y)" → "X · y") o Mar la renombró (config/renombrados.js),
+      // pasa al nombre nuevo; un producto con id nuevo, igual. La foto sigue a la del catálogo (las subidas
+      // que se reemplazan se borran del bucket). Una variante que se agotó queda marcada ("Agotado").
       const porId = new Map(accion.productos.map((p) => [p.id, p]));
       const resultado = [];
       for (const l of lineas) {
-        const p = porId.get(l.id);
+        const p = porId.get(IDS_RENOMBRADOS[l.id] ?? l.id);
         if (!p) continue;
-        const variante = l.variante ? buscarVariante(p.variantes, l.variante) : null;
-        const existe = !l.variante || !!variante;
+        const variante = l.variante ? buscarVariante(p.variantes, nombreNuevo(p.id, l.variante)) : null;
         // Lo elegido en un kit que el kit ya no pide (Mar sacó ese selector) se descarta
         const claves = new Set((p.elecciones ?? []).map((e) => e.clave));
         const elecciones = (l.elecciones ?? []).filter(([k]) => claves.has(k));
-        const { promo: _promoAnterior, elecciones: _eleccionesAnteriores, colorACoordinar: _colorAnterior, color: _colorVariante, ...resto } = l;
+        const {
+          promo: _promoAnterior,
+          elecciones: _eleccionesAnteriores,
+          colorACoordinar: _colorAnterior,
+          color: _colorVariante,
+          agotado: _agotadoAntes,
+          ...resto
+        } = l;
         const linea = {
           ...resto,
+          id: p.id,
           nombre: p.nombreCorto ?? p.nombre,
           marca: p.marca ?? null,
+          variante: variante?.nombre ?? null,
+          imagen: variante?.imagen ?? p.imagen,
           precio: precioDe(p, variante),
           // La promo se prende y se apaga sola: el precio y la marca de promo siguen al catálogo
           ...(p.promo && { promo: p.promo.nombre }),
           ...(elecciones.length && { elecciones }),
           ...(p.colorACoordinar && { colorACoordinar: true }),
           ...(variante?.color && { color: variante.color }),
-          ...(existe ? variante && { variante: variante.nombre } : { variante: null, imagen: p.imagen }),
+          ...(variante?.agotado && { agotado: true }),
           clave: claveLinea(p.id, variante?.nombre ?? null, elecciones),
         };
         const igual = resultado.find((r) => r.clave === linea.clave);

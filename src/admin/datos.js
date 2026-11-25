@@ -83,6 +83,7 @@ export async function guardarProducto(datos, original, todos) {
       precio: v.precio,
       foto: v.foto,
       color_hex: v.color_hex ?? null,
+      ...('agotado' in v && { agotado: v.agotado }),
       orden: i + 1,
     }));
     una(await sb.from('variantes').upsert(filas, { onConflict: 'id' }).select('id'));

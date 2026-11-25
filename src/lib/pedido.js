@@ -34,7 +34,7 @@ export function armarMensaje({ lineas, datos, numero, encabezado = null }) {
     const conMarca = l.marca && l.marca !== 'Dream Hair' ? `${l.marca} ${l.nombre}` : l.nombre;
     // Variante y lo elegido en un kit: "Kit El preferido (Shampoo: X, Skala: Y)"; sin selector de color:
     // "Kit Antifrizz (color a coordinar)"
-    const detalle = [l.variante, ...(l.elecciones ?? []).map(([k, v]) => `${k}: ${v}`), l.colorACoordinar && 'color a coordinar']
+    const detalle = [l.variante, ...(l.elecciones ?? []).map(([k, v]) => `${k}: ${v}`), l.colorACoordinar && 'color a coordinar', l.agotado && 'agotado']
       .filter(Boolean)
       .join(', ');
     const nombre = detalle ? `${conMarca} (${detalle})` : conMarca;

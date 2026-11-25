@@ -98,6 +98,9 @@ alter table public.variantes add column if not exists color_hex text;
 do $$ begin
   alter table public.variantes add constraint variantes_color_hex check (color_hex is null or color_hex ~ '^#[0-9a-f]{6}$');
 exception when duplicate_object then null; end $$;
+-- Sin stock (nov 2026): la ficha la muestra tachada con "Agotado" y no se puede elegir; si todas las variantes
+-- de un producto están agotadas, el producto dice "Sin stock".
+alter table public.variantes add column if not exists agotado boolean not null default false;
 
 create table if not exists public.servicios (
   id          text primary key check (id ~ '^[a-z0-9]+(-[a-z0-9]+)*$'),

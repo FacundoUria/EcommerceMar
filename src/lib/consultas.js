@@ -6,16 +6,26 @@ const PRODUCTO = 'id, nombre, nombre_corto, marca, categoria_id, precio, tamano,
 // Promos (supabase/migraciones/2026-11-23-promos.sql), color de las variantes (2026-11-24-color-variantes.sql)
 // y etiquetas (2026-11-24-etiquetas.sql). Si la base todavía no tiene esas columnas, se piden los productos sin
 // ellas (la tienda anda igual, sin eso): se prueba de la consulta más completa a la más simple.
+// Variantes agotadas: 2026-11-24-variantes-agotadas.sql.
 const PROMO = 'precio_promo, precio_antes, promo_nombre, promo_desde, promo_hasta, solo_en_promo, incluye, elecciones';
 const ETIQUETAS = 'perfumado, llavero_regalo, llavero_colores';
-const VARIANTES = 'variantes (nombre, precio, foto, orden, color_hex)';
-const VARIANTES_SIN_COLOR = 'variantes (nombre, precio, foto, orden)';
+const consulta = ({ promo, color, etiquetas, agotado }) =>
+  [
+    PRODUCTO,
+    etiquetas && ETIQUETAS,
+    `variantes (nombre, precio, foto, orden${color ? ', color_hex' : ''}${agotado ? ', agotado' : ''})`,
+    promo && PROMO,
+  ]
+    .filter(Boolean)
+    .join(', ');
+// De la más completa a la más simple: cada paso saca lo más nuevo
 const CONSULTAS_PRODUCTOS = [
-  `${PRODUCTO}, ${ETIQUETAS}, ${VARIANTES}, ${PROMO}`,
-  `${PRODUCTO}, ${VARIANTES}, ${PROMO}`,
-  `${PRODUCTO}, ${VARIANTES_SIN_COLOR}, ${PROMO}`,
-  `${PRODUCTO}, ${VARIANTES_SIN_COLOR}`,
-];
+  { promo: 1, color: 1, etiquetas: 1, agotado: 1 },
+  { promo: 1, color: 1, etiquetas: 1 },
+  { promo: 1, color: 1 },
+  { promo: 1 },
+  {},
+].map(consulta);
 const faltaColumna = (r) => r.error && /column|42703|schema cache/i.test(`${r.error.code} ${r.error.message}`);
 
 const revisar = (r, tabla) => {

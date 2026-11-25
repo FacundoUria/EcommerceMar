@@ -297,11 +297,12 @@ verde, coral y **violeta** (y no amarillo): pedirle una con estos 3 colores (se 
 **Cepillos, aclaraciones de Mar (24/11 a la noche):**
 - **Viral flexible** (`cepillo-viral-flexible`): es el de la foto Dompel (la de 15.00.55 = 20:24, lila y verde con
   bordes dentados). Marca Dompel, perfumado, llavero de regalo. Esa foto estaba puesta en el Flexible y se pasó
-  acá; el color Lila · uva usa la foto del lila de bordes dentados (también estaba en el Flexible). **Pendiente:**
-  no tiene descripción de Mar (la del 24/11 quedó en el Flexible: «Cepillo perfumado con mini llavero de
-  regalo…»; ¿es de este?).
+  acá; el color Lila · uva usa la foto del lila de bordes dentados (también estaba en el Flexible). La
+  descripción del 24/11 («Cepillo perfumado con mini llavero de regalo…») es de este y se pasó acá.
 - **Flexible perfumado con llavero** (`cepillo-definidor-lila`, oculto): es el de la foto del cepillo rosa
   ovalado (antes la tenía el Viral flexible). Nombre: «Cepillo Flexible perfumado con llavero de regalo».
+  Descripción propia (la escribió Facu, no Mar): «Cepillo flexible de paleta ovalada, perfumado y con mini
+  llavero de regalo. Desenreda sin tirones ondas, rulos y afro, y cada color tiene su aroma.»
 - **Pulpo** (`cepillo-magico`): foto nueva (la misma imagen, al doble de resolución). Colores: Rosa · con
   llavero (antes «Fucsia»), Lila · con llavero y Azul · sin llavero, mismo precio. **Pendiente:** la foto
   muestra también uno **amarillo** que no se vende: pedirle otra. Los carritos con «Fucsia» quedan sin color.

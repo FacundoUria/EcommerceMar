@@ -164,6 +164,7 @@
    "alias": [],
    "destacado": false,
    "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a668a376-4cb7-433e-8d4e-99de64608fde-722.webp",
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/e1023e06-3b94-4874-87eb-42e3ae2bbaf3-1000.webp"
    ],
    "perfumado": false,
@@ -3233,6 +3234,51 @@
    ]
   },
   {
+   "id": "scrunchies-saten",
+   "nombre": "Scrunchies de satén",
+   "nombre_corto": "Scrunchies de satén",
+   "marca": "Dream Hair",
+   "categoria_id": "saten",
+   "precio": null,
+   "tamano": null,
+   "alias": [],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9d835dcb-4afb-4a0e-9b37-ea15dc9054ca-387.webp"
+   ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
+   "agotado": false,
+   "paso": null,
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
+   "variantes": [
+    {
+     "foto": null,
+     "orden": 1,
+     "nombre": "1 unidad",
+     "precio": 1900,
+     "agotado": false,
+     "color_hex": null
+    },
+    {
+     "foto": null,
+     "orden": 2,
+     "nombre": "Pack x2",
+     "precio": 3000,
+     "agotado": false,
+     "color_hex": null
+    }
+   ]
+  },
+  {
    "id": "han-suero-argan",
    "nombre": "Suero Oleoso Argan Oil",
    "nombre_corto": "Suero Oleoso Argan Oil",
@@ -4097,6 +4143,38 @@
    "variantes": []
   },
   {
+   "id": "difusor-universal-eurostil",
+   "nombre": "Difusor rígido universal para secador",
+   "nombre_corto": "Difusor rígido universal",
+   "marca": "Eurostil",
+   "categoria_id": "varios",
+   "precio": 28000,
+   "tamano": null,
+   "alias": [
+    "difusor para secador",
+    "difusor universal"
+   ],
+   "destacado": false,
+   "fotos": [
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c0bd333c-7e01-41bb-8770-2a0d5638bc05-1200.webp",
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1c2e889b-3866-4b67-982a-62b4ff66a9a9-1200.webp"
+   ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
+   "agotado": false,
+   "paso": null,
+   "precio_promo": null,
+   "precio_antes": null,
+   "promo_nombre": null,
+   "promo_desde": null,
+   "promo_hasta": null,
+   "solo_en_promo": false,
+   "incluye": null,
+   "elecciones": [],
+   "variantes": []
+  },
+  {
    "id": "atomizador-day-after",
    "nombre": "Atomizador de Bruma Continua para Day After",
    "nombre_corto": "Atomizador de Bruma Continua",
@@ -4338,6 +4416,11 @@
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/19c15e52-114e-465b-9ac9-3dde880f1da7-404.webp",
    "color": null,
+   "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1c2e889b-3866-4b67-982a-62b4ff66a9a9-1200.webp",
+   "color": "#3c1538",
    "fondo": "blanco"
   },
   {
@@ -4646,6 +4729,11 @@
    "fondo": "escena"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9d835dcb-4afb-4a0e-9b37-ea15dc9054ca-387.webp",
+   "color": "#d6b798",
+   "fondo": "escena"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9e37797f-6a96-4686-95a9-78af36369791-224.webp",
    "color": "#e73848",
    "fondo": "blanco"
@@ -4676,6 +4764,11 @@
    "fondo": "blanco"
   },
   {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a668a376-4cb7-433e-8d4e-99de64608fde-722.webp",
+   "color": "#e7b28d",
+   "fondo": "escena"
+  },
+  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a991dfe5-6452-402e-8b89-3e0441637945-500.webp",
    "color": "#e74957",
    "fondo": "blanco"
@@ -4704,6 +4797,11 @@
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/bfc8c3c6-9f72-44cb-b32f-285ed5062177-447.webp",
    "color": "#ebe3da",
    "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c0bd333c-7e01-41bb-8770-2a0d5638bc05-1200.webp",
+   "color": null,
+   "fondo": "blanco"
   },
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c3c83c3f-e604-4841-9e2c-d6d8407ba11e-569.webp",

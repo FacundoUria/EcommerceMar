@@ -6,4 +6,4 @@
 export const COLOR_A_COORDINAR = ['kit-antifrizz', 'ondulador-saten', 'cofia-xl-saten', 'cofia-long-saten', 'gorro-difusor', 'scrunchies-saten'];
 
 /** Vienen en un solo color: la ficha dice "Color: X" (sin selector). { [id]: color } */
-export const COLOR_UNICO = { 'sujetadores-articulados': 'Negro' };
+export const COLOR_UNICO = { 'sujetadores-articulados': 'Negro', 'difusor-universal-eurostil': 'Negro' };

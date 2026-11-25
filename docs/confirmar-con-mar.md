@@ -41,8 +41,7 @@ Acondicionador Kleno ($ 10.000, con su foto). El Flexible perfumado con llavero 
 
 | # | Marca | Producto | Tamaño | id | Falta |
 |---|---|---|---|---|---|
-| 1 | Dream Hair | Scrunchies de satén (24/11): «1 unidad» $ 1.900 y «Pack x2» $ 3.000, color a coordinar con Mar (como las cofias) | — | `scrunchies-saten` | **foto** (y descripción, si quiere) |
-| 2 | Lua & Neve | Creme Finalizador Hubba Gum (25/11): $ 12.000, variantes Uva y Banana | 250 ml | `lua-neve-hubba-gum` | **foto** (la de la chica con los dos frascos no llegó; ver la sección 13) |
+| 1 | Lua & Neve | Creme Finalizador Hubba Gum (25/11): $ 12.000, variantes Uva y Banana | 250 ml | `lua-neve-hubba-gum` | **foto** (la de la chica con los dos frascos no llegó; ver la sección 13) |
 
 Cuando Mar suba la foto desde /admin, los muestra con «Mostrar en la tienda».
 
@@ -316,7 +315,8 @@ Confirmar o pedir:
    escribió Facu (no Mar): «Cepillo flexible de paleta ovalada, perfumado y con mini llavero de regalo…».
 5. Al Maya y al Pirulito se les agregó «maya» / «pirulito» como otros nombres para el buscador (no se ven).
 
-**Scrunchies** («color a coordinar»): desde el 24/11 hay un producto suelto (`scrunchies-saten`, oculto hasta
+**Scrunchies** («color a coordinar»): desde el 24/11 hay un producto suelto (`scrunchies-saten`; publicado el 25/11
+con su foto, ver la sección 13; antes estaba oculto hasta
 que haya foto; ver la sección 1). También van dentro del Kit Antifrizz.
 
 **Sin stock por variante** (pedido de Mar): en /admin, cada variante tiene «Sin stock». En la ficha se ve
@@ -394,3 +394,21 @@ Confirmar:
    completaron los costados con el mismo fondo).
 10. Otros nombres para el buscador (no se ven): «gelatina roja» (Super Fixação), «argan oil» y «aceite de
     argán» (Óleo de Argán), «crema finalizadora» (Hubba Gum), «aceite de almendras / de coco» (Vanilla Cream).
+
+**Más del 25/11 (tarde):**
+
+| Producto | id | Precio | Estado |
+|---|---|---|---|
+| Difusor rígido universal para secador (Eurostil), «Color: Negro» | `difusor-universal-eurostil` | $ 28.000 | visible, en Varios junto al plegable |
+| Scrunchies de satén: «1 unidad» $ 1.900 y «Pack x2» $ 3.000, color a coordinar | `scrunchies-saten` | desde $ 1.900 | **publicado** con la foto de los cuatro sobre satén |
+| Kit Antifrizz: la ilustración de la promo (chica con cofia, funda y scrunchie) es la foto principal | `kit-antifrizz` | $ 17.000 (antes $ 27.000) | la composición con las fotos reales queda segunda |
+
+11. **Difusor**: la descripción **no es de Mar** («Difusor rígido universal que se adapta a la mayoría de los
+    secadores: reparte el aire para definir ondas y rulos y reducir el frizz.»). La segunda foto es la de la caja
+    (se ve un difusor violeta detrás y la caja dice «Colores»): ¿se deja o se saca para que no pidan violeta?
+12. **Scrunchies**: la foto mide 387×516 (se ve chica). Descripción de Mar: «Colitas de satén que no tironean ni
+    cortan el cabello.»
+13. **Kit Antifrizz después del Black Friday**: no se borra. Desde el sábado 28/11 queda oculto solo (en /admin
+    dice «Oculto · Promo fuera de fecha»). Para volver a prenderlo: /admin → Kit Antifrizz → «Promoción» →
+    poner el primer y el último día nuevos (y el precio, si cambia) → «Guardar cambios».
+14. **Hubba Gum**: sigue oculto, falta la foto de la chica con los dos frascos (no llegó con ninguna tanda).

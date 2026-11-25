@@ -14,6 +14,13 @@ import { borrarFotos } from './fotos.js';
 import { BarraGuardar, DialogoBorrar, EncabezadoForm, ErrorCarga, SubirBajar } from './partes.jsx';
 import { Boton, Campo, Cargando, Dialogo, ENTRADA, EntradaPrecio, Insignia, Interruptor, useAvisos } from './ui.jsx';
 import { formatPrecio, leerPrecio, mensajeError, normalizar, textoPrecio } from './util.js';
+import { vigente } from '../lib/promo.js';
+
+/**
+ * Kit (o producto) "solo durante la promoción" que hoy está fuera de fecha: la tienda no lo muestra aunque esté
+ * visible. No se borra: se vuelve a mostrar poniéndole fechas nuevas en «Promoción».
+ */
+const fueraDeFecha = (soloEnPromo, desde, hasta) => Boolean(soloEnPromo) && !vigente(desde, hasta);
 
 // Los filtros de la lista se recuerdan mientras el panel está abierto (al volver de editar siguen igual)
 const filtros = { busca: '', categoria: '', ocultos: false };
@@ -115,7 +122,10 @@ export function ListaProductos() {
                     </span>
                     <span className="flex flex-wrap items-center gap-2">
                       <span className={`text-[17px] font-semibold tabular-nums ${precio.falta ? 'text-red-800' : 'text-tinta'}`}>{precio.texto}</span>
-                      <Insignia visible={fila.activo} />
+                      <Insignia visible={fila.activo && !fueraDeFecha(fila.solo_en_promo, fila.promo_desde, fila.promo_hasta)} />
+                      {fila.activo && fueraDeFecha(fila.solo_en_promo, fila.promo_desde, fila.promo_hasta) && (
+                        <span className="inline-flex items-center rounded-full bg-amber-50 px-3 py-1 text-[15px] font-bold text-amber-900">Promo fuera de fecha</span>
+                      )}
                       {fila.agotado && <span className="inline-flex items-center rounded-full bg-red-50 px-3 py-1 text-[15px] font-bold text-red-800">Sin stock</span>}
                     </span>
                   </span>
@@ -416,6 +426,12 @@ function Formulario({ original, datos, recargar }) {
         textoSi="Visible"
         textoNo="Oculto"
       />
+      {conPromo && form.activo && fueraDeFecha(form.promo.soloEnPromo, aDatosPromo(form.promo).promo_desde, aDatosPromo(form.promo).promo_hasta) && (
+        <p className="rounded-xl bg-amber-50 px-4 py-3 text-base font-semibold text-amber-900">
+          Es de una promoción y hoy está fuera de fecha: no se ve en la tienda (no se borró). Para volver a mostrarlo,
+          poné las fechas nuevas en «Promoción», más abajo (y el precio, si cambia), y guardá.
+        </p>
+      )}
       {form.activo && falta.length > 0 && (
         <p className="rounded-xl bg-amber-50 px-4 py-3 text-base font-semibold text-amber-900">
           Para mostrarlo en la tienda le falta {falta.join(' y ')}.

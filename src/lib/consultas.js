@@ -3,13 +3,15 @@
 // Devuelven las filas tal cual (se guardan así en localStorage); lib/catalogo.js las arma para la web.
 
 const PRODUCTO = 'id, nombre, nombre_corto, marca, categoria_id, precio, tamano, alias, destacado, fotos';
-// Promos (supabase/migraciones/2026-11-23-promos.sql) y color de las variantes (2026-11-24-color-variantes.sql).
-// Si la base todavía no tiene esas columnas, se piden los productos sin ellas (la tienda anda igual, sin
-// promos o sin cuadraditos de color): se prueba de la consulta más completa a la más simple.
+// Promos (supabase/migraciones/2026-11-23-promos.sql), color de las variantes (2026-11-24-color-variantes.sql)
+// y etiquetas (2026-11-24-etiquetas.sql). Si la base todavía no tiene esas columnas, se piden los productos sin
+// ellas (la tienda anda igual, sin eso): se prueba de la consulta más completa a la más simple.
 const PROMO = 'precio_promo, precio_antes, promo_nombre, promo_desde, promo_hasta, solo_en_promo, incluye, elecciones';
+const ETIQUETAS = 'perfumado, llavero_regalo, llavero_colores';
 const VARIANTES = 'variantes (nombre, precio, foto, orden, color_hex)';
 const VARIANTES_SIN_COLOR = 'variantes (nombre, precio, foto, orden)';
 const CONSULTAS_PRODUCTOS = [
+  `${PRODUCTO}, ${ETIQUETAS}, ${VARIANTES}, ${PROMO}`,
   `${PRODUCTO}, ${VARIANTES}, ${PROMO}`,
   `${PRODUCTO}, ${VARIANTES_SIN_COLOR}, ${PROMO}`,
   `${PRODUCTO}, ${VARIANTES_SIN_COLOR}`,

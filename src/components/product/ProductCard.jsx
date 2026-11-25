@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import Icon from '../ui/Icon.jsx';
 import FotoProducto from './FotoProducto.jsx';
 import CartelPromo from './CartelPromo.jsx';
+import Etiquetas from './Etiquetas.jsx';
 import { formatPrecio, imgSm } from '../../lib/format.js';
 import { flyToCart } from '../../lib/flyToCart.js';
 import { explotarDestellos } from '../../lib/destellos.js';
@@ -133,6 +134,8 @@ function ProductCard({ producto, priority = false, className = '', nivelTitulo =
           </Link>
         </Titulo>
         <Precio as="p" valor={producto.precio} desde={producto.desde} antes={producto.precioAntes} className="mt-1 text-base text-tinta" />
+        {/* Etiquetas cortas ("Perfumado", "Llavero de regalo"): desde 640 px, donde entran en una línea */}
+        {(producto.perfumado || producto.llavero) && <Etiquetas producto={producto} corta className="mt-2 hidden sm:flex" />}
       </div>
     </article>
   );

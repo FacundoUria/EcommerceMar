@@ -13,7 +13,7 @@ const img = (carpeta, nombre) => `/img/${carpeta}/${nombre}.webp`;
  * variantes de precios distintos, el producto vale el más bajo y `desde` = true ("Desde $ X").
  * Los campos opcionales (marca, tamaño, alias, destacado, activo: false) solo aparecen si tienen valor.
  */
-function armarProducto({ id, nombre, nombreCorto, marca, tamano, categoria, precio, alias, destacado, activo, imagen, variantes, promo, incluye, elecciones }) {
+function armarProducto({ id, nombre, nombreCorto, marca, tamano, categoria, precio, alias, destacado, activo, imagen, variantes, promo, incluye, elecciones, perfumado, llavero }) {
   // Promo vigente (ver promoDe): con precio promo, ese precio va para todo el producto (también sus variantes)
   const enPromo = promo?.precio != null;
   const propios = variantes.map((v) => v.precio).filter((x) => x != null);
@@ -51,6 +51,10 @@ function armarProducto({ id, nombre, nombreCorto, marca, tamano, categoria, prec
     // único color
     ...(!vs.some((v) => v.color) && COLOR_A_COORDINAR.includes(id) && { colorACoordinar: true }),
     ...(!vs.some((v) => v.color) && COLOR_UNICO[id] && { colorUnico: COLOR_UNICO[id] }),
+    // Etiquetas (las prende Mar en /admin): "Perfumado: cada color tiene su aroma" y "Llavero de regalo"
+    // (llavero.colores: "Rosa y Lila" si viene solo en algunos colores; null = en todos)
+    ...(perfumado && { perfumado: true }),
+    ...(llavero && { llavero }),
     ...(alias?.length && { alias }),
     ...(destacado && { destacado: true }),
     ...(activo === false && { activo: false }),
@@ -100,6 +104,8 @@ export const productoDeFila = (f, filas = [], t = ahoraPromo()) => {
     promo,
     incluye: (f.incluye ?? '').split('\n').map((x) => x.trim()).filter(Boolean),
     elecciones,
+    perfumado: f.perfumado,
+    llavero: f.llavero_regalo ? { colores: f.llavero_colores?.trim() || null } : null,
   });
 };
 

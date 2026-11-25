@@ -142,6 +142,10 @@ const aForm = (p) => ({
   descripcion: p?.descripcion ?? '',
   alias: (p?.alias ?? []).join(', '),
   destacado: Boolean(p?.destacado),
+  // Etiquetas de la ficha (supabase/migraciones/2026-11-24-etiquetas.sql)
+  perfumado: Boolean(p?.perfumado),
+  llavero: Boolean(p?.llavero_regalo),
+  llaveroColores: p?.llavero_colores ?? '',
   activo: p ? p.activo : true,
   foto: p?.fotos?.[0] ?? null,
   variantes: (p?.variantes ?? []).map((v) => ({
@@ -158,9 +162,11 @@ const aForm = (p) => ({
 });
 
 const limpio = (s) => s.trim() || null;
-// conPromo: la base ya tiene las columnas de promos (supabase/migraciones/2026-11-23-promos.sql)
-const aDatos = (f, original, conPromo) => ({
+// conPromo / conEtiquetas: la base ya tiene esas columnas (supabase/migraciones/2026-11-23-promos.sql y
+// 2026-11-24-etiquetas.sql)
+const aDatos = (f, original, conPromo, conEtiquetas) => ({
   ...(conPromo && aDatosPromo(f.promo)),
+  ...(conEtiquetas && { perfumado: f.perfumado, llavero_regalo: f.llavero, llavero_colores: f.llavero ? limpio(f.llaveroColores) : null }),
   nombre: f.nombre.trim(),
   nombre_corto: limpio(f.nombreCorto),
   marca: limpio(f.marca),
@@ -318,7 +324,7 @@ function Formulario({ original, datos, recargar }) {
     setDialogo(null);
     try {
       const f = comoOculto ? { ...form, activo: false } : form;
-      const d = aDatos(f, original, conPromo);
+      const d = aDatos(f, original, conPromo, conEtiquetas);
       const id = await guardarProducto(d, original, datos.productos);
       // Fotos que dejaron de usarse (las reemplazadas o quitadas): se borran del bucket
       const usadas = new Set([...d.fotos, ...d.variantes.map((v) => v.foto)]);
@@ -367,6 +373,7 @@ function Formulario({ original, datos, recargar }) {
 
   const falta = faltaParaMostrar(form);
   const conPromo = datos.productos.some((p) => 'precio_promo' in p);
+  const conEtiquetas = datos.productos.some((p) => 'perfumado' in p);
   const precioProducto = leerPrecio(form.precio);
   const marcas = [...new Set(datos.productos.map((p) => p.marca).filter(Boolean))].sort();
 
@@ -493,6 +500,29 @@ function Formulario({ original, datos, recargar }) {
           etiqueta="Favorito de Mar"
           descripcion="Aparece en «Favoritos de Mar» en el inicio."
         />
+        {conEtiquetas && (
+          <>
+            <Interruptor
+              activo={form.perfumado}
+              onCambio={(v) => cambiar('perfumado', v)}
+              etiqueta="Perfumado"
+              descripcion="La ficha dice «Perfumado: cada color tiene su aroma»."
+            />
+            <Interruptor
+              activo={form.llavero}
+              onCambio={(v) => cambiar('llavero', v)}
+              etiqueta="Llavero de regalo"
+              descripcion="La ficha dice «Llavero de regalo»."
+            />
+            {form.llavero && (
+              <Campo etiqueta="¿El llavero viene solo en algunos colores?" opcional ayuda="Ej: Rosa y Lila. Vacío = en todos.">
+                {(id, a) => (
+                  <input id={id} {...a} className={ENTRADA} value={form.llaveroColores} onChange={(e) => cambiar('llaveroColores', e.target.value)} />
+                )}
+              </Campo>
+            )}
+          </>
+        )}
       </section>
 
       <section className="space-y-4" aria-labelledby="sec-foto">

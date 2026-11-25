@@ -28,6 +28,7 @@ import { esDesde, precioDe } from '../lib/precios.js';
 import { terminaEn } from '../lib/promo.js';
 import CartelPromo from '../components/product/CartelPromo.jsx';
 import SelectorColores from '../components/product/Colores.jsx';
+import Etiquetas from '../components/product/Etiquetas.jsx';
 
 export default function Producto() {
   const { id } = useParams();
@@ -177,11 +178,14 @@ function Detalle({ producto }) {
             <ConDestellos className="mt-1">
               <RevealText as="h1" className="text-3xl leading-tight md:text-4xl">{producto.nombre}</RevealText>
             </ConDestellos>
-            {producto.tamano && (
-              <p className="mt-3 inline-flex rounded-full bg-salvia px-3 py-1 text-xs font-bold text-verde">
-                <span className="sr-only">Tamaño:</span> {producto.tamano}
-              </p>
-            )}
+            {/* Tamaño + etiquetas ("Perfumado: cada color tiene su aroma", "Llavero de regalo") */}
+            <Etiquetas producto={producto} className="mt-3">
+              {producto.tamano && (
+                <p className="inline-flex rounded-full bg-salvia px-3 py-1 text-xs font-bold text-verde">
+                  <span className="sr-only">Tamaño:</span> {producto.tamano}
+                </p>
+              )}
+            </Etiquetas>
             {/* Descripción de Mar (tal cual): mobile 4 líneas + "Ver más"; desktop completa */}
             {descripcion && (
               <Expandible lineas={4} soloMobile className="mt-3 text-[15px] leading-relaxed text-texto-suave">

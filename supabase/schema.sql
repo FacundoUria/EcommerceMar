@@ -74,6 +74,12 @@ do $$ begin
   alter table public.productos add constraint productos_promo_fechas check (promo_hasta is null or promo_desde is null or promo_hasta > promo_desde);
 exception when duplicate_object then null; end $$;
 
+-- Etiquetas (nov 2026, cepillos): la ficha muestra "Perfumado: cada color tiene su aroma" y/o "Llavero de
+-- regalo" (+ " en <llavero_colores>" si el llavero viene solo en algunos colores: "Rosa y Lila").
+alter table public.productos add column if not exists perfumado       boolean not null default false;
+alter table public.productos add column if not exists llavero_regalo  boolean not null default false;
+alter table public.productos add column if not exists llavero_colores text;
+
 create table if not exists public.variantes (
   id          uuid primary key default gen_random_uuid(),
   producto_id text not null references public.productos (id) on update cascade on delete cascade,

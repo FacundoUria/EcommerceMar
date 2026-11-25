@@ -105,6 +105,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d4e399c2-5e22-4f56-abd2-98185de2d11f-1000.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": 32000,
    "promo_nombre": "Black Friday",
@@ -139,6 +142,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8ca3d055-cfc7-45e8-86ff-514bf06ff2ba-720.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": 49000,
    "promo_nombre": "Black Friday",
@@ -162,6 +168,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/e1023e06-3b94-4874-87eb-42e3ae2bbaf3-1000.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": 27000,
    "promo_nombre": "Black Friday",
@@ -185,6 +194,9 @@
    "fotos": [
     "/img/productos/shampoo-low-poo-han.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -265,6 +277,9 @@
    "fotos": [
     "/img/productos/low-poo-kleno.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -288,6 +303,9 @@
    "fotos": [
     "/img/productos/shampoo-skala-mais-cachos.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -311,6 +329,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/5aa6273c-908a-458f-a91d-bb2f781f503b-661.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -334,6 +355,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/d308b015-3b7a-4406-a690-08f117a9ce32-896.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -400,6 +424,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a20a2129-422e-42ea-b084-eb19ed13f9a4-504.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -423,6 +450,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9911efda-fb32-48a7-8899-fb532e72e272-394.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -446,6 +476,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/cb2b82f2-6c42-485c-9f7c-c6628a6a5744-896.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -484,6 +517,9 @@
    "fotos": [
     "/img/productos/cremas-skala.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -711,6 +747,9 @@
    "fotos": [
     "/img/productos/crema-peinar-kleno.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -734,6 +773,9 @@
    "fotos": [
     "/img/productos/curl-mode.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -757,6 +799,9 @@
    "fotos": [
     "/img/productos/crema-bekim.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -795,6 +840,9 @@
    "fotos": [
     "/img/productos/cremas-salon-line.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -833,6 +881,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/01e202fd-0bb8-48c6-a008-21a5d5c17019-224.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -856,6 +907,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/dc44db22-242a-4cea-9e03-934e4ecac720-389.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -879,6 +933,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/30c440f0-8af5-4f1b-b219-3f5082cde43f-896.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -917,6 +974,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9d254109-7c37-4317-b869-2de7c9da94b8-768.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -962,6 +1022,9 @@
    "fotos": [
     "/img/productos/crema-arbell-argan.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -985,6 +1048,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8e83ac15-1321-41d4-bdad-0b4461b1b8a5-479.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1008,6 +1074,9 @@
    "fotos": [
     "/img/productos/mascarillas-lola.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1060,6 +1129,9 @@
    "fotos": [
     "/img/productos/tratamientos-fidelite.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1112,6 +1184,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/af56f9d0-110d-4003-981d-07908466db5d-667.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1135,6 +1210,9 @@
    "fotos": [
     "/img/productos/mascara-han-alfa-keratina.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1158,6 +1236,9 @@
    "fotos": [
     "/img/productos/ghee-lola-350.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1196,6 +1277,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1e4f96b4-1386-4969-ac78-261b7d209f4a-367.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1219,6 +1303,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/0bba05e0-ddfc-4750-b427-648a051e0d31-447.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1264,6 +1351,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9a1afe57-ad90-4005-aa2d-7e45912f1685-758.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1287,6 +1377,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/a08ec167-d871-4fea-bf75-df0a1c12c210-1024.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1353,6 +1446,9 @@
    "fotos": [
     "/img/productos/custard-cantu.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1376,6 +1472,9 @@
    "fotos": [
     "/img/productos/curl-fusion.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1399,6 +1498,9 @@
    "fotos": [
     "/img/productos/gel-de-rich.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1422,6 +1524,9 @@
    "fotos": [
     "/img/productos/gel-de-rich-potenciador.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1445,6 +1550,9 @@
    "fotos": [
     "/img/productos/gelatina-liquida-salon-line.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1468,6 +1576,9 @@
    "fotos": [
     "/img/productos/gelatinas-500gr.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1527,6 +1638,9 @@
    "fotos": [
     "/img/productos/gelatinas-kids.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1579,6 +1693,9 @@
    "fotos": [
     "/img/productos/gel-frenzzi.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1624,6 +1741,9 @@
    "fotos": [
     "/img/productos/gel-bekim-800gr.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1647,6 +1767,9 @@
    "fotos": [
     "/img/productos/gel-bekim-250gr.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1670,6 +1793,9 @@
    "fotos": [
     "/img/productos/gel-fuerte-fidelite.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1693,6 +1819,9 @@
    "fotos": [
     "/img/productos/gel-aurill.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1716,6 +1845,9 @@
    "fotos": [
     "/img/productos/gel-curl-mode.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1739,6 +1871,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/3e62eec0-177d-4dd0-b59d-0a70afc5abdd-432.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1777,6 +1912,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/33308322-fb48-438f-8583-9714c09b678a-467.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1800,6 +1938,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/f7f319ec-e1bf-4bb9-8a76-9a9cd053f5ab-459.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1823,6 +1964,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/1ed3501b-896e-4edc-952f-8eb32d9974e9-520.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1846,6 +1990,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/ce93322a-0726-4a85-ae77-30a4c518b144-213.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1869,6 +2016,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/470da90e-7d84-47d5-8d38-9bf3b49a8c10-812.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1914,6 +2064,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/7dd0dd5a-b53d-43c7-9775-87c38d132b89-1014.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1937,6 +2090,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/208b3a49-4f4b-41ee-84cd-1861626f020e-719.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1960,6 +2116,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/9451817b-82c6-48da-b53e-0a55d7a291ee-351.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -1983,6 +2142,9 @@
    "fotos": [
     "/img/productos/mousse-kleno.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2006,6 +2168,9 @@
    "fotos": [
     "/img/productos/mousse-cantu.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2029,6 +2194,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/4690f8f0-29c5-4f91-83ef-c9670193b2ca-1200.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2052,6 +2220,9 @@
    "fotos": [
     "/img/productos/activador-kleno.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2075,6 +2246,9 @@
    "fotos": [
     "/img/productos/activador-cantu.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2098,6 +2272,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/57f777d1-bd74-469b-82d4-b944c234f50f-1200.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2121,6 +2298,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/443ea46f-fa5a-4d0c-b1bf-14573cb06e12-768.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2166,6 +2346,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/77503b45-c1f2-41aa-8aed-906627b6812c-554.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": 13000,
    "precio_antes": null,
    "promo_nombre": "Black Friday",
@@ -2225,6 +2408,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8be00e01-d68f-4a10-b78c-b84d7598f116-1200.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2270,6 +2456,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/3afbf078-8af1-44cf-94cd-3875b9a19b89-1080.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2315,6 +2504,9 @@
    "fotos": [
     "/img/productos/cepillo-detangle-bounce.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2365,8 +2557,11 @@
    "alias": [],
    "destacado": false,
    "fotos": [
-    "/img/productos/cepillo-magico.webp"
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/0e3c57eb-0828-4a8e-bbd5-44c5d10f5811-447.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": true,
+   "llavero_colores": "Rosa y Lila",
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2386,16 +2581,16 @@
     {
      "foto": null,
      "orden": 2,
-     "nombre": "Fucsia · con llavero",
+     "nombre": "Lila · con llavero",
      "precio": null,
-     "color_hex": "#d63384"
+     "color_hex": "#c4a7dc"
     },
     {
      "foto": null,
      "orden": 1,
-     "nombre": "Lila · con llavero",
+     "nombre": "Rosa · con llavero",
      "precio": null,
-     "color_hex": "#c4a7dc"
+     "color_hex": "#f09bb3"
     }
    ]
   },
@@ -2412,6 +2607,9 @@
    "fotos": [
     "/img/productos/funda-saten.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2464,6 +2662,9 @@
    "fotos": [
     "/img/productos/cofia-saten.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2516,6 +2717,9 @@
    "fotos": [
     "/img/productos/cofia-xl-saten.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2539,6 +2743,9 @@
    "fotos": [
     "/img/productos/cofia-long-saten.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2562,6 +2769,9 @@
    "fotos": [
     "/img/productos/ondulador-saten.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2585,6 +2795,9 @@
    "fotos": [
     "/img/productos/oleos-pinga.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2630,6 +2843,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/924f7f3c-885e-46df-9975-914371c8f4fb-224.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2653,6 +2869,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/e90630b2-6914-452f-b8a8-e52142f172d4-435.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2676,6 +2895,9 @@
    "fotos": [
     "/img/productos/spray-revitalizante.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2699,6 +2921,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/daabdfd9-b941-452c-9903-3b0044dcb9da-387.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2722,6 +2947,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/0f881184-07cb-48ae-abda-1d1868ff9725-218.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2745,6 +2973,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/711032f7-b640-46c4-9835-cc018863080e-216.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2768,6 +2999,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c7e707fc-71e3-4d73-98db-f1288f7d5496-928.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2806,6 +3040,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/c7e8ca94-2cb9-4b82-84ac-447c8336d775-896.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2846,6 +3083,9 @@
    "fotos": [
     "/img/productos/turbante-microfibra.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2893,6 +3133,9 @@
    "fotos": [
     "/img/productos/practiplopping.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2936,15 +3179,18 @@
    "id": "cepillo-viral-flexible",
    "nombre": "Cepillo viral flexible",
    "nombre_corto": null,
-   "marca": null,
+   "marca": "Dompel",
    "categoria_id": "cepillos",
    "precio": 13000,
    "tamano": null,
    "alias": [],
    "destacado": false,
    "fotos": [
-    "/img/productos/cepillo-viral-flexible.webp"
+    "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/e908e38e-ec00-4d48-b854-6a7e0c7dce36-399.webp"
    ],
+   "perfumado": true,
+   "llavero_regalo": true,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -2955,7 +3201,7 @@
    "elecciones": [],
    "variantes": [
     {
-     "foto": null,
+     "foto": "/img/productos/cepillo-definidor-lila.webp",
      "orden": 2,
      "nombre": "Lila · uva",
      "precio": null,
@@ -2990,6 +3236,9 @@
    "fotos": [
     "/img/productos/cepillo-maya-cuadrado.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -3035,6 +3284,9 @@
    "fotos": [
     "/img/productos/cepillo-pirulito.webp"
    ],
+   "perfumado": true,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -3080,6 +3332,9 @@
    "fotos": [
     "/img/productos/cepillo-pirulito-2.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -3103,6 +3358,9 @@
    "fotos": [
     "/img/productos/cepillo-tangle.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -3141,6 +3399,9 @@
    "fotos": [
     "/img/productos/cepillo-pinza.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -3179,6 +3440,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/3ba6d8e2-3d98-4069-8d64-e1950275c532-508.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -3231,6 +3495,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/35e9c595-41f7-4f21-b6a2-b92c5f9980ff-459.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -3254,6 +3521,9 @@
    "fotos": [
     "/img/productos/difusor-plegable.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -3279,6 +3549,9 @@
    "fotos": [
     "/img/productos/atomizador-day-after.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -3304,6 +3577,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/65d09793-29d8-48b9-8a17-ebdc2c4cdec8-1200.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -3327,6 +3603,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/13103875-3990-47e2-80af-113d48c5fb00-333.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -3350,6 +3629,9 @@
    "fotos": [
     "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/2f1f66f7-81af-4cad-ab8c-25cdef934f53-444.webp"
    ],
+   "perfumado": false,
+   "llavero_regalo": false,
+   "llavero_colores": null,
    "precio_promo": null,
    "precio_antes": null,
    "promo_nombre": null,
@@ -3447,6 +3729,11 @@
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/0bba05e0-ddfc-4750-b427-648a051e0d31-447.webp",
    "color": "#e8ccc7",
    "fondo": "escena"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/0e3c57eb-0828-4a8e-bbd5-44c5d10f5811-447.webp",
+   "color": "#c8a939",
+   "fondo": "blanco"
   },
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/0f881184-07cb-48ae-abda-1d1868ff9725-218.webp",
@@ -3684,11 +3971,6 @@
    "fondo": "blanco"
   },
   {
-   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/8073be09-9064-4bf2-a1ea-297f7b7e97ea-501.webp",
-   "color": "#0296b2",
-   "fondo": "escena"
-  },
-  {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/82408e6e-4f78-4455-b675-8ad26ed8d096-469.webp",
    "color": "#d72946",
    "fondo": "blanco"
@@ -3877,6 +4159,11 @@
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/e90630b2-6914-452f-b8a8-e52142f172d4-435.webp",
    "color": "#fab697",
    "fondo": "blanco"
+  },
+  {
+   "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/e908e38e-ec00-4d48-b854-6a7e0c7dce36-399.webp",
+   "color": "#0296b2",
+   "fondo": "escena"
   },
   {
    "url": "https://muyuflkkgkndkybratso.supabase.co/storage/v1/object/public/productos/fotos/ebbf71d7-fa4e-4afc-8890-2fc25bc55c93-1063.webp",

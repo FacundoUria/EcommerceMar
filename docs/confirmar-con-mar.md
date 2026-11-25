@@ -40,7 +40,7 @@ Multy y Suero Argan Oil se publicaron con la tanda del 24/11, y la Máscara Acti
 | # | Marca | Producto | Tamaño | id | Falta |
 |---|---|---|---|---|---|
 | 1 | Kleno | Perfect Curly Acondicionador Rulos Perfectos ($ 10.000 desde el 24/11) | 350 cc | `kleno-acondicionador` | **foto** (no está en su Tiendanube) |
-| 2 | Dompel | Cepillo Dompel Flexible perfumado con llavero de regalo (24/11: foto nueva, descripción y colores Rosa bebé, Lila y Verde oscuro, confirmados por Mar) | — | `cepillo-definidor-lila` | **precio** |
+| 2 | Dompel | Cepillo Flexible perfumado con llavero de regalo (24/11: el de la foto del cepillo rosa ovalado; colores Rosa bebé · frutilla, Lila · uva y Verde oscuro · manzana, confirmados por Mar) | — | `cepillo-definidor-lila` | **precio** |
 | 3 | Dream Hair | Scrunchies de satén (24/11): «1 unidad» $ 1.900 y «Pack x2» $ 3.000, color a coordinar con Mar (como las cofias) | — | `scrunchies-saten` | **foto** (y descripción, si quiere) |
 
 Cuando Mar suba la foto desde /admin, los muestra con «Mostrar en la tienda».
@@ -290,17 +290,31 @@ Fotos originales en `assets/productos/originales/2026-11-24/` (no se suben al re
    2 en 1 (Cachonados es la mini-card del inicio).
 4. Nuevas en 2 en 1: Açaí, Mango (Frutástica), Jaborandi (Botânica) y Raízes do Morro.
 
-**Pirulito (confirmado por Mar):** es `cepillo-pirulito` (el espiral redondito de Dompel). Colores perfumados:
-Amarillo (limón), Verde agua (manzana) y Rojo (frutilla), sin foto propia: los chips muestran la foto del
-producto (verde, coral y violeta, sin amarillo). **Pendiente:** una foto con estos 3 colores (se cambia desde
-/admin).
+**Pirulito (confirmado por Mar):** es `cepillo-pirulito` (el espiral redondito de Dompel), perfumado y **sin
+llavero**. Colores: Amarillo · limón, Verde agua · manzana y Rojo · frutilla. **Pendiente:** la foto muestra
+verde, coral y **violeta** (y no amarillo): pedirle una con estos 3 colores (se cambia desde /admin).
+
+**Cepillos, aclaraciones de Mar (24/11 a la noche):**
+- **Viral flexible** (`cepillo-viral-flexible`): es el de la foto Dompel (la de 15.00.55 = 20:24, lila y verde con
+  bordes dentados). Marca Dompel, perfumado, llavero de regalo. Esa foto estaba puesta en el Flexible y se pasó
+  acá; el color Lila · uva usa la foto del lila de bordes dentados (también estaba en el Flexible). **Pendiente:**
+  no tiene descripción de Mar (la del 24/11 quedó en el Flexible: «Cepillo perfumado con mini llavero de
+  regalo…»; ¿es de este?).
+- **Flexible perfumado con llavero** (`cepillo-definidor-lila`, oculto): es el de la foto del cepillo rosa
+  ovalado (antes la tenía el Viral flexible). Nombre: «Cepillo Flexible perfumado con llavero de regalo».
+- **Pulpo** (`cepillo-magico`): foto nueva (la misma imagen, al doble de resolución). Colores: Rosa · con
+  llavero (antes «Fucsia»), Lila · con llavero y Azul · sin llavero, mismo precio. **Pendiente:** la foto
+  muestra también uno **amarillo** que no se vende: pedirle otra. Los carritos con «Fucsia» quedan sin color.
+- **Maya** (`cepillo-maya-cuadrado`): sin perfume ni llavero; Violeta, Rosa y Verde agua. La foto muestra
+  también uno **negro**: ¿se vende o pedir otra foto?
+- Etiquetas (se prenden y apagan en /admin): Viral flexible y Flexible «Perfumado: cada color tiene su aroma» +
+  «Llavero de regalo»; Pirulito solo «Perfumado…»; Pulpo «Llavero de regalo en Rosa y Lila».
 
 **Scrunchies** («color a coordinar»): desde el 24/11 hay un producto suelto (`scrunchies-saten`, oculto hasta
 que haya foto; ver la sección 1). También van dentro del Kit Antifrizz.
 
-**Dompel Flexible (confirmado por Mar):** la foto 15.00.55 es el **Cepillo Dompel Flexible perfumado con
-llavero de regalo** (`cepillo-definidor-lila`): Rosa bebé (frutilla), Lila (uva, con la foto lila de antes) y
-Verde oscuro (manzana). Sigue oculto hasta que Mar pase el precio.
+**Dompel Flexible:** ver «Cepillos, aclaraciones de Mar» arriba (la foto 15.00.55 resultó ser del Viral
+flexible). El Flexible sigue oculto hasta que Mar pase el precio.
 
 **Fotos que se perdieron al cambiar colores:** la del tenedor «en la mano» (era la de la variante Lila, que
 ya no existe). El viral Rosa pasó a Rosa rojizo con su foto.

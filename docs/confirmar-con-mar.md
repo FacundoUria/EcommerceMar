@@ -309,9 +309,10 @@ Confirmar o pedir:
 2. **Flexible por color**: no se recortó una foto por color: en la foto de 447 px cada par mide ~190 px y se
    vería diminuto al elegir el color.
 3. **Maya**: la foto del abanico muestra también uno **negro**: ¿se vende o pedir otra foto?
-4. La descripción que tenía el publicado («Cepillo de cuerpo flexible y ventilado que se adapta al contorno de
-   la cabeza…») se reemplazó por la del Flexible (la escribió Facu, no Mar: «Cepillo flexible de paleta
-   ovalada, perfumado y con mini llavero de regalo…»). Está en el respaldo por si era del Maya.
+4. Descripciones: «Cepillo de cuerpo flexible y ventilado que se adapta al contorno de la cabeza…» (la que
+   tenía el publicado) es del **Maya** y se le puso tal cual (no habla de perfume ni llavero); la que tenía
+   el Maya («Cepillo de diseño curvo y cabezal flexible…») quedó en el respaldo. El Flexible tiene la que
+   escribió Facu (no Mar): «Cepillo flexible de paleta ovalada, perfumado y con mini llavero de regalo…».
 5. Al Maya y al Pirulito se les agregó «maya» / «pirulito» como otros nombres para el buscador (no se ven).
 
 **Scrunchies** («color a coordinar»): desde el 24/11 hay un producto suelto (`scrunchies-saten`, oculto hasta

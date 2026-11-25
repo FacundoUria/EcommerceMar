@@ -1,5 +1,6 @@
 // "Especial de Navidad" (promo de servicios: se reserva por WhatsApp con un código, no va al carrito). Se usa en
-// el inicio (entre el hero y las categorías, donde estuvo el Black Friday) y arriba de /servicios. Chunk aparte:
+// el inicio (entre el hero y las categorías; mientras dura el Black Friday, debajo de él) y arriba de /servicios.
+// Chunk aparte:
 // las dos páginas lo piden solo mientras la promo está vigente (el resto del año no se baja).
 // Textos, precios, códigos y fechas: src/config/navidad.js.
 import { useState } from 'react';
@@ -22,14 +23,21 @@ const DESTELLOS_FONDO = [
   { x: '48%', y: '94%', tam: 9 },
 ];
 
-/** `enInicio`: sección de borde a borde con su fondo (en /servicios va dentro de la página, sin fondo). */
-export default function EspecialNavidad({ enInicio = false }) {
+/**
+ * `enInicio`: sección de borde a borde con su fondo (en /servicios va dentro de la página, sin fondo).
+ * `sinFondo`: en el inicio debajo del Black Friday, que comparte el fondo con ella (lo pone Home.jsx).
+ */
+export default function EspecialNavidad({ enInicio = false, sinFondo = false }) {
   const palabras = NAVIDAD.titulo.split(' ');
   const ultima = palabras.pop();
   return (
     <section
       aria-labelledby="navidad-titulo"
-      className={enInicio ? 'fondo-salvia relative isolate overflow-hidden pt-8 pb-12 md:pt-12 md:pb-16' : 'relative isolate mt-6 md:mt-8'}
+      className={
+        enInicio
+          ? `${sinFondo ? '' : 'fondo-salvia '}relative isolate overflow-hidden pt-8 pb-12 md:pt-12 md:pb-16`
+          : 'relative isolate mt-6 md:mt-8'
+      }
     >
       {enInicio && <Destellos puntos={DESTELLOS_FONDO} className="-z-10" />}
       <div className={enInicio ? 'contenedor' : ''}>

@@ -17,10 +17,11 @@ import { colorDe } from '../lib/colores.js';
 import { imgSm } from '../lib/format.js';
 import { terminaEn } from '../lib/promo.js';
 
-export default function PromoInicio({ productos, titulo, hasta }) {
+/** `sinFondo`: va junto con el Especial de Navidad, que comparte el fondo (lo pone Home.jsx). */
+export default function PromoInicio({ productos, titulo, hasta, sinFondo = false }) {
   const [primera, ...resto] = titulo.split(' ');
   return (
-    <section aria-labelledby="promo-titulo" className="fondo-salvia pt-6 pb-12 md:pt-10 md:pb-16">
+    <section aria-labelledby="promo-titulo" className={sinFondo ? 'pt-6 pb-12 md:pt-10 md:pb-16' : 'fondo-salvia pt-6 pb-12 md:pt-10 md:pb-16'}>
       <Reveal className="contenedor mb-6 flex flex-wrap items-end justify-between gap-3">
         <ConDestellos>
           <RevealText as="h2" id="promo-titulo" className="text-4xl leading-tight md:text-5xl">

@@ -1,14 +1,18 @@
 // Hora de las promos y si una promo está vigente. Todo en el navegador: la promo se prende y se apaga sola.
 // Vista previa: `?promo=preview` en cualquier URL simula estar adentro del Black Friday y
-// `?promo=navidad-preview`, adentro del Especial de Navidad (el primer día de cada una, al mediodía). Queda en
+// `?promo=navidad-preview`, adentro del Especial de Navidad (el primer día de cada una al mediodía; el de Navidad,
+// el primer día sin el Black Friday). Queda en
 // la pestaña hasta cerrarla o abrir `?promo=off`. No hay link a esto en ningún lado.
 import { CAMPANA } from '../config/promo.js';
 import { NAVIDAD } from '../config/navidad.js';
 
 const CLAVE = 'dh-promo-preview';
 const MEDIODIA = 12 * 3600 * 1000;
-// valor de ?promo= → desde cuándo simula
-const PREVIEWS = { preview: CAMPANA.desde, 'navidad-preview': NAVIDAD.desde };
+// valor de ?promo= → desde cuándo simula (ms)
+const PREVIEWS = {
+  preview: Date.parse(CAMPANA.desde),
+  'navidad-preview': Math.max(Date.parse(NAVIDAD.desde), Date.parse(CAMPANA.hasta) + 1000),
+};
 let preview; // undefined = sin leer todavía; null = sin vista previa; si no, la clave de PREVIEWS
 
 function enPreview() {
@@ -30,7 +34,7 @@ function enPreview() {
 /** Hora para las promos (ms). En vista previa: el primer día de esa promo al mediodía. */
 export const ahoraPromo = () => {
   const p = enPreview();
-  return p ? Date.parse(PREVIEWS[p]) + MEDIODIA : Date.now();
+  return p ? PREVIEWS[p] + MEDIODIA : Date.now();
 };
 
 const ms = (f) => (f ? Date.parse(f) : NaN);
@@ -45,7 +49,7 @@ export function vigente(desde, hasta, t = ahoraPromo()) {
 /** ¿Está en curso la campaña de toda la tienda (barra de anuncio, forma de pago, pedido)? */
 export const campanaActiva = (t = ahoraPromo()) => vigente(CAMPANA.desde, CAMPANA.hasta, t);
 
-/** ¿Está en curso el Especial de Navidad (inicio, /servicios y barra de anuncio)? */
+/** ¿Está en curso el Especial de Navidad (inicio, /servicios y barra de anuncio)? Puede convivir con la campaña. */
 export const navidadActiva = (t = ahoraPromo()) => vigente(NAVIDAD.desde, NAVIDAD.hasta, t);
 
 /** Próximo momento (ms) en que empieza o termina alguna de estas promos, o null. */

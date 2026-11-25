@@ -61,25 +61,31 @@ const PromoInicio = lazy(() => import('./PromoInicio.jsx'));
 // Especial de Navidad (config/navidad.js): mismo lugar, mismo criterio (chunk aparte, solo mientras dura)
 const EspecialNavidad = lazy(() => import('../components/promo/EspecialNavidad.jsx'));
 
-function Navidad() {
-  if (!useNavidadActiva()) return null;
-  return (
-    <Suspense fallback={null}>
-      <EspecialNavidad enInicio />
-    </Suspense>
-  );
-}
-
-function Promos() {
+/**
+ * Promos del inicio: primero las del Black Friday (productos) y debajo el Especial de Navidad (servicios).
+ * Cuando están las dos (hasta el 27/11) comparten un solo fondo salvia: una franja, no dos seguidas.
+ */
+function Especiales() {
+  const navidad = useNavidadActiva();
   const { data: productos } = useProducts();
   const enPromo = productos?.filter((p) => p.promo) ?? [];
-  if (!enPromo.length) return null;
+  if (!navidad && !enPromo.length) return null;
+  const juntas = navidad && enPromo.length > 0;
   const campana = campanaActiva();
   const hasta = campana ? CAMPANA.hasta : enPromo.map((p) => p.promo.hasta).sort()[0];
   return (
-    <Suspense fallback={null}>
-      <PromoInicio productos={enPromo} titulo={campana ? CAMPANA.nombre : 'Promos'} hasta={hasta} />
-    </Suspense>
+    <div className={juntas ? 'fondo-salvia' : undefined}>
+      {enPromo.length > 0 && (
+        <Suspense fallback={null}>
+          <PromoInicio productos={enPromo} titulo={campana ? CAMPANA.nombre : 'Promos'} hasta={hasta} sinFondo={juntas} />
+        </Suspense>
+      )}
+      {navidad && (
+        <Suspense fallback={null}>
+          <EspecialNavidad enInicio sinFondo={juntas} />
+        </Suspense>
+      )}
+    </div>
   );
 }
 
@@ -89,8 +95,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Navidad />
-      <Promos />
+      <Especiales />
       <Categorias />
       {resto ? (
         <Suspense fallback={ESPACIO_RESTO}>

@@ -11,11 +11,17 @@ import { useMediaQuery } from '../../hooks/useMediaQuery.js';
 const CADA_MS = 4000;
 const EASE = [0.22, 1, 0.36, 1];
 
-/** Mensaje de la promo en curso ({ anuncio, anuncioMobile }) o null: Black Friday o Especial de Navidad. */
-function especialDe(campana, navidad) {
-  if (campana) return { anuncio: CAMPANA.anuncio, anuncioMobile: CAMPANA.anuncioMobile };
-  if (navidad) return { anuncio: textoNavidad(NAVIDAD.anuncio), anuncioMobile: NAVIDAD.anuncioMobile.map((x) => textoNavidad(x)) };
-  return null;
+/**
+ * Mensajes de las promos en curso ({ anuncios, anunciosMobile }) o null: Black Friday y/o Especial de Navidad
+ * (hasta el 27/11 conviven: rotan los dos, primero el Black Friday).
+ */
+function especialesDe(campana, navidad) {
+  const lista = [
+    campana && { anuncio: CAMPANA.anuncio, anuncioMobile: CAMPANA.anuncioMobile },
+    navidad && { anuncio: textoNavidad(NAVIDAD.anuncio), anuncioMobile: NAVIDAD.anuncioMobile.map((x) => textoNavidad(x)) },
+  ].filter(Boolean);
+  if (!lista.length) return null;
+  return { anuncios: lista.map((e) => e.anuncio), anunciosMobile: lista.flatMap((e) => e.anuncioMobile) };
 }
 
 /**
@@ -33,14 +39,14 @@ export default function BarraAnuncio() {
   // Fuera de pantalla: brillo en pausa y sin cambiar de mensaje
   const barra = useRef(null);
   const visible = usePausaFueraDePantalla(barra, { margen: '0px' });
-  // Campaña (Black Friday) o Especial de Navidad (no se superponen): su mensaje reemplaza a los de siempre;
-  // en mobile, partido en dos que rotan
+  // Campaña (Black Friday) y/o Especial de Navidad: sus mensajes reemplazan a los de siempre y rotan; en
+  // mobile, cada uno partido en dos
   const campana = useCampanaActiva();
   const navidad = useNavidadActiva();
   const ancha = useMediaQuery('(min-width: 640px)');
-  const especial = useMemo(() => especialDe(campana, navidad), [campana, navidad]);
+  const especial = useMemo(() => especialesDe(campana, navidad), [campana, navidad]);
   const mensajes = useMemo(
-    () => (especial ? (ancha ? [especial.anuncio] : especial.anuncioMobile).map((texto) => ({ texto })) : ANUNCIO),
+    () => (especial ? (ancha ? especial.anuncios : especial.anunciosMobile).map((texto) => ({ texto })) : ANUNCIO),
     [especial, ancha],
   );
 
@@ -72,7 +78,7 @@ export default function BarraAnuncio() {
       className="barra-brillo relative h-[34px] overflow-hidden bg-verde text-[13px] font-semibold text-arena outline-none focus-visible:ring-2 focus-visible:ring-arena/70 focus-visible:ring-inset"
     >
       <ul className="sr-only">
-        {(especial ? [{ texto: especial.anuncio }] : ANUNCIO).map((a) => (
+        {(especial ? especial.anuncios.map((texto) => ({ texto })) : ANUNCIO).map((a) => (
           <li key={a.texto}>{a.texto}</li>
         ))}
       </ul>

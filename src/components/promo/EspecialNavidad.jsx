@@ -48,9 +48,11 @@ export default function EspecialNavidad({ enInicio = false, sinFondo = false }) 
             </RevealText>
           </ConDestellos>
           <p className="mt-2 font-serif text-xl text-tinta md:text-2xl">{NAVIDAD.bajada}</p>
-          <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-texto-suave">
-            <span className="font-bold text-tinta">Incluye:</span> {NAVIDAD.incluye}
-          </p>
+          {NAVIDAD.incluye && (
+            <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-texto-suave">
+              <span className="font-bold text-tinta">Incluye:</span> {NAVIDAD.incluye}
+            </p>
+          )}
         </Reveal>
         <ul className="mt-6 grid gap-4 md:grid-cols-2 md:gap-6">
           {NAVIDAD.opciones.map((o, i) => (

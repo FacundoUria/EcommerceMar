@@ -32,6 +32,7 @@ const OTROS = {
   'gris topo': '#8a7e74',
   'celeste claro': '#bfdff2',
   'celeste oscuro': '#5f93c2',
+  'azul marino': '#1f2f56',
   'verde manzana': '#9bcf53',
   turquesa: '#3fbfb5',
   naranja: '#f08a3c',

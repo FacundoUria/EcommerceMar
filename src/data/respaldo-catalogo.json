@@ -3003,11 +3003,27 @@
    "variantes": [
     {
      "foto": null,
+     "orden": 6,
+     "nombre": "Azul marino",
+     "precio": null,
+     "agotado": false,
+     "color_hex": "#1f2f56"
+    },
+    {
+     "foto": null,
      "orden": 1,
      "nombre": "Celeste oscuro",
      "precio": null,
      "agotado": false,
      "color_hex": "#5f93c2"
+    },
+    {
+     "foto": null,
+     "orden": 5,
+     "nombre": "Lila",
+     "precio": null,
+     "agotado": false,
+     "color_hex": "#c4a7dc"
     },
     {
      "foto": null,
